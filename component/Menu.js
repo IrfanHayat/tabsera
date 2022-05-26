@@ -21,7 +21,8 @@ import MenuIcon from "@material-ui/core/Icon";
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
 import Image from 'next/image';
-import ShopingCart from '../component/ShoppingCart';
+import ActionAreaCard from '../component/Card';
+import { useSelector, useDispatch } from 'react-redux'
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -77,6 +78,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 export default function PersistentDrawerLeft() {
+  const product=useSelector((state)=>state.product.productData)
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
@@ -87,7 +89,7 @@ export default function PersistentDrawerLeft() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
+  
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -129,6 +131,7 @@ export default function PersistentDrawerLeft() {
         <List>
           {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
             <ListItem key={text} disablePadding>
+             
               <ListItemButton>
                 <ListItemIcon>
                   {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
@@ -169,7 +172,7 @@ export default function PersistentDrawerLeft() {
         </Grid>
         <Grid item xs={6} md={12}>
           <Item>
-             <ShopingCart></ShopingCart> 
+             <ActionAreaCard product={product} ></ActionAreaCard> 
             {/* <ActionAreaCard></ActionAreaCard> */}
           </Item>
         </Grid>

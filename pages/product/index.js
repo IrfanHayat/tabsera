@@ -8,8 +8,6 @@ import Menu from '../../component/Menu'
 import Layout from '../../component/Layout';
 import Footer from '../../component/Footer'  
 import ShopingCart from '../../component/ShoppingCart'
-
-
 import Image from 'next/image';
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
