@@ -16,10 +16,10 @@ export default function ActionAreaCard({product}) {
   
     return (
     <>
-    <div style={{display:'flex'}}>
+    <div style={{display:'flex', flexWrap:'wrap'}}>
       {
           product.map(item=>(
-            <Card sx={{ maxWidth: 345 }}>
+            <Card >
             <CardActionArea>
             <Image
                                     src={item.imgdata}
