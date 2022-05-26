@@ -12,20 +12,7 @@ import { useRouter } from 'next/router';
 
 export default function ActionAreaCard({product}) {
     const router = useRouter();
-  
-
-    const viewProduct = (e,item) => {
-        console.log(item)
-        e.preventDefault()
-        router.push({
-            pathname: '/product_detail',
-            state: {
-                item:item,
-            }
-            
-        })
-        //router.push('/product_detail')
-      }
+     
   
     return (
     <>
@@ -51,7 +38,7 @@ export default function ActionAreaCard({product}) {
                   {item.price}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  <button onClick={e=>viewProduct(e,item)}>View Product</button>  
+                  <button key={item.id} onClick={e=>viewProduct(e,item)}>View Product</button>  
                 </Typography>
               </CardContent>
             </CardActionArea>

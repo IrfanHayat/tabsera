@@ -1,8 +1,12 @@
-import React from 'react'
+import React,{useEffect} from 'react'
 import Details from '../../component/Detail'
-
-function product_detail() {
+import { useRouter } from 'next/router';
+function product_detail(props) {
+  const router = useRouter();  
   
+  useEffect(() => {
+    console.log(router);
+}, [router]);
   return (
     <div><Details></Details></div>
   )
