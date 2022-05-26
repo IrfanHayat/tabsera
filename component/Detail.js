@@ -1,5 +1,7 @@
 import NextLink from 'next/link'
 import Image from 'next/image';
+import { useRouter } from 'next/router';
+
 import {
   Grid,
   Link,
@@ -13,9 +15,16 @@ import {
   CircularProgress,
 } from '@material-ui/core';
 
-
 function Details(props) {
-    return (
+  const router = useRouter();
+  
+
+  const checkoutHandler = () => {
+    router.push('/shipping');
+  };
+
+
+  return (
       <>
       <Grid container spacing={1}>
         <Grid item md={6} xs={12}>
@@ -80,7 +89,7 @@ function Details(props) {
                   fullWidth
                   variant="contained"
                   color="primary"
-                  //onClick={addToCartHandler}
+                  onClick={checkoutHandler}
                 >
                   Add to cart
                 </Button>

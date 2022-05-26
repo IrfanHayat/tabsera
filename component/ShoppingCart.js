@@ -24,7 +24,7 @@ import {
 
 function CartScreen() {
   let cartItems=[{
-      id:1,slug:'first_item',image:'shirt3.jpg',name:'tshirt',quanity:20,price:155
+      id:1,slug:'first_item',image:'shirt3.jpg',name:'tshirt',quantity:20,price:155
   }]
   return (
     <>
