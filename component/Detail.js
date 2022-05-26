@@ -13,7 +13,7 @@ import {
   Button,
   TextField,
   CircularProgress,
-} from '@material-ui/core';
+} from '@mui/material';
 
 function Details(props) {
   const router = useRouter();

@@ -2,7 +2,7 @@ import NextLink from 'next/link'
 import Image from 'next/image';
 import {
   Grid
-} from '@material-ui/core';
+} from '@mui/material';
 
 
 function Footer(props) {
