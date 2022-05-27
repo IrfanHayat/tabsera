@@ -15,13 +15,8 @@ import {
   CircularProgress,
 } from "@mui/material";
 
-function Details(props) {
-  const router = useRouter();
-
-  const checkoutHandler = () => {
-    router.push("/shipping");
-  };
-
+function Details({productDetail,checkoutHandler}) {
+  
   return (
     <>
       <Grid container spacing={1}>
@@ -29,7 +24,7 @@ function Details(props) {
           <CardMedia
             component="img"
             height="14"
-            image="/shirt3.jpg"
+            image={productDetail?.imgdata}
             alt="green iguana"
           />
         </Grid>
@@ -41,10 +36,10 @@ function Details(props) {
               </Typography>
             </ListItem>
             <ListItem>
-              <Typography>Category: Shirt</Typography>
+              <Typography>Category: {productDetail?.rname}</Typography>
             </ListItem>
             <ListItem>
-              <Typography>Brand: Bonanza</Typography>
+              <Typography>Brand: {productDetail?.rname}</Typography>
             </ListItem>
             <ListItem>
               {/* <Rating value={5} readOnly></Rating> */}

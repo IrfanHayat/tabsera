@@ -128,6 +128,8 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
+
+
 export default function PersistentDrawerLeft() {
   const product = useSelector((state) => state.product.productData);
   const theme = useTheme();
@@ -142,6 +144,14 @@ export default function PersistentDrawerLeft() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  
+  const viewProduct=(item)=>{
+    router.push({
+      pathname: '/product_detail',
+      query: { id:item.id }
+  })
+
+   }
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -281,7 +291,7 @@ export default function PersistentDrawerLeft() {
         </Grid>
         <Grid item xs={12} md={12}>
           <Item>
-            <ActionAreaCard product={product}></ActionAreaCard>
+            <ActionAreaCard product={product} viewProduct={viewProduct}></ActionAreaCard>
             {/* <ActionAreaCard></ActionAreaCard> */}
           </Item>
         </Grid>
