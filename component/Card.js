@@ -10,9 +10,9 @@ import Detail from '../component/Detail'
 import { useRouter } from 'next/router';
 
 
-export default function ActionAreaCard({product}) {
-    const router = useRouter();
-     
+export default function ActionAreaCard({product,viewProduct}) {
+    
+    
   
     return (
     <>
@@ -38,7 +38,7 @@ export default function ActionAreaCard({product}) {
                   {item.price}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  <button key={item.id} onClick={e=>viewProduct(e,item)}>View Product</button>  
+                  <button key={item.id} onClick={e=>viewProduct(item)}>View Product</button>  
                 </Typography>
               </CardContent>
             </CardActionArea>

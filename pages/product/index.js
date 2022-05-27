@@ -18,7 +18,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function FullWidthGrid() {
   return (
-     
+     <Layout> 
     <Box sx={{ flexGrow: 1 }}>
       <Grid container >
         <Grid item xs={12} md={12}>
@@ -33,6 +33,6 @@ export default function FullWidthGrid() {
         </Grid>
       </Grid>
     </Box>
-    // </Layout>
+    </Layout>
   );
 }

@@ -1,7 +1,3 @@
-import NextLink from 'next/link'
-import Image from 'next/image';
-import { useRouter } from 'next/router';
-
 import {
   Grid,
   Link,
@@ -13,27 +9,19 @@ import {
   Button,
   TextField,
   CircularProgress,
-} from '@mui/material';
+} from "@mui/material";
 
-function Details(props) {
-  const router = useRouter();
-  
-
-  const checkoutHandler = () => {
-    router.push('/shipping');
-  };
-
-
+function Details({ productDetail, checkoutHandler }) {
   return (
-      <>
+    <>
       <Grid container spacing={1}>
         <Grid item md={6} xs={12}>
-        <CardMedia
-          component="img"
-          height="14"
-          image="/shirt3.jpg"
-          alt="green iguana"
-        />
+          <CardMedia
+            component="img"
+            height="14"
+            image={productDetail?.imgdata}
+            alt="green iguana"
+          />
         </Grid>
         <Grid item md={3} xs={12}>
           <List>
@@ -51,11 +39,11 @@ function Details(props) {
             <ListItem>
               {/* <Rating value={5} readOnly></Rating> */}
               <Link href="#reviews">
-                <Typography>({5} reviews)</Typography>
+                <Typography>({productDetail?.rating} reviews)</Typography>
               </Link>
             </ListItem>
             <ListItem>
-              <Typography> Description: {"Product Has Value"}</Typography>
+              <Typography> Description: {productDetail?.somedata}</Typography>
             </ListItem>
           </List>
         </Grid>
@@ -68,7 +56,7 @@ function Details(props) {
                     <Typography>Price</Typography>
                   </Grid>
                   <Grid item xs={6}>
-                    <Typography>${150}</Typography>
+                    <Typography>{productDetail?.price}</Typography>
                   </Grid>
                 </Grid>
               </ListItem>
@@ -89,7 +77,9 @@ function Details(props) {
                   fullWidth
                   variant="contained"
                   color="primary"
-                  onClick={checkoutHandler}
+                  onClick={()=>{
+                    checkoutHandler(productDetail)
+                  }}
                 >
                   Add to cart
                 </Button>
@@ -98,10 +88,8 @@ function Details(props) {
           </Card>
         </Grid>
       </Grid>
-        </>
-    )
+    </>
+  );
 }
 
-export default Details
-
-
+export default Details;

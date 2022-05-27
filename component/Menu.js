@@ -27,6 +27,8 @@ import Typography from '@mui/material/Typography';
 import { useSelector, useDispatch } from 'react-redux'
 import AccountCircle from '@mui/icons-material/AccountCircle';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
+import { useRouter } from 'next/router';
+
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -126,6 +128,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 }));
 
 export default function PersistentDrawerLeft() {
+  let router=useRouter()
   const product=useSelector((state)=>state.product.productData)
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -138,6 +141,16 @@ export default function PersistentDrawerLeft() {
     setOpen(false);
   };
   
+  const viewProduct=(item)=>{
+    router.push({
+      pathname: '/product_detail',
+      query: { id:item.id }
+  })
+
+   }
+
+
+
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
@@ -253,7 +266,7 @@ export default function PersistentDrawerLeft() {
         </Grid>
         <Grid item xs={12} md={12}>
           <Item>
-             <ActionAreaCard product={product} ></ActionAreaCard> 
+             <ActionAreaCard product={product} viewProduct={viewProduct} ></ActionAreaCard> 
             {/* <ActionAreaCard></ActionAreaCard> */}
           </Item>
         </Grid>
