@@ -2,13 +2,18 @@ import Head from "next/head";
 import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import { useRouter } from "next/router";
+import Layout from '../component/Layout';
+import Product from '../pages/product';
 
-export default function Home() {
+
+export default function Home(children) {
   let router = useRouter();
   // console.log(locale);
   return (
     <div className={styles.container}>
-      <h1>Hi tijari</h1>
+      <Layout> 
+        <Product></Product>        
+        </Layout>
     </div>
   );
 }

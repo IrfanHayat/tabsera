@@ -50,6 +50,8 @@ const addProduct = createSlice({
                   );
                   let state1={ productData: cartItems } 
                   console.log(state1.productData)
+                  state.loading=false
+                
                  return state1.productData;
             },           
      extraReducers:{

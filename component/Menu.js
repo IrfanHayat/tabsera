@@ -292,7 +292,7 @@ export default function PersistentDrawerLeft() {
         <Grid item xs={12} md={12}>
           <Item>
             <ActionAreaCard product={product} viewProduct={viewProduct}></ActionAreaCard>
-            {/* <ActionAreaCard></ActionAreaCard> */}
+            
           </Item>
         </Grid>
       </Main>
