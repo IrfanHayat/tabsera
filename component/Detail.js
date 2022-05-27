@@ -1,3 +1,7 @@
+import NextLink from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/router";
+
 import {
   Grid,
   Link,
@@ -11,7 +15,13 @@ import {
   CircularProgress,
 } from "@mui/material";
 
-function Details({ productDetail, checkoutHandler }) {
+function Details(props) {
+  const router = useRouter();
+
+  const checkoutHandler = () => {
+    router.push("/shipping");
+  };
+
   return (
     <>
       <Grid container spacing={1}>
@@ -19,7 +29,7 @@ function Details({ productDetail, checkoutHandler }) {
           <CardMedia
             component="img"
             height="14"
-            image={productDetail?.imgdata}
+            image="/shirt3.jpg"
             alt="green iguana"
           />
         </Grid>

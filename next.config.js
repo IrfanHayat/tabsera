@@ -1,4 +1,10 @@
+const nextTrnaslate = require("next-translate");
 module.exports = {
-  reactStrictMode: true,
-  images: { domains: ['res.cloudinary.com', 'b.zmtcdn.com'] },
+  ...nextTrnaslate({
+    reactStrictMode: true,
+    images: { domains: ["res.cloudinary.com", "b.zmtcdn.com"] },
+  }),
+
+  // reactStrictMode: true,
+  // images: { domains: ["res.cloudinary.com", "b.zmtcdn.com"] },
 };
