@@ -1,6 +1,6 @@
-import NextLink from 'next/link'
-import Image from 'next/image';
-import { useRouter } from 'next/router';
+import NextLink from "next/link";
+import Image from "next/image";
+import { useRouter } from "next/router";
 
 import {
   Grid,
@@ -13,27 +13,25 @@ import {
   Button,
   TextField,
   CircularProgress,
-} from '@mui/material';
+} from "@mui/material";
 
 function Details(props) {
   const router = useRouter();
-  
 
   const checkoutHandler = () => {
-    router.push('/shipping');
+    router.push("/shipping");
   };
 
-
   return (
-      <>
+    <>
       <Grid container spacing={1}>
         <Grid item md={6} xs={12}>
-        <CardMedia
-          component="img"
-          height="14"
-          image="/shirt3.jpg"
-          alt="green iguana"
-        />
+          <CardMedia
+            component="img"
+            height="14"
+            image="/shirt3.jpg"
+            alt="green iguana"
+          />
         </Grid>
         <Grid item md={3} xs={12}>
           <List>
@@ -98,10 +96,8 @@ function Details(props) {
           </Card>
         </Grid>
       </Grid>
-        </>
-    )
+    </>
+  );
 }
 
-export default Details
-
-
+export default Details;
