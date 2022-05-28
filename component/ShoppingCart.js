@@ -22,11 +22,7 @@ import {
 import { withRouter} from 'next/router';
 
 
-function CartScreen({productCartData,updateCartHandler,removeItemHandler}) {
-  
-
-  
-  
+function CartScreen({productCartData,removeItemHandler,handleAddToCart,handleDecreaseCart}) {
   return (
     <>
       <Typography component="h4" variant="h4">
@@ -69,18 +65,13 @@ function CartScreen({productCartData,updateCartHandler,removeItemHandler}) {
                         </NextLink>
                       </TableCell>
                       <TableCell align="right">
-                        <Select
-                          value={item.qnty}
-                          onChange={(e) =>
-                            updateCartHandler(item, e.target.value)
-                          }
-                        >
-                          {[...Array(item.qnty).keys()].map((x) => (
-                            <MenuItem key={x + 1} value={x + 1}>
-                              {x + 1}
-                            </MenuItem>
-                          ))}
-                        </Select>
+                      <Button
+                          variant="contained" onClick={() => handleDecreaseCart(item)}>
+                      -
+                    </Button>
+                    <div className="count">{item.cartQuantity}</div>
+                    <Button
+                          variant="contained" onClick={() => handleAddToCart(item)}>+</Button>
                       </TableCell>
                       <TableCell align="right">${item.price}</TableCell>
                       <TableCell align="right">
@@ -91,7 +82,7 @@ function CartScreen({productCartData,updateCartHandler,removeItemHandler}) {
                         >
                           x
                         </Button>
-                        <Button variant="contained">Contained</Button>
+                        
                       </TableCell>
                     </TableRow>
                   ))}
@@ -104,9 +95,9 @@ function CartScreen({productCartData,updateCartHandler,removeItemHandler}) {
               <List>
                 <ListItem>
                   <Typography variant="h2">
-                    Subtotal ({productCartData.reduce((a, c) => a + c.qnty, 0)}{' '}
+                      Subtotal ({productCartData.reduce((a, c) => a + c.cartQuantity, 0)}{' '}
                     items) : $
-                    {productCartData.reduce((a, c) => a + c.qnty * c.price, 0)}
+                    {productCartData.reduce((a, c) => a + c.cartQuantity * c.price, 0)} 
                   </Typography>
                 </ListItem>
                 <ListItem>

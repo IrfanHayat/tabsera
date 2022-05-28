@@ -33,7 +33,7 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import useTranslation from "next-translate/useTranslation";
 import MenuItem from "@mui/material/MenuItem";
-
+import { addToBasket } from "../slice/basketSlice";
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
@@ -132,10 +132,12 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 export default function PersistentDrawerLeft() {
   const product = useSelector((state) => state.product.productData);
+  
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   let { t } = useTranslation();
   let router = useRouter();
+  let dispatch=useDispatch()
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -152,6 +154,12 @@ export default function PersistentDrawerLeft() {
   })
 
    }
+
+   const addToCartHandler = (product) => {
+      
+    dispatch(addToBasket(product));
+    router.push('/cart')
+   }; 
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -291,7 +299,7 @@ export default function PersistentDrawerLeft() {
         </Grid>
         <Grid item xs={12} md={12}>
           <Item>
-            <ActionAreaCard product={product} viewProduct={viewProduct}></ActionAreaCard>
+            <ActionAreaCard product={product} viewProduct={viewProduct} addToCartHandler={addToCartHandler}></ActionAreaCard>
             
           </Item>
         </Grid>

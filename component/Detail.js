@@ -11,7 +11,7 @@ import {
   CircularProgress,
 } from "@mui/material";
 
-function Details({productDetail,checkoutHandler}) {
+function Details({productDetail,addToCartHandler}) {
   
   return (
     <>
@@ -79,7 +79,7 @@ function Details({productDetail,checkoutHandler}) {
                   variant="contained"
                   color="primary"
                   onClick={()=>{
-                    checkoutHandler(productDetail)
+                    addToCartHandler(productDetail)
                   }}
                 >
                   Add to cart

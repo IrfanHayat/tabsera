@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-
+import localStorage from 'localStorage'
 const initialState = {
-  items: [],
+  cartItems:  localStorage?.getItem("cartItems")
+    ? JSON.parse(localStorage?.getItem("cartItems"))
+    : [],
   products: null,
   filteredProducts: null
 };
@@ -10,59 +12,84 @@ export const basketSlice = createSlice({
   name: "basket",
   initialState,
   reducers: {
-    addProducts: (state, action) => {
-      state.products = action.payload
-      state.filteredProducts = action.payload
-    },
-    updateFilters: (state, action) => {
-      state.filteredProducts = action.payload
-    },
-    clearFilters: (state) => {
-      state.filteredProducts = state.products
-    },
     addToBasket: (state, action) => {
-      const index = state.items.findIndex(basketItem => basketItem.id == action.payload.id)
-      if(action.payload.quantity > 0){
-        if(index >= 0){
-          state.items[index].quantity += action.payload.quantity
-        }else{
-          state.items = [...state.items, action.payload]
-        }
+      const existingIndex = state.cartItems.findIndex(
+        (item) => item.id === action.payload.id
+      );
+
+      if (existingIndex >= 0) {
+        state.cartItems[existingIndex] = {
+          ...state.cartItems[existingIndex],
+          cartQuantity: state.cartItems[existingIndex].cartQuantity + 1,
+        };
+        
+      } else {
+        let tempProductItem = { ...action.payload, cartQuantity: 1 };
+        state.cartItems.push(tempProductItem);
+        
       }
-    },
-    updateQuantity: (state, action) => {
-      const index = state.items.findIndex(basketItem => basketItem.id == action.payload.id)
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
       
-      if(index >= 0) {
-        if(action.payload.quantity > 0){
-          state.items[index].quantity = action.payload.quantity
-        }else {
-          let newBasket = [...state.items]
-          newBasket.splice(index, 1)
-          state.items = newBasket
-        }
+    },
+    decreaseBasket: (state, action) => {
+      const itemIndex = state.cartItems.findIndex(
+        (item) => item.id === action.payload.id
+      );
+
+      if (state.cartItems[itemIndex].cartQuantity > 1) {
+        state.cartItems[itemIndex].cartQuantity -= 1;
+      } else if (state.cartItems[itemIndex].cartQuantity === 1) {
+        const nextCartItems = state.cartItems.filter(
+          (item) => item.id !== action.payload.id
+        );
+
+        state.cartItems = nextCartItems;
       }
-      else console.warn(`Can't remove product ${action.payload.id} as its does not exist!`)
+
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+
     },
     removeFromBasket: (state, action) => {
-      const index = state.items.findIndex(basketItem => basketItem.id == action.payload.id)
-      let newBasket = [...state.items]
+      state.cartItems.map((cartItem) => {
+        if (cartItem.id === action.payload.id) {
+          const nextCartItems = state.cartItems.filter(
+            (item) => item.id !== cartItem.id
+          );
 
-      if(index >= 0) newBasket.splice(index, 1)
-      else console.warn(`Can't remove product ${action.payload.id} as its does not exist!`)
+          state.cartItems = nextCartItems;
+        }
+        localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+        return state;
+      });
+    },
+    getTotals(state, action) {
+      let { total, quantity } = state.cartItems.reduce(
+        (cartTotal, cartItem) => {
+          const { price, cartQuantity } = cartItem;
+          const itemTotal = price * cartQuantity;
 
-      state.items = newBasket
+          cartTotal.total += itemTotal;
+          cartTotal.quantity += cartQuantity;
+
+          return cartTotal;
+        },
+        {
+          total: 0,
+          quantity: 0,
+        }
+      );
+      total = parseFloat(total.toFixed(2));
+      state.cartTotalQuantity = quantity;
+      state.cartTotalAmount = total;
+    },
+    clearBasket(state, action) {
+      state.cartItems = [];
+      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+      toast.error("Cart cleared", { position: "bottom-left" });
     },
   },
 });
 
-export const { addToBasket, removeFromBasket, updateQuantity, addProducts, updateFilters, clearFilters } = basketSlice.actions;
-
-// Selectors - This is how we pull information from the Global store slice
-export const selectItems = (state) => state.basket.items;
-export const selectProducts = (state) => state.basket.products;
-export const selectFilteredProducts = (state) => state.basket.filteredProducts;
-export const selectTotal = (state) => state.basket.items.reduce((total, item) => total + item.price * item.quantity, 0);
-export const selectTotalItems = (state) => state.basket.items.reduce((total, item) => total + item.quantity, 0);
+export const { addToBasket, removeFromBasket, decreaseBasket, clearBasket, getTotals } = basketSlice.actions;
 
 export default basketSlice.reducer;

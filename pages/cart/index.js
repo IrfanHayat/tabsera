@@ -1,62 +1,48 @@
-import React,{useState,useEffect} from 'react'
-import ShoppingCart from '../../component/ShoppingCart'
-import { useSelector, useDispatch } from 'react-redux'
-
-import { useRouter,withRouter } from 'next/router';
-import { updateQuantity,removeFromCart } from '../../slice/productSlice';
-
-
-
-
+import React, { useState, useEffect } from "react";
+import ShoppingCart from "../../component/ShoppingCart";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  addToBasket,
+  clearBasket,
+  decreaseBasket,
+  getTotals,
+  removeFromBasket,
+} from "../../slice/basketSlice";
+import { useRouter, withRouter } from "next/router";
 
 function cart() {
- 
- const product=useSelector((state)=>state.product.productData)
-  let router=useRouter();
-  let [filterData,setFilterData]=useState([]);
-  let dispatch=useDispatch()
+  const cartItems = useSelector(state => state.basket.cartItems);
+  let router = useRouter();
+  let dispatch = useDispatch();
+
+  console.log("product");
+  console.log(cartItems);
+  console.log("-----------");
   
-  console.log('product')
-  console.log(product)
-  useEffect(()=>{
-     
-      console.log('-------------')
-    let new_arr=product.filter(result=>result.id==router?.query?.id)
-    
-    setFilterData(new_arr)
-     
-  },[router.query.id]) 
-
-
-  const updateCartHandler = async (item, quantity) => {
-    
-    
-   // const { data } = await axios.get(`/api/products/${item._id}`);
-    // if (data.countInStock < quantity) {
-    //   window.alert('Sorry. Product is out of stock');
-    //   return;
-    // }
-    dispatch(updateQuantity({item,quantity}))
-   // dispatch({ type: 'CART_ADD_ITEM', payload: { ...item, quantity } });
+  const handleAddToCart=(item)=>{
+      dispatch(addToBasket(item))
+  }
+  const removeItemHandler = item => {
+    dispatch(removeFromBasket(item));
   };
-  const removeItemHandler = (item) => {
-   let state= dispatch(removeFromCart(item))
-   console.log('update State')
-   console.log(state)
-   console.log("-0----------0")
-   //setFilterData(state) 
-    // dispatch({ type: 'CART_REMOVE_ITEM', payload: item });
-  };    
 
+  const handleClearCart = () => {
+    dispatch(clearBasket());
+  };
 
-console.log('filterData')
- console.log(filterData)|
-console.log('-------------------')
+  const handleDecreaseCart = product => {
+    dispatch(decreaseBasket(product));
+  };
 
-  
   return (
-    <ShoppingCart productCartData={filterData} updateCartHandler={updateCartHandler} removeItemHandler={removeItemHandler} ></ShoppingCart>
-  )
+    <ShoppingCart
+      productCartData={cartItems}
+      handleAddToCart={handleAddToCart}
+      handleDecreaseCart={handleDecreaseCart}
+      handleClearCart={handleClearCart}
+      removeItemHandler={removeItemHandler}
+    ></ShoppingCart>
+  );
 }
 
-export default withRouter(cart)
+export default withRouter(cart);

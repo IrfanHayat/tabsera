@@ -10,10 +10,10 @@ export default function Home(children) {
   let router = useRouter();
   // console.log(locale);
   return (
-    <div className={styles.container}>
-      <Layout> 
+    //<div className={styles.container}>
+      //<Layout> 
         <Product></Product>        
-        </Layout>
-    </div>
+        //</Layout>
+    //</div>
   );
 }

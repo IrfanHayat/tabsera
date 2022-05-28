@@ -10,13 +10,14 @@ import Detail from '../component/Detail'
 import { useRouter } from 'next/router';
 
 
-export default function ActionAreaCard({product,viewProduct}) {
+export default function ActionAreaCard({product,viewProduct,addToCartHandler}) {
     
     
   
     return (
     <>
     <div style={{display:'flex', flexWrap:'wrap'}}>
+       
       {
           product.map(item=>(
             <Card >
@@ -39,6 +40,9 @@ export default function ActionAreaCard({product,viewProduct}) {
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                   <button key={item.id} onClick={e=>viewProduct(item)}>View Product</button>  
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  <button key={item.id} onClick={e=>addToCartHandler(item)}>Add To Cart</button>  
                 </Typography>
               </CardContent>
             </CardActionArea>
