@@ -22,7 +22,7 @@ import {
 import { withRouter} from 'next/router';
 
 
-function CartScreen({productCartData,removeItemHandler,handleAddToCart,handleDecreaseCart}) {
+function CartScreen({productCartData,removeItemHandler,handleAddToCart,handleDecreaseCart,checkoutHandler}) {
   return (
     <>
       <Typography component="h4" variant="h4">
@@ -102,7 +102,7 @@ function CartScreen({productCartData,removeItemHandler,handleAddToCart,handleDec
                 </ListItem>
                 <ListItem>
                   <Button
-                    // onClick={checkoutHandler}
+                     onClick={checkoutHandler}
                     variant="contained"
                     color="primary"
                     fullWidth

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Shipping from "../../component/Shipping";
+import Payement from "../../component/Payement";
 // import { useSelector, useDispatch } from "react-redux";
 // import {
 //   addToBasket,
@@ -11,7 +11,7 @@ import Shipping from "../../component/Shipping";
 
 import { useRouter, withRouter } from "next/router";
 
-function shipping() {
+function payement() {
 //   const cartItems = useSelector(state => state.basket.cartItems);
 //   let router = useRouter();
 //   let dispatch = useDispatch();
@@ -36,14 +36,14 @@ function shipping() {
 //   };
 
   return (
-    <Shipping
+    <Payement
     //   productCartData={cartItems}
     //   handleAddToCart={handleAddToCart}
     //   handleDecreaseCart={handleDecreaseCart}
     //   handleClearCart={handleClearCart}
     //   removeItemHandler={removeItemHandler}
-    ></Shipping>
+    ></Payement>
   );
 }
 
-export default withRouter(shipping);
+export default withRouter(payement);

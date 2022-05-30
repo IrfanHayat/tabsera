@@ -1,9 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit";
 import localStorage from 'localStorage'
 const initialState = {
-  cartItems:  localStorage?.getItem("cartItems")
-    ? JSON.parse(localStorage?.getItem("cartItems"))
-    : [],
+  cart: {
+    cartItems: localStorage.getItem('cartItems')
+      ? JSON.parse(localStorage.getItem('cartItems'))
+      : [],
+    shippingAddress: localStorage.getItem('shippingAddress')
+      ? JSON.parse(localStorage.getItem('shippingAddress'))
+      : { location: {} },
+    paymentMethod: localStorage.getItem('paymentMethod')
+      ? localStorage.getItem('paymentMethod')
+      : '',
+  },
   products: null,
   filteredProducts: null
 };
@@ -13,57 +21,57 @@ export const basketSlice = createSlice({
   initialState,
   reducers: {
     addToBasket: (state, action) => {
-      const existingIndex = state.cartItems.findIndex(
+      const existingIndex = state.cart.cartItems.findIndex(
         (item) => item.id === action.payload.id
       );
 
       if (existingIndex >= 0) {
-        state.cartItems[existingIndex] = {
-          ...state.cartItems[existingIndex],
-          cartQuantity: state.cartItems[existingIndex].cartQuantity + 1,
+        state.cart.cartItems[existingIndex] = {
+          ...state.cart.cartItems[existingIndex],
+          cartQuantity: state.cart.cartItems[existingIndex].cartQuantity + 1,
         };
         
       } else {
         let tempProductItem = { ...action.payload, cartQuantity: 1 };
-        state.cartItems.push(tempProductItem);
+        state.cart.cartItems.push(tempProductItem);
         
       }
-      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+      localStorage.setItem("cartItems", JSON.stringify(state.cart.cartItems));
       
     },
     decreaseBasket: (state, action) => {
-      const itemIndex = state.cartItems.findIndex(
+      const itemIndex = state.cart.cartItems.findIndex(
         (item) => item.id === action.payload.id
       );
 
-      if (state.cartItems[itemIndex].cartQuantity > 1) {
-        state.cartItems[itemIndex].cartQuantity -= 1;
-      } else if (state.cartItems[itemIndex].cartQuantity === 1) {
-        const nextCartItems = state.cartItems.filter(
+      if (state.cart.cartItems[itemIndex].cartQuantity > 1) {
+        state.cart.cartItems[itemIndex].cartQuantity -= 1;
+      } else if (state.cart.cartItems[itemIndex].cartQuantity === 1) {
+        const nextCartItems = state.cart.cartItems.filter(
           (item) => item.id !== action.payload.id
         );
 
-        state.cartItems = nextCartItems;
+        state.cart.cartItems = nextCartItems;
       }
 
-      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+      localStorage.setItem("cartItems", JSON.stringify(state.cart.cartItems));
 
     },
     removeFromBasket: (state, action) => {
-      state.cartItems.map((cartItem) => {
+      state.cart.cartItems.map((cartItem) => {
         if (cartItem.id === action.payload.id) {
-          const nextCartItems = state.cartItems.filter(
+          const nextCartItems = state.cart.cartItems.filter(
             (item) => item.id !== cartItem.id
           );
 
-          state.cartItems = nextCartItems;
+          state.cart.cartItems = nextCartItems;
         }
-        localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+        localStorage.setItem("cartItems", JSON.stringify(state.cart.cartItems));
         return state;
       });
     },
     getTotals(state, action) {
-      let { total, quantity } = state.cartItems.reduce(
+      let { total, quantity } = state.cart.cartItems.reduce(
         (cartTotal, cartItem) => {
           const { price, cartQuantity } = cartItem;
           const itemTotal = price * cartQuantity;
@@ -83,10 +91,13 @@ export const basketSlice = createSlice({
       state.cartTotalAmount = total;
     },
     clearBasket(state, action) {
-      state.cartItems = [];
-      localStorage.setItem("cartItems", JSON.stringify(state.cartItems));
+      state.cart.cartItems = [];
+      localStorage.setItem("cartItems", JSON.stringify(state.cart.cartItems));
       toast.error("Cart cleared", { position: "bottom-left" });
     },
+    saveShippingAdress(state,action){
+              
+    }
   },
 });
 

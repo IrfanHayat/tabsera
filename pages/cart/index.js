@@ -11,7 +11,7 @@ import {
 import { useRouter, withRouter } from "next/router";
 
 function cart() {
-  const cartItems = useSelector(state => state.basket.cartItems);
+  const cartItems = useSelector(state => state.basket.cart.cartItems);
   let router = useRouter();
   let dispatch = useDispatch();
 
@@ -33,6 +33,10 @@ function cart() {
   const handleDecreaseCart = product => {
     dispatch(decreaseBasket(product));
   };
+  
+  const checkoutHandler=()=>{
+       router.push('/shipping')
+  }
 
   return (
     <ShoppingCart
@@ -41,6 +45,7 @@ function cart() {
       handleDecreaseCart={handleDecreaseCart}
       handleClearCart={handleClearCart}
       removeItemHandler={removeItemHandler}
+      checkoutHandler={checkoutHandler}
     ></ShoppingCart>
   );
 }
