@@ -1,9 +1,9 @@
-import * as React from 'react';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
+import * as React from "react";
+import Card from "@mui/material/Card";
+import CardContent from "@mui/material/CardContent";
 //import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
-import { CardActionArea } from '@mui/material';
+import { CardActionArea,  Button } from '@mui/material';
 import Image from 'next/image';
 import Link from 'next/link'
 import Detail from '../component/Detail'
@@ -39,10 +39,10 @@ export default function ActionAreaCard({product,viewProduct,addToCartHandler}) {
                   {item.price}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  <button key={item.id} onClick={e=>viewProduct(item)}>View Product</button>  
+                  <Button key={item.id} onClick={e=>viewProduct(item)}>View Product</Button>  
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
-                  <button key={item.id} onClick={e=>addToCartHandler(item)}>Add To Cart</button>  
+                  <Button key={item.id} onClick={e=>addToCartHandler(item)}>Add To Cart</Button>  
                 </Typography>
               </CardContent>
             </CardActionArea>

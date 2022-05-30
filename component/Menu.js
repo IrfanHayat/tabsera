@@ -33,6 +33,8 @@ import { useRouter } from "next/router";
 import Link from "next/link";
 import useTranslation from "next-translate/useTranslation";
 import MenuItem from "@mui/material/MenuItem";
+import { Button } from "@mui/material";
+
 import { addToBasket } from "../slice/basketSlice";
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -128,8 +130,6 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-
-
 export default function PersistentDrawerLeft() {
   const product = useSelector((state) => state.product.productData);
   
@@ -146,14 +146,13 @@ export default function PersistentDrawerLeft() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-  
-  const viewProduct=(item)=>{
-    router.push({
-      pathname: '/product_detail',
-      query: { id:item.id }
-  })
 
-   }
+  const viewProduct = (item) => {
+    router.push({
+      pathname: "/product_detail",
+      query: { id: item.id },
+    });
+  };
 
    const addToCartHandler = (product) => {
       
@@ -271,30 +270,23 @@ export default function PersistentDrawerLeft() {
         </List>
         <Divider />
         <List>
-          {["Category 1", "Category 2", "Category 3", "Category 4"].map(
-            (text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </ListItem>
-            )
-          )}
+          {["All mail", "Trash", "Spam"].map((text, index) => (
+            <ListItem key={text} disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                </ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItemButton>
+            </ListItem>
+          ))}
         </List>
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
         <Grid item xs={12} md={12}>
           <Item>
-            <Image
-              src="/shirt3.jpg"
-              alt="shirt"
-              width={1000}
-              height={100}
-            ></Image>
+            <Image src="/shirt3.jpg" alt="shirt" width={1000} height={100} />
           </Item>
         </Grid>
         <Grid item xs={12} md={12}>
