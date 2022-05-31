@@ -32,9 +32,9 @@ function payement() {
       //  enqueueSnackbar('Payment method is required', { variant: 'error' });
       } else {
         dispatch(savePayment(paymentMethod))
-        //dispatch({ type: 'SAVE_PAYMENT_METHOD', payload: paymentMethod });
-      //  Cookies.set('paymentMethod', paymentMethod);
-        //router.push('/placeorder');
+        
+        localStorage.getItem('paymentMethod', paymentMethod);
+        router.push('/placeorder');
       }
     };
   return (

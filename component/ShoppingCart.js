@@ -11,8 +11,8 @@ import {
   TableRow,
   TableCell,
   Link,
-  Select,
-  MenuItem,
+
+  ListItemText,
   Button,
   Card,
   List,
@@ -20,6 +20,7 @@ import {
 } from '@mui/material';
 
 import { withRouter} from 'next/router';
+
 
 
 function CartScreen({productCartData,removeItemHandler,handleAddToCart,handleDecreaseCart,checkoutHandler}) {
@@ -94,11 +95,11 @@ function CartScreen({productCartData,removeItemHandler,handleAddToCart,handleDec
             <Card>
               <List>
                 <ListItem>
-                  <Typography variant="h2">
+                  <ListItemText >
                       Subtotal ({productCartData.reduce((a, c) => a + c.cartQuantity, 0)}{' '}
                     items) : $
                     {productCartData.reduce((a, c) => a + c.cartQuantity * c.price, 0)} 
-                  </Typography>
+                  </ListItemText>
                 </ListItem>
                 <ListItem>
                   <Button
