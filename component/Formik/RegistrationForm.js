@@ -32,9 +32,11 @@ function RegistratioForm() {
     lastName: Yup.string().required("Required"),
     email: Yup.string().required("Required"),
   });
-  const onSubmit = (values) =>
+  const onSubmit = (values) =>{
     console.log("Form data", values.firstName, values.lastName, values.email);
 
+  }
+    
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container md={12} spacing={2} justify="space-around">
@@ -121,7 +123,7 @@ function RegistratioForm() {
                 name="checkBoxChoice"
                 options={choices}
               />{" "} */}
-              <Button onClick={onSubmit} style={{ background: "green" }}>
+              <Button type='submit' style={{ background: "green" }}>
                 Submit
               </Button>
             </Form>
