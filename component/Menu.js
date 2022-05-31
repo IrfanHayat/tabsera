@@ -40,7 +40,7 @@ const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
   padding: theme.spacing(1),
-  color: theme.palette.text.secondary,
+  color: theme.palette.text.primary,
 }));
 
 const drawerWidth = 240;
@@ -99,7 +99,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("md")]: {
-      width: "20ch",
+      width: "30ch",
     },
   },
 }));
@@ -132,12 +132,12 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 export default function PersistentDrawerLeft() {
   const product = useSelector((state) => state.product.productData);
-  
+
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   let { t } = useTranslation();
   let router = useRouter();
-  let dispatch=useDispatch()
+  let dispatch = useDispatch();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -154,11 +154,10 @@ export default function PersistentDrawerLeft() {
     });
   };
 
-   const addToCartHandler = (product) => {
-      
+  const addToCartHandler = (product) => {
     dispatch(addToBasket(product));
-    router.push('/cart')
-   }; 
+    router.push("/cart");
+  };
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -174,18 +173,10 @@ export default function PersistentDrawerLeft() {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap component="div">
+          <Typography variant="h6" noWrap component="div" sx={{ flexGrow: 1 }}>
             Amazon
           </Typography>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
+
           {/* 
             <InputLabel variant="standard">Language</InputLabel>
             <NativeSelect defaultValue={30}>
@@ -197,6 +188,16 @@ export default function PersistentDrawerLeft() {
             </NativeSelect>
           </FormControl> */}
 
+          <Search>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="Search…"
+              inputProps={{ "aria-label": "search" }}
+            />
+          </Search>
+
           <InputLabel id="demo-simple-select-label">Language</InputLabel>
           <Select>
             {router.locales.map((locale) => (
@@ -206,17 +207,10 @@ export default function PersistentDrawerLeft() {
             ))}
           </Select>
 
-          <IconButton
-            size="large"
-            edge="end"
-            aria-label="account of current user"
-            aria-controls={menuId}
-            aria-haspopup="true"
-            //   onClick={handleProfileMenuOpen}
-            color="inherit"
-          >
-            <AccountCircle />
-          </IconButton>
+          <InputLabel id="demo-simple-select-autowidth-label">
+            {t("common:Language")}
+          </InputLabel>
+
           <IconButton
             size="large"
             edge="end"
@@ -228,9 +222,17 @@ export default function PersistentDrawerLeft() {
           >
             <ShoppingCartIcon />
           </IconButton>
-          <InputLabel id="demo-simple-select-autowidth-label">
-            {t("common:Language")}
-          </InputLabel>
+          <IconButton
+            size="large"
+            edge="end"
+            aria-label="account of current user"
+            aria-controls={menuId}
+            aria-haspopup="true"
+            //   onClick={handleProfileMenuOpen}
+            color="inherit"
+          >
+            <AccountCircle />
+          </IconButton>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -291,8 +293,11 @@ export default function PersistentDrawerLeft() {
         </Grid>
         <Grid item xs={12} md={12}>
           <Item>
-            <ActionAreaCard product={product} viewProduct={viewProduct} addToCartHandler={addToCartHandler}></ActionAreaCard>
-            
+            <ActionAreaCard
+              product={product}
+              viewProduct={viewProduct}
+              addToCartHandler={addToCartHandler}
+            ></ActionAreaCard>
           </Item>
         </Grid>
       </Main>
