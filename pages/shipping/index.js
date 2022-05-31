@@ -1,47 +1,79 @@
 import React, { useState, useEffect } from "react";
 import Shipping from "../../component/Shipping";
-// import { useSelector, useDispatch } from "react-redux";
-// import {
-//   addToBasket,
-//   clearBasket,
-//   decreaseBasket,
-//   getTotals,
-//   removeFromBasket,
-// } from "../../slice/basketSlice";
+import { useSelector, useDispatch } from "react-redux";
+import {
+    saveShippingAdress
+} from "../../slice/basketSlice";
+import localStorage from "localStorage";
+import useStyles from '../../utils/styles'
 
 import { useRouter, withRouter } from "next/router";
 
+import { Controller, useForm } from 'react-hook-form';
+
+
 function shipping() {
-//   const cartItems = useSelector(state => state.basket.cartItems);
-//   let router = useRouter();
-//   let dispatch = useDispatch();
-
-//   console.log("product");
-//   console.log(cartItems);
-//   console.log("-----------");
+    const  {userInfo,cart: { shippingAddress }}  = useSelector(state => state.basket);
+    let router = useRouter();
   
-//   const handleAddToCart=(item)=>{
-//       dispatch(addToBasket(item))
-//   }
-//   const removeItemHandler = item => {
-//     dispatch(removeFromBasket(item));
-//   };
+    let dispatch = useDispatch();
+    const {
+        handleSubmit,
+        control,
+        formState: { errors },
+        setValue,
+        getValues,
+      } = useForm();
 
-//   const handleClearCart = () => {
-//     dispatch(clearBasket());
-//   };
+    const { location } = shippingAddress;
+    useEffect(() => {
+        //   if (!userInfo) {
+        //    router.push('/login?redirect=/shipping');
+        //   }
+          setValue('fullName', shippingAddress.fullName);
+          setValue('address', shippingAddress.address);
+          setValue('city', shippingAddress.city);
+          setValue('postalCode', shippingAddress.postalCode);
+          setValue('country', shippingAddress.country);
+        }, []);
+        const classes = useStyles();
+        
+        
+        const submitHandler = (value) => {
+            console.log(value) 
+             dispatch(saveShippingAdress(value))
+             localStorage.setItem("shippingAddress", JSON.stringify(value));
+             router.push('/payment');
+        };
+      
+        const chooseLocationHandler = () => {
+          const fullName = getValues('fullName');
+          const address = getValues('address');
+          const city = getValues('city');
+          const postalCode = getValues('postalCode');
+          const country = getValues('country');
 
-//   const handleDecreaseCart = product => {
-//     dispatch(decreaseBasket(product));
-//   };
+          dispatch(saveShippingAdress({ fullName, address, city, postalCode, country, location }))
+          localStorage.setItem("shippingAddress", {
+            fullName,
+            address,
+            city,
+            postalCode,
+            country,
+            location,
+          });
+          // router.push('/map');
+        };
 
   return (
     <Shipping
-    //   productCartData={cartItems}
-    //   handleAddToCart={handleAddToCart}
-    //   handleDecreaseCart={handleDecreaseCart}
-    //   handleClearCart={handleClearCart}
-    //   removeItemHandler={removeItemHandler}
+      submitHandler={submitHandler}
+      chooseLocationHandler={chooseLocationHandler}
+      classes={classes}
+      Controller={Controller}
+      control={control}
+      handleSubmit={handleSubmit}
+      errors={errors}
     ></Shipping>
   );
 }

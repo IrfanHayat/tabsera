@@ -69,7 +69,7 @@ function CartScreen({productCartData,removeItemHandler,handleAddToCart,handleDec
                           variant="contained" onClick={() => handleDecreaseCart(item)}>
                       -
                     </Button>
-                    <div className="count">{item.cartQuantity}</div>
+                    <Typography className="count">{item.cartQuantity}</Typography>
                     <Button
                           variant="contained" onClick={() => handleAddToCart(item)}>+</Button>
                       </TableCell>

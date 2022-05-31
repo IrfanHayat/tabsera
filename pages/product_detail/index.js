@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import Details from "../../component/Detail";
 import { useSelector, useDispatch } from "react-redux";
 import { addToBasket } from "../../slice/basketSlice";
-
 import { useRouter, withRouter } from "next/router";
+
 function product_detail(props) {
   const product = useSelector(state => state.product.productData);
   let router = useRouter();

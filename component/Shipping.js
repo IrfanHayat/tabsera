@@ -5,83 +5,17 @@ import {
     TextField,
     Button,
   } from '@mui/material';
-  import { useRouter } from 'next/router';
-  import React, { useContext, useEffect } from 'react';
- // import Layout from '../components/Layout';
-//   import { Store } from '../utils/Store';
-//   import useStyles from '../utils/styles';
-  import Cookies from 'js-cookie';
-  import { Controller, useForm } from 'react-hook-form';
+  import React from 'react';
   import CheckoutWizard from '../component/CheckoutWizard';
   
-  export default function Shipping() {
-    const {
-      handleSubmit,
-      control,
-      formState: { errors },
-      setValue,
-      getValues,
-    } = useForm();
-    const router = useRouter();
-    // const { state, dispatch } = useContext(Store);
-    // const {
-    //   userInfo,
-    //   cart: { shippingAddress },
-    // } = state;
-    //const { location } = shippingAddress;
-    useEffect(() => {
-    //   if (!userInfo) {
-    //     router.push('/login?redirect=/shipping');
-    //   }
-    //   setValue('fullName', shippingAddress.fullName);
-    //   setValue('address', shippingAddress.address);
-    //   setValue('city', shippingAddress.city);
-    //   setValue('postalCode', shippingAddress.postalCode);
-    //   setValue('country', shippingAddress.country);
-    }, []);
+  export default function Shipping({submitHandler,handleSubmit,chooseLocationHandler,classes,control,Controller,errors}) {
   
-   // const classes = useStyles();
-    const submitHandler = ({ fullName, address, city, postalCode, country }) => {
-    //   dispatch({
-    //     type: 'SAVE_SHIPPING_ADDRESS',
-    //     payload: { fullName, address, city, postalCode, country, location },
-    //   });
-    //   Cookies.set('shippingAddress', {
-    //     fullName,
-    //     address,
-    //     city,
-    //     postalCode,
-    //     country,
-    //     location,
-    //   });
-    //  router.push('/payment');
-    };
-  
-    const chooseLocationHandler = () => {
-      const fullName = getValues('fullName');
-      const address = getValues('address');
-      const city = getValues('city');
-      const postalCode = getValues('postalCode');
-      const country = getValues('country');
-    //   dispatch({
-    //     type: 'SAVE_SHIPPING_ADDRESS',
-    //     payload: { fullName, address, city, postalCode, country },
-    //   });
-    //   Cookies.set('shippingAddress', {
-    //     fullName,
-    //     address,
-    //     city,
-    //     postalCode,
-    //     country,
-    //     location,
-    //   });
-    //  router.push('/map');
-    };
+    
     return (
       <>
-        <CheckoutWizard activeStep={1} />
-        <form onSubmit={handleSubmit(submitHandler)} >
-          <Typography component="h1" variant="h1">
+         <CheckoutWizard activeStep={1} /> 
+        <form   onSubmit={handleSubmit(submitHandler)}className={classes.form} >
+          <Typography component="h4" variant="h4">
             Shipping Address
           </Typography>
           <List>
@@ -225,7 +159,7 @@ import {
                 )}
               ></Controller>
             </ListItem>
-            <ListItem>
+            {/* <ListItem>
               <Button
                 variant="contained"
                 type="button"
@@ -233,14 +167,14 @@ import {
               >
                 Choose on map
               </Button>
-              {/* <Typography>
+              <Typography>
                 {location.lat && `${location.lat}, ${location.lat}`}
-              </Typography> */}
-            </ListItem>
+              </Typography>
+            </ListItem> */}
             <ListItem>
-              <Button variant="contained" type="submit" fullWidth color="primary">
-                Continue
-              </Button>
+            <Button variant="contained" type="submit" fullWidth color="primary">
+              Continue
+            </Button>
             </ListItem>
           </List>
         </form>
