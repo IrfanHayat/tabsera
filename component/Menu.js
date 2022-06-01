@@ -36,6 +36,9 @@ import MenuItem from "@mui/material/MenuItem";
 import { Button } from "@mui/material";
 
 import { addToBasket } from "../slice/basketSlice";
+import NewCarousel from "./Carousel/NewCarousel";
+import CarouselApp from "./Carousel/Carousel";
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
@@ -132,12 +135,12 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 export default function PersistentDrawerLeft() {
   const product = useSelector((state) => state.product.productData);
-  
+  console.log(product);
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   let { t } = useTranslation();
   let router = useRouter();
-  let dispatch=useDispatch()
+  let dispatch = useDispatch();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -154,11 +157,10 @@ export default function PersistentDrawerLeft() {
     });
   };
 
-   const addToCartHandler = (product) => {
-      
+  const addToCartHandler = (product) => {
     dispatch(addToBasket(product));
-    router.push('/cart')
-   }; 
+    router.push("/cart");
+  };
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -285,14 +287,29 @@ export default function PersistentDrawerLeft() {
       <Main open={open}>
         <DrawerHeader />
         <Grid item xs={12} md={12}>
-          <Item>
-            <Image src="/shirt3.jpg" alt="shirt" width={1000} height={100} />
-          </Item>
+          <NewCarousel />
         </Grid>
         <Grid item xs={12} md={12}>
           <Item>
-            <ActionAreaCard product={product} viewProduct={viewProduct} addToCartHandler={addToCartHandler}></ActionAreaCard>
-            
+            <ActionAreaCard
+              product={product}
+              viewProduct={viewProduct}
+              addToCartHandler={addToCartHandler}
+            />
+
+            <CarouselApp
+              heading="Featured Products"
+              // content={
+              //   <ActionAreaCard
+              //     product={product}
+              //     viewProduct={viewProduct}
+              //     addToCartHandler={addToCartHandler}
+              //   />
+              // }
+              product={product}
+              viewProduct={viewProduct}
+              addToCartHandler={addToCartHandler}
+            />
           </Item>
         </Grid>
       </Main>

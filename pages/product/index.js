@@ -19,7 +19,7 @@ export default function Product() {
     <Box sx={{ flexGrow: 1 }}>
       <Grid container>
         <Grid item xs={12} md={12}>
-          <Menu></Menu>
+          <Menu />
         </Grid>
 
         <Grid item xs={12} md={12}>
