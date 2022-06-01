@@ -8,6 +8,7 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Image from "next/image";
 // import ProductCard from "../Card";
+import  ActionAreaCard from '../Card'
 
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
@@ -114,20 +115,15 @@ export default function CarouselApp({
 
       <Carousel breakPoints={breakPoints}>
         {/* {content} */}
-        {/* 
+       
+         {product.map((item) => (
         <ActionAreaCard
-          product={product}
+          product={item}
           viewProduct={viewProduct}
           addToCartHandler={addToCartHandler}
-        ></ActionAreaCard> */}
+        ></ActionAreaCard>)) }
 
-        {product.map((item) => (
-          <CarouselItem
-            product={item}
-            viewProduct={viewProduct}
-            addToCartHandle={addToCartHandler}
-          />
-        ))}
+      
       </Carousel>
       <Button variant="outlined">View All</Button>
     </div>

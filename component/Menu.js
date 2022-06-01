@@ -291,21 +291,8 @@ export default function PersistentDrawerLeft() {
         </Grid>
         <Grid item xs={12} md={12}>
           <Item>
-            <ActionAreaCard
-              product={product}
-              viewProduct={viewProduct}
-              addToCartHandler={addToCartHandler}
-            />
-
-            <CarouselApp
+             <CarouselApp
               heading="Featured Products"
-              // content={
-              //   <ActionAreaCard
-              //     product={product}
-              //     viewProduct={viewProduct}
-              //     addToCartHandler={addToCartHandler}
-              //   />
-              // }
               product={product}
               viewProduct={viewProduct}
               addToCartHandler={addToCartHandler}

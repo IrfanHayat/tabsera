@@ -12,44 +12,44 @@ export default function ActionAreaCard({
 }) {
   return (
     <div style={{ display: "flex", flexWrap: "wrap", margin: "10,19" }}>
-      {product.map((item) => (
+    
         <Card sx={{ maxWidth: 345 }}>
           <Image
-            src={item.imgdata}
+            src={product.imgdata}
             alt="shirt"
             width={345}
             height={200}
           ></Image>
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
-              {item.rname}
+              {product.rname}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              {item.somedata}
+              {product.somedata}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              {item.price}
+              {product.price}
             </Typography>
           </CardContent>
 
           <CardActions>
             <Button
-              key={item.id}
-              onClick={(e) => viewProduct(item)}
+              key={product.id}
+              onClick={(e) => viewProduct(product)}
               variant="contained"
             >
               View Product
             </Button>
             <Button
-              key={item.id}
-              onClick={(e) => addToCartHandler(item)}
+              key={product.id}
+              onClick={(e) => addToCartHandler(product)}
               variant="contained"
             >
               Add To Cart
             </Button>
           </CardActions>
         </Card>
-      ))}
+    
     </div>
   );
 }
