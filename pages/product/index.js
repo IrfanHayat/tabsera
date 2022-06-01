@@ -27,7 +27,7 @@ export default function Product() {
             <Footer></Footer>
           </Item>
         </Grid>
-      </Grid>
+      </Grid> 
     </Box>
   );
 }
