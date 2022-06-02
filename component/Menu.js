@@ -34,10 +34,16 @@ import Link from "next/link";
 import useTranslation from "next-translate/useTranslation";
 import MenuItem from "@mui/material/MenuItem";
 import { Button } from "@mui/material";
-
+import AccountBoxIcon from "@mui/icons-material/AccountBox";
+import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
+import ReceiptIcon from "@mui/icons-material/Receipt";
+import AdUnitsIcon from "@mui/icons-material/AdUnits";
+import GppGoodOutlinedIcon from "@mui/icons-material/GppGoodOutlined";
 import { addToBasket } from "../slice/basketSlice";
 import NewCarousel from "./Carousel/NewCarousel";
 import CarouselApp from "./Carousel/Carousel";
+import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -262,30 +268,120 @@ export default function PersistentDrawerLeft() {
         </DrawerHeader>
         <Divider />
         <List>
-          {["Select Your Category"].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
+          {["Profile"].map((text, index) => (
+            <Link href={`/carousel`}>
+              <ListItem key={text} disablePadding>
+                {/* <ListItemIcon> */}
+                <AccountBoxIcon />
+                {/* </ListItemIcon> */}
                 <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
+              </ListItem>
+            </Link>
           ))}
         </List>
         <Divider />
         <List>
-          {["All mail", "Trash", "Spam"].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
+          {["My Orders"].map((text, index) => (
+            <Link href={`/carousel`}>
+              <ListItem key={text} disablePadding>
+                {/* <ListItemIcon> */}
+                <FormatListBulletedIcon />
+                {/* </ListItemIcon> */}
                 <ListItemText primary={text} />
-              </ListItemButton>
+              </ListItem>
+            </Link>
+          ))}
+        </List>
+        <Divider />{" "}
+        <List>
+          {["My Coupons"].map((text, index) => (
+            <Link href={`/carousel`}>
+              <ListItem key={text} disablePadding>
+                {/* <ListItemIcon> */}
+                <FormatListBulletedIcon />
+                {/* </ListItemIcon> */}
+                <ListItemText primary={text} />
+              </ListItem>
+            </Link>
+          ))}
+        </List>
+        <Divider />{" "}
+        <List>
+          {["My Bill Payments"].map((text, index) => (
+            <Link href={`/carousel`}>
+              <ListItem key={text} disablePadding>
+                {/* <ListItemIcon> */}
+                <ReceiptIcon />
+                {/* </ListItemIcon> */}
+                <ListItemText primary={text} />
+              </ListItem>
+            </Link>
+          ))}
+        </List>
+        <Divider />{" "}
+        <List>
+          {["My Topups"].map((text, index) => (
+            <Link href={`/carousel`}>
+              <ListItem key={text} disablePadding>
+                {/* <ListItemIcon> */}
+                <AdUnitsIcon />
+                {/* </ListItemIcon> */}
+                <ListItemText primary={text} />
+              </ListItem>
+            </Link>
+          ))}
+        </List>
+        <Divider />{" "}
+        <List>
+          {["Security"].map((text, index) => (
+            <Link href={`/carousel`}>
+              <ListItem key={text} disablePadding>
+                {/* <ListItemIcon> */}
+                <GppGoodOutlinedIcon />
+                {/* </ListItemIcon> */}
+                <ListItemText primary={text} />
+              </ListItem>
+            </Link>
+          ))}
+        </List>
+        <Divider />{" "}
+        <List>
+          {["About"].map((text, index) => (
+            <Link href={`/carousel`}>
+              <ListItem key={text} disablePadding>
+                {/* <ListItemIcon> */}
+                <InfoOutlinedIcon />
+                {/* </ListItemIcon> */}
+                <ListItemText primary={text} />
+              </ListItem>
+            </Link>
+          ))}
+        </List>
+        <Divider />{" "}
+        <List>
+          {["Help"].map((text, index) => (
+            <Link href={`/carousel`}>
+              <ListItem key={text} disablePadding>
+                {/* <ListItemIcon> */}
+                <HelpOutlineOutlinedIcon />
+                {/* </ListItemIcon> */}
+                <ListItemText primary={text} />
+              </ListItem>
+            </Link>
+          ))}
+        </List>
+        <Divider />
+        <List>
+          {["Logout"].map((text, index) => (
+            <ListItem key={text} disablePadding>
+              {/* <ListItemIcon> */}
+              {/* <MailIcon /> */}
+              {/* </ListItemIcon> */}
+              <ListItemText primary={text} />
             </ListItem>
           ))}
         </List>
+        <Divider />
       </Drawer>
       <Main open={open}>
         <DrawerHeader />
