@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import * as React from "react";
 import { styled, useTheme, alpha } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -40,12 +40,10 @@ import ReceiptIcon from "@mui/icons-material/Receipt";
 import AdUnitsIcon from "@mui/icons-material/AdUnits";
 import GppGoodOutlinedIcon from "@mui/icons-material/GppGoodOutlined";
 import { addToBasket } from "../slice/basketSlice";
-import { getProduct } from "../slice/productSlice";
 import NewCarousel from "./Carousel/NewCarousel";
 import CarouselApp from "./Carousel/Carousel";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
-
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -149,15 +147,6 @@ export default function PersistentDrawerLeft() {
   let { t } = useTranslation();
   let router = useRouter();
   let dispatch = useDispatch();
-
-  
-   useEffect(() => {
-    console.log('I am, hwerer')
-  
-    dispatch(getProduct()) 
-
-  }, []);
-
 
   const handleDrawerOpen = () => {
     setOpen(true);

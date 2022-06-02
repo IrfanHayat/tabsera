@@ -22,6 +22,10 @@ export const registerUser = createAsyncThunk(
     try {
 
       const result = await axios.post(`${url}/customers/login`, values);
+      if (response.data.resultCode === 2000) {
+        logIn(true, res.data.response, 'Successfully Login');
+        
+    }
       return result.data;
     } catch (error) {
       console.log(error.response.data);
@@ -81,6 +85,17 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
+    logIn(auth, account_detail, message) {
+      // if (message.length > 0) {
+      //     toast.success(message);
+      // }
+  
+      return {
+          type: LOG_IN,
+          auth,
+          account_detail,
+      };
+  },
     loadUser(state, action) {
       const token = state.token;
     
@@ -190,6 +205,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { loadUser, logoutUser } = authSlice.actions;
+export const { loadUser, logoutUser,logIn } = authSlice.actions;
 
 export default authSlice.reducer;
