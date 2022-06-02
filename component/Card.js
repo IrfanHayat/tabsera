@@ -22,7 +22,7 @@ export default function ActionAreaCard({
             <Image
               src={item.imgdata}
               alt="shirt"
-              width={100}
+              width={315}
               height={300}
             ></Image>
             <CardContent>
