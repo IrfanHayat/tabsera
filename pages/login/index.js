@@ -32,9 +32,9 @@ export default function Login() {
   
 
   useEffect(() => {
-    // if (auth._id) {
-    //   navigate("/cart");
-    // }
+    if (auth._id) {
+      navigate("/cart");
+    }
   }, []);
 
   
@@ -45,7 +45,7 @@ export default function Login() {
     console.log(phone,password)
     try {
       dispatch(loginUser(data));
-     // Cookies.set('userInfo', data);
+      
       router.push(redirect || '/');
     } catch (err) {
     //  enqueueSnackbar(getError(err), { variant: 'error' });

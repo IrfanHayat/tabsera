@@ -12,9 +12,9 @@ const initialState = {
       ? localStorage.getItem("paymentMethod")
       : "",
   },
-  userIfo:localStorage.getItem("userInfo")
-  ? JSON.parse(localStorage.getItem("userInfo"))
-  : [],
+  // userIfo:localStorage.getItem("userInfo")
+  // ? JSON.parse(localStorage.getItem("userInfo"))
+  // : [],
   products: null,
   filteredProducts: null,
 };

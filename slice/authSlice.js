@@ -2,8 +2,10 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { url, setHeaders } from "../helper/axios/config";
 import Encryption from '../helper/encryption/encryptAes';
+import localStorage from "localStorage";
+
 const initialState = {
-  //token: localStorage.getItem("token"),
+  token: localStorage.getItem("token"),
   phone: "",
   password: "",
   _id: "",
@@ -48,17 +50,12 @@ export const loginUser = createAsyncThunk(
         const requestBody = {
             requestBody: encrypt
         };
-      const result = await axios.post(`${url}/customers/login`, requestBody,{
-        headers: {
-        ['Content-Type']: 'application/json',
-        ["Access-Control-Allow-Origin"]:'*'
-        }
-      });
-
-     // localStorage.setItem("token", token.data);
-      return result.response;
+      const result = await axios.post(`${url}/customers/login`, requestBody);
+      localStorage.setItem("token", result.data.response);
+      console.log(result.data.response)
+      return result.data.response;
     } catch (error) {
-      console.log(error.response);
+      console.log(error);
       return rejectWithValue(error.response.data);
     }
   }
@@ -66,13 +63,13 @@ export const loginUser = createAsyncThunk(
 
 export const getUser = createAsyncThunk(
   "auth/getUser",
-  async (id, { rejectWithValue }) => {
+  async ({ rejectWithValue }) => {
     try {
-      const token = await axios.get(`${url}/user/${id}`, setHeaders());
+      const response = await axios.get(`${url}/customers`, setHeaders());
 
-      localStorage.setItem("token", token.data);
+      localStorage.setItem("token", response.data);
 
-      return token.data;
+      return response.data;
     } catch (error) {
       console.log(error.response);
       return rejectWithValue(error.response.data);
@@ -86,15 +83,16 @@ const authSlice = createSlice({
   reducers: {
     loadUser(state, action) {
       const token = state.token;
-
+    
       if (token) {
-        const user = jwtDecode(token);
+        const user = token.data;
+        console.log(user)
         return {
           ...state,
           token,
-          name: user.name,
+          name: user.first_name,
           email: user.email,
-          _id: user._id,
+          _id: user.cust_id,
           userLoaded: true,
         };
       } else return { ...state, userLoaded: true };
@@ -144,13 +142,14 @@ const authSlice = createSlice({
     });
     builder.addCase(loginUser.fulfilled, (state, action) => {
       if (action.payload) {
-        const user = jwtDecode(action.payload);
+        const user = action.payload;
+        console.log(user)
         return {
           ...state,
           token: action.payload,
-          name: user.name,
+          name: user.firstName,
           email: user.email,
-          _id: user._id,
+          _id: user.customerUserId,
           loginStatus: "success",
         };
       } else return state;

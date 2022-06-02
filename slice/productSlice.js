@@ -1,33 +1,44 @@
 import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
+import axios from "axios";
 import productData from "../data/product";
-
+import { url, setHeaders } from "../helper/axios/config";
 export const getProduct = createAsyncThunk(
   "product/getProduct",
-  async ({ id }) => {
-    return fetch("https://jsonplaceholder.typicode.com/posts/1")
-      .then(response => response.json())
-      .then(json => console.log(json));
+  async () => {
+    const result = await axios.get(`${url}/ecommerce/products`,{withCredentials: true});
+    
+    return result.data.response;;
   }
 );
 
 const addProduct = createSlice({
   name: "product",
   initialState: {
-    productData,
+    productData:[],
     loading: false,
     error: null,
   },
-    extraReducers: {
-      [getProduct.pending]: (state, action) => {
-        state.loading = true;
-      },
-      [getProduct.fulfilled]: (state, action) => {
-        (state.loading = false), (state.product = [action.payload]);
-      },
-      [getProduct.rejected]: (state, action) => {
-        (state.loading = false), (state.error = action.payload);
-      },
-    },
+  reducers:{},
+  extraReducers: (builder) => {
+    builder.addCase(getProduct.pending, (state, action) => {
+      return { ...state, loading: true };
+    });
+    builder.addCase(getProduct.fulfilled, (state, action) => {
+      console.log(action)
+      if (action.payload) {
+        const user = action.payload;
+        console.log(user)
+      } else return state;
+    });
+    builder.addCase(getProduct.rejected, (state, action) => {
+      return {
+        ...state,
+        loading: "rejected",
+        error: action.payload,
+      };
+    });
+    
+  },  
   },
 );
 

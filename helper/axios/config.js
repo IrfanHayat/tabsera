@@ -1,7 +1,7 @@
 
 
 
-export const url = "https://tijari.cloud:9876";
+export const url = "https://tijaricloud.com:9876";
 
 export const setHeaders = () => {
   const headers = {
