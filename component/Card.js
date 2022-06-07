@@ -12,26 +12,26 @@ export default function ActionAreaCard({
 }) {
   return (
     <div style={{ display: "flex", flexWrap: "wrap", margin: "10,19" }}>
-        
-        <Card sx={{ maxWidth: 270 }}>
+      <Card sx={{ maxWidth: 270 }}>
         {product?.productImage && (
           <Image
             src={product?.productImage}
             alt="shirt"
             width={345}
             height={200}
-          ></Image>)}
-          <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              {product.productName}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              {product.categoryName}
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              {product.productCost}
-            </Typography>
-          </CardContent>
+          ></Image>
+        )}
+        <CardContent>
+          <Typography gutterBottom variant="h5" component="div">
+            {product.productName}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {product.categoryName}
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            {product.productCost}
+          </Typography>
+        </CardContent>
 
         <CardActions>
           <Button
