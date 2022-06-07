@@ -393,7 +393,7 @@ export default function PersistentDrawerLeft() {
         <Grid item xs={12} md={12}>
           <NewCarousel   product={product?product.slice([0], [3]).map((item, i) => {
                 return item;
-              }):'' }/>
+              }):[] }/>
         </Grid>
         <Grid item xs={12} md={12}>
           <Item>
@@ -401,7 +401,7 @@ export default function PersistentDrawerLeft() {
               heading="Featured Products"
               product={product?product.slice([0], [10]).map((item, i) => {
                 return item;
-              }):'' }
+              }):[]}
               viewProduct={viewProduct}
               addToCartHandler={addToCartHandler}
             />

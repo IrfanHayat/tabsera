@@ -76,7 +76,7 @@ export default function VariableWidthGrid({
                   component="img"
                   // height="10"
                   style={{ height: "100px", width: "150px" }}
-                  image={item.imgdata}
+                  image={item.productId}
                   alt="green iguana"
                 />
               </Link>
@@ -88,7 +88,7 @@ export default function VariableWidthGrid({
             {/* <Item> */}
             <NextLink href={`/product/${item.slug}`} passHref>
               <Link>
-                <Typography>{item.rname}</Typography>
+                <Typography>{item.productName}</Typography>
               </Link>
             </NextLink>
             {/* </Item> */}
@@ -110,7 +110,7 @@ export default function VariableWidthGrid({
           </Grid>
 
           <Grid item xs={2}>
-            <Typography>$ : {item.price}</Typography>
+            <Typography>$  {item.productCost}</Typography>
             {/* <Item> */}
             {/* </Item> */}
           </Grid>
@@ -126,12 +126,40 @@ export default function VariableWidthGrid({
             </Button>
             {/* </Item> */}
           </Grid>
-
+          <Grid item md={3} xs={12}>
+          <Card>
+            <List>
+              <ListItem>
+                <ListItemText>
+                  Subtotal (
+                  {productCartData.reduce((a, c) => a + c.cartQuantity, 0)}{" "}
+                  items) : $
+                  {productCartData.reduce(
+                    (a, c) => a + c.cartQuantity * c.productCost,
+                    0
+                  )}
+                </ListItemText>
+              </ListItem>
+              <ListItem>
+                <Button
+                  onClick={checkoutHandler}
+                  variant="contained"
+                  color="primary"
+                  fullWidth
+                >
+                  Check Out
+                </Button>
+              </ListItem>
+            </List>
+          </Card>
+        </Grid>
           {/* <Grid item xs={1}>
             <Item>${item.price}</Item>
           </Grid> */}
         </Grid>
       ))}
+      
+      
     </Box>
   );
 }
