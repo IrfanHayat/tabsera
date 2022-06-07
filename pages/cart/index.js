@@ -9,20 +9,21 @@ import {
   removeFromBasket,
 } from "../../slice/basketSlice";
 import { useRouter, withRouter } from "next/router";
+import VariableWidthGrid from "../../component/NewShoppingCart";
 
 function cart() {
-  const cartItems = useSelector(state => state.basket.cart.cartItems);
+  const cartItems = useSelector((state) => state.basket.cart.cartItems);
   let router = useRouter();
   let dispatch = useDispatch();
 
   console.log("product");
   console.log(cartItems);
   console.log("-----------");
-  
-  const handleAddToCart=(item)=>{
-      dispatch(addToBasket(item))
-  }
-  const removeItemHandler = item => {
+
+  const handleAddToCart = (item) => {
+    dispatch(addToBasket(item));
+  };
+  const removeItemHandler = (item) => {
     dispatch(removeFromBasket(item));
   };
 
@@ -30,23 +31,32 @@ function cart() {
     dispatch(clearBasket());
   };
 
-  const handleDecreaseCart = product => {
+  const handleDecreaseCart = (product) => {
     dispatch(decreaseBasket(product));
   };
-  
-  const checkoutHandler=()=>{
-       router.push('/shipping')
-  }
+
+  const checkoutHandler = () => {
+    router.push("/shipping");
+  };
 
   return (
-    <ShoppingCart
+    <VariableWidthGrid
       productCartData={cartItems}
       handleAddToCart={handleAddToCart}
       handleDecreaseCart={handleDecreaseCart}
       handleClearCart={handleClearCart}
       removeItemHandler={removeItemHandler}
       checkoutHandler={checkoutHandler}
-    ></ShoppingCart>
+    />
+    // <NewShoppingCart/>
+    // <ShoppingCart
+    //   productCartData={cartItems}
+    //   handleAddToCart={handleAddToCart}
+    //   handleDecreaseCart={handleDecreaseCart}
+    //   handleClearCart={handleClearCart}
+    //   removeItemHandler={removeItemHandler}
+    //   checkoutHandler={checkoutHandler}
+    // ></ShoppingCart>
   );
 }
 

@@ -11,8 +11,7 @@ import {
   CircularProgress,
 } from "@mui/material";
 
-function Details({productDetail,addToCartHandler}) {
-  
+function Details({ productDetail, addToCartHandler }) {
   return (
     <>
       <Grid container spacing={1}>
@@ -22,12 +21,13 @@ function Details({productDetail,addToCartHandler}) {
             height="14"
             image={productDetail?.imgdata}
             alt="green iguana"
+            style={{ margin: "5px" }}
           />
         </Grid>
         <Grid item md={3} xs={12}>
           <List>
             <ListItem>
-              <Typography component="h1" variant="h1">
+              <Typography component="h1" variant="h4">
                 Title
               </Typography>
             </ListItem>
@@ -49,25 +49,25 @@ function Details({productDetail,addToCartHandler}) {
           </List>
         </Grid>
         <Grid item md={3} xs={12}>
-          <Card>
+          <Card style={{ margin: "10px" }}>
             <List>
               <ListItem>
                 <Grid container>
                   <Grid item xs={6}>
-                    <Typography>Price</Typography>
+                    <Typography variant="h6">Price</Typography>
                   </Grid>
                   <Grid item xs={6}>
-                    <Typography>{productDetail?.price}</Typography>
+                    <Typography variant="h6">{productDetail?.price}</Typography>
                   </Grid>
                 </Grid>
               </ListItem>
               <ListItem>
                 <Grid container>
                   <Grid item xs={6}>
-                    <Typography>Status</Typography>
+                    <Typography variant="h6">Status</Typography>
                   </Grid>
                   <Grid item xs={6}>
-                    <Typography>
+                    <Typography variant="h6">
                       {/* {product.countInStock > 0 ? 'In stock' : 'Unavailable'} */}
                     </Typography>
                   </Grid>
@@ -78,8 +78,8 @@ function Details({productDetail,addToCartHandler}) {
                   fullWidth
                   variant="contained"
                   color="primary"
-                  onClick={()=>{
-                    addToCartHandler(productDetail)
+                  onClick={() => {
+                    addToCartHandler(productDetail);
                   }}
                 >
                   Add to cart
