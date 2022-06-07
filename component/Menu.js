@@ -1,4 +1,4 @@
-import * as React from "react";
+import  React,{useState} from "react";
 import { styled, useTheme, alpha } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -142,7 +142,10 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 export default function PersistentDrawerLeft() {
   const product = useSelector((state) => state.product.productData);
+  console.log("product")
+  let [groupProduct,setGroupedProduct]=useState()
   console.log(product);
+  console.log("------------")
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   let { t } = useTranslation();
@@ -169,9 +172,25 @@ export default function PersistentDrawerLeft() {
     router.push("/cart");
   };
 
+  //groupBy
+  function groupArrayOfObjects(list, key) {
+    return list.reduce(function(rv, x) {
+      (rv[x[key].split(' ').join('')] = rv[x[key].split(' ').join('')] || []).push(x);
+     // console.log(rv[x[key]])
+      return rv;
+    }, {});
+  };
+
   React.useEffect(async ()=>{
-      await dispatch(getProduct()) 
-      
+       dispatch(getProduct()) 
+       console.log("product")
+  console.log(product);
+  console.log("------------")
+       var groupedCategory=groupArrayOfObjects(product,"categoryName");
+       console.log('groupedCategory')
+       console.log(groupedCategory)
+       setGroupedProduct(groupedCategory)
+
   },[])
   return (
     <Box sx={{ display: "flex" }}>
@@ -417,6 +436,16 @@ export default function PersistentDrawerLeft() {
             />
           </Item>
         </Grid>
+        {/* <Grid item xs={12} md={12}>
+          <Item>
+             <CarouselApp
+              heading="Kamran Test Category"
+              product={groupProduct.KamranTestCategory}
+              viewProduct={viewProduct}
+              addToCartHandler={addToCartHandler}
+            />
+          </Item>
+        </Grid> */}
       </Main>
     </Box>
   );

@@ -28,7 +28,7 @@ function Item(props) {
        {props?.item.productImage && (
       <Image
         // layout="fill"
-        width={1400}
+        width={2000}
         height={400}
         // style={{ width: "100%", height: "300px" }}
         src={props?.item.productImage}
