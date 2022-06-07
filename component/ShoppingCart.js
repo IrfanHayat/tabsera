@@ -92,7 +92,7 @@ function CartScreen({
                   </TableCell>
 
                   <TableCell>
-                    <NextLink href={`/product/${item.slug}`} passHref>
+                    <NextLink href={`/product_detail?productId=${item.productId}`} passHref>
                       <Link>
                         <Typography>{item.productName}</Typography>
                       </Link>

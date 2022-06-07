@@ -17,6 +17,8 @@ function product_detail(props) {
 
   const addToCartHandler = product => {
     dispatch(addToBasket(product));
+    router.push("/cart");
+
   };
 
   return (
