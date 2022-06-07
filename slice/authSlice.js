@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import instance from "../helper/axios/httpRequest";
 import { url, setHeaders } from "../helper/axios/config";
 import Encryption from '../helper/encryption/encryptAes';
 import localStorage from "localStorage";
@@ -20,8 +20,8 @@ export const registerUser = createAsyncThunk(
   "auth/registerUser",
   async (values, { rejectWithValue }) => {
     try {
-
-      const result = await axios.post(`${url}/customers/login`, values);
+      
+      const result = await instance.post(`${url}/customers/login`, values);
       if (response.data.resultCode === 2000) {
         logIn(true, res.data.response, 'Successfully Login');
         
@@ -39,27 +39,29 @@ export const loginUser = createAsyncThunk(
   async (values, { rejectWithValue }) => {
     console.log(values)
     try {
-        const dataEncrypt = {
-            // deviceId: "",
-            // imsi: "",
-            channelId:1,
-            mobileNumber: '923235412298', // values.phone
-             otp: "127484",
-            password: values.password
-            // registrationToken: ""
-        };
-        //let encrypt = "EYeg8Wha6Mz6NGeWzjIBJZGcrodlGkpRUUzHcjIaugV80IelDyLdGunDQ/E25/kNyMU5LY9wGqb5Na0a3SCFZdQHTulGjAn9HwkTZSfQ5PpaqwCsEWExt3FXWJPidZkV5kkn6gHFqDt8R4QuaWIc7FNpz0vy+CeS40oiZwiuSkYVl9FJz7EqmcoIL6ioEWYuISY88I1unM9btPTW/oimRKJ/47UEkJNCKCOjNxh4clfB/X3dHnBKKR1O7En7k1MTsrwVrQUBC+gAZ5S/CdmrttwxbkvusDGj4mFBh5CqW2/1NVPI85+g/ecPSoe7gpcwcE5dQd1osNscjjxpLi7BJyypiPZtiKdz/ORUgj4j4z171cDNIVB7QCHXpAmlkd8E"
+        // const dataEncrypt = {
+        //     // deviceId: "",
+        //     // imsi: "",
+          
+        //     channelId:1,
+        //     mobileNumber: '923235412298',
+        //      otp: "127484",
+        //     password: values.password
+        //     // registrationToken: ""
+        // };
+        let encrypt = "EYeg8Wha6Mz6NGeWzjIBJZGcrodlGkpRUUzHcjIaugV80IelDyLdGunDQ/E25/kNyMU5LY9wGqb5Na0a3SCFZdQHTulGjAn9HwkTZSfQ5PpaqwCsEWExt3FXWJPidZkV5kkn6gHFqDt8R4QuaWIc7FNpz0vy+CeS40oiZwiuSkYVl9FJz7EqmcoIL6ioEWYuISY88I1unM9btPTW/oimRKJ/47UEkJNCKCOjNxh4clfB/X3dHnBKKR1O7En7k1MTsrwVrQUBC+gAZ5S/CdmrttwxbkvusDGj4mFBh5CqW2/1NVPI85+g/ecPSoe7gpcwcE5dQd1osNscjjxpLi7BJyypiPZtiKdz/ORUgj4j4z171cDNIVB7QCHXpAmlkd8E"
 
         //aes helper function
-       const encrypt = Encryption(dataEncrypt);
+       //const encrypt = Encryption(dataEncrypt);
         console.log(encrypt)
 
         const requestBody = {
             requestBody: encrypt
         };
-      const result = await axios.post(`${url}/customers/login`, requestBody);
+        console.log(instance)
+      const result = await instance.post(`${url}/customers/login`,requestBody);
       localStorage.setItem("token", result.data.response);
-      console.log(result.data.response)
+      
       return result.data.response;
     } catch (error) {
       console.log(error);
@@ -72,7 +74,7 @@ export const getUser = createAsyncThunk(
   "auth/getUser",
   async ({ rejectWithValue }) => {
     try {
-      const response = await axios.get(`${url}/customers`, setHeaders());
+      const response = await instance.get(`${url}/customers`, setHeaders());
 
       localStorage.setItem("token", response.data);
 

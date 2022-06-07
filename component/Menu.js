@@ -40,6 +40,7 @@ import ReceiptIcon from "@mui/icons-material/Receipt";
 import AdUnitsIcon from "@mui/icons-material/AdUnits";
 import GppGoodOutlinedIcon from "@mui/icons-material/GppGoodOutlined";
 import { addToBasket } from "../slice/basketSlice";
+import { getProduct } from "../slice/productSlice";
 import NewCarousel from "./Carousel/NewCarousel";
 import CarouselApp from "./Carousel/Carousel";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
@@ -168,6 +169,10 @@ export default function PersistentDrawerLeft() {
     router.push("/cart");
   };
 
+  React.useEffect(()=>{
+      let data = dispatch(getProduct()) 
+      console.log(data)
+  },[])
   return (
     <Box sx={{ display: "flex" }}>
       <CssBaseline />

@@ -1,11 +1,13 @@
 import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
-import axios from "axios";
+import instance from "../helper/axios/httpRequest";
 import productData from "../data/product";
 import { url, setHeaders } from "../helper/axios/config";
+import Cookies from 'universal-cookie';
+
 export const getProduct = createAsyncThunk(
   "product/getProduct",
   async () => {
-    const result = await axios.get(`${url}/ecommerce/products`,{withCredentials: true});
+    const result = await instance.get(`${url}/ecommerce/products`);
     
     return result.data.response;;
   }

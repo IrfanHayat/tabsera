@@ -18,8 +18,11 @@
     "@mui/styles": "^5.8.0",
     "@reduxjs/toolkit": "^1.8.2",
     "axios": "^0.27.2",
+    "cookie": "^0.5.0",
+    "cookies": "^0.8.0",
     "crypto-js": "^4.1.1",
     "formik": "^2.2.9",
+    "http-proxy": "^1.18.1",
     "i18n": "^0.15.0",
     "js-cookie": "^3.0.1",
     "js-crypto-aes": "^1.0.4",
@@ -29,6 +32,7 @@
     "next-translate": "^1.4.0",
     "notistack": "^2.0.5",
     "react": "^17.0.2",
+    "react-cookie": "^4.1.1",
     "react-currency-formatter": "^1.1.0",
     "react-datepicker": "^4.8.0",
     "react-dom": "^17.0.2",
@@ -37,6 +41,7 @@
     "react-material-ui-carousel": "^3.4.2",
     "react-redux": "^8.0.2",
     "styled-components": "^5.3.5",
+    "universal-cookie": "^4.0.4",
     "yup": "^0.32.11"
   },
   "devDependencies": {
