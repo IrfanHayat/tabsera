@@ -40,6 +40,7 @@ export default function ActionAreaCard({
             variant="contained"
             size="small"
             style={{ fontSize: "10px" }}
+            color="primary"
           >
             View Product
           </Button>
@@ -47,7 +48,7 @@ export default function ActionAreaCard({
             key={product.id}
             onClick={(e) => addToCartHandler(product)}
             variant="contained"
-            // color="success"
+             color="primary"
             // labelStyle={{ fontSize: 15 }}
             style={{ fontSize: "10px" }}
             size="small"
