@@ -4,7 +4,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import { Button, CardActions } from "@mui/material";
 import Image from "next/image";
-
+import { CardMedia } from "@mui/material"
 export default function ActionAreaCard({
   product,
   viewProduct,
@@ -14,12 +14,13 @@ export default function ActionAreaCard({
     <div style={{ display: "flex", flexWrap: "wrap", margin: "10,19" }}>
         
         <Card sx={{ maxWidth: 270 }}>
-          <Image
-            src={product.productImage}
-            alt="shirt"
-            width={345}
-            height={200}
-          ></Image>
+        <CardMedia
+          component="img"
+          height="14"
+          image={product.productImage}
+          alt="green iguana"
+          style={{ margin: "5px" }}
+        />
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
               {product.productName}

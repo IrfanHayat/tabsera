@@ -169,8 +169,8 @@ export default function PersistentDrawerLeft() {
     router.push("/cart");
   };
 
-  React.useEffect(()=>{
-       dispatch(getProduct()) 
+  React.useEffect(async ()=>{
+      await dispatch(getProduct()) 
       
   },[])
   return (
