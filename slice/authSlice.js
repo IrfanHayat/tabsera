@@ -44,7 +44,7 @@ export const loginUser = createAsyncThunk(
             // imsi: "",
           
             channelId:1,
-            mobileNumber: '923235412298',
+            mobileNumber: values.phone,
              otp: "127484",
             password: values.password
             // registrationToken: ""

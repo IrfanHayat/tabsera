@@ -105,7 +105,7 @@ export default function Login() {
                 <PhoneInput
                   variant="outlined"
                   dropdownStyle={{ height: "250px" }}
-                  inputStyle={{ height: "50px", width: "500px" }}
+                  inputStyle={{ height: "50px", width: "207vh" }}
                   // style={{ width="1000px" }}
                   id="phone"
                   label="Phone"

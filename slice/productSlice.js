@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 import instance from "../helper/axios/httpRequest";
 import productData from "../data/product";
 import { url, setHeaders } from "../helper/axios/config";
-import Cookies from 'universal-cookie';
+//import Cookies from 'universal-cookie';
 
 export const getProduct = createAsyncThunk(
   "product/getProduct",
