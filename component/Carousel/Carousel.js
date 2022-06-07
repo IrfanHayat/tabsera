@@ -116,13 +116,13 @@ export default function CarouselApp({
       <Carousel breakPoints={breakPoints}>
         {/* {content} */}
 
-        {product.map((item) => (
+        {/* {product.map((item) => (
           <ActionAreaCard
             product={item}
             viewProduct={viewProduct}
             addToCartHandler={addToCartHandler}
           ></ActionAreaCard>
-        ))}
+        ))} */}
       </Carousel>
       <Button variant="contained" style={{ fontSize: "10px" }} size="small">
         View All
