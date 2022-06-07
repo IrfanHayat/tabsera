@@ -9,6 +9,7 @@ import Button from "@mui/material/Button";
 import Image from "next/image";
 // import ProductCard from "../Card";
 import ActionAreaCard from "../Card";
+import { Link } from "@mui/material";
 
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
@@ -113,7 +114,13 @@ export default function CarouselApp({
     <div>
       <Typography variant="h5">{heading}</Typography>
 
-      <Carousel breakPoints={breakPoints}>
+      <Carousel
+        breakPoints={breakPoints}
+        // disableArrowsOnEnd={false}
+        // showArrows={false}
+        // pagination={false}
+        // itemsToShow={2}
+      >
         {/* {content} */}
 
         {product.map((item) => (
@@ -125,7 +132,9 @@ export default function CarouselApp({
         ))}
       </Carousel>
       <Button variant="contained" style={{ fontSize: "10px" }} size="small">
-        View All
+        <Link href="/all_products">
+          <a>View All</a>
+        </Link>
       </Button>
     </div>
   );
