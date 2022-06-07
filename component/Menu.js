@@ -492,7 +492,7 @@ export default function PersistentDrawerLeft() {
               textDecoration: "none",
             }}
           >
-            Tijari
+            Tabsera
           </Typography>
 
           <Typography
@@ -511,7 +511,7 @@ export default function PersistentDrawerLeft() {
               textDecoration: "none",
             }}
           >
-            Tijari
+            Tabsera
           </Typography>
 
           {/* 
