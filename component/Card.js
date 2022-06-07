@@ -12,7 +12,7 @@ export default function ActionAreaCard({
 }) {
   return (
     <div style={{ display: "flex", flexWrap: "wrap", margin: "10,19" }}>
-      <Card sx={{ maxWidth: 270 }}>
+      <Card sx={{ maxWidth: 230, maxHeight: 600 }}>
         {product?.productImage && (
           <Image
             src={product?.productImage}
@@ -22,7 +22,7 @@ export default function ActionAreaCard({
           ></Image>
         )}
         <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
+          <Typography gutterBottom variant="h6" component="div">
             {product.productName}
           </Typography>
           <Typography variant="body2" color="text.secondary">
