@@ -41,12 +41,10 @@ export default function Login() {
   const submitHandler = async ({phone,password }) => {
   //   closeSnackbar();
     let data={phone,password}
-    console.log('I am here')
-    console.log(phone,password)
+    
     try {
-      dispatch(loginUser(data));
-      
-      router.push(redirect || '/');
+     let result=await dispatch(loginUser(data));
+     result.payload? router.push('/'):router.push('/login');
     } catch (err) {
     //  enqueueSnackbar(getError(err), { variant: 'error' });
     }
