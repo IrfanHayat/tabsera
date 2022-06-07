@@ -25,6 +25,12 @@ export default function ActionAreaCard({
               width={315}
               height={300}
             ></Image>
+            {/* <Image
+              src={item.imgdata}
+              alt="shirt"
+              width={315}
+              height={300}
+            ></Image> */}
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
                 {item.rname}
