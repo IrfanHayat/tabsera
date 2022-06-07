@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 
 function Details({ productDetail, addToCartHandler }) {
+  console.log(productDetail)
   return (
     <>
       <Grid container spacing={1}>
@@ -19,7 +20,7 @@ function Details({ productDetail, addToCartHandler }) {
           <CardMedia
             component="img"
             height="14"
-            image={productDetail?.imgdata}
+            image={productDetail?.productImage}
             alt="green iguana"
             style={{ margin: "5px" }}
           />
@@ -32,19 +33,19 @@ function Details({ productDetail, addToCartHandler }) {
               </Typography>
             </ListItem>
             <ListItem>
-              <Typography>Category: {productDetail?.rname}</Typography>
+              <Typography>Category: {productDetail?.categoryName}</Typography>
             </ListItem>
             <ListItem>
-              <Typography>Brand: {productDetail?.rname}</Typography>
+              <Typography>Brand: {productDetail?.productName}</Typography>
             </ListItem>
             <ListItem>
               {/* <Rating value={5} readOnly></Rating> */}
               <Link href="#reviews">
-                <Typography>({productDetail?.rating} reviews)</Typography>
+                <Typography>({productDetail?.totalReviewa} reviews)</Typography>
               </Link>
             </ListItem>
             <ListItem>
-              <Typography> Description: {productDetail?.somedata}</Typography>
+              <Typography> Description:</Typography>
             </ListItem>
           </List>
         </Grid>
@@ -57,7 +58,7 @@ function Details({ productDetail, addToCartHandler }) {
                     <Typography variant="h6">Price</Typography>
                   </Grid>
                   <Grid item xs={6}>
-                    <Typography variant="h6">{productDetail?.price}</Typography>
+                    <Typography variant="h6">{productDetail?.productCost}</Typography>
                   </Grid>
                 </Grid>
               </ListItem>

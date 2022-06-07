@@ -28,6 +28,7 @@ function CartScreen({
   handleDecreaseCart,
   checkoutHandler,
 }) {
+  console.log(productCartData)
   return (
     <>
       <Typography component="h4" variant="h5">
@@ -58,8 +59,9 @@ function CartScreen({
               </TableRow>
             </TableHead>
             <TableBody>
+              
               {productCartData?.map((item) => (
-                <TableRow key={item._id}>
+                <TableRow key={item.productId}>
                   <TableCell>
                     <NextLink href={`/product/${item.slug}`} passHref>
                       <Link>
@@ -67,7 +69,7 @@ function CartScreen({
                           component="img"
                           // height="10"
                           style={{ height: "70px", width: "100px" }}
-                          image={item.imgdata}
+                          image={item.productImage}
                           alt="green iguana"
 
                           // style={{ margin: "5px" }}
@@ -92,7 +94,7 @@ function CartScreen({
                   <TableCell>
                     <NextLink href={`/product/${item.slug}`} passHref>
                       <Link>
-                        <Typography>{item.rname}</Typography>
+                        <Typography>{item.productName}</Typography>
                       </Link>
                     </NextLink>
                   </TableCell>
@@ -113,7 +115,7 @@ function CartScreen({
                       +
                     </Button>
                   </TableCell>
-                  <TableCell align="right">${item.price}</TableCell>
+                  <TableCell align="right">${item.productCost}</TableCell>
                   <TableCell align="right">
                     <Button
                       variant="contained"

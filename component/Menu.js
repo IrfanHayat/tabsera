@@ -160,7 +160,7 @@ export default function PersistentDrawerLeft() {
   const viewProduct = (item) => {
     router.push({
       pathname: "/product_detail",
-      query: { id: item.id },
+      query: { productId: item.productId },
     });
   };
 
@@ -391,12 +391,26 @@ export default function PersistentDrawerLeft() {
       <Main open={open}>
         <DrawerHeader />
         <Grid item xs={12} md={12}>
-          <NewCarousel />
+          <NewCarousel   product={product?product.slice([0], [3]).map((item, i) => {
+                return item;
+              }):'' }/>
         </Grid>
         <Grid item xs={12} md={12}>
           <Item>
              <CarouselApp
               heading="Featured Products"
+              product={product?product.slice([0], [10]).map((item, i) => {
+                return item;
+              }):'' }
+              viewProduct={viewProduct}
+              addToCartHandler={addToCartHandler}
+            />
+          </Item>
+        </Grid>
+        <Grid item xs={12} md={12}>
+          <Item>
+             <CarouselApp
+              heading="All Products"
               product={product}
               viewProduct={viewProduct}
               addToCartHandler={addToCartHandler}
