@@ -141,7 +141,7 @@ function CartScreen({
                   {productCartData.reduce((a, c) => a + c.cartQuantity, 0)}{" "}
                   items) : $
                   {productCartData.reduce(
-                    (a, c) => a + c.cartQuantity * c.price,
+                    (a, c) => a + c.cartQuantity * c.productCost,
                     0
                   )}
                 </ListItemText>

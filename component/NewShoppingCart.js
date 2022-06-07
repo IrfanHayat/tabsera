@@ -76,7 +76,7 @@ export default function VariableWidthGrid({
                   component="img"
                   // height="10"
                   style={{ height: "100px", width: "150px" }}
-                  image={item.productId}
+                  image={item.productImage}
                   alt="green iguana"
                 />
               </Link>
