@@ -26,11 +26,8 @@ const addProduct = createSlice({
       return { ...state, loading: true };
     });
     builder.addCase(getProduct.fulfilled, (state, action) => {
-      console.log(action)
-      if (action.payload) {
-        const user = action.payload;
-        console.log(user)
-      } else return state;
+      state.productData = action.payload;
+      state.loading = false;
     });
     builder.addCase(getProduct.rejected, (state, action) => {
       return {

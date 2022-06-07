@@ -170,8 +170,8 @@ export default function PersistentDrawerLeft() {
   };
 
   React.useEffect(()=>{
-      let data = dispatch(getProduct()) 
-      console.log(data)
+       dispatch(getProduct()) 
+      
   },[])
   return (
     <Box sx={{ display: "flex" }}>

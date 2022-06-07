@@ -15,20 +15,20 @@ export default function ActionAreaCard({
     
         <Card sx={{ maxWidth: 345 }}>
           <Image
-            src={product.imgdata}
+            src={product.productImage}
             alt="shirt"
             width={345}
             height={200}
           ></Image>
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
-              {product.rname}
+              {product.productName}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              {product.somedata}
+              {product.categoryName}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              {product.price}
+              {product.productCost}
             </Typography>
           </CardContent>
 
