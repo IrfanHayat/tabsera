@@ -19,7 +19,7 @@ function placeorder() {
   } = useSelector(state => state.basket);
   const round2 = num => Math.round(num * 100 + Number.EPSILON) / 100; // 123.456 => 123.46
   const itemsPrice = round2(
-    cartItems.reduce((a, c) => a + c.price * c.cartQuantity, 0)
+    cartItems.reduce((a, c) => a + c.productCost * c.cartQuantity, 0)
   );
   console.log(itemsPrice)
   const shippingPrice = itemsPrice > 200 ? 10 : 15;

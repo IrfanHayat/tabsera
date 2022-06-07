@@ -84,7 +84,7 @@ function PlaceOrder({shippingAddress,shippingPrice,taxPrice,totalPrice,placeOrde
                             <NextLink href={`/product/${item.slug}`} passHref>
                               <Link>
                                 <Image
-                                  src={item.imgdata}
+                                  src={item.productImage}
                                   alt="shirt"
                                   width={50}
                                   height={50}
@@ -96,7 +96,7 @@ function PlaceOrder({shippingAddress,shippingPrice,taxPrice,totalPrice,placeOrde
                           <TableCell>
                             <NextLink href={`/product/${item.slug}`} passHref>
                               <Link>
-                                <Typography>{item.rname}</Typography>
+                                <Typography>{item.productName}</Typography>
                               </Link>
                             </NextLink>
                           </TableCell>
@@ -104,7 +104,7 @@ function PlaceOrder({shippingAddress,shippingPrice,taxPrice,totalPrice,placeOrde
                             <Typography>{item.cartQuantity}</Typography>
                           </TableCell>
                           <TableCell align="right">
-                            <Typography>${item.price}</Typography>
+                            <Typography>${item.productCost}</Typography>
                           </TableCell>
                         </TableRow>
                       ))}
