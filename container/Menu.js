@@ -1,4 +1,4 @@
-import  React,{useState} from "react";
+import React, { useState } from "react";
 import { styled, useTheme, alpha } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -154,10 +154,10 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 export default function PersistentDrawerLeft() {
   const product = useSelector((state) => state.product.productData);
-  console.log("product")
-  let [groupProduct,setGroupedProduct]=useState()
+  console.log("product");
+  let [groupProduct, setGroupedProduct] = useState();
   console.log(product);
-  console.log("------------")
+  console.log("------------");
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   let { t } = useTranslation();
@@ -203,24 +203,24 @@ export default function PersistentDrawerLeft() {
 
   //groupBy
   function groupArrayOfObjects(list, key) {
-    return list.reduce(function(rv, x) {
-      (rv[x[key].split(' ').join('')] = rv[x[key].split(' ').join('')] || []).push(x);
-     // console.log(rv[x[key]])
+    return list.reduce(function (rv, x) {
+      (rv[x[key].split(" ").join("")] =
+        rv[x[key].split(" ").join("")] || []).push(x);
+      // console.log(rv[x[key]])
       return rv;
     }, {});
-  };
+  }
 
-  React.useEffect(async ()=>{
-       dispatch(getProduct()) 
-       console.log("product")
-  console.log(product);
-  console.log("------------")
-       var groupedCategory=groupArrayOfObjects(product,"categoryName");
-       console.log('groupedCategory')
-       console.log(groupedCategory)
-       setGroupedProduct(groupedCategory)
-
-  },[])
+  React.useEffect(async () => {
+    dispatch(getProduct());
+    console.log("product");
+    console.log(product);
+    console.log("------------");
+    var groupedCategory = groupArrayOfObjects(product, "categoryName");
+    console.log("groupedCategory");
+    console.log(groupedCategory);
+    setGroupedProduct(groupedCategory);
+  }, []);
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -462,7 +462,7 @@ export default function PersistentDrawerLeft() {
       <AppBar
         position="fixed"
         sx={{
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
+          // width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
         }}
       >
@@ -472,7 +472,7 @@ export default function PersistentDrawerLeft() {
             color="inherit"
             aria-label="open drawer"
             onClick={toggleDrawer}
-            sx={{ mr: 0, display: { sm: "none" } }}
+            // sx={{ mr: 0, display: { sm: "none" } }}
           >
             <MenuIcon />
           </IconButton>
@@ -592,22 +592,20 @@ export default function PersistentDrawerLeft() {
         aria-label="mailbox folders"
       >
         <Drawer
-          // container={container}
           variant="temporary"
           open={open}
           onClose={toggleDrawer}
-          // open={mobileOpen}
-          // onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+            keepMounted: true,
+            // Better open performance on mobile.
           }}
-          sx={{
-            display: { xs: "block", sm: "none" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-          }}
+          // sx={{
+          //   display: { xs: "block", sm: "none" },
+          //   "& .MuiDrawer-paper": {
+          //     boxSizing: "border-box",
+          //     width: drawerWidth,
+          //   },
+          // }}
         >
           {/* <DrawerHeader> */}
           {/* <Typography variant="h5" alignContent="center">
@@ -617,7 +615,7 @@ export default function PersistentDrawerLeft() {
           {/* </DrawerHeader> */}
           {drawer}
         </Drawer>
-        <Drawer
+        {/* <Drawer
           variant="permanent"
           sx={{
             display: { xs: "none", sm: "block" },
@@ -627,15 +625,15 @@ export default function PersistentDrawerLeft() {
             },
           }}
           open
-        >
-          {/* <DrawerHeader> */}
-          {/* <Typography variant="h5" alignContent="center">
+        > */}
+        {/* <DrawerHeader> */}
+        {/* <Typography variant="h5" alignContent="center">
               {" "}
               My Account
             </Typography> */}
-          {/* </DrawerHeader> */}
-          {drawer}
-        </Drawer>
+        {/* </DrawerHeader> */}
+        {/* {drawer}
+        </Drawer> */}
         {/* <Drawer
           variant={isMdUp ? "permanent" : "temporary"}
           anchor="left"
@@ -698,6 +696,13 @@ export default function PersistentDrawerLeft() {
               viewProduct={viewProduct}
               addToCartHandler={addToCartHandler}
             />
+            {/* {product.map((item) => (
+              <ActionAreaCard
+                product={item}
+                viewProduct={viewProduct}
+                addToCartHandler={addToCartHandler}
+              ></ActionAreaCard>
+            ))} */}
           </Item>
         </Grid>
       </Box>
