@@ -89,7 +89,7 @@ const useStyles = makeStyles(({ palette, typography }) => ({
   }
 }));
 
-export const Footer= ()=> {
+export default Footer= ()=> {
   const classes = useStyles();
   return (
    
