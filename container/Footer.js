@@ -45,7 +45,7 @@ const useStyles = makeStyles(({ palette, typography }) => ({
   },
   bottom: {
     backgroundColor:
-      palette.type === 'dark' ? '#0F2128' : palette.action.selected,
+      palette.type === 'dark' ? '#3d7cff' : palette.action.selected,
   },
   newsletterText: {
     color: '#fff',
@@ -89,7 +89,7 @@ const useStyles = makeStyles(({ palette, typography }) => ({
   }
 }));
 
-export default Footer= ()=> {
+export default function Footer() {
   const classes = useStyles();
   return (
    

@@ -5,7 +5,7 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import ActionAreaCard from "../../container/Card";
 import Menu from "../../container/Menu";
-//import Footer from "../../container/Footer";
+import Footer from "../../container/Footer";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -22,11 +22,11 @@ export default function Product() {
           <Menu />
         </Grid>
 
-        {/* <Grid item xs={12} md={12}>
+        <Grid item xs={12} md={12}>
           <Item>
             <Footer></Footer>
           </Item>
-        </Grid> */}
+        </Grid>
       </Grid>
     </Box>
   );
