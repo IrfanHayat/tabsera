@@ -1,4 +1,4 @@
-import  React,{useState} from "react";
+import  React,{useEffect, useState} from "react";
 import { styled, useTheme, alpha } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -43,6 +43,7 @@ import AdUnitsIcon from "@mui/icons-material/AdUnits";
 import GppGoodOutlinedIcon from "@mui/icons-material/GppGoodOutlined";
 import { addToBasket } from "../slice/basketSlice";
 import { getProduct } from "../slice/productSlice";
+import { getCategory } from "../slice/categorySlice";
 import NewCarousel from "./Carousel/NewCarousel";
 import CarouselApp from "./Carousel/Carousel";
 // import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
@@ -154,10 +155,14 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 export default function PersistentDrawerLeft() {
   const product = useSelector((state) => state.product.productData);
-  console.log("product")
+  const category = useSelector((state) => state.category.categoryData);
   let [groupProduct,setGroupedProduct]=useState()
-  console.log(product);
+console.log("product")
+console.log(product);
   console.log("------------")
+  
+    
+
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
   let { t } = useTranslation();
@@ -212,13 +217,22 @@ export default function PersistentDrawerLeft() {
 
   React.useEffect(async ()=>{
        dispatch(getProduct()) 
-       console.log("product")
+             console.log("product")
   console.log(product);
   console.log("------------")
        var groupedCategory=groupArrayOfObjects(product,"categoryName");
        console.log('groupedCategory')
        console.log(groupedCategory)
        setGroupedProduct(groupedCategory)
+
+  },[])
+  useEffect(()=>{
+    dispatch(getCategory())
+    
+    // category.filter(result=>{
+    //      result.
+    // })
+
 
   },[])
   const handleProfileMenuOpen = (event) => {
@@ -685,6 +699,16 @@ export default function PersistentDrawerLeft() {
                     })
                   : []
               }
+              viewProduct={viewProduct}
+              addToCartHandler={addToCartHandler}
+            />
+          </Item>
+        </Grid>
+        <Grid item xs={12} md={12}>
+          <Item>
+            <CarouselApp
+              heading="All Products"
+              product={product}
               viewProduct={viewProduct}
               addToCartHandler={addToCartHandler}
             />
