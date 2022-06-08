@@ -3,9 +3,9 @@ import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import ActionAreaCard from "../../component/Card";
-import Menu from "../../component/Menu";
-import Footer from "../../component/Footer";
+import ActionAreaCard from "../../container/Card";
+import Menu from "../../container/Menu";
+import Footer from "../../container/Footer";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",

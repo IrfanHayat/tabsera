@@ -1,5 +1,5 @@
 import React from "react";
-import RegistrationForm from "../../component/Formik/RegistrationForm";
+import RegistrationForm from "../../container/Formik/RegistrationForm";
 const index = () => {
   return (
     

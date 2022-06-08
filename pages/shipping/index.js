@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Shipping from "../../component/Shipping";
+import Shipping from "../../container/Shipping";
 import { useSelector, useDispatch } from "react-redux";
 import {
     saveShippingAdress

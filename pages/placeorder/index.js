@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import PlaceOrder from "../../component/PlaceOrder";
+import PlaceOrder from "../../container/PlaceOrder";
 import { useRouter,withRouter } from 'next/router';
 
 import useStyles from "../../utils/styles";

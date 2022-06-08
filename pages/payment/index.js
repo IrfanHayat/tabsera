@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Payment from "../../component/Payment";
+import Payment from "../../container/Payment";
 import { useSelector, useDispatch } from "react-redux";
 import localStorage from "localStorage";
 import {

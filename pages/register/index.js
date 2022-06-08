@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Register from "../../component/Register";
+import Register from "../../container/Register";
 import { useSelector, useDispatch } from "react-redux";
 import { saveShippingAdress } from "../../slice/basketSlice";
 import localStorage from "localStorage";

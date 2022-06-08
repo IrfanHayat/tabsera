@@ -1,13 +1,23 @@
 import React from "react";
-import ActionAreaCard from "../../component/Card";
+import ActionAreaCard from "../../container/Card";
 import { useSelector, useDispatch } from "react-redux";
 import { getProduct } from "../../slice/productSlice";
 import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
+import {
+  addToBasket,
+  clearBasket,
+  decreaseBasket,
+  getTotals,
+  removeFromBasket,
+} from "../../slice/basketSlice"
+
+import { useRouter, withRouter } from "next/router";
 
 const index = () => {
   const product = useSelector((state) => state.product.productData);
   console.log(product);
+  let router = useRouter();
   let dispatch = useDispatch();
 
   React.useEffect(async () => {
@@ -27,7 +37,9 @@ const index = () => {
 
   return (
     <Box sx={{ width: "200vh" }}>
-      <Grid container wrap="wrap" spacing={2} sx={{ overflow: "auto" }}>
+      <Grid container wrap="wrap" spacing={5} sx={{ overflow: "auto" }}>
+        
+       
         {product.map((item) => (
           <ActionAreaCard
             product={item}

@@ -22,7 +22,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Image from "next/image";
-import ActionAreaCard from "../component/Card";
+import ActionAreaCard from "../container/Card";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 

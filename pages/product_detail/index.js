@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Details from "../../component/Detail";
+import Details from "../../container/Detail";
 import { useSelector, useDispatch } from "react-redux";
 import { addToBasket } from "../../slice/basketSlice";
 import { useRouter, withRouter } from "next/router";

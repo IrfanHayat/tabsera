@@ -21,7 +21,7 @@ import {
 //import axios from 'axios';
 import { useRouter, withRouter } from "next/router";
 
-import CheckoutWizard from "../component/CheckoutWizard";
+import CheckoutWizard from "./CheckoutWizard";
 
 
 function PlaceOrder({shippingAddress,shippingPrice,taxPrice,totalPrice,placeOrderHandler,loading,classes,paymentMethod,cartItems,itemsPrice}) {

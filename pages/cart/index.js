@@ -9,7 +9,7 @@ import {
   removeFromBasket,
 } from "../../slice/basketSlice";
 import { useRouter, withRouter } from "next/router";
-import VariableWidthGrid from "../../component/ShoppingCart";
+import VariableWidthGrid from "../../container/ShoppingCart";
 
 function cart() {
   const cartItems = useSelector((state) => state.basket.cart.cartItems);
