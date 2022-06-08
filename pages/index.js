@@ -4,7 +4,7 @@ import styles from "../styles/Home.module.css";
 import { useRouter } from "next/router";
 import Layout from '../container/Layout';
 import Product from '../pages/product';
-import Footer from '../pages/footer';
+
 
 export default function Home(children) {
   let router = useRouter();
@@ -14,7 +14,7 @@ export default function Home(children) {
       //<Layout> 
         <>
         <Product></Product>
-        <Footer/>
+      
         </>        
         //</Layout>
     //</div>

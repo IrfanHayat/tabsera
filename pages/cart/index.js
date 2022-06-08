@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import ShoppingCart from "../../component/ShoppingCart";
+// import ShoppingCart from "../../component/ShoppingCart";
 import { useSelector, useDispatch } from "react-redux";
 import {
   addToBasket,
@@ -9,6 +9,7 @@ import {
   removeFromBasket,
 } from "../../slice/basketSlice";
 import { useRouter, withRouter } from "next/router";
+// import VariableWidthGrid from "../../container/ShoppingCart";
 import VariableWidthGrid from "../../container/ShoppingCart";
 
 function cart() {

@@ -208,9 +208,10 @@ console.log(product);
 
   //groupBy
   function groupArrayOfObjects(list, key) {
-    return list.reduce(function(rv, x) {
-      (rv[x[key].split(' ').join('')] = rv[x[key].split(' ').join('')] || []).push(x);
-     // console.log(rv[x[key]])
+    return list.reduce(function (rv, x) {
+      (rv[x[key].split(" ").join("")] =
+        rv[x[key].split(" ").join("")] || []).push(x);
+      // console.log(rv[x[key]])
       return rv;
     }, {});
   };
@@ -476,7 +477,7 @@ console.log(product);
       <AppBar
         position="fixed"
         sx={{
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
+          // width: { sm: `calc(100% - ${drawerWidth}px)` },
           ml: { sm: `${drawerWidth}px` },
         }}
       >
@@ -486,7 +487,7 @@ console.log(product);
             color="inherit"
             aria-label="open drawer"
             onClick={toggleDrawer}
-            sx={{ mr: 0, display: { sm: "none" } }}
+            // sx={{ mr: 0, display: { sm: "none" } }}
           >
             <MenuIcon />
           </IconButton>
@@ -606,22 +607,20 @@ console.log(product);
         aria-label="mailbox folders"
       >
         <Drawer
-          // container={container}
           variant="temporary"
           open={open}
           onClose={toggleDrawer}
-          // open={mobileOpen}
-          // onClose={handleDrawerToggle}
           ModalProps={{
-            keepMounted: true, // Better open performance on mobile.
+            keepMounted: true,
+            // Better open performance on mobile.
           }}
-          sx={{
-            display: { xs: "block", sm: "none" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-          }}
+          // sx={{
+          //   display: { xs: "block", sm: "none" },
+          //   "& .MuiDrawer-paper": {
+          //     boxSizing: "border-box",
+          //     width: drawerWidth,
+          //   },
+          // }}
         >
           {/* <DrawerHeader> */}
           {/* <Typography variant="h5" alignContent="center">
@@ -631,7 +630,7 @@ console.log(product);
           {/* </DrawerHeader> */}
           {drawer}
         </Drawer>
-        <Drawer
+        {/* <Drawer
           variant="permanent"
           sx={{
             display: { xs: "none", sm: "block" },
@@ -641,15 +640,15 @@ console.log(product);
             },
           }}
           open
-        >
-          {/* <DrawerHeader> */}
-          {/* <Typography variant="h5" alignContent="center">
+        > */}
+        {/* <DrawerHeader> */}
+        {/* <Typography variant="h5" alignContent="center">
               {" "}
               My Account
             </Typography> */}
-          {/* </DrawerHeader> */}
-          {drawer}
-        </Drawer>
+        {/* </DrawerHeader> */}
+        {/* {drawer}
+        </Drawer> */}
         {/* <Drawer
           variant={isMdUp ? "permanent" : "temporary"}
           anchor="left"
@@ -712,6 +711,13 @@ console.log(product);
               viewProduct={viewProduct}
               addToCartHandler={addToCartHandler}
             />
+            {/* {product.map((item) => (
+              <ActionAreaCard
+                product={item}
+                viewProduct={viewProduct}
+                addToCartHandler={addToCartHandler}
+              ></ActionAreaCard>
+            ))} */}
           </Item>
         </Grid>
         <Grid item xs={12} md={12}>

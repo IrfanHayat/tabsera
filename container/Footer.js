@@ -8,7 +8,7 @@ import {
   makeStyles,
   ThemeProvider,
   createMuiTheme,
-} from '@mui/material/styles';
+} from '@mui/styles';
 //import { FontProvider, Font } from 'website/src/components/Font';
 
 import { ColumnToRow, Item } from '@mui-treasury/components/flex';
@@ -33,7 +33,7 @@ import { usePoofSocialLinkStyles } from '@mui-treasury/styles/socialLink/poof';
 import { useReadyEmailSubscribeStyles } from '@mui-treasury/styles/emailSubscribe/ready';
 import { usePlainNavigationMenuStyles } from '@mui-treasury/styles/navigationMenu/plain';
 
-const darkTheme = createMuiTheme({ palette: { type: 'dark' } });
+//const darkTheme = createMuiTheme({ palette: { type: 'dark' } });
 
 const useStyles = makeStyles(({ palette, typography }) => ({
   top: {
@@ -89,7 +89,7 @@ const useStyles = makeStyles(({ palette, typography }) => ({
   }
 }));
 
-export const ArcAppFooterDemo = React.memo(function ArcAppFooter() {
+export const Footer= ()=> {
   const classes = useStyles();
   return (
    
@@ -103,7 +103,7 @@ export const ArcAppFooterDemo = React.memo(function ArcAppFooter() {
               alt={''}
             />
           </div>
-          <ThemeProvider theme={darkTheme}>
+         
             <ColumnToRow
               at={'sm'}
               cssPosition={'relative'}
@@ -129,7 +129,7 @@ export const ArcAppFooterDemo = React.memo(function ArcAppFooter() {
                 </EmailSubscribe>
               </Item>
             </ColumnToRow>
-          </ThemeProvider>
+          
         </Box>
         <Box px={2} py={10} className={classes.middle}>
           <Container disableGutters>
@@ -273,4 +273,4 @@ export const ArcAppFooterDemo = React.memo(function ArcAppFooter() {
       </Box>
  
   );
-});
+}
