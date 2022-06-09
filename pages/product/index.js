@@ -17,7 +17,7 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function Product() {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <Grid container>
+      <Grid>
         <Grid item xs={12} md={12}>
           <Menu />
         </Grid>

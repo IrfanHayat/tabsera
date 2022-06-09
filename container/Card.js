@@ -1,24 +1,9 @@
 import * as React from "react";
-// import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Image from "next/image";
-// import Card from "../components/Card/Card";
-import {
-  Grid,
-  Link,
-  List,
-  ListItem,
-  Typography,
-  Card,
-  CardMedia,
-  TextField,
-  CircularProgress,
-  Button,
-  CardActionArea,
-  CardActions,
-} from "@mui/material";
+import { Card, CardActions } from "@mui/material";
 
-import  {makeStyles}  from "@mui/styles";
+import { makeStyles } from "@mui/styles";
 import TextInfoContent from "@mui-treasury/components/content/textInfo";
 import { useFourThreeCardMediaStyles } from "@mui-treasury/styles/cardMedia/fourThree";
 import { useN04TextInfoContentStyles } from "@mui-treasury/styles/textInfoContent/n04";
@@ -30,9 +15,9 @@ import PreviewOutlinedIcon from "@mui/icons-material/PreviewOutlined";
 
 const useStyles = makeStyles(() => ({
   root: {
-    maxWidth: 283,
+    // maxWidth: 283,
     // maxHeight: 600,
-    margin: "auto",
+    margin: 9,
     borderRadius: 12,
     padding: 12,
   },
@@ -52,11 +37,8 @@ export default function ActionAreaCard({
   const shadowStyles = useOverShadowStyles({ inactive: true });
 
   return (
-    // <div style={{ display: "flex", flexWrap: "wrap", margin: "10,19" }}>
-    <Card
-      // sx={{ maxWidth: 230, maxHeight: 600 }}
-      className={cx(styles.root, shadowStyles.root)}
-    >
+    // <Box>
+    <Card className={cx(styles.root, shadowStyles.root)}>
       {product?.productImage && (
         <Image
           className={cx(styles.media, mediaStyles.root)}
@@ -65,49 +47,10 @@ export default function ActionAreaCard({
           width={245}
           height={200}
         ></Image>
-        // <CardMedia
-        //   component="img"
-        //   // className={cx(styles.media, mediaStyles.root)}
-        //   // height="14"
-        //   image={product?.productImage}
-        //   width={215}
-        //   height={200}
-        //   style={{ margin: "5px" }}
-        // />
       )}
-      {product?.category_image && (
-        <Image
-          className={cx(styles.media, mediaStyles.root)}
-          src={product?.category_image}
-          alt="shirt"
-          width={245}
-          height={200}
-        ></Image>
-        // <CardMedia
-        //   component="img"
-        //   // className={cx(styles.media, mediaStyles.root)}
-        //   // height="14"
-        //   image={product?.productImage}
-        //   width={215}
-        //   height={200}
-        //   style={{ margin: "5px" }}
-        // />
-      )}
-      {/* <CardContent>
-        <Typography gutterBottom variant="h6" component="div">
-          {product.productName}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {product.categoryName}
-        </Typography>
-        <Typography variant="body2" color="text.secondary">
-          {product.productCost}
-        </Typography>
-      </CardContent> */}
-
       <CardContent>
         <TextInfoContent
-          classes={textCardContentStyles}
+          // classes={textCardContentStyles}
           overline={product.categoryName}
           heading={product.productName}
           // body={
@@ -115,30 +58,7 @@ export default function ActionAreaCard({
           // }
         />
       </CardContent>
-
       <CardActions>
-        {/* <Button
-          key={product.id}
-          onClick={(e) => viewProduct(product)}
-          variant="contained"
-          size="small"
-          style={{ fontSize: "10px" }}
-          color="primary"
-        >
-          View Product
-        </Button> */}
-        {/* <Button
-          key={product.id}
-          onClick={(e) => addToCartHandler(product)}
-          variant="contained"
-          color="primary"
-          // labelStyle={{ fontSize: 15 }}
-          style={{ fontSize: "10px" }}
-          size="small"
-        >
-          Add To Cart
-        </Button> */}
-
         <IconButton
           key={product.id}
           onClick={(e) => viewProduct(product)}
@@ -157,6 +77,6 @@ export default function ActionAreaCard({
         </IconButton>
       </CardActions>
     </Card>
-    // </div>
+    // </Box>
   );
 }

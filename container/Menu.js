@@ -254,13 +254,13 @@ export default function PersistentDrawerLeft() {
     // let new_arr2 = [];
 
     // console.log(new_arr2);
-    //
+    // // //
      var groupedCategory = groupArrayOfObjects(product, "categoryName");
      
      setGroupedProduct(groupedCategory);
      console.log(groupedCategory) 
 
-  }, []);
+  }, [product && product]);
 
   const handleProfileMenuOpen = event => {
     setAnchorEl(event.currentTarget);
