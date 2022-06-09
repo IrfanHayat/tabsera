@@ -22,11 +22,11 @@ export default function Product() {
           <Menu />
         </Grid>
 
-        {/* <Grid item xs={12} md={12}>
+         <Grid item xs={12} md={12}>
           <Item>
             <Footer></Footer>
           </Item>
-        </Grid> */}
+        </Grid>
       </Grid>
     </Box>
   );
