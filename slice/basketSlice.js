@@ -1,5 +1,8 @@
-import { createSlice,current } from "@reduxjs/toolkit";
+import { createAsyncThunk,createSlice,current } from "@reduxjs/toolkit";
 import localStorage from "localStorage";
+import { useSelector, useDispatch } from "react-redux";
+import instance from "../helper/axios/httpRequest";
+import { url, setHeaders } from "../helper/axios/config";
 const initialState = {
   cart: {
     cartItems: localStorage.getItem("cartItems")
@@ -19,6 +22,16 @@ const initialState = {
   filteredProducts: null,
 };
 
+
+export const getProductWithId = createAsyncThunk(
+  "cart/getProductWithId",
+  async (id) => {
+    const result = await instance.get(`${url}/ecommerce/products/${id}`);
+    console.log(result)
+    return result.data.response;;
+  }
+);
+
 export const basketSlice = createSlice({
   name: "basket",
   initialState,
@@ -29,12 +42,68 @@ export const basketSlice = createSlice({
       );
 
       if (existingIndex >= 0) {
+
         state.cart.cartItems[existingIndex] = {
           ...state.cart.cartItems[existingIndex],
           cartQuantity: state.cart.cartItems[existingIndex].cartQuantity + 1,
         };
+        // instance.get(`${url}/ecommerce/products/${tempProductItem.productId}`).then(result=>{
+        //   skus=result.data.response.skus
+         
+        //   if(skus.length>0){
+        //     let skus_value;
+        //     skus.map(result=>{
+        //       skus_value=result.sku;
+        //     })
+           
+        //     let cart = {
+        //       cart_id:611,
+        //       sku:  skus_value,
+        //       // price: cost,
+        //       qty: tempProductItem.cartQuantity
+        //   };
+        //   console.log(cart)
+        //   instance.post(`${url}/ecommerce/carts/items`,cart).then(result=>{
+        //        console.log(result)
+        //   })
+        //   }
+
+        // });
+
+
       } else {
+        let skus;
+       
         let tempProductItem = { ...action.payload, cartQuantity: 1 };
+        instance.get(`${url}/ecommerce/carts`).then(result=>{
+                console.log(result)
+        })
+        instance.get(`${url}/ecommerce/products/${tempProductItem.productId}`).then(result=>{
+          skus=result.data.response.skus
+         
+          if(skus.length>0){
+            let skus_value;
+            skus.map(result=>{
+              skus_value=result.sku;
+            })
+           
+            let cart = {
+              cart_id:611,
+              sku:  skus_value,
+              // price: cost,
+              qty: tempProductItem.cartQuantity
+          };
+          console.log(cart)
+          instance.post(`${url}/ecommerce/carts/items`,cart).then(result=>{
+               console.log(result)
+          })
+          }
+
+        });
+      
+        // const result = await instance.get(`${url}/ecommerce/products/${temp}`);
+       // console.log(result)
+       
         state.cart.cartItems.push(tempProductItem);
       }
       localStorage.setItem("cartItems", JSON.stringify(state.cart.cartItems));

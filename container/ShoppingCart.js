@@ -28,7 +28,7 @@ function CartScreen({
   handleDecreaseCart,
   checkoutHandler,
 }) {
-  console.log(productCartData)
+ // console.log(productCartData)
   return (
     <>
       <Typography component="h4" variant="h5">

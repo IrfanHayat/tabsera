@@ -75,6 +75,24 @@ export default function ActionAreaCard({
         //   style={{ margin: "5px" }}
         // />
       )}
+      {product?.category_image && (
+        <Image
+          className={cx(styles.media, mediaStyles.root)}
+          src={product?.category_image}
+          alt="shirt"
+          width={245}
+          height={200}
+        ></Image>
+        // <CardMedia
+        //   component="img"
+        //   // className={cx(styles.media, mediaStyles.root)}
+        //   // height="14"
+        //   image={product?.productImage}
+        //   width={215}
+        //   height={200}
+        //   style={{ margin: "5px" }}
+        // />
+      )}
       {/* <CardContent>
         <Typography gutterBottom variant="h6" component="div">
           {product.productName}

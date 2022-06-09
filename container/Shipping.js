@@ -6,7 +6,7 @@ import {
     Button,
   } from '@mui/material';
   import React from 'react';
-  import CheckoutWizard from '../component/CheckoutWizard';
+  import CheckoutWizard from '../container/CheckoutWizard';
   
   export default function Shipping({submitHandler,handleSubmit,chooseLocationHandler,classes,control,Controller,errors}) {
   

@@ -6,7 +6,7 @@ import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import Image from "next/image";
 function NewCarousel({product}) {
   var items = product
-  console.log(items)
+
   return (
     <Carousel
       animation="slide"

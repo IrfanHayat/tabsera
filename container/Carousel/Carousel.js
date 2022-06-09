@@ -108,8 +108,8 @@ export default function CarouselApp({
   viewProduct,
   addToCartHandler,
 }) {
-  console.log("Hellow");
-  console.log(product);
+  //console.log("Hellow");
+  //console.log(product);
   return (
     <div>
       <Typography variant="h5">{heading}</Typography>
@@ -123,7 +123,7 @@ export default function CarouselApp({
       >
         {/* {content} */}
 
-        {product.map((item) => (
+        {product?.map((item) => (
           <ActionAreaCard
             product={item}
             viewProduct={viewProduct}

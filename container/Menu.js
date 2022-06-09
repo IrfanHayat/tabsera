@@ -1,4 +1,4 @@
-import  React,{useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { styled, useTheme, alpha } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -68,7 +68,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 const drawerWidth = 10;
 
-const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
+const Main = styled("main", { shouldForwardProp: prop => prop !== "open" })(
   ({ theme, open }) => ({
     flexGrow: 1,
     // padding: theme.spacing(3),
@@ -128,7 +128,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== "open",
+  shouldForwardProp: prop => prop !== "open",
 })(({ theme, open }) => ({
   transition: theme.transitions.create(["margin", "width"], {
     easing: theme.transitions.easing.sharp,
@@ -147,21 +147,18 @@ const menuId = "primary-search-account-menu";
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
-// padding: theme.spacing(0, 1),
+  // padding: theme.spacing(0, 1),
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
   justifyContent: "flex-end",
 }));
 
 export default function PersistentDrawerLeft() {
-  const product = useSelector((state) => state.product.productData);
-  const category = useSelector((state) => state.category.categoryData);
-  let [groupProduct,setGroupedProduct]=useState()
-console.log("product")
-console.log(product);
-  console.log("------------")
-  
-    
+  const product = useSelector(state => state.product.productData);
+  const category = useSelector(state => state.category.categoryData);
+
+  let [groupProduct, setGroupedProduct] = useState();
+  let [productsValue, setProductsValue] = useState();
 
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
@@ -175,7 +172,7 @@ console.log(product);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const toggleDrawer = (event) => {
+  const toggleDrawer = event => {
     if (
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
@@ -194,14 +191,14 @@ console.log(product);
   //   setOpen(false);
   // };
 
-  const viewProduct = (item) => {
+  const viewProduct = item => {
     router.push({
       pathname: "/product_detail",
       query: { productId: item.productId },
     });
   };
 
-  const addToCartHandler = (product) => {
+  const addToCartHandler = product => {
     dispatch(addToBasket(product));
     router.push("/cart");
   };
@@ -214,29 +211,58 @@ console.log(product);
       // console.log(rv[x[key]])
       return rv;
     }, {});
-  };
+  }
 
-  React.useEffect(async ()=>{
-       dispatch(getProduct()) 
-             console.log("product")
-  console.log(product);
-  console.log("------------")
-       var groupedCategory=groupArrayOfObjects(product,"categoryName");
-       console.log('groupedCategory')
-       console.log(groupedCategory)
-       setGroupedProduct(groupedCategory)
+  useEffect(() => {
+  //  dispatch(getProduct());
+    //
+   // dispatch(getCategory());
+    // let productResult = [];
+    // let new_arr = [];
+    // // let result1 = category.map((categoryProduct, index) => {
+    //   if (categoryProduct.child.length > 0) {
+    //     productResult = categoryProduct.child;
+    //     new_arr = productResult.concat({
+    //       categoryName: categoryProduct.category_name,
+    //       category_id: categoryProduct.category_id,
+    //     });
+    //     let newArray = product.map(resultP => {
+    //       if (categoryProduct.category_id == resultP.categoryId) {
+    //         return resultP;
+    //       }
+    //     });
+    //     ///
 
-  },[])
-  useEffect(()=>{
-    dispatch(getCategory())
-    
-    // category.filter(result=>{
-    //      result.
-    // })
+    //     const results = newArray.filter(element => {
+    //       return element !== undefined;
+    //     });
 
+    //     let new_arr3 = [...new_arr,...results];
+    //     return new_arr3;
+    //   }else{
+    //     console.log("Product")
+    //     console.log(product)
+      
+     
+    // }}
+    // );
+    // const results = result1.filter(element => {
+    //   return element !== undefined;
+    // });
 
-  },[])
-  const handleProfileMenuOpen = (event) => {
+    // setProductsValue(results[0]);
+    // let new_arr2 = [];
+
+    // console.log(new_arr2);
+    //
+     var groupedCategory = groupArrayOfObjects(product, "categoryName");
+     
+     setGroupedProduct(groupedCategory);
+     console.log(groupedCategory) 
+
+  }, []);
+
+  const handleProfileMenuOpen = event => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -249,7 +275,7 @@ console.log(product);
     handleMobileMenuClose();
   };
 
-  const handleMobileMenuOpen = (event) => {
+  const handleMobileMenuOpen = event => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
@@ -431,7 +457,7 @@ console.log(product);
           {t("common:Language")}
         </InputLabel>
         <Select>
-          {router.locales.map((locale) => (
+          {router.locales.map(locale => (
             <Link href={router.asPath} key={locale} locale={locale}>
               <MenuItem>{locale}</MenuItem>
             </Link>
@@ -554,7 +580,7 @@ console.log(product);
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
             <InputLabel id="demo-simple-select-label">Language</InputLabel>
             <Select>
-              {router.locales.map((locale) => (
+              {router.locales.map(locale => (
                 <Link href={router.asPath} key={locale} locale={locale}>
                   <MenuItem>{locale}</MenuItem>
                 </Link>
@@ -676,7 +702,7 @@ console.log(product);
         }}
       >
         <DrawerHeader />
-        <Grid  xs={12} md={12}>
+        <Grid xs={12} md={12}>
           <NewCarousel
             product={
               product
@@ -703,24 +729,8 @@ console.log(product);
             />
           </Item>
         </Grid>
-        <Grid item xs={12} md={12}>
-          <Item>
-            <CarouselApp
-              heading="All Products"
-              product={product}
-              viewProduct={viewProduct}
-              addToCartHandler={addToCartHandler}
-            />
-            {/* {product.map((item) => (
-              <ActionAreaCard
-                product={item}
-                viewProduct={viewProduct}
-                addToCartHandler={addToCartHandler}
-              ></ActionAreaCard>
-            ))} */}
-          </Item>
-        </Grid>
-        <Grid item xs={12} md={12}>
+        
+        {/* <Grid item xs={12} md={12}>
           <Item>
             <CarouselApp
               heading="All Products"
@@ -729,7 +739,34 @@ console.log(product);
               addToCartHandler={addToCartHandler}
             />
           </Item>
+        </Grid> */}
+        {console.log(groupProduct)}
+        {/* <Grid item xs={12} md={12}>
+          <Item>
+            <CarouselApp
+              heading="All Products"
+              product={productsValue}
+              viewProduct={viewProduct}
+              addToCartHandler={addToCartHandler}
+            />
+          </Item>
+        </Grid> */}
+       {groupProduct && Object.keys(groupProduct).map((key)=>(
+          <Grid item xs={12} md={12}>
+          <Item>
+            <CarouselApp
+              heading={key}
+              product={groupProduct[key]}
+              viewProduct={viewProduct}
+              addToCartHandler={addToCartHandler}
+            />
+          </Item>
         </Grid>
+       ))
+
+       }
+        
+       
       </Box>
     </Box>
   );
