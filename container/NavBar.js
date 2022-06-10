@@ -387,7 +387,7 @@ export default function NavBar() {
       <AppBar
         style={{ height: "40px" }}
         sx={{
-          bgcolor: "green",
+         // bgcolor: "green",
           // height: "65%",
           justifyContent: "center",
           padding: "5px",
