@@ -10,20 +10,30 @@ import {
   TextField,
   CircularProgress,
 } from "@mui/material";
+import Image from "next/image";
 
-function Details({ productDetail, addToCartHandler }) {
-  console.log(productDetail)
+function Details({ productDetail,productImage, productAttributes,addToCartHandler,price }) {
+ console.log(productDetail)
   return (
     <>
       <Grid container spacing={1}>
         <Grid item md={6} xs={12}>
-          <CardMedia
+          {/* <CardMedia
             component="img"
             height="14"
             image={productDetail?.productImage}
             alt="green iguana"
             style={{ margin: "5px" }}
-          />
+          /> */}
+          {productImage && (
+        <Image
+        //  className={cx(styles.media, mediaStyles.root)}
+          src={productImage[0]}
+          alt="shirt"
+          width={700}
+          height={300}
+        ></Image>
+      )}
         </Grid>
         <Grid item md={3} xs={12}>
           <List>
@@ -33,10 +43,10 @@ function Details({ productDetail, addToCartHandler }) {
               </Typography>
             </ListItem>
             <ListItem>
-              <Typography>Category: {productDetail?.categoryName}</Typography>
+              <Typography>Category: {productDetail?.category_name}</Typography>
             </ListItem>
             <ListItem>
-              <Typography>Brand: {productDetail?.productName}</Typography>
+              <Typography>Brand: {productDetail?.product_name}</Typography>
             </ListItem>
             <ListItem>
               {/* <Rating value={5} readOnly></Rating> */}
@@ -45,7 +55,7 @@ function Details({ productDetail, addToCartHandler }) {
               </Link>
             </ListItem>
             <ListItem>
-              <Typography> Description:</Typography>
+              <Typography> Description:{productDetail?.product_desc}</Typography>
             </ListItem>
           </List>
         </Grid>
@@ -58,14 +68,19 @@ function Details({ productDetail, addToCartHandler }) {
                     <Typography variant="h6">Price</Typography>
                   </Grid>
                   <Grid item xs={6}>
-                    <Typography variant="h6">{productDetail?.productCost}</Typography>
+                    <Typography variant="h6">{price}</Typography>
                   </Grid>
                 </Grid>
               </ListItem>
               <ListItem>
                 <Grid container>
                   <Grid item xs={6}>
-                    <Typography variant="h6">Status</Typography>
+                     {
+                     productAttributes &&  productAttributes.map(result=>(
+                        <Typography variant="h6">{result.attribute_name}:{result.value}</Typography>
+                     ))  
+                    } 
+                    
                   </Grid>
                   <Grid item xs={6}>
                     <Typography variant="h6">

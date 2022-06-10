@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import NextLink from "next/link";
 import Image from "next/image";
 import {
@@ -28,7 +28,14 @@ function CartScreen({
   handleDecreaseCart,
   checkoutHandler,
 }) {
- // console.log(productCartData)
+  console.log("productCartData")
+  console.log(productCartData)
+  console.log("-----------------------")
+  
+ // if product_id is comming
+  
+   //  useMemo(() => productInCart(productCartData), [productCartData]);
+
   return (
     <>
       <Typography component="h4" variant="h5">
@@ -61,7 +68,7 @@ function CartScreen({
             <TableBody>
               
               {productCartData?.map((item) => (
-                <TableRow key={item.productId}>
+                <TableRow key={item.product_id}>
                   <TableCell>
                     <NextLink href={`/product/${item.slug}`} passHref>
                       <Link>

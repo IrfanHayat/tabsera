@@ -37,6 +37,8 @@ export const basketSlice = createSlice({
   initialState,
   reducers: {
     addToBasket: (state, action) => {
+      console.log(action.payload)
+      console.log(state.cart.cartItems)
       const existingIndex = state.cart.cartItems.findIndex(
         item => item.productId === action.payload.productId
       );
@@ -47,28 +49,7 @@ export const basketSlice = createSlice({
           ...state.cart.cartItems[existingIndex],
           cartQuantity: state.cart.cartItems[existingIndex].cartQuantity + 1,
         };
-        // instance.get(`${url}/ecommerce/products/${tempProductItem.productId}`).then(result=>{
-        //   skus=result.data.response.skus
-         
-        //   if(skus.length>0){
-        //     let skus_value;
-        //     skus.map(result=>{
-        //       skus_value=result.sku;
-        //     })
-           
-        //     let cart = {
-        //       cart_id:611,
-        //       sku:  skus_value,
-        //       // price: cost,
-        //       qty: tempProductItem.cartQuantity
-        //   };
-        //   console.log(cart)
-        //   instance.post(`${url}/ecommerce/carts/items`,cart).then(result=>{
-        //        console.log(result)
-        //   })
-        //   }
-
-        // });
+        
 
 
       } else {
@@ -78,26 +59,26 @@ export const basketSlice = createSlice({
         instance.get(`${url}/ecommerce/carts`).then(result=>{
                 console.log(result)
         })
-        instance.get(`${url}/ecommerce/products/${tempProductItem.productId}`).then(result=>{
+        instance.get(`${url}/ecommerce/products/${tempProductItem.product_id}`).then(result=>{
           skus=result.data.response.skus
-         
-          if(skus.length>0){
-            let skus_value;
-            skus.map(result=>{
-              skus_value=result.sku;
-            })
+            console.log(skus)     
+          // if(skus.length>0){
+          //   let skus_value;
+          //   skus.map(result=>{
+          //     skus_value=result.sku;
+          //   })
            
-            let cart = {
-              cart_id:611,
-              sku:  skus_value,
-              // price: cost,
-              qty: tempProductItem.cartQuantity
-          };
-          console.log(cart)
-          instance.post(`${url}/ecommerce/carts/items`,cart).then(result=>{
-               console.log(result)
-          })
-          }
+          //   let cart = {
+          //     cart_id:611,
+          //     sku:  skus_value,
+          //     // price: cost,
+          //     qty: tempProductItem.cartQuantity
+          // };
+          // console.log(cart)
+          // instance.post(`${url}/ecommerce/carts/items`,cart).then(result=>{
+          //      console.log(result)
+          // })
+          // }
 
         });
       

@@ -204,63 +204,50 @@ export default function PersistentDrawerLeft() {
   };
 
   //groupBy
-  function groupArrayOfObjects(list, key) {
+  function groupArrayOfObjects(list, key, category1) {
     return list.reduce(function (rv, x) {
-      (rv[x[key].split(" ").join("")] =
-        rv[x[key].split(" ").join("")] || []).push(x);
-      // console.log(rv[x[key]])
+      rv[x[key].split(" ").join("")] = rv[x[key].split(" ").join("")] || [];
+      rv[x[key].split(" ").join("")].push(x);
+      //  console.log(x)
       return rv;
     }, {});
   }
 
   useEffect(() => {
-  //  dispatch(getProduct());
+    // dispatch(getProduct());
     //
-   // dispatch(getCategory());
-    // let productResult = [];
-    // let new_arr = [];
-    // // let result1 = category.map((categoryProduct, index) => {
-    //   if (categoryProduct.child.length > 0) {
-    //     productResult = categoryProduct.child;
-    //     new_arr = productResult.concat({
-    //       categoryName: categoryProduct.category_name,
-    //       category_id: categoryProduct.category_id,
-    //     });
-    //     let newArray = product.map(resultP => {
-    //       if (categoryProduct.category_id == resultP.categoryId) {
-    //         return resultP;
-    //       }
-    //     });
-    //     ///
+    dispatch(getCategory());
 
-    //     const results = newArray.filter(element => {
-    //       return element !== undefined;
-    //     });
-
-    //     let new_arr3 = [...new_arr,...results];
-    //     return new_arr3;
-    //   }else{
-    //     console.log("Product")
-    //     console.log(product)
-      
-     
-    // }}
-    // );
-    // const results = result1.filter(element => {
-    //   return element !== undefined;
-    // });
-
-    // setProductsValue(results[0]);
-    // let new_arr2 = [];
-
-    // console.log(new_arr2);
-    // // //
-     var groupedCategory = groupArrayOfObjects(product, "categoryName");
-     
-     setGroupedProduct(groupedCategory);
-     console.log(groupedCategory) 
-
+    var groupedCategory = groupArrayOfObjects(product, "categoryName");
+    setGroupedProduct(groupedCategory);
   }, [product && product]);
+
+  useEffect(() => {
+    let result1 = category?.map(result => {
+      if (result.child.length > 0) {
+        return result.child;
+      }
+    });
+    let result3 = category?.map(result => {
+      if (result.child.length > 0) {
+        return result.category_name;
+      }
+    });
+    let result2 = result1.filter(result => result != undefined);
+    let result4 = result3.filter(result => result != undefined);
+    if(groupProduct){
+      let result5 = Object.keys(groupProduct).map(pro => {
+        if (pro == result4.toString().split(" ").join("")) {
+          let result=groupProduct[pro].concat(result2[0])
+          groupProduct[pro]=result
+          return groupProduct
+        }
+      });
+      let result6 = result5.filter(result => result != undefined);
+      setGroupedProduct(result6[0])
+    }
+    
+  }, [category && category && groupProduct ]);
 
   const handleProfileMenuOpen = event => {
     setAnchorEl(event.currentTarget);
@@ -705,11 +692,10 @@ export default function PersistentDrawerLeft() {
         <Grid xs={12} md={12}>
           <NewCarousel
             product={
-              product
-                ? product.slice([0], [3]).map((item, i) => {
+              product && product.slice([0], [3]).map((item, i) => {
                     return item;
                   })
-                : []
+                
             }
           />
         </Grid>
@@ -729,7 +715,7 @@ export default function PersistentDrawerLeft() {
             />
           </Item>
         </Grid>
-        
+
         {/* <Grid item xs={12} md={12}>
           <Item>
             <CarouselApp
@@ -751,22 +737,19 @@ export default function PersistentDrawerLeft() {
             />
           </Item>
         </Grid> */}
-       {groupProduct && Object.keys(groupProduct).map((key)=>(
-          <Grid item xs={12} md={12}>
-          <Item>
-            <CarouselApp
-              heading={key}
-              product={groupProduct[key]}
-              viewProduct={viewProduct}
-              addToCartHandler={addToCartHandler}
-            />
-          </Item>
-        </Grid>
-       ))
-
-       }
-        
-       
+        {groupProduct &&
+          Object.keys(groupProduct).map(key => (
+            <Grid item xs={12} md={12}>
+              <Item>
+                <CarouselApp
+                  heading={key}
+                  product={groupProduct[key]}
+                  viewProduct={viewProduct}
+                  addToCartHandler={addToCartHandler}
+                />
+              </Item>
+            </Grid>
+          ))}
       </Box>
     </Box>
   );

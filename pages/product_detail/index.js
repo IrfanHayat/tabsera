@@ -1,19 +1,39 @@
-import React, { useState, useEffect } from "react";
+import React, { useState,useMemo, useEffect } from "react";
 import Details from "../../container/Detail";
 import { useSelector, useDispatch } from "react-redux";
 import { addToBasket } from "../../slice/basketSlice";
 import { useRouter, withRouter } from "next/router";
-
+import { getProductWithId,getProduct } from "../../slice/productSlice";
 function product_detail(props) {
-  const product = useSelector(state => state.product.productData);
+      
+      const {filterProductData} = useSelector(state => state.product);
+      let [productImage,setProductImage]=useState()
+      let [productAttributes,setProductAttributes]=useState([])
+      let [price,setPrice]=useState()
+      
   let router = useRouter();
-   
+  console.log(filterProductData)
   let dispatch = useDispatch();
   let [filterData, setFilterData] = useState({});
+  
   useEffect(() => {
-    let new_arr = product.filter(result => result.productId == router?.query?.productId);
-    setFilterData(new_arr[0]);
-  }, [router.query.id]);
+    dispatch(getProductWithId(router?.query?.productId))
+   
+  }, [])
+
+ const skuData=(sku)=>{
+   
+  sku?.map(result=>{
+   
+   setProductImage(result.sku_images)
+   setProductAttributes(result.attributes)
+   console.log(result.attributes)
+   console.log(productAttributes)
+   setPrice(result.cost)  
+  })  
+ }
+
+   useMemo(() => skuData(filterProductData.skus), [filterProductData.skus]);
 
   const addToCartHandler = product => {
     dispatch(addToBasket(product));
@@ -24,8 +44,12 @@ function product_detail(props) {
   return (
     <div>
       <Details
-        productDetail={filterData}
+        productDetail={filterProductData}
         addToCartHandler={addToCartHandler}
+        productImage={productImage}
+        productAttributes={productAttributes}
+        price={price}
+        
       ></Details>
     </div>
   );

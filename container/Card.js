@@ -29,6 +29,7 @@ const useStyles = makeStyles(() => ({
 export default function ActionAreaCard({
   product,
   viewProduct,
+  viewCategory,
   addToCartHandler,
 }) {
   const styles = useStyles();
@@ -48,6 +49,27 @@ export default function ActionAreaCard({
           height={200}
         ></Image>
       )}
+       {product?.category_image && (
+        <Image
+          className={cx(styles.media, mediaStyles.root)}
+          src={product?.category_image}
+          alt="shirt"
+          width={245}
+          height={200}
+        ></Image>
+      )}
+       {product?.category_name && (
+      <CardContent>
+        <TextInfoContent
+          // classes={textCardContentStyles}
+          
+          heading={product.category_name}
+          // body={
+          //   "That year, collection of songs, review melodies, memories full, this is a long and warm journey"
+          // }
+        />
+      </CardContent>
+       )}
       <CardContent>
         <TextInfoContent
           // classes={textCardContentStyles}
@@ -67,6 +89,18 @@ export default function ActionAreaCard({
         >
           <PreviewOutlinedIcon />
         </IconButton>
+        {
+           product?.category_name && (
+           <IconButton
+          key={product.id}
+          onClick={(e) => viewCategory(product)}
+          color="primary"
+          aria-label="add to shopping cart"
+        >
+          <PreviewOutlinedIcon />
+        </IconButton>
+
+        )}
         <IconButton
           key={product.id}
           onClick={(e) => addToCartHandler(product)}
