@@ -26,10 +26,10 @@ export default function Product() {
       {/* <AppBar /> */}
       {/* </Grid> */}
 
-      <Grid item xs={12} md={12}>
-        <Item><Footer></Footer></Item>
+      {/* <Grid item xs={12} md={12}> */}
+        <Footer></Footer>
         {/* </Grid> */}
-      </Grid>
+      {/* </Grid> */}
     </Box>
   );
 }

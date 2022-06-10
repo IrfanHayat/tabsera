@@ -81,19 +81,23 @@ export default function ActionAreaCard({
         />
       </CardContent>
       <CardActions>
-        <IconButton
-          key={product.id}
-          onClick={(e) => viewProduct(product)}
-          color="primary"
-          aria-label="add to shopping cart"
-        >
-          <PreviewOutlinedIcon />
-        </IconButton>
+        {
+          product.productName? 
+           <IconButton
+           key={product.id}
+           onClick={(e) => viewProduct(product)}
+           color="primary"
+           aria-label="add to shopping cart"
+         >
+           <PreviewOutlinedIcon />
+         </IconButton>:''
+        }
+        
         {
            product?.category_name && (
            <IconButton
           key={product.id}
-          onClick={(e) => viewCategory(product)}
+          onClick={(e) => viewCategory(product.category_id)}
           color="primary"
           aria-label="add to shopping cart"
         >
@@ -101,14 +105,20 @@ export default function ActionAreaCard({
         </IconButton>
 
         )}
-        <IconButton
-          key={product.id}
-          onClick={(e) => addToCartHandler(product)}
-          color="primary"
-          aria-label="add to shopping cart"
-        >
-          <AddShoppingCartIcon />
-        </IconButton>
+        {
+
+product.productName? 
+            <IconButton
+            key={product.id}
+            onClick={(e) => addToCartHandler(product)}
+            color="primary"
+            aria-label="add to shopping cart"
+            >
+            <AddShoppingCartIcon />
+            </IconButton>:''
+
+        }
+        
       </CardActions>
     </Card>
     // </Box>

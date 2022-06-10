@@ -152,10 +152,20 @@ export default function PersistentDrawerLeft() {
     });
   };
 
+  const viewCategory = (item) => {
+    router.push({
+      pathname: "/sub_category",
+      query: { sub_category: item },
+    });
+  };
+  
+
   const addToCartHandler = (product) => {
     dispatch(addToBasket(product));
     router.push("/cart");
   };
+
+
 
   //groupBy
   function groupArrayOfObjects(list, key, category1) {
@@ -623,6 +633,7 @@ export default function PersistentDrawerLeft() {
                   product={groupProduct[key]}
                   viewProduct={viewProduct}
                   addToCartHandler={addToCartHandler}
+                  viewCategory={viewCategory}
                 />
               </Item>
             </Grid>

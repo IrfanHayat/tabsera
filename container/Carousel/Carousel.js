@@ -17,6 +17,7 @@ export default function CarouselApp({
   content,
   viewProduct,
   addToCartHandler,
+  viewCategory
 }) {
   //console.log("Hellow");
   //console.log(product);
@@ -38,6 +39,7 @@ export default function CarouselApp({
             product={item}
             viewProduct={viewProduct}
             addToCartHandler={addToCartHandler}
+            viewCategory={viewCategory}
           ></ActionAreaCard>
         ))}
       </Carousel>
