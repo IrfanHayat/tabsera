@@ -32,9 +32,7 @@ function CartScreen({
   console.log(productCartData)
   console.log("-----------------------")
   
- // if product_id is comming
   
-   //  useMemo(() => productInCart(productCartData), [productCartData]);
 
   return (
     <>

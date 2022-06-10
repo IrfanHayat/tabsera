@@ -30,6 +30,7 @@ export default function CarouselApp({
         // disableArrowsOnEnd={false}
         // showArrows={false}
         pagination={false}
+        showEmptySlots={true}
         // itemsToShow={2}
       >
         {/* {content} */}
