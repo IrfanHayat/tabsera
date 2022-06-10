@@ -39,7 +39,7 @@ export default function ActionAreaCard({
 
   return (
     // <Box>
-    <Card className={cx(styles.root, shadowStyles.root)}>
+    <Card className={cx(styles.root)}>
       {product?.productImage && (
         <Image
           className={cx(styles.media, mediaStyles.root)}
