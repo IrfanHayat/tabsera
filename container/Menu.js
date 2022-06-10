@@ -571,11 +571,10 @@ export default function PersistentDrawerLeft() {
         component="main"
         sx={{
           flexGrow: 1,
-          p: 3,
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
+          // p: 3,
+          // width: { sm: `calc(100% - ${drawerWidth}px)` },
         }}
       >
-        <DrawerHeader />
         {/* <DrawerHeader /> */}
         <Grid xs={12} md={12}>
           <NewCarousel
