@@ -13,10 +13,25 @@ export const getCategory = createAsyncThunk(
   }
 );
 
+
+export const getProductWithCategoryId = createAsyncThunk(
+  "category/getCategoryWithId",
+  async (id) => {
+    console.log(id)
+    const result = await instance.get(`${url}/ecommerce/categories/${id}/products`);
+    console.log(result)
+    return result.data.response;;
+  }
+);
+
+
+
+
 const addCategory = createSlice({
   name: "category",
   initialState: {
     categoryData: [],
+    productDataWithCategoryId:[],
     loading: false,
     error: null,
   },
@@ -26,10 +41,25 @@ const addCategory = createSlice({
       return { ...state, loading: true };
     });
     builder.addCase(getCategory.fulfilled, (state, action) => {
+      console.log(action.payload)
       state.categoryData = action.payload;
       state.loading = false;
     });
     builder.addCase(getCategory.rejected, (state, action) => {
+      return {
+        ...state,
+        loading: "rejected",
+        error: action.payload,
+      };
+    });
+    builder.addCase(getProductWithCategoryId.pending, (state, action) => {
+      return { ...state, loading: true };
+    });
+    builder.addCase(getProductWithCategoryId.fulfilled, (state, action) => {
+      state.productDataWithCategoryId = action.payload;
+      state.loading = false;
+    });
+    builder.addCase(getProductWithCategoryId.rejected, (state, action) => {
       return {
         ...state,
         loading: "rejected",
