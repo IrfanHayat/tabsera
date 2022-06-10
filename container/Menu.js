@@ -9,56 +9,37 @@ import List from "@mui/material/List";
 import InputBase from "@mui/material/InputBase";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/Icon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/Inbox";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import MailIcon from "@mui/icons-material/Mail";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import Image from "next/image";
-import ActionAreaCard from "../container/Card";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 
 import { useSelector, useDispatch } from "react-redux";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import { useRouter } from "next/router";
 import Link from "next/link";
 import useTranslation from "next-translate/useTranslation";
 import MenuItem from "@mui/material/MenuItem";
-import { Button } from "@mui/material";
-// import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import ReceiptIcon from "@mui/icons-material/Receipt";
 import AdUnitsIcon from "@mui/icons-material/AdUnits";
 import GppGoodOutlinedIcon from "@mui/icons-material/GppGoodOutlined";
 import { addToBasket } from "../slice/basketSlice";
 import { getProduct } from "../slice/productSlice";
-import { getCategory } from "../slice/categorySlice";
 import NewCarousel from "./Carousel/NewCarousel";
 import CarouselApp from "./Carousel/Carousel";
-// import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
-// import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
-// import ReceiptIcon from "@mui/icons-material/Receipt";
-// import AdUnitsIcon from "@mui/icons-material/AdUnits";
-// import GppGoodOutlinedIcon from "@mui/icons-material/GppGoodOutlined";
-// import { addToBasket } from "../slice/basketSlice";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-// import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import MoreIcon from "@mui/icons-material/MoreVert";
-
+import NavBar from "./NavBar";
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
@@ -67,25 +48,6 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 
 const drawerWidth = 10;
-
-const Main = styled("main", { shouldForwardProp: prop => prop !== "open" })(
-  ({ theme, open }) => ({
-    flexGrow: 1,
-    // padding: theme.spacing(3),
-    transition: theme.transitions.create("margin", {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.leavingScreen,
-    }),
-    marginLeft: `-${drawerWidth}px`,
-    ...(open && {
-      transition: theme.transitions.create("margin", {
-        easing: theme.transitions.easing.easeOut,
-        duration: theme.transitions.duration.enteringScreen,
-      }),
-      marginLeft: 0,
-    }),
-  })
-);
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -128,7 +90,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: prop => prop !== "open",
+  shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
   transition: theme.transitions.create(["margin", "width"], {
     easing: theme.transitions.easing.sharp,
@@ -143,19 +105,19 @@ const AppBar = styled(MuiAppBar, {
     }),
   }),
 }));
-const menuId = "primary-search-account-menu";
+
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
-  // padding: theme.spacing(0, 1),
+  padding: theme.spacing(0, 1),
   // necessary for content to be below app bar
   ...theme.mixins.toolbar,
   justifyContent: "flex-end",
 }));
 
 export default function PersistentDrawerLeft() {
-  const product = useSelector(state => state.product.productData);
-  const category = useSelector(state => state.category.categoryData);
+  const product = useSelector((state) => state.product.productData);
+  const category = useSelector((state) => state.category.categoryData);
 
   let [groupProduct, setGroupedProduct] = useState();
   let [productsValue, setProductsValue] = useState();
@@ -168,11 +130,10 @@ export default function PersistentDrawerLeft() {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  // const isMdUp = useMediaQuery(theme.breakpoints.up("md"));
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
-  const toggleDrawer = event => {
+  const toggleDrawer = (event) => {
     if (
       event.type === "keydown" &&
       (event.key === "Tab" || event.key === "Shift")
@@ -183,22 +144,14 @@ export default function PersistentDrawerLeft() {
     setOpen(!open);
   };
 
-  // const handleDrawerOpen = () => {
-  //   setOpen(true);
-  // };
-
-  // const handleDrawerClose = () => {
-  //   setOpen(false);
-  // };
-
-  const viewProduct = item => {
+  const viewProduct = (item) => {
     router.push({
       pathname: "/product_detail",
       query: { productId: item.productId },
     });
   };
 
-  const addToCartHandler = product => {
+  const addToCartHandler = (product) => {
     dispatch(addToBasket(product));
     router.push("/cart");
   };
@@ -214,9 +167,9 @@ export default function PersistentDrawerLeft() {
   }
 
   useEffect(() => {
-  //  dispatch(getProduct());
+    //  dispatch(getProduct());
     //
-   // dispatch(getCategory());
+    // dispatch(getCategory());
     // let productResult = [];
     // let new_arr = [];
     // // let result1 = category.map((categoryProduct, index) => {
@@ -242,8 +195,7 @@ export default function PersistentDrawerLeft() {
     //   }else{
     //     console.log("Product")
     //     console.log(product)
-      
-     
+
     // }}
     // );
     // const results = result1.filter(element => {
@@ -255,14 +207,13 @@ export default function PersistentDrawerLeft() {
 
     // console.log(new_arr2);
     // // //
-     var groupedCategory = groupArrayOfObjects(product, "categoryName");
-     
-     setGroupedProduct(groupedCategory);
-     console.log(groupedCategory) 
+    var groupedCategory = groupArrayOfObjects(product, "categoryName");
 
+    setGroupedProduct(groupedCategory);
+    console.log(groupedCategory);
   }, [product && product]);
 
-  const handleProfileMenuOpen = event => {
+  const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -275,7 +226,7 @@ export default function PersistentDrawerLeft() {
     handleMobileMenuClose();
   };
 
-  const handleMobileMenuOpen = event => {
+  const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
@@ -284,10 +235,6 @@ export default function PersistentDrawerLeft() {
 
   const drawer = (
     <div>
-      {/* <Toolbar /> */}
-      {/* <Typography variant="h5" alignContent="center">
-        My Account
-      </Typography> */}
       <Toolbar>
         <Typography variant="h5" alignContent="center">
           My Account
@@ -297,9 +244,7 @@ export default function PersistentDrawerLeft() {
         {["Profile"].map((text, index) => (
           <Link href={`/carousel`}>
             <ListItem key={text} disablePadding>
-              {/* <ListItemIcon> */}
               <AccountBoxIcon />
-              {/* </ListItemIcon> */}
               <ListItemText primary={text} />
             </ListItem>
           </Link>
@@ -310,22 +255,18 @@ export default function PersistentDrawerLeft() {
         {["My Orders"].map((text, index) => (
           <Link href={`/carousel`}>
             <ListItem key={text} disablePadding>
-              {/* <ListItemIcon> */}
               <FormatListBulletedIcon />
-              {/* </ListItemIcon> */}
               <ListItemText primary={text} />
             </ListItem>
           </Link>
         ))}
       </List>
-      <Divider />{" "}
+      <Divider />
       <List>
         {["My Coupons"].map((text, index) => (
           <Link href={`/carousel`}>
             <ListItem key={text} disablePadding>
-              {/* <ListItemIcon> */}
               <FormatListBulletedIcon />
-              {/* </ListItemIcon> */}
               <ListItemText primary={text} />
             </ListItem>
           </Link>
@@ -336,61 +277,51 @@ export default function PersistentDrawerLeft() {
         {["My Bill Payments"].map((text, index) => (
           <Link href={`/carousel`}>
             <ListItem key={text} disablePadding>
-              {/* <ListItemIcon> */}
               <ReceiptIcon />
-              {/* </ListItemIcon> */}
               <ListItemText primary={text} />
             </ListItem>
           </Link>
         ))}
       </List>
-      <Divider />{" "}
+      <Divider />
       <List>
         {["My Topups"].map((text, index) => (
           <Link href={`/carousel`}>
             <ListItem key={text} disablePadding>
-              {/* <ListItemIcon> */}
               <AdUnitsIcon />
-              {/* </ListItemIcon> */}
               <ListItemText primary={text} />
             </ListItem>
           </Link>
         ))}
       </List>
-      <Divider />{" "}
+      <Divider />
       <List>
         {["Security"].map((text, index) => (
           <Link href={`/carousel`}>
             <ListItem key={text} disablePadding>
-              {/* <ListItemIcon> */}
               <GppGoodOutlinedIcon />
-              {/* </ListItemIcon> */}
               <ListItemText primary={text} />
             </ListItem>
           </Link>
         ))}
       </List>
-      <Divider />{" "}
+      <Divider />
       <List>
         {["About"].map((text, index) => (
           <Link href={`/carousel`}>
             <ListItem key={text} disablePadding>
-              {/* <ListItemIcon> */}
               <InfoOutlinedIcon />
-              {/* </ListItemIcon> */}
               <ListItemText primary={text} />
             </ListItem>
           </Link>
         ))}
       </List>
-      <Divider />{" "}
+      <Divider />
       <List>
         {["Help"].map((text, index) => (
           <Link href={`/carousel`}>
             <ListItem key={text} disablePadding>
-              {/* <ListItemIcon> */}
               <HelpOutlineOutlinedIcon />
-              {/* </ListItemIcon> */}
               <ListItemText primary={text} />
             </ListItem>
           </Link>
@@ -400,9 +331,6 @@ export default function PersistentDrawerLeft() {
       <List>
         {["Logout"].map((text, index) => (
           <ListItem key={text} disablePadding>
-            {/* <ListItemIcon> */}
-            {/* <MailIcon /> */}
-            {/* </ListItemIcon> */}
             <ListItemText primary={text} />
           </ListItem>
         ))}
@@ -457,7 +385,7 @@ export default function PersistentDrawerLeft() {
           {t("common:Language")}
         </InputLabel>
         <Select>
-          {router.locales.map(locale => (
+          {router.locales.map((locale) => (
             <Link href={router.asPath} key={locale} locale={locale}>
               <MenuItem>{locale}</MenuItem>
             </Link>
@@ -498,200 +426,146 @@ export default function PersistentDrawerLeft() {
   }, []);
 
   return (
-    <Box sx={{ display: "flex" }}>
-      <CssBaseline />
-      <AppBar
-        position="fixed"
-        sx={{
-          // width: { sm: `calc(100% - ${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px` },
-        }}
-      >
-        <Toolbar>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={toggleDrawer}
-            // sx={{ mr: 0, display: { sm: "none" } }}
-          >
-            <MenuIcon />
-          </IconButton>
+    // <Box sx={{ display: "flex", marginBottom: "70px" }}>
+    //   <CssBaseline />
+    //   <AppBar
+    //     position="fixed"
+    //     sx={{
+    //       // width: { sm: `calc(100% - ${drawerWidth}px)` },
+    //       ml: { sm: `${drawerWidth}px` },
+    //     }}
+    //   >
+    //     <Toolbar>
+    //       <IconButton
+    //         edge="start"
+    //         color="inherit"
+    //         aria-label="open drawer"
+    //         onClick={toggleDrawer}
+    //         // sx={{ mr: 0, display: { sm: "none" } }}
+    //       >
+    //         <MenuIcon />
+    //       </IconButton>
 
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            Tabsera
-          </Typography>
+    //       <Typography
+    //         variant="h6"
+    //         noWrap
+    //         component="a"
+    //         href="/"
+    //         sx={{
+    //           mr: 2,
+    //           display: { xs: "none", md: "flex" },
+    //           fontFamily: "monospace",
+    //           fontWeight: 700,
+    //           letterSpacing: ".3rem",
+    //           color: "inherit",
+    //           textDecoration: "none",
+    //         }}
+    //       >
+    //         Tabsera
+    //       </Typography>
 
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href=""
-            sx={{
-              // mr: 1,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".1rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            Tabsera
-          </Typography>
+    //       <Typography
+    //         variant="h6"
+    //         noWrap
+    //         component="a"
+    //         href=""
+    //         sx={{
+    //           // mr: 1,
+    //           display: { xs: "flex", md: "none" },
+    //           flexGrow: 1,
+    //           fontFamily: "monospace",
+    //           fontWeight: 700,
+    //           letterSpacing: ".1rem",
+    //           color: "inherit",
+    //           textDecoration: "none",
+    //         }}
+    //       >
+    //         Tabsera
+    //       </Typography>
 
-          {/* 
-            <InputLabel variant="standard">Language</InputLabel>
-            <NativeSelect defaultValue={30}>
-              {router.locales.map((locale) => (
-                <Link href={router.asPath} key={locale} locale={locale}>
-                  <option value={10}>{locale}</option>
-                </Link>
-              ))}
-            </NativeSelect>
-          </FormControl> */}
+    //       <Box sx={{ flexGrow: 1 }} />
+    //       <Box sx={{ display: { xs: "none", md: "flex" } }}>
+    //         <InputLabel id="demo-simple-select-label">Language</InputLabel>
+    //         <Select>
+    //           {router.locales.map((locale) => (
+    //             <Link href={router.asPath} key={locale} locale={locale}>
+    //               <MenuItem>{locale}</MenuItem>
+    //             </Link>
+    //           ))}
+    //         </Select>
 
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </Search>
+    //         <IconButton
+    //           size="large"
+    //           edge="end"
+    //           aria-label="account of current user"
+    //           aria-controls={menuId}
+    //           aria-haspopup="true"
+    //           onClick={handleProfileMenuOpen}
+    //           color="inherit"
+    //         >
+    //           <ShoppingCartOutlinedIcon />
+    //         </IconButton>
 
-          <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            <InputLabel id="demo-simple-select-label">Language</InputLabel>
-            <Select>
-              {router.locales.map(locale => (
-                <Link href={router.asPath} key={locale} locale={locale}>
-                  <MenuItem>{locale}</MenuItem>
-                </Link>
-              ))}
-            </Select>
+    //         <IconButton
+    //           size="large"
+    //           edge="end"
+    //           aria-label="account of current user"
+    //           aria-controls={menuId}
+    //           aria-haspopup="true"
+    //           onClick={handleProfileMenuOpen}
+    //           color="inherit"
+    //         >
+    //           <AccountCircle />
+    //         </IconButton>
+    //       </Box>
+    //       <Box sx={{ display: { xs: "flex", md: "none" } }}>
+    //         <IconButton
+    //           size="large"
+    //           aria-label="show more"
+    //           aria-controls={mobileMenuId}
+    //           aria-haspopup="true"
+    //           onClick={handleMobileMenuOpen}
+    //           color="inherit"
+    //         >
+    //           <MoreIcon />
+    //         </IconButton>
+    //       </Box>
+    //     </Toolbar>
 
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <ShoppingCartOutlinedIcon />
-            </IconButton>
+    //     <Box bgcolor="text.disabled">
+    //       <Search>
+    //         <SearchIconWrapper>
+    //           <SearchIcon />
+    //         </SearchIconWrapper>
+    //         <StyledInputBase
+    //           placeholder="Search…"
+    //           inputProps={{ "aria-label": "search" }}
+    //         />
+    //       </Search>
+    //     </Box>
+    //   </AppBar>
+    //   {renderMobileMenu}
+    //   {renderMenu}{" "}
+    //   <Box
+    //     component="nav"
+    //     sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+    //     aria-label="mailbox folders"
+    //   >
+    //     <Drawer
+    //       variant="temporary"
+    //       open={open}
+    //       onClose={toggleDrawer}
+    //       ModalProps={{
+    //         keepMounted: true,
+    //         // Better open performance on mobile.
+    //       }}
+    //     >
+    //       {drawer}
+    //     </Drawer>
+    //   </Box>
 
-            <IconButton
-              size="large"
-              edge="end"
-              aria-label="account of current user"
-              aria-controls={menuId}
-              aria-haspopup="true"
-              onClick={handleProfileMenuOpen}
-              color="inherit"
-            >
-              <AccountCircle />
-            </IconButton>
-          </Box>
-          <Box sx={{ display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
-          </Box>
-        </Toolbar>
-      </AppBar>
-      {renderMobileMenu}
-      {renderMenu}{" "}
-      <Box
-        component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        aria-label="mailbox folders"
-      >
-        <Drawer
-          variant="temporary"
-          open={open}
-          onClose={toggleDrawer}
-          ModalProps={{
-            keepMounted: true,
-            // Better open performance on mobile.
-          }}
-          // sx={{
-          //   display: { xs: "block", sm: "none" },
-          //   "& .MuiDrawer-paper": {
-          //     boxSizing: "border-box",
-          //     width: drawerWidth,
-          //   },
-          // }}
-        >
-          {/* <DrawerHeader> */}
-          {/* <Typography variant="h5" alignContent="center">
-              {" "}
-              My Account
-            </Typography> */}
-          {/* </DrawerHeader> */}
-          {drawer}
-        </Drawer>
-        {/* <Drawer
-          variant="permanent"
-          sx={{
-            display: { xs: "none", sm: "block" },
-            "& .MuiDrawer-paper": {
-              boxSizing: "border-box",
-              width: drawerWidth,
-            },
-          }}
-          open
-        > */}
-        {/* <DrawerHeader> */}
-        {/* <Typography variant="h5" alignContent="center">
-              {" "}
-              My Account
-            </Typography> */}
-        {/* </DrawerHeader> */}
-        {/* {drawer}
-        </Drawer> */}
-        {/* <Drawer
-          variant={isMdUp ? "permanent" : "temporary"}
-          anchor="left"
-          open={open}
-          onClose={toggleDrawer}
-          // width={drawerWidth}
-        >
-          <DrawerHeader>
-            <Typography variant="h5" alignContent="center">
-              {" "}
-              My Account
-            </Typography>
-          </DrawerHeader>
-          <div />
-          <Divider />
-        </Drawer> */}
-      </Box>
+    <Box>
+      <NavBar />
       <Box
         // open={open}
         component="main"
@@ -702,6 +576,7 @@ export default function PersistentDrawerLeft() {
         }}
       >
         <DrawerHeader />
+        {/* <DrawerHeader /> */}
         <Grid xs={12} md={12}>
           <NewCarousel
             product={
@@ -729,44 +604,22 @@ export default function PersistentDrawerLeft() {
             />
           </Item>
         </Grid>
-        
-        {/* <Grid item xs={12} md={12}>
-          <Item>
-            <CarouselApp
-              heading="All Products"
-              product={product}
-              viewProduct={viewProduct}
-              addToCartHandler={addToCartHandler}
-            />
-          </Item>
-        </Grid> */}
-        {console.log(groupProduct)}
-        {/* <Grid item xs={12} md={12}>
-          <Item>
-            <CarouselApp
-              heading="All Products"
-              product={productsValue}
-              viewProduct={viewProduct}
-              addToCartHandler={addToCartHandler}
-            />
-          </Item>
-        </Grid> */}
-       {groupProduct && Object.keys(groupProduct).map((key)=>(
-          <Grid item xs={12} md={12}>
-          <Item>
-            <CarouselApp
-              heading={key}
-              product={groupProduct[key]}
-              viewProduct={viewProduct}
-              addToCartHandler={addToCartHandler}
-            />
-          </Item>
-        </Grid>
-       ))
 
-       }
-        
-       
+        {console.log(groupProduct)}
+
+        {groupProduct &&
+          Object.keys(groupProduct).map((key) => (
+            <Grid item xs={12} md={12}>
+              <Item>
+                <CarouselApp
+                  heading={key}
+                  product={groupProduct[key]}
+                  viewProduct={viewProduct}
+                  addToCartHandler={addToCartHandler}
+                />
+              </Item>
+            </Grid>
+          ))}
       </Box>
     </Box>
   );
