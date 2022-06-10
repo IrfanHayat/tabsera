@@ -20,14 +20,16 @@ export default function Product() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       {/* <Grid> */}
-      {/* <Grid item xs={12} md={12}> */}
-      <Menu />
-      {/* <NavBar /> */}
-      {/* <AppBar /> */}
-      {/* </Grid> */}
+      <Grid item xs={12} md={12}>
+        <Menu />
+        {/* <NavBar /> */}
+        {/* <AppBar /> */}
+      </Grid>
 
       <Grid item xs={12} md={12}>
-        <Item><Footer></Footer></Item>
+        <Item>
+          <Footer></Footer>
+        </Item>
         {/* </Grid> */}
       </Grid>
     </Box>

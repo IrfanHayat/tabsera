@@ -177,33 +177,32 @@ export default function PersistentDrawerLeft() {
   }, [product && product]);
 
   useEffect(() => {
-    let result1 = category?.map(result => {
+    let result1 = category?.map((result) => {
       if (result.child.length > 0) {
         return result.child;
       }
     });
-    let result3 = category?.map(result => {
+    let result3 = category?.map((result) => {
       if (result.child.length > 0) {
         return result.category_name;
       }
     });
-    let result2 = result1.filter(result => result != undefined);
-    let result4 = result3.filter(result => result != undefined);
-    if(groupProduct){
-      let result5 = Object.keys(groupProduct).map(pro => {
+    let result2 = result1.filter((result) => result != undefined);
+    let result4 = result3.filter((result) => result != undefined);
+    if (groupProduct) {
+      let result5 = Object.keys(groupProduct).map((pro) => {
         if (pro == result4.toString().split(" ").join("")) {
-          let result=groupProduct[pro].concat(result2[0])
-          groupProduct[pro]=result
-          return groupProduct
+          let result = groupProduct[pro].concat(result2[0]);
+          groupProduct[pro] = result;
+          return groupProduct;
         }
       });
-      let result6 = result5.filter(result => result != undefined);
-      setGroupedProduct(result6[0])
+      let result6 = result5.filter((result) => result != undefined);
+      setGroupedProduct(result6[0]);
     }
-    
-  }, [category && category && groupProduct ]);
+  }, [category && category && groupProduct]);
 
-  const handleProfileMenuOpen = event => {
+  const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -569,10 +568,10 @@ export default function PersistentDrawerLeft() {
         <Grid xs={12} md={12}>
           <NewCarousel
             product={
-              product && product.slice([0], [3]).map((item, i) => {
-                    return item;
-                  })
-                
+              product &&
+              product.slice([5], [9]).map((item, i) => {
+                return item;
+              })
             }
           />
         </Grid>
@@ -615,7 +614,7 @@ export default function PersistentDrawerLeft() {
           </Item>
         </Grid> */}
         {groupProduct &&
-          Object.keys(groupProduct).map(key => (
+          Object.keys(groupProduct).map((key) => (
             <Grid item xs={12} md={12}>
               <Item>
                 <CarouselApp

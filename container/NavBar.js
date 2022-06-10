@@ -1,4 +1,4 @@
-import React, { useMemo,useEffect, useState } from "react";
+import React, { useMemo, useEffect, useState } from "react";
 import { styled, useTheme, alpha } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -37,7 +37,6 @@ import { Button, FormControl, TextField, AppBar } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 
 import { getCategory } from "../slice/categorySlice";
-
 
 import Chip from "@mui/material/Chip";
 
@@ -117,7 +116,6 @@ const NavLink = styled("a")(() => ({
 }));
 
 export default function NavBar() {
-  
   const category = useSelector((state) => state.category.categoryData);
   const [open, setOpen] = React.useState(false);
   let { t } = useTranslation();
@@ -128,15 +126,13 @@ export default function NavBar() {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-  const [categoriesData,setCategoriesData]=useState([])
+  const [categoriesData, setCategoriesData] = useState([]);
 
-  
- const categoryData=(categories)=>{
-     setCategoriesData(categories)
-    
- }
+  const categoryData = (categories) => {
+    setCategoriesData(categories);
+  };
 
-   useMemo(() => categoryData(category), [category]);
+  useMemo(() => categoryData(category), [category]);
 
   const toggleDrawer = (event) => {
     if (
@@ -171,101 +167,83 @@ export default function NavBar() {
 
   const myAccount = (
     <Box>
-      <List>
-        {categoriesData.map((text, index) => (
-          <Link href={`/carousel`}>
-            <ListItem key={text} disablePadding>
-              <AccountBoxIcon />
-              <ListItemText primary={text} />
-            </ListItem>
-          </Link>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["My Orders"].map((text, index) => (
-          <Link href={`/carousel`}>
-            <ListItem key={text} disablePadding>
-              <FormatListBulletedIcon />
-              <ListItemText primary={text} />
-            </ListItem>
-          </Link>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["My Coupons"].map((text, index) => (
-          <Link href={`/carousel`}>
-            <ListItem key={text} disablePadding>
-              <FormatListBulletedIcon />
-              <ListItemText primary={text} />
-            </ListItem>
-          </Link>
-        ))}
-      </List>
-      <Divider />{" "}
-      <List>
-        {["My Bill Payments"].map((text, index) => (
-          <Link href={`/carousel`}>
-            <ListItem key={text} disablePadding>
-              <ReceiptIcon />
-              <ListItemText primary={text} />
-            </ListItem>
-          </Link>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["My Topups"].map((text, index) => (
-          <Link href={`/carousel`}>
-            <ListItem key={text} disablePadding>
-              <AdUnitsIcon />
-              <ListItemText primary={text} />
-            </ListItem>
-          </Link>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["Security"].map((text, index) => (
-          <Link href={`/carousel`}>
-            <ListItem key={text} disablePadding>
-              <GppGoodOutlinedIcon />
-              <ListItemText primary={text} />
-            </ListItem>
-          </Link>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["About"].map((text, index) => (
-          <Link href={`/carousel`}>
-            <ListItem key={text} disablePadding>
-              <InfoOutlinedIcon />
-              <ListItemText primary={text} />
-            </ListItem>
-          </Link>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["Help"].map((text, index) => (
-          <Link href={`/carousel`}>
-            <ListItem key={text} disablePadding>
-              <HelpOutlineOutlinedIcon />
-              <ListItemText primary={text} />
-            </ListItem>
-          </Link>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["Logout"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemText primary={text} />
+      <MenuItem>
+        <Link href={`/carousel`}>
+          <ListItem key="My Profile" disablePadding>
+            <AccountBoxIcon />
+            <ListItemText primary="My Profile" />
           </ListItem>
-        ))}
-      </List>
+        </Link>
+      </MenuItem>
+      <Divider />
+      <MenuItem>
+        <Link href={`/carousel`}>
+          <ListItem key="My Orders" disablePadding>
+            <FormatListBulletedIcon />
+            <ListItemText primary="My Orders" />
+          </ListItem>
+        </Link>
+      </MenuItem>
+      <Divider />
+      <MenuItem>
+        <Link href={`/carousel`}>
+          <ListItem key="My Coupons" disablePadding>
+            <FormatListBulletedIcon />
+            <ListItemText primary="My Coupons" />
+          </ListItem>
+        </Link>
+      </MenuItem>
+      <Divider />{" "}
+      <MenuItem>
+        <Link href={`/carousel`}>
+          <ListItem key="My Bill Payments" disablePadding>
+            <ReceiptIcon />
+            <ListItemText primary="My Bill Payments" />
+          </ListItem>
+        </Link>
+      </MenuItem>
+      <Divider />
+      <MenuItem>
+        <Link href={`/carousel`}>
+          <ListItem key="My Topups" disablePadding>
+            <AdUnitsIcon />
+            <ListItemText primary="My Topups" />
+          </ListItem>
+        </Link>
+      </MenuItem>
+      <Divider />
+      <MenuItem>
+        <Link href={`/carousel`}>
+          <ListItem key="Security" disablePadding>
+            <GppGoodOutlinedIcon />
+            <ListItemText primary="Security" />
+          </ListItem>
+        </Link>
+      </MenuItem>
+      <Divider />
+      <MenuItem>
+        <Link href={`/carousel`}>
+          <ListItem key="About" disablePadding>
+            <InfoOutlinedIcon />
+            <ListItemText primary="About" />
+          </ListItem>
+        </Link>
+      </MenuItem>
+      <Divider />
+      <MenuItem>
+        <Link href={`/carousel`}>
+          <ListItem key="Help" disablePadding>
+            <HelpOutlineOutlinedIcon />
+            <ListItemText primary="Help" />
+          </ListItem>
+        </Link>
+      </MenuItem>
+      <Divider />
+      <MenuItem>
+        <ListItem key="Logout" disablePadding>
+          <ListItemText primary="Logout" />
+        </ListItem>
+      </MenuItem>
     </Box>
   );
 
@@ -277,8 +255,7 @@ export default function NavBar() {
         </Typography>
       </Toolbar>
       {categoriesData.map((text, index) => (
-      <List>
-       
+        <List>
           <Link href={`/carousel`}>
             <ListItem key={text.category_id} disablePadding>
               {/* <AccountBoxIcon /> */}
@@ -286,11 +263,8 @@ export default function NavBar() {
             </ListItem>
           </Link>
           <Divider />
-      </List>
-      
+        </List>
       ))}
-     
-
     </Box>
   );
 
@@ -336,30 +310,41 @@ export default function NavBar() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <InputLabel id="demo-simple-select-label">
-          {" "}
-          {t("common:Language")}
-        </InputLabel>
-        <Select>
-          {router.locales.map((locale) => (
-            <Link href={router.asPath} key={locale} locale={locale}>
-              <MenuItem>{locale}</MenuItem>
-            </Link>
-          ))}
-        </Select>
+        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+          <InputLabel id="demo-select-small">My Account</InputLabel>
+          <Select labelId="demo-select-small" id="demo-select-small">
+            {myAccount}
+          </Select>
+        </FormControl>
       </MenuItem>
 
       <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <ShoppingCartOutlinedIcon />
-        </IconButton>
-        <p>My Cart</p>
+        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+          <InputLabel id="demo-select-small">Currency</InputLabel>
+          <Select labelId="demo-select-small" id="demo-select-small">
+            <MenuItem value={10}>Rupee</MenuItem>
+            <MenuItem value={20}>Dollar</MenuItem>
+            <MenuItem value={30}>Ponds</MenuItem>
+          </Select>
+        </FormControl>
+      </MenuItem>
+
+      <MenuItem>
+        {/* <InputLabel id="demo-simple-select-label">
+          {" "}
+          {t("common:Language")}
+        </InputLabel> */}
+
+        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
+          <InputLabel id="demo-simple-select-label">Language</InputLabel>
+          <Select>
+            {router.locales.map((locale) => (
+              <Link href={router.asPath} key={locale} locale={locale}>
+                <MenuItem>{locale}</MenuItem>
+              </Link>
+            ))}
+          </Select>
+        </FormControl>
       </MenuItem>
 
       <MenuItem>
@@ -387,7 +372,7 @@ export default function NavBar() {
       <AppBar
         style={{ height: "40px" }}
         sx={{
-         // bgcolor: "green",
+          // bgcolor: "green",
           // height: "65%",
           justifyContent: "center",
           padding: "5px",
@@ -401,11 +386,12 @@ export default function NavBar() {
         <Toolbar>
           <NavLink href="/about_us">About Us</NavLink>
           <NavLink href="/contact_us">Contact Us</NavLink>
-          <NavLink href="/">Store Location</NavLink>
-          <NavLink href="/">Track Order</NavLink>
+          {/* <NavLink href="/">Store Location</NavLink> */}
+          {/* <NavLink href="/">Track Order</NavLink> */}
           <NavLink href="/">Blog</NavLink>
 
           <Box sx={{ flexGrow: 1 }} />
+
           <Box
             sx={{
               display: { xs: "none", md: "flex", justifyContent: "center" },
@@ -499,7 +485,7 @@ export default function NavBar() {
       </AppBar>
       <AppBar
         sx={{
-          bgcolor: "#bdbdbd",
+          bgcolor: "#fafafa",
           // height: "65%",
           justifyContent: "center",
           padding: "5px",
