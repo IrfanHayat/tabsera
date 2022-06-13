@@ -56,10 +56,11 @@ export const basketSlice = createSlice({
         let skus;
        
         let tempProductItem = { ...action.payload, cartQuantity: 1 };
+        console.log(tempProductItem)
         instance.get(`${url}/ecommerce/carts`).then(result=>{
                 console.log(result)
         })
-        instance.get(`${url}/ecommerce/products/${tempProductItem.product_id}`).then(result=>{
+        instance.get(`${url}/ecommerce/products/${tempProductItem.productId}`).then(result=>{
           skus=result.data.response.skus
             console.log(skus)     
           // if(skus.length>0){

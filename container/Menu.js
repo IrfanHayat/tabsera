@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useMemo,useEffect, useState } from "react";
 import { styled, useTheme, alpha } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -186,7 +186,10 @@ export default function PersistentDrawerLeft() {
     setGroupedProduct(groupedCategory);
   }, [product && product]);
 
-  useEffect(() => {
+
+
+
+  const categoryData = (category) => {
     let result1 = category?.map((result) => {
       if (result.child.length > 0) {
         return result.child;
@@ -197,8 +200,10 @@ export default function PersistentDrawerLeft() {
         return result.category_name;
       }
     });
+
     let result2 = result1.filter((result) => result != undefined);
     let result4 = result3.filter((result) => result != undefined);
+   
     if (groupProduct) {
       let result5 = Object.keys(groupProduct).map((pro) => {
         if (pro == result4.toString().split(" ").join("")) {
@@ -209,8 +214,10 @@ export default function PersistentDrawerLeft() {
       });
       let result6 = result5.filter((result) => result != undefined);
       setGroupedProduct(result6[0]);
-    }
-  }, [category && category && groupProduct]);
+
+  }};
+
+  useMemo(() => categoryData(category), [category && category]);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);

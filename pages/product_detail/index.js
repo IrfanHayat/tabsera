@@ -36,8 +36,19 @@ function product_detail(props) {
    useMemo(() => skuData(filterProductData.skus), [filterProductData.skus]);
 
   const addToCartHandler = product => {
-    dispatch(addToBasket(product));
-    router.push("/cart");
+    if(product.product_id){
+      console.log(product)
+      let obj={
+        productName:product.product_name,
+        
+      }
+      //dispatch(addToBasket(product));
+      //router.push("/cart");
+    }else{
+      dispatch(addToBasket(product));
+      router.push("/cart");  
+    }
+    
 
   };
 

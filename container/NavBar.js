@@ -132,7 +132,7 @@ export default function NavBar() {
     setCategoriesData(categories);
   };
 
-  useMemo(() => categoryData(category), [category]);
+  useMemo(() => categoryData(category), [category && category]);
 
   const toggleDrawer = (event) => {
     if (
@@ -254,7 +254,7 @@ export default function NavBar() {
           Shop By Categories
         </Typography>
       </Toolbar>
-      {categoriesData.map((text, index) => (
+      {categoriesData?.map((text, index) => (
         <List>
           <Link href={`/carousel`}>
             <ListItem key={text.category_id} disablePadding>
