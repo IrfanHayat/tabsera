@@ -13,6 +13,7 @@ import { loginUser } from "../../slice/authSlice";
 import { Controller, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useSnackbar } from "notistack";
+import CheckoutWizard from '../../container/CheckoutWizard';
 import PhoneInput from "react-phone-input-2";
 export default function Login() {
   const {
@@ -48,6 +49,7 @@ export default function Login() {
   };
   return (
     <>
+    <CheckoutWizard activeStep={0}></CheckoutWizard>
       <form onSubmit={handleSubmit(submitHandler)}>
         <Typography component="h1" variant="h1">
           Login

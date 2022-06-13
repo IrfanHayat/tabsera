@@ -3,6 +3,7 @@ import instance from "../helper/axios/httpRequest";
 import { url, setHeaders } from "../helper/axios/config";
 import Encryption from '../helper/encryption/encryptAes';
 import localStorage from "localStorage";
+import Cookies from 'universal-cookie'
 
 const initialState = {
   token: localStorage.getItem("token"),
@@ -39,6 +40,9 @@ export const loginUser = createAsyncThunk(
   async (values, { rejectWithValue }) => {
     console.log(values)
     try {
+        let cookiesWebsite=new Cookies()
+        
+
         const dataEncrypt = {
             // deviceId: "",
             // imsi: "",

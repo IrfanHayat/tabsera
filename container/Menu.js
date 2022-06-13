@@ -159,6 +159,7 @@ export default function PersistentDrawerLeft() {
     });
   };
   
+ 
 
   const addToCartHandler = (product) => {
     dispatch(addToBasket(product));

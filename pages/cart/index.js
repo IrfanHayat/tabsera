@@ -35,6 +35,9 @@ function cart() {
   const handleDecreaseCart = (product) => {
     dispatch(decreaseBasket(product));
   };
+  useEffect(() => {
+    dispatch(getTotals());
+  }, [cartItems, dispatch]);
 
   const checkoutHandler = () => {
     router.push("/shipping");

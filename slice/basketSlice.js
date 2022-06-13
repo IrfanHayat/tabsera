@@ -18,6 +18,8 @@ const initialState = {
   // userIfo:localStorage.getItem("userInfo")
   // ? JSON.parse(localStorage.getItem("userInfo"))
   // : [],
+  cartTotalQuantity: 1,
+  cartTotalAmount:0,
   products: null,
   filteredProducts: null,
 };
@@ -63,23 +65,23 @@ export const basketSlice = createSlice({
         instance.get(`${url}/ecommerce/products/${tempProductItem.productId}`).then(result=>{
           skus=result.data.response.skus
             console.log(skus)     
-          // if(skus.length>0){
-          //   let skus_value;
-          //   skus.map(result=>{
-          //     skus_value=result.sku;
-          //   })
+          if(skus.length>0){
+            let skus_value;
+            skus.map(result=>{
+              skus_value=result.sku;
+            })
            
-          //   let cart = {
-          //     cart_id:611,
-          //     sku:  skus_value,
-          //     // price: cost,
-          //     qty: tempProductItem.cartQuantity
-          // };
-          // console.log(cart)
-          // instance.post(`${url}/ecommerce/carts/items`,cart).then(result=>{
-          //      console.log(result)
-          // })
-          // }
+            let cart = {
+              cart_id:611,
+              sku:  skus_value,
+              // price: cost,
+              qty: tempProductItem.cartQuantity
+          };
+          console.log(cart)
+          instance.post(`${url}/ecommerce/carts/items`,cart).then(result=>{
+               console.log(result)
+          })
+          }
 
         });
       

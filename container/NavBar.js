@@ -117,6 +117,8 @@ const NavLink = styled("a")(() => ({
 
 export default function NavBar() {
   const category = useSelector((state) => state.category.categoryData);
+  const  cartTotalQuantity  = useSelector((state) => state.basket.cart.cartTotalQuantity );
+  console.log(cartTotalQuantity)
   const [open, setOpen] = React.useState(false);
   let { t } = useTranslation();
   let router = useRouter();
@@ -553,6 +555,7 @@ export default function NavBar() {
             color="primary"
           >
             <ShoppingCartOutlinedIcon />
+            {cartTotalQuantity}
           </IconButton>
         </Toolbar>
       </AppBar>
