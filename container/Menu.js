@@ -1,4 +1,4 @@
-import React, { useMemo,useEffect, useState } from "react";
+import React, { useMemo, useEffect, useState } from "react";
 import { styled, useTheme, alpha } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -129,22 +129,6 @@ export default function PersistentDrawerLeft() {
   let router = useRouter();
   let dispatch = useDispatch();
 
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-  const toggleDrawer = (event) => {
-    if (
-      event.type === "keydown" &&
-      (event.key === "Tab" || event.key === "Shift")
-    ) {
-      return;
-    }
-
-    setOpen(!open);
-  };
-
   const viewProduct = (item) => {
     router.push({
       pathname: "/product_detail",
@@ -158,14 +142,11 @@ export default function PersistentDrawerLeft() {
       query: { sub_category: item },
     });
   };
-  
 
   const addToCartHandler = (product) => {
     dispatch(addToBasket(product));
     router.push("/cart");
   };
-
-
 
   //groupBy
   function groupArrayOfObjects(list, key, category1) {
@@ -186,9 +167,6 @@ export default function PersistentDrawerLeft() {
     setGroupedProduct(groupedCategory);
   }, [product && product]);
 
-
-
-
   const categoryData = (category) => {
     let result1 = category?.map((result) => {
       if (result.child.length > 0) {
@@ -203,7 +181,7 @@ export default function PersistentDrawerLeft() {
 
     let result2 = result1.filter((result) => result != undefined);
     let result4 = result3.filter((result) => result != undefined);
-   
+
     if (groupProduct) {
       let result5 = Object.keys(groupProduct).map((pro) => {
         if (pro == result4.toString().split(" ").join("")) {
@@ -214,8 +192,8 @@ export default function PersistentDrawerLeft() {
       });
       let result6 = result5.filter((result) => result != undefined);
       setGroupedProduct(result6[0]);
-
-  }};
+    }
+  };
 
   useMemo(() => categoryData(category), [category && category]);
 
@@ -227,349 +205,13 @@ export default function PersistentDrawerLeft() {
     setMobileMoreAnchorEl(null);
   };
 
-  const handleMenuClose = () => {
-    setAnchorEl(null);
-    handleMobileMenuClose();
-  };
-
-  const handleMobileMenuOpen = (event) => {
-    setMobileMoreAnchorEl(event.currentTarget);
-  };
-
-  const menuId = "primary-search-account-menu";
   // ----------------------------------------------------------------------------------
-
-  const drawer = (
-    <div>
-      <Toolbar>
-        <Typography variant="h5" alignContent="center">
-          My Account
-        </Typography>
-      </Toolbar>
-      <List>
-        {["Profile"].map((text, index) => (
-          <Link href={`/carousel`}>
-            <ListItem key={text} disablePadding>
-              <AccountBoxIcon />
-              <ListItemText primary={text} />
-            </ListItem>
-          </Link>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["My Orders"].map((text, index) => (
-          <Link href={`/carousel`}>
-            <ListItem key={text} disablePadding>
-              <FormatListBulletedIcon />
-              <ListItemText primary={text} />
-            </ListItem>
-          </Link>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["My Coupons"].map((text, index) => (
-          <Link href={`/carousel`}>
-            <ListItem key={text} disablePadding>
-              <FormatListBulletedIcon />
-              <ListItemText primary={text} />
-            </ListItem>
-          </Link>
-        ))}
-      </List>
-      <Divider />{" "}
-      <List>
-        {["My Bill Payments"].map((text, index) => (
-          <Link href={`/carousel`}>
-            <ListItem key={text} disablePadding>
-              <ReceiptIcon />
-              <ListItemText primary={text} />
-            </ListItem>
-          </Link>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["My Topups"].map((text, index) => (
-          <Link href={`/carousel`}>
-            <ListItem key={text} disablePadding>
-              <AdUnitsIcon />
-              <ListItemText primary={text} />
-            </ListItem>
-          </Link>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["Security"].map((text, index) => (
-          <Link href={`/carousel`}>
-            <ListItem key={text} disablePadding>
-              <GppGoodOutlinedIcon />
-              <ListItemText primary={text} />
-            </ListItem>
-          </Link>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["About"].map((text, index) => (
-          <Link href={`/carousel`}>
-            <ListItem key={text} disablePadding>
-              <InfoOutlinedIcon />
-              <ListItemText primary={text} />
-            </ListItem>
-          </Link>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["Help"].map((text, index) => (
-          <Link href={`/carousel`}>
-            <ListItem key={text} disablePadding>
-              <HelpOutlineOutlinedIcon />
-              <ListItemText primary={text} />
-            </ListItem>
-          </Link>
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {["Logout"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemText primary={text} />
-          </ListItem>
-        ))}
-      </List>
-    </div>
-  );
-
-  // ----------------------------------------------------------------------------------
-
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
-    </Menu>
-  );
-
-  const mobileMenuId = "primary-search-account-menu-mobile";
-  // ----------------------------------------------------------------------------------
-
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <InputLabel id="demo-simple-select-label">
-          {" "}
-          {t("common:Language")}
-        </InputLabel>
-        <Select>
-          {router.locales.map((locale) => (
-            <Link href={router.asPath} key={locale} locale={locale}>
-              <MenuItem>{locale}</MenuItem>
-            </Link>
-          ))}
-        </Select>
-      </MenuItem>
-
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <ShoppingCartOutlinedIcon />
-        </IconButton>
-        <p>My Cart</p>
-      </MenuItem>
-
-      <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Logout</p>
-      </MenuItem>
-    </Menu>
-  );
 
   React.useEffect(async () => {
     await dispatch(getProduct());
   }, []);
 
   return (
-    // <Box sx={{ display: "flex", marginBottom: "70px" }}>
-    //   <CssBaseline />
-    //   <AppBar
-    //     position="fixed"
-    //     sx={{
-    //       // width: { sm: `calc(100% - ${drawerWidth}px)` },
-    //       ml: { sm: `${drawerWidth}px` },
-    //     }}
-    //   >
-    //     <Toolbar>
-    //       <IconButton
-    //         edge="start"
-    //         color="inherit"
-    //         aria-label="open drawer"
-    //         onClick={toggleDrawer}
-    //         // sx={{ mr: 0, display: { sm: "none" } }}
-    //       >
-    //         <MenuIcon />
-    //       </IconButton>
-
-    //       <Typography
-    //         variant="h6"
-    //         noWrap
-    //         component="a"
-    //         href="/"
-    //         sx={{
-    //           mr: 2,
-    //           display: { xs: "none", md: "flex" },
-    //           fontFamily: "monospace",
-    //           fontWeight: 700,
-    //           letterSpacing: ".3rem",
-    //           color: "inherit",
-    //           textDecoration: "none",
-    //         }}
-    //       >
-    //         Tabsera
-    //       </Typography>
-
-    //       <Typography
-    //         variant="h6"
-    //         noWrap
-    //         component="a"
-    //         href=""
-    //         sx={{
-    //           // mr: 1,
-    //           display: { xs: "flex", md: "none" },
-    //           flexGrow: 1,
-    //           fontFamily: "monospace",
-    //           fontWeight: 700,
-    //           letterSpacing: ".1rem",
-    //           color: "inherit",
-    //           textDecoration: "none",
-    //         }}
-    //       >
-    //         Tabsera
-    //       </Typography>
-
-    //       <Box sx={{ flexGrow: 1 }} />
-    //       <Box sx={{ display: { xs: "none", md: "flex" } }}>
-    //         <InputLabel id="demo-simple-select-label">Language</InputLabel>
-    //         <Select>
-    //           {router.locales.map((locale) => (
-    //             <Link href={router.asPath} key={locale} locale={locale}>
-    //               <MenuItem>{locale}</MenuItem>
-    //             </Link>
-    //           ))}
-    //         </Select>
-
-    //         <IconButton
-    //           size="large"
-    //           edge="end"
-    //           aria-label="account of current user"
-    //           aria-controls={menuId}
-    //           aria-haspopup="true"
-    //           onClick={handleProfileMenuOpen}
-    //           color="inherit"
-    //         >
-    //           <ShoppingCartOutlinedIcon />
-    //         </IconButton>
-
-    //         <IconButton
-    //           size="large"
-    //           edge="end"
-    //           aria-label="account of current user"
-    //           aria-controls={menuId}
-    //           aria-haspopup="true"
-    //           onClick={handleProfileMenuOpen}
-    //           color="inherit"
-    //         >
-    //           <AccountCircle />
-    //         </IconButton>
-    //       </Box>
-    //       <Box sx={{ display: { xs: "flex", md: "none" } }}>
-    //         <IconButton
-    //           size="large"
-    //           aria-label="show more"
-    //           aria-controls={mobileMenuId}
-    //           aria-haspopup="true"
-    //           onClick={handleMobileMenuOpen}
-    //           color="inherit"
-    //         >
-    //           <MoreIcon />
-    //         </IconButton>
-    //       </Box>
-    //     </Toolbar>
-
-    //     <Box bgcolor="text.disabled">
-    //       <Search>
-    //         <SearchIconWrapper>
-    //           <SearchIcon />
-    //         </SearchIconWrapper>
-    //         <StyledInputBase
-    //           placeholder="Search…"
-    //           inputProps={{ "aria-label": "search" }}
-    //         />
-    //       </Search>
-    //     </Box>
-    //   </AppBar>
-    //   {renderMobileMenu}
-    //   {renderMenu}{" "}
-    //   <Box
-    //     component="nav"
-    //     sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-    //     aria-label="mailbox folders"
-    //   >
-    //     <Drawer
-    //       variant="temporary"
-    //       open={open}
-    //       onClose={toggleDrawer}
-    //       ModalProps={{
-    //         keepMounted: true,
-    //         // Better open performance on mobile.
-    //       }}
-    //     >
-    //       {drawer}
-    //     </Drawer>
-    //   </Box>
-
     <Box>
       <NavBar />
       <Box

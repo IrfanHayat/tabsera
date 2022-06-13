@@ -14,6 +14,7 @@ import VariableWidthGrid from "../../container/ShoppingCart";
 
 function cart() {
   const cartItems = useSelector((state) => state.basket.cart.cartItems);
+
   let router = useRouter();
   let dispatch = useDispatch();
 

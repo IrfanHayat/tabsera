@@ -35,32 +35,9 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { Button, FormControl, TextField, AppBar } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-
-import { getCategory } from "../slice/categorySlice";
-
+import Modal from "./Modal/Modal";
 import Chip from "@mui/material/Chip";
-
-const theme = createTheme({
-  components: {
-    MuiIcon: {
-      styleOverrides: {
-        root: {
-          // Match 24px = 3 * 2 + 1.125 * 16
-          // boxSizing: "content-box",
-          // padding: 3,
-          // fontSize: "1.125rem",
-        },
-      },
-    },
-  },
-});
-
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
-  padding: theme.spacing(1),
-  color: theme.palette.text.primary,
-}));
+import SignInModal from "./Login/SignIn";
 
 const drawerWidth = 10;
 
@@ -115,12 +92,14 @@ const NavLink = styled("a")(() => ({
   // necessary for content to be below app bar
 }));
 
-export default function NavBar() {
+export default function NavBar(props) {
   const category = useSelector((state) => state.category.categoryData);
   const [open, setOpen] = React.useState(false);
   let { t } = useTranslation();
   let router = useRouter();
   let dispatch = useDispatch();
+
+  const [showLogin, setShowLogin] = useState(false);
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
@@ -134,6 +113,9 @@ export default function NavBar() {
 
   useMemo(() => categoryData(category), [category && category]);
 
+  // const openModal = () => {
+  //   setShowLogin(true);
+  // };
   const toggleDrawer = (event) => {
     if (
       event.type === "keydown" &&
@@ -160,6 +142,14 @@ export default function NavBar() {
 
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
+  };
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
   const menuId = "primary-search-account-menu";
@@ -372,16 +362,10 @@ export default function NavBar() {
       <AppBar
         style={{ height: "40px" }}
         sx={{
-          // bgcolor: "green",
-          // height: "65%",
           justifyContent: "center",
           padding: "5px",
         }}
         position="static"
-        // sx={{
-        //   // width: { sm: `calc(100% - ${drawerWidth}px)` },
-        //   ml: { sm: `${drawerWidth}px` },
-        // }}
       >
         <Toolbar>
           <NavLink href="/about_us">About Us</NavLink>
@@ -450,7 +434,7 @@ export default function NavBar() {
         position="static"
       >
         <Toolbar>
-        <Typography
+          <Typography
             variant="h6"
             noWrap
             component="a"
@@ -499,7 +483,20 @@ export default function NavBar() {
           >
             <AccountCircle />
           </IconButton>
-          <Button>Sign In</Button>
+
+          {/* <Modal
+            buttonText="Sign IN"
+            heading="Sign In"
+            dialogContentText={<SignIn />}
+            buttonCancel={
+              <Button onClick={handleClose} autoFocus>
+                Cancel
+              </Button>
+            }
+          ></Modal> */}
+
+          {/* <Button onClick={() => setShowLogin(true)}>Sign In</Button> */}
+          <SignInModal show={showLogin} close={() => setShowLogin(false)} />
         </Toolbar>
       </AppBar>
       <AppBar
@@ -520,18 +517,6 @@ export default function NavBar() {
             />
           </ThemeProvider>
 
-          {/* <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={toggleDrawer}
-            sx={{ mr: 2 }}
-            // sx={{ mr: 0, display: { sm: "none" } }}
-          >
-            <MenuIcon />
-          </IconButton> */}
-
           <Box component="div" sx={{ flexGrow: 1 }} alignItems="center">
             <Search borderColor="Black">
               <SearchIconWrapper>
@@ -549,7 +534,6 @@ export default function NavBar() {
             aria-label="account of current user"
             aria-controls={menuId}
             aria-haspopup="true"
-            onClick={handleProfileMenuOpen}
             color="primary"
           >
             <ShoppingCartOutlinedIcon />
