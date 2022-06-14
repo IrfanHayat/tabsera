@@ -13,7 +13,7 @@ import { loginUser } from "../../slice/authSlice";
 import { Controller, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { useSnackbar } from "notistack";
-import CheckoutWizard from '../../container/CheckoutWizard';
+import CheckoutWizard from "../../container/CheckoutWizard";
 import PhoneInput from "react-phone-input-2";
 import SignIn from "../../container/Login/SignIn";
 export default function Login() {
@@ -50,6 +50,7 @@ export default function Login() {
   return (
     <>
       <SignIn />
+
       {/* <form onSubmit={handleSubmit(submitHandler)}>
         <Typography component="h1" variant="h1">
           Login

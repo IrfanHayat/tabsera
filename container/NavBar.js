@@ -94,8 +94,10 @@ const NavLink = styled("a")(() => ({
 
 export default function NavBar(props) {
   const category = useSelector((state) => state.category.categoryData);
-  const  cartTotalQuantity  = useSelector((state) => state.basket.cart.cartTotalQuantity );
-  console.log(cartTotalQuantity)
+  const cartTotalQuantity = useSelector(
+    (state) => state.basket.cart.cartTotalQuantity
+  );
+  console.log(cartTotalQuantity);
   const [open, setOpen] = React.useState(false);
   let { t } = useTranslation();
   let router = useRouter();
@@ -246,17 +248,18 @@ export default function NavBar(props) {
           Shop By Categories
         </Typography>
       </Toolbar>
-      {categoriesData && categoriesData.map((text, index) => (
-        <List>
-          <Link href={`/carousel`}>
-            <ListItem key={text.category_id} disablePadding>
-              {/* <AccountBoxIcon /> */}
-              <ListItemText primary={text.category_name} />
-            </ListItem>
-          </Link>
-          <Divider />
-        </List>
-      ))}
+      {categoriesData &&
+        categoriesData.map((text, index) => (
+          <List>
+            <Link href={`/carousel`}>
+              <ListItem key={text.category_id} disablePadding>
+                {/* <AccountBoxIcon /> */}
+                <ListItemText primary={text.category_name} />
+              </ListItem>
+            </Link>
+            <Divider />
+          </List>
+        ))}
     </Box>
   );
 
