@@ -4,22 +4,18 @@ import productData from "../data/product";
 import { url, setHeaders } from "../helper/axios/config";
 //import Cookies from 'universal-cookie';
 
-export const getProduct = createAsyncThunk(
-  "product/getProduct",
-  async () => {
-    const result = await instance.get(`${url}/ecommerce/products`);
-    
-    return result.data.response;;
-  }
-);
+export const getProduct = createAsyncThunk("product/getProduct", async () => {
+  const result = await instance.get(`${url}/ecommerce/products`);
 
+  return result.data.response;
+});
 
 export const getProductWithId = createAsyncThunk(
   "product/getProductWithId",
   async (id) => {
     const result = await instance.get(`${url}/ecommerce/products/${id}`);
-    console.log(result)
-    return result.data.response;;
+    console.log(result);
+    return result.data.response;
   }
 );
 
@@ -32,6 +28,14 @@ export const getFeatureProduct = createAsyncThunk(
   }
 );
 
+// export const getProductWithName = createAsyncThunk(
+//   "product/getProductWithId",
+//   async (id) => {
+//     const result = await instance.get(`${url}/ecommerce/products/${id}`);
+//     console.log(result);
+//     return result.data.response;
+//   }
+// );
 
 const addProduct = createSlice({
   name: "product",
@@ -39,6 +43,7 @@ const addProduct = createSlice({
     productData: [],
     filterProductData:{},
     featureProductData:[],
+    filterProductData: {},
     loading: false,
     error: null,
   },
@@ -62,7 +67,7 @@ const addProduct = createSlice({
       return { ...state, loading: true };
     });
     builder.addCase(getProductWithId.fulfilled, (state, action) => {
-      console.log(action.payload)
+      console.log(action.payload);
       state.filterProductData = action.payload;
       state.loading = false;
     });

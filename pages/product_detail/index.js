@@ -7,6 +7,13 @@ import { getProductWithId, getProduct } from "../../slice/productSlice";
 function product_detail(props) {
   const { filterProductData } = useSelector((state) => state.product);
   
+  const { productData } = useSelector((state) => state.product);
+  console.log("---------------------------------------------------");
+  console.log("filterProductData", filterProductData);
+  console.log("---------------------------------------------------");
+  console.log("productData", productData);
+  console.log("---------------------------------------------------");
+
   let [productImage, setProductImage] = useState();
   let [productAttributes, setProductAttributes] = useState([]);
   let [price, setPrice] = useState();
@@ -18,7 +25,35 @@ function product_detail(props) {
 
   useEffect(() => {
 
+    // console.log(router.query.product_name);
+    dispatch(getProduct());
     dispatch(getProductWithId(router?.query?.productId));
+
+    if (router.query.product_name) {
+      const productObj = productData.filter((result) => {
+        console.log(result.productName);
+        return result.productName == router.query.product_name;
+      });
+      let productWithName = productObj.map((result) => {
+        let obj = {
+          product_id: result.productId,
+          product_name: result.productName,
+
+          // isfreeShipping: result.is_free_shipping,
+          // productCost: result.cost,
+          category_name: result.categoryName,
+          //merchantId: result.merchant_id,
+          //merchanName: result.merchant_name,
+          //productDescription: result.product_desc,
+          //productCost: cost,
+          //skuId: sku,
+          // productCost: result.skus[0],
+          // averageRating: result.averageRating,
+        };
+        return obj;
+      });
+      setFilterData(productWithName[0]);
+    }
   }, []);
 
   const skuData = (sku) => {
@@ -84,7 +119,9 @@ function product_detail(props) {
   return (
     <div>
       <Details
-        productDetail={filterProductData}
+        productDetail={
+          Object.keys(filterData).length > 0 ? filterData : filterProductData
+        }
         addToCartHandler={addToCartHandler}
         productImage={productImage}
         productAttributes={productAttributes}
