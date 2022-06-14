@@ -65,13 +65,14 @@ export default function VariableWidthGrid({
         </Grid> */}
       {/* </Grid> */}
 
-      {productCartData?.map((item) => (
+     
         <Grid
           container
           spacing={1}
           key={item._id}
           style={{ textAlign: "center" }}
         >
+          
           <Grid item xs="auto" style={{ marginTop: "5px" }}>
             {/* <Item> */}
             <NextLink href={`/product_detail?product_name=${item.name}`} passHref>
@@ -136,12 +137,9 @@ export default function VariableWidthGrid({
               <ListItem>
                 <ListItemText>
                   Subtotal (
-                  {productCartData.reduce((a, c) => a + c.qty, 0)}{" "}
+                  {item.qty}
                   items) : $
-                  {productCartData.reduce(
-                    (a, c) => a + c.qty * c.price,
-                    0
-                  )}
+                  {item.qty*item.price}
                 </ListItemText>
               </ListItem>
               <ListItem>

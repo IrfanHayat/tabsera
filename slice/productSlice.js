@@ -23,6 +23,14 @@ export const getProductWithId = createAsyncThunk(
   }
 );
 
+export const getFeatureProduct = createAsyncThunk(
+  "product/getFeatureProduct",
+  async () => {
+    const result = await instance.get(`${url}/ecommerce/products/featured/shop`);
+    
+    return result.data.response;;
+  }
+);
 
 
 const addProduct = createSlice({
@@ -30,6 +38,7 @@ const addProduct = createSlice({
   initialState: {
     productData: [],
     filterProductData:{},
+    featureProductData:[],
     loading: false,
     error: null,
   },
@@ -58,6 +67,21 @@ const addProduct = createSlice({
       state.loading = false;
     });
     builder.addCase(getProductWithId.rejected, (state, action) => {
+      return {
+        ...state,
+        loading: "rejected",
+        error: action.payload,
+      };
+    });
+    builder.addCase(getFeatureProduct.pending, (state, action) => {
+      return { ...state, loading: true };
+    });
+    builder.addCase(getFeatureProduct.fulfilled, (state, action) => {
+      console.log(action.payload)
+      state.featureProductData = action.payload;
+      state.loading = false;
+    });
+    builder.addCase(getFeatureProduct.rejected, (state, action) => {
       return {
         ...state,
         loading: "rejected",

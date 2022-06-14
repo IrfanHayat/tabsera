@@ -16,7 +16,7 @@ const initialState = {
   // userIfo:localStorage.getItem("userInfo")
   // ? JSON.parse(localStorage.getItem("userInfo"))
   // : [],
-  cartTotalQuantity: 1,
+  cartTotalQuantity: 0,
   cartTotalAmount:0,
   products: null,
   filteredProducts: null,
@@ -154,13 +154,18 @@ export const basketSlice = createSlice({
       });
     },
     getTotals(state, action) {
+      console.log("I am here")
+      console.log(current(state.cart.cartItems))
       let { total, quantity } = state.cart.cartItems.reduce(
         (cartTotal, cartItem) => {
-          const { price, cartQuantity } = cartItem;
-          const itemTotal = price * cartQuantity;
+          console.log("cartItem")
+          console.log(cartItem)
+          console.log("-------------------")
+          const { price, qty } = cartItem;
+          const itemTotal = price * qty;
 
           cartTotal.total += itemTotal;
-          cartTotal.quantity += cartQuantity;
+          cartTotal.quantity += qty;
 
           return cartTotal;
         },

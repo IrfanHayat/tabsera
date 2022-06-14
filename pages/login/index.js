@@ -30,11 +30,11 @@ export default function Login() {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
 
-  useEffect(() => {
-    if (auth._id) {
-      navigate("/cart");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (auth._id) {
+  //     navigate("/cart");
+  //   }
+  // }, []);
 
   const submitHandler = async ({ phone, password }) => {
     //   closeSnackbar();

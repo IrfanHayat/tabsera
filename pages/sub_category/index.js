@@ -6,7 +6,12 @@ import { addToBasket } from "../../slice/basketSlice";
 import { useSelector, useDispatch } from "react-redux";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
-
+import NavBar from "../../container/NavBar";
+import {
+  
+  Typography
+  
+} from "@mui/material";
 function SubCategory() {
   const { productDataWithCategoryId } = useSelector(state => state.category);
   const router = useRouter();
@@ -40,6 +45,11 @@ function SubCategory() {
   };
 
   return (
+    <>
+    <NavBar></NavBar>
+    <Typography component="h4" variant="h4">
+          Sub Products
+    </Typography>
     <Container maxWidth="lg">
       <Grid container wrap="wrap" sx={{ overflow: "auto" }}>
         {" "}
@@ -54,6 +64,7 @@ function SubCategory() {
           ))}
       </Grid>{" "}
     </Container>
+    </>
   );
 }
 

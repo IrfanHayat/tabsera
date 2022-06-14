@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useMemo,useState, useEffect } from "react";
 // import ShoppingCart from "../../component/ShoppingCart";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -12,10 +12,11 @@ import {
 import { useRouter, withRouter } from "next/router";
 // import VariableWidthGrid from "../../container/ShoppingCart";
 import VariableWidthGrid from "../../container/NewShoppingCart";
+import ShoppingCart from "../../container/ShoppingCart";
 
 function cart() {
-  const cartItems = useSelector((state) => state.basket.cart.cartItems);
-
+  const {cartTotalQuantity,cartTotalAmount} = useSelector((state) => state.basket);
+  const {cartItems}=useSelector((state)=>state.basket.cart)
   let router = useRouter();
   let dispatch = useDispatch();
 
@@ -23,9 +24,17 @@ function cart() {
   console.log(cartItems);
   console.log("-----------");
   useEffect(()=>{
+    console.log(cartItems)
     dispatch(getCartItems())
-
+    dispatch(getTotals())
   },[])
+
+  const cartData = (cartItem) => {
+         return cartItem
+  };
+
+  useMemo(() => cartData(cartItems), [cartItems]);
+
   const handleAddToCart = (item) => {
     dispatch(addToBasket(item));
   };
@@ -46,23 +55,26 @@ function cart() {
   };
 
   return (
-    <VariableWidthGrid
-      productCartData={cartItems}
-      handleAddToCart={handleAddToCart}
-      handleDecreaseCart={handleDecreaseCart}
-      handleClearCart={handleClearCart}
-      removeItemHandler={removeItemHandler}
-      checkoutHandler={checkoutHandler}
-    />
-    // <NewShoppingCart/>
-    // <ShoppingCart
+    // <VariableWidthGrid
     //   productCartData={cartItems}
     //   handleAddToCart={handleAddToCart}
     //   handleDecreaseCart={handleDecreaseCart}
     //   handleClearCart={handleClearCart}
     //   removeItemHandler={removeItemHandler}
     //   checkoutHandler={checkoutHandler}
-    // ></ShoppingCart>
+    //   cartTotalQuantity={cartTotalQuantity}
+    //   cartTotalAmount={cartTotalAmount}
+
+    // />
+    // <NewShoppingCart/>
+    <ShoppingCart
+      productCartData={cartItems}
+      handleAddToCart={handleAddToCart}
+      handleDecreaseCart={handleDecreaseCart}
+      handleClearCart={handleClearCart}
+      removeItemHandler={removeItemHandler}
+      checkoutHandler={checkoutHandler}
+    ></ShoppingCart>
   );
 }
 

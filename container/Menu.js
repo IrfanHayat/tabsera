@@ -31,7 +31,7 @@ import ReceiptIcon from "@mui/icons-material/Receipt";
 import AdUnitsIcon from "@mui/icons-material/AdUnits";
 import GppGoodOutlinedIcon from "@mui/icons-material/GppGoodOutlined";
 import { addToBasket } from "../slice/basketSlice";
-import { getProduct } from "../slice/productSlice";
+import { getProduct,getFeatureProduct } from "../slice/productSlice";
 import { getCategory } from "../slice/categorySlice";
 import NewCarousel from "./Carousel/NewCarousel";
 import CarouselApp from "./Carousel/Carousel";
@@ -118,6 +118,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 export default function PersistentDrawerLeft() {
   const product = useSelector((state) => state.product.productData);
+  const featureProduct = useSelector((state) => state.product.featureProductData);
   const category = useSelector((state) => state.category.categoryData);
 
   let [groupProduct, setGroupedProduct] = useState();
@@ -161,8 +162,8 @@ export default function PersistentDrawerLeft() {
   }
 
   useEffect(() => {
-    // dispatch(getProduct());
-    //
+    dispatch(getFeatureProduct());
+    
     dispatch(getCategory());
 
     var groupedCategory = groupArrayOfObjects(product, "categoryName");
@@ -241,11 +242,7 @@ export default function PersistentDrawerLeft() {
             <CarouselApp
               heading="Featured Products"
               product={
-                product
-                  ? product.slice([0], [10]).map((item, i) => {
-                      return item;
-                    })
-                  : []
+                featureProduct
               }
               viewProduct={viewProduct}
               addToCartHandler={addToCartHandler}

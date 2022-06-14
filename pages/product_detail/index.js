@@ -6,6 +6,7 @@ import { useRouter, withRouter } from "next/router";
 import { getProductWithId, getProduct } from "../../slice/productSlice";
 function product_detail(props) {
   const { filterProductData } = useSelector((state) => state.product);
+  
   let [productImage, setProductImage] = useState();
   let [productAttributes, setProductAttributes] = useState([]);
   let [price, setPrice] = useState();
@@ -16,6 +17,7 @@ function product_detail(props) {
   let [filterData, setFilterData] = useState({});
 
   useEffect(() => {
+
     dispatch(getProductWithId(router?.query?.productId));
   }, []);
 
