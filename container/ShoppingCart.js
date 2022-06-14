@@ -68,7 +68,7 @@ function CartScreen({
               {productCartData?.map((item) => (
                 <TableRow key={item.product_id}>
                   <TableCell>
-                    <NextLink href={`/product/${item.slug}`} passHref>
+                    <NextLink href={`/product/${item.name}`} passHref>
                       <Link>
                         <CardMedia
                           component="img"

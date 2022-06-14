@@ -37,7 +37,11 @@ export default function VariableWidthGrid({
   handleDecreaseCart,
   checkoutHandler,
 }) {
+  console.log('product Detail')
+  console.log(productCartData)
+  console.log('=====================')
   return (
+
     <Box sx={{ flexGrow: 1 }}>
       <Typography component="h4" variant="h5">
         Shopping Cart
@@ -70,13 +74,13 @@ export default function VariableWidthGrid({
         >
           <Grid item xs="auto" style={{ marginTop: "5px" }}>
             {/* <Item> */}
-            <NextLink href={`/product/${item.slug}`} passHref>
+            <NextLink href={`/product_detail?product_name=${item.name}`} passHref>
               <Link>
                 <CardMedia
                   component="img"
                   // height="10"
                   style={{ height: "100px", width: "150px" }}
-                  image={item.productImage}
+                  image={item.image_URL}
                   alt="green iguana"
                 />
               </Link>
@@ -86,9 +90,9 @@ export default function VariableWidthGrid({
 
           <Grid item xs={3}>
             {/* <Item> */}
-            <NextLink href={`/product/${item.slug}`} passHref>
+            <NextLink href={`/product_detail?product_name=${item.name}`} passHref>
               <Link>
-                <Typography>{item.productName}</Typography>
+                <Typography>{item.name}</Typography>
               </Link>
             </NextLink>
             {/* </Item> */}
@@ -102,7 +106,7 @@ export default function VariableWidthGrid({
             >
               -
             </Button>
-            <Typography className="count">{item.cartQuantity}</Typography>
+            <Typography className="count">{item.qty}</Typography>
             <Button variant="contained" onClick={() => handleAddToCart(item)}>
               +
             </Button>
@@ -110,7 +114,7 @@ export default function VariableWidthGrid({
           </Grid>
 
           <Grid item xs={2}>
-            <Typography>$  {item.productCost}</Typography>
+            <Typography>$  {item.price}</Typography>
             {/* <Item> */}
             {/* </Item> */}
           </Grid>
@@ -132,10 +136,10 @@ export default function VariableWidthGrid({
               <ListItem>
                 <ListItemText>
                   Subtotal (
-                  {productCartData.reduce((a, c) => a + c.cartQuantity, 0)}{" "}
+                  {productCartData.reduce((a, c) => a + c.qty, 0)}{" "}
                   items) : $
                   {productCartData.reduce(
-                    (a, c) => a + c.cartQuantity * c.productCost,
+                    (a, c) => a + c.qty * c.price,
                     0
                   )}
                 </ListItemText>

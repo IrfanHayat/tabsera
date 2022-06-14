@@ -7,20 +7,25 @@ import {
   decreaseBasket,
   getTotals,
   removeFromBasket,
+  getCartItems
 } from "../../slice/basketSlice";
 import { useRouter, withRouter } from "next/router";
 // import VariableWidthGrid from "../../container/ShoppingCart";
-import VariableWidthGrid from "../../container/ShoppingCart";
+import VariableWidthGrid from "../../container/NewShoppingCart";
 
 function cart() {
   const cartItems = useSelector((state) => state.basket.cart.cartItems);
+
   let router = useRouter();
   let dispatch = useDispatch();
 
   console.log("product");
   console.log(cartItems);
   console.log("-----------");
+  useEffect(()=>{
+    dispatch(getCartItems())
 
+  },[])
   const handleAddToCart = (item) => {
     dispatch(addToBasket(item));
   };
@@ -35,10 +40,7 @@ function cart() {
   const handleDecreaseCart = (product) => {
     dispatch(decreaseBasket(product));
   };
-  useEffect(() => {
-    dispatch(getTotals());
-  }, [cartItems, dispatch]);
-
+  
   const checkoutHandler = () => {
     router.push("/shipping");
   };

@@ -5,9 +5,7 @@ import instance from "../helper/axios/httpRequest";
 import { url, setHeaders } from "../helper/axios/config";
 const initialState = {
   cart: {
-    cartItems: localStorage.getItem("cartItems")
-      ? JSON.parse(localStorage.getItem("cartItems"))
-      : [],
+    cartItems: [],
     shippingAddress: localStorage.getItem("shippingAddress")
       ? JSON.parse(localStorage.getItem("shippingAddress"))
       : { location: {} },
@@ -34,6 +32,15 @@ export const getProductWithId = createAsyncThunk(
   }
 );
 
+export const getCartItems = createAsyncThunk(
+  "cart/getCartItems",
+  async () => {
+    const result = await instance.post(`${url}/ecommerce/carts`);
+    console.log(result.data.response.items)
+    return result.data.response.items;;
+  }
+);
+
 export const basketSlice = createSlice({
   name: "basket",
   initialState,
@@ -42,25 +49,31 @@ export const basketSlice = createSlice({
       console.log(action.payload)
       console.log(state.cart.cartItems)
       const existingIndex = state.cart.cartItems.findIndex(
-        item => item.productId === action.payload.productId
+        item => item.cart_item_id === action.payload.cart_item_id
       );
 
       if (existingIndex >= 0) {
-
+        console.log("existing Index")
+        console.log(existingIndex)
+        console.log('----------------------')
         state.cart.cartItems[existingIndex] = {
           ...state.cart.cartItems[existingIndex],
-          cartQuantity: state.cart.cartItems[existingIndex].cartQuantity + 1,
+          qty: state.cart.cartItems[existingIndex].qty + 1,
         };
-        
+        console.log(state.cart.cartItems[existingIndex].cart_item_id)
 
+        instance.put(`${url}/ecommerce/carts/items/${state.cart.cartItems[existingIndex].cart_item_id}`,state.cart.cartItems[existingIndex]).then(result=>{
+          console.log(result)
+     })
+         
 
       } else {
         let skus;
        
-        let tempProductItem = { ...action.payload, cartQuantity: 1 };
+        let tempProductItem = { ...action.payload, qty: 1 };
         console.log(tempProductItem)
-        instance.get(`${url}/ecommerce/carts`).then(result=>{
-                console.log(result)
+        instance.post(`${url}/ecommerce/carts`).then(result=>{
+                console.log(result.data.response)
         })
         instance.get(`${url}/ecommerce/products/${tempProductItem.productId}`).then(result=>{
           skus=result.data.response.skus
@@ -75,7 +88,7 @@ export const basketSlice = createSlice({
               cart_id:611,
               sku:  skus_value,
               // price: cost,
-              qty: tempProductItem.cartQuantity
+              qty: tempProductItem.qty
           };
           console.log(cart)
           instance.post(`${url}/ecommerce/carts/items`,cart).then(result=>{
@@ -90,34 +103,52 @@ export const basketSlice = createSlice({
        
         state.cart.cartItems.push(tempProductItem);
       }
-      localStorage.setItem("cartItems", JSON.stringify(state.cart.cartItems));
+     // localStorage.setItem("cartItems", JSON.stringify(state.cart.cartItems));
     },
     decreaseBasket: (state, action) => {
       const itemIndex = state.cart.cartItems.findIndex(
-        item => item.productId === action.payload.productId
+        item => item.cart_item_id === action.payload.cart_item_id
       );
 
-      if (state.cart.cartItems[itemIndex].cartQuantity > 1) {
-        state.cart.cartItems[itemIndex].cartQuantity -= 1;
-      } else if (state.cart.cartItems[itemIndex].cartQuantity === 1) {
+      if (state.cart.cartItems[itemIndex].qty > 1) {
+        state.cart.cartItems[itemIndex].qty -= 1;
+                  
+        instance.put(`${url}/ecommerce/carts/items/${state.cart.cartItems[itemIndex].cart_item_id}`,state.cart.cartItems[itemIndex]).then(result=>{
+          console.log(result)
+     })
+      } else if (state.cart.cartItems[itemIndex].qty === 1) {
         const nextCartItems = state.cart.cartItems.filter(
-          item => item.productId !== action.payload.productId
+          item => item.cart_item_id !== action.payload.cart_item_id
         );
-
+       
+        instance.put(`${url}/ecommerce/carts/items/${state.cart.cartItems[itemIndex].cart_item_id}`,nextCartItems).then(result=>{
+          console.log(result)
+     })
         state.cart.cartItems = nextCartItems;
       }
 
       localStorage.setItem("cartItems", JSON.stringify(state.cart.cartItems));
+       state.cart.cartItems
+  
     },
     removeFromBasket: (state, action) => {
       state.cart.cartItems.map(cartItem => {
-        if (cartItem.productId === action.payload.productId) {
+        if (cartItem.cart_item_id === action.payload.cart_item_id) {
+          // const itemIndex = state.cart.cartItems.findIndex(
+          //   item => item.cart_item_id === action.payload.cart_item_id
+          // );
           const nextCartItems = state.cart.cartItems.filter(
-            item => item.productId !== cartItem.productId
+            item => item.cart_item_id !== cartItem.cart_item_id
           );
 
           state.cart.cartItems = nextCartItems;
+          // console.log(itemIndex)
+          console.log(state.cart.cartItems)
+          instance.delete(`${url}/ecommerce/carts/items/${cartItem.cart_item_id}`,state.cart.cartItems).then(result=>{
+            console.log(result)
+       })
         }
+        
         localStorage.setItem("cartItems", JSON.stringify(state.cart.cartItems));
         return state;
       });
@@ -192,9 +223,31 @@ export const basketSlice = createSlice({
           paymentMethod: '',
         },
       };
-    }
+    },
+  
 
   },
+  extraReducers: (builder) => {
+    builder.addCase(getCartItems.pending, (state, action) => {
+      
+      return { ...state, loading: true };
+    });
+    builder.addCase(getCartItems.fulfilled, (state, action) => {
+      
+      state.cart.cartItems = action.payload;
+      state.loading = false;
+    });
+    builder.addCase(getCartItems.rejected, (state, action) => {
+      
+      return {
+        ...state,
+        loading: "rejected",
+        error: action.payload,
+      };
+    });
+
+
+  }
 });
 
 export const {
