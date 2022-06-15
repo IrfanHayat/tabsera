@@ -10,14 +10,61 @@ import {
   TextField,
   CircularProgress,
 } from "@mui/material";
+import PropTypes from "prop-types";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
+//import Typography from '@mui/material/Typography';
+import Box from "@mui/material/Box";
 import Image from "next/image";
+import React, { useState } from "react";
+function a11yProps(index) {
+  return {
+    id: `simple-tab-${index}`,
+    "aria-controls": `simple-tabpanel-${index}`,
+  };
+}
+function Details({
+  productDetail,
+  productImage,
+  productAttributes,
+  addToCartHandler,
+  price,
+}) {
+  function TabPanel(props) {
+    const { children, value, index, ...other } = props;
 
-function Details({ productDetail,productImage, productAttributes,addToCartHandler,price }) {
- console.log(productDetail)
+    return (
+      <div
+        role="tabpanel"
+        hidden={value !== index}
+        id={`simple-tabpanel-${index}`}
+        aria-labelledby={`simple-tab-${index}`}
+        {...other}
+      >
+        {value === index && (
+          <Box sx={{ p: 3 }}>
+            <Typography>{children}</Typography>
+          </Box>
+        )}
+      </div>
+    );
+  }
+
+  TabPanel.propTypes = {
+    children: PropTypes.node,
+    index: PropTypes.number.isRequired,
+    value: PropTypes.number.isRequired,
+  };
+  const [value, setValue] = useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+  console.log(productDetail);
   return (
     <>
       <Grid container spacing={1}>
-        <Grid item md={6} xs={12}>
+        <Grid item md={12} xs={12}>
           {/* <CardMedia
             component="img"
             height="14"
@@ -26,27 +73,22 @@ function Details({ productDetail,productImage, productAttributes,addToCartHandle
             style={{ margin: "5px" }}
           /> */}
           {productImage && (
-        <Image
-        //  className={cx(styles.media, mediaStyles.root)}
-          src={productImage[0]}
-          alt="shirt"
-          width={700}
-          height={300}
-        ></Image>
-      )}
+            <Image
+              //  className={cx(styles.media, mediaStyles.root)}
+              src={productImage[0]}
+              alt="shirt"
+              width={1500}
+              height={300}
+            ></Image>
+          )}
         </Grid>
-        <Grid item md={3} xs={12}>
+        <Grid item md={12} xs={12}>
           <List>
             <ListItem>
-              <Typography component="h1" variant="h4">
-                Title
-              </Typography>
+              <Typography> {productDetail?.product_name}</Typography>
             </ListItem>
             <ListItem>
-              <Typography>Category: {productDetail?.category_name}</Typography>
-            </ListItem>
-            <ListItem>
-              <Typography>Brand: {productDetail?.product_name}</Typography>
+              <Typography>{productDetail?.category_name}</Typography>
             </ListItem>
             <ListItem>
               {/* <Rating value={5} readOnly></Rating> */}
@@ -55,11 +97,14 @@ function Details({ productDetail,productImage, productAttributes,addToCartHandle
               </Link>
             </ListItem>
             <ListItem>
-              <Typography> Description:{productDetail?.product_desc}</Typography>
+              <Typography>
+                {" "}
+                Description:{productDetail?.product_desc}
+              </Typography>
             </ListItem>
           </List>
         </Grid>
-        <Grid item md={3} xs={12}>
+        <Grid item md={12} xs={12}>
           <Card style={{ margin: "10px" }}>
             <List>
               <ListItem>
@@ -75,12 +120,12 @@ function Details({ productDetail,productImage, productAttributes,addToCartHandle
               <ListItem>
                 <Grid container>
                   <Grid item xs={6}>
-                     {
-                     productAttributes &&  productAttributes.map(result=>(
-                        <Typography variant="h6">{result.attribute_name}:{result.value}</Typography>
-                     ))  
-                    } 
-                    
+                    {productAttributes &&
+                      productAttributes.map(result => (
+                        <Typography variant="h6">
+                          {result.attribute_name}:{result.value}
+                        </Typography>
+                      ))}
                   </Grid>
                   <Grid item xs={6}>
                     <Typography variant="h6">
@@ -89,7 +134,36 @@ function Details({ productDetail,productImage, productAttributes,addToCartHandle
                   </Grid>
                 </Grid>
               </ListItem>
-              <ListItem>
+            </List>
+          </Card>
+        </Grid>
+        <Grid item md={12} xs={12}>
+          <Card style={{ margin: "10px" }}>
+            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+              <Tabs
+                value={value}
+                onChange={handleChange}
+                aria-label="basic tabs example"
+                variant="fullWidth"
+              >
+                <Tab label="Description" {...a11yProps(0)} />
+                <Tab label="Rating" {...a11yProps(1)} />
+                <Tab label="Store" {...a11yProps(2)} />
+              </Tabs>
+            </Box>
+            <TabPanel value={value} index={0}>
+              Description
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+              Rating
+            </TabPanel>
+            <TabPanel value={value} index={2}>
+              Store
+            </TabPanel>
+          </Card>
+        </Grid>
+        <Grid item md={12} xs={12}>
+        <ListItem>
                 <Button
                   fullWidth
                   variant="contained"
@@ -101,8 +175,7 @@ function Details({ productDetail,productImage, productAttributes,addToCartHandle
                   Add to cart
                 </Button>
               </ListItem>
-            </List>
-          </Card>
+
         </Grid>
       </Grid>
     </>

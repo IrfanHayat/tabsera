@@ -96,12 +96,13 @@ export const basketSlice = createSlice({
           }
 
         });
-        instance.post(`${url}/ecommerce/carts`).then(result=>{
-          console.log(result)
-     })
         // const result = await instance.get(`${url}/ecommerce/products/${temp}`);
        // console.log(result)
-       
+
+       instance.post(`${url}/ecommerce/carts`).then(result=>{
+        console.log(result.data.response)
+})
+      
         state.cart.cartItems.push(tempProductItem);
       }
      // localStorage.setItem("cartItems", JSON.stringify(state.cart.cartItems));
