@@ -6,10 +6,13 @@ import {
   Typography,
   Card,
   CardMedia,
+  
   Button,
   TextField,
   CircularProgress,
 } from "@mui/material";
+import { styled } from '@mui/material/styles';
+import Paper from '@mui/material/Paper';
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -30,6 +33,14 @@ function Details({
   addToCartHandler,
   price,
 }) {
+  const Item = styled(Paper)(({ theme }) => ({
+    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    ...theme.typography.body2,
+    padding: theme.spacing(1),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+  }));
+  
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -82,55 +93,69 @@ function Details({
             ></Image>
           )}
         </Grid>
-        <Grid item md={12} xs={12}>
-          <List>
+        </Grid>
+        <Grid container spacing={1}>
+          
+        
+          <Grid item md={6} xs={6}>
             <ListItem>
               <Typography> {productDetail?.product_name}</Typography>
             </ListItem>
+            </Grid>
+            <Grid item md={6} xs={6}>
             <ListItem>
+           
+              <Typography>Rs.{price}</Typography>
+            </ListItem>
+           
+            </Grid>
+            <Grid item md={6} xs={6}>
+            <ListItem>
+            
               <Typography>{productDetail?.category_name}</Typography>
             </ListItem>
+            </Grid>
+            <Grid item md={6} xs={6}>
             <ListItem>
-              {/* <Rating value={5} readOnly></Rating> */}
-              <Link href="#reviews">
-                <Typography>({productDetail?.totalReviewa} reviews)</Typography>
-              </Link>
+            
+              <Typography>out of stock</Typography>
             </ListItem>
+            </Grid>
+            <Grid item md={6} xs={6}>
             <ListItem>
-              <Typography>
-                {" "}
-                Description:{productDetail?.product_desc}
-              </Typography>
+              <Typography> Sold By:{productDetail?.merchant_name}</Typography>
             </ListItem>
-          </List>
-        </Grid>
+            </Grid>
+
+        
         <Grid item md={12} xs={12}>
           <Card style={{ margin: "10px" }}>
             <List>
               <ListItem>
                 <Grid container>
-                  <Grid item xs={6}>
-                    <Typography variant="h6">Price</Typography>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Typography variant="h6">{price}</Typography>
-                  </Grid>
-                </Grid>
-              </ListItem>
-              <ListItem>
-                <Grid container>
-                  <Grid item xs={6}>
+                  <Grid item xs={6} md={6}>
                     {productAttributes &&
                       productAttributes.map(result => (
-                        <Typography variant="h6">
+                        <Typography >
                           {result.attribute_name}:{result.value}
                         </Typography>
                       ))}
                   </Grid>
-                  <Grid item xs={6}>
-                    <Typography variant="h6">
-                      {/* {product.countInStock > 0 ? 'In stock' : 'Unavailable'} */}
-                    </Typography>
+                  
+                  <Grid item xs={6} md={6}>
+                    {productImage &&
+                      productImage.map(result => (
+                        
+                          <Image
+                            //  className={cx(styles.media, mediaStyles.root)}
+                            src={result}
+                            alt="shirt"
+                            width={200}
+                            height={300}
+                            
+                          ></Image>
+                         
+                      ))}
                   </Grid>
                 </Grid>
               </ListItem>
@@ -152,7 +177,7 @@ function Details({
               </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-              Description
+              {productDetail?.product_desc}
             </TabPanel>
             <TabPanel value={value} index={1}>
               Rating
@@ -162,8 +187,11 @@ function Details({
             </TabPanel>
           </Card>
         </Grid>
-        <Grid item md={12} xs={12}>
-        <ListItem>
+        <Grid container spacing={1}>
+          <Grid item xs={6} md={6}>
+            <Item>
+              {" "}
+              <ListItem>
                 <Button
                   fullWidth
                   variant="contained"
@@ -175,6 +203,11 @@ function Details({
                   Add to cart
                 </Button>
               </ListItem>
+            </Item>
+          </Grid>
+          <Grid item xs={6} md={6}>
+            <Item>
+              {" "}
               <ListItem>
                 <Button
                   fullWidth
@@ -184,11 +217,11 @@ function Details({
                     addToCartHandler(productDetail);
                   }}
                 >
-                  
+                  Buy Now
                 </Button>
               </ListItem>
-               
-          
+            </Item>
+          </Grid>
         </Grid>
       </Grid>
     </>

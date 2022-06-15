@@ -52,6 +52,7 @@ export default function ActionAreaCard({
           alt="shirt"
           width={245}
           height={200}
+         // loading='eager'
         ></Image>
       )}
        {product?.category_image && (
