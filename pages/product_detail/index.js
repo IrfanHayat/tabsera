@@ -4,10 +4,16 @@ import { useSelector, useDispatch } from "react-redux";
 import { addToBasket } from "../../slice/basketSlice";
 import { useRouter, withRouter } from "next/router";
 import { getProductWithId, getProduct } from "../../slice/productSlice";
+import { getMerchantWithId } from "../../slice/merchantSlice";
+
 function product_detail(props) {
   const { filterProductData } = useSelector((state) => state.product);
-  
   const { productData } = useSelector((state) => state.product);
+
+  const { merchantData } = useSelector((state) => state.merchant);
+
+  console.log("mdata= ", merchantData);
+  // console.log("merchant ", merchantData);
   console.log("---------------------------------------------------");
   console.log("filterProductData", filterProductData);
   console.log("---------------------------------------------------");
@@ -23,11 +29,15 @@ function product_detail(props) {
   let dispatch = useDispatch();
   let [filterData, setFilterData] = useState({});
 
-  useEffect(() => {
+  console.log("merchant  id ", filterProductData.merchant_id);
 
+  useEffect(() => {
     // console.log(router.query.product_name);
+     console.log("merchant ", filterProductData.merchant_id);
+    
     dispatch(getProduct());
     dispatch(getProductWithId(router?.query?.productId));
+    dispatch(getMerchantWithId(filterProductData.merchant_id));
 
     if (router.query.product_name) {
       const productObj = productData.filter((result) => {
@@ -42,7 +52,7 @@ function product_detail(props) {
           // isfreeShipping: result.is_free_shipping,
           // productCost: result.cost,
           category_name: result.categoryName,
-          //merchantId: result.merchant_id,
+          merchant_id: result.merchantId,
           //merchanName: result.merchant_name,
           //productDescription: result.product_desc,
           //productCost: cost,
@@ -54,7 +64,7 @@ function product_detail(props) {
       });
       setFilterData(productWithName[0]);
     }
-  }, []);
+  }, [filterProductData.merchant_id]);
 
   const skuData = (sku) => {
     sku?.map((result) => {
