@@ -24,16 +24,18 @@ function cart() {
   console.log(cartItems);
   console.log("-----------");
   useEffect(()=>{
-    console.log(cartItems)
-    dispatch(getCartItems())
-    dispatch(getTotals())
-  },[])
+    if(cartItems){
+      dispatch(getCartItems())
+      //dispatch(getTotals())
+    }
+    
+  },[cartItems])
 
-  const cartData = (cartItem) => {
-         return cartItem
-  };
+  // const cartData = (cartItem) => {
+  //        return cartItem
+  // };
 
-  useMemo(() => cartData(cartItems), [cartItems]);
+  // useMemo(() => cartData(cartItems), [cartItems]);
 
   const handleAddToCart = (item) => {
     dispatch(addToBasket(item));
