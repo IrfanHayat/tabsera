@@ -6,13 +6,12 @@ import {
   Typography,
   Card,
   CardMedia,
-  
   Button,
   TextField,
   CircularProgress,
 } from "@mui/material";
-import { styled } from '@mui/material/styles';
-import Paper from '@mui/material/Paper';
+import { styled } from "@mui/material/styles";
+import Paper from "@mui/material/Paper";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
@@ -34,13 +33,13 @@ function Details({
   price,
 }) {
   const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
+    backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
     ...theme.typography.body2,
     padding: theme.spacing(1),
-    textAlign: 'center',
+    textAlign: "center",
     color: theme.palette.text.secondary,
   }));
-  
+
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -93,41 +92,34 @@ function Details({
             ></Image>
           )}
         </Grid>
+      </Grid>
+      <Grid container spacing={1}>
+        <Grid item md={6} xs={6}>
+          <ListItem>
+            <Typography> {productDetail?.product_name}</Typography>
+          </ListItem>
         </Grid>
-        <Grid container spacing={1}>
-          
-        
-          <Grid item md={6} xs={6}>
-            <ListItem>
-              <Typography> {productDetail?.product_name}</Typography>
-            </ListItem>
-            </Grid>
-            <Grid item md={6} xs={6}>
-            <ListItem>
-           
-              <Typography>Rs.{price}</Typography>
-            </ListItem>
-           
-            </Grid>
-            <Grid item md={6} xs={6}>
-            <ListItem>
-            
-              <Typography>{productDetail?.category_name}</Typography>
-            </ListItem>
-            </Grid>
-            <Grid item md={6} xs={6}>
-            <ListItem>
-            
-              <Typography>out of stock</Typography>
-            </ListItem>
-            </Grid>
-            <Grid item md={6} xs={6}>
-            <ListItem>
-              <Typography> Sold By:{productDetail?.merchant_name}</Typography>
-            </ListItem>
-            </Grid>
+        <Grid item md={6} xs={6}>
+          <ListItem>
+            <Typography>Rs.{price}</Typography>
+          </ListItem>
+        </Grid>
+        <Grid item md={6} xs={6}>
+          <ListItem>
+            <Typography>{productDetail?.category_name}</Typography>
+          </ListItem>
+        </Grid>
+        <Grid item md={6} xs={6}>
+          <ListItem>
+            <Typography>out of stock</Typography>
+          </ListItem>
+        </Grid>
+        <Grid item md={6} xs={6}>
+          <ListItem>
+            <Typography> Sold By:{productDetail?.merchant_name}</Typography>
+          </ListItem>
+        </Grid>
 
-        
         <Grid item md={12} xs={12}>
           <Card style={{ margin: "10px" }}>
             <List>
@@ -135,26 +127,23 @@ function Details({
                 <Grid container>
                   <Grid item xs={6} md={6}>
                     {productAttributes &&
-                      productAttributes.map(result => (
-                        <Typography >
+                      productAttributes.map((result) => (
+                        <Typography>
                           {result.attribute_name}:{result.value}
                         </Typography>
                       ))}
                   </Grid>
-                  
+
                   <Grid item xs={6} md={6}>
                     {productImage &&
-                      productImage.map(result => (
-                        
-                          <Image
-                            //  className={cx(styles.media, mediaStyles.root)}
-                            src={result}
-                            alt="shirt"
-                            width={200}
-                            height={300}
-                            
-                          ></Image>
-                         
+                      productImage.map((result) => (
+                        <Image
+                          //  className={cx(styles.media, mediaStyles.root)}
+                          src={result}
+                          alt="shirt"
+                          width={200}
+                          height={300}
+                        ></Image>
                       ))}
                   </Grid>
                 </Grid>
