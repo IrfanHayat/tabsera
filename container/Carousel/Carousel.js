@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import Carousel from "react-elastic-carousel";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
@@ -21,6 +21,9 @@ export default function CarouselApp({
 }) {
   //console.log("Hellow");
   //console.log(product);
+  let [productView,setProuctView]=useState(false)
+  let [categoryView,setCategoryView]=useState(false)
+  let [cartView,setCartView]=useState(false)
   return (
     <div>
       <Typography variant="h5">{heading}</Typography>
@@ -41,6 +44,9 @@ export default function CarouselApp({
             viewProduct={viewProduct}
             addToCartHandler={addToCartHandler}
             viewCategory={viewCategory}
+            productView={productView}
+            categoryView={categoryView}
+            cartView={cartView}
           ></ActionAreaCard>
         ))}
       </Carousel>

@@ -175,7 +175,20 @@ function Details({
                   Add to cart
                 </Button>
               </ListItem>
-
+              <ListItem>
+                <Button
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  onClick={() => {
+                    addToCartHandler(productDetail);
+                  }}
+                >
+                  
+                </Button>
+              </ListItem>
+               
+          
         </Grid>
       </Grid>
     </>

@@ -31,6 +31,10 @@ export default function ActionAreaCard({
   viewProduct,
   viewCategory,
   addToCartHandler,
+  productView,
+  categoryView,
+  cartView
+
 }) {
   const styles = useStyles();
   const textCardContentStyles = useN04TextInfoContentStyles();
@@ -44,6 +48,7 @@ export default function ActionAreaCard({
         <Image
           className={cx(styles.media, mediaStyles.root)}
           src={product?.productImage}
+          onClick={(e) => viewProduct(product)}
           alt="shirt"
           width={245}
           height={200}
@@ -53,6 +58,7 @@ export default function ActionAreaCard({
         <Image
           className={cx(styles.media, mediaStyles.root)}
           src={product?.category_image}
+          onClick={(e) => viewCategory(product.category_id)}
           alt="shirt"
           width={245}
           height={200}
@@ -80,9 +86,9 @@ export default function ActionAreaCard({
           // }
         />
       </CardContent>
-      <CardActions>
+      {/* <CardActions>
         {
-          product.productName? 
+          product.productName && productView? 
            <IconButton
            key={product.id}
            onClick={(e) => viewProduct(product)}
@@ -94,7 +100,7 @@ export default function ActionAreaCard({
         }
         
         {
-           product?.category_name && (
+          categoryView && product.category_name && (
            <IconButton
           key={product.id}
           onClick={(e) => viewCategory(product.category_id)}
@@ -107,7 +113,7 @@ export default function ActionAreaCard({
         )}
         {
 
-product.productName? 
+product.productName && cartView? 
             <IconButton
             key={product.id}
             onClick={(e) => addToCartHandler(product)}
@@ -119,7 +125,7 @@ product.productName?
 
         }
         
-      </CardActions>
+      </CardActions> */}
     </Card>
     // </Box>
   );
