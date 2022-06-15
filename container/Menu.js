@@ -41,6 +41,8 @@ import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import NavBar from "./NavBar";
+import {useGetAllProductsQuery} from '../RTK/productApi'
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
@@ -116,8 +118,13 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
+
 export default function PersistentDrawerLeft() {
-  const product = useSelector((state) => state.product.productData);
+  const { data, isLoading, isFetching, isError } = useGetAllProductsQuery()
+  console.log(data)
+   const product = useSelector((state) => state.product.productData);
+  
+ 
   const featureProduct = useSelector((state) => state.product.featureProductData);
   const category = useSelector((state) => state.category.categoryData);
 
@@ -162,13 +169,17 @@ export default function PersistentDrawerLeft() {
   }
 
   useEffect(() => {
+ 
+  console.log(data)
     dispatch(getFeatureProduct());
     
     dispatch(getCategory());
-
-    var groupedCategory = groupArrayOfObjects(product, "categoryName");
-    setGroupedProduct(groupedCategory);
-  }, [product && product]);
+    if(data){
+      var groupedCategory = groupArrayOfObjects(data.response, "categoryName");
+      setGroupedProduct(groupedCategory);
+    }
+    
+  }, [product , data ]);
 
   const categoryData = (category) => {
     let result1 = category && category.map((result) => {
@@ -260,7 +271,7 @@ export default function PersistentDrawerLeft() {
             />
           </Item>
         </Grid> */}
-        {console.log(groupProduct)}
+        
         {/* <Grid item xs={12} md={12}>
           <Item>
             <CarouselApp
