@@ -38,16 +38,16 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Modal from "./Modal/Modal";
 import Chip from "@mui/material/Chip";
 import SignInModal from "./Login/SignIn";
+import Badge from "@mui/material/Badge";
 
 const drawerWidth = 10;
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: 24,
-  borderColor: "black",
-  backgroundColor: alpha(theme.palette.common.black, 0.15),
+  backgroundColor: "#fafafa",
   "&:hover": {
-    backgroundColor: alpha(theme.palette.common.black, 0.25),
+    // backgroundColor: alpha(theme.palette.common.black, 0.25),
   },
 
   width: "100%",
@@ -65,10 +65,11 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+  color: "black",
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
+  // color: "inherit",
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
     // vertical padding + font size from searchIcon
@@ -94,8 +95,10 @@ const NavLink = styled("a")(() => ({
 
 export default function NavBar(props) {
   const category = useSelector((state) => state.category.categoryData);
-  const  cartTotalQuantity  = useSelector((state) => state.basket.cart.cartTotalQuantity );
-  console.log(cartTotalQuantity)
+  const cartTotalQuantity = useSelector(
+    (state) => state.basket.cart.cartTotalQuantity
+  );
+  console.log(cartTotalQuantity);
   const [open, setOpen] = React.useState(false);
   let { t } = useTranslation();
   let router = useRouter();
@@ -246,17 +249,18 @@ export default function NavBar(props) {
           Shop By Categories
         </Typography>
       </Toolbar>
-      {categoriesData && categoriesData.map((text, index) => (
-        <List>
-          <Link href={`/carousel`}>
-            <ListItem key={text.category_id} disablePadding>
-              {/* <AccountBoxIcon /> */}
-              <ListItemText primary={text.category_name} />
-            </ListItem>
-          </Link>
-          <Divider />
-        </List>
-      ))}
+      {categoriesData &&
+        categoriesData.map((text, index) => (
+          <List>
+            <Link href={`/carousel`}>
+              <ListItem key={text.category_id} disablePadding>
+                {/* <AccountBoxIcon /> */}
+                <ListItemText primary={text.category_name} />
+              </ListItem>
+            </Link>
+            <Divider />
+          </List>
+        ))}
     </Box>
   );
 
@@ -428,10 +432,11 @@ export default function NavBar(props) {
       {renderMenu}{" "}
       <AppBar
         sx={{
-          bgcolor: "#bdbdbd",
-          // height: "65%",
+          // bgcolor: "#bdbdbd",
+          // height: "95%",
+          bgcolor: "#fafafa",
           justifyContent: "center",
-          padding: "5px",
+          // padding: "5px",
         }}
         position="static"
       >
@@ -447,7 +452,7 @@ export default function NavBar(props) {
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "inherit",
+              color: "black",
               textDecoration: "none",
             }}
           >
@@ -466,7 +471,7 @@ export default function NavBar(props) {
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".1rem",
-              color: "inherit",
+              color: "black",
               textDecoration: "none",
             }}
           >
@@ -474,7 +479,7 @@ export default function NavBar(props) {
           </Typography>
           <Box component="div" sx={{ flexGrow: 1 }} />
 
-          <IconButton
+          {/* <IconButton
             size="large"
             edge="end"
             aria-label="account of current user"
@@ -484,7 +489,7 @@ export default function NavBar(props) {
             color="inherit"
           >
             <AccountCircle />
-          </IconButton>
+          </IconButton> */}
 
           {/* <Modal
             buttonText="Sign IN"
@@ -500,8 +505,44 @@ export default function NavBar(props) {
           {/* <Button onClick={() => setShowLogin(true)}>Sign In</Button> */}
           <SignInModal show={showLogin} close={() => setShowLogin(false)} />
         </Toolbar>
+
+        <Toolbar>
+          <ThemeProvider>
+            <Chip
+              onClick={toggleDrawer}
+              icon={<MenuIcon />}
+              label="Shop By Category"
+            />
+          </ThemeProvider>
+
+          <Box component="div" sx={{ flexGrow: 1 }} alignItems="center">
+            <Search sx={{ border: 1, borderColor: "text.primary" }}>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="Search…"
+                inputProps={{ "aria-label": "search" }}
+              />
+            </Search>
+          </Box>
+
+          <IconButton
+            size="large"
+            edge="end"
+            aria-label="account of current user"
+            aria-controls={menuId}
+            aria-haspopup="true"
+            color="primary"
+          >
+            <Badge color="error" badgeContent={9} max={99}>
+              <ShoppingCartOutlinedIcon />
+              {cartTotalQuantity}
+            </Badge>
+          </IconButton>
+        </Toolbar>
       </AppBar>
-      <AppBar
+      {/* <AppBar
         sx={{
           bgcolor: "#fafafa",
           // height: "65%",
@@ -542,7 +583,7 @@ export default function NavBar(props) {
             {cartTotalQuantity}
           </IconButton>
         </Toolbar>
-      </AppBar>
+      </AppBar> */}
       <Box
         component="nav"
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}

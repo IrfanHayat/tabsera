@@ -47,29 +47,31 @@ export default function ActionAreaCard({
           alt="shirt"
           width={245}
           height={200}
+          // loading="eager"
         ></Image>
       )}
-       {product?.category_image && (
+      {product?.category_image && (
         <Image
           className={cx(styles.media, mediaStyles.root)}
           src={product?.category_image}
           alt="shirt"
           width={245}
           height={200}
+          // loading="eager"
         ></Image>
       )}
-       {product?.category_name && (
-      <CardContent>
-        <TextInfoContent
-          // classes={textCardContentStyles}
-          
-          heading={product.category_name}
-          // body={
-          //   "That year, collection of songs, review melodies, memories full, this is a long and warm journey"
-          // }
-        />
-      </CardContent>
-       )}
+      {product?.category_name && (
+        <CardContent>
+          <TextInfoContent
+            // classes={textCardContentStyles}
+
+            heading={product.category_name}
+            // body={
+            //   "That year, collection of songs, review melodies, memories full, this is a long and warm journey"
+            // }
+          />
+        </CardContent>
+      )}
       <CardContent>
         <TextInfoContent
           // classes={textCardContentStyles}
@@ -81,44 +83,41 @@ export default function ActionAreaCard({
         />
       </CardContent>
       <CardActions>
-        {
-          product.productName? 
-           <IconButton
-           key={product.id}
-           onClick={(e) => viewProduct(product)}
-           color="primary"
-           aria-label="add to shopping cart"
-         >
-           <PreviewOutlinedIcon />
-         </IconButton>:''
-        }
-        
-        {
-           product?.category_name && (
-           <IconButton
-          key={product.id}
-          onClick={(e) => viewCategory(product.category_id)}
-          color="primary"
-          aria-label="add to shopping cart"
-        >
-          <PreviewOutlinedIcon />
-        </IconButton>
-
+        {product.productName ? (
+          <IconButton
+            key={product.id}
+            onClick={(e) => viewProduct(product)}
+            color="primary"
+            aria-label="add to shopping cart"
+          >
+            <PreviewOutlinedIcon />
+          </IconButton>
+        ) : (
+          ""
         )}
-        {
 
-product.productName? 
-            <IconButton
+        {product?.category_name && (
+          <IconButton
+            key={product.id}
+            onClick={(e) => viewCategory(product.category_id)}
+            color="primary"
+            aria-label="add to shopping cart"
+          >
+            <PreviewOutlinedIcon />
+          </IconButton>
+        )}
+        {product.productName ? (
+          <IconButton
             key={product.id}
             onClick={(e) => addToCartHandler(product)}
             color="primary"
             aria-label="add to shopping cart"
-            >
+          >
             <AddShoppingCartIcon />
-            </IconButton>:''
-
-        }
-        
+          </IconButton>
+        ) : (
+          ""
+        )}
       </CardActions>
     </Card>
     // </Box>

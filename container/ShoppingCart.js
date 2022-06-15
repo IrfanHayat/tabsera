@@ -21,7 +21,10 @@ import {
 } from "@mui/material";
 
 import { withRouter } from "next/router";
-
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
+import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
+import IndeterminateCheckBoxOutlinedIcon from "@mui/icons-material/IndeterminateCheckBoxOutlined";
 function CartScreen({
   productCartData,
   removeItemHandler,
@@ -63,11 +66,12 @@ function CartScreen({
                   <TableCell align="right">Quantity</TableCell>
                   <TableCell align="right">Price</TableCell>
                   <TableCell align="right">Action</TableCell>
+                  <TableCell align="center">Price of Items</TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {productCartData &&
-                  productCartData.map(item => (
+                  productCartData.map((item) => (
                     <TableRow key={item.name}>
                       <TableCell>
                         <NextLink href={`/product/${item.name}`} passHref>
@@ -103,47 +107,82 @@ function CartScreen({
                           href={`/product_detail?product_name=${item.name}`}
                           passHref
                         >
-                          <Link>
-                            <Typography>{item.name}</Typography>
-                          </Link>
+                          {/* <Link> */}
+                          <Typography
+                            variant="body"
+                            style={{ textDecoration: "none " }}
+                          >
+                            {item.name}
+                          </Typography>
+                          {/* </Link> */}
                         </NextLink>
                       </TableCell>
-                      <TableCell align="right">
-                        <Button
+                      <TableCell align="center">
+                        {/* <Button
                           variant="contained"
                           onClick={() => handleDecreaseCart(item)}
                         >
                           -
-                        </Button>
-                        <Typography className="count">{item.qty}</Typography>
-                        <Button
+                        </Button> */}
+                        <IconButton
+                          onClick={() => handleDecreaseCart(item)}
+                          aria-label="delete item"
+                          size="large"
+                          variant="contained"
+                          sx={{ color: "text.secondary" }}
+                          // onClick={() => removeItemHandler(item)}
+                        >
+                          <IndeterminateCheckBoxOutlinedIcon />
+                        </IconButton>
+                        <Typography className="count" align="center">
+                          {item.qty}
+                        </Typography>
+
+                        <IconButton
+                          aria-label="delete item"
+                          size="large"
+                          variant="contained"
+                          sx={{ color: "text.secondary" }}
+                          onClick={() => handleAddToCart(item)}
+                        >
+                          <AddBoxOutlinedIcon />
+                        </IconButton>
+
+                        {/* <Button
                           variant="contained"
                           onClick={() => handleAddToCart(item)}
                         >
                           +
-                        </Button>
+                        </Button> */}
                       </TableCell>
                       <TableCell align="right">${item.price}</TableCell>
                       <TableCell align="right">
-                        <Button
+                        {/* <Button
                           variant="contained"
                           //  color="secondary"
                           onClick={() => removeItemHandler(item)}
                         >
                           x
-                        </Button>
+                        </Button> */}
+
+                        <IconButton
+                          aria-label="delete"
+                          size="large"
+                          variant="contained"
+                          color="error"
+                          onClick={() => removeItemHandler(item)}
+                        >
+                          <DeleteIcon fontSize="inherit" />
+                        </IconButton>
                       </TableCell>
                       <TableCell>
                         <Card>
                           <List>
                             <ListItem>
                               <ListItemText>
-                                Sub Total 
-                                 {item.qty}
-                                item : $
-                                {   item.qty * item.price
-                                 
-                                }
+                                Sub Total
+                                {item.qty}
+                                item : ${item.qty * item.price}
                               </ListItemText>
                             </ListItem>
                           </List>
@@ -159,9 +198,14 @@ function CartScreen({
 
         <Grid item md={3} xs={12}>
           <Card>
+            <Typography variant="h6" align="center">
+              {" "}
+              Order Summary
+            </Typography>
+
             <List>
-              <ListItem>
-                <ListItemText>
+              {/* <ListItem> */}
+              {/* <ListItemText>
                   Total (
                   {productCartData &&
                     productCartData.reduce((a, c) => a + c.qty, 0)}{" "}
@@ -169,7 +213,26 @@ function CartScreen({
                   {productCartData &&
                     productCartData.reduce((a, c) => a + c.qty * c.price, 0)}
                 </ListItemText>
+              </ListItem> */}
+
+              <ListItem>
+                <ListItemText>Total Items </ListItemText>
+
+                <ListItemText>
+                  {productCartData &&
+                    productCartData.reduce((a, c) => a + c.qty, 0)}{" "}
+                </ListItemText>
               </ListItem>
+
+              <ListItem>
+                <ListItemText> Total Price </ListItemText>
+                <ListItemText>
+                  {/* Total Price = $ */}$
+                  {productCartData &&
+                    productCartData.reduce((a, c) => a + c.qty * c.price, 0)}
+                </ListItemText>
+              </ListItem>
+
               <ListItem>
                 <Button
                   onClick={checkoutHandler}
