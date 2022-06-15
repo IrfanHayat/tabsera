@@ -3,6 +3,7 @@ import {
   Link,
   List,
   ListItem,
+  ListItemText,
   Typography,
   Card,
   CardMedia,
@@ -19,6 +20,15 @@ import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import Image from "next/image";
 import React, { useState } from "react";
+import Carousel from "react-elastic-carousel";
+
+const breakPoints = [
+  { width: 1, itemsToShow: 1 },
+  { width: 550, itemsToShow: 2 },
+  { width: 768, itemsToShow: 3 },
+  { width: 1200, itemsToShow: 4 },
+];
+
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
@@ -74,7 +84,9 @@ function Details({
   return (
     <>
       <Grid container spacing={1}>
-        <Grid item md={12} xs={12}>
+        <Grid item md={3}></Grid>
+
+        <Grid item md={6} xs={12}>
           {/* <CardMedia
             component="img"
             height="14"
@@ -88,13 +100,40 @@ function Details({
               src={productImage[0]}
               alt="shirt"
               width={1500}
-              height={300}
+              height={500}
             ></Image>
           )}
         </Grid>
+        <Grid item md={3}></Grid>
       </Grid>
+
       <Grid container spacing={1}>
-        <Grid item md={6} xs={6}>
+        {/* <Grid item md={3}></Grid> */}
+        <Grid item md={12}>
+          <ListItem>
+            <ListItemText sx={{ fontWeight: "bold" }}>
+              {productDetail?.product_name}{" "}
+            </ListItemText>
+
+            <ListItemText sx={{ fontWeight: "bold" }}>Rs.{price}</ListItemText>
+          </ListItem>
+
+          <ListItem>
+            <ListItemText sx={{ color: "error.main" }}>
+              {" "}
+              {productDetail?.category_name}{" "}
+            </ListItemText>
+            <ListItemText sx={{ color: "success.main" }}>
+              out of stock
+            </ListItemText>
+          </ListItem>
+        </Grid>
+        {/* <Grid item md={3}></Grid> */}
+      </Grid>
+
+      <Grid container spacing={1}>
+        {/* <Grid item md={6} xs={6}>
+
           <ListItem>
             <Typography> {productDetail?.product_name}</Typography>
           </ListItem>
@@ -103,8 +142,8 @@ function Details({
           <ListItem>
             <Typography>Rs.{price}</Typography>
           </ListItem>
-        </Grid>
-        <Grid item md={6} xs={6}>
+        </Grid> */}
+        {/* <Grid item md={6} xs={6}>
           <ListItem>
             <Typography>{productDetail?.category_name}</Typography>
           </ListItem>
@@ -118,39 +157,49 @@ function Details({
           <ListItem>
             <Typography> Sold By:{productDetail?.merchant_name}</Typography>
           </ListItem>
-        </Grid>
+        </Grid> */}
 
         <Grid item md={12} xs={12}>
-          <Card style={{ margin: "10px" }}>
+          {/* <Card style={{ margin: "10px" }}>
             <List>
-              <ListItem>
-                <Grid container>
-                  <Grid item xs={6} md={6}>
-                    {productAttributes &&
-                      productAttributes.map((result) => (
-                        <Typography>
-                          {result.attribute_name}:{result.value}
-                        </Typography>
-                      ))}
-                  </Grid>
+              <ListItem> */}
+          <Grid container>
+            <Grid item xs={6} md={6}>
+              {productAttributes &&
+                productAttributes.map((result) => (
+                  <Typography>
+                    {result.attribute_name}:{result.value}
+                  </Typography>
+                ))}
+            </Grid>
 
-                  <Grid item xs={6} md={6}>
-                    {productImage &&
-                      productImage.map((result) => (
-                        <Image
-                          //  className={cx(styles.media, mediaStyles.root)}
-                          src={result}
-                          alt="shirt"
-                          width={200}
-                          height={300}
-                        ></Image>
-                      ))}
-                  </Grid>
-                </Grid>
-              </ListItem>
+            <Grid item xs={6} md={6}>
+              <Carousel
+                // breakPoints={breakPoints}
+                disableArrowsOnEnd={false}
+                // showArrows={false}
+                pagination={false}
+                // showEmptySlots={true}
+                itemsToShow={2}
+              >
+                {productImage &&
+                  productImage.map((result) => (
+                    <Image
+                      //  className={cx(styles.media, mediaStyles.root)}
+                      src={result}
+                      alt="shirt"
+                      width={200}
+                      height={300}
+                    ></Image>
+                  ))}
+              </Carousel>
+            </Grid>
+          </Grid>
+          {/* </ListItem>
             </List>
-          </Card>
+          </Card> */}
         </Grid>
+
         <Grid item md={12} xs={12}>
           <Card style={{ margin: "10px" }}>
             <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -176,6 +225,7 @@ function Details({
             </TabPanel>
           </Card>
         </Grid>
+
         <Grid container spacing={1}>
           <Grid item xs={6} md={6}>
             <Item>
