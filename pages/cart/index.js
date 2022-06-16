@@ -1,4 +1,4 @@
-import React, { useMemo,useState, useEffect } from "react";
+import React, {useCallback, useMemo,useState, useEffect } from "react";
 // import ShoppingCart from "../../component/ShoppingCart";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -17,26 +17,19 @@ import ShoppingCart from "../../container/ShoppingCart";
 function cart() {
   const {cartTotalQuantity,cartTotalAmount} = useSelector((state) => state.basket);
   const {cartItems}=useSelector((state)=>state.basket.cart)
+  
   let router = useRouter();
   let dispatch = useDispatch();
 
   console.log("product");
   console.log(cartItems);
   console.log("-----------");
-  useEffect(()=>{
-    if(cartItems){
-      dispatch(getCartItems())
-      //dispatch(getTotals())
-    }
-    
-  },[cartItems])
-
-  // const cartData = (cartItem) => {
-  //        return cartItem
-  // };
-
-  // useMemo(() => cartData(cartItems), [cartItems]);
-
+ useEffect(()=>{
+   if(cartItems)
+   dispatch(getCartItems())
+   
+ },[cartItems])
+ 
   const handleAddToCart = (item) => {
     dispatch(addToBasket(item));
   };

@@ -1,3 +1,4 @@
+
 import { createAsyncThunk,createSlice,current } from "@reduxjs/toolkit";
 import localStorage from "localStorage";
 import { useSelector, useDispatch } from "react-redux";
@@ -71,10 +72,10 @@ export const basketSlice = createSlice({
        
         let tempProductItem = { ...action.payload, qty: 1 };
         console.log(tempProductItem)
-        instance.post(`${url}/ecommerce/carts`).then(result=>{
-                console.log(result.data.response)
-        })
-        instance.get(`${url}/ecommerce/products/${tempProductItem.productId}`).then(result=>{
+        // instance.post(`${url}/ecommerce/carts`).then(result=>{
+        //         console.log(result.data.response)
+        // })
+        instance.get(`${url}/ecommerce/products/${tempProductItem.product_id}`).then(result=>{
           skus=result.data.response.skus
             console.log(skus)     
           if(skus.length>0){

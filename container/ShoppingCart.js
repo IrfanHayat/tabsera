@@ -29,6 +29,7 @@ function CartScreen({
   handleDecreaseCart,
   checkoutHandler,
 }) {
+  
   console.log("productCartData");
   console.log(productCartData);
   console.log("-----------------------");
@@ -67,7 +68,7 @@ function CartScreen({
               </TableHead>
               <TableBody>
                 {productCartData &&
-                  productCartData.map(item => (
+                  productCartData?.map(item => (
                     <TableRow key={item.name}>
                       <TableCell>
                         <NextLink href={`/product/${item.name}`} passHref>

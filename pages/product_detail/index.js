@@ -80,45 +80,11 @@ function product_detail(props) {
 
   const addToCartHandler = (product) => {
     if (product.product_id) {
-      console.log(product);
-      let cost;
-      let image;
-      let sku;
+     
+      
 
-      product.skus.map((result) => {
-        sku = result.sku;
-      });
-
-      product.skus.map((result) => {
-        cost = result.cost;
-      });
-
-      product.product_images.map((result) => {
-        image = result.media_images[0];
-      });
-
-      console.log(cost);
-      let obj = {
-        productId: product.product_id,
-        productName: product.product_name,
-        productImage: image,
-        isfreeShipping: product.is_free_shipping,
-        // productCost: product.cost,
-        categoryName: product.category_name,
-        merchantId: product.merchant_id,
-        merchanName: product.merchant_name,
-        productDescription: product.product_desc,
-        productCost: cost,
-        skuId: sku,
-        // productCost: product.skus[0],
-        // averageRating: product.averageRating,
-      };
-
-      dispatch(addToBasket(obj));
-      //      router.push({
-      // //       pathname: "/cart",
-      // //       query: { sub_category: item },
-      // //     });
+      dispatch(addToBasket(product));
+     
       router.push("/cart");
     } else {
       dispatch(addToBasket(product));

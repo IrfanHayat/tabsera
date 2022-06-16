@@ -132,8 +132,7 @@ function Details({
       </Grid>
 
       <Grid container spacing={1}>
-        {/* <Grid item md={6} xs={6}>
-
+        <Grid item md={6} xs={6}>
           <ListItem>
             <Typography> {productDetail?.product_name}</Typography>
           </ListItem>
@@ -142,8 +141,8 @@ function Details({
           <ListItem>
             <Typography>Rs.{price}</Typography>
           </ListItem>
-        </Grid> */}
-        {/* <Grid item md={6} xs={6}>
+        </Grid>
+        <Grid item md={6} xs={6}>
           <ListItem>
             <Typography>{productDetail?.category_name}</Typography>
           </ListItem>
@@ -157,7 +156,7 @@ function Details({
           <ListItem>
             <Typography> Sold By:{productDetail?.merchant_name}</Typography>
           </ListItem>
-        </Grid> */}
+        </Grid>
 
         <Grid item md={12} xs={12}>
           {/* <Card style={{ margin: "10px" }}>
@@ -166,7 +165,7 @@ function Details({
           <Grid container>
             <Grid item xs={6} md={6}>
               {productAttributes &&
-                productAttributes.map((result) => (
+                productAttributes.map(result => (
                   <Typography>
                     {result.attribute_name}:{result.value}
                   </Typography>
@@ -182,8 +181,8 @@ function Details({
                 // showEmptySlots={true}
                 itemsToShow={2}
               >
-                {productImage &&
-                  productImage.map((result) => (
+                {productDetail &&
+                  productDetail.skus?.map(results=>(results.sku_images).map(result => (
                     <Image
                       //  className={cx(styles.media, mediaStyles.root)}
                       src={result}
@@ -191,7 +190,7 @@ function Details({
                       width={200}
                       height={300}
                     ></Image>
-                  ))}
+                  )))}
               </Carousel>
             </Grid>
           </Grid>
