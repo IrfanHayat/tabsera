@@ -31,7 +31,7 @@ import ReceiptIcon from "@mui/icons-material/Receipt";
 import AdUnitsIcon from "@mui/icons-material/AdUnits";
 import GppGoodOutlinedIcon from "@mui/icons-material/GppGoodOutlined";
 import { addToBasket } from "../slice/basketSlice";
-import { getProduct,getFeatureProduct } from "../slice/productSlice";
+import { getProduct, getFeatureProduct } from "../slice/productSlice";
 import { getCategory } from "../slice/categorySlice";
 import NewCarousel from "./Carousel/NewCarousel";
 import CarouselApp from "./Carousel/Carousel";
@@ -41,7 +41,7 @@ import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import NavBar from "./NavBar";
-import {useGetAllProductsQuery} from '../RTK/productApi'
+import { useGetAllProductsQuery } from "../RTK/productApi";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -118,14 +118,14 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-
 export default function PersistentDrawerLeft() {
-  const { data, isLoading, isFetching, isError } = useGetAllProductsQuery()
-  console.log(data)
-   const product = useSelector((state) => state.product.productData);
-  
- 
-  const featureProduct = useSelector((state) => state.product.featureProductData);
+  const { data, isLoading, isFetching, isError } = useGetAllProductsQuery();
+  console.log(data);
+  const product = useSelector((state) => state.product.productData);
+
+  const featureProduct = useSelector(
+    (state) => state.product.featureProductData
+  );
   const category = useSelector((state) => state.category.categoryData);
 
   let [groupProduct, setGroupedProduct] = useState();
@@ -150,8 +150,6 @@ export default function PersistentDrawerLeft() {
       query: { sub_category: item },
     });
   };
-  
- 
 
   const addToCartHandler = (product) => {
     dispatch(addToBasket(product));
@@ -169,29 +167,31 @@ export default function PersistentDrawerLeft() {
   }
 
   useEffect(() => {
- 
-  console.log(data)
+    console.log(data);
     dispatch(getFeatureProduct());
-    
+
     dispatch(getCategory());
-    if(data){
+    if (data) {
       var groupedCategory = groupArrayOfObjects(data.response, "categoryName");
       setGroupedProduct(groupedCategory);
     }
-    
-  }, [product , data ]);
+  }, [product, data]);
 
   const categoryData = (category) => {
-    let result1 = category && category.map((result) => {
-      if (result.child.length > 0) {
-        return result.child;
-      }
-    });
-    let result3 = category && category.map((result) => {
-      if (result.child.length > 0) {
-        return result.category_name;
-      }
-    });
+    let result1 =
+      category &&
+      category.map((result) => {
+        if (result.child.length > 0) {
+          return result.child;
+        }
+      });
+    let result3 =
+      category &&
+      category.map((result) => {
+        if (result.child.length > 0) {
+          return result.category_name;
+        }
+      });
 
     let result2 = result1 && result1.filter((result) => result != undefined);
     let result4 = result3 && result3.filter((result) => result != undefined);
@@ -252,9 +252,7 @@ export default function PersistentDrawerLeft() {
           <Item>
             <CarouselApp
               heading="Featured Products"
-              product={
-                featureProduct
-              }
+              product={featureProduct}
               viewProduct={viewProduct}
               addToCartHandler={addToCartHandler}
             />
@@ -271,7 +269,7 @@ export default function PersistentDrawerLeft() {
             />
           </Item>
         </Grid> */}
-        
+
         {/* <Grid item xs={12} md={12}>
           <Item>
             <CarouselApp
@@ -285,7 +283,7 @@ export default function PersistentDrawerLeft() {
         {groupProduct &&
           Object.keys(groupProduct).map((key) => (
             <Grid item xs={12} md={12}>
-              <Item>
+              <Item key={key}>
                 <CarouselApp
                   heading={key}
                   product={groupProduct[key]}

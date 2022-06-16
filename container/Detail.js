@@ -37,6 +37,7 @@ function a11yProps(index) {
 }
 function Details({
   productDetail,
+  merchantDetail,
   productImage,
   productAttributes,
   addToCartHandler,
@@ -126,6 +127,9 @@ function Details({
             <ListItemText sx={{ color: "success.main" }}>
               out of stock
             </ListItemText>
+          </ListItem>
+          <ListItem>
+            <Typography> Sold By:{productDetail?.merchant_name}</Typography>
           </ListItem>
         </Grid>
         {/* <Grid item md={3}></Grid> */}
@@ -221,8 +225,22 @@ function Details({
               Rating
             </TabPanel>
             <TabPanel value={value} index={2}>
-              Store
+              {/* {productDetail?.merchant_name} */}
+              <List>
+                <ListItem>Name : {merchantDetail?.merchant_name}</ListItem>
+              </List>
+              <List>
+                <ListItem>Location : {merchantDetail?.city}</ListItem>
+              </List>
+              <List>
+                <ListItem>
+                  Joined Tabsera : {merchantDetail?.created_date}
+                </ListItem>
+              </List>
             </TabPanel>
+            {/* <TabPanel value={value} index={2}>
+              {merchantDetail?.city}
+            </TabPanel> */}
           </Card>
         </Grid>
 

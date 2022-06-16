@@ -17,7 +17,7 @@ function product_detail(props) {
   console.log("---------------------------------------------------");
   console.log("filterProductData", filterProductData);
   console.log("---------------------------------------------------");
-  console.log("productData", productData);
+  // console.log("productData", productData);
   console.log("---------------------------------------------------");
 
   let [productImage, setProductImage] = useState();
@@ -28,13 +28,12 @@ function product_detail(props) {
   console.log(filterProductData);
   let dispatch = useDispatch();
   let [filterData, setFilterData] = useState({});
-
-  console.log("merchant  id ", filterProductData.merchant_id);
+  console.log("type ", typeof filterProductData.merchant_id);
 
   useEffect(() => {
     // console.log(router.query.product_name);
-     console.log("merchant ", filterProductData.merchant_id);
-    
+    console.log("merchant  idddd", merchantData.merchant_id);
+
     dispatch(getProduct());
     dispatch(getProductWithId(router?.query?.productId));
     dispatch(getMerchantWithId(filterProductData.merchant_id));
@@ -132,6 +131,7 @@ function product_detail(props) {
         productDetail={
           Object.keys(filterData).length > 0 ? filterData : filterProductData
         }
+        merchantDetail={merchantData}
         addToCartHandler={addToCartHandler}
         productImage={productImage}
         productAttributes={productAttributes}
