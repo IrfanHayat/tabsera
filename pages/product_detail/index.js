@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 import Details from "../../container/Detail";
 import { useSelector, useDispatch } from "react-redux";
-import { addToBasket } from "../../slice/basketSlice";
+import { addToBasket, addToCart } from "../../slice/basketSlice";
 import { useRouter, withRouter } from "next/router";
 import { getProductWithId, getProduct } from "../../slice/productSlice";
 import { getMerchantWithId } from "../../slice/merchantSlice";
@@ -82,8 +82,8 @@ function product_detail(props) {
     if (product.product_id) {
      
       
-
-      dispatch(addToBasket(product));
+      dispatch(addToCart(product))
+     // dispatch(addToBasket(product));
      
       router.push("/cart");
     } else {

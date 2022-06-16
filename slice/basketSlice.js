@@ -1,4 +1,6 @@
 
+
+
 import { createAsyncThunk,createSlice,current } from "@reduxjs/toolkit";
 import localStorage from "localStorage";
 import { useSelector, useDispatch } from "react-redux";
@@ -6,7 +8,9 @@ import instance from "../helper/axios/httpRequest";
 import { url, setHeaders } from "../helper/axios/config";
 const initialState = {
   cart: {
-    cartItems: [],
+    cartItems: localStorage.getItem("cartItems")
+    ? JSON.parse(localStorage.getItem("cartItems"))
+    : [],
     shippingAddress: localStorage.getItem("shippingAddress")
       ? JSON.parse(localStorage.getItem("shippingAddress"))
       : { location: {} },
@@ -24,6 +28,7 @@ const initialState = {
 };
 
 
+
 export const getProductWithId = createAsyncThunk(
   "cart/getProductWithId",
   async (id) => {
@@ -32,6 +37,61 @@ export const getProductWithId = createAsyncThunk(
     return result.data.response;;
   }
 );
+
+export const addToCart = createAsyncThunk(
+  "cart/addCart",
+  async (product)=>{
+   let result=await instance.post(`${url}/ecommerce/carts`)
+    console.log(result.data.response.items)
+    console.log(product)
+    console.log("Hell")
+
+
+     if(result.length>0 && result.data.response.items.length>0){
+      let existingIndex=result.data.response.items.findIndex(
+        item => item.cart_item_id === product.cart_item_id
+      );
+      if(existingIndex){
+        result.data.response.items[existingIndex]={
+          ...result.data.response.items[existingIndex],
+          qty: result.data.response.items[existingIndex].qty + 1,
+        };
+        await instance.put(`${url}/ecommerce/carts/items/${result.data.response.items[existingIndex].cart_item_id}`,result.data.response.items[existingIndex])
+        return result.data.response
+      }
+     
+      
+    }else{
+      let tempProductItem = { ...product, qty: 1 };
+      console.log(tempProductItem)
+      let result2=await instance.get(`${url}/ecommerce/products/${tempProductItem.product_id}`)
+    // console.log()
+     let skus = result2.data.response.skus
+      console.log(skus)     
+    if(skus.length>0){
+      let skus_value;
+      skus.map(result=>{
+        skus_value=result.sku;
+      })
+     console.log(skus_value)
+      let cart = {
+        cart_id:611,
+        sku:  skus_value,
+        // price: cost,
+        qty: tempProductItem.qty
+    };
+  
+      
+    console.log(cart)
+   await instance.post(`${url}/ecommerce/carts/items`,cart)
+      
+  }
+  let result3=await  instance.post(`${url}/ecommerce/carts`)
+      return result3.data.response.items  
+    }  
+  }
+)
+
 
 export const getCartItems = createAsyncThunk(
   "cart/getCartItems",
@@ -72,9 +132,9 @@ export const basketSlice = createSlice({
        
         let tempProductItem = { ...action.payload, qty: 1 };
         console.log(tempProductItem)
-        // instance.post(`${url}/ecommerce/carts`).then(result=>{
-        //         console.log(result.data.response)
-        // })
+        instance.post(`${url}/ecommerce/carts`).then(result=>{
+                console.log(result.data.response)
+        })
         instance.get(`${url}/ecommerce/products/${tempProductItem.product_id}`).then(result=>{
           skus=result.data.response.skus
             console.log(skus)     
@@ -103,8 +163,7 @@ export const basketSlice = createSlice({
        instance.post(`${url}/ecommerce/carts`).then(result=>{
         console.log(result.data.response)
 })
-      
-        state.cart.cartItems.push(tempProductItem);
+     state.cart.cartItems
       }
      // localStorage.setItem("cartItems", JSON.stringify(state.cart.cartItems));
     },
@@ -253,7 +312,23 @@ export const basketSlice = createSlice({
         error: action.payload,
       };
     });
-
+    builder.addCase(addToCart.pending, (state, action) => {
+      
+      return { ...state, loading: true };
+    });
+    builder.addCase(addToCart.fulfilled, (state, action) => {
+      console.log(action.payload)
+      state.cart.cartItems = action.payload;
+      state.loading = false;
+    });
+    builder.addCase(addToCart.rejected, (state, action) => {
+      
+      return {
+        ...state,
+        loading: "rejected",
+        error: action.payload,
+      };
+    });
 
   }
 });

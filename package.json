@@ -30,6 +30,7 @@
     "js-cookie": "^3.0.1",
     "js-crypto-aes": "^1.0.4",
     "localStorage": "^1.0.4",
+    "lodash": "^4.17.21",
     "next": "12.1.6",
     "next-auth": "^4.3.4",
     "next-translate": "^1.4.0",

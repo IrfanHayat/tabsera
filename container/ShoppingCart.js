@@ -23,6 +23,7 @@ import {
 import { withRouter } from "next/router";
 
 function CartScreen({
+  heading,
   productCartData,
   removeItemHandler,
   handleAddToCart,
@@ -37,7 +38,7 @@ function CartScreen({
   return (
     <>
       <Typography component="h4" variant="h5">
-        Shopping Cart
+        {heading}
       </Typography>
 
       <Grid container spacing={1}>
