@@ -22,6 +22,12 @@ import Image from "next/image";
 import React, { useState } from "react";
 import Carousel from "react-elastic-carousel";
 
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
+import ImageListItemBar from "@mui/material/ImageListItemBar";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
+import IconButton from "@mui/material/IconButton";
+import ShareIcon from "@mui/icons-material/Share";
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
   { width: 550, itemsToShow: 2 },
@@ -36,6 +42,7 @@ function a11yProps(index) {
   };
 }
 function Details({
+  viewProduct,
   productDetail,
   productImage,
   productAttributes,
@@ -95,13 +102,35 @@ function Details({
             style={{ margin: "5px" }}
           /> */}
           {productImage && (
-            <Image
-              //  className={cx(styles.media, mediaStyles.root)}
-              src={productImage[0]}
-              alt="shirt"
-              width={1500}
-              height={500}
-            ></Image>
+            <ImageListItem>
+              <Image
+                width={1500}
+                height={500}
+                src={productImage[0]}
+                loading="lazy"
+              />
+              <ImageListItemBar
+                title="shirt"
+                subtitle={<span>by: J. </span>}
+                position="below"
+                actionIcon={
+                  <IconButton
+                    sx={{ color: "black" }}
+                    // aria-label={`star ${item.title}`}
+                  >
+                    <ShareIcon />
+                  </IconButton>
+                }
+              />
+            </ImageListItem>
+
+            // <Image
+            //   //  className={cx(styles.media, mediaStyles.root)}
+            //   src={productImage[0]}
+            //   alt="shirt"
+            // width={1500}
+            // height={500}
+            // ></Image>
           )}
         </Grid>
         <Grid item md={3}></Grid>
@@ -165,7 +194,7 @@ function Details({
           <Grid container>
             <Grid item xs={6} md={6}>
               {productAttributes &&
-                productAttributes.map(result => (
+                productAttributes.map((result) => (
                   <Typography>
                     {result.attribute_name}:{result.value}
                   </Typography>
@@ -182,15 +211,18 @@ function Details({
                 itemsToShow={2}
               >
                 {productDetail &&
-                  productDetail.skus?.map(results=>(results.sku_images).map(result => (
-                    <Image
-                      //  className={cx(styles.media, mediaStyles.root)}
-                      src={result}
-                      alt="shirt"
-                      width={200}
-                      height={300}
-                    ></Image>
-                  )))}
+                  productDetail.skus?.map((results) =>
+                    results.sku_images.map((result) => (
+                      <Image
+                        //  className={cx(styles.media, mediaStyles.root)}
+                        onClick={(e) => console.log(productDetail.skus[3])}
+                        src={result}
+                        alt="shirt"
+                        width={200}
+                        height={300}
+                      ></Image>
+                    ))
+                  )}
               </Carousel>
             </Grid>
           </Grid>

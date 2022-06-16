@@ -33,8 +33,7 @@ export default function ActionAreaCard({
   addToCartHandler,
   productView,
   categoryView,
-  cartView
-
+  cartView,
 }) {
   const styles = useStyles();
   const textCardContentStyles = useN04TextInfoContentStyles();
@@ -52,10 +51,10 @@ export default function ActionAreaCard({
           alt="shirt"
           width={245}
           height={200}
-         // loading='eager'
+          // loading='eager'
         ></Image>
       )}
-       {product?.category_image && (
+      {product?.category_image && (
         <Image
           className={cx(styles.media, mediaStyles.root)}
           src={product?.category_image}
@@ -65,18 +64,18 @@ export default function ActionAreaCard({
           height={200}
         ></Image>
       )}
-       {product?.category_name && (
-      <CardContent>
-        <TextInfoContent
-          // classes={textCardContentStyles}
-          
-          heading={product.category_name}
-          // body={
-          //   "That year, collection of songs, review melodies, memories full, this is a long and warm journey"
-          // }
-        />
-      </CardContent>
-       )}
+      {product?.category_name && (
+        <CardContent>
+          <TextInfoContent
+            // classes={textCardContentStyles}
+
+            heading={product.category_name}
+            // body={
+            //   "That year, collection of songs, review melodies, memories full, this is a long and warm journey"
+            // }
+          />
+        </CardContent>
+      )}
       <CardContent>
         <TextInfoContent
           // classes={textCardContentStyles}
