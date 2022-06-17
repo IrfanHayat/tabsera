@@ -47,7 +47,7 @@ function groupArrayOfObjects(list){
    return grouped
 }
 
-console.log(groupProductData)
+
 
   
 

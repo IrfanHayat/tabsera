@@ -21,6 +21,8 @@ import Box from "@mui/material/Box";
 import Image from "next/image";
 import React, { useState } from "react";
 import Carousel from "react-elastic-carousel";
+import NavBar from "./NavBar";
+
 
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
@@ -42,6 +44,7 @@ function Details({
   addToCartHandler,
   price,
 }) {
+  console.log(productDetail)
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
     ...theme.typography.body2,
@@ -49,6 +52,11 @@ function Details({
     textAlign: "center",
     color: theme.palette.text.secondary,
   }));
+  let [skusProduct,setSkusProduct]=useState()
+  const viewVariantsProduct=(result)=>{
+    console.log(result)
+     setSkusProduct(result)
+  }
 
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -83,6 +91,7 @@ function Details({
   console.log(productDetail);
   return (
     <>
+    <NavBar/>
       <Grid container spacing={1}>
         <Grid item md={3}></Grid>
 
@@ -94,15 +103,40 @@ function Details({
             alt="green iguana"
             style={{ margin: "5px" }}
           /> */}
-          {productImage && (
+           <Carousel
+                // breakPoints={breakPoints}
+              //  disableArrowsOnEnd={false}
+                // showArrows={false}
+                pagination={true}
+                // showEmptySlots={true}
+                itemsToShow={2}
+                showArrows={false}
+              >
+                     {
+            
+            skusProduct?
+            skusProduct.sku_images.map(result => (
+              <Image
+                //  className={cx(styles.media, mediaStyles.root)}
+                src={result}
+                alt="shirt"
+                width={1500}
+                height={500}
+              ></Image>
+            ))
+            :
+            productImage && (
             <Image
-              //  className={cx(styles.media, mediaStyles.root)}
-              src={productImage[0]}
-              alt="shirt"
-              width={1500}
-              height={500}
-            ></Image>
-          )}
+            //  className={cx(styles.media, mediaStyles.root)}
+            src={productImage[0]}
+            alt="shirt"
+            width={1500}
+            height={500}
+          ></Image>)
+            }
+
+              </Carousel>
+        
         </Grid>
         <Grid item md={3}></Grid>
       </Grid>
@@ -115,7 +149,7 @@ function Details({
               {productDetail?.product_name}{" "}
             </ListItemText>
 
-            <ListItemText sx={{ fontWeight: "bold" }}>Rs.{price}</ListItemText>
+            <ListItemText sx={{ fontWeight: "bold" }}>Rs.{skusProduct?skusProduct.cost:price}</ListItemText>
           </ListItem>
 
           <ListItem>
@@ -139,7 +173,7 @@ function Details({
         </Grid>
         <Grid item md={6} xs={6}>
           <ListItem>
-            <Typography>Rs.{price}</Typography>
+            <Typography>Rs.{skusProduct?skusProduct.cost:price}</Typography>
           </ListItem>
         </Grid>
         <Grid item md={6} xs={6}>
@@ -164,8 +198,12 @@ function Details({
               <ListItem> */}
           <Grid container>
             <Grid item xs={6} md={6}>
-              {productAttributes &&
-                productAttributes.map(result => (
+              {skusProduct ?
+                skusProduct.attributes.map(result => (
+                  <Typography>
+                    {result.attribute_name}:{result.value}
+                  </Typography>
+                )): productAttributes.map(result => (
                   <Typography>
                     {result.attribute_name}:{result.value}
                   </Typography>
@@ -182,15 +220,18 @@ function Details({
                 itemsToShow={2}
               >
                 {productDetail &&
-                  productDetail.skus?.map(results=>(results.sku_images).map(result => (
+                  productDetail.skus?.map(results=>
                     <Image
                       //  className={cx(styles.media, mediaStyles.root)}
-                      src={result}
+                      onClick={() => {
+                        viewVariantsProduct(results);
+                      }}
+                      src={results.sku_images[0]}
                       alt="shirt"
                       width={200}
                       height={300}
                     ></Image>
-                  )))}
+                  )}
               </Carousel>
             </Grid>
           </Grid>

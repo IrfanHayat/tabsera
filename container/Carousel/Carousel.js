@@ -38,7 +38,7 @@ export default function CarouselApp({
       >
         {/* {content} */}
 
-        {product?.map((item) => (
+        {product && product.map((item) => (
           <ActionAreaCard
             product={item}
             viewProduct={viewProduct}
