@@ -31,7 +31,7 @@ import ReceiptIcon from "@mui/icons-material/Receipt";
 import AdUnitsIcon from "@mui/icons-material/AdUnits";
 import GppGoodOutlinedIcon from "@mui/icons-material/GppGoodOutlined";
 import { addToBasket } from "../slice/basketSlice";
-import { getProduct,getFeatureProduct } from "../slice/productSlice";
+import { getProduct, getFeatureProduct } from "../slice/productSlice";
 import { getCategory } from "../slice/categorySlice";
 import NewCarousel from "./Carousel/NewCarousel";
 import CarouselApp from "./Carousel/Carousel";
@@ -150,8 +150,6 @@ export default function PersistentDrawerLeft() {
       query: { sub_category: item },
     });
   };
-  
- 
 
   const addToCartHandler = (product) => {
     dispatch(addToBasket(product));
@@ -172,7 +170,7 @@ export default function PersistentDrawerLeft() {
  
   console.log(data)
     dispatch(getFeatureProduct());
-    
+
     dispatch(getCategory());
     if(data){
       var groupedCategory = groupArrayOfObjects(data.response, "categoryName");
@@ -182,16 +180,20 @@ export default function PersistentDrawerLeft() {
   }, [product , data ]);
 
   const categoryData = (category) => {
-    let result1 = category && category.map((result) => {
-      if (result.child.length > 0) {
-        return result.child;
-      }
-    });
-    let result3 = category && category.map((result) => {
-      if (result.child.length > 0) {
-        return result.category_name;
-      }
-    });
+    let result1 =
+      category &&
+      category.map((result) => {
+        if (result.child.length > 0) {
+          return result.child;
+        }
+      });
+    let result3 =
+      category &&
+      category.map((result) => {
+        if (result.child.length > 0) {
+          return result.category_name;
+        }
+      });
 
     let result2 = result1 && result1.filter((result) => result != undefined);
     let result4 = result3 && result3.filter((result) => result != undefined);
@@ -227,7 +229,7 @@ export default function PersistentDrawerLeft() {
 
   return (
     <Box>
-      <NavBar />
+      {/* <NavBar /> */}
       <Box
         // open={open}
         component="main"
@@ -252,9 +254,7 @@ export default function PersistentDrawerLeft() {
           <Item>
             <CarouselApp
               heading="Featured Products"
-              product={
-                featureProduct
-              }
+              product={featureProduct}
               viewProduct={viewProduct}
               addToCartHandler={addToCartHandler}
             />

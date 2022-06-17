@@ -12,8 +12,9 @@ import {
   getTotals,
   removeFromBasket,
 } from "../../slice/basketSlice";
-
+import { useState } from "react";
 import { useRouter, withRouter } from "next/router";
+import AddPagination from "../../container/AddPagination/AddPagination";
 
 const index = () => {
   const product = useSelector((state) => state.product.productData);
@@ -21,12 +22,15 @@ const index = () => {
   let router = useRouter();
   let dispatch = useDispatch();
 
+  const [page, setPage] = useState(1);
+
   React.useEffect(async () => {
     await dispatch(getProduct());
   }, []);
+
   const viewProduct = (item) => {
     router.push({
-      pathname: "/product_detail",
+      pathname: `/product_detail${page}`,
       query: { productId: item.productId },
     });
   };
@@ -46,6 +50,8 @@ const index = () => {
             addToCartHandler={addToCartHandler}
           ></ActionAreaCard>
         ))}
+
+        <AddPagination />
       </Grid>
     </Container>
   );

@@ -27,10 +27,8 @@ export default function Product() {
       </Grid>
 
       <Grid item xs={12} md={12}>
-        <Item>
-          <Footer></Footer>
-        </Item>
-        </Grid>
+        <Item>{/* <Footer></Footer> */}</Item>
+      </Grid>
       {/* </Grid> */}
     </Box>
   );
