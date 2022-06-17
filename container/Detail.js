@@ -24,6 +24,12 @@ import Carousel from "react-elastic-carousel";
 import NavBar from "./NavBar";
 
 
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
+import ImageListItemBar from "@mui/material/ImageListItemBar";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
+import IconButton from "@mui/material/IconButton";
+import ShareIcon from "@mui/icons-material/Share";
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
   { width: 550, itemsToShow: 2 },
@@ -38,6 +44,7 @@ function a11yProps(index) {
   };
 }
 function Details({
+  viewProduct,
   productDetail,
   productImage,
   productAttributes,
