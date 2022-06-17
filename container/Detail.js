@@ -88,7 +88,7 @@ function Details({
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-  console.log(productDetail);
+ 
   return (
     <>
     <NavBar/>
