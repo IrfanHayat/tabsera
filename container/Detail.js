@@ -179,7 +179,7 @@ function Details({
         <Grid item md={2}></Grid>
         <Grid item md={4}>
           <ListItemText sx={{ color: "success.main" }}>
-            out of stock
+            In Stock
           </ListItemText>
         </Grid>
       </Grid>
