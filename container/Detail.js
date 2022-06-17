@@ -21,7 +21,7 @@ import Box from "@mui/material/Box";
 import Image from "next/image";
 import React, { useState } from "react";
 import Carousel from "react-elastic-carousel";
-import NavBar from "./NavBar";
+//import NavBar from "./NavBar";
 
 
 import ImageList from "@mui/material/ImageList";
@@ -98,7 +98,7 @@ function Details({
  
   return (
     <>
-    <NavBar/>
+   
       <Grid container spacing={1}>
         <Grid item md={3}></Grid>
 
