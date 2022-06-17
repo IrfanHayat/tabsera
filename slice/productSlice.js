@@ -22,9 +22,11 @@ export const getProductWithId = createAsyncThunk(
 export const getFeatureProduct = createAsyncThunk(
   "product/getFeatureProduct",
   async () => {
-    const result = await instance.get(`${url}/ecommerce/products/featured/shop`);
-    
-    return result.data.response;;
+    const result = await instance.get(
+      `${url}/ecommerce/products/featured/shop`
+    );
+
+    return result.data.response;
   }
 );
 
@@ -41,8 +43,8 @@ const addProduct = createSlice({
   name: "product",
   initialState: {
     productData: [],
-    filterProductData:{},
-    featureProductData:[],
+    filterProductData: {},
+    featureProductData: [],
     filterProductData: {},
     loading: false,
     error: null,
@@ -82,7 +84,7 @@ const addProduct = createSlice({
       return { ...state, loading: true };
     });
     builder.addCase(getFeatureProduct.fulfilled, (state, action) => {
-      console.log(action.payload)
+      console.log(action.payload);
       state.featureProductData = action.payload;
       state.loading = false;
     });

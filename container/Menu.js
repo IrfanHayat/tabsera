@@ -41,7 +41,7 @@ import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import NavBar from "./NavBar";
-import {useGetAllProductsQuery} from '../RTK/productApi'
+import { useGetAllProductsQuery } from "../RTK/productApi";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -118,14 +118,14 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   justifyContent: "flex-end",
 }));
 
-
 export default function PersistentDrawerLeft() {
-  const { data, isLoading, isFetching, isError } = useGetAllProductsQuery()
-  console.log(data)
-   const product = useSelector((state) => state.product.productData);
-  
- 
-  const featureProduct = useSelector((state) => state.product.featureProductData);
+  const { data, isLoading, isFetching, isError } = useGetAllProductsQuery();
+  console.log(data);
+  const product = useSelector((state) => state.product.productData);
+
+  const featureProduct = useSelector(
+    (state) => state.product.featureProductData
+  );
   const category = useSelector((state) => state.category.categoryData);
 
   let [groupProduct, setGroupedProduct] = useState();
@@ -167,17 +167,15 @@ export default function PersistentDrawerLeft() {
   }
 
   useEffect(() => {
- 
-  console.log(data)
+    console.log(data);
     dispatch(getFeatureProduct());
 
     dispatch(getCategory());
-    if(data){
+    if (data) {
       var groupedCategory = groupArrayOfObjects(data.response, "categoryName");
       setGroupedProduct(groupedCategory);
     }
-    
-  }, [product , data ]);
+  }, [product, data]);
 
   const categoryData = (category) => {
     let result1 =
@@ -271,7 +269,7 @@ export default function PersistentDrawerLeft() {
             />
           </Item>
         </Grid> */}
-        
+
         {/* <Grid item xs={12} md={12}>
           <Item>
             <CarouselApp
@@ -285,7 +283,7 @@ export default function PersistentDrawerLeft() {
         {groupProduct &&
           Object.keys(groupProduct).map((key) => (
             <Grid item xs={12} md={12}>
-              <Item>
+              <Item key={key}>
                 <CarouselApp
                   heading={key}
                   product={groupProduct[key]}
