@@ -11,8 +11,9 @@ function product_detail(props) {
   const { productData } = useSelector((state) => state.product);
 
   const { merchantData } = useSelector((state) => state.merchant);
+  const { shipmentData } = useSelector((state) => state.shipments);
 
-  console.log("mdata= ", merchantData);
+  console.log("new shipmentData= ", shipmentData);
   // console.log("merchant ", merchantData);
   console.log("---------------------------------------------------");
   console.log("filterProductData", filterProductData);
@@ -33,8 +34,8 @@ function product_detail(props) {
 
   useEffect(() => {
     // console.log(router.query.product_name);
-     console.log("merchant ", filterProductData.merchant_id);
-    
+    console.log("merchant ", filterProductData.merchant_id);
+
     dispatch(getProduct());
     dispatch(getProductWithId(router?.query?.productId));
     dispatch(getMerchantWithId(filterProductData.merchant_id));
@@ -80,11 +81,8 @@ function product_detail(props) {
 
   const addToCartHandler = (product) => {
     if (product.product_id) {
-     
-      
-
       dispatch(addToBasket(product));
-     
+
       router.push("/cart");
     } else {
       dispatch(addToBasket(product));
