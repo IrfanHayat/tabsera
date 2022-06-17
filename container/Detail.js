@@ -23,7 +23,6 @@ import React, { useState } from "react";
 import Carousel from "react-elastic-carousel";
 //import NavBar from "./NavBar";
 
-
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
@@ -50,6 +49,7 @@ function Details({
   productImage,
   productAttributes,
   addToCartHandler,
+  checkoutHandler,
   price,
 }) {
   console.log("----------Product Detail")
@@ -102,11 +102,10 @@ function Details({
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
- 
+
   return (
     <>
-   
-      <Grid container spacing={1}>
+      <Grid container spacing={1} sx={{ paddingTop: 2 }}>
         <Grid item md={3}></Grid>
 
         <Grid item md={6} xs={12}>
@@ -117,77 +116,99 @@ function Details({
             alt="green iguana"
             style={{ margin: "5px" }}
           /> */}
-           <Carousel
-                // breakPoints={breakPoints}
-              //  disableArrowsOnEnd={false}
-                // showArrows={false}
-                pagination={true}
-                // showEmptySlots={true}
-                itemsToShow={2}
-                showArrows={false}
-              >
-                     {
-            
-            skusProduct?
-            skusProduct.sku_images.map(result => (
-              <Image
-                //  className={cx(styles.media, mediaStyles.root)}
-                src={result}
-                alt="shirt"
-                width={1500}
-                height={500}
-              ></Image>
-            ))
-            :
-            productImage && (
-            <Image
-            //  className={cx(styles.media, mediaStyles.root)}
-            src={productImage[0]}
-            alt="shirt"
-            width={1500}
-            height={500}
-          ></Image>)
-            }
+          <Typography variant="h6">Product Details</Typography>
 
-              </Carousel>
-        
+          <Carousel
+            // breakPoints={breakPoints}
+            //  disableArrowsOnEnd={false}
+            // showArrows={false}
+            // pagination={true}
+            pagination={false}
+            // showEmptySlots={true}
+            // itemsToShow={2}
+            showArrows={false}
+          >
+            {skusProduct
+              ? skusProduct.sku_images.map((result) => (
+                  <Image
+                    //  className={cx(styles.media, mediaStyles.root)}
+                    src={result}
+                    alt="shirt"
+                    width={1500}
+                    height={500}
+                  ></Image>
+                ))
+              : productImage && (
+                  <Image
+                    //  className={cx(styles.media, mediaStyles.root)}
+                    src={productImage[0]}
+                    alt="shirt"
+                    width={1500}
+                    height={500}
+                  ></Image>
+                )}
+          </Carousel>
         </Grid>
         <Grid item md={3}></Grid>
       </Grid>
 
       <Grid container spacing={1}>
-        {/* <Grid item md={3}></Grid> */}
-        <Grid item md={12}>
-          <ListItem>
-            <ListItemText sx={{ fontWeight: "bold" }}>
-              {productDetail?.product_name}{" "}
-            </ListItemText>
-
-            <ListItemText sx={{ fontWeight: "bold" }}>Rs.{skusProduct?skusProduct.cost:price}</ListItemText>
-          </ListItem>
-
-          <ListItem>
-            <ListItemText sx={{ color: "error.main" }}>
-              {" "}
-              {productDetail?.category_name}{" "}
-            </ListItemText>
-            <ListItemText sx={{ color: "success.main" }}>
-              out of stock
-            </ListItemText>
-          </ListItem>
+        <Grid item md={3}></Grid>
+        <Grid item md={3} sm={6}>
+          <ListItemText sx={{ fontWeight: "bold" }}>
+            {productDetail?.product_name}{" "}
+          </ListItemText>
         </Grid>
-        {/* <Grid item md={3}></Grid> */}
+        <Grid item md={2} sm={3}></Grid>
+        <Grid item md={4} sm={6}>
+          <ListItemText sx={{ fontWeight: "bold" }}>
+            Rs.{skusProduct ? skusProduct.cost : price}
+          </ListItemText>
+        </Grid>
       </Grid>
 
       <Grid container spacing={1}>
-        <Grid item md={6} xs={6}>
+        {/* <ListItem>   </ListItem> */}
+        <Grid item md={3}></Grid>
+        <Grid item md={3}>
+          <ListItemText sx={{ color: "error.main" }}>
+            {productDetail?.category_name}{" "}
+          </ListItemText>
+        </Grid>
+        <Grid item md={2}></Grid>
+        <Grid item md={4}>
+          <ListItemText sx={{ color: "success.main" }}>
+            out of stock
+          </ListItemText>
+        </Grid>
+      </Grid>
+
+      {/* ---------------------------------------------------------------------------------------- */}
+
+      <Grid container spacing={1}>
+        <Grid item md={3}></Grid>
+        <Grid item md={3}>
+          <ListItemText>Sold By: {productDetail?.merchant_name}</ListItemText>
+        </Grid>
+        <Grid item md={2}></Grid>
+        <Grid item md={4}></Grid>
+
+        {/* <ListItem>
+            <Typography> Sold By:{productDetail?.merchant_name}</Typography>
+          </ListItem> */}
+      </Grid>
+      {/* <Grid item md={3}></Grid> */}
+      {/* </Grid> */}
+
+      <Grid container spacing={1}>
+        {/* <Grid item md={6} xs={6}>
           <ListItem>
             <Typography> {productDetail?.product_name}</Typography>
           </ListItem>
         </Grid>
         <Grid item md={6} xs={6}>
           <ListItem>
-            <Typography>Rs.{skusProduct?skusProduct.cost:price}</Typography>
+            <Typography>Rs.{skusProduct ? skusProduct.cost : price}</Typography>
           </ListItem>
         </Grid>
         <Grid item md={6} xs={6}>
@@ -199,61 +220,61 @@ function Details({
           <ListItem>
             <Typography>out of stock</Typography>
           </ListItem>
-        </Grid>
-        <Grid item md={6} xs={6}>
+        </Grid> */}
+        {/* <Grid item md={6} xs={6}>
           <ListItem>
             <Typography> Sold By:{productDetail?.merchant_name}</Typography>
           </ListItem>
-        </Grid>
+        </Grid> */}
 
-        <Grid item md={12} xs={12}>
-          {/* <Card style={{ margin: "10px" }}>
+        {/* <Grid item md={12} xs={12}> */}
+        {/* <Card style={{ margin: "10px" }}>
             <List>
               <ListItem> */}
-          <Grid container>
-            <Grid item xs={6} md={6}>
-              {skusProduct ?
-                skusProduct.attributes.map(result => (
-                  <Typography>
-                    {result.attribute_name}:{result.value}
-                  </Typography>
-                )): productAttributes.map(result => (
-                  <Typography>
-                    {result.attribute_name}:{result.value}
-                  </Typography>
-                ))}
-            </Grid>
+        {/* <Grid container spacing={1}> */}
+        <Grid item md={3}></Grid>
 
-            <Grid item xs={6} md={6}>
-              <Carousel
-                // breakPoints={breakPoints}
-                disableArrowsOnEnd={false}
-                // showArrows={false}
-                pagination={false}
-                // showEmptySlots={true}
-                itemsToShow={2}
-              >
-                {productDetail &&
-                  productDetail.skus?.map(results=>
-                    <Image
-                      //  className={cx(styles.media, mediaStyles.root)}
-                      onClick={() => {
-                        viewVariantsProduct(results);
-                      }}
-                      src={results.sku_images[0]}
-                      alt="shirt"
-                      width={200}
-                      height={300}
-                    ></Image>
-                  )}
-              </Carousel>
-            </Grid>
-          </Grid>
-          {/* </ListItem>
-            </List>
-          </Card> */}
+        <Grid item xs={6} md={3}>
+          {skusProduct
+            ? skusProduct.attributes.map((result) => (
+                <Typography>
+                  {result.attribute_name}:{result.value}
+                </Typography>
+              ))
+            : productAttributes.map((result) => (
+                <Typography>
+                  {result.attribute_name}:{result.value}
+                </Typography>
+              ))}
         </Grid>
 
+        <Grid item xs={12} md={6}>
+          <Carousel
+            // breakPoints={breakPoints}
+            disableArrowsOnEnd={false}
+            // showArrows={false}
+            pagination={false}
+            // showEmptySlots={true}
+            itemsToShow={4}
+          >
+            {productDetail &&
+              productDetail.skus?.map((results) => (
+                <Image
+                  //  className={cx(styles.media, mediaStyles.root)}
+                  onClick={() => {
+                    viewVariantsProduct(results);
+                  }}
+                  src={results.sku_images[0]}
+                  alt="shirt"
+                  width={100}
+                  height={100}
+                ></Image>
+              ))}
+          </Carousel>
+        </Grid>
+      </Grid>
+
+      <Grid container spacing={1}>
         <Grid item md={12} xs={12}>
           <Card style={{ margin: "10px" }}>
             <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -306,9 +327,7 @@ function Details({
                   fullWidth
                   variant="contained"
                   color="primary"
-                  onClick={() => {
-                    addToCartHandler(productDetail);
-                  }}
+                  onClick={checkoutHandler}
                 >
                   Buy Now
                 </Button>

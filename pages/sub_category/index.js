@@ -7,17 +7,13 @@ import { useSelector, useDispatch } from "react-redux";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
 import NavBar from "../../container/NavBar";
-import {
-  
-  Typography
-  
-} from "@mui/material";
+import { Typography } from "@mui/material";
 function SubCategory() {
-  const { productDataWithCategoryId } = useSelector(state => state.category);
+  const { productDataWithCategoryId } = useSelector((state) => state.category);
   const router = useRouter();
   const dispatch = useDispatch();
   console.log(productDataWithCategoryId);
-  const viewProduct = item => {
+  const viewProduct = (item) => {
     router.push({
       pathname: "/product_detail",
       query: { productId: item.productId },
@@ -30,7 +26,7 @@ function SubCategory() {
   //       query: { sub_category: item },
   //     });
   //   };
-  const getData = id => {
+  const getData = (id) => {
     dispatch(getProductWithCategoryId(id));
   };
   useMemo(() => {
@@ -39,31 +35,30 @@ function SubCategory() {
     getData(id);
   }, []);
 
-  const addToCartHandler = product => {
+  const addToCartHandler = (product) => {
     dispatch(addToBasket(product));
     router.push("/cart");
   };
 
   return (
     <>
-    <NavBar></NavBar>
-    <Typography component="h4" variant="h4">
-          Sub Products
-    </Typography>
-    <Container maxWidth="lg">
-      <Grid container wrap="wrap" sx={{ overflow: "auto" }}>
-        {" "}
-        {productDataWithCategoryId &&
-          productDataWithCategoryId?.map(item => (
-            <ActionAreaCard
-              product={item}
-              viewProduct={viewProduct}
-              addToCartHandler={addToCartHandler}
-              // viewCategory={viewCategory}
-            ></ActionAreaCard>
-          ))}
-      </Grid>{" "}
-    </Container>
+      <Typography component="h4" variant="h4">
+        Sub Products
+      </Typography>
+      <Container maxWidth="lg">
+        <Grid container wrap="wrap" sx={{ overflow: "auto" }}>
+          {" "}
+          {productDataWithCategoryId &&
+            productDataWithCategoryId?.map((item) => (
+              <ActionAreaCard
+                product={item}
+                viewProduct={viewProduct}
+                addToCartHandler={addToCartHandler}
+                // viewCategory={viewCategory}
+              ></ActionAreaCard>
+            ))}
+        </Grid>{" "}
+      </Container>
     </>
   );
 }

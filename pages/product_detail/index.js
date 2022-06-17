@@ -111,6 +111,10 @@ function product_detail(props) {
     // }
   };
 
+  const checkoutHandler = () => {
+    router.push("/shipping");
+  };
+
   return (
     <div>
       <Details
@@ -121,6 +125,7 @@ function product_detail(props) {
         productImage={productImage}
         productAttributes={productAttributes}
         price={price}
+        checkoutHandler={checkoutHandler}
       ></Details>
     </div>
   );
