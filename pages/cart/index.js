@@ -53,6 +53,8 @@ function groupArrayOfObjects(list){
   
 
   const handleAddToCart = (item) => {
+   
+   
     dispatch(addToBasket(item));
   };
   const removeItemHandler = (item) => {

@@ -66,7 +66,21 @@ export const addToCart = createAsyncThunk(
       console.log(tempProductItem)
       let result2=await instance.get(`${url}/ecommerce/products/${tempProductItem.product_id}`)
     // console.log()
-     let skus = result2.data.response.skus
+     if(tempProductItem.skus.length>0){
+      let skus_value;
+      tempProductItem.skus.map(result=>{
+        skus_value=result.sku;
+      })
+
+      let cart={
+        cart_id:611,
+        sku:skus_value,
+        qty: tempProductItem.qty
+      }  
+      await instance.post(`${url}/ecommerce/carts/items`,cart)
+
+     }else{
+      let skus = result2.data.response.skus
       console.log(skus)     
     if(skus.length>0){
       let skus_value;
@@ -84,6 +98,9 @@ export const addToCart = createAsyncThunk(
       
     console.log(cart)
    await instance.post(`${url}/ecommerce/carts/items`,cart)
+     
+
+     }  
       
   }
   let result3=await  instance.post(`${url}/ecommerce/carts`)

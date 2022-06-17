@@ -30,6 +30,7 @@ import ImageListItemBar from "@mui/material/ImageListItemBar";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import IconButton from "@mui/material/IconButton";
 import ShareIcon from "@mui/icons-material/Share";
+import { useEffect } from "react";
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
   { width: 550, itemsToShow: 2 },
@@ -51,7 +52,9 @@ function Details({
   addToCartHandler,
   price,
 }) {
+  console.log("----------Product Detail")
   console.log(productDetail)
+  console.log("----------Product Detail")
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
     ...theme.typography.body2,
@@ -60,9 +63,13 @@ function Details({
     color: theme.palette.text.secondary,
   }));
   let [skusProduct,setSkusProduct]=useState()
+  let [variantOneProduct,setVariantOneProduct]=useState();
+  //let [productDetailOne,setProductDetailOne]=useState();
   const viewVariantsProduct=(result)=>{
-    console.log(result)
-     setSkusProduct(result)
+    setSkusProduct(result)
+      
+
+    
   }
 
   function TabPanel(props) {
@@ -283,7 +290,7 @@ function Details({
                   variant="contained"
                   color="primary"
                   onClick={() => {
-                    addToCartHandler(productDetail);
+                    skusProduct? addToCartHandler(productDetail,skusProduct):addToCartHandler(productDetail);
                   }}
                 >
                   Add to cart

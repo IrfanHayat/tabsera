@@ -87,7 +87,7 @@ export default function ActionAreaCard({
           // }
         />
       </CardContent>
-      <CardActions>
+      {/* <CardActions>
         {product.productName ? (
           <IconButton
             key={product.id}
@@ -123,7 +123,7 @@ export default function ActionAreaCard({
         ) : (
           ""
         )}
-      </CardActions>
+      </CardActions> */}
     </Card>
     // </Box>
   );

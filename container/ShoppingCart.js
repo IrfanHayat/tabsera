@@ -48,31 +48,12 @@ function CartScreen({
       </Typography>
 
       <Grid container spacing={1}>
-        {/* <Grid item md={9} xs={12}> */}
-        {/* <TableContainer
-          style={{
-            // width: "75%",
-            display: "flex",
-            // overflowX: "auto",
-            flexDirection: "column",
-            alignContent: "flex-start",
-            // flexWrap: "wrap",
-            // flexDirection: "row",
-          }}
-
-        > */}
+       
         <Grid item md={9} xs={12}>
           <Paper className="container">
             <Table>
               <TableHead>
-                {/* <TableRow>
-                  <TableCell>Image</TableCell>
-                  <TableCell>Name</TableCell>
-                  <TableCell align="right">Quantity</TableCell>
-                  <TableCell align="right">Price</TableCell>
-                  <TableCell align="right">Action</TableCell>
-                  <TableCell align="center">Price of Items</TableCell>
-                </TableRow> */}
+                
               </TableHead>
               <TableBody>
                 {productCartData &&

@@ -79,18 +79,36 @@ function product_detail(props) {
 
   useMemo(() => skuData(filterProductData.skus), [filterProductData.skus]);
 
-  const addToCartHandler = (product) => {
-    if (product.product_id) {
-     
-      
-      dispatch(addToCart(product))
-     // dispatch(addToBasket(product));
-     
-      router.push("/cart");
-    } else {
-      dispatch(addToBasket(product));
-      router.push("/cart");
+  const addToCartHandler = (item,skus) => {
+    console.log(item,skus)
+    if(skus){
+      let product={
+        "product_id": item.product_id,
+        "product_name": item.product_name,
+        "product_desc": item.product_desc,
+        "is_free_shipping": item.is_free_shipping,
+        "merchant_id": item.merchant_id,
+        "merchant_name": item.merchant_name,
+        "category_name": item.category_name,
+        "product_images": item.product_images,
+        "skus": [skus]
     }
+     console.log(skus)
+    dispatch(addToCart(product));
+    router.push("/cart");
+    }
+    
+    // if (item.product_id) {
+    
+      
+    //   dispatch(addToCart(item))
+    //  // dispatch(addToBasket(product));
+     
+    //   router.push("/cart");
+    // } else {
+    //   dispatch(addToBasket(item));
+    //   router.push("/cart");
+    // }
   };
 
   return (
