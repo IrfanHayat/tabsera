@@ -81,16 +81,18 @@ function product_detail(props) {
 
   const addToCartHandler = (product) => {
     if (product.product_id) {
-     
-      
-      dispatch(addToCart(product))
-     // dispatch(addToBasket(product));
-     
+      dispatch(addToCart(product));
+      // dispatch(addToBasket(product));
+
       router.push("/cart");
     } else {
       dispatch(addToBasket(product));
       router.push("/cart");
     }
+  };
+
+  const checkoutHandler = () => {
+    router.push("/shipping");
   };
 
   return (
@@ -103,6 +105,7 @@ function product_detail(props) {
         productImage={productImage}
         productAttributes={productAttributes}
         price={price}
+        checkoutHandler={checkoutHandler}
       ></Details>
     </div>
   );

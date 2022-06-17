@@ -1,7 +1,7 @@
 import * as React from "react";
 import CardContent from "@mui/material/CardContent";
 import Image from "next/image";
-import { Card, CardActions } from "@mui/material";
+import { Card, CardActions, Typography } from "@mui/material";
 
 import { makeStyles } from "@mui/styles";
 import TextInfoContent from "@mui-treasury/components/content/textInfo";
@@ -42,10 +42,13 @@ export default function ActionAreaCard({
 
   return (
     // <Box>
-    <Card className={cx(styles.root)}>
+    <Card
+      sx={{ margin: 1, padding: 0.5, maxWidth: 300, height: 300 }}
+      // className={cx(styles.root)}
+    >
       {product?.productImage && (
         <Image
-          className={cx(styles.media, mediaStyles.root)}
+          // className={cx(styles.media, mediaStyles.root)}
           src={product?.productImage}
           onClick={(e) => viewProduct(product)}
           alt="shirt"
@@ -56,7 +59,7 @@ export default function ActionAreaCard({
       )}
       {product?.category_image && (
         <Image
-          className={cx(styles.media, mediaStyles.root)}
+          // className={cx(styles.media, mediaStyles.root)}
           src={product?.category_image}
           onClick={(e) => viewCategory(product.category_id)}
           alt="shirt"
@@ -67,27 +70,23 @@ export default function ActionAreaCard({
       )}
       {product?.category_name && (
         <CardContent>
-          <TextInfoContent
-            // classes={textCardContentStyles}
+          <Typography variant="overline">{product.category_name}</Typography>
 
-            heading={product.category_name}
-            // body={
-            //   "That year, collection of songs, review melodies, memories full, this is a long and warm journey"
-            // }
+          <TextInfoContent
+          // classes={textCardContentStyles}
+
+          // heading={product.category_name}
+          // body={
+          //   "That year, collection of songs, review melodies, memories full, this is a long and warm journey"
+          // }
           />
         </CardContent>
       )}
       <CardContent>
-        <TextInfoContent
-          // classes={textCardContentStyles}
-          overline={product.categoryName}
-          heading={product.productName}
-          // body={
-          //   "That year, collection of songs, review melodies, memories full, this is a long and warm journey"
-          // }
-        />
+        <Typography variant="overline">{product.categoryName}</Typography>
+        <Typography variant="h5">{product.productName}</Typography>
       </CardContent>
-      <CardActions>
+      {/* <CardActions>
         {product.productName ? (
           <IconButton
             key={product.id}
@@ -123,7 +122,7 @@ export default function ActionAreaCard({
         ) : (
           ""
         )}
-      </CardActions>
+      </CardActions> */}
     </Card>
     // </Box>
   );
