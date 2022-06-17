@@ -13,6 +13,7 @@ import { useRouter, withRouter } from "next/router";
 // import VariableWidthGrid from "../../container/ShoppingCart";
 import VariableWidthGrid from "../../container/NewShoppingCart";
 import ShoppingCart from "../../container/ShoppingCart";
+import CalculateBill from "../../container/CalculateBill";
 import _ from 'lodash'
 
 
@@ -91,6 +92,7 @@ function groupArrayOfObjects(list){
            <ShoppingCart
            heading={groupProductData[key].map(result=>result.merchant_name)[0]}
            productCartData={groupProductData[key]}
+           productPrice={cartItems}
            handleAddToCart={handleAddToCart}
            handleDecreaseCart={handleDecreaseCart}
            handleClearCart={handleClearCart}
@@ -98,6 +100,20 @@ function groupArrayOfObjects(list){
            checkoutHandler={checkoutHandler}
          ></ShoppingCart>  
            ))
+           
+    }
+     {
+          
+           <CalculateBill
+           productPrice={cartItems}
+           handleAddToCart={handleAddToCart}
+           handleDecreaseCart={handleDecreaseCart}
+           handleClearCart={handleClearCart}
+           removeItemHandler={removeItemHandler}
+           checkoutHandler={checkoutHandler}
+         ></CalculateBill>  
+         
+           
     }
     </>
     

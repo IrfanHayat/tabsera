@@ -32,10 +32,14 @@ function CartScreen({
   handleAddToCart,
   handleDecreaseCart,
   checkoutHandler,
+  productPrice
 }) {
   console.log("productCartData");
   console.log(productCartData);
   console.log("-----------------------");
+  
+
+ 
 
   return (
     <>
@@ -61,14 +65,14 @@ function CartScreen({
           <Paper className="container">
             <Table>
               <TableHead>
-                <TableRow>
+                {/* <TableRow>
                   <TableCell>Image</TableCell>
                   <TableCell>Name</TableCell>
                   <TableCell align="right">Quantity</TableCell>
                   <TableCell align="right">Price</TableCell>
                   <TableCell align="right">Action</TableCell>
                   <TableCell align="center">Price of Items</TableCell>
-                </TableRow>
+                </TableRow> */}
               </TableHead>
               <TableBody>
                 {productCartData &&
@@ -196,58 +200,12 @@ function CartScreen({
           </Paper>
           {/* </TableContainer> */}
         </Grid>
+       
 
-        <Grid item md={3} xs={12}>
-          <Card>
-            <Typography variant="h6" align="center">
-              {" "}
-              Order Summary
-            </Typography>
-
-            <List>
-              {/* <ListItem> */}
-              {/* <ListItemText>
-                  Total (
-                  {productCartData &&
-                    productCartData.reduce((a, c) => a + c.qty, 0)}{" "}
-                  items) : $
-                  {productCartData &&
-                    productCartData.reduce((a, c) => a + c.qty * c.price, 0)}
-                </ListItemText>
-              </ListItem> */}
-
-              <ListItem>
-                <ListItemText>Total Items </ListItemText>
-
-                <ListItemText>
-                  {productCartData &&
-                    productCartData.reduce((a, c) => a + c.qty, 0)}{" "}
-                </ListItemText>
-              </ListItem>
-
-              <ListItem>
-                <ListItemText> Total Price </ListItemText>
-                <ListItemText>
-                  {/* Total Price = $ */}$
-                  {productCartData &&
-                    productCartData.reduce((a, c) => a + c.qty * c.price, 0)}
-                </ListItemText>
-              </ListItem>
-
-              <ListItem>
-                <Button
-                  onClick={checkoutHandler}
-                  variant="contained"
-                  color="primary"
-                  fullWidth
-                >
-                  Check Out
-                </Button>
-              </ListItem>
-            </List>
-          </Card>
-        </Grid>
+       
       </Grid>
+      
+      
     </>
   );
 }

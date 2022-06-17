@@ -1,0 +1,75 @@
+import React from 'react'
+import {
+    Grid,
+    TableContainer,
+    Table,
+    Typography,
+    TableHead,
+    TableBody,
+    TableRow,
+    TableCell,
+    Link,
+    ListItemText,
+    Button,
+    Card,
+    List,
+    ListItem,
+    CardMedia,
+    Paper,
+  } from "@mui/material";
+function CalculateBill({productPrice,checkoutHandler}) {
+  return (
+    <div><Grid item md={3} xs={12}>
+    <Card>
+      <Typography variant="h6" align="center">
+        {" "}
+        Order Summary
+      </Typography>
+
+      <List>
+        {/* <ListItem> */}
+        {/* <ListItemText>
+            Total (
+            {productCartData &&
+              productCartData.reduce((a, c) => a + c.qty, 0)}{" "}
+            items) : $
+            {productCartData &&
+              productCartData.reduce((a, c) => a + c.qty * c.price, 0)}
+          </ListItemText>
+        </ListItem> */}
+
+        <ListItem>
+          <ListItemText>Total Items </ListItemText>
+
+          <ListItemText>
+            {productPrice &&
+              productPrice.reduce((a, c) => a + c.qty, 0)}{" "}
+          </ListItemText>
+        </ListItem>
+
+        <ListItem>
+          <ListItemText> Total Price </ListItemText>
+          <ListItemText>
+            {/* Total Price = $ */}$
+            {productPrice &&
+              productPrice.reduce((a, c) => a + c.qty * c.price, 0)}
+          </ListItemText>
+        </ListItem>
+
+        <ListItem>
+          <Button
+            onClick={checkoutHandler}
+            variant="contained"
+            color="primary"
+            fullWidth
+          >
+            Check Out
+          </Button>
+        </ListItem>
+      </List>
+    </Card>
+  </Grid></div>
+  )
+}
+
+export default CalculateBill
