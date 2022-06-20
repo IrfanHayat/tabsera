@@ -53,9 +53,9 @@ function Details({
   checkoutHandler,
   price,
 }) {
-  console.log("----------Product Detail")
-  console.log(productDetail)
-  console.log("----------Product Detail")
+  console.log("----------Product Detail");
+  console.log(productDetail);
+  console.log("----------Product Detail");
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
     ...theme.typography.body2,
@@ -63,15 +63,12 @@ function Details({
     textAlign: "center",
     color: theme.palette.text.secondary,
   }));
-  let [skusProduct,setSkusProduct]=useState()
-  let [variantOneProduct,setVariantOneProduct]=useState();
+  let [skusProduct, setSkusProduct] = useState();
+  let [variantOneProduct, setVariantOneProduct] = useState();
   //let [productDetailOne,setProductDetailOne]=useState();
-  const viewVariantsProduct=(result)=>{
-    setSkusProduct(result)
-      
-
-    
-  }
+  const viewVariantsProduct = (result) => {
+    setSkusProduct(result);
+  };
 
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -178,9 +175,7 @@ function Details({
         </Grid>
         <Grid item md={2}></Grid>
         <Grid item md={4}>
-          <ListItemText sx={{ color: "success.main" }}>
-            In Stock
-          </ListItemText>
+          <ListItemText sx={{ color: "success.main" }}>In Stock</ListItemText>
         </Grid>
       </Grid>
 
@@ -326,7 +321,9 @@ function Details({
                   variant="contained"
                   color="primary"
                   onClick={() => {
-                    skusProduct? addToCartHandler(productDetail,skusProduct):addToCartHandler(productDetail);
+                    skusProduct
+                      ? addToCartHandler(productDetail, skusProduct)
+                      : addToCartHandler(productDetail);
                   }}
                 >
                   Add to cart
@@ -342,7 +339,9 @@ function Details({
                   fullWidth
                   variant="contained"
                   color="primary"
-                  onClick={checkoutHandler}
+                  type="submit"
+                  href="/shipping_information"
+                  // onClick={checkoutHandler}
                 >
                   Buy Now
                 </Button>

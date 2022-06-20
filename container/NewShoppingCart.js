@@ -37,16 +37,14 @@ export default function VariableWidthGrid({
   handleDecreaseCart,
   checkoutHandler,
 }) {
-  console.log('product Detail')
-  console.log(productCartData)
-  console.log('=====================')
+  console.log("product Detail");
+  console.log(productCartData);
+  console.log("=====================");
   return (
-
     <Box sx={{ flexGrow: 1 }}>
       <Typography component="h4" variant="h5">
         Shopping Cart
       </Typography>
-
       {/* <Grid container spacing={1} style={{ textAlign: "center" }}>
         <Grid item xs={3}>
           <Typography> Image </Typography>
@@ -64,82 +62,74 @@ export default function VariableWidthGrid({
           <Typography> Action</Typography>
         </Grid> */}
       {/* </Grid> */}
+      <Grid
+        container
+        spacing={1}
+        key={item._id}
+        style={{ textAlign: "center" }}
+      >
+        <Grid item xs="auto" style={{ marginTop: "5px" }}>
+          {/* <Item> */}
+          <NextLink href={`/product_detail?product_name=${item.name}`} passHref>
+            <Link>
+              <CardMedia
+                component="img"
+                // height="10"
+                style={{ height: "100px", width: "150px" }}
+                image={item.image_URL}
+                alt="green iguana"
+              />
+            </Link>
+          </NextLink>
+          {/* </Item> */}
+        </Grid>
 
-     
-        <Grid
-          container
-          spacing={1}
-          key={item._id}
-          style={{ textAlign: "center" }}
-        >
-          
-          <Grid item xs="auto" style={{ marginTop: "5px" }}>
-            {/* <Item> */}
-            <NextLink href={`/product_detail?product_name=${item.name}`} passHref>
-              <Link>
-                <CardMedia
-                  component="img"
-                  // height="10"
-                  style={{ height: "100px", width: "150px" }}
-                  image={item.image_URL}
-                  alt="green iguana"
-                />
-              </Link>
-            </NextLink>
-            {/* </Item> */}
-          </Grid>
+        <Grid item xs={3}>
+          {/* <Item> */}
+          <NextLink href={`/product_detail?product_name=${item.name}`} passHref>
+            <Link>
+              <Typography>{item.name}</Typography>
+            </Link>
+          </NextLink>
+          {/* </Item> */}
+        </Grid>
 
-          <Grid item xs={3}>
-            {/* <Item> */}
-            <NextLink href={`/product_detail?product_name=${item.name}`} passHref>
-              <Link>
-                <Typography>{item.name}</Typography>
-              </Link>
-            </NextLink>
-            {/* </Item> */}
-          </Grid>
+        <Grid item xs={2}>
+          {/* <Item> */}
+          <Button variant="contained" onClick={() => handleDecreaseCart(item)}>
+            -
+          </Button>
+          <Typography className="count">{item.qty}</Typography>
+          <Button variant="contained" onClick={() => handleAddToCart(item)}>
+            +
+          </Button>
+          {/* </Item> */}
+        </Grid>
 
-          <Grid item xs={2}>
-            {/* <Item> */}
-            <Button
-              variant="contained"
-              onClick={() => handleDecreaseCart(item)}
-            >
-              -
-            </Button>
-            <Typography className="count">{item.qty}</Typography>
-            <Button variant="contained" onClick={() => handleAddToCart(item)}>
-              +
-            </Button>
-            {/* </Item> */}
-          </Grid>
+        <Grid item xs={2}>
+          <Typography>$ {item.price}</Typography>
+          {/* <Item> */}
+          {/* </Item> */}
+        </Grid>
 
-          <Grid item xs={2}>
-            <Typography>$  {item.price}</Typography>
-            {/* <Item> */}
-            {/* </Item> */}
-          </Grid>
-
-          <Grid item xs={2}>
-            {/* <Item> */}
-            <Button
-              variant="contained"
-              //  color="secondary"
-              onClick={() => removeItemHandler(item)}
-            >
-              x
-            </Button>
-            {/* </Item> */}
-          </Grid>
-          <Grid item md={3} xs={12}>
+        <Grid item xs={2}>
+          {/* <Item> */}
+          <Button
+            variant="contained"
+            //  color="secondary"
+            onClick={() => removeItemHandler(item)}
+          >
+            x
+          </Button>
+          {/* </Item> */}
+        </Grid>
+        <Grid item md={3} xs={12}>
           <Card>
             <List>
               <ListItem>
                 <ListItemText>
-                  Subtotal (
-                  {item.qty}
-                  items) : $
-                  {item.qty*item.price}
+                  Subtotal ({item.qty}
+                  items) : ${item.qty * item.price}
                 </ListItemText>
               </ListItem>
               <ListItem>
@@ -155,13 +145,11 @@ export default function VariableWidthGrid({
             </List>
           </Card>
         </Grid>
-          {/* <Grid item xs={1}>
+        {/* <Grid item xs={1}>
             <Item>${item.price}</Item>
           </Grid> */}
-        </Grid>
-      ))}
-      
-      
+      </Grid>
+      ))
     </Box>
   );
 }

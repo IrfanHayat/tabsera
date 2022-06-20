@@ -18,10 +18,10 @@ export default function Shipping({
 }) {
   return (
     <>
-      <CheckoutWizard activeStep={1} />
+      <CheckoutWizard activeStep={2} />
       <form onSubmit={handleSubmit(submitHandler)} className={classes.form}>
         <Typography component="h4" variant="h4">
-          Shipping Information
+          Add Shipping Address
         </Typography>
         <List>
           <ListItem>
@@ -270,7 +270,13 @@ export default function Shipping({
         </List>
         <List>
           <ListItem>
-            <Button variant="contained" type="submit" fullWidth color="primary">
+            <Button
+              variant="contained"
+              href="/shipping_methods"
+              type="submit"
+              fullWidth
+              color="primary"
+            >
               Continue
             </Button>
           </ListItem>
