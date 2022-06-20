@@ -17,6 +17,7 @@ import {
   List,
   ListItem,
   CardMedia,
+  Box,
   Paper,
 } from "@mui/material";
 
@@ -32,160 +33,107 @@ function CartScreen({
   handleAddToCart,
   handleDecreaseCart,
   checkoutHandler,
-  productPrice
+  productPrice,
 }) {
   console.log("productCartData");
   console.log(productCartData);
   console.log("-----------------------");
-  
-
- 
 
   return (
-    <>
+    <Box sx={{ flexGrow: 1 }}>
       <Typography component="h4" variant="h5">
         {heading}
       </Typography>
 
-    
-       
-        <Grid item md={12} xs={12}>
-          {/* <Paper className="container"> */}
-            <Table sx={{ minWidth: 0 }}>
-              
-              <TableBody >
-                {productCartData &&
-                  productCartData.map((item) => (
-                    <TableRow key={item.name}>
-                      <TableCell>
-                        <NextLink href={`/product/${item?.name}`} passHref>
-                          <Link>
-                            <CardMedia
-                              component="img"
-                              // height="10"
-                              style={{ height: "70px", width: "100px" }}
-                              image={item.image_URL}
-                              alt="green iguana"
+      {productCartData &&
+        productCartData.map((item) => (
+          <Grid
+            container
+            spacing={1}
+            key={item.name}
+            style={{ textAlign: "center" }}
+          >
+            <Grid item xs="auto" style={{ height: "150px", width: "150px" }}>
+              <NextLink href={`/product/${item?.name}`} passHref>
+                <Link>
+                  <CardMedia
+                    component="img"
+                    style={{ height: "100%", width: "100%" }}
+                    image={item.image_URL}
+                    alt="green iguana"
+                  />
+                </Link>
+              </NextLink>
+            </Grid>
 
-                              // style={{ margin: "5px" }}
-                            />
-                            {/* <CardMedia
-                            component="img"
-                            height="14"
-                            image={productDetail?.imgdata}
-                            alt="green iguana"
-                            style={{ margin: "5px" }}
-                          /> */}
-                            {/* <Image
-                              src={item.imgdata}
-                              alt={item.rname}
-                              width={50}
-                              height={50}
-                            ></Image> */}
-                          </Link>
-                        </NextLink>
-                      </TableCell>
+            <Grid item md={2} sm={1}>
+              <NextLink
+                href={`/product_detail?product_name=${item.name}`}
+                passHref
+              >
+                <Typography variant="body" style={{ textDecoration: "none " }}>
+                  {item.name}
+                </Typography>
+              </NextLink>
+            </Grid>
 
-                      <TableCell>
-                        <NextLink
-                          href={`/product_detail?product_name=${item.name}`}
-                          passHref
-                        >
-                          {/* <Link> */}
-                          <Typography
-                            variant="body"
-                            style={{ textDecoration: "none " }}
-                          >
-                            {item.name}
-                          </Typography>
-                          {/* </Link> */}
-                        </NextLink>
-                      </TableCell>
-                      <TableCell align="center">
-                        {/* <Button
-                          variant="contained"
-                          onClick={() => handleDecreaseCart(item)}
-                        >
-                          -
-                        </Button> */}
-                        <IconButton
-                          onClick={() => handleDecreaseCart(item)}
-                          aria-label="delete item"
-                          size="large"
-                          variant="contained"
-                          sx={{ color: "text.secondary" }}
-                          // onClick={() => removeItemHandler(item)}
-                        >
-                          <IndeterminateCheckBoxOutlinedIcon />
-                        </IconButton>
-                        <Typography className="count" align="center">
-                          {item.qty}
-                        </Typography>
+            <Grid item md={1} sm={1}>
+              <IconButton
+                onClick={() => handleDecreaseCart(item)}
+                aria-label="reduce item"
+                size="large"
+                variant="contained"
+                sx={{ color: "text.secondary" }}
+              >
+                <IndeterminateCheckBoxOutlinedIcon />
+              </IconButton>
 
-                        <IconButton
-                          aria-label="delete item"
-                          size="large"
-                          variant="contained"
-                          sx={{ color: "text.secondary" }}
-                          onClick={() => handleAddToCart(item)}
-                        >
-                          <AddBoxOutlinedIcon />
-                        </IconButton>
+              <Typography className="count" align="center">
+                {item.qty}
+              </Typography>
 
-                        {/* <Button
-                          variant="contained"
-                          onClick={() => handleAddToCart(item)}
-                        >
-                          +
-                        </Button> */}
-                      </TableCell>
-                      <TableCell align="right">${item.price}</TableCell>
-                      <TableCell align="right">
-                        {/* <Button
-                          variant="contained"
-                          //  color="secondary"
-                          onClick={() => removeItemHandler(item)}
-                        >
-                          x
-                        </Button> */}
+              <IconButton
+                aria-label="increase item"
+                size="large"
+                variant="contained"
+                sx={{ color: "text.secondary" }}
+                onClick={() => handleAddToCart(item)}
+              >
+                <AddBoxOutlinedIcon />
+              </IconButton>
+            </Grid>
 
-                        <IconButton
-                          aria-label="delete"
-                          size="large"
-                          variant="contained"
-                          color="error"
-                          onClick={() => removeItemHandler(item)}
-                        >
-                          <DeleteIcon fontSize="inherit" />
-                        </IconButton>
-                      </TableCell>
-                      {/* <TableCell >
-                        
-                          <List>
-                            <ListItem>
-                              <ListItemText>
-                                Sub Total
-                                {item.qty}
-                                item : ${item.qty * item.price}
-                              </ListItemText>
-                            </ListItem>
-                          </List>
-                        
-                      </TableCell> */}
-                    </TableRow>
-                  ))}
-              </TableBody>
-            </Table>
-          {/* </Paper> */}
-          {/* </TableContainer> */}
-        </Grid>
-       
+            <Grid item md={1} sm={2} align="right">
+              ${item.price}
+            </Grid>
+            <Grid item md={1} sm={1} align="right">
+              <IconButton
+                aria-label="delete"
+                size="large"
+                variant="contained"
+                color="error"
+                onClick={() => removeItemHandler(item)}
+              >
+                <DeleteIcon fontSize="inherit" />
+              </IconButton>
+            </Grid>
 
-       
-      {/* </Grid> */}
-      
-      
-    </>
+            <Grid item md={2} sm={2}>
+              <Card>
+                <List>
+                  <ListItem>
+                    <ListItemText>
+                      Sub Total
+                      {item.qty}
+                      item : ${item.qty * item.price}
+                    </ListItemText>
+                  </ListItem>
+                </List>
+              </Card>
+            </Grid>
+          </Grid>
+        ))}
+    </Box>
   );
 }
 

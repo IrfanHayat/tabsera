@@ -1,6 +1,6 @@
-import React, { useContext, useEffect, useState } from 'react';
-import CheckoutWizard from './CheckoutWizard';
-import useStyles from '../utils/styles';
+import React, { useContext, useEffect, useState } from "react";
+import CheckoutWizard from "./CheckoutWizard";
+import useStyles from "../utils/styles";
 import {
   Button,
   FormControl,
@@ -10,17 +10,18 @@ import {
   Radio,
   RadioGroup,
   Typography,
-} from '@mui/material';
+} from "@mui/material";
 
-
-
-export default function Payment({submitHandler,paymentMethod,setPaymentMethod}) {
-  
+export default function Payment({
+  submitHandler,
+  paymentMethod,
+  setPaymentMethod,
+}) {
   const classes = useStyles();
-  
+
   return (
-   <>
-      <CheckoutWizard activeStep={2}></CheckoutWizard>
+    <>
+      <CheckoutWizard activeStep={4}></CheckoutWizard>
       <form className={classes.form} onSubmit={submitHandler}>
         <Typography component="h4" variant="h4">
           Payment Method
@@ -62,13 +63,13 @@ export default function Payment({submitHandler,paymentMethod,setPaymentMethod}) 
               fullWidth
               type="button"
               variant="contained"
-              onClick={() => router.push('/shipping')}
+              onClick={() => router.push("/shipping")}
             >
               Back
             </Button>
           </ListItem>
         </List>
       </form>
-      </>
+    </>
   );
 }

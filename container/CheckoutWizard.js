@@ -9,15 +9,20 @@ export default function CheckoutWizard({ activeStep = 0 }) {
       className={classes.transparentBackgroud}
       activeStep={activeStep}
       alternativeLabel
-      sx={{ marginTop: 3 }}
+      sx={{ margin: 5 }}
     >
-      {["Login", "Shipping Address", "Payment Method", "Place Order"].map(
-        (step) => (
-          <Step key={step}>
-            <StepLabel>{step}</StepLabel>
-          </Step>
-        )
-      )}
+      {[
+        "Login",
+        "Shipping Information",
+        "Shipping Address",
+        "Shipping Methods",
+        "Payment Method",
+        "Place Order",
+      ].map((step) => (
+        <Step key={step}>
+          <StepLabel>{step}</StepLabel>
+        </Step>
+      ))}
     </Stepper>
   );
 }
