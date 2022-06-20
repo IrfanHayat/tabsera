@@ -1,5 +1,5 @@
 import { List, ListItem, Typography, TextField, Button } from "@mui/material";
-import React from "react";
+import React,{ useState,useEffect }  from "react";
 import CheckoutWizard from "../container/CheckoutWizard";
 import Radio from "@mui/material/Radio";
 import RadioGroup from "@mui/material/RadioGroup";
@@ -7,6 +7,8 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import BusinessIcon from "@mui/icons-material/Business";
+import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
+
 export default function Shipping({
   submitHandler,
   handleSubmit,
@@ -15,7 +17,58 @@ export default function Shipping({
   control,
   Controller,
   errors,
+  labels,
+  countryData,
+  getStates,
+  states,
+  getCities,
+  cityData
+
 }) {
+
+  let [labelValue,setLabelValue]=useState('')
+  const [countryList, setCountryList] = useState([]);
+  const [stateList, setStateList] = useState([]);
+  const [cityList, setCityList] = useState([]);
+
+  useEffect(() => {
+    console.log(countryData)
+    console.log("--------------")
+    console.log(cityData)
+    console.log('-0----------------')
+    
+    setCountryList(countryData);
+    
+    //setValue("item", { id: 3, name: "item3" });
+  }, []);
+
+  // useEffect(() => {
+    
+  //   setStateList([
+  //     { id: 1, name: "item1" },
+  //     { id: 2, name: "item2" }
+  //   ]);
+    
+  //   //setValue("item", { id: 3, name: "item3" });
+  // }, []);
+
+  // useEffect(() => {
+  //   setCityList([
+  //     { id: 1, name: "item1" },
+  //     { id: 2, name: "item2" }
+  //   ]);
+    
+  //   //setValue("item", { id: 3, name: "item3" });
+  // }, []);
+
+  const handleChange = (event, value) => {
+    console.log(value)
+    setLabelValue({ value });
+  };
+
+
+  
+  
   return (
     <>
       <CheckoutWizard activeStep={1} />
@@ -23,10 +76,11 @@ export default function Shipping({
         <Typography component="h4" variant="h4">
           Shipping Information
         </Typography>
+        
         <List>
-          <ListItem>
+        <ListItem>
             <Controller
-              name="country"
+              name="firstName"
               control={control}
               defaultValue=""
               rules={{
@@ -37,14 +91,14 @@ export default function Shipping({
                 <TextField
                   variant="outlined"
                   fullWidth
-                  id="country"
-                  label="Country"
-                  error={Boolean(errors.country)}
+                  id="firstName"
+                  label="First Name"
+                  error={Boolean(errors.email)}
                   helperText={
-                    errors.country
-                      ? errors.country.type === "minLength"
-                        ? "Country length is more than 1"
-                        : "Country is required"
+                    errors.email
+                      ? errors.email.type === "minLength"
+                        ? "First Name is more than 1"
+                        : "First Name is required"
                       : ""
                   }
                   {...field}
@@ -52,10 +106,9 @@ export default function Shipping({
               )}
             ></Controller>
           </ListItem>
-
           <ListItem>
             <Controller
-              name="state"
+              name="lastName"
               control={control}
               defaultValue=""
               rules={{
@@ -66,14 +119,14 @@ export default function Shipping({
                 <TextField
                   variant="outlined"
                   fullWidth
-                  id="state"
-                  label="State"
-                  error={Boolean(errors.state)}
+                  id="lastName"
+                  label="Last Name"
+                  error={Boolean(errors.email)}
                   helperText={
-                    errors.state
-                      ? errors.state.type === "minLength"
-                        ? "State length is more than 1"
-                        : "State is required"
+                    errors.email
+                      ? errors.email.type === "minLength"
+                        ? "Last Name is more than 1"
+                        : "Last Name is required"
                       : ""
                   }
                   {...field}
@@ -81,34 +134,109 @@ export default function Shipping({
               )}
             ></Controller>
           </ListItem>
+          <ListItem>
+             <Controller
+            control={control}
+            name="country"
+            rules={{
+              required: true,
+              minLength: 2,
+            }}
+            render={({ field: { onChange, value } }) => (
+              <Autocomplete
+                onChange={getStates}
+                value={value}
+                options={countryList}
+                getOptionLabel={(item) => (item.country_name ? item.country_name : "")}
+                getOptionSelected={(option, value) =>
+                  value === undefined || value === "" || option.country_id === value.country_id
+                }
+                sx={{ width: 800 }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="country"
+                    margin="normal"
+                    variant="outlined"
+                    error={!!errors.item}
+                    helperText={errors.item && "country required"}
+                    required
+                  />
+                )}
+              />
+            )}
+          />
+           
+          </ListItem>
 
           <ListItem>
-            <Controller
-              name="city"
-              control={control}
-              defaultValue=""
-              rules={{
-                required: true,
-                minLength: 2,
-              }}
-              render={({ field }) => (
-                <TextField
-                  variant="outlined"
-                  fullWidth
-                  id="city"
-                  label="City"
-                  error={Boolean(errors.city)}
-                  helperText={
-                    errors.city
-                      ? errors.city.type === "minLength"
-                        ? "City length is more than 1"
-                        : "City is required"
-                      : ""
-                  }
-                  {...field}
-                ></TextField>
-              )}
-            ></Controller>
+          <Controller
+            control={control}
+            name="state"
+            rules={{
+              required: true,
+              minLength: 2,
+            }}
+            render={({ field: { onChange, value } }) => (
+              <Autocomplete
+                onChange={getCities}
+                value={value}
+                options={states}
+                getOptionLabel={(item) => (item.state ? item.state : "")}
+                getOptionSelected={(option, value) =>
+                  value === undefined || value === "" || option.state_id === value.state_id
+                }
+                sx={{ width: 800 }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="state"
+                    margin="normal"
+                    variant="outlined"
+                    error={!!errors.item}
+                    helperText={errors.item && "state required"}
+                    required
+                  />
+                )}
+              />
+            )}
+          />
+          </ListItem>
+
+          <ListItem>
+          <Controller
+            control={control}
+            name="city"
+            rules={{
+              required: true,
+              minLength: 2,
+            }}
+            render={({ field: { onChange, value } }) => (
+              <Autocomplete
+                onChange={(event, item) => {
+                  console.log(item)
+                }}
+                value={value}
+                options={cityData}
+                getOptionLabel={(item) => (item.city ? item.city : "")}
+                getOptionSelected={(option, value) =>
+                  value === undefined || value === "" || option.city_id === value.city_id
+                }
+                sx={{ width: 800 }}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="city"
+                    margin="normal"
+                    variant="outlined"
+                    error={!!errors.item}
+                    helperText={errors.item && "city required"}
+                    required
+                  />
+                )}
+              />
+            )}
+          />
           </ListItem>
 
           {/* <ListItem>
@@ -224,27 +352,20 @@ export default function Shipping({
             ></Controller>
           </ListItem>
 
-          {/* <ListItem>
-              <Button
-                variant="contained"
-                type="button"
-                onClick={chooseLocationHandler}
-              >
-                Choose on map
-              </Button>
-              <Typography>
-                {location.lat && `${location.lat}, ${location.lat}`}
-              </Typography>
-            </ListItem> */}
+          
           <ListItem>
             <FormControl>
               <FormLabel id="demo-row-radio-buttons-group-label">
                 Address Label :
               </FormLabel>
-              <RadioGroup
+             
+             
+                <RadioGroup
                 row
                 aria-labelledby="demo-row-radio-buttons-group-label"
                 name="row-radio-buttons-group"
+                value={labelValue}
+                onChange={handleChange}
               >
                 {/* <FormControlLabel
                   value="female"
@@ -254,17 +375,22 @@ export default function Shipping({
                   <BusinessIcon/>
                   <FormControlLabel/> */}
                 {/* <BusinessIcon /> */}
-                <FormControlLabel
-                  value="home"
-                  control={<Radio />}
-                  label="Home"
-                />
-                <FormControlLabel
-                  value="office"
-                  control={<Radio />}
-                  label="Office"
-                />
+                {
+                     labels.map(result=>(
+                      <FormControlLabel
+                      value={result.address_label_id}
+                      control={<Radio />}
+                      label={result.address_label_name}
+                    />
+                     ))
+                }
+                
+                
               </RadioGroup>
+              
+                
+             
+              
             </FormControl>
           </ListItem>
         </List>

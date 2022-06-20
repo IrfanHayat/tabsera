@@ -47,15 +47,13 @@ function CartScreen({
         {heading}
       </Typography>
 
-      <Grid container spacing={1}>
+    
        
-        <Grid item md={9} xs={12}>
-          <Paper className="container">
-            <Table>
-              <TableHead>
-                
-              </TableHead>
-              <TableBody>
+        <Grid item md={12} xs={12}>
+          {/* <Paper className="container"> */}
+            <Table sx={{ minWidth: 0 }}>
+              
+              <TableBody >
                 {productCartData &&
                   productCartData.map((item) => (
                     <TableRow key={item.name}>
@@ -161,8 +159,8 @@ function CartScreen({
                           <DeleteIcon fontSize="inherit" />
                         </IconButton>
                       </TableCell>
-                      <TableCell>
-                        <Card>
+                      {/* <TableCell >
+                        
                           <List>
                             <ListItem>
                               <ListItemText>
@@ -172,19 +170,19 @@ function CartScreen({
                               </ListItemText>
                             </ListItem>
                           </List>
-                        </Card>
-                      </TableCell>
+                        
+                      </TableCell> */}
                     </TableRow>
                   ))}
               </TableBody>
             </Table>
-          </Paper>
+          {/* </Paper> */}
           {/* </TableContainer> */}
         </Grid>
        
 
        
-      </Grid>
+      {/* </Grid> */}
       
       
     </>

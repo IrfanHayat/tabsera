@@ -106,9 +106,8 @@ function Details({
 
   return (
     <>
-      <Grid container spacing={1} sx={{ paddingTop: 2 }}>
-        <Grid item md={3}></Grid>
-
+      <Grid container spacing={1} sx={{ paddingTop: 2 }} justifyContent="center" >
+    
         <Grid item md={6} xs={12}>
           {/* <CardMedia
             component="img"
@@ -150,7 +149,7 @@ function Details({
                 )}
           </Carousel>
         </Grid>
-        <Grid item md={3}></Grid>
+       
       </Grid>
 
       <Grid container spacing={1}>

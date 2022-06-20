@@ -19,8 +19,8 @@ import {
   } from "@mui/material";
 function CalculateBill({productPrice,checkoutHandler}) {
   return (
-    <div><Grid item md={3} xs={12}>
-    <Card>
+    <Grid item md={12} xs={12}>
+    {/* <Card> */}
       <Typography variant="h6" align="center">
         {" "}
         Order Summary
@@ -67,8 +67,8 @@ function CalculateBill({productPrice,checkoutHandler}) {
           </Button>
         </ListItem>
       </List>
-    </Card>
-  </Grid></div>
+    {/* </Card> */}
+  </Grid>
   )
 }
 

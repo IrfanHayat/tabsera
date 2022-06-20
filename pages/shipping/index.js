@@ -2,8 +2,12 @@ import React, { useState, useEffect } from "react";
 import Shipping from "../../container/Shipping";
 import { useSelector, useDispatch } from "react-redux";
 import {
-    saveShippingAdress
-} from "../../slice/basketSlice";
+  addShipmentAddress,
+  getLabels,
+  getCountry,
+  getCity,
+  getState
+} from "../../slice/shipmentSlice";
 import localStorage from "localStorage";
 import useStyles from '../../utils/styles'
 
@@ -14,6 +18,10 @@ import { Controller, useForm } from 'react-hook-form';
 
 function shipping() {
     const  {userInfo,cart: { shippingAddress }}  = useSelector(state => state.basket);
+    
+    const {labels,countryData,states,cityData}=useSelector(state=>state.shipments)
+
+    console.log(labels)
     let router = useRouter();
   
     let dispatch = useDispatch();
@@ -27,9 +35,9 @@ function shipping() {
 
     const { location } = shippingAddress;
     useEffect(() => {
-        //   if (!userInfo) {
-        //    router.push('/login?redirect=/shipping');
-        //   }
+       dispatch(getLabels())
+       dispatch(getCountry())
+       
           setValue('fullName', shippingAddress.fullName);
           setValue('address', shippingAddress.address);
           setValue('city', shippingAddress.city);
@@ -41,11 +49,22 @@ function shipping() {
         
         const submitHandler = (value) => {
             console.log(value) 
-             dispatch(saveShippingAdress(value))
-             localStorage.setItem("shippingAddress", JSON.stringify(value));
+             dispatch(addShipmentAddress(value))
+           //  localStorage.setItem("shippingAddress", JSON.stringify(value));
              router.push('/payment');
         };
+
+        const getStates = (event, value) => {
+          console.log(value.country_id)
+          dispatch(getState(value.country_id))
+          
+        };
       
+        const getCities = (event,value)=>{
+              console.log(value.state_id)
+              dispatch(getCity(value.state_id))
+        }
+
         const chooseLocationHandler = () => {
           const fullName = getValues('fullName');
           const address = getValues('address');
@@ -73,7 +92,14 @@ function shipping() {
       Controller={Controller}
       control={control}
       handleSubmit={handleSubmit}
+      labels={labels}
       errors={errors}
+      countryData={countryData}
+      getStates={getStates}
+      states={states} 
+      getCities={getCities}  
+      cityData={cityData}
+      
     ></Shipping>
   );
 }
