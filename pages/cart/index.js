@@ -14,6 +14,7 @@ import {
   getTotals,
   removeFromBasket,
   getCartItems,
+  addToCart,
 } from "../../slice/basketSlice";
 import { useRouter, withRouter } from "next/router";
 // import VariableWidthGrid from "../../container/ShoppingCart";
@@ -36,11 +37,15 @@ function cart() {
   console.log(cartItems);
 
   // const { current: myArray } = useRef(cartItems);
+  useEffect(()=>{
+    dispatch(getCartItems())
+  },[])
 
   useEffect(() => {
     //dispatch(getCartItems())
 
     console.log(cartItems);
+    // dispatch(getCartItems())
     var groupedCategory = groupArrayOfObjects(cartItems);
     setGroupedProductData(groupedCategory);
   }, [cartItems]);
@@ -51,7 +56,7 @@ function cart() {
   }
 
   const handleAddToCart = (item) => {
-    dispatch(addToBasket(item));
+    dispatch(addToCart(item));
   };
   const removeItemHandler = (item) => {
     dispatch(removeFromBasket(item));
