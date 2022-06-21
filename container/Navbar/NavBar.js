@@ -330,8 +330,13 @@ export default function NavBar(props) {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-          <InputLabel id="demo-select-small">My Account</InputLabel>
+        <FormControl
+          sx={{ m: 1, maxWidth: 10, textDecoration: "none" }}
+          size="small"
+        >
+          <InputLabel id="demo-select-small" sx={{ fontWeight: 100 }}>
+            My Account
+          </InputLabel>
           <Select labelId="demo-select-small" id="demo-select-small">
             {myAccount}
           </Select>
@@ -390,7 +395,7 @@ export default function NavBar(props) {
     <Box sx={{ flexGrow: 1 }}>
       <CssBaseline />
       <AppBar
-        style={{ height: "40px" }}
+        style={{ height: "50px" }}
         sx={{
           justifyContent: "center",
           padding: "5px",
@@ -411,24 +416,49 @@ export default function NavBar(props) {
               display: { xs: "none", md: "flex", justifyContent: "center" },
             }}
           >
-            <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-              <InputLabel id="demo-select-small">My Account</InputLabel>
-              <Select labelId="demo-select-small" id="demo-select-small">
-                {myAccount}
+            <FormControl variant="standard" sx={{ minWidth: 120 }} size="small">
+              <InputLabel
+                id="demo-simple-select-standard-label"
+                sx={{ color: "white" }}
+              >
+                My Account
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-standard-label"
+                id="demo-simple-select-standard"
+              >
+                <MenuItem>{myAccount}</MenuItem>
               </Select>
             </FormControl>
 
-            <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-              <InputLabel id="demo-select-small">Currency</InputLabel>
-              <Select labelId="demo-select-small" id="demo-select-small">
+            <FormControl variant="standard" sx={{ minWidth: 120 }} size="small">
+              <InputLabel
+                id="demo-simple-select-standard-label"
+                sx={{ color: "white" }}
+              >
+                Currency
+              </InputLabel>
+              <Select
+                labelId="demo-simple-select-standard-label"
+                id="demo-simple-select-standard"
+              >
                 <MenuItem value={10}>Rupee</MenuItem>
                 <MenuItem value={20}>Dollar</MenuItem>
                 <MenuItem value={30}>Ponds</MenuItem>
               </Select>
             </FormControl>
 
-            <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-              <InputLabel id="demo-simple-select-label">Language</InputLabel>
+            <FormControl
+              variant="standard"
+              sx={{ marginBottom: 1, minWidth: 120 }}
+              size="small"
+            >
+              <InputLabel
+                id="demo-simple-select-standard-label"
+                sx={{ color: "white" }}
+              >
+                Language
+              </InputLabel>
               <Select>
                 {router.locales.map((locale) => (
                   <Link href={router.asPath} key={locale} locale={locale}>

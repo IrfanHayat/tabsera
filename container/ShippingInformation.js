@@ -1,4 +1,4 @@
-import { Button, Typography } from "@mui/material";
+import { Button, Grid, Typography } from "@mui/material";
 import React from "react";
 import CheckoutWizard from "../container/CheckoutWizard";
 import AddIcon from "@mui/icons-material/Add";
@@ -10,9 +10,15 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 function ShippingInformation({ checkoutHandler }) {
   return (
-    <Box>
+    <Grid container>
       <CheckoutWizard activeStep={1} />
-      <Box sx={{ display: "container", justifyContent: "center", margin: 5 }}>
+      {/* <Grid item md={2}></Grid> */}
+      <Grid
+        md={12}
+        sm={12}
+        item
+        sx={{ display: "container", justifyContent: "center", margin: 5 }}
+      >
         <FormControl>
           <RadioGroup
             row
@@ -38,8 +44,9 @@ function ShippingInformation({ checkoutHandler }) {
             Add Addresss
           </Button>
         </FormControl>
-      </Box>
-      <Box sx={{ display: "container", margin: 5 }}>
+      </Grid>
+
+      <Grid item md={12} sm={12} sx={{ margin: 5 }}>
         <FormControl>
           <FormLabel id="demo-radio-buttons-group-label">
             Saved Addresses
@@ -68,8 +75,8 @@ function ShippingInformation({ checkoutHandler }) {
             Continue
           </Button>
         </FormControl>
-      </Box>
-    </Box>
+      </Grid>
+    </Grid>
   );
 }
 
