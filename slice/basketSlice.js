@@ -119,6 +119,34 @@ export const getCartItems = createAsyncThunk(
   }
 );
 
+export const getTotalCartQuantity= createAsyncThunk(
+  "cart/getTotalCartQunatity",
+  async ()=>{
+    const result = await instance.post(`${url}/ecommerce/carts`);
+    let { total, quantity } = result.data.response.items.reduce(
+      (cartTotal, cartItem) => {
+        console.log("cartItem")
+        console.log(cartItem)
+        console.log("-------------------")
+        const { price, qty } = cartItem;
+        const itemTotal = price * qty;
+
+        cartTotal.total += itemTotal;
+        cartTotal.quantity += qty;
+
+        return cartTotal;
+      },
+      {
+        total: 0,
+        quantity: 0,
+      }
+    );
+     total = parseFloat(total.toFixed(2));
+     console.log(total)
+     return quantity;
+  }
+)
+
 export const basketSlice = createSlice({
   name: "basket",
   initialState,
@@ -235,7 +263,7 @@ export const basketSlice = createSlice({
     getTotals(state, action) {
       console.log("I am here")
       console.log(current(state.cart.cartItems))
-      let { total, quantity } = state.cart.cartItems.reduce(
+      let { total, quantity } = current(state.cart.cartItems).reduce(
         (cartTotal, cartItem) => {
           console.log("cartItem")
           console.log(cartItem)
@@ -256,6 +284,7 @@ export const basketSlice = createSlice({
       total = parseFloat(total.toFixed(2));
       state.cartTotalQuantity = quantity;
       state.cartTotalAmount = total;
+     
     },
     clearBasket(state, action) {
       state.cart.cartItems = [];
@@ -339,6 +368,23 @@ export const basketSlice = createSlice({
       state.loading = false;
     });
     builder.addCase(addToCart.rejected, (state, action) => {
+      
+      return {
+        ...state,
+        loading: "rejected",
+        error: action.payload,
+      };
+    });
+    builder.addCase(getTotalCartQuantity.pending, (state, action) => {
+      
+      return { ...state, loading: true };
+    });
+    builder.addCase(getTotalCartQuantity.fulfilled, (state, action) => {
+      console.log(action.payload)
+      state.cart.cartTotalQuantity = action.payload;
+      state.loading = false;
+    });
+    builder.addCase(getTotalCartQuantity.rejected, (state, action) => {
       
       return {
         ...state,

@@ -28,6 +28,7 @@ import ReceiptIcon from "@mui/icons-material/Receipt";
 import AdUnitsIcon from "@mui/icons-material/AdUnits";
 import GppGoodOutlinedIcon from "@mui/icons-material/GppGoodOutlined";
 import { getProduct } from "../slice/productSlice";
+import { getTotals } from "../slice/basketSlice";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
@@ -39,7 +40,8 @@ import Modal from "./Modal/Modal";
 import Chip from "@mui/material/Chip";
 import SignInModal from "./Login/SignIn";
 import Badge from "@mui/material/Badge";
-
+import instance from "../helper/axios/httpRequest";
+import { url, setHeaders } from "../helper/axios/config";
 const drawerWidth = 10;
 
 const Search = styled("div")(({ theme }) => ({
@@ -95,10 +97,8 @@ const NavLink = styled("a")(() => ({
 
 export default function NavBar(props) {
   const category = useSelector((state) => state.category.categoryData);
-  const cartTotalQuantity = useSelector(
-    (state) => state.basket.cart.cartTotalQuantity
-  );
-  console.log(cartTotalQuantity);
+  const [quantityProduct,setQunatityProduct]=useState()
+
   const [open, setOpen] = React.useState(false);
   let { t } = useTranslation();
   let router = useRouter();
@@ -111,6 +111,35 @@ export default function NavBar(props) {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const [categoriesData, setCategoriesData] = useState([]);
+
+
+  useEffect(async ()=>{
+    const result = await instance.post(`${url}/ecommerce/carts`);
+    console.log(result.data.response.items)
+    let { total, quantity } = result.data.response.items.reduce(
+      (cartTotal, cartItem) => {
+        console.log("cartItem")
+        console.log(cartItem)
+        console.log("-------------------")
+        const { price, qty } = cartItem;
+        const itemTotal = price * qty;
+
+        cartTotal.total += itemTotal;
+        cartTotal.quantity += qty;
+
+        return cartTotal;
+      },
+      {
+        total: 0,
+        quantity: 0,
+      }
+    );
+     total = parseFloat(total.toFixed(2));
+     console.log(total)
+     setQunatityProduct(quantity);
+    // state.cartTotalAmount = total;
+  },[quantityProduct])
+
 
   const categoryData = (categories) => {
     setCategoriesData(categories);
@@ -535,9 +564,9 @@ export default function NavBar(props) {
             aria-haspopup="true"
             color="primary"
           >
-            <Badge color="error" badgeContent={9} max={99}>
+            <Badge color="error" badgeContent= {quantityProduct} max={99}>
               <ShoppingCartOutlinedIcon />
-              {cartTotalQuantity}
+             
             </Badge>
           </IconButton>
         </Toolbar>
