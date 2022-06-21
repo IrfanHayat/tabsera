@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 import Details from "../../container/Detail";
 import { useSelector, useDispatch } from "react-redux";
-import { addToBasket, addToCart } from "../../slice/basketSlice";
+import { addToBasket, addToCart,getTotalCartQuantity } from "../../slice/basketSlice";
 import { useRouter, withRouter } from "next/router";
 import { getProductWithId, getProduct } from "../../slice/productSlice";
 import { getMerchantWithId } from "../../slice/merchantSlice";
@@ -78,8 +78,10 @@ function product_detail(props) {
 
   useMemo(() => skuData(filterProductData.skus), [filterProductData.skus]);
 
-  const addToCartHandler = (item,skus) => {
-    console.log(item,skus)
+  const addToCartHandler =async (item,skus) => {
+    console.log("I am here")
+    console.log(item)
+    console.log("-----------------")
     if(skus){
       let product={
         "product_id": item.product_id,
@@ -92,13 +94,16 @@ function product_detail(props) {
         "product_images": item.product_images,
         "skus": [skus]
     }
-     console.log(skus)
-    dispatch(addToCart(product));
-    dispatch(getTotalCartQuantity())
+    
+    await dispatch(addToBasket(product));
+    await dispatch(getTotalCartQuantity())
     //router.push("/cart");
     }else{
       console.log(item)
-      dispatch(addToCart(item));
+      dispatch(addToBasket(item));
+      setTimeout(()=>{
+        dispatch(getTotalCartQuantity())
+      },1000)
     //  router.push("/cart");
     }
     
@@ -131,11 +136,15 @@ function product_detail(props) {
     }
      console.log(skus)
     dispatch(addToCart(product));
-    dispatch(getTotalCartQuantity())
+    dispatch(getTotalCartQuantity(true))
     router.push("/shipping_information");
     }else{
       console.log(item)
       dispatch(addToCart(item));
+      setTimeout(()=>{
+        dispatch(getTotalCartQuantity())
+      },1000)
+       
     router.push("/shipping_information");
     }
     

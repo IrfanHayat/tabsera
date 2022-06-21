@@ -121,8 +121,9 @@ export const getCartItems = createAsyncThunk(
 
 export const getTotalCartQuantity= createAsyncThunk(
   "cart/getTotalCartQunatity",
-  async ()=>{
+  async (cart)=>{
     const result = await instance.post(`${url}/ecommerce/carts`);
+    
     let { total, quantity } = result.data.response.items.reduce(
       (cartTotal, cartItem) => {
        
@@ -140,7 +141,8 @@ export const getTotalCartQuantity= createAsyncThunk(
       }
     );
      total = parseFloat(total.toFixed(2));
-     console.log(quantity)
+    
+
      return quantity;
   }
 )
@@ -378,7 +380,7 @@ export const basketSlice = createSlice({
       return { ...state, loading: true };
     });
     builder.addCase(getTotalCartQuantity.fulfilled, (state, action) => {
-    
+       console.log(action.payload)
       state.cart.cartTotalQuantity = action.payload;
       state.loading = false;
     });

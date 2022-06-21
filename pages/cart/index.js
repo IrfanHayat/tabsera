@@ -13,6 +13,7 @@ import {
   decreaseBasket,
   getTotals,
   removeFromBasket,
+  getTotalCartQuantity,
   getCartItems,
   addToCart,
 } from "../../slice/basketSlice";
@@ -56,18 +57,30 @@ function cart() {
   const handleAddToCart = (item) => {
     console.log(item)
     dispatch(addToBasket(item));
+    setTimeout(()=>{
+      dispatch(getTotalCartQuantity())
+    },1000)
 
   };
   const removeItemHandler = (item) => {
     dispatch(removeFromBasket(item));
+    setTimeout(()=>{
+      dispatch(getTotalCartQuantity())
+    },1000)
   };
 
   const handleClearCart = () => {
     dispatch(clearBasket());
+    setTimeout(()=>{
+      dispatch(getTotalCartQuantity())
+    },1000)
   };
 
   const handleDecreaseCart = (product) => {
     dispatch(decreaseBasket(product));
+    setTimeout(()=>{
+      dispatch(getTotalCartQuantity())
+    },1000)
   };
 
   const checkoutHandler = () => {

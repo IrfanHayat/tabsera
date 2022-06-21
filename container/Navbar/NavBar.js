@@ -115,7 +115,7 @@ export default function NavBar(props) {
   console.log(cartTotalQuantity);
 
   useEffect(async () => {
-     dispatch(getTotalCartQuantity());
+     dispatch(getTotalCartQuantity(false));
     // setQunatityProduct(result.payload)
   }, [cartTotalQuantity && cartTotalQuantity]);
 
