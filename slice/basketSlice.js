@@ -140,7 +140,7 @@ export const getTotalCartQuantity= createAsyncThunk(
       }
     );
      total = parseFloat(total.toFixed(2));
-    
+     console.log(quantity)
      return quantity;
   }
 )

@@ -51,6 +51,7 @@ function Details({
   productAttributes,
   addToCartHandler,
   checkoutHandler,
+  BuyHandler,
   price,
 }) {
   console.log("----------Product Detail");
@@ -339,11 +340,11 @@ function Details({
                   variant="contained"
                   color="primary"
                   type="submit"
-                  href="/shipping_information"
+                 // href="/shipping_information"
                   onClick={() => {
                     skusProduct
-                      ? addToCartHandler(productDetail, skusProduct)
-                      : addToCartHandler(productDetail);
+                      ? BuyHandler(productDetail, skusProduct)
+                      : BuyHandler(productDetail);
                   }}
                 >
                   Buy Now

@@ -97,8 +97,9 @@ function product_detail(props) {
     dispatch(getTotalCartQuantity())
     //router.push("/cart");
     }else{
+      console.log(item)
       dispatch(addToCart(item));
-      router.push("/cart");
+    //  router.push("/cart");
     }
     
     // if (item.product_id) {
@@ -114,6 +115,42 @@ function product_detail(props) {
     // }
   };
 
+  const BuyHandler = (item,skus) => {
+    console.log(item,skus)
+    if(skus){
+      let product={
+        "product_id": item.product_id,
+        "product_name": item.product_name,
+        "product_desc": item.product_desc,
+        "is_free_shipping": item.is_free_shipping,
+        "merchant_id": item.merchant_id,
+        "merchant_name": item.merchant_name,
+        "category_name": item.category_name,
+        "product_images": item.product_images,
+        "skus": [skus]
+    }
+     console.log(skus)
+    dispatch(addToCart(product));
+    dispatch(getTotalCartQuantity())
+    router.push("/shipping_information");
+    }else{
+      console.log(item)
+      dispatch(addToCart(item));
+    router.push("/shipping_information");
+    }
+    
+    // if (item.product_id) {
+    
+      
+    //   dispatch(addToCart(item))
+    //  // dispatch(addToBasket(product));
+     
+    //   router.push("/cart");
+    // } else {
+    //   dispatch(addToBasket(item));
+    //   router.push("/cart");
+    // }
+  };
   const checkoutHandler = () => {
     router.push("/shipping");
   };
@@ -126,6 +163,7 @@ function product_detail(props) {
         }
         merchantDetail={merchantData}
         addToCartHandler={addToCartHandler}
+        BuyHandler={BuyHandler}
         productImage={productImage}
         productAttributes={productAttributes}
         price={price}
