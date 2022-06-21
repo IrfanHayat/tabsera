@@ -94,7 +94,8 @@ function product_detail(props) {
     }
      console.log(skus)
     dispatch(addToCart(product));
-    router.push("/cart");
+    dispatch(getTotalCartQuantity())
+    //router.push("/cart");
     }else{
       dispatch(addToCart(item));
       router.push("/cart");

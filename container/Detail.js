@@ -340,7 +340,11 @@ function Details({
                   color="primary"
                   type="submit"
                   href="/shipping_information"
-                  // onClick={checkoutHandler}
+                  onClick={() => {
+                    skusProduct
+                      ? addToCartHandler(productDetail, skusProduct)
+                      : addToCartHandler(productDetail);
+                  }}
                 >
                   Buy Now
                 </Button>

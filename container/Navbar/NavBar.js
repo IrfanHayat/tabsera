@@ -27,7 +27,7 @@ import ReceiptIcon from "@mui/icons-material/Receipt";
 import AdUnitsIcon from "@mui/icons-material/AdUnits";
 import GppGoodOutlinedIcon from "@mui/icons-material/GppGoodOutlined";
 import { getProduct } from "../../slice/productSlice";
-import { getTotals } from "../../slice/basketSlice";
+import { getTotalCartQuantity, getTotals } from "../../slice/basketSlice";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
@@ -38,9 +38,12 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Chip from "@mui/material/Chip";
 import SignInModal from "../Login/SignIn";
 import Badge from "@mui/material/Badge";
+import Popover from '@mui/material/Popover';
 import instance from "../../helper/axios/httpRequest";
 import { url, setHeaders } from "../../helper/axios/config";
+import ShoppingCart from '../../pages/cart/index'
 const drawerWidth = 10;
+
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -95,8 +98,8 @@ const NavLink = styled("a")(() => ({
 
 export default function NavBar(props) {
   const category = useSelector((state) => state.category.categoryData);
-  const [quantityProduct,setQunatityProduct]=useState()
-
+  //const [quantityProduct,setQunatityProduct]=useState()
+  const { cartTotalQuantity } = useSelector((state) => state.basket.cart);
   const [open, setOpen] = React.useState(false);
   let { t } = useTranslation();
   let router = useRouter();
@@ -110,33 +113,12 @@ export default function NavBar(props) {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const [categoriesData, setCategoriesData] = useState([]);
 
+  console.log(cartTotalQuantity)
 
   useEffect(async ()=>{
-    const result = await instance.post(`${url}/ecommerce/carts`);
-    console.log(result.data.response.items)
-    let { total, quantity } = result.data.response.items.reduce(
-      (cartTotal, cartItem) => {
-        console.log("cartItem")
-        console.log(cartItem)
-        console.log("-------------------")
-        const { price, qty } = cartItem;
-        const itemTotal = price * qty;
-
-        cartTotal.total += itemTotal;
-        cartTotal.quantity += qty;
-
-        return cartTotal;
-      },
-      {
-        total: 0,
-        quantity: 0,
-      }
-    );
-     total = parseFloat(total.toFixed(2));
-     console.log(total)
-     setQunatityProduct(quantity);
-    // state.cartTotalAmount = total;
-  },[quantityProduct])
+    let result=await dispatch(getTotalCartQuantity())
+   // setQunatityProduct(result.payload)
+  },[])
 
 
   const categoryData = (categories) => {
@@ -180,6 +162,17 @@ export default function NavBar(props) {
   const handleClose = () => {
     setOpen(false);
   };
+
+  
+  const handlePopoverOpen = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handlePopoverClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open1 = Boolean(anchorEl);
 
   const menuId = "primary-search-account-menu";
   // ----------------------------------------------------------------------------------
@@ -258,11 +251,11 @@ export default function NavBar(props) {
         </Link>
       </MenuItem>
       <Divider />
-      <MenuItem>
+      {/* <MenuItem>
         <ListItem key="Logout" disablePadding>
           <ListItemText primary="Logout" />
         </ListItem>
-      </MenuItem>
+      </MenuItem> */}
     </Box>
   );
 
@@ -306,7 +299,7 @@ export default function NavBar(props) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
-      <MenuItem onClick={handleMenuClose}>Logout</MenuItem>
+      {/* <MenuItem onClick={handleMenuClose}>Logout</MenuItem> */}
     </Menu>
   );
 
@@ -367,7 +360,7 @@ export default function NavBar(props) {
         </FormControl>
       </MenuItem>
 
-      <MenuItem>
+      {/* <MenuItem>
         <IconButton
           size="large"
           aria-label="account of current user"
@@ -378,7 +371,7 @@ export default function NavBar(props) {
           <AccountCircle />
         </IconButton>
         <p>Logout</p>
-      </MenuItem>
+      </MenuItem> */}
     </Menu>
   );
 
@@ -533,15 +526,37 @@ export default function NavBar(props) {
             aria-controls={menuId}
             aria-haspopup="true"
             color="primary"
+            onMouseEnter={handlePopoverOpen}
+            onMouseLeave={handlePopoverClose}
           >
-            <Badge color="error" badgeContent= {quantityProduct} max={99}>
+            <Badge color="error" badgeContent= {cartTotalQuantity} max={99}>
               <ShoppingCartOutlinedIcon />
              
             </Badge>
             {/* </Tooltip> */}
           </IconButton>
+          <Popover
+        id="mouse-over-popover"
+        sx={{
+          pointerEvents: 'none',
+        }}
+        open={open1}
+        anchorEl={anchorEl}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'left',
+        }}
+        onClose={handlePopoverClose}
+        disableRestoreFocus
+      >
+        <Typography sx={{ p: 1 }}> <ShoppingCart  /></Typography>
+      </Popover>
 
-          {/* <ShoppingCart  /> */}
+         
         </Toolbar>
       </AppBar>
       <Box

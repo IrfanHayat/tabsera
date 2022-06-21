@@ -56,7 +56,8 @@ function cart() {
   }
 
   const handleAddToCart = (item) => {
-    dispatch(addToCart(item));
+    dispatch(addToBasket(item));
+    
   };
   const removeItemHandler = (item) => {
     dispatch(removeFromBasket(item));
