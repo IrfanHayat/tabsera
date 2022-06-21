@@ -38,12 +38,11 @@ import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Chip from "@mui/material/Chip";
 import SignInModal from "../Login/SignIn";
 import Badge from "@mui/material/Badge";
-import Popover from '@mui/material/Popover';
+import Popover from "@mui/material/Popover";
 import instance from "../../helper/axios/httpRequest";
 import { url, setHeaders } from "../../helper/axios/config";
-import ShoppingCart from '../../pages/cart/index'
+import ShoppingCart from "../../pages/cart/index";
 const drawerWidth = 10;
-
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -113,13 +112,12 @@ export default function NavBar(props) {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const [categoriesData, setCategoriesData] = useState([]);
 
-  console.log(cartTotalQuantity)
+  console.log(cartTotalQuantity);
 
-  useEffect(async ()=>{
-    let result=await dispatch(getTotalCartQuantity())
-   // setQunatityProduct(result.payload)
-  },[])
-
+  useEffect(async () => {
+    let result = await dispatch(getTotalCartQuantity());
+    // setQunatityProduct(result.payload)
+  }, []);
 
   const categoryData = (categories) => {
     setCategoriesData(categories);
@@ -138,9 +136,9 @@ export default function NavBar(props) {
     setOpen(!open);
   };
 
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+  // const handleProfileMenuOpen = (event) => {
+  //   setAnchorEl(event.currentTarget);
+  // };
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
@@ -155,15 +153,14 @@ export default function NavBar(props) {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+  // const handleClickOpen = () => {
+  //   setOpen(true);
+  // };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
+  // const handleClose = () => {
+  //   setOpen(false);
+  // };
 
-  
   const handlePopoverOpen = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -172,10 +169,20 @@ export default function NavBar(props) {
     setAnchorEl(null);
   };
 
-  const open1 = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  // const open1 = Boolean(anchorEl);
 
   const menuId = "primary-search-account-menu";
   // ----------------------------------------------------------------------------------
+  const open1 = Boolean(anchorEl);
+  const id = open ? "simple-popover" : undefined;
 
   const myAccount = (
     <Box>
@@ -518,45 +525,36 @@ export default function NavBar(props) {
               />
             </Search>
           </Box>
-
-          <IconButton
-            size="large"
-            edge="end"
-            aria-label="account of current user"
-            aria-controls={menuId}
-            aria-haspopup="true"
-            color="primary"
-            onMouseEnter={handlePopoverOpen}
-            onMouseLeave={handlePopoverClose}
-          >
-            <Badge color="error" badgeContent= {cartTotalQuantity} max={99}>
-              <ShoppingCartOutlinedIcon />
-             
-            </Badge>
-            {/* </Tooltip> */}
-          </IconButton>
-          <Popover
-        id="mouse-over-popover"
-        sx={{
-          pointerEvents: 'none',
-        }}
-        open={open1}
-        anchorEl={anchorEl}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'left',
-        }}
-        onClose={handlePopoverClose}
-        disableRestoreFocus
-      >
-        <Typography sx={{ p: 1 }}> <ShoppingCart  /></Typography>
-      </Popover>
-
-         
+          <div>
+            <IconButton
+              aria-describedby={id}
+              variant="contained"
+              onClick={handleClick}
+              color="primary"
+              onMouseEnter={handleClick}
+              // onMouseLeave={handleClick}
+            >
+              <Badge color="error" badgeContent={cartTotalQuantity} max={99}>
+                <ShoppingCartOutlinedIcon />
+              </Badge>
+              {/* </Tooltip> */}
+            </IconButton>
+            <Popover
+              id={id}
+              open={open1}
+              anchorEl={anchorEl}
+              onClose={handleClose}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "left",
+              }}
+            >
+              <Typography sx={{ p: 1 }}>
+                {" "}
+                <ShoppingCart />
+              </Typography>
+            </Popover>
+          </div>
         </Toolbar>
       </AppBar>
       <Box
