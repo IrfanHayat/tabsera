@@ -25,7 +25,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function PersistentDrawerLeft() {
   const { data, isLoading, isFetching, isError } = useGetAllProductsQuery();
-  console.log(data);
+
   const product = useSelector((state) => state.product.productData);
 
   const featureProduct = useSelector(
@@ -68,7 +68,7 @@ export default function PersistentDrawerLeft() {
   }
 
   useEffect(() => {
-    console.log(data);
+    
     dispatch(getFeatureProduct());
 
     dispatch(getCategory());

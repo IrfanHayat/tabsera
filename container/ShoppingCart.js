@@ -35,9 +35,7 @@ function CartScreen({
   checkoutHandler,
   productPrice,
 }) {
-  console.log("productCartData");
-  console.log(productCartData);
-  console.log("-----------------------");
+  
 
   return (
     <Box sx={{ flexGrow: 1, marginTop: 5 }}>

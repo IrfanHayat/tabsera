@@ -113,7 +113,7 @@ export default function NavBar(props) {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const [categoriesData, setCategoriesData] = useState([]);
 
-  console.log(cartTotalQuantity)
+  //console.log(cartTotalQuantity)
 
   useEffect(async ()=>{
     let result=await dispatch(getTotalCartQuantity())
@@ -527,7 +527,7 @@ export default function NavBar(props) {
             aria-haspopup="true"
             color="primary"
             onMouseEnter={handlePopoverOpen}
-            onMouseLeave={handlePopoverClose}
+           // onMouseLeave={handlePopoverClose}
           >
             <Badge color="error" badgeContent= {cartTotalQuantity} max={99}>
               <ShoppingCartOutlinedIcon />

@@ -33,9 +33,7 @@ function cart() {
   let router = useRouter();
   let dispatch = useDispatch();
 
-  console.log("product");
-  console.log(cartItems);
-
+  
   // const { current: myArray } = useRef(cartItems);
   useEffect(()=>{
     dispatch(getCartItems())
@@ -44,7 +42,7 @@ function cart() {
   useEffect(() => {
     //dispatch(getCartItems())
 
-    console.log(cartItems);
+   
     // dispatch(getCartItems())
     var groupedCategory = groupArrayOfObjects(cartItems);
     setGroupedProductData(groupedCategory);
@@ -56,8 +54,9 @@ function cart() {
   }
 
   const handleAddToCart = (item) => {
+    console.log(item)
     dispatch(addToBasket(item));
-    
+
   };
   const removeItemHandler = (item) => {
     dispatch(removeFromBasket(item));
