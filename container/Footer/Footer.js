@@ -10,8 +10,8 @@ export default function Footer() {
     <Box
       px={{ xs: 3, sm: 10 }}
       py={{ xs: 5, sm: 10 }}
-      bgcolor="text.disabled"
-      color="black"
+      bgcolor="primary.main"
+      color="white"
     >
       {/* Hi */}
       <Container maxWidth="lg">

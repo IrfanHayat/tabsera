@@ -3,11 +3,7 @@ import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
-import ActionAreaCard from "../../container/Card";
 import Menu from "../../container/Menu";
-import NavBar from "../../container/NavBar";
-import Footer from "../../container/Footer";
-// import { AppBar } from "@material-ui/core";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -19,17 +15,9 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function Product() {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      {/* <Grid> */}
       <Grid item xs={12} md={12}>
         <Menu />
-        {/* <NavBar /> */}
-        {/* <AppBar /> */}
       </Grid>
-
-      <Grid item xs={12} md={12}>
-        <Item>{/* <Footer></Footer> */}</Item>
-      </Grid>
-      {/* </Grid> */}
     </Box>
   );
 }

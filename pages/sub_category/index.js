@@ -6,7 +6,6 @@ import { addToBasket } from "../../slice/basketSlice";
 import { useSelector, useDispatch } from "react-redux";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
-import NavBar from "../../container/NavBar";
 import { Typography } from "@mui/material";
 function SubCategory() {
   const { productDataWithCategoryId } = useSelector((state) => state.category);

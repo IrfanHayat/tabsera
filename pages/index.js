@@ -4,7 +4,7 @@ import styles from "../styles/Home.module.css";
 import { useRouter } from "next/router";
 import Layout from "../container/Layout";
 import Product from "../pages/product";
-import NavBar from "../container/NavBar";
+import NavBar from "../container/Navbar/NavBar";
 
 export default function Home(children) {
   let router = useRouter();
