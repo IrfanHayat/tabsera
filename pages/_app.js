@@ -5,8 +5,8 @@ import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "@mui/material/styles";
 import { theme } from "../theme";
 import { CookiesProvider } from "react-cookie";
-import NavBar from "../container/NavBar";
-import Footer from "../container/Footer";
+import NavBar from "../container/Navbar/NavBar";
+import Footer from "../container/Footer/Footer";
 const MyApp = ({ Component, pageProps }) => {
   return (
     //  <SessionProvider session={pageProps.session}>

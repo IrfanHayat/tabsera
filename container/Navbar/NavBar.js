@@ -12,7 +12,6 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
 import Menu from "@mui/material/Menu";
 import { useSelector, useDispatch } from "react-redux";
@@ -27,18 +26,18 @@ import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import ReceiptIcon from "@mui/icons-material/Receipt";
 import AdUnitsIcon from "@mui/icons-material/AdUnits";
 import GppGoodOutlinedIcon from "@mui/icons-material/GppGoodOutlined";
-import { getProduct } from "../slice/productSlice";
+import { getProduct } from "../../slice/productSlice";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import { Button, FormControl, TextField, AppBar } from "@mui/material";
+import { Button, FormControl, TextField, AppBar, Tooltip } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import Modal from "./Modal/Modal";
 import Chip from "@mui/material/Chip";
-import SignInModal from "./Login/SignIn";
+import SignInModal from "../Login/SignIn";
 import Badge from "@mui/material/Badge";
+import ShoppingCart from "../ShoppingCart";
 
 const drawerWidth = 10;
 
@@ -118,9 +117,6 @@ export default function NavBar(props) {
 
   useMemo(() => categoryData(category), [category && category]);
 
-  // const openModal = () => {
-  //   setShowLogin(true);
-  // };
   const toggleDrawer = (event) => {
     if (
       event.type === "keydown" &&
@@ -478,31 +474,6 @@ export default function NavBar(props) {
             Tabsera
           </Typography>
           <Box component="div" sx={{ flexGrow: 1 }} />
-
-          {/* <IconButton
-            size="large"
-            edge="end"
-            aria-label="account of current user"
-            aria-controls={menuId}
-            aria-haspopup="true"
-            onClick={handleProfileMenuOpen}
-            color="inherit"
-          >
-            <AccountCircle />
-          </IconButton> */}
-
-          {/* <Modal
-            buttonText="Sign IN"
-            heading="Sign In"
-            dialogContentText={<SignIn />}
-            buttonCancel={
-              <Button onClick={handleClose} autoFocus>
-                Cancel
-              </Button>
-            }
-          ></Modal> */}
-
-          {/* <Button onClick={() => setShowLogin(true)}>Sign In</Button> */}
           <SignInModal show={showLogin} close={() => setShowLogin(false)} />
         </Toolbar>
 
@@ -535,55 +506,17 @@ export default function NavBar(props) {
             aria-haspopup="true"
             color="primary"
           >
+            {/* <Tooltip title={<ShoppingCart />} arrow> */}
             <Badge color="error" badgeContent={9} max={99}>
-              <ShoppingCartOutlinedIcon />
+              <ShoppingCartOutlinedIcon color="primary" />
               {cartTotalQuantity}
             </Badge>
+            {/* </Tooltip> */}
           </IconButton>
+
+          {/* <ShoppingCart  /> */}
         </Toolbar>
       </AppBar>
-      {/* <AppBar
-        sx={{
-          bgcolor: "#fafafa",
-          // height: "65%",
-          justifyContent: "center",
-          padding: "5px",
-        }}
-        position="static"
-      >
-        <Toolbar>
-          <ThemeProvider>
-            <Chip
-              onClick={toggleDrawer}
-              icon={<MenuIcon />}
-              label="Shop By Category"
-            />
-          </ThemeProvider>
-
-          <Box component="div" sx={{ flexGrow: 1 }} alignItems="center">
-            <Search borderColor="Black">
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ "aria-label": "search" }}
-              />
-            </Search>
-          </Box>
-          <IconButton
-            size="large"
-            edge="end"
-            aria-label="account of current user"
-            aria-controls={menuId}
-            aria-haspopup="true"
-            color="primary"
-          >
-            <ShoppingCartOutlinedIcon />
-            {cartTotalQuantity}
-          </IconButton>
-        </Toolbar>
-      </AppBar> */}
       <Box
         component="nav"
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
@@ -595,7 +528,6 @@ export default function NavBar(props) {
           onClose={toggleDrawer}
           ModalProps={{
             keepMounted: true,
-            // Better open performance on mobile.
           }}
         >
           {drawer}

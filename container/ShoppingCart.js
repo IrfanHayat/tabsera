@@ -40,7 +40,7 @@ function CartScreen({
   console.log("-----------------------");
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, marginTop: 5 }}>
       <Typography component="h4" variant="h5">
         {heading}
       </Typography>
@@ -51,7 +51,11 @@ function CartScreen({
             container
             spacing={1}
             key={item.name}
-            style={{ textAlign: "center" }}
+            style={{
+              textAlign: "center",
+              display: "flex",
+              alignItems: "center",
+            }}
           >
             <Grid item xs="auto" style={{ height: "150px", width: "150px" }}>
               <NextLink href={`/product/${item?.name}`} passHref>
@@ -65,7 +69,6 @@ function CartScreen({
                 </Link>
               </NextLink>
             </Grid>
-
             <Grid item md={2} sm={1}>
               <NextLink
                 href={`/product_detail?product_name=${item.name}`}
@@ -76,7 +79,6 @@ function CartScreen({
                 </Typography>
               </NextLink>
             </Grid>
-
             <Grid item md={1} sm={1}>
               <IconButton
                 onClick={() => handleDecreaseCart(item)}
@@ -102,7 +104,6 @@ function CartScreen({
                 <AddBoxOutlinedIcon />
               </IconButton>
             </Grid>
-
             <Grid item md={1} sm={2} align="right">
               ${item.price}
             </Grid>
@@ -117,7 +118,6 @@ function CartScreen({
                 <DeleteIcon fontSize="inherit" />
               </IconButton>
             </Grid>
-
             <Grid item md={2} sm={2}>
               <Card>
                 <List>

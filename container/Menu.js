@@ -1,46 +1,18 @@
 import React, { useMemo, useEffect, useState } from "react";
 import { styled, useTheme, alpha } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
-import CssBaseline from "@mui/material/CssBaseline";
-import MuiAppBar from "@mui/material/AppBar";
-import Toolbar from "@mui/material/Toolbar";
-import List from "@mui/material/List";
-import InputBase from "@mui/material/InputBase";
-import Divider from "@mui/material/Divider";
-import IconButton from "@mui/material/IconButton";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import MenuIcon from "@mui/icons-material/Menu";
-import SearchIcon from "@mui/icons-material/Search";
+
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
 
 import { useSelector, useDispatch } from "react-redux";
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import InputLabel from "@mui/material/InputLabel";
-import Select from "@mui/material/Select";
+
 import { useRouter } from "next/router";
-import Link from "next/link";
-import useTranslation from "next-translate/useTranslation";
-import MenuItem from "@mui/material/MenuItem";
-import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
-import ReceiptIcon from "@mui/icons-material/Receipt";
-import AdUnitsIcon from "@mui/icons-material/AdUnits";
-import GppGoodOutlinedIcon from "@mui/icons-material/GppGoodOutlined";
 import { addToBasket } from "../slice/basketSlice";
 import { getProduct, getFeatureProduct } from "../slice/productSlice";
 import { getCategory } from "../slice/categorySlice";
 import NewCarousel from "./Carousel/NewCarousel";
 import CarouselApp from "./Carousel/Carousel";
-import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
-import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import AccountBoxIcon from "@mui/icons-material/AccountBox";
-import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-import MoreIcon from "@mui/icons-material/MoreVert";
-import NavBar from "./NavBar";
 import { useGetAllProductsQuery } from "../RTK/productApi";
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -61,11 +33,7 @@ export default function PersistentDrawerLeft() {
   const category = useSelector((state) => state.category.categoryData);
 
   let [groupProduct, setGroupedProduct] = useState();
-  let [productsValue, setProductsValue] = useState();
 
-  const theme = useTheme();
-  const [open, setOpen] = React.useState(false);
-  let { t } = useTranslation();
   let router = useRouter();
   let dispatch = useDispatch();
 
@@ -159,17 +127,12 @@ export default function PersistentDrawerLeft() {
 
   return (
     <Box>
-      {/* <NavBar /> */}
       <Box
-        // open={open}
         component="main"
         sx={{
           flexGrow: 1,
-          // p: 3,
-          // width: { sm: `calc(100% - ${drawerWidth}px)` },
         }}
       >
-        {/* <DrawerHeader /> */}
         <Grid xs={12} md={12}>
           <NewCarousel
             product={
@@ -190,28 +153,6 @@ export default function PersistentDrawerLeft() {
             />
           </Item>
         </Grid>
-
-        {/* <Grid item xs={12} md={12}>
-          <Item>
-            <CarouselApp
-              heading="All Products"
-              product={product}
-              viewProduct={viewProduct}
-              addToCartHandler={addToCartHandler}
-            />
-          </Item>
-        </Grid> */}
-
-        {/* <Grid item xs={12} md={12}>
-          <Item>
-            <CarouselApp
-              heading="All Products"
-              product={productsValue}
-              viewProduct={viewProduct}
-              addToCartHandler={addToCartHandler}
-            />
-          </Item>
-        </Grid> */}
         {groupProduct &&
           Object.keys(groupProduct).map((key) => (
             <Grid item xs={12} md={12}>
