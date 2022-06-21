@@ -1,5 +1,6 @@
 import {
   Button,
+  Grid,
   List,
   ListItem,
   ListItemText,
@@ -16,10 +17,10 @@ import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 function ShippingMethods({ checkoutHandler }) {
   return (
-    <Box>
+    <Grid container>
       <CheckoutWizard activeStep={3} />
 
-      <Box sx={{ display: "container", margin: 5 }}>
+      <Grid item md={12} sm={12} sx={{ margin: 5 }}>
         <FormControl>
           <FormLabel id="demo-radio-buttons-group-label">
             Shipping Methods
@@ -55,8 +56,9 @@ function ShippingMethods({ checkoutHandler }) {
             Back
           </Button>
         </FormControl>
-      </Box>
-      <Box sx={{ display: "container", margin: 5 }}>
+      </Grid>
+
+      <Grid item md={12} sm={12} sx={{ margin: 5 }}>
         <Typography variant="h5">Shipping Charges</Typography>
         <Box sx={{ display: "inline", margin: 5 }}>
           <List>
@@ -80,8 +82,8 @@ function ShippingMethods({ checkoutHandler }) {
             Proced to Payment
           </Button>
         </Box>
-      </Box>
-    </Box>
+      </Grid>
+    </Grid>
   );
 }
 
