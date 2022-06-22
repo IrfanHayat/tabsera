@@ -31,63 +31,66 @@ function shipping() {
         formState: { errors },
         setValue,
         getValues,
+        
       } = useForm();
 
-    const { location } = shippingAddress;
+    // const { location } = shippingAddress;
     useEffect(() => {
        dispatch(getLabels())
        dispatch(getCountry())
        
-          setValue('fullName', shippingAddress.fullName);
-          setValue('address', shippingAddress.address);
-          setValue('city', shippingAddress.city);
-          setValue('postalCode', shippingAddress.postalCode);
-          setValue('country', shippingAddress.country);
+          // setValue('fullName', shippingAddress.fullName);
+          // setValue('address', shippingAddress.address);
+          // setValue('city', shippingAddress.city);
+          // setValue('postalCode', shippingAddress.postalCode);
+          // setValue('country', shippingAddress.country);
         }, []);
         const classes = useStyles();
         
         
         const submitHandler = (value) => {
-            console.log(value) 
-             dispatch(addShipmentAddress(value))
-           //  localStorage.setItem("shippingAddress", JSON.stringify(value));
-             router.push('/payment');
+          console.log("I am new") 
+          console.log(value) 
+          console.log("---------")
+          //    dispatch(addShipmentAddress(value))
+          //  localStorage.setItem("shippingAddress", JSON.stringify(value));
+          //    router.push('/payment');
         };
 
-        const getStates = (event, value) => {
-          console.log(value.country_id)
+        const getStates = (value) => {
+         
           dispatch(getState(value.country_id))
           
         };
       
-        const getCities = (event,value)=>{
+        const getCities = (value)=>{
               console.log(value.state_id)
               dispatch(getCity(value.state_id))
         }
 
-        const chooseLocationHandler = () => {
-          const fullName = getValues('fullName');
-          const address = getValues('address');
-          const city = getValues('city');
-          const postalCode = getValues('postalCode');
-          const country = getValues('country');
+        // const chooseLocationHandler = () => {
+        //   const fullName = getValues('fullName');
+        //   const address = getValues('address');
+        //   const city = getValues('city');
+        //   const postalCode = getValues('postalCode');
+        //   const country = getValues('country');
 
-          dispatch(saveShippingAdress({ fullName, address, city, postalCode, country, location }))
-          localStorage.setItem("shippingAddress", {
-            fullName,
-            address,
-            city,
-            postalCode,
-            country,
-            location,
-          });
-          // router.push('/map');
-        };
+        //   dispatch(saveShippingAdress({ fullName, address, city, postalCode, country, location }))
+        //   localStorage.setItem("shippingAddress", {
+        //     fullName,
+        //     address,
+        //     city,
+        //     postalCode,
+        //     country,
+        //     location,
+        //   });
+        //   // router.push('/map');
+        // };
 
   return (
     <Shipping
       submitHandler={submitHandler}
-      chooseLocationHandler={chooseLocationHandler}
+     // chooseLocationHandler={chooseLocationHandler}
       classes={classes}
       Controller={Controller}
       control={control}
