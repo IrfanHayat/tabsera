@@ -5,8 +5,12 @@ export default function CheckoutWizard({ activeStep = 0 }) {
   const classes = useStyles();
   return (
     <Grid container>
-      <Grid item md={12} xs={12}>
-        <Stepper activeStep={activeStep} alternativeLabel sx={{ mt: 5 }}>
+      <Grid item md={12} xs={6} sm={12}>
+        <Stepper
+          activeStep={activeStep}
+          alternativeLabel
+          sx={{ mt: 5, width: "100%" }}
+        >
           {[
             "Login",
             "Shipping Information",
@@ -15,7 +19,7 @@ export default function CheckoutWizard({ activeStep = 0 }) {
             "Payment Method",
             "Place Order",
           ].map((step) => (
-            <Step key={step}>
+            <Step key={step} sx={{ width: "35%" }}>
               <StepLabel>{step}</StepLabel>
             </Step>
           ))}

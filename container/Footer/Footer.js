@@ -8,10 +8,22 @@ import PublicOutlinedIcon from "@mui/icons-material/PublicOutlined";
 export default function Footer() {
   return (
     <Box
-      px={{ xs: 3, sm: 10 }}
-      py={{ xs: 5, sm: 10 }}
-      bgcolor="primary.main"
-      color="white"
+      px={{ xs: 3, sm: 10, md: 12 }}
+      py={{ xs: 5, sm: 10, md: 12 }}
+      sx={{
+        display: "flex",
+        color: "white",
+        bgcolor: "primary.main",
+        flexDirection: "column",
+        // minHeight: "10vh",
+        justifyContent: "space-between",
+        // position: "absolute",
+        bottom: 0,
+        width: "100%",
+        //  flex-direction: "column",
+        // justify-content: "space-between,"
+        // mb: 0,
+      }}
     >
       {/* Hi */}
       <Container maxWidth="lg">
