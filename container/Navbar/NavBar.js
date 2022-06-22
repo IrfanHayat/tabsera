@@ -194,7 +194,6 @@ export default function NavBar(props) {
           </ListItem>
         </Link>
       </MenuItem>
-      <Divider />
       <MenuItem>
         <Link href={`/carousel`}>
           <ListItem key="My Orders" disablePadding>
@@ -203,7 +202,6 @@ export default function NavBar(props) {
           </ListItem>
         </Link>
       </MenuItem>
-      <Divider />
       <MenuItem>
         <Link href={`/carousel`}>
           <ListItem key="My Coupons" disablePadding>
@@ -211,8 +209,7 @@ export default function NavBar(props) {
             <ListItemText primary="My Coupons" />
           </ListItem>
         </Link>
-      </MenuItem>
-      <Divider />{" "}
+      </MenuItem>{" "}
       <MenuItem>
         <Link href={`/carousel`}>
           <ListItem key="My Bill Payments" disablePadding>
@@ -221,7 +218,6 @@ export default function NavBar(props) {
           </ListItem>
         </Link>
       </MenuItem>
-      <Divider />
       <MenuItem>
         <Link href={`/carousel`}>
           <ListItem key="My Topups" disablePadding>
@@ -230,7 +226,6 @@ export default function NavBar(props) {
           </ListItem>
         </Link>
       </MenuItem>
-      <Divider />
       <MenuItem>
         <Link href={`/carousel`}>
           <ListItem key="Security" disablePadding>
@@ -239,7 +234,6 @@ export default function NavBar(props) {
           </ListItem>
         </Link>
       </MenuItem>
-      <Divider />
       <MenuItem>
         <Link href={`/carousel`}>
           <ListItem key="About" disablePadding>
@@ -248,7 +242,6 @@ export default function NavBar(props) {
           </ListItem>
         </Link>
       </MenuItem>
-      <Divider />
       <MenuItem>
         <Link href={`/carousel`}>
           <ListItem key="Help" disablePadding>
@@ -257,7 +250,6 @@ export default function NavBar(props) {
           </ListItem>
         </Link>
       </MenuItem>
-      <Divider />
       {/* <MenuItem>
         <ListItem key="Logout" disablePadding>
           <ListItemText primary="Logout" />
