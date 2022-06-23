@@ -164,7 +164,7 @@ const Index = () => {
           ></ActionAreaCard>
         ))} */}
 
-        {items.map((item, index) => (
+        {product.map((item, index) => (
           <ActionAreaCard
             product={item}
             viewProduct={viewProduct}

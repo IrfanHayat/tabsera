@@ -392,7 +392,9 @@ export default function NavBar(props) {
         sx={{
           justifyContent: "center",
           padding: "5px",
+           bgcolor: "#00b0ff",
         }}
+
         position="static"
       >
         <Toolbar>
@@ -482,7 +484,7 @@ export default function NavBar(props) {
           color: "inherit",
           // bgcolor: "#bdbdbd",
           // height: "95%",
-          bgcolor: "#212121",
+          bgcolor: "#3d7cff",
           justifyContent: "center",
           // padding: "5px",
         }}
@@ -554,7 +556,7 @@ export default function NavBar(props) {
               aria-describedby={id}
               variant="contained"
               onClick={handleClick}
-              color="primary"
+              color="inherit"
               // onMouseEnter={handleClick}
               // onMouseLeave={handleClick}
             >
