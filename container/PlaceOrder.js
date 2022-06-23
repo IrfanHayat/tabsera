@@ -20,95 +20,122 @@ import {
 } from "@mui/material";
 //import axios from 'axios';
 import { useRouter, withRouter } from "next/router";
-
+import Box from '@mui/material/Box';
 import CheckoutWizard from "./CheckoutWizard";
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import PhoneIcon from '@mui/icons-material/Phone';
+import EmailIcon from '@mui/icons-material/Email';
+import DomainAddOutlinedIcon from '@mui/icons-material/DomainAddOutlined';
+import AddLocationAltOutlinedIcon from '@mui/icons-material/AddLocationAltOutlined';
 
-
-function PlaceOrder({shippingAddress,shippingPrice,taxPrice,totalPrice,placeOrderHandler,loading,classes,paymentMethod,cartItems,itemsPrice}) {
+function PlaceOrder({userData,shippementData,shippingAddress,shippingPrice,taxPrice,totalPrice,productPrice,placeOrderHandler,productCartData,cartTotalAmount,heading,loading,classes,paymentMethod,cartItems,itemsPrice}) {
   
   return (
     <>
-      <CheckoutWizard activeStep={3}></CheckoutWizard>
-      <Typography component="h1" variant="h1">
+      <CheckoutWizard activeStep={5}></CheckoutWizard>
+      <Typography component="h3" variant="h3">
         Place Order
       </Typography>
 
       <Grid container spacing={1}>
         <Grid item md={9} xs={12}>
+        <Card className={classes.section}>
+            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+            <Typography variant="h6" component="h2">
+             Shipping Information
+           </Typography>
+            
+              {/* {productDetail?.merchant_name} */}
+              <List>
+                <ListItem><AccountCircleIcon/>{userData.first_name} {userData.last_name}</ListItem>
+              </List>
+              <List>
+                <ListItem><PhoneIcon/> </ListItem>
+              </List>
+              <List>
+                <ListItem>
+                  <EmailIcon/>{userData.email}
+                </ListItem>
+              </List>
+              <List>
+                <ListItem>
+                  <DomainAddOutlinedIcon/>{shippementData.address}
+                </ListItem>
+              </List>
+              <List>
+                <ListItem>
+                  <AddLocationAltOutlinedIcon/>{shippementData.city},{shippementData.state},{shippementData.country}
+                </ListItem>
+              </List>
+              </Box>
+            {/* <TabPanel value={value} index={2}>
+              {merchantDetail?.city}
+            </TabPanel> */}
+          </Card>
           <Card className={classes.section}>
             <List>
               <ListItem>
-                <Typography component="h2" variant="h2">
-                  Shipping Address
+                <Typography component="h2" variant="h4">
+                  Your Shipping Method
                 </Typography>
               </ListItem>
-              <ListItem>
-                {shippingAddress.fullName}, {shippingAddress.address},{" "}
-                {shippingAddress.city}, {shippingAddress.postalCode},{" "}
-                {shippingAddress.country}
-              </ListItem>
+              <ListItem>overnight</ListItem>
             </List>
           </Card>
           <Card className={classes.section}>
             <List>
               <ListItem>
-                <Typography component="h2" variant="h2">
-                  Payment Method
-                </Typography>
-              </ListItem>
-              <ListItem>{paymentMethod}</ListItem>
-            </List>
-          </Card>
-          <Card className={classes.section}>
-            <List>
-              <ListItem>
-                <Typography component="h2" variant="h2">
+                <Typography component="h2" variant="h4">
                   Order Items
                 </Typography>
               </ListItem>
               <ListItem>
                 <TableContainer>
                   <Table>
-                    <TableHead>
-                      <TableRow>
-                        <TableCell>Image</TableCell>
-                        <TableCell>Name</TableCell>
-                        <TableCell align="right">Quantity</TableCell>
-                        <TableCell align="right">Price</TableCell>
-                      </TableRow>
-                    </TableHead>
-                    <TableBody>
-                      {cartItems.map(item => (
-                        <TableRow key={item._id}>
-                          <TableCell>
-                            <NextLink href={`/product/${item.slug}`} passHref>
-                              <Link>
-                                <Image
-                                  src={item.productImage}
-                                  alt="shirt"
-                                  width={50}
-                                  height={50}
-                                ></Image>
-                              </Link>
-                            </NextLink>
-                          </TableCell>
+                    {console.log(productCartData)}
+                  {productCartData && Object.keys(productCartData).map((key) => (  
+                  <>
+                  <TableHead>
+                  {productCartData[key].map((result) => result.merchant_name)[0]}
+                   </TableHead>
+                  
+                     <TableBody>
+                     { productCartData[key].map((item)=> (
+                       <TableRow >
+                         <TableCell>
+                           <NextLink href={`/product/${item.name}`} passHref>
+                             <Link>
+                               <Image
+                                 src={item.image_URL}
+                                 alt="shirt"
+                                 width={50}
+                                 height={50}
+                               ></Image>
+                             </Link>
+                           </NextLink>
+                         </TableCell>
 
-                          <TableCell>
-                            <NextLink href={`/product/${item.slug}`} passHref>
-                              <Link>
-                                <Typography>{item.productName}</Typography>
-                              </Link>
-                            </NextLink>
-                          </TableCell>
-                          <TableCell align="right">
-                            <Typography>{item.cartQuantity}</Typography>
-                          </TableCell>
-                          <TableCell align="right">
-                            <Typography>${item.productCost}</Typography>
-                          </TableCell>
-                        </TableRow>
-                      ))}
-                    </TableBody>
+                         <TableCell>
+                           <NextLink href={`/product/${item.name}`} passHref>
+                             <Link>
+                               <Typography>{item.name}</Typography>
+                             </Link>
+                           </NextLink>
+                         </TableCell>
+                         <TableCell align="right">
+                           <Typography>{item.qty}</Typography>
+                         </TableCell>
+                         <TableCell align="right">
+                           <Typography>${item.price}</Typography>
+                         </TableCell>
+                       </TableRow>
+                     ))}
+                   </TableBody>
+            
+                    
+                    </>
+                   ))
+                   } 
                   </Table>
                 </TableContainer>
               </ListItem>
@@ -127,11 +154,12 @@ function PlaceOrder({shippingAddress,shippingPrice,taxPrice,totalPrice,placeOrde
                     <Typography>Items:</Typography>
                   </Grid>
                   <Grid item xs={6}>
-                    <Typography align="right">${itemsPrice}</Typography>
+                    <Typography align="right"> {productPrice &&
+              productPrice.reduce((a, c) => a + c.qty * c.price, 0)}</Typography>
                   </Grid>
                 </Grid>
               </ListItem>
-              <ListItem>
+              {/* <ListItem>
                 <Grid container>
                   <Grid item xs={6}>
                     <Typography>Tax:</Typography>
@@ -140,14 +168,14 @@ function PlaceOrder({shippingAddress,shippingPrice,taxPrice,totalPrice,placeOrde
                     <Typography align="right">${taxPrice}</Typography>
                   </Grid>
                 </Grid>
-              </ListItem>
+              </ListItem> */}
               <ListItem>
                 <Grid container>
                   <Grid item xs={6}>
                     <Typography>Shipping:</Typography>
                   </Grid>
                   <Grid item xs={6}>
-                    <Typography align="right">${shippingPrice}</Typography>
+                    <Typography align="right">500</Typography>
                   </Grid>
                 </Grid>
               </ListItem>
@@ -160,7 +188,8 @@ function PlaceOrder({shippingAddress,shippingPrice,taxPrice,totalPrice,placeOrde
                   </Grid>
                   <Grid item xs={6}>
                     <Typography align="right">
-                      <strong>${totalPrice}</strong>
+                      <strong>{productPrice &&
+              productPrice.reduce((a, c) => a + c.qty * c.price, 0)+500}</strong>
                     </Typography>
                   </Grid>
                 </Grid>
@@ -175,11 +204,11 @@ function PlaceOrder({shippingAddress,shippingPrice,taxPrice,totalPrice,placeOrde
                   Place Order
                 </Button>
               </ListItem>
-              {loading && (
+              {/* {loading && (
                 <ListItem>
                   <CircularProgress />
                 </ListItem>
-              )}
+              )} */}
             </List>
           </Card>
         </Grid>

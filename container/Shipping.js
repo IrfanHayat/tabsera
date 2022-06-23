@@ -14,6 +14,7 @@ export default function Shipping({
   submitHandler,
   handleSubmit,
   chooseLocationHandler,
+  handleChange,
   classes,
   control,
   Controller,
@@ -25,11 +26,13 @@ export default function Shipping({
   states,
   getCities,
   cityData,
+  labelValue
 }) {
-  let [labelValue, setLabelValue] = useState("");
+  
   const [countryList, setCountryList] = useState([]);
   const [stateList, setStateList] = useState([]);
   const [cityList, setCityList] = useState([]);
+
 
   useEffect(() => {
     console.log(countryData);
@@ -61,10 +64,7 @@ export default function Shipping({
   //   //setValue("item", { id: 3, name: "item3" });
   // }, []);
 
-  const handleChange = (event, value) => {
-    console.log(value);
-    setLabelValue({ value });
-  };
+  
 
   return (
     <>

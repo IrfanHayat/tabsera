@@ -38,7 +38,7 @@ function CartScreen({
   
 
   return (
-    <Box sx={{ flexGrow: 1, marginTop: 5 }}>
+    <Box sx={{ flexGrow: 1,display: 'grid', marginTop: 5 }}>
       <Typography component="h4" variant="h5">
         {heading}
       </Typography>
@@ -116,7 +116,7 @@ function CartScreen({
                 <DeleteIcon fontSize="inherit" />
               </IconButton>
             </Grid>
-            <Grid item md={2} sm={2}>
+            {/* <Grid item md={2} sm={2}>
               <Card>
                 <List>
                   <ListItem>
@@ -128,7 +128,7 @@ function CartScreen({
                   </ListItem>
                 </List>
               </Card>
-            </Grid>
+            </Grid> */}
           </Grid>
         ))}
     </Box>

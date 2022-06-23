@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import PublicOutlinedIcon from "@mui/icons-material/PublicOutlined";
+
 export default function Footer() {
   return (
     <Box
@@ -17,7 +18,8 @@ export default function Footer() {
         flexDirection: "column",
         // minHeight: "10vh",
         justifyContent: "space-between",
-        // position: "absolute",
+         //position: "fixed",
+        
         bottom: 0,
         width: "100%",
         //  flex-direction: "column",
@@ -26,7 +28,7 @@ export default function Footer() {
       }}
     >
       {/* Hi */}
-      <Container maxWidth="lg">
+      <Container fixed maxWidth="lg">
         <Grid container spacing={5}>
           <Grid item xs={12} sm={3} direction="row" alignItems="center">
             <Box borderBottom={1}>

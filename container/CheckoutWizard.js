@@ -16,8 +16,9 @@ export default function CheckoutWizard({ activeStep = 0 }) {
             "Shipping Information",
             "Shipping Address",
             "Shipping Methods",
-            "Payment Method",
             "Place Order",
+            "Payment Method",
+           
           ].map((step) => (
             <Step key={step} sx={{ width: "35%" }}>
               <StepLabel>{step}</StepLabel>

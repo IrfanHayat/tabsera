@@ -3,12 +3,8 @@ import instance from "../helper/axios/httpRequest";
 import productData from "../data/product";
 import { url, setHeaders } from "../helper/axios/config";
 //import Cookies from 'universal-cookie';
+import Encryption from '../helper/encryption/encryptAes';
 
-export const getShipmentsMethods = createAsyncThunk("ecommerce/shipments/methods", async () => {
-  const result = await instance.post(`${url}/ecommerce/shipments/methods`);
-  console.log("shipments methods", result);
-  return result.data.response;
-});
 
 
 export const getLabels = createAsyncThunk("customers/address/labels", async () => {
@@ -19,8 +15,14 @@ export const getLabels = createAsyncThunk("customers/address/labels", async () =
 
 
 export const addShipmentAddress = createAsyncThunk("add/customers/addresses", async (shipmentData) => {
-  console.log(shipmentData)
-  const result = await instance.post(`${url}/customers/addresses`,shipmentData);
+ 
+  const encrypt = Encryption(shipmentData);
+  console.log(encrypt)
+
+  const requestBody = {
+      requestBody: encrypt
+  };
+  const result = await instance.post(`${url}/customers/addresses`,requestBody);
   console.log("add shipments", result);
   return result.data.response;
 });
@@ -58,7 +60,41 @@ export const getCity = createAsyncThunk("cities", async (id) => {
   return result.data.response;
 });
 
+export const getCustomer = createAsyncThunk(
+  "auth/getCustomer",
+  async () => {
+  
+      const response = await instance.get(`${url}/customers`);
 
+      return response.data.response;
+    
+  }
+);
+
+
+export const getShipmentsMethods = createAsyncThunk("ecommerce/shipments/methods", async (shipmentData) => {
+  const encrypt = Encryption(shipmentData);
+        console.log(encrypt)
+
+        const requestBody = {
+            requestBody: encrypt
+        };
+  const result = await instance.post(`${url}/ecommerce/shipments/methods`,requestBody);
+  console.log("shipments methods", result.data.response);
+  return result.data.response;
+});
+
+export const getShipmentsCharges = createAsyncThunk("ecommerce/shipments/charges", async (shipmentData) => {
+  const encrypt = Encryption(shipmentData);
+        console.log(encrypt)
+
+        const requestBody = {
+            requestBody: encrypt
+        };
+  const result = await instance.post(`${url}/ecommerce/shipments/charges`,requestBody);
+  console.log("shipments methods", result.data.response);
+  return result.data.response;
+});
 
 
 
@@ -70,6 +106,8 @@ const addShipments = createSlice({
     countryData:[],
     states:[],
     cityData:[],
+    userData:{},
+    shippingCharges:[],
     shippingAddressData:[],
     loading: false,
     error: null,
@@ -182,6 +220,35 @@ const addShipments = createSlice({
       state.loading = false;
     });
     builder.addCase(getCity.rejected, (state, action) => {
+      return {
+        ...state,
+        loading: "rejected",
+        error: action.payload,
+      };
+    });
+    builder.addCase(getCustomer.pending, (state, action) => {
+      return { ...state, loading: true };
+    });
+    builder.addCase(getCustomer.fulfilled, (state, action) => {
+      state.userData = action.payload || [];
+      state.loading = false;
+    });
+    builder.addCase(getCustomer.rejected, (state, action) => {
+      return {
+        ...state,
+        loading: "rejected",
+        error: action.payload,
+      };
+    });
+    builder.addCase(getShipmentsCharges.pending, (state, action) => {
+      return { ...state, loading: true };
+    });
+    builder.addCase(getShipmentsCharges.fulfilled, (state, action) => {
+      console.log(action.payload)
+      state.shippingCharges = action.payload || [];
+      state.loading = false;
+    });
+    builder.addCase(getShipmentsCharges.rejected, (state, action) => {
       return {
         ...state,
         loading: "rejected",

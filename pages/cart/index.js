@@ -84,7 +84,7 @@ function cart() {
   };
 
   const checkoutHandler = () => {
-    router.push("/shipping");
+    router.push("/shipping_information");
   };
 
   return (

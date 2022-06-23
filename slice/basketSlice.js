@@ -282,8 +282,8 @@ export const basketSlice = createSlice({
         }
       );
       total = parseFloat(total.toFixed(2));
-      state.cartTotalQuantity = quantity;
-      state.cartTotalAmount = total;
+      state.cart.cartTotalQuantity = quantity;
+      state.cart.cartTotalAmount = total;
      
     },
     clearBasket(state, action) {

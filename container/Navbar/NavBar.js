@@ -114,10 +114,10 @@ export default function NavBar(props) {
 
   console.log(cartTotalQuantity);
 
-  useEffect(async () => {
-     dispatch(getTotalCartQuantity(false));
+  useEffect( () => {
+     dispatch(getTotalCartQuantity());
     // setQunatityProduct(result.payload)
-  }, [cartTotalQuantity && cartTotalQuantity]);
+  }, []);
 
   const categoryData = (categories) => {
     setCategoriesData(categories);
@@ -323,8 +323,7 @@ export default function NavBar(props) {
     >
       <MenuItem>
         <FormControl
-          sx={{ m: 1, maxWidth: 10, textDecoration: "none" }}
-          size="small"
+          sx={{ m: 1, minWidth: 120 }} size="small"
         >
           <InputLabel id="demo-select-small" sx={{ fontWeight: 100 }}>
             My Account
