@@ -35,8 +35,6 @@ function CartScreen({
   checkoutHandler,
   productPrice,
 }) {
-  
-
   return (
     <Box sx={{ flexGrow: 1,display: 'grid', marginTop: 5 }}>
       <Typography component="h4" variant="h5">
@@ -55,7 +53,13 @@ function CartScreen({
               alignItems: "center",
             }}
           >
-            <Grid item xs="auto" style={{ height: "150px", width: "150px" }}>
+            <Grid
+              item
+              xs="auto"
+              sm="auto"
+              md={3}
+              style={{ height: "150px", width: "150px" }}
+            >
               <NextLink href={`/product/${item?.name}`} passHref>
                 <Link>
                   <CardMedia
@@ -102,7 +106,7 @@ function CartScreen({
                 <AddBoxOutlinedIcon />
               </IconButton>
             </Grid>
-            <Grid item md={1} sm={2} align="right">
+            <Grid item md={2} sm={2} align="right">
               ${item.price}
             </Grid>
             <Grid item md={1} sm={1} align="right">
@@ -117,6 +121,7 @@ function CartScreen({
               </IconButton>
             </Grid>
             {/* <Grid item md={2} sm={2}>
+            <Grid item md={3} sm={3}>
               <Card>
                 <List>
                   <ListItem>

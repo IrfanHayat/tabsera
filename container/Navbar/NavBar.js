@@ -42,6 +42,8 @@ import Popover from "@mui/material/Popover";
 import instance from "../../helper/axios/httpRequest";
 import { url, setHeaders } from "../../helper/axios/config";
 import ShoppingCart from "../../pages/cart/index";
+import Image from "next/image";
+import logo from "../../public/logo.png";
 const drawerWidth = 10;
 
 const Search = styled("div")(({ theme }) => ({
@@ -477,16 +479,17 @@ export default function NavBar(props) {
       {renderMenu}{" "}
       <AppBar
         sx={{
+          color: "inherit",
           // bgcolor: "#bdbdbd",
           // height: "95%",
-          bgcolor: "#fafafa",
+          bgcolor: "#212121",
           justifyContent: "center",
           // padding: "5px",
         }}
         position="static"
       >
         <Toolbar>
-          <Typography
+          {/* <Typography
             variant="h6"
             noWrap
             component="a"
@@ -497,31 +500,30 @@ export default function NavBar(props) {
               fontFamily: "monospace",
               fontWeight: 700,
               letterSpacing: ".3rem",
-              color: "black",
+              // color: "black",
               textDecoration: "none",
             }}
-          >
-            Tabsera
-          </Typography>
+          > */}
 
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href=""
+          {/* <Box
+            component="img"
             sx={{
-              // mr: 1,
-              display: { xs: "flex", md: "none" },
-              flexGrow: 1,
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".1rem",
               color: "black",
-              textDecoration: "none",
+              height: 64,
             }}
-          >
-            Tabsera
-          </Typography>
+            alt="Your logo."
+            // src={logo}
+            src={"./image_2022_06_22T12_07_34_261Z.png"}
+            // src={
+            //   "https://i2.wp.com/files.123freevectors.com/wp-content/uploads/freevectorimage/abstract-and-colorful-logo-free-vector-1802.jpg?w=800&q=95"
+            // }
+          ></Box> */}
+
+          {/* <Image src="/logo.png" height={100} width={100}></Image> */}
+          {/* </Typography> */}
+
+          <Image src="/logo.png" height={40} width={100}></Image>
+
           <Box component="div" sx={{ flexGrow: 1 }} />
           <SignInModal show={showLogin} close={() => setShowLogin(false)} />
         </Toolbar>
@@ -529,6 +531,7 @@ export default function NavBar(props) {
         <Toolbar>
           <ThemeProvider>
             <Chip
+              sx={{ color: "white" }}
               onClick={toggleDrawer}
               icon={<MenuIcon />}
               label="Shop By Category"
@@ -552,7 +555,7 @@ export default function NavBar(props) {
               variant="contained"
               onClick={handleClick}
               color="primary"
-              onMouseEnter={handleClick}
+              // onMouseEnter={handleClick}
               // onMouseLeave={handleClick}
             >
               <Badge color="error" badgeContent={cartTotalQuantity} max={99}>
@@ -570,10 +573,8 @@ export default function NavBar(props) {
                 horizontal: "left",
               }}
             >
-              <Typography sx={{ p: 1 }}>
-                {" "}
-                <ShoppingCart />
-              </Typography>
+              {/* <Typography sx={{ p: 1 }}> */} <ShoppingCart />
+              {/* </Typography> */}
             </Popover>
           </div>
         </Toolbar>
