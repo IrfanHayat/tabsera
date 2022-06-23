@@ -15,10 +15,10 @@ export default function Footer() {
         color: "white",
         bgcolor: "primary.main",
         flexDirection: "column",
-        // minHeight: "10vh",
         justifyContent: "space-between",
-        // position: "absolute",
-        bottom: 0,
+        position: "relative",
+        marginBottom: 0,
+        // bottom: 0,
         width: "100%",
         //  flex-direction: "column",
         // justify-content: "space-between,"

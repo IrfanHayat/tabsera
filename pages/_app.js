@@ -7,6 +7,7 @@ import { theme } from "../theme";
 import { CookiesProvider } from "react-cookie";
 import NavBar from "../container/Navbar/NavBar";
 import Footer from "../container/Footer/Footer";
+import { Box } from "@mui/material";
 const MyApp = ({ Component, pageProps }) => {
   return (
     //  <SessionProvider session={pageProps.session}>
@@ -14,7 +15,9 @@ const MyApp = ({ Component, pageProps }) => {
       <ThemeProvider theme={theme}>
         <CookiesProvider>
           <NavBar />
-          <Component {...pageProps} />
+          <Box sx={{ minHeight: "80vh" }}>
+            <Component {...pageProps} />
+          </Box>
           <Footer />
         </CookiesProvider>
       </ThemeProvider>
