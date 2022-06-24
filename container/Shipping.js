@@ -35,10 +35,7 @@ export default function Shipping({
 
 
   useEffect(() => {
-    console.log(countryData);
-    console.log("--------------");
-    console.log(cityData);
-    console.log("-0----------------");
+    
 
     setCountryList(countryData);
 

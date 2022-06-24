@@ -7,7 +7,7 @@ import { Box } from "@mui/material";
 
 function Input(props) {
   const { name, label, ...rest } = props;
-  // console.log(name);
+ 
   return (
     <Box>
       {/* <label htmlFor={name}> {label}</label> */}

@@ -33,7 +33,7 @@ export const getProductWithId = createAsyncThunk(
   "cart/getProductWithId",
   async (id) => {
     const result = await instance.get(`${url}/ecommerce/products/${id}`);
-    console.log(result)
+  
     return result.data.response;;
   }
 );
@@ -42,9 +42,7 @@ export const addToCart = createAsyncThunk(
   "cart/addCart",
   async (product)=>{
    let result=await instance.post(`${url}/ecommerce/carts`)
-    console.log(result.data.response.items)
-    console.log(product)
-    console.log("Hell")
+ 
 
 
      if(result.length>0 && result.data.response.items.length>0){
@@ -63,9 +61,9 @@ export const addToCart = createAsyncThunk(
       
     }else{
       let tempProductItem = { ...product, qty: 1 };
-      console.log(tempProductItem)
+     
       let result2=await instance.get(`${url}/ecommerce/products/${tempProductItem.product_id}`)
-    // console.log()
+    
      if(tempProductItem.skus.length>0){
       let skus_value;
       tempProductItem.skus.map(result=>{
@@ -81,13 +79,13 @@ export const addToCart = createAsyncThunk(
 
      }else{
       let skus = result2.data.response.skus
-      console.log(skus)     
+     
     if(skus.length>0){
       let skus_value;
       skus.map(result=>{
         skus_value=result.sku;
       })
-     console.log(skus_value)
+    
       let cart = {
         cart_id:611,
         sku:  skus_value,
@@ -96,7 +94,7 @@ export const addToCart = createAsyncThunk(
     };
   
       
-    console.log(cart)
+    
    await instance.post(`${url}/ecommerce/carts/items`,cart)
      
 
@@ -114,7 +112,7 @@ export const getCartItems = createAsyncThunk(
   "cart/getCartItems",
   async () => {
     const result = await instance.post(`${url}/ecommerce/carts`);
-  
+    
     return result.data.response.items;;
   }
 );
@@ -158,17 +156,14 @@ export const basketSlice = createSlice({
       );
 
       if (existingIndex >= 0) {
-        console.log("existing Index")
-        console.log(existingIndex)
-        console.log('----------------------')
+        
         state.cart.cartItems[existingIndex] = {
           ...state.cart.cartItems[existingIndex],
           qty: state.cart.cartItems[existingIndex].qty + 1,
         };
-        console.log(state.cart.cartItems[existingIndex].cart_item_id)
-
+        
         instance.put(`${url}/ecommerce/carts/items/${state.cart.cartItems[existingIndex].cart_item_id}`,state.cart.cartItems[existingIndex]).then(result=>{
-          console.log(result)
+        
      })
          
 
@@ -176,13 +171,12 @@ export const basketSlice = createSlice({
         let skus;
        
         let tempProductItem = { ...action.payload, qty: 1 };
-        console.log(tempProductItem)
         instance.post(`${url}/ecommerce/carts`).then(result=>{
-                console.log(result.data.response)
+                
         })
         instance.get(`${url}/ecommerce/products/${tempProductItem.product_id}`).then(result=>{
           skus=result.data.response.skus
-            console.log(skus)     
+           
           if(skus.length>0){
             let skus_value;
             skus.map(result=>{
@@ -195,18 +189,18 @@ export const basketSlice = createSlice({
               // price: cost,
               qty: tempProductItem.qty
           };
-          console.log(cart)
+          
           instance.post(`${url}/ecommerce/carts/items`,cart).then(result=>{
-               console.log(result)
+              
           })
           }
 
         });
         // const result = await instance.get(`${url}/ecommerce/products/${temp}`);
-       // console.log(result)
+       //
 
        instance.post(`${url}/ecommerce/carts`).then(result=>{
-        console.log(result.data.response)
+  
 })
      state.cart.cartItems
       }
@@ -221,7 +215,7 @@ export const basketSlice = createSlice({
         state.cart.cartItems[itemIndex].qty -= 1;
                   
         instance.put(`${url}/ecommerce/carts/items/${state.cart.cartItems[itemIndex].cart_item_id}`,state.cart.cartItems[itemIndex]).then(result=>{
-          console.log(result)
+         
      })
       } else if (state.cart.cartItems[itemIndex].qty === 1) {
         const nextCartItems = state.cart.cartItems.filter(
@@ -229,7 +223,7 @@ export const basketSlice = createSlice({
         );
        
         instance.put(`${url}/ecommerce/carts/items/${state.cart.cartItems[itemIndex].cart_item_id}`,nextCartItems).then(result=>{
-          console.log(result)
+         
      })
         state.cart.cartItems = nextCartItems;
       }
@@ -249,10 +243,10 @@ export const basketSlice = createSlice({
           );
 
           state.cart.cartItems = nextCartItems;
-          // console.log(itemIndex)
-          console.log(state.cart.cartItems)
+          
+          
           instance.delete(`${url}/ecommerce/carts/items/${cartItem.cart_item_id}`,state.cart.cartItems).then(result=>{
-            console.log(result)
+           
        })
         }
         
@@ -261,13 +255,9 @@ export const basketSlice = createSlice({
       });
     },
     getTotals(state, action) {
-      console.log("I am here")
-      console.log(current(state.cart.cartItems))
+      
       let { total, quantity } = current(state.cart.cartItems).reduce(
         (cartTotal, cartItem) => {
-          console.log("cartItem")
-          console.log(cartItem)
-          console.log("-------------------")
           const { price, qty } = cartItem;
           const itemTotal = price * qty;
 
@@ -303,7 +293,7 @@ export const basketSlice = createSlice({
           },
         },
       };
-      console.log(state)
+     
     },
     saveShippingMap(state,action){
       return {
@@ -363,7 +353,7 @@ export const basketSlice = createSlice({
       return { ...state, loading: true };
     });
     builder.addCase(addToCart.fulfilled, (state, action) => {
-      console.log(action.payload)
+      
       state.cart.cartItems = action.payload;
       state.loading = false;
     });
@@ -380,7 +370,7 @@ export const basketSlice = createSlice({
       return { ...state, loading: true };
     });
     builder.addCase(getTotalCartQuantity.fulfilled, (state, action) => {
-       console.log(action.payload)
+       
       state.cart.cartTotalQuantity = action.payload;
       state.loading = false;
     });

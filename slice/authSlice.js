@@ -29,7 +29,7 @@ export const registerUser = createAsyncThunk(
     }
       return result.data;
     } catch (error) {
-      console.log(error.response.data);
+      
       return rejectWithValue(error.response.data);
     }
   }
@@ -38,7 +38,7 @@ export const registerUser = createAsyncThunk(
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async (values, { rejectWithValue }) => {
-    console.log(values)
+    
     try {
         let cookiesWebsite=new Cookies()
         
@@ -57,18 +57,18 @@ export const loginUser = createAsyncThunk(
 
         //aes helper function
        const encrypt = Encryption(dataEncrypt);
-        console.log(encrypt)
+       
 
         const requestBody = {
             requestBody: encrypt
         };
-        console.log(instance)
+       
       const result = await instance.post(`${url}/customers/login`,requestBody);
       localStorage.setItem("token", result.data.response);
       
       return result.data.response;
     } catch (error) {
-      console.log(error);
+    
       return rejectWithValue(error.response.data);
     }
   }
@@ -84,7 +84,7 @@ export const getUser = createAsyncThunk(
 
       return response.data;
     } catch (error) {
-      console.log(error.response);
+      
       return rejectWithValue(error.response.data);
     }
   }
@@ -100,7 +100,7 @@ const authSlice = createSlice({
     
       if (token) {
         const user = token.data;
-        console.log(user)
+       
         return {
           ...state,
           token,
@@ -157,9 +157,7 @@ const authSlice = createSlice({
     builder.addCase(loginUser.fulfilled, (state, action) => {
       if (action.payload) {
         const user = action.payload;
-        console.log('LogIn user')
-        console.log(user)
-        console.log('------------')
+      
         return {
           ...state,
           token: action.payload,

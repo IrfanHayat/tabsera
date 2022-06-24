@@ -9,7 +9,7 @@ import Encryption from '../helper/encryption/encryptAes';
 
 export const getLabels = createAsyncThunk("customers/address/labels", async () => {
   const result = await instance.get(`${url}/customers/address/labels`);
-  console.log("labels", result);
+  
   return result.data.response;
 });
 
@@ -17,46 +17,43 @@ export const getLabels = createAsyncThunk("customers/address/labels", async () =
 export const addShipmentAddress = createAsyncThunk("add/customers/addresses", async (shipmentData) => {
  
   const encrypt = Encryption(shipmentData);
-  console.log(encrypt)
-
+  
   const requestBody = {
       requestBody: encrypt
   };
   const result = await instance.post(`${url}/customers/addresses`,requestBody);
-  console.log("add shipments", result);
+  
   return result.data.response;
 });
 
 
 export const getShipmentAddress = createAsyncThunk("get/customers/addresses", async () => {
   const result = await instance.get(`${url}/customers/addresses`);
-  console.log("Get shipments", result);
+  
   return result.data.response;
 });
 
 
 export const updateShipmentAddress = createAsyncThunk("put/customers/addresses", async (shipmentData) => {
   const result = await instance.put(`${url}/customers/addresses`,shipmentData);
-  console.log("shipments Update", result);
+  
   return result.data.response;
 });
 
 
 export const getCountry = createAsyncThunk("countries", async () => {
   const result = await instance.get(`${url}/countries`);
-  console.log("country", result);
+  
   return result.data.response;
 });
 
 export const getState = createAsyncThunk("states", async (id) => {
   const result = await instance.get(`${url}/states/${id}`);
-  console.log("labels", result);
   return result.data.response;
 });
 
 export const getCity = createAsyncThunk("cities", async (id) => {
   const result = await instance.get(`${url}/cities/${id}`);
-  console.log("labels", result);
   return result.data.response;
 });
 
@@ -74,25 +71,22 @@ export const getCustomer = createAsyncThunk(
 
 export const getShipmentsMethods = createAsyncThunk("ecommerce/shipments/methods", async (shipmentData) => {
   const encrypt = Encryption(shipmentData);
-        console.log(encrypt)
-
         const requestBody = {
             requestBody: encrypt
         };
   const result = await instance.post(`${url}/ecommerce/shipments/methods`,requestBody);
-  console.log("shipments methods", result.data.response);
+  
   return result.data.response;
 });
 
 export const getShipmentsCharges = createAsyncThunk("ecommerce/shipments/charges", async (shipmentData) => {
   const encrypt = Encryption(shipmentData);
-        console.log(encrypt)
-
+  
         const requestBody = {
             requestBody: encrypt
         };
   const result = await instance.post(`${url}/ecommerce/shipments/charges`,requestBody);
-  console.log("shipments methods", result.data.response);
+  
   return result.data.response;
 });
 
@@ -244,7 +238,7 @@ const addShipments = createSlice({
       return { ...state, loading: true };
     });
     builder.addCase(getShipmentsCharges.fulfilled, (state, action) => {
-      console.log(action.payload)
+      
       state.shippingCharges = action.payload || [];
       state.loading = false;
     });

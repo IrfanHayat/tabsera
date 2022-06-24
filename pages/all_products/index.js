@@ -68,6 +68,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getProduct } from "../../slice/productSlice";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
+import _ from 'lodash'
 import {
   addToBasket,
   clearBasket,
@@ -91,61 +92,56 @@ const Index = () => {
   //   hasMore: true,
   // };
 
-  const product = useSelector((state) => state.product.productData);
-  const [items, setItems] = useState(Array.from({ length: 10 }));
+  const product = useSelector(state => state.product.productData);
+  let newProduct=product.slice([0], [5]).map((item, i) => {
+    return item;
+  })
+  const [items, setItems] = useState(newProduct);
   // const [items, setItems] = useState(product);
-  console.log("item ---> ", items);
+
 
   const [hasMore, setHasMore] = useState(true);
 
-  console.log("product", product);
+ 
   let router = useRouter();
   let dispatch = useDispatch();
 
-  // const [page, setPage] = useState(product);
-  // console.log("item", page);
-
+  
   useEffect(async () => {
     await dispatch(getProduct());
   }, []);
 
-  React.useEffect(() => {
-    setItems(product);
-  }, [items, product]);
+  // React.useEffect(() => {
+  //   setItems(product);
+  // }, [items, product]);
 
-  const viewProduct = (item) => {
+  const viewProduct = item => {
     router.push({
       pathname: `/product_detail`,
       query: { productId: item.productId },
     });
   };
 
-  const addToCartHandler = (product) => {
+  const addToCartHandler = product => {
     dispatch(addToBasket(product));
     router.push("/cart");
   };
 
   const fetchMoreData = () => {
-    if (items.length >= product.length) {
-      setHasMore(false);
-      // this.setState({ hasMore: false });
-      return;
-    }
-    // a fake async api call like which sends
-    // 20 more records in .5 secs
-    setTimeout(() => {
-      setItems(items.concat(Array.from({ length: 10 })));
-      //  setItems({
-      //    items: this.state.items.concat(Array.from({ length: 20 })),
-      //  });
-    }, 1000);
+    
+      setItems(product.slice([4], [10]).map((item, i) => {
+        return item;
+      }))
   };
+  useEffect(()=>{
+    setItems(product)
+  },[])
 
+  
   return (
-    <div>
-      <h1>demo: react-infinite-scroll-component</h1>
-      <hr />
-      <InfiniteScroll
+    <>
+     
+      {/* <InfiniteScroll
         dataLength={items.length}
         next={fetchMoreData}
         hasMore={hasMore}
@@ -155,7 +151,7 @@ const Index = () => {
             <b>Yay! You have seen it all</b>
           </p>
         }
-      >
+      > */}
         {/* {items.map((item) => (
           <ActionAreaCard
             product={item}
@@ -174,8 +170,8 @@ const Index = () => {
             {/* {item?.productName}> */}
           </ActionAreaCard>
         ))}
-      </InfiniteScroll>
-    </div>
+      {/* </InfiniteScroll> */}
+    </>
   );
 };
 

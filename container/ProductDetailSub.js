@@ -7,7 +7,7 @@ function a11yProps(index) {
   };
 }
 function ProductDetailSub() {
-  console.log(productDetail);
+ 
   return <></>;
 }
 

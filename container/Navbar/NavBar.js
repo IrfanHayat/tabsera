@@ -27,6 +27,7 @@ import ReceiptIcon from "@mui/icons-material/Receipt";
 import AdUnitsIcon from "@mui/icons-material/AdUnits";
 import GppGoodOutlinedIcon from "@mui/icons-material/GppGoodOutlined";
 import { getProduct } from "../../slice/productSlice";
+import { getCategory } from "../../slice/categorySlice";
 import { getTotalCartQuantity, getTotals } from "../../slice/basketSlice";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
@@ -114,10 +115,11 @@ export default function NavBar(props) {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const [categoriesData, setCategoriesData] = useState([]);
 
-  console.log(cartTotalQuantity);
+ 
 
   useEffect( () => {
      dispatch(getTotalCartQuantity());
+     dispatch(getCategory())
     // setQunatityProduct(result.payload)
   }, []);
 

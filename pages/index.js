@@ -9,7 +9,7 @@ import { Box } from "@mui/system";
 
 export default function Home(children) {
   let router = useRouter();
-  // console.log(locale);
+ 
   return (
     //<div className={styles.container}>
     //<Layout>

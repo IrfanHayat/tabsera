@@ -11,14 +11,14 @@ function SubCategory() {
   const { productDataWithCategoryId } = useSelector((state) => state.category);
   const router = useRouter();
   const dispatch = useDispatch();
-  console.log(productDataWithCategoryId);
+
   const viewProduct = (item) => {
     router.push({
       pathname: "/product_detail",
       query: { productId: item.productId },
     });
   };
-  console.log(productDataWithCategoryId);
+
   //   const viewCategory = (item) => {
   //     router.push({
   //       pathname: "/sub_category",
@@ -30,7 +30,7 @@ function SubCategory() {
   };
   useMemo(() => {
     let id = router?.query?.sub_category;
-    console.log(id);
+  
     getData(id);
   }, []);
 

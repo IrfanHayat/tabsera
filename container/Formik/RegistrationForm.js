@@ -35,7 +35,7 @@ function RegistratioForm() {
     email: Yup.string().required("Required"),
   });
   const onSubmit = (values) =>{
-    console.log("Form data", values.firstName, values.lastName, values.email);
+  
 
   }
     

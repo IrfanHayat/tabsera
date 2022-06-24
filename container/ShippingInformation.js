@@ -21,7 +21,7 @@ function ShippingInformation({ checkoutHandler, shippementAddress, handleChange,
   //   setButtonKey(event.target.value);
   // };
 
-  console.log(buttonKey);
+  
   // React.useEffect(() => {
   //   // setButtonKey(buttonKey);
   // }, [buttonKey]);

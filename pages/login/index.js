@@ -28,7 +28,7 @@ export default function Login() {
   const router = useRouter();
   const { redirect } = router.query; // login?redirect=/shipping
   const dispatch = useDispatch();
-  const auth = useSelector((state) => state.auth);
+  const auth = useSelector(state => state.auth);
 
   // useEffect(() => {
   //   if (auth._id) {

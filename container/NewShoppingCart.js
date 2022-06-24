@@ -37,9 +37,7 @@ export default function VariableWidthGrid({
   handleDecreaseCart,
   checkoutHandler,
 }) {
-  console.log("product Detail");
-  console.log(productCartData);
-  console.log("=====================");
+ 
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Typography component="h4" variant="h5">

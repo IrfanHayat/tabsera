@@ -41,14 +41,11 @@ export default function Modal({
         <DialogContent>
           <DialogContentText>
             {dialogContentText}
-            {/* Let Google help apps determine location. This means sending
-            anonymous location data to Google, even when no apps are running. */}
+           
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          {/* <Button autoFocus onClick={handleClose}> */}
-          {/* {buttonSubmit} */}
-          {/* </Button> */}
+          
           <Button onClick={handleClose} autoFocus>
             {buttonCancel}
           </Button>

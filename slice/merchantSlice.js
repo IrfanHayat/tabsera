@@ -7,9 +7,8 @@ import { url, setHeaders } from "../helper/axios/config";
 export const getMerchantWithId = createAsyncThunk(
   "merchant/getMerchantWithId",
   async (id) => {
-    console.log(id);
     const result = await instance.get(`${url}/merchants/${id}`);
-    console.log("merchant c ", result.data.response);
+   
     return result.data.response;
   }
 );
@@ -27,7 +26,6 @@ const getMerchant = createSlice({
       return { ...state, loading: true };
     });
     builder.addCase(getMerchantWithId.fulfilled, (state, action) => {
-      console.log("data= ", action.payload);
       state.merchantData = action.payload;
       state.loading = false;
     });

@@ -12,7 +12,7 @@ export default function encryption(data) {
 
         return encrypted;
     } catch (exp) {
-        console.log(exp);
+        
         return;
     }
 }

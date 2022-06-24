@@ -62,7 +62,7 @@ export default function PersistentDrawerLeft() {
     return list.reduce(function (rv, x) {
       rv[x[key].split(" ").join("")] = rv[x[key].split(" ").join("")] || [];
       rv[x[key].split(" ").join("")].push(x);
-      //  console.log(x)
+     
       return rv;
     }, {});
   }

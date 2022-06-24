@@ -25,7 +25,7 @@ import EmailIcon from '@mui/icons-material/Email';
 import DomainAddOutlinedIcon from '@mui/icons-material/DomainAddOutlined';
 import AddLocationAltOutlinedIcon from '@mui/icons-material/AddLocationAltOutlined';
 function ShippingMethods({ shipmentMethodData,checkoutHandler,handleChange,shippementData,userData,productPrice }) {
- console.log(userData)
+ 
   return (
     <Grid container>
       <CheckoutWizard activeStep={3} />
@@ -51,12 +51,12 @@ function ShippingMethods({ shipmentMethodData,checkoutHandler,handleChange,shipp
               </List>
               <List>
                 <ListItem>
-                  <DomainAddOutlinedIcon/>{shippementData.address}
+                  <DomainAddOutlinedIcon/>{shippementData?.address}
                 </ListItem>
               </List>
               <List>
                 <ListItem>
-                  <AddLocationAltOutlinedIcon/>{shippementData.city},{shippementData.state},{shippementData.country}
+                  <AddLocationAltOutlinedIcon/>{shippementData?.city},{shippementData?.state},{shippementData?.country}
                 </ListItem>
               </List>
               </Box>

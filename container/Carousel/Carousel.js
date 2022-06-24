@@ -19,8 +19,7 @@ export default function CarouselApp({
   addToCartHandler,
   viewCategory,
 }) {
-  //console.log("Hellow");
-  //console.log(product);
+ 
   let [productView, setProuctView] = useState(false);
   let [categoryView, setCategoryView] = useState(false);
   let [cartView, setCartView] = useState(false);
@@ -39,7 +38,7 @@ export default function CarouselApp({
         {/* {content} */}
 
         {product &&
-          product.map((item) => (
+          product.map(item => (
             <ActionAreaCard
               product={item}
               viewProduct={viewProduct}

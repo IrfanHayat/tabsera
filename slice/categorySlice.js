@@ -8,7 +8,7 @@ export const getCategory = createAsyncThunk(
   "category/getCategory",
   async () => {
     const result = await instance.get(`${url}/ecommerce/categories/levels`);
-    console.log(result)
+   
     return result.data.response;;
   }
 );
@@ -17,9 +17,9 @@ export const getCategory = createAsyncThunk(
 export const getProductWithCategoryId = createAsyncThunk(
   "category/getCategoryWithId",
   async (id) => {
-    console.log(id)
+   
     const result = await instance.get(`${url}/ecommerce/categories/${id}/products`);
-    console.log(result)
+   
     return result.data.response;;
   }
 );
@@ -41,7 +41,7 @@ const addCategory = createSlice({
       return { ...state, loading: true };
     });
     builder.addCase(getCategory.fulfilled, (state, action) => {
-      console.log(action.payload)
+      
       state.categoryData = action.payload;
       state.loading = false;
     });

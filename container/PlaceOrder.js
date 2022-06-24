@@ -59,12 +59,12 @@ function PlaceOrder({userData,shippementData,shippingAddress,shippingPrice,taxPr
               </List>
               <List>
                 <ListItem>
-                  <DomainAddOutlinedIcon/>{shippementData.address}
+                  <DomainAddOutlinedIcon/>{shippementData?.address}
                 </ListItem>
               </List>
               <List>
                 <ListItem>
-                  <AddLocationAltOutlinedIcon/>{shippementData.city},{shippementData.state},{shippementData.country}
+                  <AddLocationAltOutlinedIcon/>{shippementData?.city},{shippementData?.state},{shippementData?.country}
                 </ListItem>
               </List>
               </Box>
@@ -92,7 +92,7 @@ function PlaceOrder({userData,shippementData,shippingAddress,shippingPrice,taxPr
               <ListItem>
                 <TableContainer>
                   <Table>
-                    {console.log(productCartData)}
+                  
                   {productCartData && Object.keys(productCartData).map((key) => (  
                   <>
                   <TableHead>
