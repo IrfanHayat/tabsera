@@ -116,8 +116,8 @@ export default function NavBar(props) {
 
   console.log(cartTotalQuantity);
 
-  useEffect( () => {
-     dispatch(getTotalCartQuantity());
+  useEffect(() => {
+    dispatch(getTotalCartQuantity());
     // setQunatityProduct(result.payload)
   }, []);
 
@@ -187,77 +187,61 @@ export default function NavBar(props) {
   const id = open ? "simple-popover" : undefined;
 
   const myAccount = (
-    <Box>
+    <>
       <MenuItem>
-        <Link href={`/carousel`}>
-          <ListItem key="My Profile" disablePadding>
-            <AccountBoxIcon />
-            <ListItemText primary="My Profile" />
-          </ListItem>
-        </Link>
+        {/* <ListItem key="My Profile" disablePadding> */}
+        <AccountBoxIcon />
+        <ListItemText primary="My Profile" />
+        {/* </ListItem> */}
       </MenuItem>
       <MenuItem>
-        <Link href={`/carousel`}>
-          <ListItem key="My Orders" disablePadding>
-            <FormatListBulletedIcon />
-            <ListItemText primary="My Orders" />
-          </ListItem>
-        </Link>
+        {/* <ListItem key="My Orders" disablePadding> */}
+        <FormatListBulletedIcon />
+        <ListItemText primary="My Orders" />
+        {/* </ListItem> */}
       </MenuItem>
       <MenuItem>
-        <Link href={`/carousel`}>
-          <ListItem key="My Coupons" disablePadding>
-            <FormatListBulletedIcon />
-            <ListItemText primary="My Coupons" />
-          </ListItem>
-        </Link>
+        {/* <ListItem key="My Coupons" disablePadding> */}
+        <FormatListBulletedIcon />
+        <ListItemText primary="My Coupons" />
+        {/* </ListItem> */}
       </MenuItem>{" "}
       <MenuItem>
-        <Link href={`/carousel`}>
-          <ListItem key="My Bill Payments" disablePadding>
-            <ReceiptIcon />
-            <ListItemText primary="My Bill Payments" />
-          </ListItem>
-        </Link>
+        {/* <ListItem key="My Bill Payments" disablePadding> */}
+        <ReceiptIcon />
+        <ListItemText primary="My Bill Payments" />
+        {/* </ListItem> */}
       </MenuItem>
       <MenuItem>
-        <Link href={`/carousel`}>
-          <ListItem key="My Topups" disablePadding>
-            <AdUnitsIcon />
-            <ListItemText primary="My Topups" />
-          </ListItem>
-        </Link>
+        {/* <ListItem key="My Topups" disablePadding> */}
+        <AdUnitsIcon />
+        <ListItemText primary="My Topups" />
+        {/* </ListItem> */}
       </MenuItem>
       <MenuItem>
-        <Link href={`/carousel`}>
-          <ListItem key="Security" disablePadding>
-            <GppGoodOutlinedIcon />
-            <ListItemText primary="Security" />
-          </ListItem>
-        </Link>
+        {/* <ListItem key="Security" disablePadding> */}
+        <GppGoodOutlinedIcon />
+        <ListItemText primary="Security" />
+        {/* </ListItem> */}
       </MenuItem>
       <MenuItem>
-        <Link href={`/carousel`}>
-          <ListItem key="About" disablePadding>
-            <InfoOutlinedIcon />
-            <ListItemText primary="About" />
-          </ListItem>
-        </Link>
+        {/* <ListItem key="About" disablePadding> */}
+        <InfoOutlinedIcon />
+        <ListItemText primary="About" />
+        {/* </ListItem> */}
       </MenuItem>
       <MenuItem>
-        <Link href={`/carousel`}>
-          <ListItem key="Help" disablePadding>
-            <HelpOutlineOutlinedIcon />
-            <ListItemText primary="Help" />
-          </ListItem>
-        </Link>
+        {/* <ListItem key="Help" disablePadding> */}
+        <HelpOutlineOutlinedIcon />
+        <ListItemText primary="Help" />
+        {/* </ListItem> */}
       </MenuItem>
       {/* <MenuItem>
         <ListItem key="Logout" disablePadding>
           <ListItemText primary="Logout" />
         </ListItem>
       </MenuItem> */}
-    </Box>
+    </>
   );
 
   const drawer = (
@@ -324,9 +308,7 @@ export default function NavBar(props) {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <FormControl
-          sx={{ m: 1, minWidth: 120 }} size="small"
-        >
+        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
           <InputLabel id="demo-select-small" sx={{ fontWeight: 100 }}>
             My Account
           </InputLabel>
@@ -392,9 +374,8 @@ export default function NavBar(props) {
         sx={{
           justifyContent: "center",
           padding: "5px",
-           bgcolor: "#00b0ff",
+          bgcolor: "#01579b",
         }}
-
         position="static"
       >
         <Toolbar>
@@ -484,7 +465,7 @@ export default function NavBar(props) {
           color: "inherit",
           // bgcolor: "#bdbdbd",
           // height: "95%",
-          bgcolor: "#3d7cff",
+          bgcolor: "#0277bd",
           justifyContent: "center",
           // padding: "5px",
         }}
