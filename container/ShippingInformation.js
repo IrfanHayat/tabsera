@@ -26,14 +26,16 @@ function ShippingInformation({ checkoutHandler, shippementAddress, handleChange,
   //   // setButtonKey(buttonKey);
   // }, [buttonKey]);
   return (
-    <Grid container>
-      <CheckoutWizard activeStep={1} />
+    <>
+    <CheckoutWizard activeStep={1} />
+    <Grid container mt={5} sx={{ mx: "5rem" }}>
+     
       {/* <Grid item md={2}></Grid> */}
       <Grid
         md={12}
         sm={12}
         item
-        sx={{ display: "container", justifyContent: "center", margin: 5 }}
+        sx={{ display: "container", justifyContent: "center" }}
       >
         <FormControl>
           <RadioGroup
@@ -74,7 +76,7 @@ function ShippingInformation({ checkoutHandler, shippementAddress, handleChange,
       </Grid>
 
       {buttonKey === 1 ? (
-        <Grid item md={3} sm={3} sx={{ margin: 5 }}>
+        <Grid item md={3} sm={3} mt={5} >
           <FormControl>
         
               <FormLabel id="demo-row-radio-buttons-group-label">
@@ -124,6 +126,7 @@ function ShippingInformation({ checkoutHandler, shippementAddress, handleChange,
         ""
       )}
     </Grid>
+    </>
   );
 }
 

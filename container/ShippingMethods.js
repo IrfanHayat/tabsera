@@ -27,10 +27,12 @@ import AddLocationAltOutlinedIcon from '@mui/icons-material/AddLocationAltOutlin
 function ShippingMethods({ shipmentMethodData,checkoutHandler,handleChange,shippementData,userData,productPrice }) {
  
   return (
-    <Grid container>
-      <CheckoutWizard activeStep={3} />
+    <>
+    <CheckoutWizard activeStep={3} />
+    <Grid container sx={{ mx: "3rem" }}>
+      
      
-      <Grid item md={12} xs={12}>
+      <Grid item md={12} xs={12}  >
           <Card style={{ margin: "40px" }}>
             <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <Typography variant="h6" component="h2">
@@ -132,6 +134,7 @@ function ShippingMethods({ shipmentMethodData,checkoutHandler,handleChange,shipp
         </Box>
       </Grid>
     </Grid>
+    </>
   );
 }
 

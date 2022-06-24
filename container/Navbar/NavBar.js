@@ -394,7 +394,7 @@ export default function NavBar(props) {
         sx={{
           justifyContent: "center",
           padding: "5px",
-           bgcolor: "#00b0ff",
+           bgcolor: "#3d7cff",
         }}
 
         position="static"
@@ -486,7 +486,7 @@ export default function NavBar(props) {
           color: "inherit",
           // bgcolor: "#bdbdbd",
           // height: "95%",
-          bgcolor: "#3d7cff",
+           bgcolor: "#3d7cff",
           justifyContent: "center",
           // padding: "5px",
         }}

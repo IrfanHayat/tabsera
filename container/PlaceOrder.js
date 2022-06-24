@@ -33,11 +33,9 @@ function PlaceOrder({userData,shippementData,shippingAddress,shippingPrice,taxPr
   return (
     <>
       <CheckoutWizard activeStep={5}></CheckoutWizard>
-      <Typography component="h3" variant="h3">
-        Place Order
-      </Typography>
-
-      <Grid container spacing={1}>
+      
+      <Grid container mt={5} justifyContent={"center"}>
+      
         <Grid item md={9} xs={12}>
         <Card className={classes.section}>
             <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
@@ -142,7 +140,7 @@ function PlaceOrder({userData,shippementData,shippingAddress,shippingPrice,taxPr
             </List>
           </Card>
         </Grid>
-        <Grid item md={3} xs={12}>
+        <Grid item md={9} xs={12}>
           <Card className={classes.section}>
             <List>
               <ListItem>
@@ -150,10 +148,10 @@ function PlaceOrder({userData,shippementData,shippingAddress,shippingPrice,taxPr
               </ListItem>
               <ListItem>
                 <Grid container>
-                  <Grid item xs={6}>
+                  <Grid item xs={3}>
                     <Typography>Items:</Typography>
                   </Grid>
-                  <Grid item xs={6}>
+                  <Grid item xs={3}>
                     <Typography align="right"> {productPrice &&
               productPrice.reduce((a, c) => a + c.qty * c.price, 0)}</Typography>
                   </Grid>
@@ -171,22 +169,22 @@ function PlaceOrder({userData,shippementData,shippingAddress,shippingPrice,taxPr
               </ListItem> */}
               <ListItem>
                 <Grid container>
-                  <Grid item xs={6}>
+                  <Grid item xs={3}>
                     <Typography>Shipping:</Typography>
                   </Grid>
-                  <Grid item xs={6}>
+                  <Grid item xs={3}>
                     <Typography align="right">500</Typography>
                   </Grid>
                 </Grid>
               </ListItem>
               <ListItem>
                 <Grid container>
-                  <Grid item xs={6}>
+                  <Grid item xs={3}>
                     <Typography>
                       <strong>Total:</strong>
                     </Typography>
                   </Grid>
-                  <Grid item xs={6}>
+                  <Grid item xs={3}>
                     <Typography align="right">
                       <strong>{productPrice &&
               productPrice.reduce((a, c) => a + c.qty * c.price, 0)+500}</strong>
@@ -196,7 +194,7 @@ function PlaceOrder({userData,shippementData,shippingAddress,shippingPrice,taxPr
               </ListItem>
               <ListItem>
                 <Button
-                  onClick={placeOrderHandler}
+                  onClick={()=>placeOrderHandler(shippementData,userData)}
                   variant="contained"
                   color="primary"
                   fullWidth
