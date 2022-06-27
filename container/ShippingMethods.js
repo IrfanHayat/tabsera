@@ -24,16 +24,16 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
 import DomainAddOutlinedIcon from '@mui/icons-material/DomainAddOutlined';
 import AddLocationAltOutlinedIcon from '@mui/icons-material/AddLocationAltOutlined';
-function ShippingMethods({ shipmentMethodData,checkoutHandler,handleChange,shippementData,userData,productPrice }) {
+function ShippingMethods({ classes,shipmentMethodData,checkoutHandler,handleChange,shippementData,userData,productPrice }) {
  
   return (
     <>
     <CheckoutWizard activeStep={3} />
-    <Grid container sx={{ mx: "3rem" }}>
+    <Grid container mt={5} justifyContent={"center"}>
       
      
-      <Grid item md={12} xs={12}  >
-          <Card style={{ margin: "40px" }}>
+      <Grid item md={9} xs={12}  >
+         <Card className={classes.section}>
             <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
             <Typography variant="h6" component="h2">
              Shipping Information
@@ -68,12 +68,13 @@ function ShippingMethods({ shipmentMethodData,checkoutHandler,handleChange,shipp
           </Card>
         </Grid>
 
-      <Grid item  md={3} sx={{ margin: 5 }}>
+      <Grid item  md={9} sm={12}>
+      <Card className={classes.section}>
       <FormControl>
         
-        <FormLabel id="demo-row-radio-buttons-group-label">
+      <Typography variant="h6" component="h2">
           Shipping Methods
-        </FormLabel>
+        </Typography>
 
         <RadioGroup
           row
@@ -104,10 +105,14 @@ function ShippingMethods({ shipmentMethodData,checkoutHandler,handleChange,shipp
 
       
     </FormControl>
+    </Card>
       </Grid>
 
-      <Grid item md={12} sm={12} sx={{ margin: 5 }}>
-        <Typography variant="h5">Shipping Charges</Typography>
+      <Grid item md={9} sm={12} >
+
+        
+        <Card className={classes.section}>
+          <Typography variant="h6">Shipping Charges</Typography>
         <Box sx={{ display: "inline", margin: 5 }}>
           <List>
             <ListItem>
@@ -132,6 +137,7 @@ function ShippingMethods({ shipmentMethodData,checkoutHandler,handleChange,shipp
             Proced to Payment
           </Button>
         </Box>
+        </Card>
       </Grid>
     </Grid>
     </>

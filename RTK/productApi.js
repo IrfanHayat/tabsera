@@ -6,7 +6,7 @@ import { url } from "../helper/axios/config";
 export const productsApi = createApi({
   reducerPath: "productsApi",
   baseQuery: fetchBaseQuery({ baseUrl: url ,credentials: "include" }),
-  keepUnusedDataFor: 30,
+  keepUnusedDataFor: 180,
   endpoints: (builder) => ({
     getAllProducts: builder.query({
       query: () => `/ecommerce/products`,

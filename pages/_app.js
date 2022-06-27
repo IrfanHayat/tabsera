@@ -1,6 +1,7 @@
 
 import { Provider } from "react-redux";
 import { store } from "../app/store";
+
 import "../styles/globals.css";
 import { SessionProvider } from "next-auth/react";
 import { ThemeProvider } from "@mui/material/styles";
@@ -9,6 +10,7 @@ import { CookiesProvider } from "react-cookie";
 import NavBar from "../container/Navbar/NavBar";
 import Footer from "../container/Footer/Footer";
 import { Box } from "@mui/material";
+import '../locales/i18n'
 const MyApp = ({ Component, pageProps }) => {
   
   return (
@@ -16,6 +18,7 @@ const MyApp = ({ Component, pageProps }) => {
 
     
     <Provider store={store}>
+      
       <ThemeProvider theme={theme}>
         <CookiesProvider>
           <NavBar />
@@ -25,6 +28,7 @@ const MyApp = ({ Component, pageProps }) => {
           <Footer />
         </CookiesProvider>
       </ThemeProvider>
+      
     </Provider>
     //  </SessionProvider>
   );

@@ -10,13 +10,13 @@ import {
   getShipmentAddress
 } from "../../slice/shipmentSlice";
 import { getCartItems } from "../../slice/basketSlice";
-
+import useStyles from "../../utils/styles";
 const index = () => {
   const { shipmentMethodData,shippingAddressData, userData } = useSelector(
     state => state.shipments
   );
   const [shippementData,setShippementData]=useState()
-
+  const classes = useStyles();
   const { cartItems } = useSelector(state => state.basket.cart);
   let router = useRouter();
   let dispatch = useDispatch();
@@ -87,6 +87,7 @@ const index = () => {
         handleChange={handleChange}
         shipmentMethodData={shipmentMethodData}
         checkoutHandler={checkoutHandler}
+        classes={classes}
       />
     </div>
   );

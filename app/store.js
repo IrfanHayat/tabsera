@@ -7,6 +7,7 @@ import { productsApi } from "../RTK/productApi";
 
 import shipmentsReducer from "../slice/shipmentSlice";
 import merchantReducer from "../slice/merchantSlice";
+import placeOrderReducer from "../slice/placeOrderSlice";
 export const store = configureStore({
   reducer: {
     basket: basketReducer,
@@ -15,6 +16,7 @@ export const store = configureStore({
     category: categoryReducer,
     merchant: merchantReducer,
     shipments: shipmentsReducer,
+    placeorder:placeOrderReducer,
     [productsApi.reducerPath]: productsApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>

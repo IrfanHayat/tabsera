@@ -20,7 +20,7 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import useTranslation from "next-translate/useTranslation";
+// import useTranslation from "next-translate/useTranslation";
 import MenuItem from "@mui/material/MenuItem";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import ReceiptIcon from "@mui/icons-material/Receipt";
@@ -46,6 +46,7 @@ import ShoppingCart from "../../pages/cart/index";
 import Image from "next/image";
 import logo from "../../public/logo.png";
 const drawerWidth = 10;
+import { useTranslation } from 'react-i18next';
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -103,7 +104,7 @@ export default function NavBar(props) {
   //const [quantityProduct,setQunatityProduct]=useState()
   const { cartTotalQuantity } = useSelector((state) => state.basket.cart);
   const [open, setOpen] = React.useState(false);
-  let { t } = useTranslation();
+  let { t,i18n } = useTranslation();
   let router = useRouter();
   let dispatch = useDispatch();
 
@@ -115,7 +116,7 @@ export default function NavBar(props) {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const [categoriesData, setCategoriesData] = useState([]);
 
- 
+  
 
   useEffect( () => {
      dispatch(getTotalCartQuantity());
@@ -123,6 +124,11 @@ export default function NavBar(props) {
     // setQunatityProduct(result.payload)
   }, []);
 
+  const changeLanguageHandler = (lang) =>
+  {  
+    console.log(lang)
+    i18n.changeLanguage('de')
+  }
   const categoryData = (categories) => {
     setCategoriesData(categories);
   };
@@ -164,6 +170,7 @@ export default function NavBar(props) {
   // const handleClose = () => {
   //   setOpen(false);
   // };
+  
 
   const handlePopoverOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -359,9 +366,9 @@ export default function NavBar(props) {
           <InputLabel id="demo-simple-select-label">Language</InputLabel>
           <Select>
             {router.locales.map((locale) => (
-              <Link href={router.asPath} key={locale} locale={locale}>
-                <MenuItem>{locale}</MenuItem>
-              </Link>
+            
+                <MenuItem onClick={()=>changeLanguageHandler(locale)}>{locale}</MenuItem>
+             
             ))}
           </Select>
         </FormControl>
@@ -400,7 +407,7 @@ export default function NavBar(props) {
         position="static"
       >
         <Toolbar>
-          <NavLink href="/about_us">About Us</NavLink>
+          <NavLink href="/about_us">{t('About Us')}</NavLink>
           <NavLink href="/contact_us">Contact Us</NavLink>
           {/* <NavLink href="/">Store Location</NavLink> */}
           {/* <NavLink href="/">Track Order</NavLink> */}
@@ -458,9 +465,9 @@ export default function NavBar(props) {
               </InputLabel>
               <Select>
                 {router.locales.map((locale) => (
-                  <Link href={router.asPath} key={locale} locale={locale}>
-                    <MenuItem>{locale}</MenuItem>
-                  </Link>
+                  // <Link href={router.asPath} key={locale} locale={locale}>
+                    <MenuItem onClick={()=>changeLanguageHandler(locale)}>{locale}</MenuItem>
+                  // </Link>
                 ))}
               </Select>
             </FormControl>
