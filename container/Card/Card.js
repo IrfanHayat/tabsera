@@ -14,8 +14,8 @@ export default function MediaCard() {
         maxWidth: 345,
         ":hover": {
           boxShadow: 20, // theme.shadows[20]
-          //   transform: "scale(1.1)",
-          //   opacity: 0.5,
+          transform: "scale(1.1)",
+          // opacity: 0.5,
           cursor: "pointer",
         },
       }}

@@ -5,6 +5,7 @@ import MenuItem from "@mui/material/MenuItem";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 // import { ListItemIcon, ContentCopy, ListItemText } from "@mui/material";
+import Link from "@mui/material";
 import { ListItemIcon } from "@mui/material";
 import { ListItemText } from "@mui/material";
 import ContentCopy from "@mui/icons-material/ContentCopy";
@@ -26,6 +27,7 @@ export default function NavSelect({ Title, Data, color }) {
 
   return (
     <>
+      {/* <Link></Link> */}
       <Button
         id="basic-button"
         aria-controls={open ? "basic-menu" : undefined}
@@ -33,7 +35,17 @@ export default function NavSelect({ Title, Data, color }) {
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
         variant="text"
-        sx={{ color: { color } }}
+        sx={{
+          color: { color },
+          ":hover": {
+            // boxShadow: 20, // theme.shadows[20]
+            transform: "scale(1)",
+
+            // transformOrigin: "bottomleft",
+            // opacity: 0.5,
+            cursor: "pointer",
+          },
+        }}
         endIcon={
           isActive ? <KeyboardArrowDownIcon /> : <KeyboardArrowRightIcon />
         }
