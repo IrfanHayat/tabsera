@@ -16,10 +16,10 @@ export const getLabels = createAsyncThunk("customers/address/labels", async () =
 
 export const addShipmentAddress = createAsyncThunk("add/customers/addresses", async (shipmentData) => {
  
-  const encrypt = Encryption(shipmentData);
+  // const encrypt = Encryption(shipmentData);
   
   const requestBody = {
-      requestBody: encrypt
+      requestBody: shipmentData
   };
   const result = await instance.post(`${url}/customers/addresses`,requestBody);
   
@@ -70,9 +70,9 @@ export const getCustomer = createAsyncThunk(
 
 
 export const getShipmentsMethods = createAsyncThunk("ecommerce/shipments/methods", async (shipmentData) => {
-  const encrypt = Encryption(shipmentData);
+  // const encrypt = Encryption(shipmentData);
         const requestBody = {
-            requestBody: encrypt
+            requestBody: shipmentData
         };
   const result = await instance.post(`${url}/ecommerce/shipments/methods`,requestBody);
   

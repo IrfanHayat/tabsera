@@ -6,6 +6,7 @@ import { url, setHeaders } from "../helper/axios/config";
 export const addOrder = createAsyncThunk(
   "order/addOrder",
   async (order) => {
+    console.log(order)
     const result = await instance.post(`${url}/ecommerce/orders`,order);
    
     return result.data.response;;

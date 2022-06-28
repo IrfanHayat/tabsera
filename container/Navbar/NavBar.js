@@ -19,6 +19,7 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import { useRouter } from "next/router";
+import { locales } from '../../i18n.json'
 import Link from "next/link";
 // import useTranslation from "next-translate/useTranslation";
 import MenuItem from "@mui/material/MenuItem";
@@ -127,7 +128,7 @@ export default function NavBar(props) {
   const changeLanguageHandler = (lang) =>
   {  
     console.log(lang)
-    i18n.changeLanguage('de')
+    i18n.changeLanguage(lang)
   }
   const categoryData = (categories) => {
     setCategoriesData(categories);
@@ -364,8 +365,10 @@ export default function NavBar(props) {
 
         <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
           <InputLabel id="demo-simple-select-label">Language</InputLabel>
+          {/* <button onClick={() => changeLanguageHandler('de')}>de</button>
+      <button onClick={() => changeLanguageHandler('en')}>en</button> */}
           <Select>
-            {router.locales.map((locale) => (
+            {locales.map((locale) => (
             
                 <MenuItem onClick={()=>changeLanguageHandler(locale)}>{locale}</MenuItem>
              
@@ -464,7 +467,7 @@ export default function NavBar(props) {
                 Language
               </InputLabel>
               <Select>
-                {router.locales.map((locale) => (
+                {locales.map((locale) => (
                   // <Link href={router.asPath} key={locale} locale={locale}>
                     <MenuItem onClick={()=>changeLanguageHandler(locale)}>{locale}</MenuItem>
                   // </Link>
