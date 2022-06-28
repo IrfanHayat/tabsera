@@ -52,6 +52,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import { ListItemIcon } from "@mui/material";
 // import { ListItemText } from "@mui/material";
 import ContentCopy from "@mui/icons-material/ContentCopy";
+import { Container } from "@mui/system";
 const drawerWidth = 10;
 
 const Search = styled("div")(({ theme }) => ({
@@ -338,6 +339,7 @@ export default function TopNav(props) {
         }}
         position="static"
       >
+        <Container>
         <Toolbar>
           <NavLink href="/about_us">{t('About Us')}</NavLink>
           <NavLink href="/contact_us">Contact Us</NavLink>
@@ -366,6 +368,7 @@ export default function TopNav(props) {
             </IconButton>
           </Box>
         </Toolbar>
+        </Container>
       </AppBar>
       {renderMobileMenu}
       {renderMenu}{" "}

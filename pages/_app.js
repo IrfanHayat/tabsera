@@ -13,6 +13,7 @@ import { Box } from "@mui/material";
 import '../locales/i18n'
 import rtl from 'jss-rtl';
 import { create } from 'jss';
+import { Container } from '@mui/material';
 
 
 const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
@@ -26,19 +27,22 @@ const MyApp = ({ Component, pageProps }) => {
     
     <Provider store={store}>
       <StylesProvider jss={jss}>
-      <ThemeProvider theme={theme}>
+      <ThemeProvider  theme={theme}>
         <CookiesProvider>
           <NavBar />
+          <Container maxWidth="lg">
           <Box sx={{ minHeight: "80vh" }}>
             <Component {...pageProps} />
           </Box>
+          </Container>
           <Footer />
         </CookiesProvider>
       </ThemeProvider>
       </StylesProvider>
       
     </Provider>
-    //  </SessionProvider>
+  
+    
   );
 };
 

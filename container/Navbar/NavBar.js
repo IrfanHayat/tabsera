@@ -50,6 +50,7 @@ import NavSelect from "./Components/NavSelect";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import  TopNav from './Components/TopNav'
 import { ListItemIcon,useTheme} from "@mui/material";
+import { Container } from "@mui/system";
 // import { ListItemText } from "@mui/material";
 const drawerWidth = 10;
  
@@ -239,6 +240,7 @@ export default function NavBar(props) {
         }}
         position="static"
       >
+        <Container fixed>
         <Toolbar>
           <Image src="/logo.png" height={40} width={100}></Image>
 
@@ -305,6 +307,7 @@ export default function NavBar(props) {
             </Popover>
           </div>
         </Toolbar>
+        </Container>
       </AppBar>
       <Box
         component="nav"
