@@ -20,61 +20,129 @@ export default function CarouselApp({
   addToCartHandler,
   viewCategory,
 }) {
- 
   let [productView, setProuctView] = useState(false);
   let [categoryView, setCategoryView] = useState(false);
   let [cartView, setCartView] = useState(false);
   return (
-    <div style={{ width: "100%" }}>
-      <Box
-        component="div"
-        sx={{
-          display: "inline",
-          p: 1,
-          m: 1,
-          bgcolor: (theme) =>
-            theme.palette.mode === "dark" ? "#101010" : "#fff",
-          color: (theme) =>
-            theme.palette.mode === "dark" ? "grey.300" : "grey.800",
-          border: "1px solid",
-          borderColor: (theme) =>
-            theme.palette.mode === "dark" ? "grey.800" : "grey.300",
-          borderRadius: 2,
-          fontSize: "0.875rem",
-          fontWeight: "700",
+    <Box
+      sx={{
+        bgcolor: "#fafafa",
+        my: 2,
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "space-between",
         }}
       >
-        <Typography sx={{ marginLeft: 5 }} variant="h5">
-          {heading}
-        </Typography>
-      </Box>
-      <Box
-        component="div"
-        sx={{
-          display: "inline",
-          p: 1,
-          m: 1,
-          bgcolor: (theme) =>
-            theme.palette.mode === "dark" ? "#101010" : "#fff",
-          color: (theme) =>
-            theme.palette.mode === "dark" ? "grey.300" : "grey.800",
-          border: "1px solid",
-          borderColor: (theme) =>
-            theme.palette.mode === "dark" ? "grey.800" : "grey.300",
-          borderRadius: 2,
-          fontSize: "0.875rem",
-          fontWeight: "700",
-        }}
-      >
-        <Button
-          href="/all_products"
-          variant="outlined"
-          style={{ fontSize: "10px" }}
-          size="small"
+        <Box
+          component="div"
+          sx={{
+            display: "inline",
+            mx: 5,
+            my: 2,
+            // bgcolor: (theme) =>
+            //   theme.palette.mode === "dark" ? "#101010" : "#fff",
+            color: (theme) =>
+              theme.palette.mode === "dark" ? "grey.300" : "grey.800",
+            // border: "1px solid",
+            borderColor: (theme) =>
+              theme.palette.mode === "dark" ? "grey.800" : "grey.300",
+            // borderRadius: 2,
+            fontSize: "1.5rem",
+            fontWeight: "700",
+          }}
         >
-          View All
-        </Button>
-      </Box>
+          {/* <Typography sx={{ marginLeft: 5 }} variant="h5"> */}
+          {heading}
+          {/* </Typography> */}
+        </Box>
+        {/* <Box
+          style={{
+            display: "flex",
+            flexWrap: "wrap",
+            justifyContent: "space-between",
+          }}
+        ></Box> */}
+        <Box
+          component="div"
+          sx={{
+            display: "inline",
+            mx: 5,
+            my: 2,
+          }}
+        >
+          <Button
+            href="/all_products"
+            variant="outlined"
+            sx={{
+              fontSize: "14px",
+              // bgcolor: "white",
+              color: "blue",
+
+              ":hover": {
+                bgcolor: "blue",
+                color: "white",
+              },
+            }}
+            size="small"
+          >
+            View All
+          </Button>
+        </Box>
+      </div>
+
+      {/* <Box
+        component="div"
+        sx={{
+          display: "inline",
+          p: 1,
+          m: 1,
+          bgcolor: (theme) =>
+            theme.palette.mode === "dark" ? "#101010" : "#fff",
+          color: (theme) =>
+            theme.palette.mode === "dark" ? "grey.300" : "grey.800",
+          border: "1px solid",
+          borderColor: (theme) =>
+            theme.palette.mode === "dark" ? "grey.800" : "grey.300",
+          borderRadius: 2,
+          fontSize: "0.875rem",
+          fontWeight: "700",
+        }}
+      > */}
+      {/* <Typography sx={{ marginLeft: 5 }} variant="h5">
+        {heading}
+      </Typography> */}
+      {/* </Box> */}
+      {/* <Box
+        component="div"
+        sx={{
+          display: "inline",
+          p: 1,
+          m: 1,
+          bgcolor: (theme) =>
+            theme.palette.mode === "dark" ? "#101010" : "#fff",
+          color: (theme) =>
+            theme.palette.mode === "dark" ? "grey.300" : "grey.800",
+          border: "1px solid",
+          borderColor: (theme) =>
+            theme.palette.mode === "dark" ? "grey.800" : "grey.300",
+          borderRadius: 2,
+          fontSize: "0.875rem",
+          fontWeight: "700",
+        }}
+      > */}
+      {/* <Button
+        href="/all_products"
+        variant="outlined"
+        style={{ fontSize: "10px" }}
+        size="small"
+      >
+        View All
+      </Button> */}
+      {/* </Box> */}
       <Carousel
         breakPoints={breakPoints}
         // disableArrowsOnEnd={false}
@@ -86,7 +154,7 @@ export default function CarouselApp({
         {/* {content} */}
 
         {product &&
-          product.map(item => (
+          product.map((item) => (
             <ActionAreaCard
               product={item}
               viewProduct={viewProduct}
@@ -98,6 +166,6 @@ export default function CarouselApp({
             ></ActionAreaCard>
           ))}
       </Carousel>
-    </div>
+    </Box>
   );
 }

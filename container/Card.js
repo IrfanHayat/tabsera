@@ -44,8 +44,10 @@ export default function ActionAreaCard({
     // <Box>
     <Card
       sx={{
-        marginTop: 1,
-        marginBottom: 1,
+        mx: 0.4,
+        my: 2,
+        // marginTop: 1,
+        // marginBottom: 1,
         padding: 0.5,
         maxWidth: 300,
         height: 310,
