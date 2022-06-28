@@ -70,7 +70,9 @@ export default function SignIn() {
   };
   return (
     <div>
-      <Button onClick={handleModalOpen} sx={{color:"white"}}>sign in</Button>
+      <Button onClick={handleModalOpen} sx={{ color: "white" }}>
+        sign in
+      </Button>
       <Dialog
         fullScreen={fullScreen}
         open={open}
@@ -108,7 +110,7 @@ export default function SignIn() {
                   defaultValue=""
                   rules={{
                     required: true,
-                    minLength: 6,
+                    minLength: 2,
                   }}
                   render={({ field }) => (
                     <TextField
