@@ -46,8 +46,13 @@ import { url, setHeaders } from "../../helper/axios/config";
 import ShoppingCart from "../../pages/cart/index";
 import Image from "next/image";
 import logo from "../../public/logo.png";
+import NavSelect from "./Components/NavSelect";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import  TopNav from './Components/TopNav'
+import { ListItemIcon } from "@mui/material";
+// import { ListItemText } from "@mui/material";
 const drawerWidth = 10;
-import { useTranslation } from 'react-i18next';
+ 
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -105,7 +110,7 @@ export default function NavBar(props) {
   //const [quantityProduct,setQunatityProduct]=useState()
   const { cartTotalQuantity } = useSelector((state) => state.basket.cart);
   const [open, setOpen] = React.useState(false);
-  let { t,i18n } = useTranslation();
+  
   let router = useRouter();
   let dispatch = useDispatch();
 
@@ -125,11 +130,7 @@ export default function NavBar(props) {
     // setQunatityProduct(result.payload)
   }, []);
 
-  const changeLanguageHandler = (lang) =>
-  {  
-    console.log(lang)
-    i18n.changeLanguage(lang)
-  }
+  
   const categoryData = (categories) => {
     setCategoriesData(categories);
   };
@@ -189,207 +190,34 @@ export default function NavBar(props) {
     setAnchorEl(null);
   };
 
-  // const open1 = Boolean(anchorEl);
-
-  const menuId = "primary-search-account-menu";
   // ----------------------------------------------------------------------------------
   const open1 = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
 
-  const myAccount = (
-    <Box>
-      <MenuItem>
-        <Link href={`/carousel`}>
-          <ListItem key="My Profile" disablePadding>
-            <AccountBoxIcon />
-            <ListItemText primary="My Profile" />
-          </ListItem>
-        </Link>
-      </MenuItem>
-      <MenuItem>
-        <Link href={`/carousel`}>
-          <ListItem key="My Orders" disablePadding>
-            <FormatListBulletedIcon />
-            <ListItemText primary="My Orders" />
-          </ListItem>
-        </Link>
-      </MenuItem>
-      <MenuItem>
-        <Link href={`/carousel`}>
-          <ListItem key="My Coupons" disablePadding>
-            <FormatListBulletedIcon />
-            <ListItemText primary="My Coupons" />
-          </ListItem>
-        </Link>
-      </MenuItem>{" "}
-      <MenuItem>
-        <Link href={`/carousel`}>
-          <ListItem key="My Bill Payments" disablePadding>
-            <ReceiptIcon />
-            <ListItemText primary="My Bill Payments" />
-          </ListItem>
-        </Link>
-      </MenuItem>
-      <MenuItem>
-        <Link href={`/carousel`}>
-          <ListItem key="My Topups" disablePadding>
-            <AdUnitsIcon />
-            <ListItemText primary="My Topups" />
-          </ListItem>
-        </Link>
-      </MenuItem>
-      <MenuItem>
-        <Link href={`/carousel`}>
-          <ListItem key="Security" disablePadding>
-            <GppGoodOutlinedIcon />
-            <ListItemText primary="Security" />
-          </ListItem>
-        </Link>
-      </MenuItem>
-      <MenuItem>
-        <Link href={`/carousel`}>
-          <ListItem key="About" disablePadding>
-            <InfoOutlinedIcon />
-            <ListItemText primary="About" />
-          </ListItem>
-        </Link>
-      </MenuItem>
-      <MenuItem>
-        <Link href={`/carousel`}>
-          <ListItem key="Help" disablePadding>
-            <HelpOutlineOutlinedIcon />
-            <ListItemText primary="Help" />
-          </ListItem>
-        </Link>
-      </MenuItem>
-      {/* <MenuItem>
-        <ListItem key="Logout" disablePadding>
-          <ListItemText primary="Logout" />
-        </ListItem>
-      </MenuItem> */}
-    </Box>
-  );
-
   const drawer = (
-    <Box>
-      <Toolbar>
-        <Typography variant="h5" alignContent="center">
-          Shop By Categories
-        </Typography>
-      </Toolbar>
+    <List>
+      {/* <ListItemIcon>
+        <AccountBoxIcon />
+      </ListItemIcon> */}
+      {/* <ListItemText>My Profile</ListItemText> */}
       {categoriesData &&
         categoriesData.map((text, index) => (
-          <List>
-            <Link href={`/carousel`}>
-              <ListItem key={text.category_id} disablePadding>
-                {/* <AccountBoxIcon /> */}
-                <ListItemText primary={text.category_name} />
-              </ListItem>
-            </Link>
+          <MenuItem
+            key={text.category_id}
+            disablePadding
+            sx={{ marginLeft: 3 }}
+          >
+            {/* <ListItem
+              key={text.category_id}
+              disablePadding
+              sx={{ marginLeft: 3 }}
+            > */}
+            <ListItemText primary={text.category_name} />
+            {/* </ListItem> */}
             <Divider />
-          </List>
+          </MenuItem>
         ))}
-    </Box>
-  );
-
-  // ----------------------------------------------------------------------------------
-
-  const renderMenu = (
-    <Menu
-      anchorEl={anchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={menuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMenuOpen}
-      onClose={handleMenuClose}
-    >
-      {/* <MenuItem onClick={handleMenuClose}>Logout</MenuItem> */}
-    </Menu>
-  );
-
-  const mobileMenuId = "primary-search-account-menu-mobile";
-  // ----------------------------------------------------------------------------------
-
-  const renderMobileMenu = (
-    <Menu
-      anchorEl={mobileMoreAnchorEl}
-      anchorOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      id={mobileMenuId}
-      keepMounted
-      transformOrigin={{
-        vertical: "top",
-        horizontal: "right",
-      }}
-      open={isMobileMenuOpen}
-      onClose={handleMobileMenuClose}
-    >
-      <MenuItem>
-        <FormControl
-          sx={{ m: 1, minWidth: 120 }} size="small"
-        >
-          <InputLabel id="demo-select-small" sx={{ fontWeight: 100 }}>
-            My Account
-          </InputLabel>
-          <Select labelId="demo-select-small" id="demo-select-small">
-            {myAccount}
-          </Select>
-        </FormControl>
-      </MenuItem>
-
-      <MenuItem>
-        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-          <InputLabel id="demo-select-small">Currency</InputLabel>
-          <Select labelId="demo-select-small" id="demo-select-small">
-            <MenuItem value={10}>Rupee</MenuItem>
-            <MenuItem value={20}>Dollar</MenuItem>
-            <MenuItem value={30}>Ponds</MenuItem>
-          </Select>
-        </FormControl>
-      </MenuItem>
-
-      <MenuItem>
-        {/* <InputLabel id="demo-simple-select-label">
-          {" "}
-          {t("common:Language")}
-        </InputLabel> */}
-
-        <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-          <InputLabel id="demo-simple-select-label">Language</InputLabel>
-          {/* <button onClick={() => changeLanguageHandler('de')}>de</button>
-      <button onClick={() => changeLanguageHandler('en')}>en</button> */}
-          <Select>
-            {locales.map((locale) => (
-            
-                <MenuItem onClick={()=>changeLanguageHandler(locale)}>{locale}</MenuItem>
-             
-            ))}
-          </Select>
-        </FormControl>
-      </MenuItem>
-
-      {/* <MenuItem>
-        <IconButton
-          size="large"
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        >
-          <AccountCircle />
-        </IconButton>
-        <p>Logout</p>
-      </MenuItem> */}
-    </Menu>
+    </List>
   );
 
   React.useEffect(async () => {
@@ -398,144 +226,19 @@ export default function NavBar(props) {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <CssBaseline />
-      <AppBar
-        style={{ height: "50px" }}
-        sx={{
-          justifyContent: "center",
-          padding: "5px",
-           bgcolor: "#3d7cff",
-        }}
-
-        position="static"
-      >
-        <Toolbar>
-          <NavLink href="/about_us">{t('About Us')}</NavLink>
-          <NavLink href="/contact_us">Contact Us</NavLink>
-          {/* <NavLink href="/">Store Location</NavLink> */}
-          {/* <NavLink href="/">Track Order</NavLink> */}
-          <NavLink href="/">Blog</NavLink>
-
-          <Box sx={{ flexGrow: 1 }} />
-
-          <Box
-            sx={{
-              display: { xs: "none", md: "flex", justifyContent: "center" },
-            }}
-          >
-            <FormControl variant="standard" sx={{ minWidth: 120 }} size="small">
-              <InputLabel
-                id="demo-simple-select-standard-label"
-                sx={{ color: "white" }}
-              >
-                My Account
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-standard-label"
-                id="demo-simple-select-standard"
-              >
-                <MenuItem>{myAccount}</MenuItem>
-              </Select>
-            </FormControl>
-
-            <FormControl variant="standard" sx={{ minWidth: 120 }} size="small">
-              <InputLabel
-                id="demo-simple-select-standard-label"
-                sx={{ color: "white" }}
-              >
-                Currency
-              </InputLabel>
-              <Select
-                labelId="demo-simple-select-standard-label"
-                id="demo-simple-select-standard"
-              >
-                <MenuItem value={10}>Rupee</MenuItem>
-                <MenuItem value={20}>Dollar</MenuItem>
-                <MenuItem value={30}>Ponds</MenuItem>
-              </Select>
-            </FormControl>
-
-            <FormControl
-              variant="standard"
-              sx={{ marginBottom: 1, minWidth: 120 }}
-              size="small"
-            >
-              <InputLabel
-                id="demo-simple-select-standard-label"
-                sx={{ color: "white" }}
-              >
-                Language
-              </InputLabel>
-              <Select>
-                {locales.map((locale) => (
-                  // <Link href={router.asPath} key={locale} locale={locale}>
-                    <MenuItem onClick={()=>changeLanguageHandler(locale)}>{locale}</MenuItem>
-                  // </Link>
-                ))}
-              </Select>
-            </FormControl>
-          </Box>
-          <Box sx={{ display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
-            >
-              <MoreIcon />
-            </IconButton>
-          </Box>
-        </Toolbar>
-      </AppBar>
-      {renderMobileMenu}
-      {renderMenu}{" "}
+      <TopNav />
       <AppBar
         sx={{
           color: "inherit",
           // bgcolor: "#bdbdbd",
           // height: "95%",
-           bgcolor: "#3d7cff",
+          // bgcolor: "#0277bd",
           justifyContent: "center",
           // padding: "5px",
         }}
         position="static"
       >
         <Toolbar>
-          {/* <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              // color: "black",
-              textDecoration: "none",
-            }}
-          > */}
-
-          {/* <Box
-            component="img"
-            sx={{
-              color: "black",
-              height: 64,
-            }}
-            alt="Your logo."
-            // src={logo}
-            src={"./image_2022_06_22T12_07_34_261Z.png"}
-            // src={
-            //   "https://i2.wp.com/files.123freevectors.com/wp-content/uploads/freevectorimage/abstract-and-colorful-logo-free-vector-1802.jpg?w=800&q=95"
-            // }
-          ></Box> */}
-
-          {/* <Image src="/logo.png" height={100} width={100}></Image> */}
-          {/* </Typography> */}
-
           <Image src="/logo.png" height={40} width={100}></Image>
 
           <Box component="div" sx={{ flexGrow: 1 }} />
@@ -543,14 +246,23 @@ export default function NavBar(props) {
         </Toolbar>
 
         <Toolbar>
-          <ThemeProvider>
+          {/* <ThemeProvider>
             <Chip
               sx={{ color: "white" }}
               onClick={toggleDrawer}
               icon={<MenuIcon />}
               label="Shop By Category"
             />
-          </ThemeProvider>
+          </ThemeProvider> */}
+
+          <MenuItem>
+            <ListItemIcon>
+              <MenuIcon />
+            </ListItemIcon>
+            <ListItemText>
+              <NavSelect Title="Shop By Category" color="black" Data={drawer} />
+            </ListItemText>
+          </MenuItem>
 
           <Box component="div" sx={{ flexGrow: 1 }} alignItems="center">
             <Search sx={{ border: 1, borderColor: "text.primary" }}>
@@ -598,7 +310,7 @@ export default function NavBar(props) {
         sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
         aria-label="mailbox folders"
       >
-        <Drawer
+        {/* <Drawer
           variant="temporary"
           open={open}
           onClose={toggleDrawer}
@@ -607,7 +319,7 @@ export default function NavBar(props) {
           }}
         >
           {drawer}
-        </Drawer>
+        </Drawer> */}
       </Box>
     </Box>
   );
