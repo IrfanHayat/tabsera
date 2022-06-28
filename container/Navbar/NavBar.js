@@ -1,5 +1,5 @@
 import React, { useMemo, useEffect, useState } from "react";
-import { styled, useTheme, alpha } from "@mui/material/styles";
+import { styled, alpha } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -49,7 +49,7 @@ import logo from "../../public/logo.png";
 import NavSelect from "./Components/NavSelect";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import  TopNav from './Components/TopNav'
-import { ListItemIcon } from "@mui/material";
+import { ListItemIcon,useTheme} from "@mui/material";
 // import { ListItemText } from "@mui/material";
 const drawerWidth = 10;
  
@@ -121,7 +121,8 @@ export default function NavBar(props) {
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const [categoriesData, setCategoriesData] = useState([]);
-
+  const theme = useTheme();
+   
   
 
   useEffect( () => {

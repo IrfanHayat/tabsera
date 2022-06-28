@@ -1,8 +1,8 @@
 import { createTheme } from "@mui/material/styles";
-
+import i18n from './locales/i18n'
 
 export const theme = createTheme({
- 
+ direction:i18n.dir(),
   palette: {
     primary: {
       main: "#3d7cff",
