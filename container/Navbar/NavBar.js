@@ -156,25 +156,29 @@ export default function NavBar(props) {
   const id = open ? "simple-popover" : undefined;
 
   const drawer = (
-    <MenuItem>
-      <ListItemIcon>
+    <List>
+      {/* <ListItemIcon>
         <AccountBoxIcon />
-      </ListItemIcon>
-      <ListItemText>My Profile</ListItemText>
-      {/* {categoriesData &&
+      </ListItemIcon> */}
+      {/* <ListItemText>My Profile</ListItemText> */}
+      {categoriesData &&
         categoriesData.map((text, index) => (
-          <List>
-            <ListItem
+          <MenuItem
+            key={text.category_id}
+            disablePadding
+            sx={{ marginLeft: 3 }}
+          >
+            {/* <ListItem
               key={text.category_id}
               disablePadding
               sx={{ marginLeft: 3 }}
-            >
-              <ListItemText primary={text.category_name} />
-            </ListItem>
+            > */}
+            <ListItemText primary={text.category_name} />
+            {/* </ListItem> */}
             <Divider />
-          </List>
-        ))} */}
-    </MenuItem>
+          </MenuItem>
+        ))}
+    </List>
   );
 
   React.useEffect(async () => {

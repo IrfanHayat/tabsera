@@ -43,7 +43,19 @@ export default function ActionAreaCard({
   return (
     // <Box>
     <Card
-      sx={{ margin: 1, padding: 0.5, maxWidth: 300, height: 300 }}
+      sx={{
+        marginTop: 1,
+        marginBottom: 1,
+        padding: 0.5,
+        maxWidth: 300,
+        height: 310,
+        ":hover": {
+          boxShadow: 10, // theme.shadows[20]
+          transform: "scale(1.1)",
+          // opacity: 0.5,
+          cursor: "pointer",
+        },
+      }}
       // className={cx(styles.root)}
     >
       {product?.productImage && (
@@ -71,15 +83,6 @@ export default function ActionAreaCard({
       {product?.category_name && (
         <CardContent>
           <Typography variant="overline">{product.category_name}</Typography>
-
-          <TextInfoContent
-          // classes={textCardContentStyles}
-
-          // heading={product.category_name}
-          // body={
-          //   "That year, collection of songs, review melodies, memories full, this is a long and warm journey"
-          // }
-          />
         </CardContent>
       )}
       <CardContent>

@@ -35,11 +35,12 @@ export default function NavSelect({ Title, Data, color }) {
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
         variant="text"
+        underline="hover"
         sx={{
           color: { color },
           ":hover": {
             // boxShadow: 20, // theme.shadows[20]
-            transform: "scale(1)",
+            transform: "scale(1.1)",
 
             // transformOrigin: "bottomleft",
             // opacity: 0.5,
