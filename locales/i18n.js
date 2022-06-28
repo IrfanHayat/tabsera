@@ -7,7 +7,7 @@ import translationsDe from './de/translation.json'
 import translationsAr from './ar/translation.json'
 
 const resources = {
-  en: {
+  en_US: {
     translation: translationsEN
   },
   fr: {
