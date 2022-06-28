@@ -20,7 +20,7 @@ import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import { useRouter } from "next/router";
 import Link from "next/link";
-import {useTranslation} from "react-i18next";
+import { useTranslation } from "react-i18next";
 import MenuItem from "@mui/material/MenuItem";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
 import ReceiptIcon from "@mui/icons-material/Receipt";
@@ -35,8 +35,7 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { Button, FormControl, TextField, AppBar, Tooltip } from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
-import { locales } from '../../../i18n.json'
-
+import * as locales from "../../../i18n.json";
 
 import Chip from "@mui/material/Chip";
 // import SignInModal from "../Login/SignIn";
@@ -111,7 +110,7 @@ export default function TopNav(props) {
   //const [quantityProduct,setQunatityProduct]=useState()
   const { cartTotalQuantity } = useSelector((state) => state.basket.cart);
   const [open, setOpen] = React.useState(false);
-  let { t,i18n } = useTranslation();
+  let { t, i18n } = useTranslation();
   let router = useRouter();
   let dispatch = useDispatch();
 
@@ -123,21 +122,19 @@ export default function TopNav(props) {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const [categoriesData, setCategoriesData] = useState([]);
 
-  const theme=useTheme()
+  const theme = useTheme();
 
-  const changeLanguageHandler = (lang) =>
-  {  
-    console.log(lang)
-    i18n.changeLanguage(lang)
+  const changeLanguageHandler = (lang) => {
+    console.log(lang);
+    i18n.changeLanguage(lang);
     document.body.dir = i18n.dir();
-      theme.direction = i18n.dir();
-  }
+    theme.direction = i18n.dir();
+  };
 
   // useEffect(() => {
   //   dispatch(getTotalCartQuantity());
   //   // setQunatityProduct(result.payload)
   // }, []);
-
 
   const categoryData = (categories) => {
     setCategoriesData(categories);
@@ -196,11 +193,13 @@ export default function TopNav(props) {
 
   const languageData = (
     <div>
-      {locales.map((locale) => (
-       <MenuItem>
-            <ListItemText onClick={()=>changeLanguageHandler(locale)}> {locale}</ListItemText>
+      {locales?.locales.map((locale) => (
+        <MenuItem>
+          <ListItemText onClick={() => changeLanguageHandler(locale)}>
+            {" "}
+            {locale}
+          </ListItemText>
         </MenuItem>
-        
       ))}
     </div>
   );
@@ -340,34 +339,34 @@ export default function TopNav(props) {
         position="static"
       >
         <Container>
-        <Toolbar>
-          <NavLink href="/about_us">{t('About Us')}</NavLink>
-          <NavLink href="/contact_us">Contact Us</NavLink>
+          <Toolbar>
+            <NavLink href="/about_us">{t("About Us")}</NavLink>
+            <NavLink href="/contact_us">Contact Us</NavLink>
 
-          <Box sx={{ flexGrow: 1 }} />
+            <Box sx={{ flexGrow: 1 }} />
 
-          <Box
-            sx={{
-              display: { xs: "none", md: "flex", justifyContent: "center" },
-            }}
-          >
-            <NavSelect Title="Account" Data={myAccount} color="black" />
-            <NavSelect Title="Currency" Data={currencyData} color="black" />
-            <NavSelect Title="Language" Data={languageData} color="black" />
-          </Box>
-          <Box sx={{ display: { xs: "flex", md: "none" } }}>
-            <IconButton
-              size="large"
-              aria-label="show more"
-              aria-controls={mobileMenuId}
-              aria-haspopup="true"
-              onClick={handleMobileMenuOpen}
-              color="inherit"
+            <Box
+              sx={{
+                display: { xs: "none", md: "flex", justifyContent: "center" },
+              }}
             >
-              <MoreIcon />
-            </IconButton>
-          </Box>
-        </Toolbar>
+              <NavSelect Title="Account" Data={myAccount} color="black" />
+              <NavSelect Title="Currency" Data={currencyData} color="black" />
+              <NavSelect Title="Language" Data={languageData} color="black" />
+            </Box>
+            <Box sx={{ display: { xs: "flex", md: "none" } }}>
+              <IconButton
+                size="large"
+                aria-label="show more"
+                aria-controls={mobileMenuId}
+                aria-haspopup="true"
+                onClick={handleMobileMenuOpen}
+                color="inherit"
+              >
+                <MoreIcon />
+              </IconButton>
+            </Box>
+          </Toolbar>
         </Container>
       </AppBar>
       {renderMobileMenu}

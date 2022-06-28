@@ -68,7 +68,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getProduct } from "../../slice/productSlice";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
-import _ from 'lodash'
+import _ from "lodash";
 import {
   addToBasket,
   clearBasket,
@@ -92,21 +92,18 @@ const Index = () => {
   //   hasMore: true,
   // };
 
-  const product = useSelector(state => state.product.productData);
-  let newProduct=product.slice([0], [5]).map((item, i) => {
+  const product = useSelector((state) => state.product.productData);
+  let newProduct = product.slice([0], [5]).map((item, i) => {
     return item;
-  })
+  });
   const [items, setItems] = useState(newProduct);
   // const [items, setItems] = useState(product);
 
-
   const [hasMore, setHasMore] = useState(true);
 
- 
   let router = useRouter();
   let dispatch = useDispatch();
 
-  
   useEffect(async () => {
     await dispatch(getProduct());
   }, []);
@@ -115,32 +112,31 @@ const Index = () => {
   //   setItems(product);
   // }, [items, product]);
 
-  const viewProduct = item => {
+  const viewProduct = (item) => {
     router.push({
       pathname: `/product_detail`,
       query: { productId: item.productId },
     });
   };
 
-  const addToCartHandler = product => {
+  const addToCartHandler = (product) => {
     dispatch(addToBasket(product));
     router.push("/cart");
   };
 
   const fetchMoreData = () => {
-    
-      setItems(product.slice([4], [10]).map((item, i) => {
+    setItems(
+      product.slice([4], [10]).map((item, i) => {
         return item;
-      }))
+      })
+    );
   };
-  useEffect(()=>{
-    setItems(product)
-  },[])
+  useEffect(() => {
+    setItems(product);
+  }, []);
 
-  
   return (
     <>
-     
       {/* <InfiniteScroll
         dataLength={items.length}
         next={fetchMoreData}
@@ -152,14 +148,14 @@ const Index = () => {
           </p>
         }
       > */}
-        {/* {items.map((item) => (
+      {/* {items.map((item) => (
           <ActionAreaCard
             product={item}
             viewProduct={viewProduct}
             addToCartHandler={addToCartHandler}
           ></ActionAreaCard>
         ))} */}
-
+      <Grid container justifyContent="center">
         {product.map((item, index) => (
           <ActionAreaCard
             product={item}
@@ -170,6 +166,7 @@ const Index = () => {
             {/* {item?.productName}> */}
           </ActionAreaCard>
         ))}
+      </Grid>
       {/* </InfiniteScroll> */}
     </>
   );

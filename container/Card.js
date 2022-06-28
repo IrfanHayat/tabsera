@@ -52,8 +52,8 @@ export default function ActionAreaCard({
         maxWidth: 300,
         height: 310,
         ":hover": {
-          boxShadow: 10, // theme.shadows[20]
-          transform: "scale(1.1)",
+          boxShadow: 5, // theme.shadows[20]
+          transform: "scale(1.05)",
           // opacity: 0.5,
           cursor: "pointer",
         },

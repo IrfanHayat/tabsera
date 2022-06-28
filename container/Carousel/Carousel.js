@@ -3,7 +3,9 @@ import Carousel from "react-elastic-carousel";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import ActionAreaCard from "../Card";
-import { Box } from "@mui/material";
+import { Box, Grid } from "@mui/material";
+import Link from "@mui/material/Link";
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
@@ -24,131 +26,64 @@ export default function CarouselApp({
   let [categoryView, setCategoryView] = useState(false);
   let [cartView, setCartView] = useState(false);
   return (
-    <Box
+    <Grid
+      container
+      spacing={1}
       sx={{
         bgcolor: "#fafafa",
-        my: 2,
+        my: 1,
       }}
     >
-      <div
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          justifyContent: "space-between",
-        }}
-      >
+      <Grid item md={6}>
         <Box
-          component="div"
           sx={{
-            display: "inline",
-            mx: 5,
-            my: 2,
-            // bgcolor: (theme) =>
-            //   theme.palette.mode === "dark" ? "#101010" : "#fff",
+            ml: 6,
             color: (theme) =>
               theme.palette.mode === "dark" ? "grey.300" : "grey.800",
-            // border: "1px solid",
             borderColor: (theme) =>
               theme.palette.mode === "dark" ? "grey.800" : "grey.300",
-            // borderRadius: 2,
-            fontSize: "1.5rem",
+            fontSize: "1.3rem",
             fontWeight: "700",
           }}
         >
-          {/* <Typography sx={{ marginLeft: 5 }} variant="h5"> */}
           {heading}
-          {/* </Typography> */}
         </Box>
-        {/* <Box
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            justifyContent: "space-between",
-          }}
-        ></Box> */}
+      </Grid>
+
+      <Grid item md={6} textAlign="right">
         <Box
           component="div"
           sx={{
-            display: "inline",
-            mx: 5,
-            my: 2,
+            // display: "inline",
+            mr: 6,
+            // mx: 5,
+            // my: 2,
           }}
         >
           <Button
+            variant="text"
             href="/all_products"
-            variant="outlined"
-            sx={{
-              fontSize: "14px",
-              // bgcolor: "white",
-              color: "blue",
-
-              ":hover": {
-                bgcolor: "blue",
-                color: "white",
-              },
-            }}
+            underline="none"
             size="small"
+            endIcon={<KeyboardArrowRightIcon />}
           >
             View All
           </Button>
         </Box>
-      </div>
-
-      {/* <Box
-        component="div"
-        sx={{
-          display: "inline",
-          p: 1,
-          m: 1,
-          bgcolor: (theme) =>
-            theme.palette.mode === "dark" ? "#101010" : "#fff",
-          color: (theme) =>
-            theme.palette.mode === "dark" ? "grey.300" : "grey.800",
-          border: "1px solid",
-          borderColor: (theme) =>
-            theme.palette.mode === "dark" ? "grey.800" : "grey.300",
-          borderRadius: 2,
-          fontSize: "0.875rem",
-          fontWeight: "700",
-        }}
-      > */}
-      {/* <Typography sx={{ marginLeft: 5 }} variant="h5">
-        {heading}
-      </Typography> */}
-      {/* </Box> */}
-      {/* <Box
-        component="div"
-        sx={{
-          display: "inline",
-          p: 1,
-          m: 1,
-          bgcolor: (theme) =>
-            theme.palette.mode === "dark" ? "#101010" : "#fff",
-          color: (theme) =>
-            theme.palette.mode === "dark" ? "grey.300" : "grey.800",
-          border: "1px solid",
-          borderColor: (theme) =>
-            theme.palette.mode === "dark" ? "grey.800" : "grey.300",
-          borderRadius: 2,
-          fontSize: "0.875rem",
-          fontWeight: "700",
-        }}
-      > */}
-      {/* <Button
-        href="/all_products"
-        variant="outlined"
-        style={{ fontSize: "10px" }}
-        size="small"
-      >
-        View All
-      </Button> */}
-      {/* </Box> */}
+      </Grid>
+      {/* <Grid md={12} sm={12}> */}
       <Carousel
         breakPoints={breakPoints}
         // disableArrowsOnEnd={false}
-        // showArrows={false}
+        showArrows={true}
         pagination={false}
         showEmptySlots={true}
+        itemsToScroll={1}
+        focusOnSelect={true}
+        // enableSwipe={true}
+        // enableMouseSwipe={true}
+        enableAutoPlay={true}
+        // autoPlaySpeed={2000}
         // itemsToShow={2}
       >
         {/* {content} */}
@@ -166,6 +101,7 @@ export default function CarouselApp({
             ></ActionAreaCard>
           ))}
       </Carousel>
-    </Box>
+      {/* </Grid> */}
+    </Grid>
   );
 }

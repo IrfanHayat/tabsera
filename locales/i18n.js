@@ -1,24 +1,24 @@
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-import LanguageDetector from 'i18next-browser-languagedetector';
-import translationsEN from './en-US/translation.json'
-import translationsFr from './fr/translation.json'
-import translationsDe from './de/translation.json'
-import translationsAr from './ar/translation.json'
+import LanguageDetector from "i18next-browser-languagedetector";
+import translationsEN from "./en/translation.json";
+import translationsFr from "./fr/translation.json";
+import translationsDe from "./de/translation.json";
+import translationsAr from "./ar/translation.json";
 
 const resources = {
-  en_US: {
-    translation: translationsEN
+  en: {
+    translation: translationsEN,
   },
   fr: {
-    translation: translationsFr
+    translation: translationsFr,
   },
   de: {
-    translation: translationsDe
+    translation: translationsDe,
   },
-  ar:{
-    translation: translationsAr
-  }
+  ar: {
+    translation: translationsAr,
+  },
 };
 
 i18n
@@ -26,11 +26,11 @@ i18n
   .use(LanguageDetector)
   .init({
     resources,
-    fallbackLng: 'en', // default language
+    fallbackLng: "en", // default language
     keySeparator: false, // we do not use keys in form messages.welcome
     interpolation: {
-      escapeValue: false // react already safes from xss
-    }
+      escapeValue: false, // react already safes from xss
+    },
   });
-  
-  export default i18n;
+
+export default i18n;
