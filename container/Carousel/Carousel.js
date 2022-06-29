@@ -37,7 +37,7 @@ export default function CarouselApp({
       <Grid item md={6}>
         <Box
           sx={{
-            ml: 6,
+            ml: 7,
             color: (theme) =>
               theme.palette.mode === "dark" ? "grey.300" : "grey.800",
             borderColor: (theme) =>

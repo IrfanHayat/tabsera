@@ -54,7 +54,6 @@ function Details({
   BuyHandler,
   price,
 }) {
- 
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
     ...theme.typography.body2,
@@ -102,8 +101,12 @@ function Details({
 
   return (
     <>
-      <Grid container spacing={1} sx={{ paddingTop: 2 }} justifyContent="center" >
-    
+      <Grid
+        container
+        spacing={1}
+        sx={{ paddingTop: 2 }}
+        justifyContent="center"
+      >
         <Grid item md={6} xs={12}>
           {/* <CardMedia
             component="img"
@@ -145,7 +148,6 @@ function Details({
                 )}
           </Carousel>
         </Grid>
-       
       </Grid>
 
       <Grid container spacing={1}>
@@ -245,7 +247,7 @@ function Details({
         <Grid item xs={12} md={6}>
           <Carousel
             // breakPoints={breakPoints}
-            disableArrowsOnEnd={false}
+            disableArrowsOnEnd={true}
             // showArrows={false}
             pagination={false}
             // showEmptySlots={true}
@@ -338,7 +340,7 @@ function Details({
                   variant="contained"
                   color="primary"
                   type="submit"
-                 // href="/shipping_information"
+                  // href="/shipping_information"
                   onClick={() => {
                     skusProduct
                       ? BuyHandler(productDetail, skusProduct)
