@@ -264,9 +264,9 @@ export default function TopNav(props) {
                 display: { xs: "none", md: "flex", justifyContent: "center" },
               }}
             >
-              <NavSelect Title="Account" Data={myAccount} color="black" />
-              <NavSelect Title="Currency" Data={currencyData} color="black" />
-              <NavSelect Title="Language" Data={languageData} color="black" />
+              <NavSelect Title="Account" Data={myAccount} />
+              <NavSelect Title="Currency" Data={currencyData} />
+              <NavSelect Title="Language" Data={languageData} />
             </Box>
             <Box sx={{ display: { xs: "flex", md: "none" } }}>
               <IconButton

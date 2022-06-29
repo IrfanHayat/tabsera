@@ -10,7 +10,7 @@ import { ListItemIcon } from "@mui/material";
 import { ListItemText } from "@mui/material";
 import ContentCopy from "@mui/icons-material/ContentCopy";
 
-export default function NavSelect({ Title, Data, color }) {
+export default function NavSelect({ Title, Data, clr }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [isActive, setIsActive] = React.useState(false);
 
@@ -25,7 +25,7 @@ export default function NavSelect({ Title, Data, color }) {
     setIsActive(!isActive);
     setAnchorEl(null);
   };
-
+  const linkcolor = "black";
   return (
     <>
       {/* <Link></Link> */}
@@ -43,12 +43,12 @@ export default function NavSelect({ Title, Data, color }) {
           // component: "a",
           fontFamily: "monospace",
           fontWeight: 300,
-          color: "inherit",
+          color: "black",
           // marginLeft: 50,
           textDecoration: "none",
           textTransform: "capitalize",
           // underline: "hover",
-          color: { color },
+          // color: { color: clr ? { clr } : linkcolor },
           ":hover": {
             // boxShadow: 20, // theme.shadows[20]
             // transform: "scale(1.1)",
