@@ -19,7 +19,7 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import InputLabel from "@mui/material/InputLabel";
 import Select from "@mui/material/Select";
 import { useRouter } from "next/router";
-import { locales } from '../../i18n.json'
+import { locales } from "../../i18n.json";
 import Link from "next/link";
 // import useTranslation from "next-translate/useTranslation";
 import MenuItem from "@mui/material/MenuItem";
@@ -35,7 +35,14 @@ import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import { Button, FormControl, TextField, AppBar, Tooltip } from "@mui/material";
+import {
+  Button,
+  FormControl,
+  TextField,
+  AppBar,
+  Tooltip,
+  Grid,
+} from "@mui/material";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import Chip from "@mui/material/Chip";
 import SignInModal from "../Login/SignIn";
@@ -48,12 +55,13 @@ import Image from "next/image";
 import logo from "../../public/logo.png";
 import NavSelect from "./Components/NavSelect";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import  TopNav from './Components/TopNav'
-import { ListItemIcon,useTheme} from "@mui/material";
+import TopNav from "./Components/TopNav";
+import { ListItemIcon, useTheme } from "@mui/material";
 import { Container } from "@mui/system";
+import Tabs from "@mui/material/Tabs";
+import Tab from "@mui/material/Tab";
 // import { ListItemText } from "@mui/material";
 const drawerWidth = 10;
- 
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -65,8 +73,8 @@ const Search = styled("div")(({ theme }) => ({
 
   width: "100%",
   [theme.breakpoints.up("sm")]: {
-    marginLeft: theme.spacing(23),
-    width: "60%",
+    marginLeft: theme.spacing(10),
+    width: "80%",
   },
 }));
 
@@ -111,7 +119,7 @@ export default function NavBar(props) {
   //const [quantityProduct,setQunatityProduct]=useState()
   const { cartTotalQuantity } = useSelector((state) => state.basket.cart);
   const [open, setOpen] = React.useState(false);
-  
+
   let router = useRouter();
   let dispatch = useDispatch();
 
@@ -123,16 +131,19 @@ export default function NavBar(props) {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const [categoriesData, setCategoriesData] = useState([]);
   const theme = useTheme();
-   
-  
 
-  useEffect( () => {
-     dispatch(getTotalCartQuantity());
-     dispatch(getCategory())
+  const [value, setValue] = React.useState(0);
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  useEffect(() => {
+    dispatch(getTotalCartQuantity());
+    dispatch(getCategory());
     // setQunatityProduct(result.payload)
   }, []);
 
-  
   const categoryData = (categories) => {
     setCategoriesData(categories);
   };
@@ -174,7 +185,6 @@ export default function NavBar(props) {
   // const handleClose = () => {
   //   setOpen(false);
   // };
-  
 
   const handlePopoverOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -240,16 +250,23 @@ export default function NavBar(props) {
         }}
         position="static"
       >
-        <Container fixed>
-        <Toolbar>
-          <Image src="/logo.png" height={40} width={100}></Image>
+        {/* <Grid */}
+        <Container>
+          <Grid Container>
+            <Grid item md={12}>
+              <Toolbar>
+                <Image src="/logo.png" height={40} width={100}></Image>
 
-          <Box component="div" sx={{ flexGrow: 1 }} />
-          <SignInModal show={showLogin} close={() => setShowLogin(false)} />
-        </Toolbar>
-
-        <Toolbar>
-          {/* <ThemeProvider>
+                <Box component="div" sx={{ flexGrow: 1 }} />
+                <SignInModal
+                  show={showLogin}
+                  close={() => setShowLogin(false)}
+                />
+              </Toolbar>
+            </Grid>
+          </Grid>
+          <Toolbar>
+            {/* <ThemeProvider>
             <Chip
               sx={{ color: "white" }}
               onClick={toggleDrawer}
@@ -257,56 +274,74 @@ export default function NavBar(props) {
               label="Shop By Category"
             />
           </ThemeProvider> */}
-
-          <MenuItem>
-            <ListItemIcon>
-              <MenuIcon />
-            </ListItemIcon>
-            <ListItemText>
-              <NavSelect Title="Shop By Category" color="black" Data={drawer} />
-            </ListItemText>
-          </MenuItem>
-
-          <Box component="div" sx={{ flexGrow: 1 }} alignItems="center">
-            <Search sx={{ border: 1, borderColor: "text.primary" }}>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="Search…"
-                inputProps={{ "aria-label": "search" }}
+            {/* <Grid Container> */}
+            {/* <Grid item md={1} sm={1}> */}
+            <MenuItem>
+              <ListItemIcon>
+                <MenuIcon />
+              </ListItemIcon>
+              <ListItemText>
+                <NavSelect Title="Categories" color="black" Data={drawer} />
+              </ListItemText>
+            </MenuItem>
+            {/* 
+            <Tabs value={value} onChange={handleChange}>
+              <Tab
+                icon={<SearchIcon />}
+                iconPosition="start"
+                label={
+                  <NavSelect Title="Categories" color="black" Data={drawer} />
+                }
               />
-            </Search>
-          </Box>
-          <div>
-            <IconButton
-              aria-describedby={id}
-              variant="contained"
-              onClick={handleClick}
-              color="inherit"
-              // onMouseEnter={handleClick}
-              // onMouseLeave={handleClick}
-            >
-              <Badge color="error" badgeContent={cartTotalQuantity} max={99}>
-                <ShoppingCartOutlinedIcon />
-              </Badge>
-              {/* </Tooltip> */}
-            </IconButton>
-            <Popover
-              id={id}
-              open={open1}
-              anchorEl={anchorEl}
-              onClose={handleClose}
-              anchorOrigin={{
-                vertical: "bottom",
-                horizontal: "left",
-              }}
-            >
-              {/* <Typography sx={{ p: 1 }}> */} <ShoppingCart />
-              {/* </Typography> */}
-            </Popover>
-          </div>
-        </Toolbar>
+            </Tabs> */}
+            {/* </Grid> */}
+
+            {/* <Grid item md={6} sm={4}> */}
+            <Box component="div" sx={{ flexGrow: 1 }} alignItems="center">
+              <Search sx={{ border: 1, borderColor: "text.primary" }}>
+                <SearchIconWrapper>
+                  <SearchIcon />
+                </SearchIconWrapper>
+                <StyledInputBase
+                  placeholder="Search…"
+                  inputProps={{ "aria-label": "search" }}
+                />
+              </Search>
+            </Box>
+            {/* </Grid> */}
+
+            {/* <Grid item md={1} sm={1} sx={{ justifyContent: "right" }}> */}
+            <div>
+              <IconButton
+                aria-describedby={id}
+                variant="contained"
+                onClick={handleClick}
+                color="inherit"
+                // onMouseEnter={handleClick}
+                // onMouseLeave={handleClick}
+              >
+                <Badge color="error" badgeContent={cartTotalQuantity} max={99}>
+                  <ShoppingCartOutlinedIcon />
+                </Badge>
+                {/* </Tooltip> */}
+              </IconButton>
+              <Popover
+                id={id}
+                open={open1}
+                anchorEl={anchorEl}
+                onClose={handleClose}
+                anchorOrigin={{
+                  vertical: "bottom",
+                  horizontal: "left",
+                }}
+              >
+                {/* <Typography sx={{ p: 1 }}> */} <ShoppingCart />
+                {/* </Typography> */}
+              </Popover>
+            </div>
+            {/* </Grid> */}
+            {/* </Grid> */}
+          </Toolbar>
         </Container>
       </AppBar>
       <Box

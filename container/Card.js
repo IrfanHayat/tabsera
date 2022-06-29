@@ -89,7 +89,7 @@ export default function ActionAreaCard({
       )}
       <CardContent>
         <Typography variant="overline">{product.categoryName}</Typography>
-        <Typography variant="h5">{product.productName}</Typography>
+        <Typography fontSize="1.3rem">{product.productName}</Typography>
       </CardContent>
       {/* <CardActions>
         {product.productName ? (
