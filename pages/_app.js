@@ -30,7 +30,7 @@ const MyApp = ({ Component, pageProps }) => {
       <ThemeProvider  theme={theme}>
         <CookiesProvider>
           <NavBar />
-          <Container maxWidth="lg">
+          <Container maxWidth="maxWidthXl">
           <Box sx={{ minHeight: "80vh" }}>
             <Component {...pageProps} />
           </Box>

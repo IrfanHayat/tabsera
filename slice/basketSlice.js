@@ -17,7 +17,9 @@ const initialState = {
     paymentMethod: localStorage.getItem("paymentMethod")
       ? localStorage.getItem("paymentMethod")
       : "",
+    cartId:localStorage.getItem("cartId")?JSON.parse(localStorage.getItem("cartId")):""  
   },
+
   // userIfo:localStorage.getItem("userInfo")
   // ? JSON.parse(localStorage.getItem("userInfo"))
   // : [],
@@ -71,7 +73,7 @@ export const addToCart = createAsyncThunk(
       })
 
       let cart={
-        cart_id:611,
+        cart_id:168,
         sku:skus_value,
         qty: tempProductItem.qty
       }  
@@ -87,7 +89,7 @@ export const addToCart = createAsyncThunk(
       })
     
       let cart = {
-        cart_id:611,
+        cart_id:168,
         sku:  skus_value,
         // price: cost,
         qty: tempProductItem.qty
@@ -169,42 +171,78 @@ export const basketSlice = createSlice({
 
       } else {
         let skus;
-       
         let tempProductItem = { ...action.payload, qty: 1 };
-        instance.post(`${url}/ecommerce/carts`).then(result=>{
-                
-        })
-        instance.get(`${url}/ecommerce/products/${tempProductItem.product_id}`).then(result=>{
-          skus=result.data.response.skus
-           
-          if(skus.length>0){
-            let skus_value;
-            skus.map(result=>{
-              skus_value=result.sku;
-            })
-           
-            let cart = {
-              cart_id:611,
-              sku:  skus_value,
-              // price: cost,
-              qty: tempProductItem.qty
-          };
-          
-          instance.post(`${url}/ecommerce/carts/items`,cart).then(result=>{
+        let a
+        instance.post(`${url}/ecommerce/carts`).then(result1=>{
+          instance.get(`${url}/ecommerce/products/${tempProductItem.product_id}`).then(result=>{
+            skus=result.data.response.skus
+             
+            if(skus.length>0){
+              let skus_value;
+              skus.map(result=>{
+                skus_value=result.sku;
+              })
+             
+              let  cart_id=result1.data.response.cartId;
               
-          })
-          }
-
-        });
+              localStorage.setItem("cartId",cart_id)
+           
+              let cart = {
+                cart_id:result1.data.response.cartId,
+                sku:  skus_value,
+                // price: cost,
+                qty: tempProductItem.qty
+            };
+            
+            instance.post(`${url}/ecommerce/carts/items`,cart).then(result=>{
+                
+            })
+            }
+  
+          });
+        })
+      
         // const result = await instance.get(`${url}/ecommerce/products/${temp}`);
        //
 
-       instance.post(`${url}/ecommerce/carts`).then(result=>{
-  
-})
+      
      state.cart.cartItems
       }
      // localStorage.setItem("cartItems", JSON.stringify(state.cart.cartItems));
+    },
+    BuyItem: (state, action) => {
+       let skus;
+       let tempProductItem = { ...action.payload, qty: 1 };
+        let a
+        instance.post(`${url}/ecommerce/carts`).then(result1=>{
+          instance.get(`${url}/ecommerce/products/${tempProductItem.product_id}`).then(result=>{
+            skus=result.data.response.skus
+             
+            if(skus.length>0){
+              let skus_value;
+              skus.map(result=>{
+                skus_value=result.sku;
+              })
+             console.log(result1.data.response.cartId)
+              let cart = {
+                cart_id:null,
+                sku:  skus_value,
+                // price: cost,
+                qty: tempProductItem.qty
+            };
+            
+            instance.post(`${url}/ecommerce/carts/items`,cart).then(result=>{
+                
+            })
+            }
+  
+          });
+        })
+      
+      
+     state.cart.cartItems
+      
+      localStorage.setItem("buyCartItems", JSON.stringify(state.cart.cartItems));
     },
     decreaseBasket: (state, action) => {
       const itemIndex = state.cart.cartItems.findIndex(

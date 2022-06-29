@@ -24,8 +24,9 @@ import {
 
 function placeorder() {
   let [groupProductData, setGroupedProductData] = useState();
-  const { userData,shippingAddressData } = useSelector(state => state.shipments);
+  const { userData,shippingAddressData,shippingCharges } = useSelector(state => state.shipments);
   const [shippementData,setShippementData]=useState()
+  const [shippementCharges,setShippementCharges]=useState()
   const classes = useStyles();
   const router = useRouter();
   const dispatch = useDispatch();
@@ -48,6 +49,10 @@ function placeorder() {
     return grouped;
   }
 
+  useEffect(()=>{
+    setShippementCharges(shippingCharges.charges)
+  },[])
+
   useEffect(() => {
     dispatch(getTotals());
   }, []);
@@ -65,6 +70,8 @@ function placeorder() {
     dispatch(getShipmentAddress());
   }, []);
 
+  
+
   console.log(cartItems)
 
   const placeOrderHandler=(shippementData,userData)=>{
@@ -77,6 +84,9 @@ function placeorder() {
     //     return newObj
     // })
     console.log(shippementData)
+
+   
+
     let obj={
       "isBuyNow": false,
       "orderAmount":cartItems.reduce((a, c) => a + c.qty * c.price, 0),
@@ -102,15 +112,15 @@ function placeorder() {
           "cityName": shippementData.city,
           "countryId": shippementData.country_id,
           "countryName":  shippementData.country,
-          "email": "string",
+          "email": "",
           "firstName": userData.first_name,
           "lastName": userData.last_name,
-          "mobileNumber": "string",
+          "mobileNumber": "",
           "stateId":  shippementData.state_id,
           "stateName":  shippementData.state
         },
-        "origShippingCharges": "500",
-        "shippingCharges": "500",
+        "origShippingCharges": shippementCharges,
+        "shippingCharges": shippementCharges,
         "shippingDiscount": "",
         // "shippingMethodId": shippementData.method_id
       },
@@ -140,6 +150,7 @@ function placeorder() {
         productPrice={cartItems}
         productCartData={groupProductData}
         shippementData={shippementData}
+        shippingCharges={shippementCharges}
         //itemsPrice={itemsPrice}
       ></PlaceOrder>
     </>

@@ -80,10 +80,9 @@ export const getShipmentsMethods = createAsyncThunk("ecommerce/shipments/methods
 });
 
 export const getShipmentsCharges = createAsyncThunk("ecommerce/shipments/charges", async (shipmentData) => {
-  const encrypt = Encryption(shipmentData);
   
         const requestBody = {
-            requestBody: encrypt
+            requestBody: shipmentData
         };
   const result = await instance.post(`${url}/ecommerce/shipments/charges`,requestBody);
   
@@ -101,7 +100,7 @@ const addShipments = createSlice({
     states:[],
     cityData:[],
     userData:{},
-    shippingCharges:[],
+    shippingCharges:{},
     shippingAddressData:[],
     loading: false,
     error: null,
@@ -238,8 +237,8 @@ const addShipments = createSlice({
       return { ...state, loading: true };
     });
     builder.addCase(getShipmentsCharges.fulfilled, (state, action) => {
-      
-      state.shippingCharges = action.payload || [];
+      console.log(action.payload)
+      state.shippingCharges = action.payload || {};
       state.loading = false;
     });
     builder.addCase(getShipmentsCharges.rejected, (state, action) => {

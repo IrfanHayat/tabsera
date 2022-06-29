@@ -28,7 +28,7 @@ import EmailIcon from '@mui/icons-material/Email';
 import DomainAddOutlinedIcon from '@mui/icons-material/DomainAddOutlined';
 import AddLocationAltOutlinedIcon from '@mui/icons-material/AddLocationAltOutlined';
 
-function PlaceOrder({userData,shippementData,shippingAddress,shippingPrice,taxPrice,totalPrice,productPrice,placeOrderHandler,productCartData,cartTotalAmount,heading,loading,classes,paymentMethod,cartItems,itemsPrice}) {
+function PlaceOrder({userData,shippementData,shippingAddress,shippingPrice,taxPrice,totalPrice,shippingCharges,productPrice,placeOrderHandler,productCartData,cartTotalAmount,heading,loading,classes,paymentMethod,cartItems,itemsPrice}) {
   
   return (
     <>
@@ -173,7 +173,7 @@ function PlaceOrder({userData,shippementData,shippingAddress,shippingPrice,taxPr
                     <Typography>Shipping:</Typography>
                   </Grid>
                   <Grid item xs={3}>
-                    <Typography align="right">500</Typography>
+                    <Typography align="right">{shippingCharges}</Typography>
                   </Grid>
                 </Grid>
               </ListItem>
@@ -186,8 +186,8 @@ function PlaceOrder({userData,shippementData,shippingAddress,shippingPrice,taxPr
                   </Grid>
                   <Grid item xs={3}>
                     <Typography align="right">
-                      <strong>{productPrice &&
-              productPrice.reduce((a, c) => a + c.qty * c.price, 0)+500}</strong>
+                      <strong>{ productPrice && shippingCharges?
+              productPrice.reduce((a, c) => a + c.qty * c.price, 0) + shippingCharges:productPrice.reduce((a, c) => a + c.qty * c.price, 0) }</strong>
                     </Typography>
                   </Grid>
                 </Grid>

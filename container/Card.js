@@ -12,6 +12,7 @@ import cx from "clsx";
 import IconButton from "@mui/material/IconButton";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import PreviewOutlinedIcon from "@mui/icons-material/PreviewOutlined";
+import { CardMedia } from '@mui/material';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -61,6 +62,8 @@ export default function ActionAreaCard({
       // className={cx(styles.root)}
     >
       {product?.productImage && (
+        <>
+        {console.log(product?.productImage)}
         <Image
           // className={cx(styles.media, mediaStyles.root)}
           src={product?.productImage}
@@ -70,6 +73,7 @@ export default function ActionAreaCard({
           height={200}
           // loading="eager"
         ></Image>
+        </>
       )}
       {product?.category_image && (
         <Image

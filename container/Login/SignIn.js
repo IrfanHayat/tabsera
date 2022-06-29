@@ -108,7 +108,7 @@ export default function SignIn() {
                   defaultValue=""
                   rules={{
                     required: true,
-                    minLength: 6,
+                    // minLength: 6,
                   }}
                   render={({ field }) => (
                     <TextField

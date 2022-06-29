@@ -99,7 +99,7 @@ function ShippingInformation({ checkoutHandler, shippementAddress, handleChange,
                   <FormControlLabel/> */}
                 {/* <BusinessIcon /> */}
                 {shippementAddress && shippementAddress.map(result => (
-                  result.address_default_billing===true?(
+                  result.address_default_billing===false?(
                     <FormControlLabel
                     value={result.address_id}
                     control={<Radio />}

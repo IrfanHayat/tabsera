@@ -44,12 +44,12 @@ export const loginUser = createAsyncThunk(
         
 
         const dataEncrypt = {
-            // deviceId: "",
+             deviceId: "",
             // imsi: "",
           
             channelId:1,
             mobileNumber: values.phone,
-             otp: "127484",
+           //  otp: "127484",
             password: values.password
             // registrationToken: ""
         };

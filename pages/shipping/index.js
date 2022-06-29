@@ -76,6 +76,7 @@ function shipping() {
         },
       ],
     };
+    console.log(obj)
    
     dispatch(addShipmentAddress(obj));
     //  localStorage.setItem("shippingAddress", JSON.stringify(value));

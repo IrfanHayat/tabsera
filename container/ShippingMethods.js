@@ -24,7 +24,7 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import EmailIcon from '@mui/icons-material/Email';
 import DomainAddOutlinedIcon from '@mui/icons-material/DomainAddOutlined';
 import AddLocationAltOutlinedIcon from '@mui/icons-material/AddLocationAltOutlined';
-function ShippingMethods({ classes,shipmentMethodData,checkoutHandler,handleChange,shippementData,userData,productPrice }) {
+function ShippingMethods({ classes,shipmentMethodData,checkoutHandler,handleChange,shippementData,userData,productPrice,shippingCharges }) {
  
   return (
     <>
@@ -75,13 +75,13 @@ function ShippingMethods({ classes,shipmentMethodData,checkoutHandler,handleChan
       <Typography variant="h6" component="h2">
           Shipping Methods
         </Typography>
-
+      
         <RadioGroup
           row
           aria-labelledby="demo-row-radio-buttons-group-label"
           name="row-radio-buttons-group"
           // value={labelValue}
-           onChange={handleChange}
+          
         >
           {/* <FormControlLabel
             value="female"
@@ -91,17 +91,18 @@ function ShippingMethods({ classes,shipmentMethodData,checkoutHandler,handleChan
             <BusinessIcon/>
             <FormControlLabel/> */}
           {/* <BusinessIcon /> */}
+         
           {shipmentMethodData && shipmentMethodData.map(result => (
-           
               <FormControlLabel
+              key={result.shipping_method_id}
               value={result.shipping_method_id}
-              control={<Radio />}
+              control={<Radio  onChange={()=>handleChange(result)}/>}
               label={result.shipping_method_name}
             />
-          
-          ))}
+            ))}
+        
         </RadioGroup>
-
+  
 
       
     </FormControl>
@@ -121,11 +122,11 @@ function ShippingMethods({ classes,shipmentMethodData,checkoutHandler,handleChan
               {/* <ListItemText>$ 0.0</ListItemText> */}
             </ListItem>
             <ListItem>
-              <ListItemText>Shipping Cost :500</ListItemText>
+              <ListItemText>Shipping Cost {shippingCharges}</ListItemText>
             </ListItem>
             <ListItem>
-              <ListItemText>Subtotal { productPrice &&
-              productPrice.reduce((a, c) => a + c.qty * c.price, 0)+ 500}</ListItemText>
+              <ListItemText>Subtotal { productPrice && shippingCharges?
+              productPrice.reduce((a, c) => a + c.qty * c.price, 0) + shippingCharges:productPrice.reduce((a, c) => a + c.qty * c.price, 0) }</ListItemText>
             </ListItem>
           </List>
           <Button

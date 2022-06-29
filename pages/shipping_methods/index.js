@@ -7,65 +7,87 @@ import {
   getShipmentsCharges,
   getShipmentsMethods,
   getCustomer,
-  getShipmentAddress
+  getShipmentAddress,
 } from "../../slice/shipmentSlice";
 import { getCartItems } from "../../slice/basketSlice";
 import useStyles from "../../utils/styles";
 const index = () => {
-  const { shipmentMethodData,shippingAddressData, userData } = useSelector(
+  const { shipmentMethodData, shippingAddressData, shippingCharges, userData } = useSelector(
     state => state.shipments
   );
-  const [shippementData,setShippementData]=useState()
+  const [shippementData, setShippementData] = useState();
   const classes = useStyles();
-  const { cartItems } = useSelector(state => state.basket.cart);
+  const { cartItems,cartId } = useSelector(state => state.basket.cart);
+  const [shippementCharges,setShippementCharges]=useState()
   let router = useRouter();
   let dispatch = useDispatch();
 
   const checkoutHandler = () => {
-    
     router.push({ pathname: "/placeorder", query: router.query });
   };
 
- 
-  const handleChange = (event, value) => {
+  const handleChange =async ( value) => {
+    console.log(value)
+    let result = shippingAddressData.filter(result => {
+      if (result.address_id == router.query.addressId) return result;
+    })[0];
+    console.log(cartId)
+
+           
+     
+      
+     
   
-    let result = shippingAddressData.filter(result =>{
-      
-      if(result.address_id == router.query.addressId) return result  
-    }
-      
-    )[0];
+   
+    // let shipmentMethodDataFilter=shipmentMethodData.filter(result=>{
+    //   if (result.address_id == router.query.addressId) return result;
+    // })
     
-  
     let obj = {
-      address: result.address,
-      bundle_id: null,
-      cart_id: 611,
-      city_id: result.city_id,
-      country_id: result.country_id,
-      shipment_method_type: "address",
-      sku_id: null,
-      state_id: result.state_id,
+      cartId: cartId,
+      shipmentMethodId: value.shipping_method_id,
+      shipmentMethodType: "address",
+      shippingAddress: {
+        address: result.address,
+        addressId: result.address_id,
+        cityId: result.city_id,
+        countryId: result.country_id,
+        stateId: result.state_id,
+      },
     };
 
-  
-    dispatch(getShipmentsCharges(obj));
+    // let obj = {
+    //   address: result.address,
+    //   bundle_id: null,
+    //   cart_id: 611,
+    //   city_id: result.city_id,
+    //   country_id: result.country_id,
+    //   shipment_method_type: "address",
+    //   sku_id: null,
+    //   state_id: result.state_id,
+    // };
+ let result2=await dispatch(getShipmentsCharges(obj));
+ console.log(result2.payload.charges)
+ setShippementCharges(result2.payload.charges)
   };
+
+  
+
   useEffect(() => {
     dispatch(getShipmentAddress());
   }, []);
 
   useEffect(() => {
-  
-    let result1 = shippingAddressData.filter(result =>result.address_id == router.query.addressId?  result:'' );
-    
+    let result1 = shippingAddressData.filter(result =>
+      result.address_id == router.query.addressId ? result : ""
+    );
 
-    setShippementData(result1[0])
-    
+    setShippementData(result1[0]);
+
     let obj = {
       address: result1[0]?.address,
       bundle_id: null,
-      cart_id: 611,
+      cart_id: cartId?cartId:'',
       city_id: result1[0]?.city_id,
       country_id: result1[0]?.country_id,
       shipment_method_type: "address",
@@ -73,10 +95,10 @@ const index = () => {
       state_id: result1[0]?.state_id,
     };
 
-   dispatch(getShipmentsMethods(obj));
+    dispatch(getShipmentsMethods(obj));
     dispatch(getCustomer());
     dispatch(getCartItems());
-  }, [router,shippementData]);
+  }, [router, shippementData]);
 
   return (
     <div>
@@ -88,6 +110,7 @@ const index = () => {
         shipmentMethodData={shipmentMethodData}
         checkoutHandler={checkoutHandler}
         classes={classes}
+        shippingCharges={shippementCharges}
       />
     </div>
   );
