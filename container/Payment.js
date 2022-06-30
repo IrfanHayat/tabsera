@@ -17,6 +17,7 @@ export default function Payment({
   submitHandler,
   paymentMethod,
   setPaymentMethod,
+  handleChange
 }) {
   const classes = useStyles();
 
@@ -31,28 +32,33 @@ export default function Payment({
           <List>
             <ListItem>
               <FormControl component="fieldset">
-                <RadioGroup
-                  aria-label="Payment Method"
-                  name="paymentMethod"
-                  value={paymentMethod}
-                  onChange={(e) => setPaymentMethod(e.target.value)}
-                >
-                  <FormControlLabel
-                    label="PayPal"
-                    value="PayPal"
-                    control={<Radio />}
-                  ></FormControlLabel>
-                  <FormControlLabel
-                    label="Stripe"
-                    value="Stripe"
-                    control={<Radio />}
-                  ></FormControlLabel>
-                  <FormControlLabel
-                    label="Cash"
-                    value="Cash"
-                    control={<Radio />}
-                  ></FormControlLabel>
-                </RadioGroup>
+               
+        <RadioGroup
+          row
+          aria-labelledby="demo-row-radio-buttons-group-label"
+          name="row-radio-buttons-group"
+          // value={labelValue}
+          
+        >
+          {/* <FormControlLabel
+            value="female"
+            control={<Radio />}
+            label="Female"
+          >
+            <BusinessIcon/>
+            <FormControlLabel/> */}
+          {/* <BusinessIcon /> */}
+         
+          {paymentMethod && paymentMethod.map(result => (
+              <FormControlLabel
+              key={result.payment_method_id}
+              value={result.payment_method_id}
+              control={<Radio  onChange={()=>handleChange(result)}/>}
+              label={result.parent_payment_method}
+            />
+            ))}
+        
+        </RadioGroup>
               </FormControl>
             </ListItem>
             <ListItem>

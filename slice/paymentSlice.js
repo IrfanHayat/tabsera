@@ -12,7 +12,7 @@ export const getPayment = createAsyncThunk("payments/methods", async () => {
 const addPayment = createSlice({
   name: "payment",
   initialState: {
-    paymentData: {},
+    paymentData: [],
     loading: false,
     error: null,
   },

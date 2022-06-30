@@ -3,7 +3,7 @@ import Payment from "../../container/Payment";
 import { useSelector, useDispatch } from "react-redux";
 import localStorage from "localStorage";
 import { savePayment } from "../../slice/basketSlice";
-
+//import {getPayment} from '../../slice/paymentSlice'
 import { useRouter, withRouter } from "next/router";
 import { getPayment } from "../../slice/paymentSlice";
 
@@ -27,6 +27,9 @@ function payement() {
   //     setPaymentMethod(localStorage.getItem("paymentMethod") || "");
   //   }
   // }, []);
+  useEffect(()=>{
+        dispatch(getPayment())
+  },[])
 
   const submitHandler = (e) => {
     //  closeSnackbar();
@@ -40,11 +43,18 @@ function payement() {
       router.push("/placeorder");
     }
   };
+
+  const handleChange=(result)=>{
+     console.log(result)
+  }
+
+
   return (
     <Payment
-      paymentMethod={paymentMethod}
+      paymentMethod={paymentData}
       submitHandler={submitHandler}
       setPaymentMethod={setPaymentMethod}
+      handleChange={handleChange}
     ></Payment>
   );
 }
