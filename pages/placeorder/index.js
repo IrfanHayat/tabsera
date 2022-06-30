@@ -24,13 +24,13 @@ import {
 
 function placeorder() {
   let [groupProductData, setGroupedProductData] = useState();
-  const { userData,shippingAddressData,shippingCharges } = useSelector(state => state.shipments);
+  const { userData,shippingAddressData,shippingCharges,shipmentMethodData } = useSelector(state => state.shipments);
   const [shippementData,setShippementData]=useState()
   const [shippementCharges,setShippementCharges]=useState()
   const classes = useStyles();
   const router = useRouter();
   const dispatch = useDispatch();
-
+  
   const {
     cart: { cartItems },
   } = useSelector(state => state.basket);
@@ -75,6 +75,7 @@ function placeorder() {
   console.log(cartItems)
 
   const placeOrderHandler=(shippementData,userData)=>{
+    
     // let newCartItems=cartItems.map(result=>{
     //     let newObj={
     //         merchantId:result.merchant_id,
@@ -83,28 +84,77 @@ function placeorder() {
     //     }
     //     return newObj
     // })
-    console.log(shippementData)
+    
 
-   
+//    let obj={
+//     "isBuyNow": true,
+//     "orderAmount": 3.0,
+//     "cartItems": [
+//         {
+//             "discount": 0,
+//             "merchantId": 215,
+//             "origPrice": 3.0,
+//             "price": 3,
+//             "quantity": 1,
+//             "sku": "SKU_1582873943422"
+//         }
+//     ],
+//     "coupons": [],
+//     "orderDiscount": 0.0,
+//     "discounts": [],
+//     "paymentInfo": {
+//         "paymentAmount": 3,
+//         "paymentCurreny": "PKR"
+//     },
+//     "rewards": [],
+//     "shippingInfo": {
+//         "contactInfo": {
+//             "address": "johar",
+//             "cityId": 11,
+//             "cityName": "Lahore",
+//             "countryId": 1,
+//             "countryName": "Pakistan",
+//             "email": "mailto:umar.ismail@smartfusion.co",
+//             "firstName": "um",
+//             "lastName": "is",
+//             "mobileNumber": "03215890184",
+//             "stateId": 3,
+//             "stateName": "Punjab"
+//         },
+//         "origShippingCharges": 45,
+//         "shipment_method_type": "address",
+//         "shippingCharges": 45,
+//         "shippingDiscount": 0,
+//         "shippingMethodId": 3
+//     },
+//     "origOrderAmount": 3.0
+// }
+console.log(shippementData)
 
+let newCartItems=cartItems.map(result=>{
+      let obj={};
+       obj.discount=0;
+       obj.merchantId=result.merchant_id
+       obj.origPrice=result.price
+       obj.price=result.price  
+       obj.quantity=result.qty
+       obj.sku=result.sku
+       return obj
+})
+
+console.log(newCartItems)
     let obj={
       "isBuyNow": false,
       "orderAmount":cartItems.reduce((a, c) => a + c.qty * c.price, 0),
-      "cartItems": cartItems,
-      "coupons": [
-        " "
-      ],
-      "orderDiscount": " ",
-      // "discounts": [
-      //   " "
-      // ],
+      "cartItems": newCartItems,
+      "coupons": [],
+      "orderDiscount": 0.0,
+      "discounts": [],
       "paymentInfo": {
         "paymentAmount": cartItems.reduce((a, c) => a + c.qty * c.price, 0),
-        "paymentCurreny": ""
+        "paymentCurreny": "PKR"
       },
-      // "rewards": [
-      //   "string"
-      // ],
+      "rewards": [],
       "shippingInfo": {
         "contactInfo": {
           "address": shippementData.address,
@@ -121,15 +171,16 @@ function placeorder() {
         },
         "origShippingCharges": shippementCharges,
         "shippingCharges": shippementCharges,
-        "shippingDiscount": "",
-        // "shippingMethodId": shippementData.method_id
+        "shippingDiscount": 0,
+        "shippingMethodId": router.query.shipId,
+        "shipment_method_type": "address",
       },
       "origOrderAmount": cartItems.reduce((a, c) => a + c.qty * c.price, 0)
     }
     
     console.log(obj)
     dispatch(addOrder(obj))
-    //  router.push('/payment')
+    router.push('/payment')
   }
 
 
@@ -151,7 +202,7 @@ function placeorder() {
         productCartData={groupProductData}
         shippementData={shippementData}
         shippingCharges={shippementCharges}
-        //itemsPrice={itemsPrice}
+        shippmentName={router.query.shipName}
       ></PlaceOrder>
     </>
   );

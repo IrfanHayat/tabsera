@@ -28,7 +28,7 @@ import EmailIcon from '@mui/icons-material/Email';
 import DomainAddOutlinedIcon from '@mui/icons-material/DomainAddOutlined';
 import AddLocationAltOutlinedIcon from '@mui/icons-material/AddLocationAltOutlined';
 
-function PlaceOrder({userData,shippementData,shippingAddress,shippingPrice,taxPrice,totalPrice,shippingCharges,productPrice,placeOrderHandler,productCartData,cartTotalAmount,heading,loading,classes,paymentMethod,cartItems,itemsPrice}) {
+function PlaceOrder({userData,shippementData,shippmentName,shippingAddress,shippingPrice,taxPrice,totalPrice,shippingCharges,productPrice,placeOrderHandler,productCartData,cartTotalAmount,heading,loading,classes,paymentMethod,cartItems,itemsPrice}) {
   
   return (
     <>
@@ -77,7 +77,7 @@ function PlaceOrder({userData,shippementData,shippingAddress,shippingPrice,taxPr
                   Your Shipping Method
                 </Typography>
               </ListItem>
-              <ListItem>overnight</ListItem>
+              <ListItem>{shippmentName}</ListItem>
             </List>
           </Card>
           <Card className={classes.section}>

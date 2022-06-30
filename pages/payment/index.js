@@ -15,13 +15,13 @@ function payement() {
 
   const [paymentMethod, setPaymentMethod] = useState("");
 
-  useEffect(() => {
-    if (!shippingAddress.address) {
-      router.push("/shipping");
-    } else {
-      setPaymentMethod(localStorage.getItem("paymentMethod") || "");
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (!shippingAddress.address) {
+  //     router.push("/shipping");
+  //   } else {
+  //     setPaymentMethod(localStorage.getItem("paymentMethod") || "");
+  //   }
+  // }, []);
 
   const submitHandler = e => {
     //  closeSnackbar();

@@ -1,17 +1,13 @@
-import {
-  Grid,
-  Link,
-  List,
-  ListItem,
-  ListItemText,
-  Typography,
-  Card,
-  CardMedia,
-  Button,
-  TextField,
-  CircularProgress,
-} from "@mui/material";
-import { styled } from "@mui/material/styles";
+
+import React, { useState } from "react";
+import Grid from "@mui/material/Grid"
+import List from "@mui/material/List"
+import ListItem from "@mui/material/ListItem";
+import  ListItemText  from "@mui/material/ListItemText";
+import Typography from "@mui/material/Typography";
+import Card from "@mui/material/Card";
+import Button from "@mui/material/Button";
+import  styled  from "@mui/styles/styled";
 import Paper from "@mui/material/Paper";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
@@ -19,17 +15,8 @@ import Tab from "@mui/material/Tab";
 //import Typography from '@mui/material/Typography';
 import Box from "@mui/material/Box";
 import Image from "next/image";
-import React, { useState } from "react";
 import Carousel from "react-elastic-carousel";
-//import NavBar from "./NavBar";
 
-import ImageList from "@mui/material/ImageList";
-import ImageListItem from "@mui/material/ImageListItem";
-import ImageListItemBar from "@mui/material/ImageListItemBar";
-import StarBorderIcon from "@mui/icons-material/StarBorder";
-import IconButton from "@mui/material/IconButton";
-import ShareIcon from "@mui/icons-material/Share";
-import { useEffect } from "react";
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
   { width: 550, itemsToShow: 2 },

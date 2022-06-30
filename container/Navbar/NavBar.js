@@ -1,65 +1,37 @@
 import React, { useMemo, useEffect, useState } from "react";
-import { styled, alpha } from "@mui/material/styles";
+// import { styled, alpha } from "@mui/material/styles";
 import Box from "@mui/material/Box";
-import Drawer from "@mui/material/Drawer";
-import CssBaseline from "@mui/material/CssBaseline";
+// import Drawer from "@mui/material/Drawer";
+// import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
 import List from "@mui/material/List";
 import InputBase from "@mui/material/InputBase";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
-import Typography from "@mui/material/Typography";
-import Menu from "@mui/material/Menu";
 import { useSelector, useDispatch } from "react-redux";
-import AccountCircle from "@mui/icons-material/AccountCircle";
-import InputLabel from "@mui/material/InputLabel";
-import Select from "@mui/material/Select";
+
 import { useRouter } from "next/router";
-import { locales } from "../../i18n.json";
-import Link from "next/link";
-// import useTranslation from "next-translate/useTranslation";
 import MenuItem from "@mui/material/MenuItem";
-import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
-import ReceiptIcon from "@mui/icons-material/Receipt";
-import AdUnitsIcon from "@mui/icons-material/AdUnits";
-import GppGoodOutlinedIcon from "@mui/icons-material/GppGoodOutlined";
 import { getProduct } from "../../slice/productSlice";
 import { getCategory } from "../../slice/categorySlice";
-import { getTotalCartQuantity, getTotals } from "../../slice/basketSlice";
-import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import AccountBoxIcon from "@mui/icons-material/AccountBox";
-import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-import MoreIcon from "@mui/icons-material/MoreVert";
 import {
-  Button,
-  FormControl,
-  TextField,
   AppBar,
-  Tooltip,
   Grid,
 } from "@mui/material";
-import { ThemeProvider, createTheme } from "@mui/material/styles";
-import Chip from "@mui/material/Chip";
 import SignInModal from "../Login/SignIn";
 import Badge from "@mui/material/Badge";
 import Popover from "@mui/material/Popover";
-import instance from "../../helper/axios/httpRequest";
-import { url, setHeaders } from "../../helper/axios/config";
 import ShoppingCart from "../../pages/cart/index";
 import Image from "next/image";
-import logo from "../../public/logo.png";
 import NavSelect from "./Components/NavSelect";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import TopNav from "./Components/TopNav";
 import { ListItemIcon, useTheme } from "@mui/material";
 import { Container } from "@mui/system";
-import Tabs from "@mui/material/Tabs";
-import Tab from "@mui/material/Tab";
 // import { ListItemText } from "@mui/material";
 const drawerWidth = 10;
 import Paper from "@mui/material/Paper";
@@ -89,7 +61,7 @@ export default function NavBar(props) {
   };
 
   useEffect(() => {
-    dispatch(getTotalCartQuantity());
+    //dispatch(getTotalCartQuantity());
     dispatch(getCategory());
     // setQunatityProduct(result.payload)
   }, []);

@@ -19,30 +19,23 @@ const index = () => {
   const classes = useStyles();
   const { cartItems,cartId } = useSelector(state => state.basket.cart);
   const [shippementCharges,setShippementCharges]=useState()
+  const [shippingMethodId,setShippingMethodId]=useState()
   let router = useRouter();
   let dispatch = useDispatch();
 
   const checkoutHandler = () => {
-    router.push({ pathname: "/placeorder", query: router.query });
+    router.push({ pathname: "/placeorder", query: {addressId:router.query.addressId,shipId:shippingMethodId.shipping_method_id,shipName:shippingMethodId.shipping_method_name} });
   };
 
   const handleChange =async ( value) => {
     console.log(value)
+    setShippingMethodId(value)
     let result = shippingAddressData.filter(result => {
       if (result.address_id == router.query.addressId) return result;
     })[0];
     console.log(cartId)
 
-           
-     
-      
-     
-  
-   
-    // let shipmentMethodDataFilter=shipmentMethodData.filter(result=>{
-    //   if (result.address_id == router.query.addressId) return result;
-    // })
-    
+               
     let obj = {
       cartId: cartId,
       shipmentMethodId: value.shipping_method_id,

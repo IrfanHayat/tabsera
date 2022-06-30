@@ -49,13 +49,13 @@ export default function SignIn() {
     //   closeSnackbar();
     let data = { phone, password };
 
-    try {
       let result = await dispatch(loginUser(data));
+      console.log(result)
       result.payload ? router.push("/") : router.push("/login");
       handleClose();
-    } catch (err) {
-      //  enqueueSnackbar(getError(err), { variant: 'error' });
-    }
+    // } catch (err) {
+    //   //  enqueueSnackbar(getError(err), { variant: 'error' });
+    // }
   };
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
