@@ -22,7 +22,7 @@ export default function Payment({
 
   return (
     <Grid container>
-      <CheckoutWizard activeStep={4}></CheckoutWizard>
+      <CheckoutWizard activeStep={5}></CheckoutWizard>
       <Grid item sx={{ margin: 5 }}>
         <form onSubmit={submitHandler}>
           <Typography component="h4" variant="h4">

@@ -6,7 +6,7 @@ import ActionAreaCard from "../Card";
 import { Box, Grid } from "@mui/material";
 import Link from "@mui/material/Link";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
-
+import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
   { width: 550, itemsToShow: 2 },
@@ -28,16 +28,17 @@ export default function CarouselApp({
   return (
     <Grid
       container
-      spacing={1}
+      // spacing={1}
       sx={{
-        bgcolor: "#fafafa",
-        my: 1,
+        bgcolor: "#f6f9fc",
+        // my: 1,
+        height: "400px",
       }}
     >
       <Grid item md={6}>
         <Box
           sx={{
-            ml: 7,
+            mx: 7,
             color: (theme) =>
               theme.palette.mode === "dark" ? "grey.300" : "grey.800",
             borderColor: (theme) =>
@@ -50,22 +51,25 @@ export default function CarouselApp({
         </Box>
       </Grid>
 
-      <Grid item md={6} textAlign="right">
+      <Grid item md={6}>
         <Box
           component="div"
           sx={{
+            display: "flex",
+            justifyContent: "flex-end",
             // display: "inline",
-            mr: 6,
+            mx: 6,
             // mx: 5,
             // my: 2,
           }}
         >
           <Button
+            // dir="rtl"
             variant="text"
             href="/all_products"
             underline="none"
             size="small"
-            endIcon={<KeyboardArrowRightIcon />}
+            endIcon={<DoubleArrowIcon />}
           >
             View All
           </Button>
