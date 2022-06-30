@@ -15,7 +15,6 @@ import NewCarousel from "./Carousel/NewCarousel";
 import CarouselApp from "./Carousel/Carousel";
 import { useGetAllProductsQuery } from "../RTK/productApi";
 
-
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
@@ -62,13 +61,12 @@ export default function PersistentDrawerLeft() {
     return list.reduce(function (rv, x) {
       rv[x[key].split(" ").join("")] = rv[x[key].split(" ").join("")] || [];
       rv[x[key].split(" ").join("")].push(x);
-     
+
       return rv;
     }, {});
   }
 
   useEffect(() => {
-    
     dispatch(getFeatureProduct());
 
     dispatch(getCategory());
@@ -127,48 +125,49 @@ export default function PersistentDrawerLeft() {
   }, []);
 
   return (
-    <Box>
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-        }}
-      >
-        <Grid xs={12} md={12}>
-          <NewCarousel
-            product={
-              product &&
-              product.slice([5], [9]).map((item, i) => {
-                return item;
-              })
-            }
+    // <Box>
+    <Box
+      component="main"
+      sx={{
+        flexGrow: 1,
+        backgroundColor: "#f6f9fc",
+      }}
+    >
+      <Grid xs={12} md={12}>
+        <NewCarousel
+          product={
+            product &&
+            product.slice([5], [9]).map((item, i) => {
+              return item;
+            })
+          }
+        />
+      </Grid>
+      <Grid item xs={12} md={12}>
+        <Item>
+          <CarouselApp
+            heading="Featured Products"
+            product={featureProduct}
+            viewProduct={viewProduct}
+            addToCartHandler={addToCartHandler}
           />
-        </Grid>
-        <Grid item xs={12} md={12}>
-          <Item>
-            <CarouselApp
-              heading="Featured Products"
-              product={featureProduct}
-              viewProduct={viewProduct}
-              addToCartHandler={addToCartHandler}
-            />
-          </Item>
-        </Grid>
-        {groupProduct &&
-          Object.keys(groupProduct).map((key) => (
-            <Grid item xs={12} md={12}>
-              <Item key={key}>
-                <CarouselApp
-                  heading={key}
-                  product={groupProduct[key]}
-                  viewProduct={viewProduct}
-                  addToCartHandler={addToCartHandler}
-                  viewCategory={viewCategory}
-                />
-              </Item>
-            </Grid>
-          ))}
-      </Box>
+        </Item>
+      </Grid>
+      {groupProduct &&
+        Object.keys(groupProduct).map((key) => (
+          <Grid item xs={12} md={12}>
+            <Item key={key}>
+              <CarouselApp
+                heading={key}
+                product={groupProduct[key]}
+                viewProduct={viewProduct}
+                addToCartHandler={addToCartHandler}
+                viewCategory={viewCategory}
+              />
+            </Item>
+          </Grid>
+        ))}
     </Box>
+    // </Box>
   );
 }

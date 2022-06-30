@@ -28,10 +28,11 @@ export default function CarouselApp({
   return (
     <Grid
       container
-      spacing={1}
+      // spacing={1}
       sx={{
-        bgcolor: "#fafafa",
-        my: 1,
+        bgcolor: "#f6f9fc",
+        // my: 1,
+        height: "400px",
       }}
     >
       <Grid item md={6}>

@@ -36,7 +36,14 @@ function CartScreen({
   productPrice,
 }) {
   return (
-    <Box sx={{ flexGrow: 1,display: 'grid', marginTop: 5 }}>
+    <Box
+      sx={{
+        flexGrow: 1,
+        display: "grid",
+        marginTop: 5,
+        backgroundColor: "#f6f9fc",
+      }}
+    >
       <Typography component="h4" variant="h5">
         {heading}
       </Typography>
@@ -48,9 +55,11 @@ function CartScreen({
             spacing={1}
             key={item.name}
             style={{
+              backgroundColor: "white",
               textAlign: "center",
               display: "flex",
               alignItems: "center",
+              marginTop: "30px",
             }}
           >
             <Grid
