@@ -50,12 +50,14 @@ export default function Payment({
           {/* <BusinessIcon /> */}
          
           {paymentMethod && paymentMethod.map(result => (
-              <FormControlLabel
+            
+            <FormControlLabel
               key={result.payment_method_id}
               value={result.payment_method_id}
               control={<Radio  onChange={()=>handleChange(result)}/>}
               label={result.parent_payment_method}
             />
+
             ))}
         
         </RadioGroup>

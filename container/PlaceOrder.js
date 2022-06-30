@@ -20,52 +20,78 @@ import {
 } from "@mui/material";
 //import axios from 'axios';
 import { useRouter, withRouter } from "next/router";
-import Box from '@mui/material/Box';
+import Box from "@mui/material/Box";
 import CheckoutWizard from "./CheckoutWizard";
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import PhoneIcon from '@mui/icons-material/Phone';
-import EmailIcon from '@mui/icons-material/Email';
-import DomainAddOutlinedIcon from '@mui/icons-material/DomainAddOutlined';
-import AddLocationAltOutlinedIcon from '@mui/icons-material/AddLocationAltOutlined';
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import PhoneIcon from "@mui/icons-material/Phone";
+import EmailIcon from "@mui/icons-material/Email";
+import DomainAddOutlinedIcon from "@mui/icons-material/DomainAddOutlined";
+import AddLocationAltOutlinedIcon from "@mui/icons-material/AddLocationAltOutlined";
 
-function PlaceOrder({userData,shippementData,shippmentName,shippingAddress,shippingPrice,taxPrice,totalPrice,shippingCharges,productPrice,placeOrderHandler,productCartData,cartTotalAmount,heading,loading,classes,paymentMethod,cartItems,itemsPrice}) {
-  
+function PlaceOrder({
+  userData,
+  shippementData,
+  shippmentName,
+  shippingAddress,
+  shippingPrice,
+  taxPrice,
+  totalPrice,
+  shippingCharges,
+  productPrice,
+  placeOrderHandler,
+  productCartData,
+  cartTotalAmount,
+  heading,
+  loading,
+  classes,
+  paymentMethod,
+  cartItems,
+  itemsPrice,
+}) {
   return (
     <>
-      <CheckoutWizard activeStep={5}></CheckoutWizard>
-      
+      <CheckoutWizard activeStep={4}></CheckoutWizard>
+
       <Grid container mt={5} justifyContent={"center"}>
-      
         <Grid item md={9} xs={12}>
-        <Card className={classes.section}>
+          <Card className={classes.section}>
             <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-            <Typography variant="h6" component="h2">
-             Shipping Information
-           </Typography>
-            
+              <Typography variant="h6" component="h2">
+                Shipping Information
+              </Typography>
+
               {/* {productDetail?.merchant_name} */}
               <List>
-                <ListItem><AccountCircleIcon/>{userData.first_name} {userData.last_name}</ListItem>
-              </List>
-              <List>
-                <ListItem><PhoneIcon/> </ListItem>
-              </List>
-              <List>
                 <ListItem>
-                  <EmailIcon/>{userData.email}
+                  <AccountCircleIcon />
+                  {userData.first_name} {userData.last_name}
                 </ListItem>
               </List>
               <List>
                 <ListItem>
-                  <DomainAddOutlinedIcon/>{shippementData?.address}
+                  <PhoneIcon />{" "}
                 </ListItem>
               </List>
               <List>
                 <ListItem>
-                  <AddLocationAltOutlinedIcon/>{shippementData?.city},{shippementData?.state},{shippementData?.country}
+                  <EmailIcon />
+                  {userData.email}
                 </ListItem>
               </List>
-              </Box>
+              <List>
+                <ListItem>
+                  <DomainAddOutlinedIcon />
+                  {shippementData?.address}
+                </ListItem>
+              </List>
+              <List>
+                <ListItem>
+                  <AddLocationAltOutlinedIcon />
+                  {shippementData?.city},{shippementData?.state},
+                  {shippementData?.country}
+                </ListItem>
+              </List>
+            </Box>
             {/* <TabPanel value={value} index={2}>
               {merchantDetail?.city}
             </TabPanel> */}
@@ -90,50 +116,57 @@ function PlaceOrder({userData,shippementData,shippmentName,shippingAddress,shipp
               <ListItem>
                 <TableContainer>
                   <Table>
-                  
-                  {productCartData && Object.keys(productCartData).map((key) => (  
-                  <>
-                  <TableHead>
-                  {productCartData[key].map((result) => result.merchant_name)[0]}
-                   </TableHead>
-                  
-                     <TableBody>
-                     { productCartData[key].map((item)=> (
-                       <TableRow >
-                         <TableCell>
-                           <NextLink href={`/product/${item.name}`} passHref>
-                             <Link>
-                               <Image
-                                 src={item.image_URL}
-                                 alt="shirt"
-                                 width={50}
-                                 height={50}
-                               ></Image>
-                             </Link>
-                           </NextLink>
-                         </TableCell>
+                    {productCartData &&
+                      Object.keys(productCartData).map((key) => (
+                        <>
+                          <TableHead>
+                            {
+                              productCartData[key].map(
+                                (result) => result.merchant_name
+                              )[0]
+                            }
+                          </TableHead>
 
-                         <TableCell>
-                           <NextLink href={`/product/${item.name}`} passHref>
-                             <Link>
-                               <Typography>{item.name}</Typography>
-                             </Link>
-                           </NextLink>
-                         </TableCell>
-                         <TableCell align="right">
-                           <Typography>{item.qty}</Typography>
-                         </TableCell>
-                         <TableCell align="right">
-                           <Typography>${item.price}</Typography>
-                         </TableCell>
-                       </TableRow>
-                     ))}
-                   </TableBody>
-            
-                    
-                    </>
-                   ))
-                   } 
+                          <TableBody>
+                            {productCartData[key].map((item) => (
+                              <TableRow>
+                                <TableCell>
+                                  <NextLink
+                                    href={`/product/${item.name}`}
+                                    passHref
+                                  >
+                                    <Link>
+                                      <Image
+                                        src={item.image_URL}
+                                        alt="shirt"
+                                        width={50}
+                                        height={50}
+                                      ></Image>
+                                    </Link>
+                                  </NextLink>
+                                </TableCell>
+
+                                <TableCell>
+                                  <NextLink
+                                    href={`/product/${item.name}`}
+                                    passHref
+                                  >
+                                    <Link>
+                                      <Typography>{item.name}</Typography>
+                                    </Link>
+                                  </NextLink>
+                                </TableCell>
+                                <TableCell align="right">
+                                  <Typography>{item.qty}</Typography>
+                                </TableCell>
+                                <TableCell align="right">
+                                  <Typography>${item.price}</Typography>
+                                </TableCell>
+                              </TableRow>
+                            ))}
+                          </TableBody>
+                        </>
+                      ))}
                   </Table>
                 </TableContainer>
               </ListItem>
@@ -152,8 +185,11 @@ function PlaceOrder({userData,shippementData,shippmentName,shippingAddress,shipp
                     <Typography>Items:</Typography>
                   </Grid>
                   <Grid item xs={3}>
-                    <Typography align="right"> {productPrice &&
-              productPrice.reduce((a, c) => a + c.qty * c.price, 0)}</Typography>
+                    <Typography align="right">
+                      {" "}
+                      {productPrice &&
+                        productPrice.reduce((a, c) => a + c.qty * c.price, 0)}
+                    </Typography>
                   </Grid>
                 </Grid>
               </ListItem>
@@ -186,15 +222,24 @@ function PlaceOrder({userData,shippementData,shippmentName,shippingAddress,shipp
                   </Grid>
                   <Grid item xs={3}>
                     <Typography align="right">
-                      <strong>{ productPrice && shippingCharges?
-              productPrice.reduce((a, c) => a + c.qty * c.price, 0) + shippingCharges:productPrice.reduce((a, c) => a + c.qty * c.price, 0) }</strong>
+                      <strong>
+                        {productPrice && shippingCharges
+                          ? productPrice.reduce(
+                              (a, c) => a + c.qty * c.price,
+                              0
+                            ) + shippingCharges
+                          : productPrice.reduce(
+                              (a, c) => a + c.qty * c.price,
+                              0
+                            )}
+                      </strong>
                     </Typography>
                   </Grid>
                 </Grid>
               </ListItem>
               <ListItem>
                 <Button
-                  onClick={()=>placeOrderHandler(shippementData,userData)}
+                  onClick={() => placeOrderHandler(shippementData, userData)}
                   variant="contained"
                   color="primary"
                   fullWidth

@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/router";
 import NextLink from "next/link";
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { loginUser } from "../../slice/authSlice";
 import { Controller, useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
@@ -24,7 +24,15 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
+import Stack from "@mui/material/Stack";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 // import useMediaQuery from "@mui/material/useMediaQuery";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
+
 export default function SignIn() {
   const {
     handleSubmit,
@@ -39,20 +47,38 @@ export default function SignIn() {
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
 
+  const [openBar, setOpenBar] = React.useState(false);
+
+  const handleClickBar = () => {
+    setOpenBar(true);
+  };
+
+  const handleCloseBar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenBar(false);
+  };
+
   // useEffect(() => {
   //   if (auth._id) {
   //     navigate("/cart");
   //   }
   // }, []);
+  const [loginSccess, setLginSccess] = useState(false);
 
   const submitHandler = async ({ phone, password }) => {
     //   closeSnackbar();
     let data = { phone, password };
 
-      let result = await dispatch(loginUser(data));
-      console.log(result)
-      result.payload ? router.push("/") : router.push("/login");
-      handleClose();
+    let result = await dispatch(loginUser(data));
+
+    console.log(result);
+
+    result.payload
+      ? (router.push("/"), setLginSccess(true), handleClickBar(), handleClose())
+      : (setLginSccess(false), handleClickBar(), router.push("/login"));
+    // handleClose();
     // } catch (err) {
     //   //  enqueueSnackbar(getError(err), { variant: 'error' });
     // }
@@ -164,6 +190,15 @@ export default function SignIn() {
           </Button> */}
         </DialogActions>
       </Dialog>
+      <Snackbar open={openBar} autoHideDuration={6000} onClose={handleCloseBar}>
+        <Alert
+          onClose={handleCloseBar}
+          severity={loginSccess ? "success" : "error"}
+          sx={{ width: "100%" }}
+        >
+          {loginSccess ? " Login SuccessFully!" : " Login Failed!"}
+        </Alert>
+      </Snackbar>
     </div>
   );
 }
