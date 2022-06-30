@@ -5,13 +5,18 @@ import localStorage from "localStorage";
 import { savePayment } from "../../slice/basketSlice";
 
 import { useRouter, withRouter } from "next/router";
+import { getPayment } from "../../slice/paymentSlice";
 
 function payement() {
   const {
     cart: { shippingAddress },
-  } = useSelector(state => state.basket);
+  } = useSelector((state) => state.basket);
   let router = useRouter();
   let dispatch = useDispatch();
+
+  const { paymentData } = useSelector((state) => state.payment);
+
+  console.log("Payment Data = ", paymentData);
 
   const [paymentMethod, setPaymentMethod] = useState("");
 
@@ -23,11 +28,10 @@ function payement() {
   //   }
   // }, []);
 
-  const submitHandler = e => {
+  const submitHandler = (e) => {
     //  closeSnackbar();
     e.preventDefault();
     if (!paymentMethod) {
-     
       //  enqueueSnackbar('Payment method is required', { variant: 'error' });
     } else {
       dispatch(savePayment(paymentMethod));

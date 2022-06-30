@@ -3,6 +3,7 @@ import basketReducer from "../slice/basketSlice";
 import productReducer from "../slice/productSlice";
 import authReducer from "../slice/authSlice";
 import categoryReducer from "../slice/categorySlice";
+import paymentReducer from "../slice/paymentSlice";
 import { productsApi } from "../RTK/productApi";
 
 import shipmentsReducer from "../slice/shipmentSlice";
@@ -16,7 +17,8 @@ export const store = configureStore({
     category: categoryReducer,
     merchant: merchantReducer,
     shipments: shipmentsReducer,
-    placeorder:placeOrderReducer,
+    placeorder: placeOrderReducer,
+    payment: paymentReducer,
     [productsApi.reducerPath]: productsApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>

@@ -11,13 +11,11 @@ import { getProductWithId, getProduct } from "../../slice/productSlice";
 import { getMerchantWithId } from "../../slice/merchantSlice";
 
 function product_detail(props) {
-  const { filterProductData } = useSelector(state => state.product);
-  const { productData } = useSelector(state => state.product);
+  const { filterProductData } = useSelector((state) => state.product);
+  const { productData } = useSelector((state) => state.product);
 
-  const { merchantData } = useSelector(state => state.merchant);
-  const { shipmentData } = useSelector(state => state.shipments);
-
- 
+  const { merchantData } = useSelector((state) => state.merchant);
+  const { shipmentData } = useSelector((state) => state.shipments);
 
   let [productImage, setProductImage] = useState();
   let [productAttributes, setProductAttributes] = useState([]);
@@ -26,18 +24,17 @@ function product_detail(props) {
   let router = useRouter();
   let dispatch = useDispatch();
   let [filterData, setFilterData] = useState({});
- 
+
   useEffect(() => {
- 
     dispatch(getProduct());
     dispatch(getProductWithId(router?.query?.productId));
     dispatch(getMerchantWithId(filterProductData.merchant_id));
 
     if (router.query.product_name) {
-      const productObj = productData.filter(result => {
+      const productObj = productData.filter((result) => {
         return result.productName == router.query.product_name;
       });
-      let productWithName = productObj.map(result => {
+      let productWithName = productObj.map((result) => {
         let obj = {
           product_id: result.productId,
           product_name: result.productName,
@@ -59,11 +56,11 @@ function product_detail(props) {
     }
   }, [filterProductData.merchant_id]);
 
-  const skuData = sku => {
-    sku?.map(result => {
+  const skuData = (sku) => {
+    sku?.map((result) => {
       setProductImage(result.sku_images);
       setProductAttributes(result.attributes);
-     
+
       setPrice(result.cost);
     });
   };
@@ -71,7 +68,6 @@ function product_detail(props) {
   useMemo(() => skuData(filterProductData.skus), [filterProductData.skus]);
 
   const addToCartHandler = async (item, skus) => {
-    
     if (skus) {
       let product = {
         product_id: item.product_id,
@@ -87,9 +83,7 @@ function product_detail(props) {
 
       await dispatch(addToBasket(product));
       await dispatch(getTotalCartQuantity());
-     
     } else {
-      
       dispatch(addToBasket(item));
       setTimeout(() => {
         dispatch(getTotalCartQuantity());
@@ -110,7 +104,6 @@ function product_detail(props) {
   };
 
   const BuyHandler = (item, skus) => {
-   
     if (skus) {
       let product = {
         product_id: item.product_id,
@@ -123,12 +116,11 @@ function product_detail(props) {
         product_images: item.product_images,
         skus: [skus],
       };
-     
+
       dispatch(addToCart(product));
       dispatch(getTotalCartQuantity(true));
       router.push("/shipping_information");
     } else {
-     
       dispatch(addToCart(item));
       setTimeout(() => {
         dispatch(getTotalCartQuantity());
