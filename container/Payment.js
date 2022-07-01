@@ -25,7 +25,7 @@ export default function Payment({
     <Grid container>
       <CheckoutWizard activeStep={4}></CheckoutWizard>
       <Grid item sx={{ margin: 5 }}>
-        <form onSubmit={submitHandler}>
+        <form >
           <Typography component="h4" variant="h4">
             Payment Method
           </Typography>
@@ -66,9 +66,10 @@ export default function Payment({
             <ListItem>
               <Button
                 fullWidth
-                type="submit"
+                type="button"
                 variant="contained"
                 color="primary"
+                onClick={()=>submitHandler()}  
               >
                 Continue
               </Button>

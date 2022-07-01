@@ -9,10 +9,21 @@ export const getPayment = createAsyncThunk("payments/methods", async () => {
   return result.data.response;
 });
 
+export const postPayment = createAsyncThunk("payments", async (payment) => {
+  const requestBody = {
+    requestBody: payment
+};
+console.log(requestBody)
+  const result = await instance.post(`${url}/payments`,requestBody);
+  console.log("payment", result);
+  return result.data.response;
+});
+
 const addPayment = createSlice({
   name: "payment",
   initialState: {
     paymentData: [],
+    paymentAddData:'',
     loading: false,
     error: null,
   },
@@ -26,6 +37,20 @@ const addPayment = createSlice({
       state.loading = false;
     });
     builder.addCase(getPayment.rejected, (state, action) => {
+      return {
+        ...state,
+        loading: "rejected",
+        error: action.payload,
+      };
+    });
+    builder.addCase(postPayment.pending, (state, action) => {
+      return { ...state, loading: true };
+    });
+    builder.addCase(postPayment.fulfilled, (state, action) => {
+      state.paymentAddData = action.payload;
+      state.loading = false;
+    });
+    builder.addCase(postPayment.rejected, (state, action) => {
       return {
         ...state,
         loading: "rejected",

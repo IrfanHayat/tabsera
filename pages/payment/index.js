@@ -1,25 +1,26 @@
 import React, { useState, useEffect } from "react";
 import Payment from "../../container/Payment";
 import { useSelector, useDispatch } from "react-redux";
-import localStorage from "localStorage";
-import { savePayment } from "../../slice/basketSlice";
-//import {getPayment} from '../../slice/paymentSlice'
 import { useRouter, withRouter } from "next/router";
-import { getPayment } from "../../slice/paymentSlice";
+import { getPayment,postPayment } from "../../slice/paymentSlice";
+import { ConstructionOutlined } from "@mui/icons-material";
+import {getTotals} from '../../slice/basketSlice'
 
 function payement() {
-  const {
-    cart: { shippingAddress },
-  } = useSelector((state) => state.basket);
+
+  const { paymentData,paymentAddData } = useSelector((state) => state.payment);
+  const  { placeOrderData} = useSelector((state) => state.placeorder);
+  const {cartTotalAmount} =useSelector((state)=>state.basket)
+
   let router = useRouter();
   let dispatch = useDispatch();
 
-  const { paymentData } = useSelector((state) => state.payment);
-
+  
   console.log("Payment Data = ", paymentData);
 
   const [paymentMethod, setPaymentMethod] = useState("");
 
+  const [selectPaymentMethod,setSelectPaymentMethod]=useState()
   // useEffect(() => {
   //   if (!shippingAddress.address) {
   //     router.push("/shipping");
@@ -27,26 +28,36 @@ function payement() {
   //     setPaymentMethod(localStorage.getItem("paymentMethod") || "");
   //   }
   // }, []);
+  useEffect(() => {
+    dispatch(getTotals());
+  }, []);
   useEffect(()=>{
         dispatch(getPayment())
   },[])
 
-  const submitHandler = (e) => {
+  const submitHandler = () => {
     //  closeSnackbar();
-    e.preventDefault();
-    if (!paymentMethod) {
-      //  enqueueSnackbar('Payment method is required', { variant: 'error' });
-    } else {
-      dispatch(savePayment(paymentMethod));
+       console.log(placeOrderData)    
+       console.log(selectPaymentMethod)
+       
+   
+      let obj={'accountNumber':null,'amount':cartTotalAmount,'orderId':placeOrderData?.orderId,'parentPaymentMethodId':selectPaymentMethod.parent_payment_method_id,'paymentGatewayId':selectPaymentMethod.payment_gateway_id,'paymentMethodId':selectPaymentMethod.payment_method_id,'pin':null,'serviceTypeId':6,'transactionTypeId':8}
 
-      localStorage.getItem("paymentMethod", paymentMethod);
-      router.push("/placeorder");
-    }
+      dispatch(postPayment(obj))
+
+      // dispatch(savePayment(paymentMethod));
+
+      // localStorage.getItem("paymentMethod", paymentMethod);
+      // router.push("/placeorder");
   };
 
   const handleChange=(result)=>{
-     console.log(result)
+    setSelectPaymentMethod(result)
+     console.log(result.payment_method_id)
   }
+
+
+ 
 
 
   return (
