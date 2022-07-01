@@ -19,14 +19,13 @@ function shipping() {
   const {
     userInfo,
     cart: { shippingAddress },
-  } = useSelector(state => state.basket);
+  } = useSelector((state) => state.basket);
 
   const { labels, countryData, states, cityData } = useSelector(
-    state => state.shipments
+    (state) => state.shipments
   );
   let [labelValue, setLabelValue] = useState("");
 
- 
   let router = useRouter();
 
   let dispatch = useDispatch();
@@ -41,7 +40,6 @@ function shipping() {
   // const { location } = shippingAddress;
 
   const handleChange = (event, value) => {
-   
     setLabelValue({ value });
   };
   useEffect(() => {
@@ -50,8 +48,7 @@ function shipping() {
 
   const classes = useStyles();
 
-  const submitHandler = value => {
-    
+  const submitHandler = (value) => {
     let obj = {
       addresses: [
         {
@@ -76,18 +73,18 @@ function shipping() {
         },
       ],
     };
-    console.log(obj)
-   
+    console.log(obj);
+
     dispatch(addShipmentAddress(obj));
     //  localStorage.setItem("shippingAddress", JSON.stringify(value));
-    router.push("/shipping_information");
+    // router.push("/shipping_information");
   };
 
-  const getStates = value => {
+  const getStates = (value) => {
     dispatch(getState(value.country_id));
   };
 
-  const getCities = value => {
+  const getCities = (value) => {
     dispatch(getCity(value.state_id));
   };
 
