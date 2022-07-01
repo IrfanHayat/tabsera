@@ -28,6 +28,7 @@ import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 // import useMediaQuery from "@mui/material/useMediaQuery";
+import MuiPhoneNumber from "material-ui-phone-number";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -118,14 +119,24 @@ export default function SignIn() {
                     required: true,
                   }}
                   render={({ field }) => (
-                    <PhoneInput
+                    <MuiPhoneNumber
+                      defaultCountry={"us"}
+                      fullWidth
                       variant="outlined"
-                      inputStyle={{ height: "50px", width: "135%" }}
                       id="phone"
-                      label="Phone"
+                      label="Phone Number"
                       error={Boolean(errors.phone)}
                       {...field}
-                    ></PhoneInput>
+                      // disableAreaCodes
+                    />
+                    // <PhoneInput
+                    //   variant="outlined"
+                    //   inputStyle={{ height: "50px", width: "135%" }}
+                    //   id="phone"
+                    //   label="Phone"
+                    //   error={Boolean(errors.phone)}
+                    //   {...field}
+                    // ></PhoneInput>
                   )}
                 ></Controller>
               </ListItem>
