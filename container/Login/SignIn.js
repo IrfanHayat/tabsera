@@ -201,7 +201,15 @@ export default function SignIn() {
           </Button> */}
         </DialogActions>
       </Dialog>
-      <Snackbar open={openBar} autoHideDuration={6000} onClose={handleCloseBar}>
+      <Snackbar
+        open={openBar}
+        autoHideDuration={4000}
+        onClose={handleCloseBar}
+        anchorOrigin={{
+          horizontal: "center",
+          vertical: "top",
+        }}
+      >
         <Alert
           onClose={handleCloseBar}
           severity={loginSccess ? "success" : "error"}

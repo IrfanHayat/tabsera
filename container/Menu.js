@@ -14,7 +14,7 @@ import { getCategory } from "../slice/categorySlice";
 import NewCarousel from "./Carousel/NewCarousel";
 import CarouselApp from "./Carousel/Carousel";
 import { useGetAllProductsQuery } from "../RTK/productApi";
-
+import MenuCard from "./DealsAndPromotions/MenuCards";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -62,13 +62,12 @@ export default function PersistentDrawerLeft() {
     return list.reduce(function (rv, x) {
       rv[x[key].split(" ").join("")] = rv[x[key].split(" ").join("")] || [];
       rv[x[key].split(" ").join("")].push(x);
-     
+
       return rv;
     }, {});
   }
 
   useEffect(() => {
-    
     dispatch(getFeatureProduct());
 
     dispatch(getCategory());
@@ -126,6 +125,7 @@ export default function PersistentDrawerLeft() {
     await dispatch(getProduct());
   }, []);
 
+  const dealsPromotions = <div>yes</div>;
   return (
     <Box>
       <Box
@@ -143,6 +143,17 @@ export default function PersistentDrawerLeft() {
               })
             }
           />
+        </Grid>
+        <Grid item xs={12} md={12}>
+          <MenuCard heading="Deals & Promotions" />
+          {/* <Item>
+            <CarouselApp
+              heading="Deals And Promotions"
+              product={dealsPromotions}
+              // viewProduct={viewProduct}
+              // addToCartHandler={addToCartHandler}
+            />
+          </Item> */}
         </Grid>
         <Grid item xs={12} md={12}>
           <Item>

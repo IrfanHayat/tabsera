@@ -12,6 +12,7 @@ function SubCategory() {
   const router = useRouter();
   const dispatch = useDispatch();
 
+  console.log("productDataWithCategoryId", productDataWithCategoryId);
   const viewProduct = (item) => {
     router.push({
       pathname: "/product_detail",
@@ -30,7 +31,7 @@ function SubCategory() {
   };
   useMemo(() => {
     let id = router?.query?.sub_category;
-  
+
     getData(id);
   }, []);
 
@@ -41,10 +42,10 @@ function SubCategory() {
 
   return (
     <>
-      <Typography component="h4" variant="h4">
-        Sub Products
-      </Typography>
       <Container maxWidth="lg">
+        <Typography component="h4" variant="h4">
+          Sub Products
+        </Typography>
         <Grid container wrap="wrap" sx={{ overflow: "auto" }}>
           {" "}
           {productDataWithCategoryId &&
