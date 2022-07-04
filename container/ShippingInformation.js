@@ -1,4 +1,4 @@
-import { Button, Divider, Grid, Typography } from "@mui/material";
+import { Button, Divider, Grid, Stack, Typography } from "@mui/material";
 import React from "react";
 import CheckoutWizard from "../container/CheckoutWizard";
 import AddIcon from "@mui/icons-material/Add";
@@ -8,6 +8,8 @@ import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
+import { useRouter } from "next/router";
+
 //import Divider from "@mui/material";
 function ShippingInformation({
   checkoutHandler,
@@ -16,6 +18,8 @@ function ShippingInformation({
   checkoutHandler1,
 }) {
   const [buttonKey, setButtonKey] = React.useState(1);
+  let router = useRouter();
+
   let buttonText;
 
   if (buttonKey === 1) {
@@ -23,6 +27,7 @@ function ShippingInformation({
   } else {
     buttonText = "Locker";
   }
+
   // const handleChange = (event) => {
   //   setButtonKey(event.target.value);
   // };
@@ -68,7 +73,8 @@ function ShippingInformation({
             </RadioGroup>
             <Button
               onClick={checkoutHandler1}
-              variant="outlined"
+              variant="contained"
+              color="primary"
               // buttonKey={buttonKey}
               // href="/shipping"
               startIcon={<AddIcon />}
@@ -101,28 +107,40 @@ function ShippingInformation({
                   <BusinessIcon/>
                   <FormControlLabel/> */}
                 {/* <BusinessIcon /> */}
-                {shippementAddress && shippementAddress.map(result => (
-                  result.address_default_billing===false?(
-                    <FormControlLabel
-                    value={result.address_id}
-                    control={<Radio />}
-                    label={result.address}
-                  />
-                  ):''
-                  
-                ))}
+                {shippementAddress &&
+                  shippementAddress.map((result) =>
+                    result.address_default_billing === false ? (
+                      <FormControlLabel
+                        value={result.address_id}
+                        control={<Radio />}
+                        label={result.address}
+                      />
+                    ) : (
+                      ""
+                    )
+                  )}
               </RadioGroup>
 
-              <Divider />
+              <Stack direction="row" spacing={2}>
+                <Button
+                  onClick={checkoutHandler}
+                  variant="contained"
+                  color="primary"
+                  // href="/shipping_methods"
+                  // startIcon={<AddIcon />}
+                >
+                  Continue
+                </Button>
 
-              <Button
-                onClick={checkoutHandler}
-                variant="outlined"
-                // href="/shipping_methods"
-                // startIcon={<AddIcon />}
-              >
-                Continue
-              </Button>
+                <Button
+                  // fullWidth
+                  variant="contained"
+                  color="error"
+                  // onClick={() => router.push("/product_detail")}
+                >
+                  Back
+                </Button>
+              </Stack>
             </FormControl>
           </Grid>
         ) : (

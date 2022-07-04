@@ -41,14 +41,15 @@ export const loginUser = createAsyncThunk(
     
     try {
         let cookiesWebsite=new Cookies()
-        
-
+        console.log("Phone")
+        console.log(values.phone.replace(/[^\d]/g, ''))
+        console.log('-------------')
         const dataEncrypt = {
              deviceId: "",
             // imsi: "",
           
             channelId:1,
-            mobileNumber: values.phone,
+            mobileNumber: values.phone.replace(/[^\d]/g, ''),
            //  otp: "127484",
             password: values.password
             // registrationToken: ""

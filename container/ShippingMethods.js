@@ -5,6 +5,7 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
+  Stack,
   Typography,
 } from "@mui/material";
 import React from "react";
@@ -25,6 +26,8 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
 import DomainAddOutlinedIcon from "@mui/icons-material/DomainAddOutlined";
 import AddLocationAltOutlinedIcon from "@mui/icons-material/AddLocationAltOutlined";
+import { useRouter } from "next/router";
+
 function ShippingMethods({
   classes,
   shipmentMethodData,
@@ -35,6 +38,8 @@ function ShippingMethods({
   productPrice,
   shippingCharges,
 }) {
+  let router = useRouter();
+
   return (
     <>
       <CheckoutWizard activeStep={3} />
@@ -182,13 +187,24 @@ function ShippingMethods({
                   </ListItemText>
                 </ListItem>
               </List>
-              <Button
-                onClick={checkoutHandler}
-                variant="outlined"
-                // startIcon={<AddIcon />}
-              >
-                Proced to Payment
-              </Button>
+              <Stack direction="row" spacing={2}>
+                <Button
+                  onClick={checkoutHandler}
+                  variant="contained"
+                  color="primary"
+                  // startIcon={<AddIcon />}
+                >
+                  Continue to Place Order
+                </Button>
+                <Button
+                  // fullWidth
+                  variant="contained"
+                  color="error"
+                  onClick={() => router.push("/")}
+                >
+                  Back
+                </Button>
+              </Stack>
             </Box>
           </Card>
         </Grid>

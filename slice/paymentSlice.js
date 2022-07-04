@@ -10,11 +10,8 @@ export const getPayment = createAsyncThunk("payments/methods", async () => {
 });
 
 export const postPayment = createAsyncThunk("payments", async (payment) => {
-  const requestBody = {
-    requestBody: payment
-};
-console.log(requestBody)
-  const result = await instance.post(`${url}/payments`,requestBody);
+  
+  const result = await instance.post(`${url}/payments`,payment);
   console.log("payment", result);
   return result.data.response;
 });

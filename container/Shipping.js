@@ -1,4 +1,11 @@
-import { List, ListItem, Typography, TextField, Button } from "@mui/material";
+import {
+  List,
+  ListItem,
+  Typography,
+  TextField,
+  Button,
+  Stack,
+} from "@mui/material";
 import React, { useState, useEffect } from "react";
 import CheckoutWizard from "../container/CheckoutWizard";
 import Radio from "@mui/material/Radio";
@@ -26,17 +33,13 @@ export default function Shipping({
   states,
   getCities,
   cityData,
-  labelValue
+  labelValue,
 }) {
-  
   const [countryList, setCountryList] = useState([]);
   const [stateList, setStateList] = useState([]);
   const [cityList, setCityList] = useState([]);
 
-
   useEffect(() => {
-    
-
     setCountryList(countryData);
 
     //setValue("item", { id: 3, name: "item3" });
@@ -60,8 +63,6 @@ export default function Shipping({
 
   //   //setValue("item", { id: 3, name: "item3" });
   // }, []);
-
-  
 
   return (
     <>
@@ -129,38 +130,42 @@ export default function Shipping({
             ></Controller>
           </ListItem>
           <ListItem>
-          <Controller
-            control={control}
-            name="country"
-            rules={{ required: true }}
-            render={({ field: { onChange, value } }) => (
-              <Autocomplete
-                onChange={(event, item) => {
-                  onChange(item);
-                  getStates(item)
-                }}
-                value={value}
-                sx={{ width: 800 }}
-                options={countryList}
-                getOptionLabel={(item) => (item.country_name ? item.country_name : "")}
-                getOptionSelected={(option, value) =>
-                  value === undefined || value === "" || option.country_id === value.country_id
-                }
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="country"
-                    margin="normal"
-                    variant="outlined"
-                    error={!!errors.item}
-                    helperText={errors.item && "item required"}
-                    required
-                  />
-                )}
-              />
-            )}
-          />
-              
+            <Controller
+              control={control}
+              name="country"
+              rules={{ required: true }}
+              render={({ field: { onChange, value } }) => (
+                <Autocomplete
+                  onChange={(event, item) => {
+                    onChange(item);
+                    getStates(item);
+                  }}
+                  value={value}
+                  sx={{ width: 800 }}
+                  options={countryList}
+                  getOptionLabel={(item) =>
+                    item.country_name ? item.country_name : ""
+                  }
+                  getOptionSelected={(option, value) =>
+                    value === undefined ||
+                    value === "" ||
+                    option.country_id === value.country_id
+                  }
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="country"
+                      margin="normal"
+                      variant="outlined"
+                      error={!!errors.item}
+                      helperText={errors.item && "item required"}
+                      required
+                    />
+                  )}
+                />
+              )}
+            />
+
             {/* <Controller
               control={control}
               name="country"
@@ -198,77 +203,76 @@ export default function Shipping({
               )}
             /> */}
           </ListItem>
-          
+
           <ListItem>
-          <Controller
-            control={control}
-            name="states"
-            rules={{ required: true }}
-            render={({ field: { onChange, value } }) => (
-              <Autocomplete
-                onChange={(event, item) => {
-                  onChange(item);
-                  getCities(item)
-                }}
-                sx={{ width: 800 }}
-                value={value}
-                options={states}
-                getOptionLabel={(item) => (item.state ? item.state : "")}
-                getOptionSelected={(option, value) =>
-                  value === undefined || value === "" || option.state_id === value.state_id
-                }
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="state"
-                    margin="normal"
-                    variant="outlined"
-                    error={!!errors.item}
-                    helperText={errors.item && "item required"}
-                    required
-                  />
-                )}
-              />
-            )}
-          />
-              
-           
+            <Controller
+              control={control}
+              name="states"
+              rules={{ required: true }}
+              render={({ field: { onChange, value } }) => (
+                <Autocomplete
+                  onChange={(event, item) => {
+                    onChange(item);
+                    getCities(item);
+                  }}
+                  sx={{ width: 800 }}
+                  value={value}
+                  options={states}
+                  getOptionLabel={(item) => (item.state ? item.state : "")}
+                  getOptionSelected={(option, value) =>
+                    value === undefined ||
+                    value === "" ||
+                    option.state_id === value.state_id
+                  }
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="state"
+                      margin="normal"
+                      variant="outlined"
+                      error={!!errors.item}
+                      helperText={errors.item && "item required"}
+                      required
+                    />
+                  )}
+                />
+              )}
+            />
           </ListItem>
 
           <ListItem>
-          <Controller
-            control={control}
-            name="city"
-            rules={{ required: true }}
-            render={({ field: { onChange, value } }) => (
-              <Autocomplete
-                onChange={(event, item) => {
-                  onChange(item);
-                 
-                }}
-                sx={{ width: 800 }}
-                value={value}
-                options={cityData}
-                getOptionLabel={(item) => (item.city ? item.city : "")}
-                getOptionSelected={(option, value) =>
-                  value === undefined || value === "" || option.city_id === value.city_id
-                }
-                renderInput={(params) => (
-                  <TextField
-                    {...params}
-                    label="city"
-                    margin="normal"
-                    variant="outlined"
-                    error={!!errors.item}
-                    helperText={errors.item && "item required"}
-                    required
-                  />
-                )}
-              />
-            )}
-          />
-              
-           
+            <Controller
+              control={control}
+              name="city"
+              rules={{ required: true }}
+              render={({ field: { onChange, value } }) => (
+                <Autocomplete
+                  onChange={(event, item) => {
+                    onChange(item);
+                  }}
+                  sx={{ width: 800 }}
+                  value={value}
+                  options={cityData}
+                  getOptionLabel={(item) => (item.city ? item.city : "")}
+                  getOptionSelected={(option, value) =>
+                    value === undefined ||
+                    value === "" ||
+                    option.city_id === value.city_id
+                  }
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="city"
+                      margin="normal"
+                      variant="outlined"
+                      error={!!errors.item}
+                      helperText={errors.item && "item required"}
+                      required
+                    />
+                  )}
+                />
+              )}
+            />
           </ListItem>
 
           {/*
@@ -443,7 +447,7 @@ export default function Shipping({
                   <BusinessIcon/>
                   <FormControlLabel/> */}
                 {/* <BusinessIcon /> */}
-                {labels.map(result => (
+                {labels.map((result) => (
                   <FormControlLabel
                     value={result.address_label_id}
                     control={<Radio />}
@@ -454,19 +458,30 @@ export default function Shipping({
             </FormControl>
           </ListItem>
         </List>
-        <List>
-          <ListItem>
-            <Button
-              variant="contained"
-              //href="/shipping_methods"
-              type="submit"
-              fullWidth
-              color="primary"
-            >
-              Continue
-            </Button>
-          </ListItem>
-        </List>
+        <Stack direction="row" spacing={2}>
+          {/* <List>
+            <ListItem> */}
+          <Button
+            variant="contained"
+            //href="/shipping_methods"
+            type="submit"
+            // fullWidth
+            color="primary"
+          >
+            Continue
+          </Button>
+
+          <Button
+            // fullWidth
+            variant="contained"
+            color="error"
+            onClick={() => router.push("/")}
+          >
+            Back
+          </Button>
+          {/* </ListItem>
+          </List> */}
+        </Stack>
       </form>
     </>
   );

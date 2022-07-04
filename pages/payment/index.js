@@ -41,8 +41,18 @@ function payement() {
        console.log(selectPaymentMethod)
        
    
-      let obj={'accountNumber':null,'amount':cartTotalAmount,'orderId':placeOrderData?.orderId,'parentPaymentMethodId':selectPaymentMethod.parent_payment_method_id,'paymentGatewayId':selectPaymentMethod.payment_gateway_id,'paymentMethodId':selectPaymentMethod.payment_method_id,'pin':null,'serviceTypeId':6,'transactionTypeId':8}
-
+      let obj={
+        "requestBody": {
+            "accountNumber": null,
+            "amount": cartTotalAmount,
+            "orderId": placeOrderData?.orderId,
+            "parentPaymentMethodId": selectPaymentMethod.parent_payment_method_id,
+            "paymentGatewayId": selectPaymentMethod.payment_gateway_id,
+            "paymentMethodId": selectPaymentMethod.payment_method_id,
+            "serviceTypeId": 6,
+            "transactionTypeId": 8
+        }
+    }
       dispatch(postPayment(obj))
 
       // dispatch(savePayment(paymentMethod));

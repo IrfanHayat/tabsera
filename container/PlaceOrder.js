@@ -17,6 +17,8 @@ import {
   Card,
   List,
   ListItem,
+  ListItemIcon,
+  ListItemText,
 } from "@mui/material";
 //import axios from 'axios';
 import { useRouter, withRouter } from "next/router";
@@ -27,6 +29,13 @@ import PhoneIcon from "@mui/icons-material/Phone";
 import EmailIcon from "@mui/icons-material/Email";
 import DomainAddOutlinedIcon from "@mui/icons-material/DomainAddOutlined";
 import AddLocationAltOutlinedIcon from "@mui/icons-material/AddLocationAltOutlined";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+import { Stack } from "@mui/material";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 function PlaceOrder({
   userData,
@@ -48,6 +57,19 @@ function PlaceOrder({
   cartItems,
   itemsPrice,
 }) {
+  const [openBar, setOpenBar] = React.useState(false);
+  // const [loginSccess, setLginSccess] = React.useState(false);
+
+  const handleClickBar = () => {
+    setOpenBar(true);
+  };
+
+  const handleCloseBar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenBar(false);
+  };
   return (
     <>
       <CheckoutWizard activeStep={4}></CheckoutWizard>
@@ -55,7 +77,13 @@ function PlaceOrder({
       <Grid container mt={5} justifyContent={"center"}>
         <Grid item md={9} xs={12}>
           <Card className={classes.section}>
-            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+            <Box
+              sx={{
+                borderBottom: 1,
+                borderColor: "divider",
+                p: 2,
+              }}
+            >
               <Typography variant="h6" component="h2">
                 Shipping Information
               </Typography>
@@ -63,32 +91,46 @@ function PlaceOrder({
               {/* {productDetail?.merchant_name} */}
               <List>
                 <ListItem>
-                  <AccountCircleIcon />
-                  {userData.first_name} {userData.last_name}
+                  <ListItemIcon>
+                    <AccountCircleIcon />
+                  </ListItemIcon>
+                  <ListItemText>
+                    {userData.first_name} {userData.last_name}
+                  </ListItemText>
                 </ListItem>
               </List>
               <List>
                 <ListItem>
-                  <PhoneIcon />{" "}
+                  <ListItemIcon>
+                    <PhoneIcon />
+                  </ListItemIcon>
                 </ListItem>
               </List>
               <List>
                 <ListItem>
-                  <EmailIcon />
-                  {userData.email}
+                  <ListItemIcon>
+                    <EmailIcon />
+                  </ListItemIcon>
+                  <ListItemText>{userData.email}</ListItemText>
                 </ListItem>
               </List>
               <List>
                 <ListItem>
-                  <DomainAddOutlinedIcon />
-                  {shippementData?.address}
+                  <ListItemIcon>
+                    <DomainAddOutlinedIcon />
+                  </ListItemIcon>
+                  <ListItemText>{shippementData?.address}</ListItemText>
                 </ListItem>
               </List>
               <List>
                 <ListItem>
-                  <AddLocationAltOutlinedIcon />
-                  {shippementData?.city},{shippementData?.state},
-                  {shippementData?.country}
+                  <ListItemIcon>
+                    <AddLocationAltOutlinedIcon />
+                  </ListItemIcon>
+                  <ListItemText>
+                    {shippementData?.city},{shippementData?.state},
+                    {shippementData?.country}
+                  </ListItemText>
                 </ListItem>
               </List>
             </Box>
@@ -97,103 +139,129 @@ function PlaceOrder({
             </TabPanel> */}
           </Card>
           <Card className={classes.section}>
-            <List>
-              <ListItem>
-                <Typography component="h2" variant="h4">
-                  Your Shipping Method
-                </Typography>
-              </ListItem>
-              <ListItem>{shippmentName}</ListItem>
-            </List>
+            <Box
+              sx={{
+                borderBottom: 1,
+                borderColor: "divider",
+                p: 2,
+              }}
+            >
+              <List>
+                <ListItem>
+                  <Typography variant="h6" component="h2">
+                    Your Shipping Method
+                  </Typography>
+                </ListItem>
+                <ListItem>{shippmentName}</ListItem>
+              </List>
+            </Box>
           </Card>
+
           <Card className={classes.section}>
-            <List>
-              <ListItem>
-                <Typography component="h2" variant="h4">
-                  Order Items
-                </Typography>
-              </ListItem>
-              <ListItem>
-                <TableContainer>
-                  <Table>
-                    {productCartData &&
-                      Object.keys(productCartData).map((key) => (
-                        <>
-                          <TableHead>
-                            {
-                              productCartData[key].map(
-                                (result) => result.merchant_name
-                              )[0]
-                            }
-                          </TableHead>
+            <Box
+              sx={{
+                borderBottom: 1,
+                borderColor: "divider",
+                p: 2,
+              }}
+            >
+              <List>
+                <ListItem>
+                  <Typography variant="h6" component="h2">
+                    Order Items
+                  </Typography>
+                </ListItem>
+                <ListItem>
+                  <TableContainer>
+                    <Table>
+                      {productCartData &&
+                        Object.keys(productCartData).map((key) => (
+                          <>
+                            <TableHead>
+                              {
+                                productCartData[key].map(
+                                  (result) => result.merchant_name
+                                )[0]
+                              }
+                            </TableHead>
 
-                          <TableBody>
-                            {productCartData[key].map((item) => (
-                              <TableRow>
-                                <TableCell>
-                                  <NextLink
-                                    href={`/product/${item.name}`}
-                                    passHref
-                                  >
-                                    <Link>
-                                      <Image
-                                        src={item.image_URL}
-                                        alt="shirt"
-                                        width={50}
-                                        height={50}
-                                      ></Image>
-                                    </Link>
-                                  </NextLink>
-                                </TableCell>
+                            <TableBody>
+                              {productCartData[key].map((item) => (
+                                <TableRow>
+                                  <TableCell>
+                                    <NextLink
+                                      href={`/product/${item.name}`}
+                                      passHref
+                                    >
+                                      <Link>
+                                        <Image
+                                          src={item.image_URL}
+                                          alt="shirt"
+                                          width={50}
+                                          height={50}
+                                        ></Image>
+                                      </Link>
+                                    </NextLink>
+                                  </TableCell>
 
-                                <TableCell>
-                                  <NextLink
-                                    href={`/product/${item.name}`}
-                                    passHref
-                                  >
-                                    <Link>
-                                      <Typography>{item.name}</Typography>
-                                    </Link>
-                                  </NextLink>
-                                </TableCell>
-                                <TableCell align="right">
-                                  <Typography>{item.qty}</Typography>
-                                </TableCell>
-                                <TableCell align="right">
-                                  <Typography>${item.price}</Typography>
-                                </TableCell>
-                              </TableRow>
-                            ))}
-                          </TableBody>
-                        </>
-                      ))}
-                  </Table>
-                </TableContainer>
-              </ListItem>
-            </List>
+                                  <TableCell>
+                                    <NextLink
+                                      href={`/product/${item.name}`}
+                                      passHref
+                                    >
+                                      <Link>
+                                        <Typography>{item.name}</Typography>
+                                      </Link>
+                                    </NextLink>
+                                  </TableCell>
+                                  <TableCell align="right">
+                                    <Typography>{item.qty}</Typography>
+                                  </TableCell>
+                                  <TableCell align="right">
+                                    <Typography>${item.price}</Typography>
+                                  </TableCell>
+                                </TableRow>
+                              ))}
+                            </TableBody>
+                          </>
+                        ))}
+                    </Table>
+                  </TableContainer>
+                </ListItem>
+              </List>
+            </Box>
           </Card>
         </Grid>
         <Grid item md={9} xs={12}>
           <Card className={classes.section}>
-            <List>
-              <ListItem>
-                <Typography variant="h2">Order Summary</Typography>
-              </ListItem>
-              <ListItem>
-                <Grid container>
-                  <Grid item xs={3}>
-                    <Typography>Items:</Typography>
+            <Box
+              sx={{
+                borderBottom: 1,
+                borderColor: "divider",
+                p: 2,
+              }}
+            >
+              <List>
+                <ListItem>
+                  <Typography variant="h4" component="h2">
+                    Order Summary
+                  </Typography>
+                </ListItem>
+                <ListItem>
+                  <Grid container>
+                    <Grid item xs={3}>
+                      <Typography>Items:</Typography>
+                    </Grid>
+                    <Grid item xs={3}>
+                      <Typography align="right">
+                        {" "}
+                        {productPrice &&
+                          productPrice.reduce((a, c) => a + c.qty * c.price, 0)}
+                      </Typography>
+                    </Grid>
                   </Grid>
-                  <Grid item xs={3}>
-                    <Typography align="right">
-                      {" "}
-                      {productPrice &&
-                        productPrice.reduce((a, c) => a + c.qty * c.price, 0)}
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </ListItem>
-              {/* <ListItem>
+                </ListItem>
+                {/* <ListItem>
                 <Grid container>
                   <Grid item xs={6}>
                     <Typography>Tax:</Typography>
@@ -203,59 +271,113 @@ function PlaceOrder({
                   </Grid>
                 </Grid>
               </ListItem> */}
-              <ListItem>
-                <Grid container>
-                  <Grid item xs={3}>
-                    <Typography>Shipping:</Typography>
+                <ListItem>
+                  <Grid container>
+                    <Grid item xs={3}>
+                      <Typography>Shipping:</Typography>
+                    </Grid>
+                    <Grid item xs={3}>
+                      <Typography align="right">{shippingCharges}</Typography>
+                    </Grid>
                   </Grid>
-                  <Grid item xs={3}>
-                    <Typography align="right">{shippingCharges}</Typography>
+                </ListItem>
+                <ListItem>
+                  <Grid container>
+                    <Grid item xs={3}>
+                      <Typography>
+                        <strong>Total:</strong>
+                      </Typography>
+                    </Grid>
+                    <Grid item xs={3}>
+                      <Typography align="right">
+                        <strong>
+                          {productPrice && shippingCharges
+                            ? productPrice.reduce(
+                                (a, c) => a + c.qty * c.price,
+                                0
+                              ) + shippingCharges
+                            : productPrice.reduce(
+                                (a, c) => a + c.qty * c.price,
+                                0
+                              )}
+                        </strong>
+                      </Typography>
+                    </Grid>
                   </Grid>
-                </Grid>
-              </ListItem>
-              <ListItem>
-                <Grid container>
-                  <Grid item xs={3}>
-                    <Typography>
-                      <strong>Total:</strong>
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={3}>
-                    <Typography align="right">
-                      <strong>
-                        {productPrice && shippingCharges
-                          ? productPrice.reduce(
-                              (a, c) => a + c.qty * c.price,
-                              0
-                            ) + shippingCharges
-                          : productPrice.reduce(
-                              (a, c) => a + c.qty * c.price,
-                              0
-                            )}
-                      </strong>
-                    </Typography>
-                  </Grid>
-                </Grid>
-              </ListItem>
-              <ListItem>
-                <Button
-                  onClick={() => placeOrderHandler(shippementData, userData)}
-                  variant="contained"
-                  color="primary"
-                  fullWidth
-                >
-                  Place Order
-                </Button>
-              </ListItem>
-              {/* {loading && (
+                </ListItem>
+                {/* <ListItem> */}
+                {/* <Button
+                    onClick={
+                      () => {
+                        handleClickBar(),
+                          placeOrderHandler(shippementData, userData);
+                      }
+                      // handleClickBar())
+                    }
+                    variant="contained"
+                    color="primary"
+                    // fullWidth
+                  >
+                    Place Order
+                  </Button>
+                </ListItem> */}
+                {/* {loading && (
                 <ListItem>
                   <CircularProgress />
                 </ListItem>
               )} */}
-            </List>
+              </List>
+              <Stack direction="row" spacing={2}>
+                <Button
+                  onClick={
+                    () => {
+                      handleClickBar(),
+                        placeOrderHandler(shippementData, userData);
+                    }
+                    // handleClickBar())
+                  }
+                  variant="contained"
+                  color="primary"
+                  // fullWidth
+                >
+                  Place Order
+                </Button>
+                <Button
+                  // fullWidth
+                  variant="contained"
+                  color="error"
+                  onClick={() => router.push("/")}
+                >
+                  Back
+                </Button>
+              </Stack>
+            </Box>
           </Card>
+
+          <Snackbar
+            open={openBar}
+            autoHideDuration={6000}
+            onClose={handleCloseBar}
+          >
+            <Alert
+              onClose={handleCloseBar}
+              severity="success"
+              sx={{ width: "100%" }}
+            >
+              Ordered SuccessFully!
+            </Alert>
+          </Snackbar>
         </Grid>
       </Grid>
+      {/* <Snackbar open={openBar} autoHideDuration={6000} onClose={handleCloseBar}>
+        <Alert
+          onClose={handleCloseBar}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          Ordered SuccessFully!
+        </Alert>
+      </Snackbar> */}
     </>
   );
 }

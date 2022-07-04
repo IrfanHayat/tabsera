@@ -28,6 +28,7 @@ import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 // import useMediaQuery from "@mui/material/useMediaQuery";
+import MuiPhoneNumber from "material-ui-phone-number";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -73,8 +74,7 @@ export default function SignIn() {
 
     let result = await dispatch(loginUser(data));
 
-    console.log(result);
-
+    console.log("result", result);
     result.payload
       ? (router.push("/"), setLginSccess(true), handleClickBar(), handleClose())
       : (setLginSccess(false), handleClickBar(), router.push("/login"));
@@ -82,6 +82,7 @@ export default function SignIn() {
     // } catch (err) {
     //   //  enqueueSnackbar(getError(err), { variant: 'error' });
     // }
+    console.log("payload", result.payload);
   };
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
@@ -118,14 +119,24 @@ export default function SignIn() {
                     required: true,
                   }}
                   render={({ field }) => (
-                    <PhoneInput
+                    <MuiPhoneNumber
+                      defaultCountry={"us"}
+                      fullWidth
                       variant="outlined"
-                      inputStyle={{ height: "50px", width: "135%" }}
                       id="phone"
-                      label="Phone"
+                      label="Phone Number"
                       error={Boolean(errors.phone)}
                       {...field}
-                    ></PhoneInput>
+                      // disableAreaCodes
+                    />
+                    // <PhoneInput
+                    //   variant="outlined"
+                    //   inputStyle={{ height: "50px", width: "135%" }}
+                    //   id="phone"
+                    //   label="Phone"
+                    //   error={Boolean(errors.phone)}
+                    //   {...field}
+                    // ></PhoneInput>
                   )}
                 ></Controller>
               </ListItem>

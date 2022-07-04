@@ -1,13 +1,12 @@
-
 import React, { useState } from "react";
-import Grid from "@mui/material/Grid"
-import List from "@mui/material/List"
+import Grid from "@mui/material/Grid";
+import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import  ListItemText  from "@mui/material/ListItemText";
+import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
 import Button from "@mui/material/Button";
-import  styled  from "@mui/styles/styled";
+import styled from "@mui/styles/styled";
 import Paper from "@mui/material/Paper";
 import PropTypes from "prop-types";
 import Tabs from "@mui/material/Tabs";
@@ -16,6 +15,8 @@ import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import Image from "next/image";
 import Carousel from "react-elastic-carousel";
+import { Stack } from "@mui/material";
+import { useRouter } from "next/router";
 
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
@@ -85,7 +86,7 @@ function Details({
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
+  let router = useRouter();
   return (
     <>
       <Grid
@@ -298,46 +299,52 @@ function Details({
           </Card>
         </Grid>
 
-        <Grid container spacing={1}>
-          <Grid item xs={6} md={6}>
-            <Item>
-              {" "}
-              <ListItem>
-                <Button
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  onClick={() => {
-                    skusProduct
-                      ? addToCartHandler(productDetail, skusProduct)
-                      : addToCartHandler(productDetail);
-                  }}
-                >
-                  Add to cart
-                </Button>
-              </ListItem>
-            </Item>
-          </Grid>
-          <Grid item xs={6} md={6}>
-            <Item>
-              {" "}
-              <ListItem>
-                <Button
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  type="submit"
-                  // href="/shipping_information"
-                  onClick={() => {
-                    skusProduct
-                      ? BuyHandler(productDetail, skusProduct)
-                      : BuyHandler(productDetail);
-                  }}
-                >
-                  Buy Now
-                </Button>
-              </ListItem>
-            </Item>
+        <Grid container spacing={1} sx={{ p: 2 }}>
+          <Grid item xs={12} md={12}>
+            {/* <Item> */} {/* <ListItem> */}
+            <Stack direction="row" spacing={2}>
+              <Button
+                // fullWidth
+                variant="contained"
+                color="primary"
+                onClick={() => {
+                  skusProduct
+                    ? addToCartHandler(productDetail, skusProduct)
+                    : addToCartHandler(productDetail);
+                }}
+              >
+                Add to cart
+              </Button>
+              {/* </ListItem> */}
+              {/* </Item> */}
+              {/* </Grid> */}
+              {/* <Grid item xs={6} md={6}> */}
+              {/* <Item> */} {/* <ListItem> */}
+              <Button
+                // fullWidth
+                variant="contained"
+                color="primary"
+                type="submit"
+                // href="/shipping_information"
+                onClick={() => {
+                  skusProduct
+                    ? BuyHandler(productDetail, skusProduct)
+                    : BuyHandler(productDetail);
+                }}
+              >
+                Buy Now
+              </Button>
+              <Button
+                // fullWidth
+                variant="contained"
+                color="error"
+                onClick={() => router.push("/")}
+              >
+                Back
+              </Button>
+            </Stack>
+            {/* </ListItem> */}
+            {/* </Item> */}
           </Grid>
         </Grid>
       </Grid>
