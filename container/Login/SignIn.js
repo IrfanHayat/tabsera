@@ -117,18 +117,29 @@ export default function SignIn() {
                   defaultValue=""
                   inputProps={{
                     required: true,
+                    // length: 12,
+                    RegExp: "^d{10}$",
                   }}
                   render={({ field }) => (
-                    <MuiPhoneNumber
-                      defaultCountry={"us"}
+                    <TextField
                       fullWidth
                       variant="outlined"
                       id="phone"
                       label="Phone Number"
                       error={Boolean(errors.phone)}
                       {...field}
-                      // disableAreaCodes
-                    />
+                    ></TextField>
+
+                    // <MuiPhoneNumber
+                    // defaultCountry={"us"}
+                    // fullWidth
+                    // variant="outlined"
+                    // id="phone"
+                    // label="Phone Number"
+                    // error={Boolean(errors.phone)}
+                    // {...field}
+                    //   // disableAreaCodes
+                    // />
                     // <PhoneInput
                     //   variant="outlined"
                     //   inputStyle={{ height: "50px", width: "135%" }}
