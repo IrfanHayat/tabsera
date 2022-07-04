@@ -13,6 +13,7 @@ import "../locales/i18n";
 import rtl from "jss-rtl";
 import { create } from "jss";
 import { Container } from "@mui/material";
+import { RouteGuard } from "../RouterGuard";
 
 const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 
@@ -28,7 +29,9 @@ const MyApp = ({ Component, pageProps }) => {
 
             <Container maxWidth="lg">
               <Box sx={{ minHeight: "80vh" }}>
+                <RouteGuard>
                 <Component {...pageProps} />
+                </RouteGuard>
               </Box>
             </Container>
             <Footer />

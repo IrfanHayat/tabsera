@@ -10,6 +10,7 @@ const initialState = {
   phone: "",
   password: "",
   _id: "",
+  name: localStorage.getItem('name'),
   registerStatus: "",
   registerError: "",
   loginStatus: "",
@@ -159,7 +160,7 @@ const authSlice = createSlice({
     builder.addCase(loginUser.fulfilled, (state, action) => {
       if (action.payload) {
         const user = action.payload;
-      
+         localStorage.setItem('name',user.firstName)
         return {
           ...state,
           token: action.payload,

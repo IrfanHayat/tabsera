@@ -10,7 +10,7 @@ function payement() {
 
   const { paymentData,paymentAddData } = useSelector((state) => state.payment);
   const  { placeOrderData} = useSelector((state) => state.placeorder);
-  const {cartTotalAmount} =useSelector((state)=>state.basket)
+  const {cartTotalAmount} =useSelector((state)=>state.basket.cart)
 
   let router = useRouter();
   let dispatch = useDispatch();
@@ -28,6 +28,7 @@ function payement() {
   //     setPaymentMethod(localStorage.getItem("paymentMethod") || "");
   //   }
   // }, []);
+  console.log(cartTotalAmount)
   useEffect(() => {
     dispatch(getTotals());
   }, []);
@@ -35,15 +36,16 @@ function payement() {
         dispatch(getPayment())
   },[])
 
-  const submitHandler = () => {
+  const submitHandler = (total) => {
     //  closeSnackbar();
        console.log(placeOrderData)    
        console.log(selectPaymentMethod)
+       console.log(total)
        
    
       let obj={
         "requestBody": {
-            "accountNumber": null,
+            "accountNumber": "",
             "amount": cartTotalAmount,
             "orderId": placeOrderData?.orderId,
             "parentPaymentMethodId": selectPaymentMethod?.parent_payment_method_id,
@@ -76,6 +78,7 @@ function payement() {
       submitHandler={submitHandler}
       setPaymentMethod={setPaymentMethod}
       handleChange={handleChange}
+      cartTotalAmount={cartTotalAmount}
     ></Payment>
   );
 }

@@ -311,6 +311,7 @@ export const basketSlice = createSlice({
       );
       total = parseFloat(total.toFixed(2));
       state.cart.cartTotalQuantity = quantity;
+      console.log(total)
       state.cart.cartTotalAmount = total;
      
     },

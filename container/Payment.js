@@ -22,6 +22,7 @@ export default function Payment({
   paymentMethod,
   setPaymentMethod,
   handleChange,
+  cartTotalAmount
 }) {
   const classes = useStyles();
   let router = useRouter();
@@ -78,7 +79,7 @@ export default function Payment({
               type="button"
               variant="contained"
               color="primary"
-              onClick={submitHandler}
+              onClick={()=>submitHandler(cartTotalAmount)}
             >
               Continue
             </Button>
