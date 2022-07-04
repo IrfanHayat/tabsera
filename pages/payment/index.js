@@ -46,9 +46,9 @@ function payement() {
             "accountNumber": null,
             "amount": cartTotalAmount,
             "orderId": placeOrderData?.orderId,
-            "parentPaymentMethodId": selectPaymentMethod.parent_payment_method_id,
-            "paymentGatewayId": selectPaymentMethod.payment_gateway_id,
-            "paymentMethodId": selectPaymentMethod.payment_method_id,
+            "parentPaymentMethodId": selectPaymentMethod?.parent_payment_method_id,
+            "paymentGatewayId": selectPaymentMethod?.payment_gateway_id,
+            "paymentMethodId": selectPaymentMethod?.payment_method_id,
             "serviceTypeId": 6,
             "transactionTypeId": 8
         }

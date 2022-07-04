@@ -15,6 +15,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import Image from "next/image";
 
 export default function Payment({
   submitHandler,
@@ -53,14 +54,18 @@ export default function Payment({
 
                   {paymentMethod &&
                     paymentMethod.map((result) => (
-                      <FormControlLabel
-                        key={result.payment_method_id}
-                        value={result.payment_method_id}
-                        control={
-                          <Radio onChange={() => handleChange(result)} />
-                        }
-                        label={result.parent_payment_method}
-                      />
+                      <><Image
+                        // className={cx(styles.media, mediaStyles.root)}
+                        src={result?.payment_method_icon}
+                        onClick={(e) => viewCategory(product.category_id)}
+                        alt="shirt"
+                        width={45}
+                        height={20}
+                      ></Image><FormControlLabel
+                          key={result.payment_method_id}
+                          value={result.payment_method_id}
+                          control={<Radio onChange={() => handleChange(result)} ></Radio>}
+                          label={result.parent_payment_method} /></>
                     ))}
                 </RadioGroup>
               </FormControl>
