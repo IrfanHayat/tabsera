@@ -78,6 +78,7 @@ export default function NavSelect({ Title, Data, clr }) {
         MenuListProps={{
           "aria-labelledby": "basic-button",
         }}
+        onClick={handleClose}
         PaperProps={{
           // elevation: 0,
           sx: {

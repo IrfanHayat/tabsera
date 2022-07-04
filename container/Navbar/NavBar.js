@@ -13,15 +13,11 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import { useSelector, useDispatch } from "react-redux";
 
-import { useRouter } from "next/router";
 import MenuItem from "@mui/material/MenuItem";
 import { getProduct } from "../../slice/productSlice";
 import { getCategory } from "../../slice/categorySlice";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import {
-  AppBar,
-  Grid,
-} from "@mui/material";
+import { AppBar, Grid } from "@mui/material";
 import SignInModal from "../Login/SignIn";
 import Badge from "@mui/material/Badge";
 import Popover from "@mui/material/Popover";
@@ -35,8 +31,9 @@ import { Container } from "@mui/system";
 // import { ListItemText } from "@mui/material";
 const drawerWidth = 10;
 import Paper from "@mui/material/Paper";
+import { useRouter } from "next/router";
 
-export default function NavBar(props) {
+export default function NavBar() {
   const category = useSelector((state) => state.category.categoryData);
   //const [quantityProduct,setQunatityProduct]=useState()
   const { cartTotalQuantity } = useSelector((state) => state.basket.cart);
@@ -57,6 +54,10 @@ export default function NavBar(props) {
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  const viewCategory1 = (event, newValue) => {
     setValue(newValue);
   };
 
@@ -124,6 +125,16 @@ export default function NavBar(props) {
     setAnchorEl(null);
   };
 
+  const viewCategory = (item) => {
+    router.push({
+      pathname: "/sub_category",
+      query: { sub_category: item },
+    });
+  };
+
+  // useEffect(() => {
+  //   viewCategory();
+  // }, []);
   // ----------------------------------------------------------------------------------
   const open1 = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
@@ -146,7 +157,11 @@ export default function NavBar(props) {
               disablePadding
               sx={{ marginLeft: 3 }}
             > */}
-            <ListItemText primary={text.category_name} />
+            <ListItemText
+              primary={text.category_name}
+              onClick={(e) => viewCategory(text.category_id)}
+              // onClick={viewCategory(text.category_id)}
+            />
             {/* </ListItem> */}
             <Divider />
           </MenuItem>
@@ -154,6 +169,7 @@ export default function NavBar(props) {
     </List>
   );
 
+  console.log("cdata", categoriesData);
   React.useEffect(async () => {
     await dispatch(getProduct());
   }, []);

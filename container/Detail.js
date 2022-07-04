@@ -292,6 +292,9 @@ function Details({
                   Joined Tabsera : {merchantDetail?.created_date}
                 </ListItem>
               </List>
+              <Stack>
+                <Button variant="text">Visit Store</Button>
+              </Stack>
             </TabPanel>
             {/* <TabPanel value={value} index={2}>
               {merchantDetail?.city}
