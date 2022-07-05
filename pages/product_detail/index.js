@@ -16,7 +16,8 @@ function product_detail(props) {
 
   const { merchantData } = useSelector((state) => state.merchant);
   const { shipmentData } = useSelector((state) => state.shipments);
-
+  console.log("merchantData", merchantData);
+  console.log("productData", productData);
   let [productImage, setProductImage] = useState();
   let [productAttributes, setProductAttributes] = useState([]);
   let [price, setPrice] = useState();
@@ -24,6 +25,14 @@ function product_detail(props) {
   let router = useRouter();
   let dispatch = useDispatch();
   let [filterData, setFilterData] = useState({});
+
+  const viewStore = (item) => {
+    console.log("item", item);
+    router.push({
+      pathname: "/merchant_store",
+      query: { merchantId: item.merchantId },
+    });
+  };
 
   useEffect(() => {
     dispatch(getProduct());
@@ -157,6 +166,7 @@ function product_detail(props) {
         productAttributes={productAttributes}
         price={price}
         checkoutHandler={checkoutHandler}
+        viewStore={viewStore}
       ></Details>
     </div>
   );

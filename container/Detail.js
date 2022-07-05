@@ -15,9 +15,8 @@ import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import Image from "next/image";
 import Carousel from "react-elastic-carousel";
-import { Stack } from "@mui/material";
+import { AppBar, Stack } from "@mui/material";
 import { useRouter } from "next/router";
-
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
   { width: 550, itemsToShow: 2 },
@@ -41,6 +40,7 @@ function Details({
   checkoutHandler,
   BuyHandler,
   price,
+  viewStore,
 }) {
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -261,18 +261,27 @@ function Details({
       <Grid container spacing={1}>
         <Grid item md={12} xs={12}>
           <Card style={{ margin: "10px" }}>
-            <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+            <AppBar
+              sx={{
+                borderBottom: 1,
+                borderColor: "divider",
+                position: "static",
+              }}
+            >
+              {/* <AppBar></AppBar> */}
               <Tabs
                 value={value}
                 onChange={handleChange}
                 aria-label="basic tabs example"
                 variant="fullWidth"
+                indicatorColor="secondary"
+                textColor="inherit"
               >
                 <Tab label="Description" {...a11yProps(0)} />
                 <Tab label="Rating" {...a11yProps(1)} />
                 <Tab label="Store" {...a11yProps(2)} />
               </Tabs>
-            </Box>
+            </AppBar>
             <TabPanel value={value} index={0}>
               {productDetail?.product_desc}
             </TabPanel>
@@ -292,8 +301,18 @@ function Details({
                   Joined Tabsera : {merchantDetail?.created_date}
                 </ListItem>
               </List>
+              <List>
+                <ListItem>Seller Rating :</ListItem>
+                {console.log("idddd", merchantDetail)}
+              </List>
               <Stack>
-                <Button variant="text">Visit Store</Button>
+                <Button
+                  variant="text"
+                  onClick={() => viewStore(159)}
+                  // onClick={viewStore}
+                >
+                  Visit Store {merchantDetail?.created_date}
+                </Button>
               </Stack>
             </TabPanel>
             {/* <TabPanel value={value} index={2}>

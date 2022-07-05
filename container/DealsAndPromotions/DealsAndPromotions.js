@@ -19,7 +19,8 @@ const DealsAndPromotions = ({ dealsData }) => {
             // marginBottom: 1,
             padding: 0.5,
             // maxWidth: 300,
-            maxWidth: 250,
+            width: 250,
+            // maxWidth: 250,
             height: 250,
             ":hover": {
               boxShadow: 5, // theme.shadows[20]
