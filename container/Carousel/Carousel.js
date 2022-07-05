@@ -3,7 +3,8 @@ import Carousel from "react-elastic-carousel";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import ActionAreaCard from "../Card";
-import { Box, Grid } from "@mui/material";
+import  Box  from "@mui/material/Box";
+import Grid from '@mui/material/Grid'
 import Link from "@mui/material/Link";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
@@ -92,9 +93,9 @@ export default function CarouselApp({
       >
         {/* {content} */}
 
-        {product &&
-          product.map((item) => (
-            <ActionAreaCard
+         {
+          product?.map((item) => ( 
+            <ActionAreaCard 
               product={item}
               viewProduct={viewProduct}
               addToCartHandler={addToCartHandler}
@@ -103,7 +104,7 @@ export default function CarouselApp({
               categoryView={categoryView}
               cartView={cartView}
             ></ActionAreaCard>
-          ))}
+           ))} 
       </Carousel>
       {/* </Grid> */}
     </Grid>

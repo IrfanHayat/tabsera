@@ -145,10 +145,19 @@ function product_detail(props) {
   };
 
   return (
-    <div>
-      <Details
-        productDetail={
-          Object.keys(filterData).length > 0 ? filterData : filterProductData
+    <>
+    {Object.keys(filterData).length > 0? 
+        <Details
+        productDetail={filterData || []}
+        merchantDetail={merchantData}
+        addToCartHandler={addToCartHandler}
+        BuyHandler={BuyHandler}
+        productImage={productImage}
+        productAttributes={productAttributes}
+        price={price}
+        checkoutHandler={checkoutHandler}
+        ></Details>:<Details
+        productDetail={filterProductData || []
         }
         merchantDetail={merchantData}
         addToCartHandler={addToCartHandler}
@@ -157,9 +166,13 @@ function product_detail(props) {
         productAttributes={productAttributes}
         price={price}
         checkoutHandler={checkoutHandler}
-      ></Details>
-    </div>
+        ></Details>                           
+    
+    }
+ 
+    </>
   );
 }
+
 
 export default withRouter(product_detail);

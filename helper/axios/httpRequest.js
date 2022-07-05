@@ -34,7 +34,7 @@ import {url} from "./config";
                 };
                
               const result = await axios.post(`${url}/customers/login`,requestBody);
-                router.push("/")
+                router.push("/login")
                 }
       
         

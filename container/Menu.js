@@ -155,7 +155,7 @@ export default function PersistentDrawerLeft() {
             />
           </Item> */}
         </Grid>
-        <Grid item xs={12} md={12}>
+      { featureProduct!=''? <Grid item xs={12} md={12}>
           <Item>
             <CarouselApp
               heading="Featured Products"
@@ -164,7 +164,8 @@ export default function PersistentDrawerLeft() {
               addToCartHandler={addToCartHandler}
             />
           </Item>
-        </Grid>
+        </Grid>:''
+        }
         {groupProduct &&
           Object.keys(groupProduct).map((key) => (
             <Grid item xs={12} md={12}>

@@ -60,7 +60,7 @@ function payement() {
       // dispatch(savePayment(paymentMethod));
 
       // localStorage.getItem("paymentMethod", paymentMethod);
-      // router.push("/placeorder");
+       router.push("/paymentIframe");
   };
 
   const handleChange=(result)=>{

@@ -24,18 +24,18 @@ const MyApp = ({ Component, pageProps }) => {
     <Provider store={store}>
       <StylesProvider jss={jss}>
         <ThemeProvider theme={theme}>
-          <CookiesProvider>
+          {/* <CookiesProvider> */}
             <NavBar />
 
             <Container maxWidth="lg">
               <Box sx={{ minHeight: "80vh" }}>
-                <RouteGuard>
+                {/* <RouteGuard> */}
                 <Component {...pageProps} />
-                </RouteGuard>
+                {/* </RouteGuard> */}
               </Box>
             </Container>
             <Footer />
-          </CookiesProvider>
+          {/* </CookiesProvider> */}
         </ThemeProvider>
       </StylesProvider>
     </Provider>

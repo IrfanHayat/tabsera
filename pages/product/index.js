@@ -1,5 +1,5 @@
 import * as React from "react";
-import { styled } from "@mui/material/styles";
+import  styled  from "@mui/system/styled";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
@@ -16,7 +16,7 @@ export default function Product() {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid item xs={12} md={12}>
-        <Menu />
+         <Menu /> 
       </Grid>
     </Box>
   );

@@ -21,7 +21,7 @@ import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { AppBar } from "@mui/material";
-import * as locales from "../../../i18n.json";
+import locales from "../../../i18n.json";
 
 import NavSelect from "./NavSelect";
 import { ListItemIcon } from "@mui/material";

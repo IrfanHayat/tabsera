@@ -1,31 +1,17 @@
 import * as React from "react";
 import CardContent from "@mui/material/CardContent";
 import Image from "next/image";
-import { Card, CardActions, Typography } from "@mui/material";
+import  Card from "@mui/material/Card";
 
-import { makeStyles } from "@mui/styles";
-import TextInfoContent from "@mui-treasury/components/content/textInfo";
-import { useFourThreeCardMediaStyles } from "@mui-treasury/styles/cardMedia/fourThree";
-import { useN04TextInfoContentStyles } from "@mui-treasury/styles/textInfoContent/n04";
-import { useOverShadowStyles } from "@mui-treasury/styles/shadow/over";
-import cx from "clsx";
-import IconButton from "@mui/material/IconButton";
-import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
-import PreviewOutlinedIcon from "@mui/icons-material/PreviewOutlined";
-import { CardMedia } from '@mui/material';
+import  CardActions from "@mui/material/CardActions";
+import  Typography  from "@mui/material/Typography";
 
-const useStyles = makeStyles(() => ({
-  root: {
-    // maxWidth: 283,
-    // maxHeight: 600,
-    margin: 9,
-    borderRadius: 12,
-    padding: 12,
-  },
-  media: {
-    borderRadius: 6,
-  },
-}));
+
+import  makeStyles  from "@mui/styles/makeStyles";
+
+
+
+
 
 export default function ActionAreaCard({
   product,
@@ -36,10 +22,7 @@ export default function ActionAreaCard({
   categoryView,
   cartView,
 }) {
-  const styles = useStyles();
-  const textCardContentStyles = useN04TextInfoContentStyles();
-  const mediaStyles = useFourThreeCardMediaStyles();
-  const shadowStyles = useOverShadowStyles({ inactive: true });
+  
 
   return (
     // <Box>
@@ -88,12 +71,12 @@ export default function ActionAreaCard({
       )}
       {product?.category_name && (
         <CardContent>
-          <Typography variant="overline">{product.category_name}</Typography>
+          <Typography variant="overline">{product?.category_name}</Typography>
         </CardContent>
       )}
       <CardContent>
-        <Typography variant="overline">{product.categoryName}</Typography>
-        <Typography fontSize="1.3rem">{product.productName}</Typography>
+        <Typography variant="overline">{product?.categoryName}</Typography>
+        <Typography fontSize="1.3rem">{product?.productName}</Typography>
       </CardContent>
       {/* <CardActions>
         {product.productName ? (
