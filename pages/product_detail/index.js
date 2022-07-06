@@ -3,6 +3,7 @@ import Details from "../../container/Detail";
 import { useSelector, useDispatch } from "react-redux";
 import {
   addToBasket,
+  buyItem,
   addToCart,
   getTotalCartQuantity,
 } from "../../slice/basketSlice";
@@ -126,11 +127,13 @@ function product_detail(props) {
         skus: [skus],
       };
 
-      dispatch(addToCart(product));
+      dispatch(buyItem(product));
+      // dispatch(addToCart(product));
       dispatch(getTotalCartQuantity(true));
       router.push("/shipping_information");
     } else {
-      dispatch(addToCart(item));
+      dispatch(buyItem(item));
+      // dispatch(addToCart(item));
       setTimeout(() => {
         dispatch(getTotalCartQuantity());
       }, 1000);
@@ -155,32 +158,32 @@ function product_detail(props) {
 
   return (
     <>
-    {Object.keys(filterData).length > 0? 
+      {Object.keys(filterData).length > 0 ? (
         <Details
-        productDetail={filterData || []}
-        merchantDetail={merchantData}
-        addToCartHandler={addToCartHandler}
-        BuyHandler={BuyHandler}
-        productImage={productImage}
-        productAttributes={productAttributes}
-        price={price}
-        checkoutHandler={checkoutHandler}
-        ></Details>:<Details
-        productDetail={filterProductData || []
-        }
-        merchantDetail={merchantData}
-        addToCartHandler={addToCartHandler}
-        BuyHandler={BuyHandler}
-        productImage={productImage}
-        productAttributes={productAttributes}
-        price={price}
-        checkoutHandler={checkoutHandler}
-        viewStore={viewStore}
-      ></Details>
-    }
+          productDetail={filterData || []}
+          merchantDetail={merchantData}
+          addToCartHandler={addToCartHandler}
+          BuyHandler={BuyHandler}
+          productImage={productImage}
+          productAttributes={productAttributes}
+          price={price}
+          checkoutHandler={checkoutHandler}
+        ></Details>
+      ) : (
+        <Details
+          productDetail={filterProductData || []}
+          merchantDetail={merchantData}
+          addToCartHandler={addToCartHandler}
+          BuyHandler={BuyHandler}
+          productImage={productImage}
+          productAttributes={productAttributes}
+          price={price}
+          checkoutHandler={checkoutHandler}
+          viewStore={viewStore}
+        ></Details>
+      )}
     </>
   );
 }
-
 
 export default withRouter(product_detail);

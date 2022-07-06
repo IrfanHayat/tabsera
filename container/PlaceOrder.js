@@ -84,7 +84,7 @@ function PlaceOrder({
                 p: 2,
               }}
             >
-              <Typography variant="h6" component="h2">
+              <Typography variant="h6" style={{ fontWeight: "bold" }}>
                 Shipping Information
               </Typography>
 
@@ -148,7 +148,7 @@ function PlaceOrder({
             >
               <List>
                 <ListItem>
-                  <Typography variant="h6" component="h2">
+                  <Typography variant="h6" style={{ fontWeight: "bold" }}>
                     Your Shipping Method
                   </Typography>
                 </ListItem>
@@ -167,7 +167,7 @@ function PlaceOrder({
             >
               <List>
                 <ListItem>
-                  <Typography variant="h6" component="h2">
+                  <Typography variant="h6" style={{ fontWeight: "bold" }}>
                     Order Items
                   </Typography>
                 </ListItem>
@@ -243,7 +243,11 @@ function PlaceOrder({
             >
               <List>
                 <ListItem>
-                  <Typography variant="h4" component="h2">
+                  <Typography
+                    variant="h5"
+                    component="h4"
+                    style={{ fontWeight: "bold" }}
+                  >
                     Order Summary
                   </Typography>
                 </ListItem>
@@ -358,6 +362,10 @@ function PlaceOrder({
             open={openBar}
             autoHideDuration={6000}
             onClose={handleCloseBar}
+            anchorOrigin={{
+              horizontal: "center",
+              vertical: "top",
+            }}
           >
             <Alert
               onClose={handleCloseBar}

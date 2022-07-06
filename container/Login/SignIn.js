@@ -29,7 +29,7 @@ import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 // import useMediaQuery from "@mui/material/useMediaQuery";
 import MuiPhoneNumber from "material-ui-phone-number";
-
+// import MuiPhoneNumber from "material-ui-phone-number-2";
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -122,6 +122,7 @@ export default function SignIn() {
                     <MuiPhoneNumber
                       defaultCountry={"us"}
                       fullWidth
+                      disableDropdown
                       variant="outlined"
                       id="phone"
                       label="Phone Number"
