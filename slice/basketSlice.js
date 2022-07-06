@@ -17,7 +17,8 @@ const initialState = {
     paymentMethod: localStorage.getItem("paymentMethod")
       ? localStorage.getItem("paymentMethod")
       : "",
-    cartId:localStorage.getItem("cartId")?localStorage.getItem("cartId"):""  
+    cartId:localStorage.getItem("cartId")?localStorage.getItem("cartId"):"" ,
+    buyCartItems:localStorage.getItem("buyCartItems")?localStorage.getItem("buyCartItems"):[]
   },
 
   // userIfo:localStorage.getItem("userInfo")
@@ -240,7 +241,7 @@ export const basketSlice = createSlice({
         })
       
       
-     state.cart.cartItems
+     state.cart.buyCartItems
       
       localStorage.setItem("buyCartItems", JSON.stringify(state.cart.cartItems));
     },

@@ -10,6 +10,7 @@ const initialState = {
   phone: "",
   password: "",
   _id: "",
+  data:localStorage.getItem('data'),
   name: localStorage.getItem('name'),
   registerStatus: "",
   registerError: "",
@@ -44,6 +45,7 @@ export const loginUser = createAsyncThunk(
         let cookiesWebsite=new Cookies()
         console.log("Phone")
         console.log(values.phone.replace(/[^\d]/g, ''))
+        
         console.log('-------------')
         const dataEncrypt = {
              deviceId: "",
@@ -67,7 +69,11 @@ export const loginUser = createAsyncThunk(
         };
        
       const result = await instance.post(`${url}/customers/login`,requestBody);
-      localStorage.setItem("token", result.data.response);
+      if(result.data.response){
+        localStorage.setItem("token", result.data.response);
+        localStorage.setItem("data", requestBody);
+      }
+      
       
       return result.data.response;
     } catch (error) {
@@ -162,6 +168,7 @@ const authSlice = createSlice({
       if (action.payload) {
         const user = action.payload;
          localStorage.setItem('name',user.firstName)
+
         return {
           ...state,
           token: action.payload,
