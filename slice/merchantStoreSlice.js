@@ -7,7 +7,7 @@ import { url, setHeaders } from "../helper/axios/config";
 export const getMerchantStore = createAsyncThunk(
   `merchants/products/getMerchantStore`,
   async (id) => {
-    const result = await instance.get(`${url}/merchants/${159}/products`);
+    const result = await instance.get(`${url}/merchants/${id}/products`);
 
     return result.data.response;
   }

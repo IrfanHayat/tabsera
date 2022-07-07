@@ -16,17 +16,16 @@ function index() {
   
   return (
   <>
-  <PreviewIframe srcdoc="<p>Hello world!</p>" /> 
-  <div dangerouslySetInnerHTML={{ __html: paymentAddData }} />
-  //<webview source={{html:'<p>Irfan</p>'}}></webview>
+  <PreviewIframe srcdoc={paymentAddData} /> 
+  {/* <div dangerouslySetInnerHTML={{ __html: paymentAddData }} />
+  <webview source={{html:'<p>Irfan</p>'}}></webview>
    
-
-   //   <iframe scrolling="no"  target="_blank" style={{height:"100vh",width:"100%",border:"none",overflow:"hidden"}} sandbox='allow-forms
-   //   allow-pointer-lock
-   //   allow-popups
-   //   allow-same-origin
-   //   allow-scripts
-   //   allow-top-navigation' allow="payment" referrerPolicy='no-referrer' srcDoc={paymentAddData} />
+//    <iframe scrolling="no"  target="_blank" style={{height:"100vh",width:"100%",border:"none",overflow:"hidden"}} sandbox='allow-forms */}
+     {/* allow-pointer-lock */}
+   {/* allow-popups */}
+      {/* allow-same-origin */}
+      {/* allow-scripts */}
+      {/* allow-top-navigation' allow="payment" referrerPolicy='no-referrer' srcDoc={paymentAddData} /> */}
   </>
   );
 }

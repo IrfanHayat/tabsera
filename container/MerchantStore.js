@@ -15,8 +15,11 @@ import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import Image from "next/image";
 import Carousel from "react-elastic-carousel";
+import { useSelector } from "react-redux";
 import { AppBar, Stack } from "@mui/material";
 import { useRouter } from "next/router";
+import ActionAreaCard from "./Card";
+import { result } from "lodash";
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
   { width: 550, itemsToShow: 2 },
@@ -31,9 +34,13 @@ function a11yProps(index) {
   };
 }
 function MerchantStore({ merchantStoreDetail }) {
+  
+  const { merchantData } = useSelector((state) => state.merchant);
+  
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
-
+    
+    
     return (
       <div
         role="tabpanel"
@@ -64,6 +71,9 @@ function MerchantStore({ merchantStoreDetail }) {
   let router = useRouter();
 
   console.log("m s d", merchantStoreDetail);
+ 
+  console.log(merchantData)
+ 
   return (
     <>
       <Grid container spacing={1}>
@@ -74,10 +84,10 @@ function MerchantStore({ merchantStoreDetail }) {
           <Box>
             {" "}
             <List>
-              <ListItem>Name :</ListItem>
+              <ListItem>Name :{merchantData.merchant_name}</ListItem>
             </List>
             <List>
-              <ListItem>Location : </ListItem>
+              <ListItem>Location :{merchantData.city} </ListItem>
             </List>
             <List>
               <ListItem>Joined Tabsera :</ListItem>
@@ -111,8 +121,18 @@ function MerchantStore({ merchantStoreDetail }) {
               </Tabs>
             </AppBar>
 
-            <TabPanel value={value} index={0}>
-              All Products
+            <TabPanel sx={{display:"flex"}} value={value} index={0}>
+            
+              {merchantStoreDetail?.map(result=>(
+                   <ActionAreaCard 
+                   product={result}
+                   
+                 ></ActionAreaCard>
+                  
+               ))
+            
+            
+              }
             </TabPanel>
             <TabPanel value={value} index={1}>
               Ratings and Reviews

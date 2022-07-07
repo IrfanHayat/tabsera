@@ -27,11 +27,11 @@ function product_detail(props) {
   let dispatch = useDispatch();
   let [filterData, setFilterData] = useState({});
 
-  const viewStore = (item) => {
-    console.log("item", item);
+  const viewStore = (merchantId) => {
+    console.log("item", merchantId);
     router.push({
       pathname: "/merchant_store",
-      query: { merchantId: item.merchantId },
+      query: { merchantId: merchantId },
     });
   };
 
@@ -168,6 +168,7 @@ function product_detail(props) {
           productAttributes={productAttributes}
           price={price}
           checkoutHandler={checkoutHandler}
+          viewStore={viewStore}
         ></Details>
       ) : (
         <Details

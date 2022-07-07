@@ -10,14 +10,15 @@ import { useRouter, withRouter } from "next/router";
 import { getMerchantStore } from "../../slice/merchantStoreSlice";
 import MerchantStore from "../../container/MerchantStore";
 
-function product_detail(props) {
+function product_detail() {
   let dispatch = useDispatch();
 
+  let router=useRouter()
   const { merchantStoreData } = useSelector((state) => state.merchantStore);
   console.log("merchant Store Data", merchantStoreData);
 
   useEffect(() => {
-    dispatch(getMerchantStore(merchantStoreData.merchant_id));
+    dispatch(getMerchantStore(router.query.merchantId));
   }, []);
 
   return (
