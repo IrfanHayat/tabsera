@@ -17,7 +17,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { getProduct } from "../../slice/productSlice";
 import { getCategory } from "../../slice/categorySlice";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import { AppBar, Grid } from "@mui/material";
+import { AppBar, Grid, Typography } from "@mui/material";
 import SignInModal from "../Login/SignIn";
 import Badge from "@mui/material/Badge";
 import Popover from "@mui/material/Popover";
@@ -269,11 +269,36 @@ export default function NavBar() {
                 onClose={handleClose}
                 anchorOrigin={{
                   vertical: "bottom",
-                  horizontal: "left",
+                  horizontal: "center",
                 }}
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "center",
+                }}
+                // anchorOrigin={{
+                //   vertical: "bottom",
+                //   horizontal: "left",
+                // }}
               >
-                {/* <Typography sx={{ p: 1 }}> */} <ShoppingCart />
-                {/* </Typography> */}
+                {cartTotalQuantity > 0 ? (
+                  <ShoppingCart />
+                ) : (
+                  <Box
+                    sx={{
+                      height: 50,
+                      width: 200,
+                      textAlign: "center",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <Typography variant="body" color="error">
+                      There are no items in this cart
+                    </Typography>
+                  </Box>
+                )}
+                {/* <ShoppingCart /> */}
               </Popover>
             </div>
             {/* </Grid> */}

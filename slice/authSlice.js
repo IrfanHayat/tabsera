@@ -1,9 +1,9 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import instance from "../helper/axios/httpRequest";
 import { url, setHeaders } from "../helper/axios/config";
-import Encryption from '../helper/encryption/encryptAes';
+import Encryption from "../helper/encryption/encryptAes";
 import localStorage from "localStorage";
-import Cookies from 'universal-cookie'
+import Cookies from "universal-cookie";
 
 const initialState = {
   token: localStorage.getItem("token"),
@@ -23,15 +23,12 @@ export const registerUser = createAsyncThunk(
   "auth/registerUser",
   async (values, { rejectWithValue }) => {
     try {
-      
       const result = await instance.post(`${url}/customers/login`, values);
       if (response.data.resultCode === 2000) {
-        logIn(true, res.data.response, 'Successfully Login');
-        
-    }
+        logIn(true, res.data.response, "Successfully Login");
+      }
       return result.data;
     } catch (error) {
-      
       return rejectWithValue(error.response.data);
     }
   }
@@ -40,7 +37,6 @@ export const registerUser = createAsyncThunk(
 export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async (values, { rejectWithValue }) => {
-    
     try {
         let cookiesWebsite=new Cookies()
         console.log("Phone")
@@ -60,9 +56,12 @@ export const loginUser = createAsyncThunk(
         console.log(dataEncrypt)
         //let encrypt = "EYeg8Wha6Mz6NGeWzjIBJZGcrodlGkpRUUzHcjIaugV80IelDyLdGunDQ/E25/kNyMU5LY9wGqb5Na0a3SCFZdQHTulGjAn9HwkTZSfQ5PpaqwCsEWExt3FXWJPidZkV5kkn6gHFqDt8R4QuaWIc7FNpz0vy+CeS40oiZwiuSkYVl9FJz7EqmcoIL6ioEWYuISY88I1unM9btPTW/oimRKJ/47UEkJNCKCOjNxh4clfB/X3dHnBKKR1O7En7k1MTsrwVrQUBC+gAZ5S/CdmrttwxbkvusDGj4mFBh5CqW2/1NVPI85+g/ecPSoe7gpcwcE5dQd1osNscjjxpLi7BJyypiPZtiKdz/ORUgj4j4z171cDNIVB7QCHXpAmlkd8E"
 
-        //aes helper function
+      
+      console.log(dataEncrypt);
+      //let encrypt = "EYeg8Wha6Mz6NGeWzjIBJZGcrodlGkpRUUzHcjIaugV80IelDyLdGunDQ/E25/kNyMU5LY9wGqb5Na0a3SCFZdQHTulGjAn9HwkTZSfQ5PpaqwCsEWExt3FXWJPidZkV5kkn6gHFqDt8R4QuaWIc7FNpz0vy+CeS40oiZwiuSkYVl9FJz7EqmcoIL6ioEWYuISY88I1unM9btPTW/oimRKJ/47UEkJNCKCOjNxh4clfB/X3dHnBKKR1O7En7k1MTsrwVrQUBC+gAZ5S/CdmrttwxbkvusDGj4mFBh5CqW2/1NVPI85+g/ecPSoe7gpcwcE5dQd1osNscjjxpLi7BJyypiPZtiKdz/ORUgj4j4z171cDNIVB7QCHXpAmlkd8E"
+
+      //aes helper function
       //  const encrypt = Encryption(dataEncrypt);
-       
 
         const requestBody = {
             requestBody: dataEncrypt
@@ -77,7 +76,6 @@ export const loginUser = createAsyncThunk(
       
       return result.data.response;
     } catch (error) {
-    
       return rejectWithValue(error.response.data);
     }
   }
@@ -93,7 +91,6 @@ export const getUser = createAsyncThunk(
 
       return response.data;
     } catch (error) {
-      
       return rejectWithValue(error.response.data);
     }
   }
@@ -103,13 +100,12 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-   
     loadUser(state, action) {
       const token = state.token;
-    
+
       if (token) {
         const user = token.data;
-       
+
         return {
           ...state,
           token,
@@ -121,7 +117,7 @@ const authSlice = createSlice({
       } else return { ...state, userLoaded: true };
     },
     logoutUser(state, action) {
-      console.log('I am here')
+      console.log("I am here");
       localStorage.removeItem("token");
       localStorage.removeItem("name");
       return {
@@ -177,7 +173,6 @@ const authSlice = createSlice({
           _id: user.customerUserId,
           loginStatus: "success",
         };
-        
       } else return state;
     });
     builder.addCase(loginUser.rejected, (state, action) => {
@@ -216,6 +211,6 @@ const authSlice = createSlice({
   },
 });
 
-export const { loadUser, logoutUser,logIn } = authSlice.actions;
+export const { loadUser, logoutUser, logIn } = authSlice.actions;
 
 export default authSlice.reducer;

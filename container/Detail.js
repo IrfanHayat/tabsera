@@ -87,6 +87,8 @@ function Details({
     setValue(newValue);
   };
   let router = useRouter();
+
+  console.log("productDetail", productDetail);
   return (
     <>
       <Grid
@@ -103,7 +105,9 @@ function Details({
             alt="green iguana"
             style={{ margin: "5px" }}
           /> */}
-          <Typography variant="h6">Product Details</Typography>
+          <Typography variant="h6" style={{ fontWeight: "bold" }}>
+            Product Details
+          </Typography>
 
           <Carousel
             // breakPoints={breakPoints}
@@ -141,14 +145,18 @@ function Details({
       <Grid container spacing={1}>
         <Grid item md={3}></Grid>
         <Grid item md={3} sm={6}>
-          <ListItemText sx={{ fontWeight: "bold" }}>
-            {productDetail?.product_name}{" "}
+          <ListItemText>
+            <Typography style={{ fontWeight: "bold" }}>
+              {productDetail?.product_name}
+            </Typography>{" "}
           </ListItemText>
         </Grid>
         <Grid item md={2} sm={3}></Grid>
         <Grid item md={4} sm={6}>
-          <ListItemText sx={{ fontWeight: "bold" }}>
-            Rs.{skusProduct ? skusProduct.cost : price}
+          <ListItemText>
+            <Typography style={{ fontWeight: "bold" }}>
+              Rs.{skusProduct ? skusProduct.cost : price}
+            </Typography>
           </ListItemText>
         </Grid>
       </Grid>
@@ -158,12 +166,16 @@ function Details({
         <Grid item md={3}></Grid>
         <Grid item md={3}>
           <ListItemText sx={{ color: "error.main" }}>
-            {productDetail?.category_name}{" "}
+            <Typography style={{ fontWeight: "bold" }}>
+              {productDetail?.category_name}{" "}
+            </Typography>
           </ListItemText>
         </Grid>
         <Grid item md={2}></Grid>
         <Grid item md={4}>
-          <ListItemText sx={{ color: "success.main" }}>In Stock</ListItemText>
+          <ListItemText sx={{ color: "success.main" }}>
+            <Typography style={{ fontWeight: "bold" }}>In Stock</Typography>
+          </ListItemText>
         </Grid>
       </Grid>
 
@@ -172,7 +184,11 @@ function Details({
       <Grid container spacing={1}>
         <Grid item md={3}></Grid>
         <Grid item md={3}>
-          <ListItemText>Sold By: {productDetail?.merchant_name}</ListItemText>
+          <ListItemText sx={{ color: "primary.main" }}>
+            <Typography style={{ fontWeight: "bold" }}>
+              Sold By: {productDetail?.merchant_name}
+            </Typography>
+          </ListItemText>
         </Grid>
         <Grid item md={2}></Grid>
         <Grid item md={4}></Grid>
@@ -277,9 +293,21 @@ function Details({
                 indicatorColor="secondary"
                 textColor="inherit"
               >
-                <Tab label="Description" {...a11yProps(0)} />
-                <Tab label="Rating" {...a11yProps(1)} />
-                <Tab label="Store" {...a11yProps(2)} />
+                <Tab
+                  label="Description"
+                  style={{ fontWeight: "bold" }}
+                  {...a11yProps(0)}
+                />
+                <Tab
+                  label="Rating"
+                  style={{ fontWeight: "bold" }}
+                  {...a11yProps(1)}
+                />
+                <Tab
+                  label="Store"
+                  style={{ fontWeight: "bold" }}
+                  {...a11yProps(2)}
+                />
               </Tabs>
             </AppBar>
             <TabPanel value={value} index={0}>
@@ -353,6 +381,11 @@ function Details({
                     ? BuyHandler(productDetail, skusProduct)
                     : BuyHandler(productDetail);
                 }}
+                // onClick={() => {
+                //   skusProduct
+                //     ? BuyHandler(productDetail, skusProduct)
+                //     : BuyHandler(productDetail);
+                // }}
               >
                 Buy Now
               </Button>

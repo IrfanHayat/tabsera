@@ -8,7 +8,7 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import CheckoutWizard from "../container/CheckoutWizard";
 import AddIcon from "@mui/icons-material/Add";
 import Card from "@mui/material/Card";
@@ -39,6 +39,7 @@ function ShippingMethods({
   shippingCharges,
 }) {
   let router = useRouter();
+  const [radioCheck, setRadioCheck] = useState(false);
 
   return (
     <>
@@ -47,7 +48,7 @@ function ShippingMethods({
         <Grid item md={9} xs={12}>
           <Card className={classes.section}>
             <Box sx={{ borderBottom: 1, borderColor: "divider", p: 2 }}>
-              <Typography variant="h6" component="h2">
+              <Typography variant="h6" style={{ fontWeight: "bold" }}>
                 Shipping Information
               </Typography>
 
@@ -118,37 +119,33 @@ function ShippingMethods({
               }}
             >
               <FormControl>
-                <Typography variant="h6" component="h2">
+                <Typography variant="h6" style={{ fontWeight: "bold" }}>
                   Shipping Methods
                 </Typography>
 
-                <RadioGroup
-                  row
-                  aria-labelledby="demo-row-radio-buttons-group-label"
-                  name="row-radio-buttons-group"
-                  // value={labelValue}
-                >
-                  {/* <FormControlLabel
-            value="female"
-            control={<Radio />}
-            label="Female"
-          >
-            <BusinessIcon/>
-            <FormControlLabel/> */}
-                  {/* <BusinessIcon /> */}
-
-                  {shipmentMethodData &&
-                    shipmentMethodData.map((result) => (
-                      <FormControlLabel
-                        key={result.shipping_method_id}
-                        value={result.shipping_method_id}
-                        control={
-                          <Radio onChange={() => handleChange(result)} />
-                        }
-                        label={result.shipping_method_name}
-                      />
-                    ))}
-                </RadioGroup>
+                <List>
+                  <ListItem sx={{ display: "flex" }}>
+                    <RadioGroup
+                      row
+                      aria-labelledby="demo-row-radio-buttons-group-label"
+                      name="row-radio-buttons-group"
+                      // value={labelValue}
+                    >
+                      {shipmentMethodData &&
+                        shipmentMethodData.map((result) => (
+                          <FormControlLabel
+                            key={result.shipping_method_id}
+                            value={result.shipping_method_id}
+                            control={
+                              <Radio onChange={() => handleChange(result)} />
+                            }
+                            label={result.shipping_method_name}
+                            onClick={() => setRadioCheck(true)}
+                          />
+                        ))}
+                    </RadioGroup>
+                  </ListItem>
+                </List>
               </FormControl>
             </Box>
           </Card>
@@ -163,7 +160,9 @@ function ShippingMethods({
                 p: 2,
               }}
             >
-              <Typography variant="h6">Shipping Charges</Typography>
+              <Typography variant="h6" style={{ fontWeight: "bold" }}>
+                Shipping Charges
+              </Typography>
               {/* <Box sx={{ display: "inline", margin: 5 }}> */}
               <List>
                 <ListItem>
@@ -192,6 +191,7 @@ function ShippingMethods({
                   onClick={checkoutHandler}
                   variant="contained"
                   color="primary"
+                  disabled={radioCheck ? "" : "disabled"}
                   // startIcon={<AddIcon />}
                 >
                   Continue to Place Order

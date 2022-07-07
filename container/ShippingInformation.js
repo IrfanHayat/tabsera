@@ -1,4 +1,11 @@
-import { Button, Divider, Grid, Stack, Typography } from "@mui/material";
+import {
+  Button,
+  Divider,
+  Grid,
+  ListItem,
+  Stack,
+  Typography,
+} from "@mui/material";
 import React from "react";
 import CheckoutWizard from "../container/CheckoutWizard";
 import AddIcon from "@mui/icons-material/Add";
@@ -9,7 +16,8 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import FormControl from "@mui/material/FormControl";
 import FormLabel from "@mui/material/FormLabel";
 import { useRouter } from "next/router";
-
+import { useState } from "react";
+import List from "@mui/material/List";
 //import Divider from "@mui/material";
 function ShippingInformation({
   checkoutHandler,
@@ -28,6 +36,7 @@ function ShippingInformation({
     buttonText = "Locker";
   }
 
+  const [radioCheck, setRadioCheck] = useState(false);
   // const handleChange = (event) => {
   //   setButtonKey(event.target.value);
   // };
@@ -88,44 +97,41 @@ function ShippingInformation({
         {buttonKey === 1 ? (
           <Grid item md={3} sm={3} mt={5}>
             <FormControl>
-              <FormLabel id="demo-row-radio-buttons-group-label">
-                Address Label :
+              <FormLabel style={{ fontWeight: "bold" }}>
+                Shipping Addresses
               </FormLabel>
 
-              <RadioGroup
-                row
-                aria-labelledby="demo-row-radio-buttons-group-label"
-                name="row-radio-buttons-group"
-                // value={labelValue}
-                onChange={handleChange}
-              >
-                {/* <FormControlLabel
-                  value="female"
-                  control={<Radio />}
-                  label="Female"
-                >
-                  <BusinessIcon/>
-                  <FormControlLabel/> */}
-                {/* <BusinessIcon /> */}
-                {shippementAddress &&
-                  shippementAddress.map((result) =>
-                    result.address_default_billing === false ? (
-                      <FormControlLabel
-                        value={result.address_id}
-                        control={<Radio />}
-                        label={result.address}
-                      />
-                    ) : (
-                      ""
-                    )
-                  )}
-              </RadioGroup>
-
+              <List>
+                <ListItem sx={{ display: "flex" }}>
+                  <RadioGroup
+                    row
+                    aria-labelledby="demo-row-radio-buttons-group-label"
+                    name="row-radio-buttons-group"
+                    // value={labelValue}
+                    onChange={handleChange}
+                  >
+                    {shippementAddress &&
+                      shippementAddress.map((result) =>
+                        result.address_default_billing === false ? (
+                          <FormControlLabel
+                            value={result.address_id}
+                            control={<Radio />}
+                            label={result.address}
+                            onClick={() => setRadioCheck(true)}
+                          />
+                        ) : (
+                          ""
+                        )
+                      )}
+                  </RadioGroup>
+                </ListItem>
+              </List>
               <Stack direction="row" spacing={2}>
                 <Button
                   onClick={checkoutHandler}
                   variant="contained"
                   color="primary"
+                  disabled={radioCheck ? "" : "disabled"}
                   // href="/shipping_methods"
                   // startIcon={<AddIcon />}
                 >

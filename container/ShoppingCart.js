@@ -36,7 +36,7 @@ function CartScreen({
   productPrice,
 }) {
   return (
-    <Box sx={{ flexGrow: 1,display: 'grid', marginTop: 5 }}>
+    <Box sx={{ flexGrow: 1, display: "grid", p: 3 }}>
       <Typography component="h4" variant="h5">
         {heading}
       </Typography>
@@ -51,13 +51,14 @@ function CartScreen({
               textAlign: "center",
               display: "flex",
               alignItems: "center",
+              // mx: 5,
             }}
           >
             <Grid
               item
               xs="auto"
               sm="auto"
-              md={3}
+              m={2}
               style={{ height: "150px", width: "150px" }}
             >
               <NextLink href={`/product/${item?.name}`} passHref>

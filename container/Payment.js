@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import {
+  Box,
   Button,
   FormControl,
   FormControlLabel,
@@ -27,7 +28,7 @@ export default function Payment({
   paymentMethod,
   setPaymentMethod,
   handleChange,
-  cartTotalAmount
+  cartTotalAmount,
 }) {
   const classes = useStyles();
   let router = useRouter();
@@ -49,7 +50,7 @@ export default function Payment({
       <CheckoutWizard activeStep={5}></CheckoutWizard>
       <Grid item sx={{ margin: 5 }}>
         <form>
-          <Typography component="h4" variant="h6">
+          <Typography variant="h6" style={{ fontWeight: "bold" }}>
             Payment Method
           </Typography>
           <List>
@@ -72,50 +73,71 @@ export default function Payment({
 
                   {paymentMethod &&
                     paymentMethod.map((result) => (
-                      <><Image
-                        // className={cx(styles.media, mediaStyles.root)}
-                        src={result?.payment_method_icon}
-                        onClick={(e) => viewCategory(product.category_id)}
-                        alt="shirt"
-                        width={45}
-                        height={20}
-                      ></Image><FormControlLabel
+                      <Box sx={{ display: "flex", p: 2 }}>
+                        <Image
+                          // className={cx(styles.media, mediaStyles.root)}
+                          src={result?.payment_method_icon}
+                          onClick={(e) => viewCategory(product.category_id)}
+                          alt="shirt"
+                          width={45}
+                          height={20}
+                        ></Image>
+                        <FormControlLabel
                           key={result.payment_method_id}
                           value={result.payment_method_id}
-                          control={<Radio onChange={() => handleChange(result)} ></Radio>}
-                          label={result.parent_payment_method} /></>
+                          control={
+                            <Radio
+                              onChange={() => handleChange(result)}
+                            ></Radio>
+                          }
+                          label={result.parent_payment_method}
+                          sx={{ ml: 1 }}
+                        />
+                      </Box>
                     ))}
                 </RadioGroup>
               </FormControl>
             </ListItem>
           </List>
-          <Stack direction="row" spacing={2}>
-            {/* <ListItem> */}
-            <Button
-              // fullWidth
-              type="button"
-              variant="contained"
-              color="primary"
-              onClick={()=>submitHandler(cartTotalAmount)}
-            >
-              Continue
-            </Button>
-            {/* </ListItem>/ */}
-            {/* <ListItem> */}
-            <Button
-              // fullWidth
-              type="button"
-              color="error"
-              variant="contained"
-              onClick={() => router.push("/shipping")}
-            >
-              Back
-            </Button>
-          </Stack>
+          <List>
+            <ListItem>
+              <Stack direction="row" spacing={2}>
+                {/* <ListItem> */}
+                <Button
+                  // fullWidth
+                  type="button"
+                  variant="contained"
+                  color="primary"
+                  onClick={() => submitHandler(cartTotalAmount)}
+                >
+                  Continue
+                </Button>
+                {/* </ListItem>/ */}
+                {/* <ListItem> */}
+                <Button
+                  // fullWidth
+                  type="button"
+                  color="error"
+                  variant="contained"
+                  onClick={() => router.push("/shipping")}
+                >
+                  Back
+                </Button>
+              </Stack>
+            </ListItem>
+          </List>
           {/* </ListItem> */}
         </form>
       </Grid>
-      <Snackbar open={openBar} autoHideDuration={6000} onClose={handleCloseBar}>
+      <Snackbar
+        open={openBar}
+        autoHideDuration={6000}
+        onClose={handleCloseBar}
+        anchorOrigin={{
+          horizontal: "center",
+          vertical: "top",
+        }}
+      >
         <Alert
           onClose={handleCloseBar}
           severity="success"
