@@ -4,11 +4,21 @@ import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import { FormHelperText, TextField } from "@mui/material";
-export default function ContactUS() {
+import { Map, GoogleApiWrapper } from "google-maps-react";
+export default function ContactUS(props) {
   return (
     <Box color="black">
       <Box bgcolor="primary.main" maxWidth="100%" paddingBottom={50}>
-        map
+        <Map
+          google={props.google}
+          zoom={14}
+          // style={mapStyles}
+          apiKey="AIzaSyBFVMFA5rIra3b7wAQbei7UWVG_bmcH0GE"
+          initialCenter={{
+            lat: -1.2884,
+            lng: 36.8233,
+          }}
+        />
       </Box>
 
       <Container maxWidth="lg" bgcolor="primary.main">

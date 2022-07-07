@@ -42,8 +42,7 @@ function Details({
   price,
   viewStore,
 }) {
-
-  console.log(merchantDetail)
+  console.log(merchantDetail);
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
     ...theme.typography.body2,
@@ -293,6 +292,7 @@ function Details({
                 aria-label="basic tabs example"
                 variant="fullWidth"
                 indicatorColor="secondary"
+                // textColor="secondary"
                 textColor="inherit"
               >
                 <Tab
@@ -341,7 +341,7 @@ function Details({
                   onClick={() => viewStore(merchantDetail?.merchant_id)}
                   // onClick={viewStore}
                 >
-                  Visit Store {merchantDetail?.created_date}
+                  Visit Store
                 </Button>
               </Stack>
             </TabPanel>

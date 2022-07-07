@@ -10,6 +10,8 @@ import shipmentsReducer from "../slice/shipmentSlice";
 import merchantReducer from "../slice/merchantSlice";
 import placeOrderReducer from "../slice/placeOrderSlice";
 import mrechantStoreReducer from "../slice/merchantStoreSlice";
+import reviewsReducer from "../slice/reviewsSlice";
+
 export const store = configureStore({
   reducer: {
     basket: basketReducer,
@@ -21,6 +23,7 @@ export const store = configureStore({
     placeorder: placeOrderReducer,
     payment: paymentReducer,
     deals: dealsReducer,
+    reviews: reviewsReducer,
     merchantStore: mrechantStoreReducer,
     [productsApi.reducerPath]: productsApi.reducer,
   },
