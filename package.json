@@ -21,6 +21,7 @@
     "@mui/styles": "^5.8.0",
     "@reduxjs/toolkit": "^1.8.2",
     "axios": "^0.27.2",
+    "cheerio": "^1.0.0-rc.12",
     "cookie": "^0.5.0",
     "cookies": "^0.8.0",
     "crypto-js": "^4.1.1",

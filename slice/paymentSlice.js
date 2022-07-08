@@ -6,6 +6,7 @@ import { url, setHeaders } from "../helper/axios/config";
 export const getPayment = createAsyncThunk("payments/methods", async () => {
   const result = await instance.get(`${url}/ecommerce/payments/methods`);
   console.log("payment", result);
+  
   return result.data.response;
 });
 
@@ -13,6 +14,7 @@ export const postPayment = createAsyncThunk("payments", async (payment) => {
   
   const result = await instance.post(`${url}/payments`,payment);
   console.log("payment", result);
+  
   return result.data.response;
 });
 

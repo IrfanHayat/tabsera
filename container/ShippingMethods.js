@@ -65,23 +65,25 @@ function ShippingMethods({
                   </ListItemText>
                 </ListItem>
               </List>
-
-              <List>
+              
+              {/* <List>
                 <ListItem>
                   <ListItemIcon>
                     <PhoneIcon />{" "}
                   </ListItemIcon>
                 </ListItem>
-              </List>
-
+              </List> */}
+              {userData.email?
               <List>
-                <ListItem>
-                  <ListItemIcon>
-                    <EmailIcon />
-                  </ListItemIcon>
-                  <ListItemText>{userData.email}</ListItemText>
-                </ListItem>
-              </List>
+              <ListItem>
+                <ListItemIcon>
+                  <EmailIcon />
+                </ListItemIcon>
+                <ListItemText>{userData.email}</ListItemText>
+              </ListItem>
+            </List>:''
+              }
+              
 
               <List>
                 <ListItem>
@@ -180,9 +182,9 @@ function ShippingMethods({
                   <ListItemText>
                     Subtotal{" "}
                     {productPrice && shippingCharges
-                      ? productPrice.reduce((a, c) => a + c.qty * c.price, 0) +
+                      ? productPrice?.reduce((a, c) => a + c.qty * c.price, 0) +
                         shippingCharges
-                      : productPrice.reduce((a, c) => a + c.qty * c.price, 0)}
+                      : productPrice?.reduce((a, c) => a + c.qty * c.price, 0)}
                   </ListItemText>
                 </ListItem>
               </List>

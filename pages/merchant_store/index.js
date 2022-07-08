@@ -15,6 +15,8 @@ function product_detail() {
 
   let router=useRouter()
   const { merchantStoreData } = useSelector((state) => state.merchantStore);
+
+  
   console.log("merchant Store Data", merchantStoreData);
 
   useEffect(() => {
