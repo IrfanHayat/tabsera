@@ -34,6 +34,7 @@ export default function Payment({
   let router = useRouter();
   const [openBar, setOpenBar] = React.useState(false);
   // const [loginSccess, setLginSccess] = React.useState(false);
+  const [radioCheck, setRadioCheck] = useState(false);
 
   const handleClickBar = () => {
     setOpenBar(true);
@@ -92,6 +93,7 @@ export default function Payment({
                           }
                           label={result.parent_payment_method}
                           sx={{ ml: 1 }}
+                          onClick={() => setRadioCheck(true)}
                         />
                       </Box>
                     ))}
@@ -109,6 +111,7 @@ export default function Payment({
                   variant="contained"
                   color="primary"
                   onClick={() => submitHandler(cartTotalAmount)}
+                  disabled={radioCheck ? "" : "disabled"}
                 >
                   Continue
                 </Button>

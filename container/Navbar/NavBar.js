@@ -280,10 +280,10 @@ export default function NavBar() {
                 //   horizontal: "left",
                 // }}
               >
-                {cartTotalQuantity > 0 ? (
-                  <ShoppingCart />
-                ) : (
-                  <Box
+                {/* {cartTotalQuantity > 0 ? ( */}
+                <ShoppingCart />
+                {/* ) : ( */}
+                {/* <Box
                     sx={{
                       height: 50,
                       width: 200,
@@ -296,8 +296,8 @@ export default function NavBar() {
                     <Typography variant="body" color="error">
                       There are no items in this cart
                     </Typography>
-                  </Box>
-                )}
+                  </Box> */}
+                {/* )} */}
                 {/* <ShoppingCart /> */}
               </Popover>
             </div>

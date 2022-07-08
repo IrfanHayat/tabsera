@@ -34,13 +34,11 @@ function a11yProps(index) {
   };
 }
 function MerchantStore({ merchantStoreDetail }) {
-  
   const { merchantData } = useSelector((state) => state.merchant);
-  
+
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
-    
-    
+
     return (
       <div
         role="tabpanel"
@@ -71,26 +69,28 @@ function MerchantStore({ merchantStoreDetail }) {
   let router = useRouter();
 
   console.log("m s d", merchantStoreDetail);
- 
-  console.log(merchantData)
- 
+
+  console.log(merchantData);
+
   return (
     <>
       <Grid container spacing={1}>
         <Grid item md={12} xs={12}>
-          <Typography variant="h6">Seller Details</Typography>
+          <Typography variant="h6" style={{ fontWeight: "bold" }}>
+            Seller Details
+          </Typography>
         </Grid>
         <Grid item md={12} xs={12}>
           <Box>
             {" "}
             <List>
-              <ListItem>Name :{merchantData.merchant_name}</ListItem>
+              <ListItem>Name : {merchantData.merchant_name}</ListItem>
             </List>
             <List>
-              <ListItem>Location :{merchantData.city} </ListItem>
+              <ListItem>Location : {merchantData.city} </ListItem>
             </List>
             <List>
-              <ListItem>Joined Tabsera :</ListItem>
+              <ListItem>Joined Tabsera : {merchantData?.created_date}</ListItem>
             </List>
             <List>
               <ListItem>
@@ -121,18 +121,12 @@ function MerchantStore({ merchantStoreDetail }) {
               </Tabs>
             </AppBar>
 
-            <TabPanel sx={{display:"flex"}} value={value} index={0}>
-            
-              {merchantStoreDetail?.map(result=>(
-                   <ActionAreaCard 
-                   product={result}
-                   
-                 ></ActionAreaCard>
-                  
-               ))
-            
-            
-              }
+            <TabPanel value={value} index={0}>
+              <Grid container>
+                {merchantStoreDetail?.map((result) => (
+                  <ActionAreaCard product={result}></ActionAreaCard>
+                ))}
+              </Grid>
             </TabPanel>
             <TabPanel value={value} index={1}>
               Ratings and Reviews

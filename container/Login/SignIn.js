@@ -27,8 +27,16 @@ import DialogTitle from "@mui/material/DialogTitle";
 import Stack from "@mui/material/Stack";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import IconButton from "@material-ui/core/IconButton";
+import InputAdornment from "@material-ui/core/InputAdornment";
+// import TextField from "@material-ui/core/TextField";
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import VisibilityOffIcon from "@mui/icons-material/VisibilityOff";
+import Avatar from "@mui/material/Avatar";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 // import useMediaQuery from "@mui/material/useMediaQuery";
 import MuiPhoneNumber from "material-ui-phone-number";
+import Box from "@mui/material/Box";
 // import MuiPhoneNumber from "material-ui-phone-number-2";
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -47,6 +55,7 @@ export default function SignIn() {
   const { redirect } = router.query; // login?redirect=/shipping
   const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth);
+  const [showPassword, setShowPassword] = useState(false);
 
   const [openBar, setOpenBar] = React.useState(false);
 
@@ -60,7 +69,9 @@ export default function SignIn() {
     }
     setOpenBar(false);
   };
-
+  const handleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
   // useEffect(() => {
   //   if (auth._id) {
   //     navigate("/cart");
@@ -106,101 +117,146 @@ export default function SignIn() {
         onClose={handleClose}
         aria-labelledby="responsive-dialog-title"
       >
-        <DialogTitle id="responsive-dialog-title">Sign In</DialogTitle>
-        <DialogContent>
-          <form onSubmit={handleSubmit(submitHandler)}>
-            <List>
-              <ListItem>
-                <Controller
-                  name="phone"
-                  control={control}
-                  defaultValue=""
-                  inputProps={{
-                    required: true,
-                  }}
-                  render={({ field }) => (
-                    <MuiPhoneNumber
-                      defaultCountry={"us"}
-                      fullWidth
-                      disableDropdown
-                      variant="outlined"
-                      id="phone"
-                      label="Phone Number"
-                      error={Boolean(errors.phone)}
-                      {...field}
-                      // disableAreaCodes
-                    />
-                    // <PhoneInput
-                    //   variant="outlined"
-                    //   inputStyle={{ height: "50px", width: "135%" }}
-                    //   id="phone"
-                    //   label="Phone"
-                    //   error={Boolean(errors.phone)}
-                    //   {...field}
-                    // ></PhoneInput>
-                  )}
-                ></Controller>
-              </ListItem>
-              <ListItem>
-                <Controller
-                  name="password"
-                  control={control}
-                  defaultValue=""
-                  rules={{
-                    required: true,
-                    minLength: 2,
-                  }}
-                  render={({ field }) => (
-                    <TextField
-                      variant="outlined"
-                      fullWidth
-                      id="password"
-                      label="Password"
-                      inputProps={{ type: "password" }}
-                      error={Boolean(errors.password)}
-                      helperText={
-                        errors.password
-                          ? errors.password.type === "minLength"
-                            ? "Password length is more than 5"
-                            : "Password is required"
-                          : ""
-                      }
-                      {...field}
-                    ></TextField>
-                  )}
-                ></Controller>
-              </ListItem>
-              <ListItem>
-                <Button
-                  //   onClick={handleSubmit(submitHandler); handleClose()}
-                  variant="contained"
-                  type="submit"
-                  fullWidth
-                  color="primary"
-                >
-                  Login
-                </Button>
-              </ListItem>
-              <ListItem>
-                Don&apos;t have an account? &nbsp;
-                <NextLink
-                  href={`/register?redirect=${redirect || "/"}`}
-                  passHref
-                >
-                  <Link>Register</Link>
-                </NextLink>
-              </ListItem>
-            </List>
-          </form>
-        </DialogContent>
-        <DialogActions>
-          {/* <Button autoFocus onClick={handleClose}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            // m: "auto",
+            // width: "100%",
+            alignItems: "center",
+          }}
+        >
+          <DialogTitle id="responsive-dialog-title">Sign In</DialogTitle>
+          <Avatar sx={{ bgcolor: "secondary.main" }}>
+            <LockOutlinedIcon />
+          </Avatar>
+          <DialogContent>
+            <form onSubmit={handleSubmit(submitHandler)}>
+              <List>
+                <ListItem>
+                  <Controller
+                    name="phone"
+                    control={control}
+                    defaultValue=""
+                    inputProps={{
+                      required: true,
+                    }}
+                    render={({ field }) => (
+                      <MuiPhoneNumber
+                        defaultCountry={"us"}
+                        fullWidth
+                        disableDropdown
+                        variant="outlined"
+                        id="phone"
+                        label="Phone Number"
+                        error={Boolean(errors.phone)}
+                        {...field}
+                        // disableAreaCodes
+                      />
+                      // <PhoneInput
+                      //   variant="outlined"
+                      //   inputStyle={{ height: "50px", width: "135%" }}
+                      //   id="phone"
+                      //   label="Phone"
+                      //   error={Boolean(errors.phone)}
+                      //   {...field}
+                      // ></PhoneInput>
+                    )}
+                  ></Controller>
+                </ListItem>
+                <ListItem>
+                  <Controller
+                    name="password"
+                    control={control}
+                    defaultValue=""
+                    rules={{
+                      required: true,
+                      minLength: 2,
+                    }}
+                    render={({ field }) => (
+                      <TextField
+                        variant="outlined"
+                        fullWidth
+                        id="password"
+                        label="Password"
+                        type={showPassword ? "password" : "text"}
+                        // inputProps={{ type: "password" }}
+                        error={Boolean(errors.password)}
+                        helperText={
+                          errors.password
+                            ? errors.password.type === "minLength"
+                              ? "Password length is more than 5"
+                              : "Password is required"
+                            : ""
+                        }
+                        {...field}
+                        InputProps={{
+                          endAdornment: (
+                            <InputAdornment
+                              position="end"
+                              onClick={handleShowPassword}
+                            >
+                              {showPassword ? (
+                                <VisibilityOffIcon />
+                              ) : (
+                                <VisibilityIcon />
+                              )}
+                            </InputAdornment>
+                          ),
+                        }}
+                        // InputProps={{
+                        //   endAdornment: (
+                        //     <InputAdornment position="end">
+                        //       <IconButton
+                        //         aria-label="Toggle password visibility"
+                        //         onClick={handleShowPassword}
+                        //         // onMouseDown={this.handleMouseDownPassword}
+                        //       >
+                        //         {showPassword ? (
+                        //           <VisibilityOffIcon />
+                        //         ) : (
+                        //           <VisibilityIcon />
+                        //         )}
+                        //       </IconButton>
+                        //     </InputAdornment>
+                        //   ),
+                        // }}
+                      ></TextField>
+                    )}
+                  ></Controller>
+                </ListItem>
+                <ListItem>
+                  <Button
+                    //   onClick={handleSubmit(submitHandler); handleClose()}
+                    variant="contained"
+                    type="submit"
+                    fullWidth
+                    color="primary"
+                  >
+                    Login
+                  </Button>
+                </ListItem>
+                <ListItem>
+                  Don&apos;t have an account? &nbsp;
+                  <NextLink
+                    href={`/register?redirect=${redirect || "/"}`}
+                    passHref
+                  >
+                    <Link>Register</Link>
+                  </NextLink>
+                </ListItem>
+              </List>
+            </form>
+          </DialogContent>
+          <DialogActions>
+            {/* <Button autoFocus onClick={handleClose}>
             Login
           </Button>
           <Button onClick={handleClose} autoFocus>
             Cancel
           </Button> */}
-        </DialogActions>
+          </DialogActions>
+        </Box>
       </Dialog>
       <Snackbar
         open={openBar}

@@ -8,7 +8,7 @@ export const getMerchantWithId = createAsyncThunk(
   "merchant/getMerchantWithId",
   async (id) => {
     const result = await instance.get(`${url}/merchants/${id}`);
-   
+
     return result.data.response;
   }
 );

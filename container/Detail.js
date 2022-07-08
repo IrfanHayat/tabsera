@@ -13,10 +13,12 @@ import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 //import Typography from '@mui/material/Typography';
 import Box from "@mui/material/Box";
+import SwipeableViews from "react-swipeable-views";
 import Image from "next/image";
 import Carousel from "react-elastic-carousel";
 import { AppBar, Stack } from "@mui/material";
 import { useRouter } from "next/router";
+import { useTheme } from "@mui/material/styles";
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
   { width: 550, itemsToShow: 2 },
@@ -24,12 +26,39 @@ const breakPoints = [
   { width: 1200, itemsToShow: 4 },
 ];
 
+function TabPanel(props) {
+  const { children, value, index, ...other } = props;
+
+  return (
+    <div
+      role="tabpanel"
+      hidden={value !== index}
+      id={`full-width-tabpanel-${index}`}
+      aria-labelledby={`full-width-tab-${index}`}
+      {...other}
+    >
+      {value === index && (
+        <Box sx={{ p: 3 }}>
+          <Typography>{children}</Typography>
+        </Box>
+      )}
+    </div>
+  );
+}
+
+TabPanel.propTypes = {
+  children: PropTypes.node,
+  index: PropTypes.number.isRequired,
+  value: PropTypes.number.isRequired,
+};
+
 function a11yProps(index) {
   return {
-    id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`,
+    id: `full-width-tab-${index}`,
+    "aria-controls": `full-width-tabpanel-${index}`,
   };
 }
+
 function Details({
   viewProduct,
   productDetail,
@@ -42,8 +71,7 @@ function Details({
   price,
   viewStore,
 }) {
-
-  console.log(merchantDetail)
+  console.log(merchantDetail);
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
     ...theme.typography.body2,
@@ -54,42 +82,21 @@ function Details({
   let [skusProduct, setSkusProduct] = useState();
   let [variantOneProduct, setVariantOneProduct] = useState();
   //let [productDetailOne,setProductDetailOne]=useState();
+
   const viewVariantsProduct = (result) => {
     setSkusProduct(result);
   };
 
-  function TabPanel(props) {
-    const { children, value, index, ...other } = props;
-
-    return (
-      <div
-        role="tabpanel"
-        hidden={value !== index}
-        id={`simple-tabpanel-${index}`}
-        aria-labelledby={`simple-tab-${index}`}
-        {...other}
-      >
-        {value === index && (
-          <Box sx={{ p: 3 }}>
-            <Typography>{children}</Typography>
-          </Box>
-        )}
-      </div>
-    );
-  }
-
-  TabPanel.propTypes = {
-    children: PropTypes.node,
-    index: PropTypes.number.isRequired,
-    value: PropTypes.number.isRequired,
-  };
+  const theme = useTheme();
   const [value, setValue] = useState(0);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+  const handleChangeIndex = (index) => {
+    setValue(index);
+  };
   let router = useRouter();
-
   console.log("productDetail", productDetail);
   return (
     <>
@@ -290,9 +297,10 @@ function Details({
               <Tabs
                 value={value}
                 onChange={handleChange}
-                aria-label="basic tabs example"
+                aria-label="full width tabs example"
                 variant="fullWidth"
                 indicatorColor="secondary"
+                // textColor="secondary"
                 textColor="inherit"
               >
                 <Tab
@@ -312,39 +320,45 @@ function Details({
                 />
               </Tabs>
             </AppBar>
-            <TabPanel value={value} index={0}>
-              {productDetail?.product_desc}
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-              Rating
-            </TabPanel>
-            <TabPanel value={value} index={2}>
-              {/* {productDetail?.merchant_name} */}
-              <List>
-                <ListItem>Name : {merchantDetail?.merchant_name}</ListItem>
-              </List>
-              <List>
-                <ListItem>Location : {merchantDetail?.city}</ListItem>
-              </List>
-              <List>
-                <ListItem>
-                  Joined Tabsera : {merchantDetail?.created_date}
-                </ListItem>
-              </List>
-              <List>
-                <ListItem>Seller Rating :</ListItem>
-                {console.log("idddd", merchantDetail)}
-              </List>
-              <Stack>
-                <Button
-                  variant="text"
-                  onClick={() => viewStore(merchantDetail?.merchant_id)}
-                  // onClick={viewStore}
-                >
-                  Visit Store {merchantDetail?.created_date}
-                </Button>
-              </Stack>
-            </TabPanel>
+            <SwipeableViews
+              axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+              index={value}
+              onChangeIndex={handleChangeIndex}
+            >
+              <TabPanel value={value} index={0} dir={theme.direction}>
+                {productDetail?.product_desc}
+              </TabPanel>
+              <TabPanel value={value} index={1} dir={theme.direction}>
+                Rating
+              </TabPanel>
+              <TabPanel value={value} index={2} dir={theme.direction}>
+                {/* {productDetail?.merchant_name} */}
+                <List>
+                  <ListItem>Name : {merchantDetail?.merchant_name}</ListItem>
+                </List>
+                <List>
+                  <ListItem>Location : {merchantDetail?.city}</ListItem>
+                </List>
+                <List>
+                  <ListItem>
+                    Joined Tabsera : {merchantDetail?.created_date}
+                  </ListItem>
+                </List>
+                <List>
+                  <ListItem>Seller Rating :</ListItem>
+                  {console.log("idddd", merchantDetail)}
+                </List>
+                <Stack>
+                  <Button
+                    variant="text"
+                    onClick={() => viewStore(merchantDetail?.merchant_id)}
+                    // onClick={viewStore}
+                  >
+                    Visit Store
+                  </Button>
+                </Stack>
+              </TabPanel>
+            </SwipeableViews>
             {/* <TabPanel value={value} index={2}>
               {merchantDetail?.city}
             </TabPanel> */}
