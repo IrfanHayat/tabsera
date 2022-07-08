@@ -8,7 +8,7 @@ import { Map, GoogleApiWrapper } from "google-maps-react";
 export default function ContactUS(props) {
   return (
     <Box color="black">
-      <Box bgcolor="primary.main" maxWidth="100%" paddingBottom={50}>
+      <Box maxWidth="100%" paddingBottom={50}>
         <Map
           google={props.google}
           zoom={14}

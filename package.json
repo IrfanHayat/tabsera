@@ -62,6 +62,7 @@
     "react-phone-number-input": "^3.2.2",
     "react-redux": "^8.0.2",
     "react-responsive-carousel": "^3.2.23",
+    "react-swipeable-views": "^0.14.0",
     "sanitize-html": "^2.7.0",
     "services": "0.0.3",
     "styled-components": "^5.3.5",

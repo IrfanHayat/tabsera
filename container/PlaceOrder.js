@@ -205,14 +205,7 @@ function PlaceOrder({
                                   </TableCell>
 
                                   <TableCell>
-                                    <NextLink
-                                      href={`/product/${item.name}`}
-                                      passHref
-                                    >
-                                      <Link>
-                                        <Typography>{item.name}</Typography>
-                                      </Link>
-                                    </NextLink>
+                                    <Typography>{item.name}</Typography>
                                   </TableCell>
                                   <TableCell align="right">
                                     <Typography>{item.qty}</Typography>

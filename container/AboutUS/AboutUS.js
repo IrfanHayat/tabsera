@@ -3,7 +3,7 @@ import React from "react";
 import Container from "@mui/material/Container";
 
 import Image from "next/image";
-import img from "./lion.jpg";
+// import img from "./lion.jpg";
 function AboutUS() {
   return (
     <Box
@@ -11,7 +11,7 @@ function AboutUS() {
       py={{ xs: 5, sm: 10 }}
       textAlign="center"
       //   sx={{ dispaly: "flex", justifyContent: "center" }}
-      bgcolor="text.disabled"
+      // bgcolor="text.disabled"
     >
       <Container maxWidth="lg">
         <Typography variant="h5">About Us</Typography>

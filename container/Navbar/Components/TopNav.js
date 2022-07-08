@@ -26,9 +26,8 @@ import locales from "../../../i18n.json";
 import NavSelect from "./NavSelect";
 import { ListItemIcon } from "@mui/material";
 import { Container } from "@mui/system";
-import {logoutUser} from '../../../slice/authSlice';
-import Cookies from 'js-cookie';
-
+import { logoutUser } from "../../../slice/authSlice";
+import Cookies from "js-cookie";
 
 const NavLink = styled("a")(() => ({
   wrap: "noWrap",
@@ -52,13 +51,13 @@ export default function TopNav(props) {
   //const [quantityProduct,setQunatityProduct]=useState()
   const [open, setOpen] = React.useState(false);
   let { t, i18n } = useTranslation();
-  const router=useRouter()
+  const router = useRouter();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const [categoriesData, setCategoriesData] = useState([]);
-  const dispatch =useDispatch()
+  const dispatch = useDispatch();
 
   const theme = useTheme();
 
@@ -87,12 +86,11 @@ export default function TopNav(props) {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
-   const logOut=()=>{
-         dispatch(logoutUser())
-         Cookies.remove('connect.sid');
-         router.push('/login')
-
-   } 
+  const logOut = () => {
+    dispatch(logoutUser());
+    Cookies.remove("connect.sid");
+    router.push("/login");
+  };
   // const open1 = Boolean(anchorEl);
 
   const menuId = "primary-search-account-menu";
@@ -184,8 +182,8 @@ export default function TopNav(props) {
         <ListItemText>Help</ListItemText>
       </MenuItem>
       <Divider />
-      <MenuItem onClick={()=>logOut()} alignText="center">
-        <ListItemText >Logout</ListItemText>
+      <MenuItem onClick={() => logOut()} alignText="center">
+        <ListItemText>Logout</ListItemText>
       </MenuItem>
     </div>
   );
@@ -263,7 +261,7 @@ export default function TopNav(props) {
       >
         <Container>
           <Toolbar>
-            <NavLink href="/about_us">{t("About Us")}</NavLink>
+            <NavLink href="/about">{t("About Us")}</NavLink>
             <NavLink href="/contact_us">Contact Us</NavLink>
 
             <Box sx={{ flexGrow: 1 }} />
