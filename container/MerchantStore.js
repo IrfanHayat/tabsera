@@ -71,6 +71,13 @@ function MerchantStore({ merchantStoreDetail }) {
   console.log("m s d", merchantStoreDetail);
 
   console.log(merchantData);
+  const viewProduct = (item) => {
+    console.log(item);
+    router.push({
+      pathname: `/product_detail`,
+      query: { productId: item.productId },
+    });
+  };
 
   return (
     <>
@@ -124,7 +131,10 @@ function MerchantStore({ merchantStoreDetail }) {
             <TabPanel value={value} index={0}>
               <Grid container>
                 {merchantStoreDetail?.map((result) => (
-                  <ActionAreaCard product={result}></ActionAreaCard>
+                  <ActionAreaCard
+                    product={result}
+                    viewProduct={viewProduct}
+                  ></ActionAreaCard>
                 ))}
               </Grid>
             </TabPanel>

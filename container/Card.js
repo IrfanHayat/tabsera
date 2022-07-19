@@ -1,17 +1,12 @@
 import * as React from "react";
 import CardContent from "@mui/material/CardContent";
 import Image from "next/image";
-import  Card from "@mui/material/Card";
+import Card from "@mui/material/Card";
 
-import  CardActions from "@mui/material/CardActions";
-import  Typography  from "@mui/material/Typography";
+import CardActions from "@mui/material/CardActions";
+import Typography from "@mui/material/Typography";
 
-
-import  makeStyles  from "@mui/styles/makeStyles";
-
-
-
-
+import makeStyles from "@mui/styles/makeStyles";
 
 export default function ActionAreaCard({
   product,
@@ -22,9 +17,6 @@ export default function ActionAreaCard({
   categoryView,
   cartView,
 }) {
-  
-  
-
   return (
     // <Box>
     <Card
@@ -47,16 +39,15 @@ export default function ActionAreaCard({
     >
       {product?.productImage && (
         <>
-        {console.log(product?.productImage)}
-        <Image
-          // className={cx(styles.media, mediaStyles.root)}
-          src={product?.productImage}
-          onClick={(e) => viewProduct(product)}
-          alt="shirt"
-          width={245}
-          height={200}
-          // loading="eager"
-        ></Image>
+          <Image
+            // className={cx(styles.media, mediaStyles.root)}
+            src={product?.productImage}
+            onClick={(e) => viewProduct(product)}
+            alt="shirt"
+            width={245}
+            height={200}
+            // loading="eager"
+          ></Image>
         </>
       )}
       {product?.category_image && (

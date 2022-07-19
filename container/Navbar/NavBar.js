@@ -32,7 +32,8 @@ import { Container } from "@mui/system";
 const drawerWidth = 10;
 import Paper from "@mui/material/Paper";
 import { useRouter } from "next/router";
-
+import Button from "@mui/material/Button";
+import Menu from "@mui/material/Menu";
 export default function NavBar() {
   const category = useSelector((state) => state.category.categoryData);
   //const [quantityProduct,setQunatityProduct]=useState()
@@ -50,6 +51,14 @@ export default function NavBar() {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const [categoriesData, setCategoriesData] = useState([]);
   const theme = useTheme();
+  const [openCategories, setOpenCategories] = React.useState(null);
+  const openCat = Boolean(openCategories);
+  const handleClickCategories = (event) => {
+    setOpenCategories(event.currentTarget);
+  };
+  const handleCloseCategories = () => {
+    setOpenCategories(null);
+  };
 
   const [value, setValue] = React.useState(0);
 
@@ -169,7 +178,6 @@ export default function NavBar() {
     </List>
   );
 
-  console.log("cdata", categoriesData);
   React.useEffect(async () => {
     await dispatch(getProduct());
   }, []);
@@ -214,7 +222,29 @@ export default function NavBar() {
           </ThemeProvider> */}
             {/* <Grid Container> */}
             {/* <Grid item md={1} sm={1}> */}
-            <div>
+            <Box>
+              {/* <Button
+                id="basic-button"
+                aria-controls={openCat ? "basic-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={openCat ? "true" : undefined}
+                onClick={handleClickCategories}
+                // color="white"
+                sx={{ color: "white" }}
+              >
+                Categories
+              </Button>
+              <Menu
+                id="basic-menu"
+                openCategories={openCategories}
+                open={openCat}
+                onClose={handleCloseCategories}
+                MenuListProps={{
+                  "aria-labelledby": "basic-button",
+                }}
+              >
+                <MenuItem onClick={handleCloseCategories}>{drawer}</MenuItem>
+              </Menu> */}
               <MenuItem>
                 <ListItemIcon>
                   <MenuIcon />
@@ -223,7 +253,7 @@ export default function NavBar() {
                   <NavSelect Title="Categories" Data={drawer} />
                 </ListItemText>
               </MenuItem>
-            </div>
+            </Box>
 
             <Box sx={{ flexGrow: 0.5 }} />
 

@@ -15,6 +15,7 @@ import NewCarousel from "./Carousel/NewCarousel";
 import CarouselApp from "./Carousel/Carousel";
 import { useGetAllProductsQuery } from "../RTK/productApi";
 import MenuCard from "./DealsAndPromotions/MenuCards";
+import { CircularProgress } from "@mui/material";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -26,7 +27,9 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function PersistentDrawerLeft() {
   const { data, isLoading, isFetching, isError } = useGetAllProductsQuery();
 
-  const product = useSelector((state) => state.product.productData);
+  // const product = useSelector((state) => state.product.productData);
+  const { productData, loading } = useSelector((state) => state.product);
+  let product = productData;
 
   const featureProduct = useSelector(
     (state) => state.product.featureProductData
@@ -128,25 +131,42 @@ export default function PersistentDrawerLeft() {
   const dealsPromotions = <div>yes</div>;
   return (
     <Box>
-      <Box
-        component="main"
-        sx={{
-          flexGrow: 1,
-        }}
-      >
-        <Grid xs={12} md={12}>
-          <NewCarousel
-            product={
-              product &&
-              product.slice([5], [9]).map((item, i) => {
-                return item;
-              })
-            }
-          />
+      {loading ? (
+        <Grid
+          sx={{
+            display: "flex",
+            minHeight: 500,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <CircularProgress />
         </Grid>
-        <Grid item xs={12} md={12}>
-          <MenuCard heading="Deals & Promotions" />
-          {/* <Item>
+      ) : (
+        <Box
+          component="main"
+          sx={{
+            flexGrow: 1,
+          }}
+        >
+          {/* {loading ? ( 
+        <CircularProgress/>
+            ):()
+          */}
+
+          <Grid xs={12} md={12}>
+            <NewCarousel
+              product={
+                product &&
+                product.slice([5], [9]).map((item, i) => {
+                  return item;
+                })
+              }
+            />
+          </Grid>
+          <Grid item xs={12} md={12}>
+            <MenuCard heading="Deals & Promotions" />
+            {/* <Item>
             <CarouselApp
               heading="Deals And Promotions"
               product={dealsPromotions}
@@ -154,33 +174,37 @@ export default function PersistentDrawerLeft() {
               // addToCartHandler={addToCartHandler}
             />
           </Item> */}
-        </Grid>
-      { featureProduct!=''? <Grid item xs={12} md={12}>
-          <Item>
-            <CarouselApp
-              heading="Featured Products"
-              product={featureProduct}
-              viewProduct={viewProduct}
-              addToCartHandler={addToCartHandler}
-            />
-          </Item>
-        </Grid>:''
-        }
-        {groupProduct &&
-          Object.keys(groupProduct).map((key) => (
+          </Grid>
+          {featureProduct != "" ? (
             <Grid item xs={12} md={12}>
-              <Item key={key}>
+              <Item>
                 <CarouselApp
-                  heading={key}
-                  product={groupProduct[key]}
+                  heading="Featured Products"
+                  product={featureProduct}
                   viewProduct={viewProduct}
                   addToCartHandler={addToCartHandler}
-                  viewCategory={viewCategory}
                 />
               </Item>
             </Grid>
-          ))}
-      </Box>
+          ) : (
+            ""
+          )}
+          {groupProduct &&
+            Object.keys(groupProduct).map((key) => (
+              <Grid item xs={12} md={12}>
+                <Item key={key}>
+                  <CarouselApp
+                    heading={key}
+                    product={groupProduct[key]}
+                    viewProduct={viewProduct}
+                    addToCartHandler={addToCartHandler}
+                    viewCategory={viewCategory}
+                  />
+                </Item>
+              </Grid>
+            ))}
+        </Box>
+      )}
     </Box>
   );
 }

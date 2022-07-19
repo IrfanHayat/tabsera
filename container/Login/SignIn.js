@@ -179,7 +179,7 @@ export default function SignIn() {
                         fullWidth
                         id="password"
                         label="Password"
-                        type={showPassword ? "password" : "text"}
+                        type={showPassword ? "text" : "password"}
                         // inputProps={{ type: "password" }}
                         error={Boolean(errors.password)}
                         helperText={
