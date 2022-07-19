@@ -29,7 +29,7 @@ export default function CarouselApp({
   let [cartView, setCartView] = useState(false);
   const [rtl, setrtl] = useState(false);
   return (
-    <Grid
+    <Box
       container
       // spacing={1}
       sx={{
@@ -38,34 +38,31 @@ export default function CarouselApp({
         height: "400px",
       }}
     >
-      <Grid item md={6}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          p: 1,
+          m: 1,
+        }}
+      >
         <Box
           sx={{
-            mx: 7,
+            ml: 5,
             color: (theme) =>
               theme.palette.mode === "dark" ? "grey.300" : "grey.800",
             borderColor: (theme) =>
               theme.palette.mode === "dark" ? "grey.800" : "grey.300",
-            fontSize: "1.3rem",
-            fontWeight: "700",
+            fontSize: "1.2rem",
+            fontWeight: "600",
           }}
         >
           {heading}
         </Box>
-      </Grid>
+        {/* </Grid> */}
 
-      <Grid item md={6}>
-        <Box
-          component="div"
-          sx={{
-            display: "flex",
-            justifyContent: "flex-end",
-            // display: "inline",
-            mx: 6,
-            // mx: 5,
-            // my: 2,
-          }}
-        >
+        {/* <Grid item md={6}> */}
+        <Box sx={{ display: "flex", mr: 5 }}>
           <Button
             // dir="rtl"
             variant="text"
@@ -79,7 +76,7 @@ export default function CarouselApp({
             View All &gt;&gt;
           </Button>
         </Box>
-      </Grid>
+      </Box>
       {/* <Grid md={12} sm={12}> */}
       <Carousel
         breakPoints={breakPoints}
@@ -110,6 +107,6 @@ export default function CarouselApp({
         ))}
       </Carousel>
       {/* </Grid> */}
-    </Grid>
+    </Box>
   );
 }
