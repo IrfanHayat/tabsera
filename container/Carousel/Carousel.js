@@ -3,11 +3,12 @@ import Carousel from "react-elastic-carousel";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import ActionAreaCard from "../Card";
-import  Box  from "@mui/material/Box";
-import Grid from '@mui/material/Grid'
+import Box from "@mui/material/Box";
+import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import DoubleArrowIcon from "@mui/icons-material/DoubleArrow";
+import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrowLeft";
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
   { width: 550, itemsToShow: 2 },
@@ -26,6 +27,7 @@ export default function CarouselApp({
   let [productView, setProuctView] = useState(false);
   let [categoryView, setCategoryView] = useState(false);
   let [cartView, setCartView] = useState(false);
+  const [rtl, setrtl] = useState(false);
   return (
     <Grid
       container
@@ -70,9 +72,11 @@ export default function CarouselApp({
             href="/all_products"
             underline="none"
             size="small"
-            endIcon={<DoubleArrowIcon />}
+            style={{ fontWeight: "bold" }}
+            // dir="rtl"
+            // endIcon={dir ? rtl: <KeyboardDoubleArrowLeftIcon />: <DoubleArrowIcon />}
           >
-            View All
+            View All &gt;&gt;
           </Button>
         </Box>
       </Grid>
@@ -93,18 +97,17 @@ export default function CarouselApp({
       >
         {/* {content} */}
 
-         {
-          product?.map((item) => ( 
-            <ActionAreaCard 
-              product={item}
-              viewProduct={viewProduct}
-              addToCartHandler={addToCartHandler}
-              viewCategory={viewCategory}
-              productView={productView}
-              categoryView={categoryView}
-              cartView={cartView}
-            ></ActionAreaCard>
-           ))} 
+        {product?.map((item) => (
+          <ActionAreaCard
+            product={item}
+            viewProduct={viewProduct}
+            addToCartHandler={addToCartHandler}
+            viewCategory={viewCategory}
+            productView={productView}
+            categoryView={categoryView}
+            cartView={cartView}
+          ></ActionAreaCard>
+        ))}
       </Carousel>
       {/* </Grid> */}
     </Grid>

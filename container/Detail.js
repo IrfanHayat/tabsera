@@ -106,7 +106,7 @@ function Details({
         sx={{ paddingTop: 2 }}
         justifyContent="center"
       >
-        <Grid item md={6} xs={12} ml={1}>
+        <Grid item md={12} xs={12} ml={1}>
           <Typography variant="h6" style={{ fontWeight: "bold" }}>
             Product Details
           </Typography>

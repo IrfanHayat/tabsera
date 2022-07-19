@@ -11,20 +11,31 @@ export default function Footer() {
     <Box
       px={{ xs: 3, sm: 10, md: 12 }}
       py={{ xs: 5, sm: 10, md: 12 }}
+      component="footer"
       sx={{
-        display: "flex",
+        py: 3,
+        px: 2,
+        // mt: "auto",
+        mt: 2,
         color: "white",
         bgcolor: "primary.main",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        position: "relative",
-        marginBottom: 0,
-        // bottom: 0,
-        width: "100%",
-        //  flex-direction: "column",
-        // justify-content: "space-between,"
-        // mb: 0,
+        // backgroundColor: (theme) =>
+        //   theme.palette.mode === "light"
+        //     ? theme.palette.grey[200]
+        //     : theme.palette.grey[800],
       }}
+      // sx={{
+      //   display: "flex",
+      //   color: "white",
+      //   bgcolor: "primary.main",
+      //   flexDirection: "column",
+      //   justifyContent: "space-between",
+      //   position: "relative",
+      //   marginBottom: 0,
+      //   maxHeight: 300,
+      //   width: "100%",
+
+      // }}
     >
       {/* Hi */}
       <Container fixed maxWidth="lg">

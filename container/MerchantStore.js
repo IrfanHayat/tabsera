@@ -81,8 +81,13 @@ function MerchantStore({ merchantStoreDetail }) {
 
   return (
     <>
-      <Grid container spacing={1}>
-        <Grid item md={12} xs={12}>
+      <Grid
+        container
+        spacing={1}
+        sx={{ paddingTop: 2 }}
+        justifyContent="center"
+      >
+        <Grid item md={12} xs={12} ml={1}>
           <Typography variant="h6" style={{ fontWeight: "bold" }}>
             Seller Details
           </Typography>
@@ -91,7 +96,7 @@ function MerchantStore({ merchantStoreDetail }) {
           <Box>
             {" "}
             <List>
-              <ListItem>Name : {merchantData.merchant_name}</ListItem>
+              <ListItem> Name : {merchantData.merchant_name}</ListItem>
             </List>
             <List>
               <ListItem>Location : {merchantData.city} </ListItem>
