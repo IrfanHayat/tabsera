@@ -32,6 +32,7 @@ import AddLocationAltOutlinedIcon from "@mui/icons-material/AddLocationAltOutlin
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import { Stack } from "@mui/material";
+import { RouteGuard } from "../RouterGuard";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -72,6 +73,7 @@ function PlaceOrder({
   };
   return (
     <>
+   
       <CheckoutWizard activeStep={4}></CheckoutWizard>
 
       <Grid container mt={5} justifyContent={"center"}>

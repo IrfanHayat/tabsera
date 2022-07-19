@@ -28,8 +28,8 @@ export default function PersistentDrawerLeft() {
   const { data, isLoading, isFetching, isError } = useGetAllProductsQuery();
 
   // const product = useSelector((state) => state.product.productData);
-  const { productData, loading } = useSelector((state) => state.product);
-  let product = productData;
+  //const { productData, loading } = useSelector((state) => state.product);
+  let product = data?.response;
 
   const featureProduct = useSelector(
     (state) => state.product.featureProductData
@@ -131,8 +131,8 @@ export default function PersistentDrawerLeft() {
   const dealsPromotions = <div>yes</div>;
   return (
     <Box>
-      {loading ? (
-        <Grid
+      {isLoading ? (
+         <Grid
           sx={{
             display: "flex",
             minHeight: 500,
@@ -141,7 +141,7 @@ export default function PersistentDrawerLeft() {
           }}
         >
           <CircularProgress />
-        </Grid>
+        </Grid> 
       ) : (
         <Box
           component="main"
@@ -204,7 +204,7 @@ export default function PersistentDrawerLeft() {
               </Grid>
             ))}
         </Box>
-      )}
+       )} 
     </Box>
   );
 }

@@ -33,6 +33,9 @@ const drawerWidth = 10;
 import Paper from "@mui/material/Paper";
 import { useRouter } from "next/router";
 import Button from "@mui/material/Button";
+import Autocomplete from '@mui/material/Autocomplete';
+import TextField from '@mui/material/TextField';
+
 import Menu from "@mui/material/Menu";
 export default function NavBar() {
   const category = useSelector((state) => state.category.categoryData);
@@ -270,7 +273,29 @@ export default function NavBar() {
                 borderRadius: 24,
               }}
             >
-              <InputBase sx={{ ml: 1, flex: 1 }} placeholder="Search Items" />
+               <Autocomplete
+        freeSolo
+        id="free-solo-2-demo"
+        disableClearable
+        options={ [
+          { title: 'The Shawshank Redemption', year: 1994 },
+          { title: 'The Godfather', year: 1972 },
+          { title: 'The Godfather: Part II', year: 1974 },
+          { title: 'The Dark Knight', year: 2008 },
+          { title: '12 Angry Men', year: 1957 },
+          { title: "Schindler's List", year: 1993 },
+          { title: 'Pulp Fiction', year: 1994 }].map((option) => option.title)}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            label="Search input"
+            InputProps={{
+              ...params.InputProps,
+              type: 'search',
+            }}
+          />
+        )}
+      />
               <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
                 <SearchIcon />
               </IconButton>

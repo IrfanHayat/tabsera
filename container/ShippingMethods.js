@@ -27,6 +27,7 @@ import EmailIcon from "@mui/icons-material/Email";
 import DomainAddOutlinedIcon from "@mui/icons-material/DomainAddOutlined";
 import AddLocationAltOutlinedIcon from "@mui/icons-material/AddLocationAltOutlined";
 import { useRouter } from "next/router";
+import { RouteGuard } from "../RouterGuard";
 
 function ShippingMethods({
   classes,
@@ -43,6 +44,7 @@ function ShippingMethods({
 
   return (
     <>
+    
       <CheckoutWizard activeStep={3} />
       <Grid container mt={5} justifyContent={"center"}>
         <Grid item md={9} xs={12}>

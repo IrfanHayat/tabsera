@@ -54,6 +54,18 @@ export const getFeatureProduct = createAsyncThunk(
   }
 );
 
+export const getProductSearchWithHint = createAsyncThunk(
+  "product/getProductSearchWithHint",
+  async (hint) => {
+    const result = await instance.get(`${url}/ecommerce/products/search/hint/${hint}`);
+    return result.data.response;
+  }
+);
+
+
+
+
+
 // export const getProductWithName = createAsyncThunk(
 //   "product/getProductWithId",
 //   async (id) => {
@@ -72,6 +84,7 @@ const addProduct = createSlice({
     filterProductData: {},
     loading: false,
     error: null,
+    searchHintData:[]
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -119,7 +132,23 @@ const addProduct = createSlice({
         error: action.payload,
       };
     });
+    builder.addCase(getProductSearchWithHint.pending, (state, action) => {
+      return { ...state, loading: true };
+    });
+    builder.addCase(getProductSearchWithHint.fulfilled, (state, action) => {
+     
+      state.searchHintData = action.payload;
+      state.loading = false;
+    });
+    builder.addCase(getProductSearchWithHint.rejected, (state, action) => {
+      return {
+        ...state,
+        loading: "rejected",
+        error: action.payload,
+      };
+    });
   },
+
 });
 
 export default addProduct.reducer;

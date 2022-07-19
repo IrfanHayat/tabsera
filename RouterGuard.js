@@ -44,6 +44,7 @@ function RouteGuard({ children }) {
     
         if (!name && !publicPaths.includes(path)) {
             setAuthorized(false);
+            
             router.push({
                 pathname: '/login',
                 query: { returnUrl: router.asPath }

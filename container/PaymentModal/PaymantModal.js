@@ -33,9 +33,7 @@ export default function FormDialog({
 
   return (
     <div>
-      <Button variant="outlined" onClick={handleClickOpen}>
-        Payment Modal
-      </Button>
+     
       {/* <ReactLoading type="spokes" color="blue" height={127} width={175} /> */}
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Payment Modal </DialogTitle>
