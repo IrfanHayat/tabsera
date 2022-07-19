@@ -178,6 +178,7 @@ export default function NavBar() {
     </List>
   );
 
+  console.log("cdata", categoriesData);
   React.useEffect(async () => {
     await dispatch(getProduct());
   }, []);
@@ -280,7 +281,7 @@ export default function NavBar() {
 
             <div>
               <IconButton
-                aria-describedby={id}
+                // aria-describedby={id}
                 variant="contained"
                 onClick={handleClick}
                 color="inherit"
@@ -293,7 +294,7 @@ export default function NavBar() {
                 {/* </Tooltip> */}
               </IconButton>
               <Popover
-                id={id}
+                // id={id}
                 open={open1}
                 anchorEl={anchorEl}
                 onClose={handleClose}
