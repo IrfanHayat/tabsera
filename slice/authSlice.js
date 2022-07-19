@@ -120,6 +120,7 @@ const authSlice = createSlice({
       console.log("I am here");
       localStorage.removeItem("token");
       localStorage.removeItem("name");
+      localStorage.removeItem("cartItems")
       return {
         ...state,
         token: "",

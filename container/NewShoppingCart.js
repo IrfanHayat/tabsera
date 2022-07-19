@@ -147,7 +147,7 @@ export default function VariableWidthGrid({
             <Item>${item.price}</Item>
           </Grid> */}
       </Grid>
-      ))
+    
     </Box>
   );
 }

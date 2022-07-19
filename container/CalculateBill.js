@@ -17,6 +17,7 @@ import {
     CardMedia,
     Paper,
   } from "@mui/material";
+import { RouteGuard } from '../RouterGuard';
 function CalculateBill({productPrice,checkoutHandler}) {
   return (
     <Grid item md={12} xs={12}>
@@ -57,6 +58,7 @@ function CalculateBill({productPrice,checkoutHandler}) {
         </ListItem>
 
         <ListItem>
+         <RouteGuard>
           <Button
             onClick={checkoutHandler}
             variant="contained"
@@ -65,6 +67,7 @@ function CalculateBill({productPrice,checkoutHandler}) {
           >
             Check Out
           </Button>
+          </RouteGuard>
         </ListItem>
       </List>
     {/* </Card> */}

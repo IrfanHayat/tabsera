@@ -99,7 +99,7 @@ function PlaceOrder({
                   </ListItemText>
                 </ListItem>
               </List>
-              <List>
+              {/* <List>
                 <ListItem>
                   <ListItemIcon>
                     <PhoneIcon />
@@ -113,7 +113,7 @@ function PlaceOrder({
                   </ListItemIcon>
                   <ListItemText>{userData.email}</ListItemText>
                 </ListItem>
-              </List>
+              </List> */}
               <List>
                 <ListItem>
                   <ListItemIcon>
@@ -189,19 +189,16 @@ function PlaceOrder({
                               {productCartData[key].map((item) => (
                                 <TableRow>
                                   <TableCell>
-                                    <NextLink
-                                      href={`/product/${item.name}`}
-                                      passHref
-                                    >
-                                      <Link>
+                                   
+                                      
                                         <Image
                                           src={item.image_URL}
                                           alt="shirt"
                                           width={50}
                                           height={50}
                                         ></Image>
-                                      </Link>
-                                    </NextLink>
+                                      
+                                    
                                   </TableCell>
 
                                   <TableCell>

@@ -10,6 +10,8 @@ export const getPayment = createAsyncThunk("payments/methods", async () => {
   return result.data.response;
 });
 
+
+
 export const postPayment = createAsyncThunk("payments", async (payment) => {
   
   const result = await instance.post(`${url}/payments`,payment);
@@ -17,6 +19,16 @@ export const postPayment = createAsyncThunk("payments", async (payment) => {
   
   return result.data.response;
 });
+
+
+// export const postTabseraPayment = createAsyncThunk("payments", async (payment) => {
+  
+//   const result = await instance.post(`${url}/payments/tasera`,payment);
+//   console.log("payment", result);
+  
+//   return result.data.response;
+// });
+
 
 const addPayment = createSlice({
   name: "payment",

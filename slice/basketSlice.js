@@ -134,7 +134,7 @@ export const basketSlice = createSlice({
   initialState,
   reducers: {
     addToBasket: (state, action) => {
-      const existingIndex = state.cart.cartItems.findIndex(
+      const existingIndex = state.cart.cartItems?.findIndex(
         (item) => item.cart_item_id === action.payload.cart_item_id
       );
 

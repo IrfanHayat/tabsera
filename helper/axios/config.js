@@ -3,6 +3,10 @@
 
 export const url = "https://tijaricloud.com:9876";
 
+
+//export const url = "http://192.168.1.80:9876";
+
+
 export const setHeaders = () => {
   const headers = {
     headers: {

@@ -35,7 +35,10 @@ function placeorder() {
     cart: { cartItems },
   } = useSelector(state => state.basket);
 
- 
+ useEffect(()=>{
+   console.log(shippingCharges)
+ },[shippingCharges])
+
   useEffect(() => {
     //dispatch(getCartItems())
 
@@ -58,7 +61,6 @@ function placeorder() {
   }, []);
   useEffect(() => {
     let result1 = shippingAddressData.filter(result =>result.address_id == router.query.addressId?  result:'' );
-    
     
     setShippementData(result1[0])
   

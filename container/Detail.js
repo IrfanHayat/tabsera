@@ -369,6 +369,7 @@ function Details({
           <Grid item xs={12} md={12}>
             {/* <Item> */} {/* <ListItem> */}
             <Stack direction="row" spacing={2}>
+              
               <Button
                 // fullWidth
                 variant="contained"
