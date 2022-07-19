@@ -71,11 +71,23 @@ function MerchantStore({ merchantStoreDetail }) {
   console.log("m s d", merchantStoreDetail);
 
   console.log(merchantData);
+  const viewProduct = (item) => {
+    console.log(item);
+    router.push({
+      pathname: `/product_detail`,
+      query: { productId: item.productId },
+    });
+  };
 
   return (
     <>
-      <Grid container spacing={1}>
-        <Grid item md={12} xs={12}>
+      <Grid
+        container
+        spacing={1}
+        sx={{ paddingTop: 2 }}
+        justifyContent="center"
+      >
+        <Grid item md={12} xs={12} ml={1}>
           <Typography variant="h6" style={{ fontWeight: "bold" }}>
             Seller Details
           </Typography>
@@ -84,7 +96,7 @@ function MerchantStore({ merchantStoreDetail }) {
           <Box>
             {" "}
             <List>
-              <ListItem>Name : {merchantData.merchant_name}</ListItem>
+              <ListItem> Name : {merchantData.merchant_name}</ListItem>
             </List>
             <List>
               <ListItem>Location : {merchantData.city} </ListItem>
@@ -124,7 +136,10 @@ function MerchantStore({ merchantStoreDetail }) {
             <TabPanel value={value} index={0}>
               <Grid container>
                 {merchantStoreDetail?.map((result) => (
-                  <ActionAreaCard product={result}></ActionAreaCard>
+                  <ActionAreaCard
+                    product={result}
+                    viewProduct={viewProduct}
+                  ></ActionAreaCard>
                 ))}
               </Grid>
             </TabPanel>

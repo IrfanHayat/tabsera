@@ -36,15 +36,13 @@ function product_detail(props) {
   };
 
   useEffect(() => {
-    console.log("productIdWas",router?.query?.productId)
+    console.log("productIdWas", router?.query?.productId);
     dispatch(getProductWithId(router?.query?.productId));
-    
-  }, [router.query.productId])
-  
+  }, [router.query.productId]);
 
   useEffect(() => {
     dispatch(getProduct());
-   
+
     dispatch(getMerchantWithId(filterProductData.merchant_id));
 
     if (router.query.product_name) {

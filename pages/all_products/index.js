@@ -78,6 +78,9 @@ import {
 } from "../../slice/basketSlice";
 import { useRouter, withRouter } from "next/router";
 // import AddPagination from "../../container/AddPagination/AddPagination";
+import ReactLoading from "react-loading";
+import CircularProgress from "@mui/material/CircularProgress";
+import Box from "@mui/material/Box";
 
 const style = {
   height: 30,
@@ -92,7 +95,8 @@ const Index = () => {
   //   hasMore: true,
   // };
 
-  const product = useSelector((state) => state.product.productData);
+  const { productData, loading } = useSelector((state) => state.product);
+  let product = productData;
   let newProduct = product.slice([0], [5]).map((item, i) => {
     return item;
   });
@@ -155,17 +159,43 @@ const Index = () => {
             addToCartHandler={addToCartHandler}
           ></ActionAreaCard>
         ))} */}
-      <Grid container justifyContent="center">
-        {product.map((item, index) => (
-          <ActionAreaCard
-            product={item}
-            viewProduct={viewProduct}
-            addToCartHandler={addToCartHandler}
-            key={index}
-          >
-            {/* {item?.productName}> */}
-          </ActionAreaCard>
-        ))}
+      {/* <ReactLoading
+        type="spokes"
+        color="blue"
+        height={127}
+        width={175}
+        timeout={1000}
+      /> */}
+      <Grid
+        container
+        justifyContent="center"
+        alignItems="center"
+        minHeight={500}
+      >
+        {loading ? (
+          // <Box sx={{ display: "flex" }}>
+          // <ReactLoading
+          //   type="spokes"
+          //   color="blue"
+          //   height={70}
+          //   width={70}
+          //   // timeout={1000}
+          // />
+
+          <CircularProgress />
+        ) : (
+          // </Box>
+          product.map((item, index) => (
+            <ActionAreaCard
+              product={item}
+              viewProduct={viewProduct}
+              addToCartHandler={addToCartHandler}
+              key={index}
+            >
+              {/* {item?.productName}> */}
+            </ActionAreaCard>
+          ))
+        )}
       </Grid>
       {/* </InfiniteScroll> */}
     </>

@@ -106,18 +106,13 @@ function Details({
         sx={{ paddingTop: 2 }}
         justifyContent="center"
       >
-        <Grid item md={6} xs={12}>
-          {/* <CardMedia
-            component="img"
-            height="14"
-            image={productDetail?.productImage}
-            alt="green iguana"
-            style={{ margin: "5px" }}
-          /> */}
+        <Grid item md={12} xs={12} ml={1}>
           <Typography variant="h6" style={{ fontWeight: "bold" }}>
             Product Details
           </Typography>
+        </Grid>
 
+        <Grid item md={6} xs={12}>
           <Carousel
             // breakPoints={breakPoints}
             //  disableArrowsOnEnd={false}
@@ -149,68 +144,67 @@ function Details({
                 )}
           </Carousel>
         </Grid>
-      </Grid>
 
-      <Grid container spacing={1}>
-        <Grid item md={3}></Grid>
-        <Grid item md={3} sm={6}>
-          <ListItemText>
-            <Typography style={{ fontWeight: "bold" }}>
-              {productDetail?.product_name}
-            </Typography>{" "}
-          </ListItemText>
+        <Grid container spacing={1}>
+          <Grid item md={3}></Grid>
+          <Grid item md={3} sm={6}>
+            <ListItemText>
+              <Typography style={{ fontWeight: "bold" }}>
+                {productDetail?.product_name}
+              </Typography>{" "}
+            </ListItemText>
+          </Grid>
+          <Grid item md={2} sm={3}></Grid>
+          <Grid item md={4} sm={6}>
+            <ListItemText>
+              <Typography style={{ fontWeight: "bold" }}>
+                Rs.{skusProduct ? skusProduct.cost : price}
+              </Typography>
+            </ListItemText>
+          </Grid>
         </Grid>
-        <Grid item md={2} sm={3}></Grid>
-        <Grid item md={4} sm={6}>
-          <ListItemText>
-            <Typography style={{ fontWeight: "bold" }}>
-              Rs.{skusProduct ? skusProduct.cost : price}
-            </Typography>
-          </ListItemText>
-        </Grid>
-      </Grid>
 
-      <Grid container spacing={1}>
-        {/* <ListItem>   </ListItem> */}
-        <Grid item md={3}></Grid>
-        <Grid item md={3}>
-          <ListItemText sx={{ color: "error.main" }}>
-            <Typography style={{ fontWeight: "bold" }}>
-              {productDetail?.category_name}{" "}
-            </Typography>
-          </ListItemText>
+        <Grid container spacing={1}>
+          {/* <ListItem>   </ListItem> */}
+          <Grid item md={3}></Grid>
+          <Grid item md={3}>
+            <ListItemText sx={{ color: "error.main" }}>
+              <Typography style={{ fontWeight: "bold" }}>
+                {productDetail?.category_name}{" "}
+              </Typography>
+            </ListItemText>
+          </Grid>
+          <Grid item md={2}></Grid>
+          <Grid item md={4}>
+            <ListItemText sx={{ color: "success.main" }}>
+              <Typography style={{ fontWeight: "bold" }}>In Stock</Typography>
+            </ListItemText>
+          </Grid>
         </Grid>
-        <Grid item md={2}></Grid>
-        <Grid item md={4}>
-          <ListItemText sx={{ color: "success.main" }}>
-            <Typography style={{ fontWeight: "bold" }}>In Stock</Typography>
-          </ListItemText>
-        </Grid>
-      </Grid>
 
-      {/* ---------------------------------------------------------------------------------------- */}
+        {/* ---------------------------------------------------------------------------------------- */}
 
-      <Grid container spacing={1}>
-        <Grid item md={3}></Grid>
-        <Grid item md={3}>
-          <ListItemText sx={{ color: "primary.main" }}>
-            <Typography style={{ fontWeight: "bold" }}>
-              Sold By: {productDetail?.merchant_name}
-            </Typography>
-          </ListItemText>
-        </Grid>
-        <Grid item md={2}></Grid>
-        <Grid item md={4}></Grid>
+        <Grid container spacing={1}>
+          <Grid item md={3}></Grid>
+          <Grid item md={3}>
+            <ListItemText sx={{ color: "primary.main" }}>
+              <Typography style={{ fontWeight: "bold" }}>
+                Sold By: {productDetail?.merchant_name}
+              </Typography>
+            </ListItemText>
+          </Grid>
+          <Grid item md={2}></Grid>
+          <Grid item md={4}></Grid>
 
-        {/* <ListItem>
+          {/* <ListItem>
             <Typography> Sold By:{productDetail?.merchant_name}</Typography>
           </ListItem> */}
-      </Grid>
-      {/* <Grid item md={3}></Grid> */}
-      {/* </Grid> */}
+        </Grid>
+        {/* <Grid item md={3}></Grid> */}
+        {/* </Grid> */}
 
-      <Grid container spacing={1}>
-        {/* <Grid item md={6} xs={6}>
+        <Grid container spacing={1}>
+          {/* <Grid item md={6} xs={6}>
           <ListItem>
             <Typography> {productDetail?.product_name}</Typography>
           </ListItem>
@@ -230,193 +224,193 @@ function Details({
             <Typography>out of stock</Typography>
           </ListItem>
         </Grid> */}
-        {/* <Grid item md={6} xs={6}>
+          {/* <Grid item md={6} xs={6}>
           <ListItem>
             <Typography> Sold By:{productDetail?.merchant_name}</Typography>
           </ListItem>
         </Grid> */}
 
-        {/* <Grid item md={12} xs={12}> */}
-        {/* <Card style={{ margin: "10px" }}>
+          {/* <Grid item md={12} xs={12}> */}
+          {/* <Card style={{ margin: "10px" }}>
             <List>
               <ListItem> */}
-        {/* <Grid container spacing={1}> */}
-        <Grid item md={3}></Grid>
+          {/* <Grid container spacing={1}> */}
+          <Grid item md={3}></Grid>
 
-        <Grid item xs={6} md={3}>
-          {skusProduct
-            ? skusProduct.attributes.map((result) => (
-                <Typography>
-                  {result.attribute_name}:{result.value}
-                </Typography>
-              ))
-            : productAttributes.map((result) => (
-                <Typography>
-                  {result.attribute_name}:{result.value}
-                </Typography>
-              ))}
-        </Grid>
+          <Grid item xs={6} md={3}>
+            {skusProduct
+              ? skusProduct.attributes.map((result) => (
+                  <Typography>
+                    {result.attribute_name}:{result.value}
+                  </Typography>
+                ))
+              : productAttributes.map((result) => (
+                  <Typography>
+                    {result.attribute_name}:{result.value}
+                  </Typography>
+                ))}
+          </Grid>
 
-        <Grid item xs={12} md={6}>
-          <Carousel
-            // breakPoints={breakPoints}
-            disableArrowsOnEnd={true}
-            // showArrows={false}
-            pagination={false}
-            // showEmptySlots={true}
-            itemsToShow={4}
-          >
-            {productDetail &&
-              productDetail.skus?.map((results) => (
-                <Image
-                  //  className={cx(styles.media, mediaStyles.root)}
-                  onClick={() => {
-                    viewVariantsProduct(results);
-                  }}
-                  src={results.sku_images[0]}
-                  alt="shirt"
-                  width={100}
-                  height={100}
-                ></Image>
-              ))}
-          </Carousel>
-        </Grid>
-      </Grid>
-
-      <Grid container spacing={1}>
-        <Grid item md={12} xs={12}>
-          <Card style={{ margin: "10px" }}>
-            <AppBar
-              sx={{
-                borderBottom: 1,
-                borderColor: "divider",
-                position: "static",
-              }}
+          <Grid item xs={12} md={6}>
+            <Carousel
+              // breakPoints={breakPoints}
+              disableArrowsOnEnd={true}
+              // showArrows={false}
+              pagination={false}
+              // showEmptySlots={true}
+              itemsToShow={4}
             >
-              {/* <AppBar></AppBar> */}
-              <Tabs
-                value={value}
-                onChange={handleChange}
-                aria-label="full width tabs example"
-                variant="fullWidth"
-                indicatorColor="secondary"
-                // textColor="secondary"
-                textColor="inherit"
+              {productDetail &&
+                productDetail.skus?.map((results) => (
+                  <Image
+                    //  className={cx(styles.media, mediaStyles.root)}
+                    onClick={() => {
+                      viewVariantsProduct(results);
+                    }}
+                    src={results.sku_images[0]}
+                    alt="shirt"
+                    width={100}
+                    height={100}
+                  ></Image>
+                ))}
+            </Carousel>
+          </Grid>
+        </Grid>
+
+        <Grid container spacing={1}>
+          <Grid item md={12} xs={12}>
+            <Card style={{ margin: "10px" }}>
+              <AppBar
+                sx={{
+                  borderBottom: 1,
+                  borderColor: "divider",
+                  position: "static",
+                }}
               >
-                <Tab
-                  label="Description"
-                  style={{ fontWeight: "bold" }}
-                  {...a11yProps(0)}
-                />
-                <Tab
-                  label="Rating"
-                  style={{ fontWeight: "bold" }}
-                  {...a11yProps(1)}
-                />
-                <Tab
-                  label="Store"
-                  style={{ fontWeight: "bold" }}
-                  {...a11yProps(2)}
-                />
-              </Tabs>
-            </AppBar>
-            <SwipeableViews
-              axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-              index={value}
-              onChangeIndex={handleChangeIndex}
-            >
-              <TabPanel value={value} index={0} dir={theme.direction}>
-                {productDetail?.product_desc}
-              </TabPanel>
-              <TabPanel value={value} index={1} dir={theme.direction}>
-                Rating
-              </TabPanel>
-              <TabPanel value={value} index={2} dir={theme.direction}>
-                {/* {productDetail?.merchant_name} */}
-                <List>
-                  <ListItem>Name : {merchantDetail?.merchant_name}</ListItem>
-                </List>
-                <List>
-                  <ListItem>Location : {merchantDetail?.city}</ListItem>
-                </List>
-                <List>
-                  <ListItem>
-                    Joined Tabsera : {merchantDetail?.created_date}
-                  </ListItem>
-                </List>
-                <List>
-                  <ListItem>Seller Rating :</ListItem>
-                  {console.log("idddd", merchantDetail)}
-                </List>
-                <Stack>
-                  <Button
-                    variant="text"
-                    onClick={() => viewStore(merchantDetail?.merchant_id)}
-                    // onClick={viewStore}
-                  >
-                    Visit Store
-                  </Button>
-                </Stack>
-              </TabPanel>
-            </SwipeableViews>
-            {/* <TabPanel value={value} index={2}>
+                {/* <AppBar></AppBar> */}
+                <Tabs
+                  value={value}
+                  onChange={handleChange}
+                  aria-label="full width tabs example"
+                  variant="fullWidth"
+                  indicatorColor="secondary"
+                  // textColor="secondary"
+                  textColor="inherit"
+                >
+                  <Tab
+                    label="Description"
+                    style={{ fontWeight: "bold" }}
+                    {...a11yProps(0)}
+                  />
+                  <Tab
+                    label="Rating"
+                    style={{ fontWeight: "bold" }}
+                    {...a11yProps(1)}
+                  />
+                  <Tab
+                    label="Store"
+                    style={{ fontWeight: "bold" }}
+                    {...a11yProps(2)}
+                  />
+                </Tabs>
+              </AppBar>
+              <SwipeableViews
+                axis={theme.direction === "rtl" ? "x-reverse" : "x"}
+                index={value}
+                onChangeIndex={handleChangeIndex}
+              >
+                <TabPanel value={value} index={0} dir={theme.direction}>
+                  {productDetail?.product_desc}
+                </TabPanel>
+                <TabPanel value={value} index={1} dir={theme.direction}>
+                  Rating
+                </TabPanel>
+                <TabPanel value={value} index={2} dir={theme.direction}>
+                  {/* {productDetail?.merchant_name} */}
+                  <List>
+                    <ListItem>Name : {merchantDetail?.merchant_name}</ListItem>
+                  </List>
+                  <List>
+                    <ListItem>Location : {merchantDetail?.city}</ListItem>
+                  </List>
+                  <List>
+                    <ListItem>
+                      Joined Tabsera : {merchantDetail?.created_date}
+                    </ListItem>
+                  </List>
+                  <List>
+                    <ListItem>Seller Rating :</ListItem>
+                    {console.log("idddd", merchantDetail)}
+                  </List>
+                  <Stack>
+                    <Button
+                      variant="text"
+                      onClick={() => viewStore(merchantDetail?.merchant_id)}
+                      // onClick={viewStore}
+                    >
+                      Visit Store
+                    </Button>
+                  </Stack>
+                </TabPanel>
+              </SwipeableViews>
+              {/* <TabPanel value={value} index={2}>
               {merchantDetail?.city}
             </TabPanel> */}
-          </Card>
-        </Grid>
+            </Card>
+          </Grid>
 
-        <Grid container spacing={1} sx={{ p: 2 }}>
-          <Grid item xs={12} md={12}>
-            {/* <Item> */} {/* <ListItem> */}
-            <Stack direction="row" spacing={2}>
-              
-              <Button
-                // fullWidth
-                variant="contained"
-                color="primary"
-                onClick={() => {
-                  skusProduct
-                    ? addToCartHandler(productDetail, skusProduct)
-                    : addToCartHandler(productDetail);
-                }}
-              >
-                Add to cart
-              </Button>
+          <Grid container spacing={1} sx={{ p: 2 }}>
+            <Grid item xs={12} md={12}>
+              {/* <Item> */} {/* <ListItem> */}
+              <Stack direction="row" spacing={2}>
+                <Button
+                  // fullWidth
+                  variant="contained"
+                  color="primary"
+                  onClick={() => {
+                    skusProduct
+                      ? addToCartHandler(productDetail, skusProduct)
+                      : addToCartHandler(productDetail);
+                  }}
+                >
+                  Add to cart
+                </Button>
+                {/* </ListItem> */}
+                {/* </Item> */}
+                {/* </Grid> */}
+                {/* <Grid item xs={6} md={6}> */}
+                {/* <Item> */} {/* <ListItem> */}
+                <Button
+                  // fullWidth
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                  // href="/shipping_information"
+                  onClick={() => {
+                    skusProduct
+                      ? BuyHandler(productDetail, skusProduct)
+                      : BuyHandler(productDetail);
+                  }}
+                  // onClick={() => {
+                  //   skusProduct
+                  //     ? BuyHandler(productDetail, skusProduct)
+                  //     : BuyHandler(productDetail);
+                  // }}
+                >
+                  Buy Now
+                </Button>
+                <Button
+                  // fullWidth
+                  variant="contained"
+                  color="error"
+                  onClick={() => router.push("/")}
+                >
+                  Back
+                </Button>
+              </Stack>
               {/* </ListItem> */}
               {/* </Item> */}
-              {/* </Grid> */}
-              {/* <Grid item xs={6} md={6}> */}
-              {/* <Item> */} {/* <ListItem> */}
-              <Button
-                // fullWidth
-                variant="contained"
-                color="primary"
-                type="submit"
-                // href="/shipping_information"
-                onClick={() => {
-                  skusProduct
-                    ? BuyHandler(productDetail, skusProduct)
-                    : BuyHandler(productDetail);
-                }}
-                // onClick={() => {
-                //   skusProduct
-                //     ? BuyHandler(productDetail, skusProduct)
-                //     : BuyHandler(productDetail);
-                // }}
-              >
-                Buy Now
-              </Button>
-              <Button
-                // fullWidth
-                variant="contained"
-                color="error"
-                onClick={() => router.push("/")}
-              >
-                Back
-              </Button>
-            </Stack>
-            {/* </ListItem> */}
-            {/* </Item> */}
+            </Grid>
           </Grid>
         </Grid>
       </Grid>

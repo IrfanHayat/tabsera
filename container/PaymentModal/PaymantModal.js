@@ -9,6 +9,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { Controller, useForm } from "react-hook-form";
 import MuiPhoneNumber from "material-ui-phone-number";
 import { List, ListItem, Typography, Link } from "@mui/material";
+import ReactLoading from "react-loading";
 
 export default function FormDialog({
   handleClickOpen,
@@ -35,6 +36,7 @@ export default function FormDialog({
       <Button variant="outlined" onClick={handleClickOpen}>
         Payment Modal
       </Button>
+      {/* <ReactLoading type="spokes" color="blue" height={127} width={175} /> */}
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Payment Modal </DialogTitle>
         <DialogContent>
