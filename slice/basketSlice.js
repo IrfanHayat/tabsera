@@ -44,7 +44,7 @@ export const getProductWithId = createAsyncThunk(
 
 
 
-export const addToCart = createAsyncThunk("cart/addCart", async (product) => {
+export const addToCart = createAsyncThunk("cart/addCart", async (product,cart) => {
   let result = await instance.post(`${url}/ecommerce/carts`);
 
   if (result.length > 0 && result.data.response.items.length > 0) {
@@ -52,6 +52,7 @@ export const addToCart = createAsyncThunk("cart/addCart", async (product) => {
       (item) => item.cart_item_id === product.cart_item_id
     );
     if (existingIndex) {
+      
       result.data.response.items[existingIndex] = {
         ...result.data.response.items[existingIndex],
         qty: result.data.response.items[existingIndex].qty + 1,
@@ -134,6 +135,7 @@ export const getTotalCartQuantity = createAsyncThunk(
       }
     );
     total = parseFloat(total.toFixed(2));
+    console.log(cart)
 
     return quantity;
   }
