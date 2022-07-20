@@ -36,6 +36,10 @@ export const getProductWithId = createAsyncThunk(
   }
 );
 
+
+
+
+
 export const addToCart = createAsyncThunk("cart/addCart", async (product) => {
   let result = await instance.post(`${url}/ecommerce/carts`);
 
@@ -180,17 +184,32 @@ export const basketSlice = createSlice({
                 instance
                   .post(`${url}/ecommerce/carts/items`, cart)
                   .then((result) => {});
+
+                  instance.post(`${url}/ecommerce/carts`).then((result) => {
+                    console.log(result.data.response.items)
+                    localStorage.setItem(
+                      "cartItems",
+                      JSON.stringify(result.data.response.items)
+                    );
+                  });
+
               }
             });
         });
 
         // const result = await instance.get(`${url}/ecommerce/products/${temp}`);
         //
-
-        state.cart.cartItems;
+        // const data=localStorage.getItem("cartItems1")
+        // let resultCart=JSON.parse(data)
+        // console.log(resultCart)
+       // state.cart.cartItems.push(resultCart)
+       
       }
+      console.log(current(state.cart.cartItems));
       // localStorage.setItem("cartItems", JSON.stringify(state.cart.cartItems));
     },
+
+    
 
     buyItem: (state, action) => {
       let skus;
@@ -412,6 +431,7 @@ export const basketSlice = createSlice({
       return { ...state, loading: true };
     });
     builder.addCase(addToCart.fulfilled, (state, action) => {
+      console.log(action.payload)
       state.cart.cartItems = action.payload;
       state.loading = false;
     });

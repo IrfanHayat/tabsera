@@ -324,19 +324,24 @@ export default function NavBar() {
                 onClose={handleClose}
                 anchorOrigin={{
                   vertical: "bottom",
-                  horizontal: "center",
+                  horizontal: "left",
                 }}
+             // keepMounted={true}
+              // hideBackdrop={true}
                 transformOrigin={{
                   vertical: "top",
-                  horizontal: "center",
+                  horizontal: "left",
                 }}
+                style={{left:"2px"}}
                 // anchorOrigin={{
                 //   vertical: "bottom",
-                //   horizontal: "left",
+                //   horizontal: "left"62
                 // }}
               >
                 {/* {cartTotalQuantity > 0 ? ( */}
+                <div>
                 <ShoppingCart />
+                </div>
                 {/* ) : ( */}
                 {/* <Box
                     sx={{

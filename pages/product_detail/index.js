@@ -5,6 +5,7 @@ import {
   addToBasket,
   buyItem,
   addToCart,
+  getCartItems,
   getTotalCartQuantity,
 } from "../../slice/basketSlice";
 import { useRouter, withRouter } from "next/router";
@@ -42,8 +43,10 @@ function product_detail(props) {
 
   useEffect(() => {
     dispatch(getProduct());
-
-    dispatch(getMerchantWithId(filterProductData.merchant_id));
+    if(filterProductData.merchant_id){
+      dispatch(getMerchantWithId(filterProductData.merchant_id));
+    }
+    
 
     if (router.query.product_name) {
       const productObj = productData.filter((result) => {
@@ -99,7 +102,7 @@ function product_detail(props) {
       await dispatch(addToBasket(product));
       await dispatch(getTotalCartQuantity());
     } else {
-      dispatch(addToBasket(item));
+      dispatch(addToCart(item));
       setTimeout(() => {
         dispatch(getTotalCartQuantity());
       }, 1000);
@@ -117,6 +120,11 @@ function product_detail(props) {
     //   router.push("/cart");
     // }
   };
+  useEffect(() => {
+    dispatch(getCartItems());
+    
+  }, []);
+
 
   const BuyHandler = (item, skus) => {
     if (skus) {

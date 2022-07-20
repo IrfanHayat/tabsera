@@ -65,7 +65,7 @@ function CalculateBill({productPrice,checkoutHandler}) {
             color="primary"
             fullWidth
           >
-            Check Out
+            Check Out 
           </Button>
           </RouteGuard>
         </ListItem>

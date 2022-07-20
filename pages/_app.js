@@ -18,6 +18,8 @@ import { RouteGuard } from "../RouterGuard";
 const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 
 const MyApp = ({ Component, pageProps }) => {
+ 
+ 
   return (
     //  <SessionProvider session={pageProps.session}>
 

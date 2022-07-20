@@ -37,10 +37,12 @@ function cart() {
   // const { current: myArray } = useRef(cartItems);
   useEffect(() => {
     dispatch(getCartItems());
+    
   }, []);
 
   useEffect(() => {
-    //dispatch(getCartItems())
+   
+   // dispatch(getCartItems())
 
     // dispatch(getCartItems())
     var groupedCategory = groupArrayOfObjects(cartItems);
@@ -117,6 +119,7 @@ function cart() {
           ))
       }
       {
+        cartItems &&
         <CalculateBill
           productPrice={cartItems}
           handleAddToCart={handleAddToCart}
