@@ -7,13 +7,18 @@ import localStorage from "localStorage";
 import Alert from "@mui/material/Alert";
 import Stack from "@mui/material/Stack";
 import AlertTitle from "@mui/material/AlertTitle";
+import Dialog from "@mui/material/Dialog";
 
 function RouteGuard({ children }) {
   const router = useRouter();
 
   //const {name}=useSelector(state=>state.auth)
-
+  const [open, setOpen] = useState(false);
   const [authorized, setAuthorized] = useState(false);
+
+  const handleClick = () => {
+    setOpen(!open);
+  };
 
   useEffect(() => {
     // on initial load - run auth check
@@ -45,15 +50,18 @@ function RouteGuard({ children }) {
 
     if (!name && !publicPaths.includes(path)) {
       setAuthorized(false);
-      console.log("Not Sign IN");
-      //   alert("please login");
+      // console.log("Not Sign IN");
+      // alert("please login");
+      // <Dialog open={open}>
       //   <Stack sx={{ width: "100%" }} spacing={2}>
       //     <AlertTitle>Warning</AlertTitle>
-      //     <Alert severity="warning">
-      //       Session Expired — <strong> Please Login Again</strong>
-      //     </Alert>
-      //   </Stack>;
-
+      <Alert severity="warning">
+        Session Expired — <strong> Please Login Again</strong>
+      </Alert>;
+      {
+        /* </Stack>
+      </Dialog>; */
+      }
       router.push({
         pathname: "/login",
         query: { returnUrl: router.asPath },

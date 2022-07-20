@@ -29,32 +29,45 @@ export default function CarouselApp({
   let [cartView, setCartView] = useState(false);
   const [rtl, setrtl] = useState(false);
   return (
-    <Grid
+    <Box
       container
       // spacing={1}
+
+      style={{ width: "100%" }}
       sx={{
         bgcolor: "#f6f9fc",
         // my: 1,
+        p: 1,
         height: "400px",
       }}
     >
-      <Grid item md={6}>
+      {/* <Grid item md={6}> */}
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          // p: 1,
+          m: 1,
+          // bgcolor: "background.paper",
+          borderRadius: 1,
+        }}
+      >
         <Box
           sx={{
-            mx: 7,
+            mx: 5,
             color: (theme) =>
               theme.palette.mode === "dark" ? "grey.300" : "grey.800",
             borderColor: (theme) =>
               theme.palette.mode === "dark" ? "grey.800" : "grey.300",
-            fontSize: "1.3rem",
-            fontWeight: "700",
+            fontSize: "1.1rem",
+            fontWeight: "600",
           }}
         >
           {heading}
         </Box>
-      </Grid>
+        {/* </Grid> */}
 
-      <Grid item md={6}>
+        {/* <Grid item md={6}> */}
         <Box
           component="div"
           sx={{
@@ -72,14 +85,16 @@ export default function CarouselApp({
             href="/all_products"
             underline="none"
             size="small"
-            style={{ fontWeight: "bold" }}
+            sx={{ fontSize: "0.75rem", fontWeight: "600" }}
+            // style={{ fontWeight: "bold" }}
             // dir="rtl"
             // endIcon={dir ? rtl: <KeyboardDoubleArrowLeftIcon />: <DoubleArrowIcon />}
           >
             View All &gt;&gt;
           </Button>
         </Box>
-      </Grid>
+      </Box>
+      {/* </Grid> */}
       {/* <Grid md={12} sm={12}> */}
       <Carousel
         breakPoints={breakPoints}
@@ -110,6 +125,6 @@ export default function CarouselApp({
         ))}
       </Carousel>
       {/* </Grid> */}
-    </Grid>
+    </Box>
   );
 }
