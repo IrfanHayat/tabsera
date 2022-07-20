@@ -14,8 +14,12 @@ const initialState = {
     paymentMethod: localStorage.getItem("paymentMethod")
       ? localStorage.getItem("paymentMethod")
       : "",
-    cartId:localStorage.getItem("cartId")?localStorage.getItem("cartId"):"" ,
-    buyCartItems:localStorage.getItem("buyCartItems")?localStorage.getItem("buyCartItems"):[]
+    cartId: localStorage.getItem("cartId")
+      ? localStorage.getItem("cartId")
+      : "",
+    buyCartItems: localStorage.getItem("buyCartItems")
+      ? localStorage.getItem("buyCartItems")
+      : [],
   },
 
   // userIfo:localStorage.getItem("userInfo")
@@ -185,14 +189,12 @@ export const basketSlice = createSlice({
                   .post(`${url}/ecommerce/carts/items`, cart)
                   .then((result) => {});
 
-                  instance.post(`${url}/ecommerce/carts`).then((result) => {
-                    console.log(result.data.response.items)
-                    localStorage.setItem(
-                      "cartItems",
-                      JSON.stringify(result.data.response.items)
-                    );
-                  });
-
+                instance.post(`${url}/ecommerce/carts`, cart).then((result) => {
+                  localStorage.setItem(
+                    "cartItems",
+                    JSON.stringify(result.data.response.items)
+                  );
+                });
               }
             });
         });
@@ -205,8 +207,7 @@ export const basketSlice = createSlice({
        // state.cart.cartItems.push(resultCart)
        
       }
-      console.log(current(state.cart.cartItems));
-      // localStorage.setItem("cartItems", JSON.stringify(state.cart.cartItems));
+      //
     },
 
     
@@ -239,12 +240,14 @@ export const basketSlice = createSlice({
               //   .then((result) => {});
             }
           });
-        })
-      
-      
-     state.cart.buyCartItems
-      
-      localStorage.setItem("buyCartItems", JSON.stringify(state.cart.cartItems));
+      });
+
+      state.cart.buyCartItems;
+
+      localStorage.setItem(
+        "buyCartItems",
+        JSON.stringify(state.cart.cartItems)
+      );
     },
 
     // BuyItem: (state, action) => {

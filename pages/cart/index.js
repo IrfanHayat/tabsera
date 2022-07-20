@@ -27,9 +27,10 @@ import { Grid } from "@mui/material";
 
 function cart() {
   const { cartTotalQuantity, cartTotalAmount } = useSelector(
-    state => state.basket
+    (state) => state.basket
   );
-  const { cartItems } = useSelector(state => state.basket.cart);
+  const { cartItems } = useSelector((state) => state.basket.cart);
+  console.log(cartItems);
   let [groupProductData, setGroupedProductData] = useState();
   let router = useRouter();
   let dispatch = useDispatch();
@@ -44,24 +45,22 @@ function cart() {
    
    // dispatch(getCartItems())
 
-    // dispatch(getCartItems())
     var groupedCategory = groupArrayOfObjects(cartItems);
     setGroupedProductData(groupedCategory);
   }, [cartItems]);
 
   function groupArrayOfObjects(list) {
-    const grouped = _.groupBy(list, items => items.merchant_id);
+    const grouped = _.groupBy(list, (items) => items.merchant_id);
     return grouped;
   }
 
-  const handleAddToCart = item => {
-    
+  const handleAddToCart = (item) => {
     dispatch(addToBasket(item));
     setTimeout(() => {
       dispatch(getTotalCartQuantity());
     }, 1000);
   };
-  const removeItemHandler = item => {
+  const removeItemHandler = (item) => {
     dispatch(removeFromBasket(item));
     setTimeout(() => {
       dispatch(getTotalCartQuantity());
@@ -75,7 +74,7 @@ function cart() {
     }, 1000);
   };
 
-  const handleDecreaseCart = product => {
+  const handleDecreaseCart = (product) => {
     dispatch(decreaseBasket(product));
     setTimeout(() => {
       dispatch(getTotalCartQuantity());
@@ -100,13 +99,11 @@ function cart() {
     // />
     // <NewShoppingCart/>
     <>
-      {
-      
-        groupProductData &&
-          Object.keys(groupProductData).map(key => (
+      {cartItems && groupProductData
+        ? Object.keys(groupProductData).map((key) => (
             <ShoppingCart
               heading={
-                groupProductData[key].map(result => result.merchant_name)[0]
+                groupProductData[key].map((result) => result.merchant_name)[0]
               }
               productCartData={groupProductData[key]}
               productPrice={cartItems}
@@ -117,9 +114,8 @@ function cart() {
               checkoutHandler={checkoutHandler}
             ></ShoppingCart>
           ))
-      }
-      {
-        cartItems &&
+        : ""}
+      {cartItems ? (
         <CalculateBill
           productPrice={cartItems}
           handleAddToCart={handleAddToCart}
@@ -128,7 +124,9 @@ function cart() {
           removeItemHandler={removeItemHandler}
           checkoutHandler={checkoutHandler}
         ></CalculateBill>
-      }
+      ) : (
+        ""
+      )}
     </>
   );
 }
