@@ -41,6 +41,7 @@ export default function NavBar() {
   const category = useSelector((state) => state.category.categoryData);
   //const [quantityProduct,setQunatityProduct]=useState()
   const { cartTotalQuantity } = useSelector((state) => state.basket.cart);
+  
   const [open, setOpen] = React.useState(false);
 
   let router = useRouter();
@@ -345,13 +346,13 @@ export default function NavBar() {
                 onClose={handleClose}
                 anchorOrigin={{
                   vertical: "bottom",
-                  horizontal: "left",
+                  horizontal: "center",
                 }}
-             // keepMounted={true}
+            //  keepMounted={true}
               // hideBackdrop={true}
                 transformOrigin={{
                   vertical: "top",
-                  horizontal: "left",
+                  horizontal: "center",
                 }}
                 //keepMounted={true}
                 // anchorOrigin={{

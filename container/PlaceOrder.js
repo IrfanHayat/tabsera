@@ -60,7 +60,7 @@ function PlaceOrder({
 }) {
   const [openBar, setOpenBar] = React.useState(false);
   // const [loginSccess, setLginSccess] = React.useState(false);
-
+  const router = useRouter();
   const handleClickBar = () => {
     setOpenBar(true);
   };
@@ -342,7 +342,7 @@ function PlaceOrder({
                   // fullWidth
                   variant="contained"
                   color="error"
-                  onClick={() => router.push("/")}
+                  onClick={() => router.push(`shipping_methods?addressId=${JSON.parse(localStorage.getItem("addressId"))}`)}
                 >
                   Back
                 </Button>

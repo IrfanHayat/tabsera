@@ -71,6 +71,7 @@ const index = () => {
   }, []);
 
   useEffect(() => {
+    localStorage.setItem("addressId",JSON.stringify(router.query.addressId))
     let result1 = shippingAddressData.filter(result =>
       result.address_id == router.query.addressId ? result : ""
     );

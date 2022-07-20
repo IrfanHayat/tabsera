@@ -117,15 +117,7 @@ export default function Payment({
                 </Button>
                 {/* </ListItem>/ */}
                 {/* <ListItem> */}
-                <Button
-                  // fullWidth
-                  type="button"
-                  color="error"
-                  variant="contained"
-                  onClick={() => router.push("/shipping")}
-                >
-                  Back
-                </Button>
+               
               </Stack>
             </ListItem>
           </List>
