@@ -74,9 +74,10 @@ export const addToCart = createAsyncThunk("cart/addCart", async (product) => {
       tempProductItem.skus.map((result) => {
         skus_value = result.sku;
       });
-
+      let result=  await instance
+      .get(`${url}/ecommerce/products/${tempProductItem.product_id}`)
       let cart = {
-        cart_id: 168,
+        cart_id: result.data.response.cartId,
         sku: skus_value,
         qty: tempProductItem.qty,
       };
@@ -89,9 +90,10 @@ export const addToCart = createAsyncThunk("cart/addCart", async (product) => {
         skus.map((result) => {
           skus_value = result.sku;
         });
-
+      let result=  await instance
+            .get(`${url}/ecommerce/products/${tempProductItem.product_id}`)
         let cart = {
-          cart_id: 168,
+          cart_id: result.data.response.cartId,
           sku: skus_value,
           // price: cost,
           qty: tempProductItem.qty,

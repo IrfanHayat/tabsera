@@ -28,6 +28,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import TopNav from "./Components/TopNav";
 import { ListItemIcon, useTheme } from "@mui/material";
 import { Container } from "@mui/system";
+import {getTotalCartQuantity} from '../../slice/basketSlice'
 // import { ListItemText } from "@mui/material";
 const drawerWidth = 10;
 import Paper from "@mui/material/Paper";
@@ -81,6 +82,10 @@ export default function NavBar() {
   const categoryData = (categories) => {
     setCategoriesData(categories);
   };
+
+  useEffect(()=>{
+    dispatch(getTotalCartQuantity());
+  },[])
 
   useMemo(() => categoryData(category), [category && category]);
 
@@ -324,10 +329,11 @@ export default function NavBar() {
                 variant="contained"
                 onClick={handleClick}
                 color="inherit"
+                
                 // onMouseEnter={handleClick}
                 // onMouseLeave={handleClick}
               >
-                <Badge color="error" badgeContent={cartTotalQuantity} max={99}>
+                <Badge color="error"  badgeContent={cartTotalQuantity} max={99}>
                   <ShoppingCartOutlinedIcon />
                 </Badge>
                 {/* </Tooltip> */}

@@ -100,7 +100,9 @@ function product_detail(props) {
       };
 
       await dispatch(addToBasket(product));
-      await dispatch(getTotalCartQuantity());
+      setTimeout(() => {
+       dispatch(getTotalCartQuantity());
+      },1000)
     } else {
       dispatch(addToCart(item));
       setTimeout(() => {
