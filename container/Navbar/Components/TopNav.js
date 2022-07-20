@@ -92,7 +92,9 @@ export default function TopNav(props) {
     router.push("/login");
   };
   // const open1 = Boolean(anchorEl);
-
+  useEffect(() => {
+    changeLanguageHandler();
+  }, []);
   const menuId = "primary-search-account-menu";
   // ----------------------------------------------------------------------------------
   const open1 = Boolean(anchorEl);
@@ -115,7 +117,7 @@ export default function TopNav(props) {
   const languageData = (
     <div>
       {locales?.locales.map((locale) => (
-        <MenuItem>
+        <MenuItem sx={{ width: "100px" }}>
           <ListItemText onClick={() => changeLanguageHandler(locale)}>
             {" "}
             {locale}

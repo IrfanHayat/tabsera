@@ -17,7 +17,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { getProduct } from "../../slice/productSlice";
 import { getCategory } from "../../slice/categorySlice";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
-import { AppBar, Grid, Typography } from "@mui/material";
+import { AppBar, Grid, Stack, Typography } from "@mui/material";
 import SignInModal from "../Login/SignIn";
 import Badge from "@mui/material/Badge";
 import Popover from "@mui/material/Popover";
@@ -33,9 +33,8 @@ const drawerWidth = 10;
 import Paper from "@mui/material/Paper";
 import { useRouter } from "next/router";
 import Button from "@mui/material/Button";
-import Autocomplete from '@mui/material/Autocomplete';
-import TextField from '@mui/material/TextField';
-
+import Autocomplete from "@mui/material/Autocomplete";
+import TextField from "@mui/material/TextField";
 import Menu from "@mui/material/Menu";
 export default function NavBar() {
   const category = useSelector((state) => state.category.categoryData);
@@ -260,47 +259,63 @@ export default function NavBar() {
 
             <Box sx={{ flexGrow: 0.5 }} />
 
-            <Paper
+            {/* <Paper
               // dir="rtl"
               component="form"
+              sx={
+                {
+                  // p: "2px 4px",
+                  // display: "flex",
+                  // alignItems: "center",
+                  // width: "60%",
+                  // height: "40px",
+                  // border: "0.5px solid black",
+                  // borderRadius: 24,
+                }
+              }
+            > */}
+            <Stack
+              spacing={2}
               sx={{
-                p: "2px 4px",
-                display: "flex",
-                alignItems: "center",
+                px: "10px",
                 width: "60%",
+                bgcolor: "white",
                 height: "40px",
-                border: "0.5px solid black",
+                justifyContent: "center",
                 borderRadius: 24,
+                border: "none",
               }}
             >
-               <Autocomplete
-        freeSolo
-        id="free-solo-2-demo"
-        disableClearable
-        options={ [
-          { title: 'The Shawshank Redemption', year: 1994 },
-          { title: 'The Godfather', year: 1972 },
-          { title: 'The Godfather: Part II', year: 1974 },
-          { title: 'The Dark Knight', year: 2008 },
-          { title: '12 Angry Men', year: 1957 },
-          { title: "Schindler's List", year: 1993 },
-          { title: 'Pulp Fiction', year: 1994 }].map((option) => option.title)}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label="Search input"
-            InputProps={{
-              ...params.InputProps,
-              type: 'search',
-            }}
-          />
-        )}
-      />
-              <IconButton type="submit" sx={{ p: "10px" }} aria-label="search">
-                <SearchIcon />
-              </IconButton>
-            </Paper>
-            {/* </Grid> */}
+              <Autocomplete
+                freeSolo
+                id="free-solo-2-demo"
+                // disableClearable
+                // popupIcon={<SearchIcon />}
+                options={[
+                  { title: "The Shawshank Redemption", year: 1994 },
+                  { title: "The Godfather", year: 1972 },
+                  { title: "The Godfather: Part II", year: 1974 },
+                  { title: "The Dark Knight", year: 2008 },
+                  { title: "12 Angry Men", year: 1957 },
+                  { title: "Schindler's List", year: 1993 },
+                  { title: "Pulp Fiction", year: 1994 },
+                ].map((option) => option.title)}
+                renderInput={(params) => (
+                  <TextField
+                    // InputProps={{ disableUnderline: true }}
+                    {...params}
+                    placeholder="Search...."
+                    variant="standard"
+                    // color="primary"
+                    color="primary"
+                    // focused
+                    // InputProps={{
+                    //   disableUnderline: true,
+                    // }}
+                  />
+                )}
+              />
+            </Stack>
             <Box sx={{ flexGrow: 1 }} />
 
             <div>
@@ -330,6 +345,7 @@ export default function NavBar() {
                   vertical: "top",
                   horizontal: "center",
                 }}
+                //keepMounted={true}
                 // anchorOrigin={{
                 //   vertical: "bottom",
                 //   horizontal: "left",

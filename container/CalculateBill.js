@@ -1,27 +1,27 @@
-import React from 'react'
+import React from "react";
 import {
-    Grid,
-    TableContainer,
-    Table,
-    Typography,
-    TableHead,
-    TableBody,
-    TableRow,
-    TableCell,
-    Link,
-    ListItemText,
-    Button,
-    Card,
-    List,
-    ListItem,
-    CardMedia,
-    Paper,
-  } from "@mui/material";
-import { RouteGuard } from '../RouterGuard';
-function CalculateBill({productPrice,checkoutHandler}) {
+  Grid,
+  TableContainer,
+  Table,
+  Typography,
+  TableHead,
+  TableBody,
+  TableRow,
+  TableCell,
+  Link,
+  ListItemText,
+  Button,
+  Card,
+  List,
+  ListItem,
+  CardMedia,
+  Paper,
+} from "@mui/material";
+import { RouteGuard } from "../RouterGuard";
+function CalculateBill({ productPrice, checkoutHandler }) {
   return (
     <Grid item md={12} xs={12}>
-    {/* <Card> */}
+      {/* <Card> */}
       <Typography variant="h6" align="center">
         {" "}
         Order Summary
@@ -43,8 +43,7 @@ function CalculateBill({productPrice,checkoutHandler}) {
           <ListItemText>Total Items </ListItemText>
 
           <ListItemText>
-            {productPrice &&
-              productPrice.reduce((a, c) => a + c.qty, 0)}{" "}
+            {productPrice && productPrice.reduce((a, c) => a + c.qty, 0)}{" "}
           </ListItemText>
         </ListItem>
 
@@ -58,21 +57,21 @@ function CalculateBill({productPrice,checkoutHandler}) {
         </ListItem>
 
         <ListItem>
-         <RouteGuard>
-          <Button
-            onClick={checkoutHandler}
-            variant="contained"
-            color="primary"
-            fullWidth
-          >
-            Check Out
-          </Button>
+          <RouteGuard>
+            <Button
+              onClick={checkoutHandler}
+              variant="contained"
+              color="primary"
+              fullWidth
+            >
+              Check Out
+            </Button>
           </RouteGuard>
         </ListItem>
       </List>
-    {/* </Card> */}
-  </Grid>
-  )
+      {/* </Card> */}
+    </Grid>
+  );
 }
 
-export default CalculateBill
+export default CalculateBill;

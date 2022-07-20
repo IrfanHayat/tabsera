@@ -1,58 +1,67 @@
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 //import { userService } from 'services';
 import { useSelector, useDispatch } from "react-redux";
 export { RouteGuard };
 import localStorage from "localStorage";
+import Alert from "@mui/material/Alert";
+import Stack from "@mui/material/Stack";
+import AlertTitle from "@mui/material/AlertTitle";
 
 function RouteGuard({ children }) {
-    const router = useRouter();
+  const router = useRouter();
 
-    //const {name}=useSelector(state=>state.auth)
-       
-    const [authorized, setAuthorized] = useState(false);
+  //const {name}=useSelector(state=>state.auth)
 
-    useEffect(() => {
-        // on initial load - run auth check 
-        authCheck(router.asPath);
+  const [authorized, setAuthorized] = useState(false);
 
-        // on route change start - hide page content by setting authorized to false  
-        const hideContent = () => setAuthorized(false);
-        router.events.on('routeChangeStart', hideContent);
+  useEffect(() => {
+    // on initial load - run auth check
+    authCheck(router.asPath);
 
-        // on route change complete - run auth check 
-        router.events.on('routeChangeComplete', authCheck)
+    // on route change start - hide page content by setting authorized to false
+    const hideContent = () => setAuthorized(false);
+    router.events.on("routeChangeStart", hideContent);
 
-        // unsubscribe from events in useEffect return function
-        return () => {
-            router.events.off('routeChangeStart', hideContent);
-            router.events.off('routeChangeComplete', authCheck);
-        }
+    // on route change complete - run auth check
+    router.events.on("routeChangeComplete", authCheck);
 
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
+    // unsubscribe from events in useEffect return function
+    return () => {
+      router.events.off("routeChangeStart", hideContent);
+      router.events.off("routeChangeComplete", authCheck);
+    };
 
-    function authCheck(url) {
-        // redirect to login page if accessing a private page and not logged in 
-       
-        const publicPaths = ['/login'];
-      
-      
-        
-        const path = url.split('?')[0];
-        const name=localStorage.getItem('name')
-    
-        if (!name && !publicPaths.includes(path)) {
-            setAuthorized(false);
-            
-            router.push({
-                pathname: '/login',
-                query: { returnUrl: router.asPath }
-            });
-        } else {
-            setAuthorized(true);
-        }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  function authCheck(url) {
+    // redirect to login page if accessing a private page and not logged in
+
+    const publicPaths = ["/login"];
+
+    const path = url.split("?")[0];
+    const name = localStorage.getItem("name");
+
+    if (!name && !publicPaths.includes(path)) {
+      setAuthorized(false);
+      console.log("Not Sign IN");
+      //   alert("please login");
+      //   <Stack sx={{ width: "100%" }} spacing={2}>
+      //     <AlertTitle>Warning</AlertTitle>
+      //     <Alert severity="warning">
+      //       Session Expired — <strong> Please Login Again</strong>
+      //     </Alert>
+      //   </Stack>;
+
+      router.push({
+        pathname: "/login",
+        query: { returnUrl: router.asPath },
+      });
+    } else {
+      setAuthorized(true);
     }
+  }
 
-    return (authorized && children);
+  return authorized && children;
 }

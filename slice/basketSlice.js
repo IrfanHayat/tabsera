@@ -14,8 +14,12 @@ const initialState = {
     paymentMethod: localStorage.getItem("paymentMethod")
       ? localStorage.getItem("paymentMethod")
       : "",
-    cartId:localStorage.getItem("cartId")?localStorage.getItem("cartId"):"" ,
-    buyCartItems:localStorage.getItem("buyCartItems")?localStorage.getItem("buyCartItems"):[]
+    cartId: localStorage.getItem("cartId")
+      ? localStorage.getItem("cartId")
+      : "",
+    buyCartItems: localStorage.getItem("buyCartItems")
+      ? localStorage.getItem("buyCartItems")
+      : [],
   },
 
   // userIfo:localStorage.getItem("userInfo")
@@ -180,6 +184,13 @@ export const basketSlice = createSlice({
                 instance
                   .post(`${url}/ecommerce/carts/items`, cart)
                   .then((result) => {});
+
+                instance.post(`${url}/ecommerce/carts`, cart).then((result) => {
+                  localStorage.setItem(
+                    "cartItems",
+                    JSON.stringify(result.data.response.items)
+                  );
+                });
               }
             });
         });
@@ -189,7 +200,7 @@ export const basketSlice = createSlice({
 
         state.cart.cartItems;
       }
-      // localStorage.setItem("cartItems", JSON.stringify(state.cart.cartItems));
+      //
     },
 
     buyItem: (state, action) => {
@@ -220,12 +231,14 @@ export const basketSlice = createSlice({
               //   .then((result) => {});
             }
           });
-        })
-      
-      
-     state.cart.buyCartItems
-      
-      localStorage.setItem("buyCartItems", JSON.stringify(state.cart.cartItems));
+      });
+
+      state.cart.buyCartItems;
+
+      localStorage.setItem(
+        "buyCartItems",
+        JSON.stringify(state.cart.cartItems)
+      );
     },
 
     // BuyItem: (state, action) => {
