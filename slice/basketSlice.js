@@ -45,9 +45,6 @@ export const getProductWithId = createAsyncThunk(
 
 
 export const addToCart = createAsyncThunk("cart/addCart", async (product,cart) => {
-  let result = await instance.post(`${url}/ecommerce/carts`);
-
-  if (result.length > 0 && result.data.response.items.length > 0) {
     let existingIndex = result.data.response.items.findIndex(
       (item) => item.cart_item_id === product.cart_item_id
     );
@@ -63,7 +60,7 @@ export const addToCart = createAsyncThunk("cart/addCart", async (product,cart) =
       );
       return result.data.response;
     }
-  } else {
+  else {
     let tempProductItem = { ...product, qty: 1 };
 
     let result2 = await instance.get(
@@ -193,7 +190,8 @@ export const basketSlice = createSlice({
                   .post(`${url}/ecommerce/carts/items`, cart)
                   .then((result) => {});
 
-                instance.post(`${url}/ecommerce/carts`, cart).then((result) => {
+                instance.post(`${url}/ecommerce/carts`).then((result) => {
+                  console.log(result.data.response.items)
                   localStorage.setItem(
                     "cartItems",
                     JSON.stringify(result.data.response.items)
