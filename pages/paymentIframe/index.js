@@ -9,7 +9,7 @@ const PreviewIframe = styled("iframe")(() => ({
   width: "100%",
 }));
 
-function index() {
+function Index() {
   const { paymentAddData } = useSelector(state => state.payment);
   let [data, setData] = useState();
 
@@ -23,4 +23,4 @@ function index() {
   return <div dangerouslySetInnerHTML={{ __html: paymentAddData }} />;
 }
 
-export default index;
+export default Index;

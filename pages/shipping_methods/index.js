@@ -11,7 +11,7 @@ import {
 } from "../../slice/shipmentSlice";
 import { getCartItems } from "../../slice/basketSlice";
 import useStyles from "../../utils/styles";
-const index = () => {
+const Index = () => {
   const { shipmentMethodData, shippingAddressData, shippingCharges, userData } = useSelector(
     state => state.shipments
   );
@@ -109,4 +109,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;

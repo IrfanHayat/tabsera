@@ -51,6 +51,7 @@ function SubCategory() {
           {productDataWithCategoryId &&
             productDataWithCategoryId?.map((item) => (
               <ActionAreaCard
+              key={item}
                 product={item}
                 viewProduct={viewProduct}
                 addToCartHandler={addToCartHandler}

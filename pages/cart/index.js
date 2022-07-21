@@ -25,7 +25,7 @@ import CalculateBill from "../../container/CalculateBill";
 import _ from "lodash";
 import { Grid } from "@mui/material";
 
-function cart() {
+function Cart() {
   const { cartTotalQuantity, cartTotalAmount } = useSelector(
     (state) => state.basket
   );
@@ -103,6 +103,7 @@ function cart() {
       {cartItems && groupProductData
         ? Object.keys(groupProductData).map((key) => (
             <ShoppingCart
+              key={key}
               heading={
                 groupProductData[key].map((result) => result.merchant_name)[0]
               }
@@ -132,4 +133,4 @@ function cart() {
   );
 }
 
-export default withRouter(cart);
+export default withRouter(Cart);

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Payment from "../../container/Payment";
+import Payment1 from "../../container/Payment";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter, withRouter } from "next/router";
 import { getPayment,postPayment } from "../../slice/paymentSlice";
@@ -7,7 +7,7 @@ import { ConstructionOutlined } from "@mui/icons-material";
 import {getTotals} from '../../slice/basketSlice'
 import PaymentModal from "../../container/PaymentModal//PaymantModal";
 
-function payement() {
+function Payement() {
 
   const { paymentData,paymentAddData,statusCode } = useSelector((state) => state.payment);
   const  { placeOrderData} = useSelector((state) => state.placeorder);
@@ -169,7 +169,7 @@ function payement() {
     
     showModal? <PaymentModal confirmPayment={confirmPayment} handleClickOpen={handleClickOpen} handleClose={handleClose} open={open}/>:''
     }
-    <Payment
+    <Payment1
       paymentMethod={paymentData}
       submitHandler={submitHandler}
       setPaymentMethod={setPaymentMethod}
@@ -178,7 +178,7 @@ function payement() {
       status={status}
       handleCloseBar={handleCloseBar}
       openBar={openBar}
-    ></Payment>
+    ></Payment1>
     {
       
     }
@@ -186,4 +186,4 @@ function payement() {
   );
 }
 
-export default withRouter(payement);
+export default withRouter(Payement);

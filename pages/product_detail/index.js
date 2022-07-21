@@ -12,7 +12,7 @@ import { useRouter, withRouter } from "next/router";
 import { getProductWithId, getProduct } from "../../slice/productSlice";
 import { getMerchantWithId } from "../../slice/merchantSlice";
 
-function product_detail(props) {
+function Product_detail(props) {
   const { filterProductData } = useSelector((state) => state.product);
   const { productData } = useSelector((state) => state.product);
 
@@ -196,4 +196,4 @@ function product_detail(props) {
   );
 }
 
-export default withRouter(product_detail);
+export default withRouter(Product_detail);

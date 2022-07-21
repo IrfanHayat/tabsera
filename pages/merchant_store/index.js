@@ -6,7 +6,7 @@ import { getMerchantStore } from "../../slice/merchantStoreSlice";
 import { getMerchantReviews } from "../../slice/reviewsSlice";
 import MerchantStore from "../../container/MerchantStore";
 
-function product_detail() {
+function Product_detail() {
   let dispatch = useDispatch();
 
   let router = useRouter();
@@ -31,4 +31,4 @@ function product_detail() {
   );
 }
 
-export default withRouter(product_detail);
+export default withRouter(Product_detail);

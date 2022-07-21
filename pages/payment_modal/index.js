@@ -2,7 +2,7 @@ import { OpenInFullSharp } from "@mui/icons-material";
 import React from "react";
 import PaymentModal from "../../container/PaymentModal//PaymantModal";
 
-const index = ({confirmPayment}) => {
+const Index = ({confirmPayment}) => {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -21,4 +21,4 @@ const index = ({confirmPayment}) => {
   );
 };
 
-export default index;
+export default Index;

@@ -15,7 +15,7 @@ import { useRouter, withRouter } from "next/router";
 
 import { Controller, useForm } from "react-hook-form";
 
-function shipping() {
+function Shipping1() {
   const {
     userInfo,
     cart: { shippingAddress },
@@ -128,4 +128,4 @@ function shipping() {
   );
 }
 
-export default withRouter(shipping);
+export default withRouter(Shipping1);

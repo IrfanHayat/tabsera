@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Register from "../../container/Register";
+import Register1 from "../../container/Register";
 import { useSelector, useDispatch } from "react-redux";
 import { saveShippingAdress } from "../../slice/basketSlice";
 import localStorage from "localStorage";
@@ -9,7 +9,7 @@ import { useRouter, withRouter } from "next/router";
 
 import { Controller, useForm } from "react-hook-form";
 
-function register() {
+function Register() {
   const { userInfo } = useSelector(state => state.basket);
   let router = useRouter();
   let dispatch = useDispatch();
@@ -48,7 +48,7 @@ function register() {
   };
 
   return (
-    <Register
+    <Register1
       submitHandler={submitHandler}
       classes={classes}
       Controller={Controller}
@@ -56,8 +56,8 @@ function register() {
       handleSubmit={handleSubmit}
       errors={errors}
       redirect={redirect}
-    ></Register>
+    ></Register1>
   );
 }
 
-export default withRouter(register);
+export default withRouter(Register);

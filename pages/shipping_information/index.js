@@ -10,7 +10,7 @@ import {
 } from "../../slice/shipmentSlice";
 import { getTotals } from "../../slice/basketSlice";
 
-const index = () => {
+const Index = () => {
   let router = useRouter();
 
   const { shippingAddressData} = useSelector(
@@ -73,4 +73,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;

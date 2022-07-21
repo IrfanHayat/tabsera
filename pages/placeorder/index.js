@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import PlaceOrder from "../../container/PlaceOrder";
+import PlaceOrder1 from "../../container/PlaceOrder";
 import { useRouter, withRouter } from "next/router";
 
 import useStyles from "../../utils/styles";
@@ -22,7 +22,7 @@ import {
 
 
 
-function placeorder() {
+function Placeorder() {
   let [groupProductData, setGroupedProductData] = useState();
   const { userData,shippingAddressData,shippingCharges,shipmentMethodData } = useSelector(state => state.shipments);
   const [shippementData,setShippementData]=useState()
@@ -189,7 +189,7 @@ let newCartItems=cartItems.map(result=>{
 
   return (
     <>
-      <PlaceOrder
+      <PlaceOrder1
         // shippingAddress={shippingAddress}
         // shippingPrice={shippingPrice}
         // taxPrice={taxPrice}
@@ -205,9 +205,9 @@ let newCartItems=cartItems.map(result=>{
         shippementData={shippementData}
         shippingCharges={shippementCharges}
         shippmentName={router.query.shipName}
-      ></PlaceOrder>
+      ></PlaceOrder1>
     </>
   );
 }
 
-export default withRouter(placeorder);
+export default withRouter(Placeorder);

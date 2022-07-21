@@ -8,7 +8,7 @@ import DealsAndPromotions from "../../container/DealsAndPromotions/DealsAndPromo
 import { TransitionGroup } from 'react-transition-group';
 import { useRouter } from "next/router";
 import ActionAreaCard from "../../container/Card";
-const index = () => {
+const Index = () => {
   const { dealsData } = useSelector((state) => state.deals);
   let dispatch = useDispatch();
   const router = useRouter();
@@ -44,4 +44,4 @@ const index = () => {
     </Grid>
   );
 };
-export default index;
+export default Index;
