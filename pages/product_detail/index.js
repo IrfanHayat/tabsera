@@ -37,6 +37,7 @@ function product_detail(props) {
   };
 
   useEffect(() => {
+    localStorage.setItem("productId",router?.query?.productId)
     console.log("productIdWas", router?.query?.productId);
     dispatch(getProductWithId(router?.query?.productId));
   }, [router.query.productId]);
@@ -57,16 +58,10 @@ function product_detail(props) {
           product_id: result.productId,
           product_name: result.productName,
 
-          // isfreeShipping: result.is_free_shipping,
-          // productCost: result.cost,
+         
           category_name: result.categoryName,
           merchant_id: result.merchantId,
-          //merchanName: result.merchant_name,
-          //productDescription: result.product_desc,
-          //productCost: cost,
-          //skuId: sku,
-          // productCost: result.skus[0],
-          // averageRating: result.averageRating,
+         
         };
         return obj;
       });

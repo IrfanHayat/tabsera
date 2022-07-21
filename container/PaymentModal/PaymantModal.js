@@ -156,7 +156,7 @@ export default function FormDialog({
               <ListItem>
                 <Button
                   onClick={() => {
-                    handleClickBar(), handleClose();
+                     handleClose();
                   }}
                   variant="contained"
                   type="submit"

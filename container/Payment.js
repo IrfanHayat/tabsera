@@ -29,23 +29,18 @@ export default function Payment({
   setPaymentMethod,
   handleChange,
   cartTotalAmount,
+  handleCloseBar,
+  openBar
+
+
 }) {
   const classes = useStyles();
   let router = useRouter();
-  const [openBar, setOpenBar] = React.useState(false);
+ 
   // const [loginSccess, setLginSccess] = React.useState(false);
   const [radioCheck, setRadioCheck] = useState(false);
 
-  const handleClickBar = () => {
-    setOpenBar(true);
-  };
-
-  const handleCloseBar = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpenBar(false);
-  };
+  
   return (
     <Grid container>
       <CheckoutWizard activeStep={5}></CheckoutWizard>

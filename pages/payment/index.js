@@ -18,7 +18,7 @@ function payement() {
 
   let router = useRouter();
   let dispatch = useDispatch();
-
+  const [openBar, setOpenBar] = React.useState(false);
   
   console.log("Payment Data = ", paymentData);
 
@@ -33,6 +33,15 @@ function payement() {
   //   }
   // }, []);
   console.log(cartTotalAmount)
+
+
+
+  const handleCloseBar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenBar(false);
+  };
   useEffect(() => {
     dispatch(getTotals());
   }, []);
@@ -81,6 +90,7 @@ function payement() {
           }
         }
            dispatch(postPayment(obj))
+           setOpenBar(true);
           // router.push("/paymentIframe");   
        }
        
@@ -101,6 +111,7 @@ function payement() {
           
         }
            dispatch(postPayment(obj))
+           setOpenBar(true);
           // router.push("/paymentIframe");   
        }
         
@@ -155,6 +166,9 @@ function payement() {
       setPaymentMethod={setPaymentMethod}
       handleChange={handleChange}
       cartTotalAmount={cartTotalAmount}
+     
+      handleCloseBar={handleCloseBar}
+      openBar={openBar}
     ></Payment>
     {
       

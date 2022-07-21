@@ -142,7 +142,7 @@ function ShippingInformation({
                   // fullWidth
                   variant="contained"
                   color="error"
-                  // onClick={() => router.push("/product_detail")}
+                  onClick={() => router.push(`/product_detail?productId=${localStorage.getItem("productId")}`)}
                 >
                   Back
                 </Button>

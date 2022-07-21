@@ -12,9 +12,13 @@ const index = () => {
   const router = useRouter();
 
   const viewProduct = (item) => {
+    console.log("bundleId")
+    console.log(item)
+    console.log(item.bundleId)
+    console.log("================")
     router.push({
       pathname: "/product_detail",
-      query: { bundleId: item.bundleId },
+      query: { productId: item.bundleId },
     });
   };
   useEffect(() => {

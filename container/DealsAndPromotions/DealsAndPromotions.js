@@ -14,7 +14,7 @@ const DealsAndPromotions = ({ dealsData, viewProduct }) => {
       {/* <ActionAreaCard /> */}
       {dealsData.map((result) => (
         <Card
-          onClick={(e) => viewProduct(dealsData)}
+          onClick={(e) => viewProduct(result)}
           sx={{
             mx: 0.4,
             my: 2,
