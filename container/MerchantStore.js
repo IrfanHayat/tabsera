@@ -156,7 +156,7 @@ function MerchantStore({ merchantStoreDetail }) {
                 // fullWidth
                 variant="contained"
                 color="error"
-                onClick={() => router.push("/")}
+                onClick={() =>router.push(`/product_detail?productId=${localStorage.getItem("productId")}`)}
               >
                 Back
               </Button>

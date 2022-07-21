@@ -14,7 +14,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useSelector, useDispatch } from "react-redux";
 
 import MenuItem from "@mui/material/MenuItem";
-import { getProduct } from "../../slice/productSlice";
+import { getProduct,getProductSearchWithHint,getProductSearch } from "../../slice/productSlice";
 import { getCategory } from "../../slice/categorySlice";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { AppBar, Grid, Stack, Typography } from "@mui/material";
@@ -41,6 +41,7 @@ export default function NavBar() {
   const category = useSelector((state) => state.category.categoryData);
   //const [quantityProduct,setQunatityProduct]=useState()
   const { cartTotalQuantity } = useSelector((state) => state.basket.cart);
+  const { searchHintData,searchDetail } = useSelector((state) => state.product);
   
   const [open, setOpen] = React.useState(false);
 
@@ -83,6 +84,9 @@ export default function NavBar() {
   const categoryData = (categories) => {
     setCategoriesData(categories);
   };
+
+
+
 
   useEffect(()=>{
     dispatch(getTotalCartQuantity());
@@ -148,6 +152,18 @@ export default function NavBar() {
       query: { sub_category: item },
     });
   };
+
+  function handleInputChange(event, value) {
+    console.log(value);
+    dispatch(getProductSearchWithHint(value));
+  
+  }
+ 
+  async function handleInputClick(e) {
+    console.log(e.target.value);
+   let result=await dispatch(getProductSearch(e.target.value));
+   console.log(result)  
+  }
 
   // useEffect(() => {
   //   viewCategory();
@@ -297,18 +313,14 @@ export default function NavBar() {
                 id="free-solo-2-demo"
                 // disableClearable
                 // popupIcon={<SearchIcon />}
-                options={[
-                  { title: "The Shawshank Redemption", year: 1994 },
-                  { title: "The Godfather", year: 1972 },
-                  { title: "The Godfather: Part II", year: 1974 },
-                  { title: "The Dark Knight", year: 2008 },
-                  { title: "12 Angry Men", year: 1957 },
-                  { title: "Schindler's List", year: 1993 },
-                  { title: "Pulp Fiction", year: 1994 },
-                ].map((option) => option.title)}
+
+                options={searchHintData}
+                onInputChange={handleInputChange}
+                onClick={handleInputClick}
                 renderInput={(params) => (
                   <TextField
                     // InputProps={{ disableUnderline: true }}
+                    
                     {...params}
                     placeholder="Search...."
                     variant="standard"
