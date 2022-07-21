@@ -71,7 +71,7 @@ function Details({
   price,
   viewStore,
 }) {
-  console.log(merchantDetail);
+ 
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
     ...theme.typography.body2,
@@ -97,7 +97,7 @@ function Details({
     setValue(index);
   };
   let router = useRouter();
-  console.log("productDetail", productDetail);
+  
   return (
     <>
       <Grid
@@ -340,7 +340,7 @@ function Details({
                   </List>
                   <List>
                     <ListItem>Seller Rating :</ListItem>
-                    {console.log("idddd", merchantDetail)}
+                    
                   </List>
                   <Stack>
                     <Button

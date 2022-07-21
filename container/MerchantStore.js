@@ -68,11 +68,9 @@ function MerchantStore({ merchantStoreDetail }) {
   };
   let router = useRouter();
 
-  console.log("m s d", merchantStoreDetail);
+  
 
-  console.log(merchantData);
   const viewProduct = (item) => {
-    console.log(item);
     router.push({
       pathname: `/product_detail`,
       query: { productId: item.productId },

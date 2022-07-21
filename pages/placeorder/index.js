@@ -36,7 +36,7 @@ function placeorder() {
   } = useSelector(state => state.basket);
 
  useEffect(()=>{
-   console.log(shippingCharges)
+   
  },[shippingCharges])
 
   useEffect(() => {
@@ -74,7 +74,7 @@ function placeorder() {
 
   
 
-  console.log(cartItems)
+  
 
   const placeOrderHandler=(shippementData,userData)=>{
     
@@ -131,7 +131,7 @@ function placeorder() {
 //     },
 //     "origOrderAmount": 3.0
 // }
-console.log(shippementData)
+
 
 let newCartItems=cartItems.map(result=>{
       let obj={};
@@ -144,7 +144,7 @@ let newCartItems=cartItems.map(result=>{
        return obj
 })
 
-console.log(newCartItems)
+
     let obj={
       "isBuyNow": false,
       "orderAmount":cartItems.reduce((a, c) => a + c.qty * c.price, 0),
@@ -180,7 +180,7 @@ console.log(newCartItems)
       "origOrderAmount": cartItems.reduce((a, c) => a + c.qty * c.price, 0)
     }
     
-    console.log(obj)
+
     dispatch(addOrder(obj))
     router.push('/payment')
   }

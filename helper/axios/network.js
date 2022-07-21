@@ -54,7 +54,7 @@ export class Network {
                 response: response.json ? await response.json() : response.data
             };
         } catch (e) {
-            console.log(NETWORK_ERROR);
+            
             return e;
         }
     }

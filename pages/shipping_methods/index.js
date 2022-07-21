@@ -28,13 +28,12 @@ const index = () => {
   };
 
   const handleChange =async ( value) => {
-    console.log(value)
+  
     setShippingMethodId(value)
     let result = shippingAddressData.filter(result => {
       if (result.address_id == router.query.addressId) return result;
     })[0];
-    console.log(cartId)
-
+  
                
     let obj = {
       cartId: cartId,
@@ -60,7 +59,7 @@ const index = () => {
     //   state_id: result.state_id,
     // };
  let result2=await dispatch(getShipmentsCharges(obj));
- console.log(result2.payload.charges)
+
  setShippementCharges(result2.payload.charges)
   };
 

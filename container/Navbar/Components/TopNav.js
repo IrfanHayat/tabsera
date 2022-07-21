@@ -62,7 +62,7 @@ export default function TopNav(props) {
   const theme = useTheme();
 
   const changeLanguageHandler = (lang) => {
-    console.log(lang);
+    
     i18n.changeLanguage(lang);
     document.body.dir = i18n.dir();
     theme.direction = i18n.dir();

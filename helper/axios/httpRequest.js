@@ -19,7 +19,7 @@ import {url} from "./config";
  instance.interceptors.response.use(response=>response,async error=>{
     if (error.response) {
         // Request made and server responded
-        console.log(error.response.status)
+        
         if(error.response.status===4003){
           
                 let router=useRouter()

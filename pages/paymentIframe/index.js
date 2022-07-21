@@ -14,7 +14,7 @@ function index() {
   let [data, setData] = useState();
 
   useEffect(()=>{
-        console.log("payment",paymentAddData)
+      
         if(paymentAddData){
             document.getElementById("submit").click();
         }

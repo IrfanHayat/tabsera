@@ -8,6 +8,7 @@ export const getMerchantReviews = createAsyncThunk(
   "review/getMerchantReviews",
   async () => {
     const result = await instance.get(`${url}/ecommerce/reviews/summary`);
+    console.log(result.data.response)
     return result.data.response;
   }
 );

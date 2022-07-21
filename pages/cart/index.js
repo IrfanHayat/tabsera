@@ -30,7 +30,7 @@ function cart() {
     (state) => state.basket
   );
   const { cartItems } = useSelector((state) => state.basket.cart);
-  console.log(cartItems);
+  
   let [groupProductData, setGroupedProductData] = useState();
   let router = useRouter();
   let dispatch = useDispatch();
@@ -54,8 +54,9 @@ function cart() {
     return grouped;
   }
 
-  const handleAddToCart = (item) => {
-    dispatch(addToBasket(item));
+  const handleAddToCart = async (item) => {
+   let result=await dispatch(addToBasket(item));
+   console.log(result)
     setTimeout(() => {
       dispatch(getTotalCartQuantity());
     }, 1000);

@@ -154,15 +154,15 @@ export default function NavBar() {
   };
 
   function handleInputChange(event, value) {
-    console.log(value);
+   
     dispatch(getProductSearchWithHint(value));
   
   }
  
   async function handleInputClick(e) {
-    console.log(e.target.value);
+   
    let result=await dispatch(getProductSearch(e.target.value));
-   console.log(result)  
+     
   }
 
   // useEffect(() => {
@@ -314,9 +314,9 @@ export default function NavBar() {
                 // disableClearable
                 // popupIcon={<SearchIcon />}
 
-                options={searchHintData}
+                options={searchHintData?searchHintData:''}
                 onInputChange={handleInputChange}
-                onClick={handleInputClick}
+                onKeyUp={handleInputClick}
                 renderInput={(params) => (
                   <TextField
                     // InputProps={{ disableUnderline: true }}

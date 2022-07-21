@@ -18,8 +18,7 @@ function product_detail(props) {
 
   const { merchantData } = useSelector((state) => state.merchant);
   const { shipmentData } = useSelector((state) => state.shipments);
-  console.log("merchantData", merchantData);
-  console.log("productData", productData);
+ 
   let [productImage, setProductImage] = useState();
   let [productAttributes, setProductAttributes] = useState([]);
   let [price, setPrice] = useState();
@@ -29,7 +28,7 @@ function product_detail(props) {
   let [filterData, setFilterData] = useState({});
 
   const viewStore = (merchantId) => {
-    console.log("item", merchantId);
+    
     router.push({
       pathname: "/merchant_store",
       query: { merchantId: merchantId },
@@ -38,7 +37,7 @@ function product_detail(props) {
 
   useEffect(() => {
     localStorage.setItem("productId",router?.query?.productId)
-    console.log("productIdWas", router?.query?.productId);
+   
     dispatch(getProductWithId(router?.query?.productId));
   }, [router.query.productId]);
 
@@ -94,10 +93,12 @@ function product_detail(props) {
         skus: [skus],
       };
 
-      await dispatch(addToBasket(product));
+      let result=await dispatch(addToBasket(product));
+      console.log(result)
       await dispatch(getTotalCartQuantity());
     } else {
-      dispatch(addToBasket(item));
+      let result=await dispatch(addToBasket(item));
+      console.log(result)
       setTimeout(() => {
         dispatch(getTotalCartQuantity());
       }, 1000);

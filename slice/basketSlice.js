@@ -6,7 +6,7 @@ import { url, setHeaders } from "../helper/axios/config";
 const initialState = {
   cart: {
     cartItems: localStorage.getItem("cartItems")
-      ? JSON.parse(localStorage.getItem("cartItems"))
+      ? localStorage.getItem("cartItems")
       : [],
     shippingAddress: localStorage.getItem("shippingAddress")
       ? JSON.parse(localStorage.getItem("shippingAddress"))
@@ -132,7 +132,7 @@ export const getTotalCartQuantity = createAsyncThunk(
       }
     );
     total = parseFloat(total.toFixed(2));
-    console.log(cart)
+  
 
     return quantity;
   }
@@ -191,7 +191,7 @@ export const basketSlice = createSlice({
                   .then((result) => {});
 
                 instance.post(`${url}/ecommerce/carts`).then((result) => {
-                  console.log(result.data.response.items)
+                 
                   localStorage.setItem(
                     "cartItems",
                     JSON.stringify(result.data.response.items)
@@ -205,7 +205,7 @@ export const basketSlice = createSlice({
         //
         // const data=localStorage.getItem("cartItems1")
         // let resultCart=JSON.parse(data)
-        // console.log(resultCart)
+        
        // state.cart.cartItems.push(resultCart)
        
       }
@@ -229,7 +229,7 @@ export const basketSlice = createSlice({
               skus.map((result) => {
                 skus_value = result.sku;
               });
-              console.log("itemToBuy", result.data.response.itemToBuy);
+           
               // let cart = {
               //   cart_id: null,
               //   sku: skus_value,
@@ -267,7 +267,7 @@ export const basketSlice = createSlice({
     //           skus.map((result) => {
     //             skus_value = result.sku;
     //           });
-    //           console.log(result1.data.response.cartId);
+    
     //           let cart = {
     //             cart_id: null,
     //             sku: skus_value,
@@ -363,7 +363,7 @@ export const basketSlice = createSlice({
       );
       total = parseFloat(total.toFixed(2));
       state.cart.cartTotalQuantity = quantity;
-      console.log(total);
+     
       state.cart.cartTotalAmount = total;
     },
     clearBasket(state, action) {
@@ -436,7 +436,7 @@ export const basketSlice = createSlice({
       return { ...state, loading: true };
     });
     builder.addCase(addToCart.fulfilled, (state, action) => {
-      console.log(action.payload)
+      
       state.cart.cartItems = action.payload;
       state.loading = false;
     });

@@ -18,9 +18,9 @@
 
 // const index = () => {
 //   const product = useSelector((state) => state.product.productData);
-//   console.log("product", product);
+
 //   const [page, setPage] = useState(product);
-//   console.log("page", page);
+
 //   let router = useRouter();
 //   let dispatch = useDispatch();
 

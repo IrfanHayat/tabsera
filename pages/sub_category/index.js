@@ -12,7 +12,7 @@ function SubCategory() {
   const router = useRouter();
   const dispatch = useDispatch();
 
-  console.log("productDataWithCategoryId", productDataWithCategoryId);
+  
   const viewProduct = (item) => {
     router.push({
       pathname: "/product_detail",

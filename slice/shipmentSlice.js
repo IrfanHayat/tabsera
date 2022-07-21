@@ -237,7 +237,7 @@ const addShipments = createSlice({
       return { ...state, loading: true };
     });
     builder.addCase(getShipmentsCharges.fulfilled, (state, action) => {
-      console.log(action.payload)
+      
       state.shippingCharges = action.payload || {};
       state.loading = false;
     });

@@ -2,7 +2,7 @@
 import i18n from "../locales/i18n";
 import { cssMain } from "./config";
 
-console.log(cssMain);
+
 export const Newtheme = {
   direction: i18n.dir(),
   palette: {

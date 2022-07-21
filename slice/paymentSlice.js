@@ -5,7 +5,6 @@ import { url, setHeaders } from "../helper/axios/config";
 
 export const getPayment = createAsyncThunk("payments/methods", async () => {
   const result = await instance.get(`${url}/ecommerce/payments/methods`);
-  console.log("payment", result);
   
   return result.data.response;
 });
@@ -15,19 +14,13 @@ export const getPayment = createAsyncThunk("payments/methods", async () => {
 export const postPayment = createAsyncThunk("payments", async (payment) => {
   
   const result = await instance.post(`${url}/payments`,payment);
-  console.log("payment", result);
   
-  return result.data.response;
+  console.log(result)
+  return result.data;
 });
 
 
-// export const postTabseraPayment = createAsyncThunk("payments", async (payment) => {
-  
-//   const result = await instance.post(`${url}/payments/tasera`,payment);
-//   console.log("payment", result);
-  
-//   return result.data.response;
-// });
+
 
 
 const addPayment = createSlice({
@@ -37,6 +30,7 @@ const addPayment = createSlice({
     paymentAddData:'',
     loading: false,
     error: null,
+    statusCode:null
   },
   reducers: {},
   extraReducers: (builder) => {
@@ -60,6 +54,7 @@ const addPayment = createSlice({
     builder.addCase(postPayment.fulfilled, (state, action) => {
       state.paymentAddData = action.payload;
       state.loading = false;
+     
     });
     builder.addCase(postPayment.rejected, (state, action) => {
       return {

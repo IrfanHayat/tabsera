@@ -45,7 +45,7 @@ function RouteGuard({ children }) {
 
     if (!name && !publicPaths.includes(path)) {
       setAuthorized(false);
-      console.log("Not Sign IN");
+    
       //   alert("please login");
       //   <Stack sx={{ width: "100%" }} spacing={2}>
       //     <AlertTitle>Warning</AlertTitle>

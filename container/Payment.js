@@ -30,7 +30,8 @@ export default function Payment({
   handleChange,
   cartTotalAmount,
   handleCloseBar,
-  openBar
+  openBar,
+  status
 
 
 }) {
@@ -119,7 +120,11 @@ export default function Payment({
           {/* </ListItem> */}
         </form>
       </Grid>
-      <Snackbar
+     {console.log(status)}
+     {
+      
+           status?.resultCode===5000 ?
+           <Snackbar
         open={openBar}
         autoHideDuration={6000}
         onClose={handleCloseBar}
@@ -130,12 +135,31 @@ export default function Payment({
       >
         <Alert
           onClose={handleCloseBar}
-          severity="success"
+          severity="error"
           sx={{ width: "100%" }}
         >
-          Payment SuccessFully!
+          {status?.message}
         </Alert>
-      </Snackbar>
+      </Snackbar>:
+      <Snackbar
+      open={openBar}
+      autoHideDuration={6000}
+      onClose={handleCloseBar}
+      anchorOrigin={{
+        horizontal: "center",
+        vertical: "top",
+      }}
+    >
+      <Alert
+        onClose={handleCloseBar}
+        severity="success"
+        sx={{ width: "100%" }}
+      >
+        {status?.message}
+      </Alert>
+    </Snackbar>
+
+     } 
     </Grid>
   );
 }

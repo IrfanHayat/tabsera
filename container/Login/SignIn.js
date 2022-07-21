@@ -85,7 +85,7 @@ export default function SignIn() {
 
     let result = await dispatch(loginUser(data));
 
-    console.log("result", result);
+   
     result.payload
       ? (router.push("/"), setLginSccess(true), handleClickBar(), handleClose())
       : (setLginSccess(false), handleClickBar(), router.push("/login"));
@@ -93,7 +93,7 @@ export default function SignIn() {
     // } catch (err) {
     //   //  enqueueSnackbar(getError(err), { variant: 'error' });
     // }
-    console.log("payload", result.payload);
+   
   };
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();

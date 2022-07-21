@@ -15,7 +15,7 @@ function NewCarousel({ product }) {
       NextIcon={<ArrowRightIcon />}
       PrevIcon={<ArrowLeftIcon />}
     >
-      {items.map((item, i) => (
+      {items?.map((item, i) => (
         <Item key={i} item={item} />
       ))}
     </Carousel>
@@ -25,13 +25,13 @@ function NewCarousel({ product }) {
 function Item(props) {
   return (
     <Paper>
-      {props?.item.productImage && (
+      {props?.item?.productImage && (
         <Image
           // layout="fill"
           width={2000}
           height={500}
           // style={{ width: "100%", height: "300px" }}
-          src={props?.item.productImage}
+          src={props?.item?.productImage}
         ></Image>
       )}
       {/* <h2>{props.item.name}</h2>

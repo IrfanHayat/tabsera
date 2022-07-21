@@ -13,7 +13,7 @@ function product_detail() {
   const { merchantStoreData } = useSelector((state) => state.merchantStore);
 
   
-  console.log("merchant Store Data", merchantStoreData);
+  
 
   const { reviewsData } = useSelector((state) => state.reviews);
 

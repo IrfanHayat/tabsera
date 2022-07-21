@@ -9,18 +9,20 @@ import PaymentModal from "../../container/PaymentModal//PaymantModal";
 
 function payement() {
 
-  const { paymentData,paymentAddData } = useSelector((state) => state.payment);
+  const { paymentData,paymentAddData,statusCode } = useSelector((state) => state.payment);
   const  { placeOrderData} = useSelector((state) => state.placeorder);
   const {cartTotalAmount} =useSelector((state)=>state.basket.cart)
   const [showModal,setShowModal]=useState(false)
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+ const [status,setStatus]=useState()
+
  let [accountDetails,setAccountDetails]=useState()
 
   let router = useRouter();
   let dispatch = useDispatch();
   const [openBar, setOpenBar] = React.useState(false);
   
-  console.log("Payment Data = ", paymentData);
+  
 
   const [paymentMethod, setPaymentMethod] = useState("");
 
@@ -32,8 +34,7 @@ function payement() {
   //     setPaymentMethod(localStorage.getItem("paymentMethod") || "");
   //   }
   // }, []);
-  console.log(cartTotalAmount)
-
+  
 
 
   const handleCloseBar = (event, reason) => {
@@ -49,11 +50,8 @@ function payement() {
         dispatch(getPayment())
   },[])
 
-  const submitHandler = (total) => {
+  const submitHandler =async  (total) => {
     //  closeSnackbar();
-       console.log(placeOrderData)    
-       console.log(selectPaymentMethod)
-       console.log(total)
        
        if(selectPaymentMethod?.payment_mode=="HPP" ){
         let obj={
@@ -69,13 +67,20 @@ function payement() {
               "transactionTypeId": 8
           }
         }
-           dispatch(postPayment(obj))
-           router.push("/paymentIframe");   
+         let result=await  dispatch(postPayment(obj))
+           console.log(result.payload.resultCode)
+           if(result.payload.resultCode==5000){
+            setStatus(result.payload)
+            setOpenBar(true);
+           }else{
+           router.push("/paymentIframe");
+           }
+              
        }
 
 
        if(selectPaymentMethod?.payment_mode=="API"){
-        console.log(accountDetails)
+      
         let obj={
           "requestBody": {
               "accountNumber": accountDetails.accountNumber, //"923450600666",
@@ -89,13 +94,19 @@ function payement() {
               "transactionTypeId": 8
           }
         }
-           dispatch(postPayment(obj))
-           setOpenBar(true);
+          let result1=await dispatch(postPayment(obj))
+          if(result1.payload.resultCode==5000){
+            setStatus(result1.payload)
+            setOpenBar(true);
+           }else{
+            setStatus(result1.payload)
+            setOpenBar(true);
+           }
           // router.push("/paymentIframe");   
        }
        
        if(selectPaymentMethod?.payment_mode==null){
-        console.log(accountDetails)
+      
         let obj={
           "requestBody": {
           //  "accountNumber": accountDetails.accountNumber, //"923450600666",
@@ -127,7 +138,7 @@ function payement() {
 
   const handleChange=(result)=>{
     setSelectPaymentMethod(result)
-     console.log(result.payment_method_id)
+    
      if(result?.payment_mode=="API"){
       setShowModal(true)
       setOpen(true)
@@ -153,9 +164,7 @@ function payement() {
 
   return (
     <>
-     {
-      console.log(showModal)
-     }
+    
     { 
     
     showModal? <PaymentModal confirmPayment={confirmPayment} handleClickOpen={handleClickOpen} handleClose={handleClose} open={open}/>:''
@@ -166,7 +175,7 @@ function payement() {
       setPaymentMethod={setPaymentMethod}
       handleChange={handleChange}
       cartTotalAmount={cartTotalAmount}
-     
+      status={status}
       handleCloseBar={handleCloseBar}
       openBar={openBar}
     ></Payment>

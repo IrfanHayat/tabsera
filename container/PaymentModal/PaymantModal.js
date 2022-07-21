@@ -47,7 +47,7 @@ export default function FormDialog({
   };
 
   const allowOnlyNumber = (value) => {
-    console.log(value);
+    
     return value.replace(/[^0-9]/g, "");
   };
   return (

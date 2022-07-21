@@ -43,6 +43,7 @@ function CartScreen({
 
       {productCartData &&
         productCartData.map((item) => (
+          
           <Grid
             container
             spacing={1}
@@ -61,7 +62,8 @@ function CartScreen({
               m={2}
               style={{ height: "150px", width: "150px" }}
             >
-              <NextLink href={`/product/${item?.name}`} passHref>
+              
+              <NextLink href={`/product_detail?productId=${localStorage.getItem("productId")}`} passHref>
                 <Link>
                   <CardMedia
                     component="img"
@@ -74,7 +76,7 @@ function CartScreen({
             </Grid>
             <Grid item md={2} sm={1}>
               <NextLink
-                href={`/product_detail?product_name=${item.name}`}
+                href={`/product_detail?product_name=${item.id}`}
                 passHref
               >
                 <Typography variant="body" style={{ textDecoration: "none " }}>
