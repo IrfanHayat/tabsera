@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -10,6 +10,12 @@ import { Controller, useForm } from "react-hook-form";
 import MuiPhoneNumber from "material-ui-phone-number";
 import { List, ListItem, Typography, Link } from "@mui/material";
 import ReactLoading from "react-loading";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 
 export default function FormDialog({
   handleClickOpen,
@@ -25,15 +31,27 @@ export default function FormDialog({
     formState: { errors },
   } = useForm();
 
-  const allowOnlyNumber=(value)=>{
-    console.log(value)
-    return value.replace(/[^0-9]/g, '')
- }
- 
+  const [openBar, setOpenBar] = React.useState(false);
+  // const [loginSccess, setLginSccess] = React.useState(false);
+  const [radioCheck, setRadioCheck] = useState(false);
 
+  const handleClickBar = () => {
+    setOpenBar(true);
+  };
+
+  const handleCloseBar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenBar(false);
+  };
+
+  const allowOnlyNumber = (value) => {
+    console.log(value);
+    return value.replace(/[^0-9]/g, "");
+  };
   return (
     <div>
-     
       {/* <ReactLoading type="spokes" color="blue" height={127} width={175} /> */}
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Payment Modal </DialogTitle>
@@ -83,10 +101,10 @@ export default function FormDialog({
                       variant="outlined"
                       fullWidth
                       type="number"
-                    //   inputProps={{ pattern: {
-                    //     value: /^[1-9]\d*(\d+)?$/i,
-                    //     message: 'Please enter an integer',
-                    // } }}
+                      //   inputProps={{ pattern: {
+                      //     value: /^[1-9]\d*(\d+)?$/i,
+                      //     message: 'Please enter an integer',
+                      // } }}
                       id="accou"
                       label="Account Number"
                       error={Boolean(errors.email)}
@@ -103,7 +121,7 @@ export default function FormDialog({
                 ></Controller>
               </ListItem>
               <ListItem>
-              <Controller
+                <Controller
                   name="pin"
                   control={control}
                   defaultValue=""
@@ -116,10 +134,10 @@ export default function FormDialog({
                       variant="outlined"
                       fullWidth
                       type="number"
-                    //   inputProps={{ pattern: {
-                    //     value: /^[1-9]\d*(\d+)?$/i,
-                    //     message: 'Please enter an integer',
-                    // } }}
+                      //   inputProps={{ pattern: {
+                      //     value: /^[1-9]\d*(\d+)?$/i,
+                      //     message: 'Please enter an integer',
+                      // } }}
                       id="pin"
                       label="PIN"
                       error={Boolean(errors.email)}
@@ -137,19 +155,38 @@ export default function FormDialog({
               </ListItem>
               <ListItem>
                 <Button
-                  //   onClick={handleSubmit(submitHandler); handleClose()}
+                  onClick={() => {
+                    handleClickBar(), handleClose();
+                  }}
                   variant="contained"
                   type="submit"
                   fullWidth
                   color="primary"
                 >
-                  Submit
+                  Confirm Payment
                 </Button>
               </ListItem>
             </List>
           </form>
         </DialogContent>
       </Dialog>
+      <Snackbar
+        open={openBar}
+        autoHideDuration={6000}
+        onClose={handleCloseBar}
+        anchorOrigin={{
+          horizontal: "center",
+          vertical: "top",
+        }}
+      >
+        <Alert
+          onClose={handleCloseBar}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          Payment SuccessFull!
+        </Alert>
+      </Snackbar>
     </div>
   );
 }

@@ -6,12 +6,15 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Image from "next/image";
-const DealsAndPromotions = ({ dealsData }) => {
+
+const DealsAndPromotions = ({ dealsData, viewProduct }) => {
   console.log("Data Deals New", dealsData);
   return (
     <>
+      {/* <ActionAreaCard /> */}
       {dealsData.map((result) => (
         <Card
+          onClick={(e) => viewProduct(dealsData)}
           sx={{
             mx: 0.4,
             my: 2,
