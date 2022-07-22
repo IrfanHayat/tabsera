@@ -132,7 +132,7 @@ export default function PersistentDrawerLeft() {
   return (
     <Box>
       {isLoading ? (
-         <Grid
+        <Grid
           sx={{
             display: "flex",
             minHeight: 500,
@@ -140,8 +140,8 @@ export default function PersistentDrawerLeft() {
             alignItems: "center",
           }}
         >
-          <CircularProgress />
-        </Grid> 
+          <CircularProgress size={90} />
+        </Grid>
       ) : (
         <Box
           component="main"
@@ -204,7 +204,7 @@ export default function PersistentDrawerLeft() {
               </Grid>
             ))}
         </Box>
-       )} 
+      )}
     </Box>
   );
 }
