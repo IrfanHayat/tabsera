@@ -7,37 +7,20 @@ import { ConstructionOutlined } from "@mui/icons-material";
 import { getTotals } from "../../slice/basketSlice";
 import PaymentModal from "../../container/PaymentModal//PaymantModal";
 
-<<<<<<< HEAD
 function Payement() {
-
-  const { paymentData,paymentAddData,statusCode } = useSelector((state) => state.payment);
-  const  { placeOrderData} = useSelector((state) => state.placeorder);
-  const {cartTotalAmount} =useSelector((state)=>state.basket.cart)
-  const [showModal,setShowModal]=useState(false)
-  const [open, setOpen] = useState(false);
- const [status,setStatus]=useState()
-
- let [accountDetails,setAccountDetails]=useState()
-
-  let router = useRouter();
-  let dispatch = useDispatch();
-  const [openBar, setOpenBar] = React.useState(false);
-  
-  
-=======
-function payement() {
-  const { paymentData, paymentAddData } = useSelector((state) => state.payment);
+  const { paymentData, paymentAddData, statusCode } = useSelector(
+    (state) => state.payment
+  );
   const { placeOrderData } = useSelector((state) => state.placeorder);
   const { cartTotalAmount } = useSelector((state) => state.basket.cart);
   const [showModal, setShowModal] = useState(false);
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [status, setStatus] = useState();
+
   let [accountDetails, setAccountDetails] = useState();
 
   let router = useRouter();
   let dispatch = useDispatch();
-
-  console.log("Payment Data = ", paymentData);
->>>>>>> origin/demo-one
 
   const [paymentMethod, setPaymentMethod] = useState("");
 
@@ -49,11 +32,7 @@ function payement() {
   //     setPaymentMethod(localStorage.getItem("paymentMethod") || "");
   //   }
   // }, []);
-<<<<<<< HEAD
-  
-=======
   console.log(cartTotalAmount);
->>>>>>> origin/demo-one
 
   const [openBar, setOpenBar] = React.useState(false);
 
@@ -70,65 +49,61 @@ function payement() {
     dispatch(getPayment());
   }, []);
 
-  const submitHandler =async  (total) => {
+  const submitHandler = async (total) => {
     //  closeSnackbar();
-       
-       if(selectPaymentMethod?.payment_mode=="HPP" ){
-        let obj={
-          "requestBody": {
-              //"accountNumber": "923450600666",
-              "amount": cartTotalAmount.toString(),
-             // "pin":'123456',
-              "orderId": placeOrderData?.orderId,
-              "parentPaymentMethodId": selectPaymentMethod?.parent_payment_method_id,
-              "paymentGatewayId": selectPaymentMethod?.payment_gateway_id,
-              "paymentMethodId": selectPaymentMethod?.payment_method_id,
-              "serviceTypeId": 6,
-              "transactionTypeId": 8
-          }
-        }
-         let result=await  dispatch(postPayment(obj))
-           console.log(result.payload.resultCode)
-           if(result.payload.resultCode==5000){
-            setStatus(result.payload)
-            setOpenBar(true);
-           }else{
-           router.push("/paymentIframe");
-           }
-              
-       }
 
+    if (selectPaymentMethod?.payment_mode == "HPP") {
+      let obj = {
+        requestBody: {
+          //"accountNumber": "923450600666",
+          amount: cartTotalAmount.toString(),
+          // "pin":'123456',
+          orderId: placeOrderData?.orderId,
+          parentPaymentMethodId: selectPaymentMethod?.parent_payment_method_id,
+          paymentGatewayId: selectPaymentMethod?.payment_gateway_id,
+          paymentMethodId: selectPaymentMethod?.payment_method_id,
+          serviceTypeId: 6,
+          transactionTypeId: 8,
+        },
+      };
+      let result = await dispatch(postPayment(obj));
+      console.log(result.payload.resultCode);
+      if (result.payload.resultCode == 5000) {
+        setStatus(result.payload);
+        setOpenBar(true);
+      } else {
+        router.push("/paymentIframe");
+      }
+    }
 
-       if(selectPaymentMethod?.payment_mode=="API"){
-      
-        let obj={
-          "requestBody": {
-              "accountNumber": accountDetails.accountNumber, //"923450600666",
-              "amount": cartTotalAmount.toString(),
-              "pin":accountDetails.pin,//'123456',
-              "orderId": placeOrderData?.orderId,
-              "parentPaymentMethodId": selectPaymentMethod?.parent_payment_method_id,
-              "paymentGatewayId": selectPaymentMethod?.payment_gateway_id,
-              "paymentMethodId": selectPaymentMethod?.payment_method_id,
-              "serviceTypeId": 6,
-              "transactionTypeId": 8
-          }
-        }
-          let result1=await dispatch(postPayment(obj))
-          if(result1.payload.resultCode==5000){
-            setStatus(result1.payload)
-            setOpenBar(true);
-           }else{
-            setStatus(result1.payload)
-            setOpenBar(true);
-           }
-          // router.push("/paymentIframe");   
-       }
-       
-       if(selectPaymentMethod?.payment_mode==null){
-      
-        let obj={
-          "requestBody": {
+    if (selectPaymentMethod?.payment_mode == "API") {
+      let obj = {
+        requestBody: {
+          accountNumber: accountDetails.accountNumber, //"923450600666",
+          amount: cartTotalAmount.toString(),
+          pin: accountDetails.pin, //'123456',
+          orderId: placeOrderData?.orderId,
+          parentPaymentMethodId: selectPaymentMethod?.parent_payment_method_id,
+          paymentGatewayId: selectPaymentMethod?.payment_gateway_id,
+          paymentMethodId: selectPaymentMethod?.payment_method_id,
+          serviceTypeId: 6,
+          transactionTypeId: 8,
+        },
+      };
+      let result1 = await dispatch(postPayment(obj));
+      if (result1.payload.resultCode == 5000) {
+        setStatus(result1.payload);
+        setOpenBar(true);
+      } else {
+        setStatus(result1.payload);
+        setOpenBar(true);
+      }
+      // router.push("/paymentIframe");
+    }
+
+    if (selectPaymentMethod?.payment_mode == null) {
+      let obj = {
+        requestBody: {
           //  "accountNumber": accountDetails.accountNumber, //"923450600666",
           amount: cartTotalAmount.toString(),
           //  "pin":accountDetails.pin,//'123456',
@@ -145,17 +120,7 @@ function payement() {
       // router.push("/paymentIframe");
     }
 
-<<<<<<< HEAD
-  const handleChange=(result)=>{
-    setSelectPaymentMethod(result)
-    
-     if(result?.payment_mode=="API"){
-      setShowModal(true)
-      setOpen(true)
-     }
-=======
     // dispatch(savePayment(paymentMethod));
->>>>>>> origin/demo-one
 
     // localStorage.getItem("paymentMethod", paymentMethod);
     // router.push("/paymentIframe");
@@ -184,27 +149,6 @@ function payement() {
 
   return (
     <>
-<<<<<<< HEAD
-    
-    { 
-    
-    showModal? <PaymentModal confirmPayment={confirmPayment} handleClickOpen={handleClickOpen} handleClose={handleClose} open={open}/>:''
-    }
-    <Payment1
-      paymentMethod={paymentData}
-      submitHandler={submitHandler}
-      setPaymentMethod={setPaymentMethod}
-      handleChange={handleChange}
-      cartTotalAmount={cartTotalAmount}
-      status={status}
-      handleCloseBar={handleCloseBar}
-      openBar={openBar}
-    ></Payment1>
-    {
-      
-    }
-=======
-      {console.log(showModal)}
       {showModal ? (
         <PaymentModal
           confirmPayment={confirmPayment}
@@ -215,17 +159,16 @@ function payement() {
       ) : (
         ""
       )}
-      <Payment
+      <Payment1
         paymentMethod={paymentData}
         submitHandler={submitHandler}
         setPaymentMethod={setPaymentMethod}
         handleChange={handleChange}
         cartTotalAmount={cartTotalAmount}
+        status={status}
         handleCloseBar={handleCloseBar}
         openBar={openBar}
-      ></Payment>
-      {}
->>>>>>> origin/demo-one
+      ></Payment1>
     </>
   );
 }

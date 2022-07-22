@@ -104,7 +104,7 @@ function ShippingInformation({
               <List>
                 <ListItem sx={{ display: "flex", p: 1, m: 1 }}>
                   <RadioGroup
-                    row
+                    // row
                     aria-labelledby="demo-row-radio-buttons-group-label"
                     name="row-radio-buttons-group"
                     // value={labelValue}

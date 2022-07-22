@@ -31,9 +31,7 @@ export default function Payment({
   cartTotalAmount,
   handleCloseBar,
   openBar,
-  status
-
-
+  status,
 }) {
   const classes = useStyles();
   let router = useRouter();
@@ -118,50 +116,44 @@ export default function Payment({
           {/* </ListItem> */}
         </form>
       </Grid>
-     {console.log(status)}
-     {
-      
-           status?.resultCode===5000 ?
-           <Snackbar
-        open={openBar}
-        autoHideDuration={2000}
-        onClose={handleCloseBar}
-        anchorOrigin={{
-          horizontal: "center",
-          vertical: "top",
-        }}
-      >
-        <Alert
+      {console.log(status)}
+      {status?.resultCode === 5000 ? (
+        <Snackbar
+          open={openBar}
+          autoHideDuration={2000}
           onClose={handleCloseBar}
-          severity="error"
-          sx={{ width: "100%" }}
+          anchorOrigin={{
+            horizontal: "center",
+            vertical: "top",
+          }}
         >
-<<<<<<< HEAD
-          {status?.message}
-=======
-          Transaction done successfully!
->>>>>>> origin/demo-one
-        </Alert>
-      </Snackbar>:
-      <Snackbar
-      open={openBar}
-      autoHideDuration={6000}
-      onClose={handleCloseBar}
-      anchorOrigin={{
-        horizontal: "center",
-        vertical: "top",
-      }}
-    >
-      <Alert
-        onClose={handleCloseBar}
-        severity="success"
-        sx={{ width: "100%" }}
-      >
-        {status?.message}
-      </Alert>
-    </Snackbar>
-
-     } 
+          <Alert
+            onClose={handleCloseBar}
+            severity="error"
+            sx={{ width: "100%" }}
+          >
+            {status?.message}
+          </Alert>
+        </Snackbar>
+      ) : (
+        <Snackbar
+          open={openBar}
+          autoHideDuration={6000}
+          onClose={handleCloseBar}
+          anchorOrigin={{
+            horizontal: "center",
+            vertical: "top",
+          }}
+        >
+          <Alert
+            onClose={handleCloseBar}
+            severity="success"
+            sx={{ width: "100%" }}
+          >
+            {status?.message}
+          </Alert>
+        </Snackbar>
+      )}
     </Grid>
   );
 }
