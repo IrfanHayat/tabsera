@@ -2,11 +2,12 @@ import React, { useState, useEffect } from "react";
 import Payment1 from "../../container/Payment";
 import { useSelector, useDispatch } from "react-redux";
 import { useRouter, withRouter } from "next/router";
-import { getPayment,postPayment } from "../../slice/paymentSlice";
+import { getPayment, postPayment } from "../../slice/paymentSlice";
 import { ConstructionOutlined } from "@mui/icons-material";
-import {getTotals} from '../../slice/basketSlice'
+import { getTotals } from "../../slice/basketSlice";
 import PaymentModal from "../../container/PaymentModal//PaymantModal";
 
+<<<<<<< HEAD
 function Payement() {
 
   const { paymentData,paymentAddData,statusCode } = useSelector((state) => state.payment);
@@ -23,10 +24,24 @@ function Payement() {
   const [openBar, setOpenBar] = React.useState(false);
   
   
+=======
+function payement() {
+  const { paymentData, paymentAddData } = useSelector((state) => state.payment);
+  const { placeOrderData } = useSelector((state) => state.placeorder);
+  const { cartTotalAmount } = useSelector((state) => state.basket.cart);
+  const [showModal, setShowModal] = useState(false);
+  const [open, setOpen] = React.useState(false);
+  let [accountDetails, setAccountDetails] = useState();
+
+  let router = useRouter();
+  let dispatch = useDispatch();
+
+  console.log("Payment Data = ", paymentData);
+>>>>>>> origin/demo-one
 
   const [paymentMethod, setPaymentMethod] = useState("");
 
-  const [selectPaymentMethod,setSelectPaymentMethod]=useState()
+  const [selectPaymentMethod, setSelectPaymentMethod] = useState();
   // useEffect(() => {
   //   if (!shippingAddress.address) {
   //     router.push("/shipping");
@@ -34,8 +49,13 @@ function Payement() {
   //     setPaymentMethod(localStorage.getItem("paymentMethod") || "");
   //   }
   // }, []);
+<<<<<<< HEAD
   
+=======
+  console.log(cartTotalAmount);
+>>>>>>> origin/demo-one
 
+  const [openBar, setOpenBar] = React.useState(false);
 
   const handleCloseBar = (event, reason) => {
     if (reason === "clickaway") {
@@ -46,9 +66,9 @@ function Payement() {
   useEffect(() => {
     dispatch(getTotals());
   }, []);
-  useEffect(()=>{
-        dispatch(getPayment())
-  },[])
+  useEffect(() => {
+    dispatch(getPayment());
+  }, []);
 
   const submitHandler =async  (total) => {
     //  closeSnackbar();
@@ -110,32 +130,22 @@ function Payement() {
         let obj={
           "requestBody": {
           //  "accountNumber": accountDetails.accountNumber, //"923450600666",
-            "amount": cartTotalAmount.toString(),
+          amount: cartTotalAmount.toString(),
           //  "pin":accountDetails.pin,//'123456',
-            "orderId": placeOrderData?.orderId,
-            "parentPaymentMethodId": selectPaymentMethod?.parent_payment_method_id,
-            "paymentGatewayId": selectPaymentMethod?.payment_gateway_id,
-            "paymentMethodId": selectPaymentMethod?.payment_method_id,
-            "serviceTypeId": 6,
-            "transactionTypeId": 8
-        }
-          
-        }
-           dispatch(postPayment(obj))
-           setOpenBar(true);
-          // router.push("/paymentIframe");   
-       }
-        
-
-      
-      
-      
-      // dispatch(savePayment(paymentMethod));
-
-      // localStorage.getItem("paymentMethod", paymentMethod);
+          orderId: placeOrderData?.orderId,
+          parentPaymentMethodId: selectPaymentMethod?.parent_payment_method_id,
+          paymentGatewayId: selectPaymentMethod?.payment_gateway_id,
+          paymentMethodId: selectPaymentMethod?.payment_method_id,
+          serviceTypeId: 6,
+          transactionTypeId: 8,
+        },
+      };
+      dispatch(postPayment(obj));
+      setOpenBar(true);
       // router.push("/paymentIframe");
-  };
+    }
 
+<<<<<<< HEAD
   const handleChange=(result)=>{
     setSelectPaymentMethod(result)
     
@@ -143,11 +153,23 @@ function Payement() {
       setShowModal(true)
       setOpen(true)
      }
+=======
+    // dispatch(savePayment(paymentMethod));
+>>>>>>> origin/demo-one
 
-     
-  }
+    // localStorage.getItem("paymentMethod", paymentMethod);
+    // router.push("/paymentIframe");
+  };
 
- 
+  const handleChange = (result) => {
+    setSelectPaymentMethod(result);
+    console.log(result.payment_method_id);
+    if (result?.payment_mode == "API") {
+      setShowModal(true);
+      setOpen(true);
+    }
+  };
+
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -155,15 +177,14 @@ function Payement() {
   const handleClose = () => {
     setOpen(false);
   };
- 
 
-  const confirmPayment=(value)=>{
-    setAccountDetails(value)
-  }
-
+  const confirmPayment = (value) => {
+    setAccountDetails(value);
+  };
 
   return (
     <>
+<<<<<<< HEAD
     
     { 
     
@@ -182,6 +203,29 @@ function Payement() {
     {
       
     }
+=======
+      {console.log(showModal)}
+      {showModal ? (
+        <PaymentModal
+          confirmPayment={confirmPayment}
+          handleClickOpen={handleClickOpen}
+          handleClose={handleClose}
+          open={open}
+        />
+      ) : (
+        ""
+      )}
+      <Payment
+        paymentMethod={paymentData}
+        submitHandler={submitHandler}
+        setPaymentMethod={setPaymentMethod}
+        handleChange={handleChange}
+        cartTotalAmount={cartTotalAmount}
+        handleCloseBar={handleCloseBar}
+        openBar={openBar}
+      ></Payment>
+      {}
+>>>>>>> origin/demo-one
     </>
   );
 }

@@ -156,7 +156,7 @@ export default function FormDialog({
               <ListItem>
                 <Button
                   onClick={() => {
-                     handleClose();
+                    handleClose();
                   }}
                   variant="contained"
                   type="submit"
@@ -172,7 +172,7 @@ export default function FormDialog({
       </Dialog>
       <Snackbar
         open={openBar}
-        autoHideDuration={6000}
+        autoHideDuration={2000}
         onClose={handleCloseBar}
         anchorOrigin={{
           horizontal: "center",

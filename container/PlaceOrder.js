@@ -57,23 +57,25 @@ function PlaceOrder({
   paymentMethod,
   cartItems,
   itemsPrice,
+  handleCloseBar,
+  openBar,
 }) {
-  const [openBar, setOpenBar] = React.useState(false);
+  // const [openBar, setOpenBar] = React.useState(false);
   // const [loginSccess, setLginSccess] = React.useState(false);
   const router = useRouter();
-  const handleClickBar = () => {
-    setOpenBar(true);
-  };
+  // const handleClickBar = () => {
+  //   setOpenBar(true);
+  // };
 
-  const handleCloseBar = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpenBar(false);
-  };
+  // const handleCloseBar = (event, reason) => {
+  //   if (reason === "clickaway") {
+  //     return;
+  //   }
+  //   setOpenBar(false);
+  // };
+
   return (
     <>
-   
       <CheckoutWizard activeStep={4}></CheckoutWizard>
 
       <Grid container mt={5} justifyContent={"center"}>
@@ -100,8 +102,8 @@ function PlaceOrder({
                     {userData.first_name} {userData.last_name}
                   </ListItemText>
                 </ListItem>
-              </List>
-              {/* <List>
+                {/* </List> */}
+                {/* <List>
                 <ListItem>
                   <ListItemIcon>
                     <PhoneIcon />
@@ -116,15 +118,15 @@ function PlaceOrder({
                   <ListItemText>{userData.email}</ListItemText>
                 </ListItem>
               </List> */}
-              <List>
+                {/* <List> */}
                 <ListItem>
                   <ListItemIcon>
                     <DomainAddOutlinedIcon />
                   </ListItemIcon>
                   <ListItemText>{shippementData?.address}</ListItemText>
                 </ListItem>
-              </List>
-              <List>
+                {/* </List>
+              <List> */}
                 <ListItem>
                   <ListItemIcon>
                     <AddLocationAltOutlinedIcon />
@@ -191,16 +193,12 @@ function PlaceOrder({
                               {productCartData[key].map((item) => (
                                 <TableRow>
                                   <TableCell>
-                                   
-                                      
-                                        <Image
-                                          src={item.image_URL}
-                                          alt="shirt"
-                                          width={50}
-                                          height={50}
-                                        ></Image>
-                                      
-                                    
+                                    <Image
+                                      src={item.image_URL}
+                                      alt="shirt"
+                                      width={50}
+                                      height={50}
+                                    ></Image>
                                   </TableCell>
 
                                   <TableCell>
@@ -327,8 +325,8 @@ function PlaceOrder({
                 <Button
                   onClick={
                     () => {
-                      handleClickBar(),
-                        placeOrderHandler(shippementData, userData);
+                      // handleClickBar(),
+                      placeOrderHandler(shippementData, userData);
                     }
                     // handleClickBar())
                   }
@@ -342,7 +340,13 @@ function PlaceOrder({
                   // fullWidth
                   variant="contained"
                   color="error"
-                  onClick={() => router.push(`shipping_methods?addressId=${JSON.parse(localStorage.getItem("addressId"))}`)}
+                  onClick={() =>
+                    router.push(
+                      `shipping_methods?addressId=${JSON.parse(
+                        localStorage.getItem("addressId")
+                      )}`
+                    )
+                  }
                 >
                   Back
                 </Button>
@@ -352,7 +356,7 @@ function PlaceOrder({
 
           <Snackbar
             open={openBar}
-            autoHideDuration={6000}
+            autoHideDuration={2000}
             onClose={handleCloseBar}
             anchorOrigin={{
               horizontal: "center",

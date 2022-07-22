@@ -277,9 +277,9 @@ function Details({
           </Grid>
         </Grid>
 
-        <Grid container spacing={1}>
+        <Grid container spacing={1} style={{ marginTop: "40px" }}>
           <Grid item md={12} xs={12}>
-            <Card style={{ margin: "10px" }}>
+            <Card>
               <AppBar
                 sx={{
                   borderBottom: 1,
