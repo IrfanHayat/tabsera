@@ -44,7 +44,6 @@ function ShippingMethods({
 
   return (
     <>
-    
       <CheckoutWizard activeStep={3} />
       <Grid container mt={5} justifyContent={"center"}>
         <Grid item md={9} xs={12}>
@@ -66,36 +65,37 @@ function ShippingMethods({
                     {userData.first_name} {userData.last_name}
                   </ListItemText>
                 </ListItem>
-              </List>
-              
-              {/* <List>
+                {/* </List> */}
+
+                {/* <List>
                 <ListItem>
                   <ListItemIcon>
                     <PhoneIcon />{" "}
                   </ListItemIcon>
                 </ListItem>
               </List> */}
-              {userData.email?
-              <List>
-              <ListItem>
-                <ListItemIcon>
-                  <EmailIcon />
-                </ListItemIcon>
-                <ListItemText>{userData.email}</ListItemText>
-              </ListItem>
-            </List>:''
-              }
-              
+                {userData.email ? (
+                  // <List>
+                  <ListItem>
+                    <ListItemIcon>
+                      <EmailIcon />
+                    </ListItemIcon>
+                    <ListItemText>{userData.email}</ListItemText>
+                  </ListItem>
+                ) : (
+                  // </List>
+                  ""
+                )}
 
-              <List>
+                {/* <List> */}
                 <ListItem>
                   <ListItemIcon>
                     <DomainAddOutlinedIcon />
                   </ListItemIcon>
                   <ListItemText> {shippementData?.address}</ListItemText>
                 </ListItem>
-              </List>
-              <List>
+                {/* </List> */}
+                {/* <List> */}
                 <ListItem>
                   <ListItemIcon>
                     <AddLocationAltOutlinedIcon />
