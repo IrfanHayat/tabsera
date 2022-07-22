@@ -8,8 +8,8 @@ const app = next({ dev });
 const handle = app.getRequestHandler();
 
 const httpsOptions = {
-  key: fs.readFileSync('./certificates/localhost.key'),
-  cert: fs.readFileSync('./certificates/localhost.crt')
+  key: fs.readFileSync('/etc/letsencrypt/live/tabsera.com/privkey3.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/tabsera.com/cert3.pem')
 };
 
 app.prepare().then(() => {
@@ -19,6 +19,6 @@ app.prepare().then(() => {
     
   }).listen(3005, err => {
     if (err) throw err;
-    console.log('> Ready on https://localhost:3000');
+    console.log('> Ready on https://localhost:3005');
   });
 });
