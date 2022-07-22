@@ -17,8 +17,8 @@ app.prepare().then(() => {
     const parsedUrl = parse(req.url, true);
     handle(req, res, parsedUrl);
     
-  }).listen(3005, err => {
+  }).listen(3006, err => {
     if (err) throw err;
-    console.log('> Ready on https://localhost:3005');
+    console.log('> Ready on https://localhost:3006');
   });
 });
