@@ -55,8 +55,8 @@ function Cart() {
   }
 
   const handleAddToCart = async (item) => {
-   let result=await dispatch(addToBasket(item));
-   console.log(result)
+   dispatch(addToBasket(item));
+   
     setTimeout(() => {
       dispatch(getTotalCartQuantity());
     }, 1000);
