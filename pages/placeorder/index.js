@@ -4,7 +4,7 @@ import { useRouter, withRouter } from "next/router";
 
 import useStyles from "../../utils/styles";
 
-//import { clearBasket } from "../../slice/basketSlice";
+/////import { clearBasket } from "../../slice/basketSlice";
 //import Cookies from 'js-cookie';
 import { useSelector, useDispatch } from "react-redux";
 import localStorage from "localStorage";
