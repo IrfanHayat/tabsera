@@ -1,24 +1,24 @@
-var https = require('https');
-var fs = require('fs');
+const { createServer } = require('https');
+const { parse } = require('url');
+const next = require('next');
+const fs = require('fs');
 
-const next = require('next')
-const port = parseInt(process.env.PORT, 10) || config.getPort()
-const dev = process.env.NODE_ENV !== 'production'
-const app = next({ dev, dir: __dirname })
-const handle = app.getRequestHandler()
+const dev = process.env.NODE_ENV !== 'production';
+const app = next({ dev });
+const handle = app.getRequestHandler();
 
-
-var options = {
-    key: fs.readFileSync('ssl.key'),
-    cert: fs.readFileSync('ssl.crt'),
-    ca: [fs.readFileSync('root.crt')]
+const httpsOptions = {
+  key: fs.readFileSync('./certificates/localhost.key'),
+  cert: fs.readFileSync('./certificates/localhost.crt')
 };
 
 app.prepare().then(() => {
-    https.createServer(options, (req, res) => {
-        // handle ....
-    }).listen(port, err => {
-        if (err) throw err
-        console.log(`> Ready on localhost:${port}`)
-    })
-})
+  createServer(httpsOptions, (req, res) => {
+    const parsedUrl = parse(req.url, true);
+    handle(req, res, parsedUrl);
+    
+  }).listen(3005, err => {
+    if (err) throw err;
+    console.log('> Ready on https://localhost:3000');
+  });
+});
