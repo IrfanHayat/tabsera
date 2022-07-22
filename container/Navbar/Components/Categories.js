@@ -9,7 +9,7 @@ import { Link } from "@mui/material";
 import { ListItemIcon } from "@mui/material";
 import { ListItemText } from "@mui/material";
 import ContentCopy from "@mui/icons-material/ContentCopy";
-export default function NavSelect({ Title, Data, clr, startIcon }) {
+export default function Categories({ Title, Data, clr, startIcon }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [isActive, setIsActive] = React.useState(false);
 
@@ -51,7 +51,7 @@ export default function NavSelect({ Title, Data, clr, startIcon }) {
           ":hover": {
             // boxShadow: 20, // theme.shadows[20]
             // transform: "scale(1.1)",
-            color: "blue",
+            color: "white",
             // transformOrigin: "bottomleft",
             // opacity: 0.5,
             cursor: "pointer",
@@ -84,15 +84,6 @@ export default function NavSelect({ Title, Data, clr, startIcon }) {
           sx: {
             overflow: "visible",
 
-            // width: 202,
-            // filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
-            // mt: 1.5,
-            // "& .MuiAvatar-root": {
-            //   width: 52,
-            //   height: 32,
-            //   ml: -0.5,
-            //   mr: 1,
-            // },
             "&:before": {
               content: '""',
               display: "block",
@@ -110,15 +101,7 @@ export default function NavSelect({ Title, Data, clr, startIcon }) {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        {/* <MenuItem onClick={handleClose}> */}
-        {/* <ListItemIcon>
-            <ContentCopy fontSize="small" />
-          </ListItemIcon>
-          <ListItemText>Copy</ListItemText> */}
         {Data}
-        {/* </MenuItem> */}
-        {/* <MenuItem onClick={handleClose}>My account</MenuItem>
-        <MenuItem onClick={handleClose}>Logout</MenuItem> */}
       </Menu>
     </>
   );

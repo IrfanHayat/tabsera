@@ -1,7 +1,7 @@
 export const cssMain = {
   main: "#3d7cff",
   default: "#F6F9FC",
-  fontFamily: "Raleway, Arial",
+  fontFamily: "Raleway,Almarai,sans-serif;",
   fontStyle: "normal",
   fontDisplay: "swap",
   fontWeight: 400,

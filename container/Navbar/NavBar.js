@@ -1,6 +1,8 @@
 import React, { useMemo, useEffect, useState } from "react";
+
 // import { styled, alpha } from "@mui/material/styles";
 import Box from "@mui/material/Box";
+import WidgetsIcon from "@mui/icons-material/Widgets";
 // import Drawer from "@mui/material/Drawer";
 // import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
@@ -12,9 +14,13 @@ import ListItemText from "@mui/material/ListItemText";
 import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import { useSelector, useDispatch } from "react-redux";
-
+import { InputAdornment } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
-import { getProduct,getProductSearchWithHint,getProductSearch } from "../../slice/productSlice";
+import {
+  getProduct,
+  getProductSearchWithHint,
+  getProductSearch,
+} from "../../slice/productSlice";
 import { getCategory } from "../../slice/categorySlice";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { AppBar, Grid, Stack, Typography } from "@mui/material";
@@ -28,7 +34,7 @@ import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import TopNav from "./Components/TopNav";
 import { ListItemIcon, useTheme } from "@mui/material";
 import { Container } from "@mui/system";
-import {getTotalCartQuantity} from '../../slice/basketSlice'
+import { getTotalCartQuantity } from "../../slice/basketSlice";
 // import { ListItemText } from "@mui/material";
 const drawerWidth = 10;
 import Paper from "@mui/material/Paper";
@@ -37,12 +43,17 @@ import Button from "@mui/material/Button";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import Menu from "@mui/material/Menu";
+import WidgetsOutlinedIcon from "@mui/icons-material/WidgetsOutlined";
+import Categories from "./Components/Categories";
+
 export default function NavBar() {
   const category = useSelector((state) => state.category.categoryData);
   //const [quantityProduct,setQunatityProduct]=useState()
   const { cartTotalQuantity } = useSelector((state) => state.basket.cart);
-  const { searchHintData,searchDetail } = useSelector((state) => state.product);
-  
+  const { searchHintData, searchDetail } = useSelector(
+    (state) => state.product
+  );
+
   const [open, setOpen] = React.useState(false);
 
   let router = useRouter();
@@ -85,12 +96,9 @@ export default function NavBar() {
     setCategoriesData(categories);
   };
 
-
-
-
-  useEffect(()=>{
+  useEffect(() => {
     dispatch(getTotalCartQuantity());
-  },[])
+  }, []);
 
   useMemo(() => categoryData(category), [category && category]);
 
@@ -156,13 +164,12 @@ export default function NavBar() {
   function handleInputChange(event, value) {
     console.log(value);
     dispatch(getProductSearchWithHint(value));
-  
   }
- 
+
   async function handleInputClick(e) {
     console.log(e.target.value);
-   let result=await dispatch(getProductSearch(e.target.value));
-   console.log(result)  
+    let result = await dispatch(getProductSearch(e.target.value));
+    console.log(result);
   }
 
   // useEffect(() => {
@@ -172,12 +179,8 @@ export default function NavBar() {
   const open1 = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
 
-  const drawer = (
+  const categories = (
     <List>
-      {/* <ListItemIcon>
-        <AccountBoxIcon />
-      </ListItemIcon> */}
-      {/* <ListItemText>My Profile</ListItemText> */}
       {categoriesData &&
         categoriesData.map((text, index) => (
           <MenuItem
@@ -185,17 +188,10 @@ export default function NavBar() {
             disablePadding
             sx={{ marginLeft: 3 }}
           >
-            {/* <ListItem
-              key={text.category_id}
-              disablePadding
-              sx={{ marginLeft: 3 }}
-            > */}
             <ListItemText
               primary={text.category_name}
               onClick={(e) => viewCategory(text.category_id)}
-              // onClick={viewCategory(text.category_id)}
             />
-            {/* </ListItem> */}
             <Divider />
           </MenuItem>
         ))}
@@ -236,70 +232,21 @@ export default function NavBar() {
             </Grid>
           </Grid>
           <Toolbar>
-            {/* <ThemeProvider>
-            <Chip
-              sx={{ color: "white" }}
-              onClick={toggleDrawer}
-              icon={<MenuIcon />}
-              label="Shop By Category"
-            />
-          </ThemeProvider> */}
-            {/* <Grid Container> */}
-            {/* <Grid item md={1} sm={1}> */}
             <Box>
-              {/* <Button
-                id="basic-button"
-                aria-controls={openCat ? "basic-menu" : undefined}
-                aria-haspopup="true"
-                aria-expanded={openCat ? "true" : undefined}
-                onClick={handleClickCategories}
-                // color="white"
-                sx={{ color: "white" }}
-              >
-                Categories
-              </Button>
-              <Menu
-                id="basic-menu"
-                openCategories={openCategories}
-                open={openCat}
-                onClose={handleCloseCategories}
-                MenuListProps={{
-                  "aria-labelledby": "basic-button",
-                }}
-              >
-                <MenuItem onClick={handleCloseCategories}>{drawer}</MenuItem>
-              </Menu> */}
-              <MenuItem>
-                <ListItemIcon>
-                  <MenuIcon />
-                </ListItemIcon>
-                <ListItemText>
-                  <NavSelect Title="Categories" Data={drawer} />
-                </ListItemText>
-              </MenuItem>
+              <Categories
+                startIcon={<WidgetsIcon />}
+                Title="Categories"
+                Data={categories}
+              />
             </Box>
 
             <Box sx={{ flexGrow: 0.5 }} />
 
-            {/* <Paper
-              // dir="rtl"
-              component="form"
-              sx={
-                {
-                  // p: "2px 4px",
-                  // display: "flex",
-                  // alignItems: "center",
-                  // width: "60%",
-                  // height: "40px",
-                  // border: "0.5px solid black",
-                  // borderRadius: 24,
-                }
-              }
-            > */}
             <Stack
               spacing={2}
               sx={{
                 px: "10px",
+                // pl: "20px",
                 width: "60%",
                 bgcolor: "white",
                 height: "40px",
@@ -320,16 +267,23 @@ export default function NavBar() {
                 renderInput={(params) => (
                   <TextField
                     // InputProps={{ disableUnderline: true }}
-                    
+
                     {...params}
-                    placeholder="Search...."
+                    placeholder="Search Product and Brand ...."
                     variant="standard"
                     // color="primary"
                     color="primary"
-                    // focused
-                    // InputProps={{
-                    //   disableUnderline: true,
-                    // }}
+                    focused
+                    InputProps={{
+                      ...params.InputProps,
+                      endAdornment: (
+                        <InputAdornment position="end">
+                          {" "}
+                          <SearchIcon />
+                        </InputAdornment>
+                      ),
+                      disableUnderline: true,
+                    }}
                   />
                 )}
               />
@@ -342,11 +296,11 @@ export default function NavBar() {
                 variant="contained"
                 onClick={handleClick}
                 color="inherit"
-                
+
                 // onMouseEnter={handleClick}
                 // onMouseLeave={handleClick}
               >
-                <Badge color="error"  badgeContent={cartTotalQuantity} max={99}>
+                <Badge color="error" badgeContent={cartTotalQuantity} max={99}>
                   <ShoppingCartOutlinedIcon />
                 </Badge>
                 {/* </Tooltip> */}
@@ -360,8 +314,8 @@ export default function NavBar() {
                   vertical: "bottom",
                   horizontal: "center",
                 }}
-            //  keepMounted={true}
-              // hideBackdrop={true}
+                //  keepMounted={true}
+                // hideBackdrop={true}
                 transformOrigin={{
                   vertical: "top",
                   horizontal: "center",
@@ -372,14 +326,16 @@ export default function NavBar() {
                 //   horizontal: "left"62
                 // }}
               >
-                {/* {cartTotalQuantity > 0 ? ( */}
-                <div>
-                <ShoppingCart />
-                </div>
-                {/* ) : ( */}
-                {/* <Box
+                {cartTotalQuantity > 0 ? (
+                  // <div>
+                  <ShoppingCart />
+                ) : (
+                  // </div>
+                  <Box
                     sx={{
                       height: 50,
+                      p: 1,
+                      // m: 1,
                       width: 200,
                       textAlign: "center",
                       display: "flex",
@@ -390,32 +346,14 @@ export default function NavBar() {
                     <Typography variant="body" color="error">
                       There are no items in this cart
                     </Typography>
-                  </Box> */}
-                {/* )} */}
+                  </Box>
+                )}
                 {/* <ShoppingCart /> */}
               </Popover>
             </div>
-            {/* </Grid> */}
-            {/* </Grid> */}
           </Toolbar>
         </Container>
       </AppBar>
-      <Box
-        component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
-        aria-label="mailbox folders"
-      >
-        {/* <Drawer
-          variant="temporary"
-          open={open}
-          onClose={toggleDrawer}
-          ModalProps={{
-            keepMounted: true,
-          }}
-        >
-          {drawer}
-        </Drawer> */}
-      </Box>
     </Box>
   );
 }

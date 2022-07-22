@@ -260,7 +260,7 @@ export default function SignIn() {
       </Dialog>
       <Snackbar
         open={openBar}
-        autoHideDuration={4000}
+        autoHideDuration={2000}
         onClose={handleCloseBar}
         anchorOrigin={{
           horizontal: "center",

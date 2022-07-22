@@ -30,17 +30,14 @@ export default function Payment({
   handleChange,
   cartTotalAmount,
   handleCloseBar,
-  openBar
-
-
+  openBar,
 }) {
   const classes = useStyles();
   let router = useRouter();
- 
+
   // const [loginSccess, setLginSccess] = React.useState(false);
   const [radioCheck, setRadioCheck] = useState(false);
 
-  
   return (
     <Grid container>
       <CheckoutWizard activeStep={5}></CheckoutWizard>
@@ -112,7 +109,6 @@ export default function Payment({
                 </Button>
                 {/* </ListItem>/ */}
                 {/* <ListItem> */}
-               
               </Stack>
             </ListItem>
           </List>
@@ -121,7 +117,7 @@ export default function Payment({
       </Grid>
       <Snackbar
         open={openBar}
-        autoHideDuration={6000}
+        autoHideDuration={2000}
         onClose={handleCloseBar}
         anchorOrigin={{
           horizontal: "center",
@@ -133,7 +129,7 @@ export default function Payment({
           severity="success"
           sx={{ width: "100%" }}
         >
-          Payment SuccessFully!
+          Transaction done successfully!
         </Alert>
       </Snackbar>
     </Grid>

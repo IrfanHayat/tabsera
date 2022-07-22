@@ -22,7 +22,8 @@ import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { AppBar } from "@mui/material";
 import locales from "../../../i18n.json";
-
+import FormControl from "@mui/material/FormControl";
+import TextField from "@mui/material/TextField";
 import NavSelect from "./NavSelect";
 import { ListItemIcon } from "@mui/material";
 import { Container } from "@mui/system";
@@ -117,7 +118,7 @@ export default function TopNav(props) {
   const languageData = (
     <div>
       {locales?.locales.map((locale) => (
-        <MenuItem sx={{ width: "100px" }}>
+        <MenuItem sx={{ width: "70px", textTransform: "uppercase" }}>
           <ListItemText onClick={() => changeLanguageHandler(locale)}>
             {" "}
             {locale}
@@ -274,6 +275,23 @@ export default function TopNav(props) {
               }}
             >
               <NavSelect Title="Account" Data={myAccount} />
+              {/* <FormControl sx={{ m: 1, minWidth: 80 }}>
+                <TextField
+                  select
+                  // value={age}
+                  // onChange={handleChange}
+                  defaultValue={10}
+                  variant="standard"
+                  InputProps={{
+                    disableUnderline: true,
+                    "aria-label": "Without label",
+                  }}
+                >
+                  <MenuItem value={10}>Ten</MenuItem>
+                  <MenuItem value={20}>Twenty</MenuItem>
+                  <MenuItem value={30}>Thirty</MenuItem>
+                </TextField>
+              </FormControl> */}
               <NavSelect Title="Currency" Data={currencyData} />
               <NavSelect Title="Language" Data={languageData} />
             </Box>

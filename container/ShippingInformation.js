@@ -102,7 +102,7 @@ function ShippingInformation({
               </FormLabel>
 
               <List>
-                <ListItem sx={{ display: "flex" }}>
+                <ListItem sx={{ display: "flex", p: 1, m: 1 }}>
                   <RadioGroup
                     row
                     aria-labelledby="demo-row-radio-buttons-group-label"
@@ -142,7 +142,13 @@ function ShippingInformation({
                   // fullWidth
                   variant="contained"
                   color="error"
-                  onClick={() => router.push(`/product_detail?productId=${localStorage.getItem("productId")}`)}
+                  onClick={() =>
+                    router.push(
+                      `/product_detail?productId=${localStorage.getItem(
+                        "productId"
+                      )}`
+                    )
+                  }
                 >
                   Back
                 </Button>
