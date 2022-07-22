@@ -136,11 +136,7 @@ export default function Payment({
           severity="error"
           sx={{ width: "100%" }}
         >
-<<<<<<< HEAD
           {status?.message}
-=======
-          Transaction done successfully!
->>>>>>> origin/demo-one
         </Alert>
       </Snackbar>:
       <Snackbar

@@ -7,7 +7,6 @@ import { ConstructionOutlined } from "@mui/icons-material";
 import { getTotals } from "../../slice/basketSlice";
 import PaymentModal from "../../container/PaymentModal//PaymantModal";
 
-<<<<<<< HEAD
 function Payement() {
 
   const { paymentData,paymentAddData,statusCode } = useSelector((state) => state.payment);
@@ -21,23 +20,9 @@ function Payement() {
 
   let router = useRouter();
   let dispatch = useDispatch();
-  const [openBar, setOpenBar] = React.useState(false);
+ 
   
   
-=======
-function payement() {
-  const { paymentData, paymentAddData } = useSelector((state) => state.payment);
-  const { placeOrderData } = useSelector((state) => state.placeorder);
-  const { cartTotalAmount } = useSelector((state) => state.basket.cart);
-  const [showModal, setShowModal] = useState(false);
-  const [open, setOpen] = React.useState(false);
-  let [accountDetails, setAccountDetails] = useState();
-
-  let router = useRouter();
-  let dispatch = useDispatch();
-
-  console.log("Payment Data = ", paymentData);
->>>>>>> origin/demo-one
 
   const [paymentMethod, setPaymentMethod] = useState("");
 
@@ -49,11 +34,7 @@ function payement() {
   //     setPaymentMethod(localStorage.getItem("paymentMethod") || "");
   //   }
   // }, []);
-<<<<<<< HEAD
   
-=======
-  console.log(cartTotalAmount);
->>>>>>> origin/demo-one
 
   const [openBar, setOpenBar] = React.useState(false);
 
@@ -144,8 +125,7 @@ function payement() {
       setOpenBar(true);
       // router.push("/paymentIframe");
     }
-
-<<<<<<< HEAD
+  }
   const handleChange=(result)=>{
     setSelectPaymentMethod(result)
     
@@ -153,22 +133,11 @@ function payement() {
       setShowModal(true)
       setOpen(true)
      }
-=======
-    // dispatch(savePayment(paymentMethod));
->>>>>>> origin/demo-one
 
     // localStorage.getItem("paymentMethod", paymentMethod);
     // router.push("/paymentIframe");
   };
 
-  const handleChange = (result) => {
-    setSelectPaymentMethod(result);
-    console.log(result.payment_method_id);
-    if (result?.payment_mode == "API") {
-      setShowModal(true);
-      setOpen(true);
-    }
-  };
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -184,7 +153,6 @@ function payement() {
 
   return (
     <>
-<<<<<<< HEAD
     
     { 
     
@@ -200,32 +168,7 @@ function payement() {
       handleCloseBar={handleCloseBar}
       openBar={openBar}
     ></Payment1>
-    {
-      
-    }
-=======
-      {console.log(showModal)}
-      {showModal ? (
-        <PaymentModal
-          confirmPayment={confirmPayment}
-          handleClickOpen={handleClickOpen}
-          handleClose={handleClose}
-          open={open}
-        />
-      ) : (
-        ""
-      )}
-      <Payment
-        paymentMethod={paymentData}
-        submitHandler={submitHandler}
-        setPaymentMethod={setPaymentMethod}
-        handleChange={handleChange}
-        cartTotalAmount={cartTotalAmount}
-        handleCloseBar={handleCloseBar}
-        openBar={openBar}
-      ></Payment>
-      {}
->>>>>>> origin/demo-one
+   
     </>
   );
 }
