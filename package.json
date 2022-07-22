@@ -41,6 +41,7 @@
     "lodash": "^4.17.21",
     "material-ui-phone-number": "^3.0.0",
     "material-ui-phone-number-2": "^1.2.7",
+    "mkcert": "^1.5.0",
     "next": "12.1.6",
     "next-auth": "^4.3.4",
     "next-images": "^1.8.4",

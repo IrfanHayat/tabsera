@@ -181,26 +181,15 @@ let newCartItems=cartItems.map(result=>{
         shippingMethodId: router.query.shipId,
         shipment_method_type: "address",
       },
-<<<<<<< HEAD
       "origOrderAmount": cartItems.reduce((a, c) => a + c.qty * c.price, 0)
     }
     
-
+    setOpenBar(true);
     dispatch(addOrder(obj))
     router.push('/payment')
   }
-=======
-      origOrderAmount: cartItems.reduce((a, c) => a + c.qty * c.price, 0),
-    };
->>>>>>> origin/demo-one
 
-    console.log(obj);
-    dispatch(addOrder(obj));
-    setOpenBar(true);
-
-    router.push("/payment");
-  };
-
+   
   return (
     <>
       <PlaceOrder1
@@ -219,13 +208,9 @@ let newCartItems=cartItems.map(result=>{
         shippementData={shippementData}
         shippingCharges={shippementCharges}
         shippmentName={router.query.shipName}
-<<<<<<< HEAD
-      ></PlaceOrder1>
-=======
         handleCloseBar={handleCloseBar}
         openBar={openBar}
-      ></PlaceOrder>
->>>>>>> origin/demo-one
+      ></PlaceOrder1>
     </>
   );
 }
