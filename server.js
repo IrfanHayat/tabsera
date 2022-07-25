@@ -1,31 +1,25 @@
-const express = require('express')
-const next = require('next')
 
-const port = parseInt(process.env.PORT, 10) || 3006
+var https = require('https');
+var fs = require('fs');
+
+const next = require('next')
+//const port = parseInt(process.env.PORT, 10)
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
 
+
+var options = {
+  key: fs.readFileSync('/etc/letsencrypt/live/tabsera.com/privkey3.pem'),
+  cert: fs.readFileSync('/etc/letsencrypt/live/tabsera.com/cert3.pem')
+   // ca: [fs.readFileSync('root.crt')]
+};
+
 app.prepare().then(() => {
-  const app = express()
-
-app.use(express.static("public"));
-
-app.get('*', function (request, response){
-  response.sendFile(path.resolve("./", "public", 'index.html'))
+    https.createServer(options, (req, res) => {
+        // handle ....
+    }).listen(3006, err => {
+        if (err) throw err
+        console.log(`> Ready on localhost:${3006}`)
+    })
 })
-
-const server = https.createServer({
-  key: fs.readFileSync('/etc/letsencrypt/live/tabsera.com/privkey3.pem', 'utf8'),
-  cert: fs.readFileSync('/etc/letsencrypt/live/tabsera.com/cert3.pem', 'utf8')
-},app)
-
-console.log("server --> ", server)
-
-server.listen(port)
-
- 
-})
-
-
-
