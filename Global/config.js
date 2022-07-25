@@ -8,7 +8,7 @@ export const cssMain = {
   MuiCssBaseline: {
     styleOverrides: `
           @font-face {
-            font-family: 'Raleway';
+            font-family: '"Raleway", Almarai, sans-serif';
             font-style: normal;
             font-display: swap;
             font-weight: 400;
