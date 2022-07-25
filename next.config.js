@@ -12,8 +12,9 @@ module.exports = {
       // },
     ];
   },
- distDir: 'build',
+ //distDir: 'build',
   reactStrictMode: true,
+  useFileSystemPublicRoutes: false,
   images: {
     domains: [
       "res.cloudinary.com",
