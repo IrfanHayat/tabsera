@@ -3,10 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-   
     "dev": "node server.js",
-  "build": "next build",
-  "start": "NODE_ENV=production node server.js"
+    "build": "next build",
+    "start": "NODE_ENV=production node server.js"
   },
   "dependencies": {
     "@emotion/react": "^11.9.0",
@@ -28,6 +27,7 @@
     "dangerously-set-html-content": "^1.0.9",
     "dangerously-set-inner-html": "^2.0.1",
     "dompurify": "^2.3.8",
+    "express": "^4.18.1",
     "formik": "^2.2.9",
     "google-maps-react": "^2.0.6",
     "http-proxy": "^1.18.1",
