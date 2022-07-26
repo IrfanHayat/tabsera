@@ -8,8 +8,9 @@ const app = next({ dev });
 const handle = app.getRequestHandler();
 
 const httpsOptions = {
-    key: fs.readFileSync('/etc/letsencrypt/live/tijaricloud.com/privkey3.pem'),
-    cert: fs.readFileSync('/etc/letsencrypt/live/tijaricloud.com/cert3.pem')
+    key: fs.readFileSync('/etc/letsencrypt/live/tijaricloud.com/self_signed/key.pem'),
+    cert: fs.readFileSync('/etc/letsencrypt/live/tijaricloud.com/self_signed/cert.pem'),
+    ca: [fs.readFileSync('/etc/letsencrypt/live/tijaricloud.com/self_signed/cert.pem')]
 };
 
 app.prepare().then(() => {
