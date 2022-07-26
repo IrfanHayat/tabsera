@@ -20,6 +20,7 @@ module.exports = {
       "res.cloudinary.com",
       "b.zmtcdn.com",
       "tijaricloud.com",
+      "tabsera.com"
       // "localhost:3000",
     ],
   },

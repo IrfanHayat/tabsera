@@ -98,7 +98,9 @@ export default function NavBar() {
 
   useEffect(() => {
     dispatch(getTotalCartQuantity());
-  }, []);
+  }, [cartTotalQuantity]);
+   
+  console.log()
 
   useMemo(() => categoryData(category), [category && category]);
 
@@ -326,12 +328,12 @@ export default function NavBar() {
                 //   horizontal: "left"62
                 // }}
               >
-                {cartTotalQuantity > 0 ? (
-                  // <div>
+                {/* {cartTotalQuantity > 0 ? ( */}
+                  {/* // <div> */}
                   <ShoppingCart />
-                ) : (
-                  // </div>
-                  <Box
+                {/* ) : ( */}
+                  {/* // </div> */}
+                  {/* <Box
                     sx={{
                       height: 50,
                       p: 1,
@@ -347,7 +349,7 @@ export default function NavBar() {
                       There are no items in this cart
                     </Typography>
                   </Box>
-                )}
+                )} */}
                 {/* <ShoppingCart /> */}
               </Popover>
             </div>

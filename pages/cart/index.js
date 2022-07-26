@@ -47,7 +47,7 @@ function Cart() {
 
     var groupedCategory = groupArrayOfObjects(cartItems);
     setGroupedProductData(groupedCategory);
-  }, [cartItems]);
+  }, [JSON.stringify(cartItems)]);
 
   function groupArrayOfObjects(list) {
     const grouped = _.groupBy(list, (items) => items.merchant_id);

@@ -20,6 +20,7 @@ const initialState = {
     buyCartItems: localStorage.getItem("buyCartItems")
       ? localStorage.getItem("buyCartItems")
       : [],
+      addCart:{}
   },
 
   // userIfo:localStorage.getItem("userInfo")
@@ -45,6 +46,12 @@ export const getProductWithId = createAsyncThunk(
 
 
 export const addToCart = createAsyncThunk("cart/addCart", async (product,cart) => {
+  let result = await instance.post(`${url}/ecommerce/carts`);
+  console.log(result)
+  if(result.data.resultCode===4000){
+    return result.data
+  }
+  if(result.data.response.items){
     let existingIndex = result.data.response.items.findIndex(
       (item) => item.cart_item_id === product.cart_item_id
     );
@@ -60,6 +67,7 @@ export const addToCart = createAsyncThunk("cart/addCart", async (product,cart) =
       );
       return result.data.response;
     }
+  }
   else {
     let tempProductItem = { ...product, qty: 1 };
 
@@ -436,8 +444,8 @@ export const basketSlice = createSlice({
       return { ...state, loading: true };
     });
     builder.addCase(addToCart.fulfilled, (state, action) => {
-      
-      state.cart.cartItems = action.payload;
+      console.log(action.payload)
+      state.cart.addCart = action.payload;
       state.loading = false;
     });
     builder.addCase(addToCart.rejected, (state, action) => {
