@@ -15,6 +15,7 @@ const httpsOptions = {
 
 app.prepare().then(() => {
     createServer(httpsOptions, (req, res) => {
+        console.log(req.url)
         const parsedUrl = parse(req.url, true);
         handle(req, res, parsedUrl);
     }).listen(port, (err) => {

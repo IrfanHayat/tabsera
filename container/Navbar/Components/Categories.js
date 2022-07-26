@@ -5,7 +5,7 @@ import MenuItem from "@mui/material/MenuItem";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 // import { ListItemIcon, ContentCopy, ListItemText } from "@mui/material";
-import { Link } from "@mui/material";
+import { Link, Typography } from "@mui/material";
 import { ListItemIcon } from "@mui/material";
 import { ListItemText } from "@mui/material";
 import ContentCopy from "@mui/icons-material/ContentCopy";
@@ -39,15 +39,11 @@ export default function Categories({ Title, Data, clr, startIcon }) {
         // underline="hover"
         sx={{
           wrap: "noWrap",
-          // component: "a",
-          fontFamily: "monospace",
-          fontWeight: 300,
           color: "black",
-          // marginLeft: 50,
           textDecoration: "none",
           textTransform: "capitalize",
-          // underline: "hover",
-          // color: { color: clr ? { clr } : linkcolor },
+        m:1,
+        p:1,
           ":hover": {
             // boxShadow: 20, // theme.shadows[20]
             // transform: "scale(1.1)",
@@ -67,7 +63,7 @@ export default function Categories({ Title, Data, clr, startIcon }) {
         }
       >
         {/* <KeyboardArrowRightIcon /> */}
-        {Title}
+       <Typography> {Title}</Typography>
       </Button>
       <Menu
         // sx={{ width: 320, maxWidth: "100%" }}
@@ -101,7 +97,7 @@ export default function Categories({ Title, Data, clr, startIcon }) {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        {Data}
+       <Typography>  {Data}</Typography> 
       </Menu>
     </>
   );

@@ -20,7 +20,7 @@ import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import { AppBar } from "@mui/material";
+import { AppBar, Typography } from "@mui/material";
 import locales from "../../../i18n.json";
 import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
@@ -256,8 +256,8 @@ export default function TopNav(props) {
       >
         <Container>
           <Toolbar>
-            <NavLink href="/about">{t("About Us")}</NavLink>
-            <NavLink href="/contact_us">Contact Us</NavLink>
+            <NavLink href="/about"><Typography>{t("About Us")}</Typography></NavLink>
+            <NavLink href="/contact_us"><Typography>Contact Us</Typography></NavLink>
 
             <Box sx={{ flexGrow: 1 }} />
 
