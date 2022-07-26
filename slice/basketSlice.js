@@ -5,9 +5,7 @@ import instance from "../helper/axios/httpRequest";
 import { url, setHeaders } from "../helper/axios/config";
 const initialState = {
   cart: {
-    cartItems: localStorage.getItem("cartItems")
-      ? JSON.parse(localStorage.getItem("cartItems"))
-      : [],
+    cartItems: [],
     shippingAddress: localStorage.getItem("shippingAddress")
       ? JSON.parse(localStorage.getItem("shippingAddress"))
       : { location: {} },
