@@ -88,7 +88,7 @@ export default function NavBar() {
 
   useEffect(() => {
     dispatch(getTotalCartQuantity());
-  }, [cartTotalQuantity]);
+  }, []);
    
   console.log()
 
@@ -105,7 +105,7 @@ export default function NavBar() {
 {console.log(asPath)}
 
       <CssBaseline />
-      {currentHost ? 
+      {currentHost !='localhost' ? 
       <>
       <TopNav /> 
     
