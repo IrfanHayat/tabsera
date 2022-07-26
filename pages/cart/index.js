@@ -30,21 +30,16 @@ function Cart() {
     (state) => state.basket
   );
   const { cartItems } = useSelector((state) => state.basket.cart);
-  
+
   let [groupProductData, setGroupedProductData] = useState();
   let router = useRouter();
   let dispatch = useDispatch();
 
-  // const { current: myArray } = useRef(cartItems);
   useEffect(() => {
     dispatch(getCartItems());
-    
   }, []);
 
   useEffect(() => {
-   
-   // dispatch(getCartItems())
-
     var groupedCategory = groupArrayOfObjects(cartItems);
     setGroupedProductData(groupedCategory);
   }, [JSON.stringify(cartItems)]);
@@ -55,8 +50,8 @@ function Cart() {
   }
 
   const handleAddToCart = async (item) => {
-   dispatch(addToBasket(item));
-   
+    dispatch(addToBasket(item));
+
     setTimeout(() => {
       dispatch(getTotalCartQuantity());
     }, 1000);
