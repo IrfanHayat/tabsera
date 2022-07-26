@@ -77,7 +77,9 @@ export default function NavBar() {
 
   useEffect(() => {
     dispatch(getTotalCartQuantity());
-  }, []);
+  }, [cartTotalQuantity]);
+   
+  console.log()
 
   useMemo(() => categoryData(category), [category && category]);
 

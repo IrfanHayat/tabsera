@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useEffect } from "react";
 import Details from "../../container/Detail";
 import { useSelector, useDispatch } from "react-redux";
+import Snackbar from "@mui/material/Snackbar";
 import {
   addToBasket,
   buyItem,
@@ -8,13 +9,19 @@ import {
   getCartItems,
   getTotalCartQuantity,
 } from "../../slice/basketSlice";
+import MuiAlert from "@mui/material/Alert";
 import { useRouter, withRouter } from "next/router";
 import { getProductWithId, getProduct } from "../../slice/productSlice";
 import { getMerchantWithId } from "../../slice/merchantSlice";
 
+
+const Alert = React.forwardRef(function Alert(props, ref) {
+  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
+});
 function Product_detail(props) {
   const { filterProductData } = useSelector((state) => state.product);
   const { productData } = useSelector((state) => state.product);
+  const { addCart } = useSelector((state) => state.basket.cart);
 
   const { merchantData } = useSelector((state) => state.merchant);
   const { shipmentData } = useSelector((state) => state.shipments);
@@ -26,6 +33,9 @@ function Product_detail(props) {
   let router = useRouter();
   let dispatch = useDispatch();
   let [filterData, setFilterData] = useState({});
+  const [openBar, setOpenBar] = React.useState(false);
+
+ 
 
   const viewStore = (merchantId) => {
     
@@ -35,6 +45,12 @@ function Product_detail(props) {
     });
   };
 
+  const handleCloseBar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenBar(false);
+  };
   useEffect(() => {
     localStorage.setItem("productId",router?.query?.productId)
    
@@ -76,7 +92,10 @@ function Product_detail(props) {
       setPrice(result.cost);
     });
   };
-
+  
+  useEffect(()=>{
+    console.log(addCart)
+  },[addCart])
   useMemo(() => skuData(filterProductData.skus), [filterProductData.skus]);
 
   const addToCartHandler = async (item, skus) => {
@@ -93,12 +112,22 @@ function Product_detail(props) {
         skus: [skus],
       };
 
-      let result=await dispatch(addToBasket(product));
-      console.log(result)
+      await dispatch(addToCart(product));
+      console.log(addCart)
+      if(addCart.resultCode==4000){
+        setStatus(addCart)
+        setOpenBar(true);
+       }
+
       await dispatch(getTotalCartQuantity());
     } else {
-      let result=await dispatch(addToBasket(item));
-      console.log(result)
+      
+      await dispatch(addToCart(item));
+      console.log(addCart)
+      if(addCart.resultCode==4000){
+        
+        setOpenBar(true);
+       }
       setTimeout(() => {
         dispatch(getTotalCartQuantity());
       }, 1000);
@@ -167,6 +196,46 @@ function Product_detail(props) {
 
   return (
     <>
+
+{
+      
+      addCart?.resultCode===4000 ?
+      <Snackbar
+   open={openBar}
+   autoHideDuration={2000}
+   onClose={handleCloseBar}
+   anchorOrigin={{
+     horizontal: "center",
+     vertical: "top",
+   }}
+ >
+   <Alert
+     onClose={handleCloseBar}
+     severity="error"
+     sx={{ width: "100%" }}
+   >
+     Please Login 
+   </Alert>
+ </Snackbar>:
+ <Snackbar
+ open={openBar}
+ autoHideDuration={6000}
+ onClose={handleCloseBar}
+ anchorOrigin={{
+   horizontal: "center",
+   vertical: "top",
+ }}
+>
+ <Alert
+   onClose={handleCloseBar}
+   severity="success"
+   sx={{ width: "100%" }}
+ >
+   {addCart?.message}
+ </Alert>
+</Snackbar>
+
+} 
       {Object.keys(filterData).length > 0 ? (
         <Details
           productDetail={filterData || []}
