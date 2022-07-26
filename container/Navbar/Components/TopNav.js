@@ -63,7 +63,6 @@ export default function TopNav(props) {
   const theme = useTheme();
 
   const changeLanguageHandler = (lang) => {
-    
     i18n.changeLanguage(lang);
     document.body.dir = i18n.dir();
     theme.direction = i18n.dir();
@@ -92,14 +91,11 @@ export default function TopNav(props) {
     Cookies.remove("connect.sid");
     router.push("/login");
   };
-  // const open1 = Boolean(anchorEl);
   useEffect(() => {
     changeLanguageHandler();
   }, []);
   const menuId = "primary-search-account-menu";
   // ----------------------------------------------------------------------------------
-  const open1 = Boolean(anchorEl);
-  const id = open ? "simple-popover" : undefined;
 
   const currencyData = (
     <div>
@@ -243,10 +239,6 @@ export default function TopNav(props) {
       </MenuItem>
     </Menu>
   );
-
-  // React.useEffect(async () => {
-  //   await dispatch(getProduct());
-  // }, []);
 
   return (
     <Box sx={{ flexGrow: 1 }}>

@@ -182,7 +182,7 @@ const Index = () => {
           //   // timeout={1000}
           // />
 
-          <CircularProgress />
+          <CircularProgress size={140} />
         ) : (
           // </Box>
           product.map((item, index) => (
