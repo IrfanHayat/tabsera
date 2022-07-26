@@ -3,7 +3,9 @@ import { store } from "../app/store";
 
 import "../styles/globals.css";
 import { SessionProvider } from "next-auth/react";
-import { ThemeProvider, StylesProvider, jssPreset } from "@mui/styles";
+import { jssPreset, StylesProvider } from "@mui/styles";
+import { ThemeProvider  } from "@mui/material/styles";
+
 import { theme } from "../theme";
 import { CookiesProvider } from "react-cookie";
 import NavBar from "../container/Navbar/NavBar";
@@ -43,5 +45,6 @@ const MyApp = ({ Component, pageProps }) => {
     </Provider>
   );
 };
+
 
 export default MyApp;

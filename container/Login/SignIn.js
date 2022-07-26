@@ -109,7 +109,7 @@ export default function SignIn() {
   return (
     <div>
       <Button onClick={handleModalOpen} sx={{ color: "white" }}>
-        sign in
+        Sign In
       </Button>
       <Dialog
         fullScreen={fullScreen}

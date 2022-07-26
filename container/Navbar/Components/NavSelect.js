@@ -9,6 +9,7 @@ import { Link } from "@mui/material";
 import { ListItemIcon } from "@mui/material";
 import { ListItemText } from "@mui/material";
 import ContentCopy from "@mui/icons-material/ContentCopy";
+import Typography from "@mui/material/Typography";
 export default function NavSelect({ Title, Data, clr, startIcon }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [isActive, setIsActive] = React.useState(false);
@@ -67,8 +68,9 @@ export default function NavSelect({ Title, Data, clr, startIcon }) {
         }
       >
         {/* <KeyboardArrowRightIcon /> */}
-        {Title}
+        <Typography> {Title} </Typography>
       </Button>
+    
       <Menu
         // sx={{ width: 320, maxWidth: "100%" }}
         id="basic-menu"
@@ -115,7 +117,7 @@ export default function NavSelect({ Title, Data, clr, startIcon }) {
             <ContentCopy fontSize="small" />
           </ListItemIcon>
           <ListItemText>Copy</ListItemText> */}
-        {Data}
+       <Typography> {Data} </Typography>  
         {/* </MenuItem> */}
         {/* <MenuItem onClick={handleClose}>My account</MenuItem>
         <MenuItem onClick={handleClose}>Logout</MenuItem> */}

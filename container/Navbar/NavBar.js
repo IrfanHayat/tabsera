@@ -51,6 +51,7 @@ export default function NavBar() {
   const category = useSelector((state) => state.category.categoryData);
 
   let router = useRouter();
+  let {asPath} = useRouter();
   let dispatch = useDispatch();
 
   const [showLogin, setShowLogin] = useState(false);
@@ -63,13 +64,23 @@ export default function NavBar() {
   const theme = useTheme();
   const [openCategories, setOpenCategories] = React.useState(null);
   const openCat = Boolean(openCategories);
-  const [isTopNavActive, setIsTopNavActive] = useState(true);
-
+  // const [isTopNavActive, setIsTopNavActive] = useState(false);
+  const [currentHost,setCurrentHost]= useState();
+  let isTopNavActive;
+  // let href= "https://www.tabsera.com";
+  
   useEffect(() => {
     //dispatch(getTotalCartQuantity());
     dispatch(getCategory());
     // setQunatityProduct(result.payload)
+    if (typeof window !== 'undefined') {
+      const hostname = window.location.hostname;
+      setCurrentHost(hostname);
+      console.log(hostname)
+   }
   }, []);
+
+
 
   const categoryData = (categories) => {
     setCategoriesData(categories);
@@ -88,9 +99,16 @@ export default function NavBar() {
   }, []);
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1 }} >
+      {/* {router.pathname === "/" ? */}
+{console.log(router.pathname)}
+{console.log(asPath)}
+
       <CssBaseline />
-      {isTopNavActive ? <TopNav /> : ""}
+      {currentHost ? 
+      <>
+      <TopNav /> 
+    
       <AppBar
         sx={{
           color: "inherit",
@@ -107,9 +125,12 @@ export default function NavBar() {
           <Box component="div" sx={{ flexGrow: 1 }} />
           <SignInModal show={showLogin} close={() => setShowLogin(false)} />
         </Toolbar>
-
-        <NavDown />
+      
       </AppBar>
+      </>
+        : ""} 
+        <NavDown />
+
     </Box>
   );
 }
