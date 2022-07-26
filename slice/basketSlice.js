@@ -5,9 +5,7 @@ import instance from "../helper/axios/httpRequest";
 import { url, setHeaders } from "../helper/axios/config";
 const initialState = {
   cart: {
-    cartItems: localStorage.getItem("cartItems")
-      ? JSON.parse(localStorage.getItem("cartItems"))
-      : [],
+    cartItems: [],
     shippingAddress: localStorage.getItem("shippingAddress")
       ? JSON.parse(localStorage.getItem("shippingAddress"))
       : { location: {} },
@@ -20,7 +18,7 @@ const initialState = {
     buyCartItems: localStorage.getItem("buyCartItems")
       ? localStorage.getItem("buyCartItems")
       : [],
-      addCart:{}
+    addCart: {},
   },
 
   // userIfo:localStorage.getItem("userInfo")
@@ -41,22 +39,20 @@ export const getProductWithId = createAsyncThunk(
   }
 );
 
-
-
-
-
-export const addToCart = createAsyncThunk("cart/addCart", async (product,cart) => {
+export const addToCart = createAsyncThunk("cart/addCart", async (product) => {
   let result = await instance.post(`${url}/ecommerce/carts`);
-  console.log(result)
-  if(result.data.resultCode===4000){
-    return result.data
+  console.log(result);
+  if (result.data.resultCode === 4000) {
+    return result.data;
   }
-  if(result.data.response.items){
-    let existingIndex = result.data.response.items.findIndex(
-      (item) => item.cart_item_id === product.cart_item_id
-    );
-    if (existingIndex) {
-      
+  if (result.data.response.items.length > 0) {
+    let existingIndex = result.data.response.items.findIndex((item) => {
+      let itemName = item.name;
+      let productName = product.product_name;
+      return itemName === productName;
+    });
+
+    if (existingIndex == 0) {
       result.data.response.items[existingIndex] = {
         ...result.data.response.items[existingIndex],
         qty: result.data.response.items[existingIndex].qty + 1,
@@ -65,10 +61,53 @@ export const addToCart = createAsyncThunk("cart/addCart", async (product,cart) =
         `${url}/ecommerce/carts/items/${result.data.response.items[existingIndex].cart_item_id}`,
         result.data.response.items[existingIndex]
       );
-      return result.data.response;
+      return result;
+    } else {
+      let tempProductItem = { ...product, qty: 1 };
+
+      let result2 = await instance.get(
+        `${url}/ecommerce/products/${tempProductItem.product_id}`
+      );
+
+      if (tempProductItem.skus.length > 0) {
+        let skus_value;
+        tempProductItem.skus.map((result) => {
+          skus_value = result.sku;
+        });
+        let result = await instance.get(
+          `${url}/ecommerce/products/${tempProductItem.product_id}`
+        );
+        let cart = {
+          cart_id: result.data.response.cartId,
+          sku: skus_value,
+          qty: tempProductItem.qty,
+        };
+        await instance.post(`${url}/ecommerce/carts/items`, cart);
+      } else {
+        let skus = result2.data.response.skus;
+
+        if (skus.length > 0) {
+          let skus_value;
+          skus.map((result) => {
+            skus_value = result.sku;
+          });
+          let result = await instance.get(
+            `${url}/ecommerce/products/${tempProductItem.product_id}`
+          );
+          let cart = {
+            cart_id: result.data.response.cartId,
+            sku: skus_value,
+            // price: cost,
+            qty: tempProductItem.qty,
+          };
+
+          await instance.post(`${url}/ecommerce/carts/items`, cart);
+        }
+      }
+      let result3 = await instance.post(`${url}/ecommerce/carts`);
+      return result3;
     }
-  }
-  else {
+  } else {
     let tempProductItem = { ...product, qty: 1 };
 
     let result2 = await instance.get(
@@ -80,8 +119,9 @@ export const addToCart = createAsyncThunk("cart/addCart", async (product,cart) =
       tempProductItem.skus.map((result) => {
         skus_value = result.sku;
       });
-      let result=  await instance
-      .get(`${url}/ecommerce/products/${tempProductItem.product_id}`)
+      let result = await instance.get(
+        `${url}/ecommerce/products/${tempProductItem.product_id}`
+      );
       let cart = {
         cart_id: result.data.response.cartId,
         sku: skus_value,
@@ -96,8 +136,9 @@ export const addToCart = createAsyncThunk("cart/addCart", async (product,cart) =
         skus.map((result) => {
           skus_value = result.sku;
         });
-      let result=  await instance
-            .get(`${url}/ecommerce/products/${tempProductItem.product_id}`)
+        let result = await instance.get(
+          `${url}/ecommerce/products/${tempProductItem.product_id}`
+        );
         let cart = {
           cart_id: result.data.response.cartId,
           sku: skus_value,
@@ -140,7 +181,6 @@ export const getTotalCartQuantity = createAsyncThunk(
       }
     );
     total = parseFloat(total.toFixed(2));
-  
 
     return quantity;
   }
@@ -199,7 +239,6 @@ export const basketSlice = createSlice({
                   .then((result) => {});
 
                 instance.post(`${url}/ecommerce/carts`).then((result) => {
-                 
                   localStorage.setItem(
                     "cartItems",
                     JSON.stringify(result.data.response.items)
@@ -213,14 +252,11 @@ export const basketSlice = createSlice({
         //
         // const data=localStorage.getItem("cartItems1")
         // let resultCart=JSON.parse(data)
-        
-       // state.cart.cartItems.push(resultCart)
-       
+
+        // state.cart.cartItems.push(resultCart)
       }
       //
     },
-
-    
 
     buyItem: (state, action) => {
       let skus;
@@ -237,7 +273,7 @@ export const basketSlice = createSlice({
               skus.map((result) => {
                 skus_value = result.sku;
               });
-           
+
               // let cart = {
               //   cart_id: null,
               //   sku: skus_value,
@@ -275,7 +311,7 @@ export const basketSlice = createSlice({
     //           skus.map((result) => {
     //             skus_value = result.sku;
     //           });
-    
+
     //           let cart = {
     //             cart_id: null,
     //             sku: skus_value,
@@ -371,7 +407,7 @@ export const basketSlice = createSlice({
       );
       total = parseFloat(total.toFixed(2));
       state.cart.cartTotalQuantity = quantity;
-     
+
       state.cart.cartTotalAmount = total;
     },
     clearBasket(state, action) {
@@ -430,6 +466,7 @@ export const basketSlice = createSlice({
       return { ...state, loading: true };
     });
     builder.addCase(getCartItems.fulfilled, (state, action) => {
+      console.log(action.payload);
       state.cart.cartItems = action.payload;
       state.loading = false;
     });
@@ -444,7 +481,7 @@ export const basketSlice = createSlice({
       return { ...state, loading: true };
     });
     builder.addCase(addToCart.fulfilled, (state, action) => {
-      console.log(action.payload)
+      console.log(action.payload);
       state.cart.addCart = action.payload;
       state.loading = false;
     });

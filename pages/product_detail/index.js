@@ -14,7 +14,6 @@ import { useRouter, withRouter } from "next/router";
 import { getProductWithId, getProduct } from "../../slice/productSlice";
 import { getMerchantWithId } from "../../slice/merchantSlice";
 
-
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -25,7 +24,7 @@ function Product_detail(props) {
 
   const { merchantData } = useSelector((state) => state.merchant);
   const { shipmentData } = useSelector((state) => state.shipments);
- 
+
   let [productImage, setProductImage] = useState();
   let [productAttributes, setProductAttributes] = useState([]);
   let [price, setPrice] = useState();
@@ -34,11 +33,9 @@ function Product_detail(props) {
   let dispatch = useDispatch();
   let [filterData, setFilterData] = useState({});
   const [openBar, setOpenBar] = React.useState(false);
-
- 
+  const { cartItems } = useSelector((state) => state.basket.cart);
 
   const viewStore = (merchantId) => {
-    
     router.push({
       pathname: "/merchant_store",
       query: { merchantId: merchantId },
@@ -52,17 +49,16 @@ function Product_detail(props) {
     setOpenBar(false);
   };
   useEffect(() => {
-    localStorage.setItem("productId",router?.query?.productId)
-   
+    localStorage.setItem("productId", router?.query?.productId);
+
     dispatch(getProductWithId(router?.query?.productId));
   }, [router.query.productId]);
 
   useEffect(() => {
     dispatch(getProduct());
-    if(filterProductData.merchant_id){
+    if (filterProductData.merchant_id) {
       dispatch(getMerchantWithId(filterProductData.merchant_id));
     }
-    
 
     if (router.query.product_name) {
       const productObj = productData.filter((result) => {
@@ -73,10 +69,8 @@ function Product_detail(props) {
           product_id: result.productId,
           product_name: result.productName,
 
-         
           category_name: result.categoryName,
           merchant_id: result.merchantId,
-         
         };
         return obj;
       });
@@ -92,10 +86,10 @@ function Product_detail(props) {
       setPrice(result.cost);
     });
   };
-  
-  useEffect(()=>{
-    console.log(addCart)
-  },[addCart])
+
+  useEffect(() => {
+    console.log(addCart);
+  }, [addCart]);
   useMemo(() => skuData(filterProductData.skus), [filterProductData.skus]);
 
   const addToCartHandler = async (item, skus) => {
@@ -111,23 +105,25 @@ function Product_detail(props) {
         product_images: item.product_images,
         skus: [skus],
       };
-
+      console.log("product");
+      console.log(product);
       await dispatch(addToCart(product));
-      console.log(addCart)
-      if(addCart.resultCode==4000){
-        setStatus(addCart)
+      dispatch(getCartItems());
+      console.log(addCart);
+      if (addCart?.resultCode == 4000) {
         setOpenBar(true);
-       }
+      }
 
       await dispatch(getTotalCartQuantity());
     } else {
-      
+      console.log("item");
+      console.log(item);
       await dispatch(addToCart(item));
-      console.log(addCart)
-      if(addCart.resultCode==4000){
-        
+      dispatch(getCartItems());
+      console.log(addCart);
+      if (addCart?.resultCode == 4000) {
         setOpenBar(true);
-       }
+      }
       setTimeout(() => {
         dispatch(getTotalCartQuantity());
       }, 1000);
@@ -147,9 +143,7 @@ function Product_detail(props) {
   };
   useEffect(() => {
     dispatch(getCartItems());
-    
   }, []);
-
 
   const BuyHandler = (item, skus) => {
     if (skus) {
@@ -196,46 +190,43 @@ function Product_detail(props) {
 
   return (
     <>
-
-{
-      
-      addCart?.resultCode===4000 ?
-      <Snackbar
-   open={openBar}
-   autoHideDuration={2000}
-   onClose={handleCloseBar}
-   anchorOrigin={{
-     horizontal: "center",
-     vertical: "top",
-   }}
- >
-   <Alert
-     onClose={handleCloseBar}
-     severity="error"
-     sx={{ width: "100%" }}
-   >
-     Please Login 
-   </Alert>
- </Snackbar>:
- <Snackbar
- open={openBar}
- autoHideDuration={6000}
- onClose={handleCloseBar}
- anchorOrigin={{
-   horizontal: "center",
-   vertical: "top",
- }}
->
- <Alert
-   onClose={handleCloseBar}
-   severity="success"
-   sx={{ width: "100%" }}
- >
-   {addCart?.message}
- </Alert>
-</Snackbar>
-
-} 
+      {addCart?.resultCode === 4000 ? (
+        <Snackbar
+          open={openBar}
+          autoHideDuration={2000}
+          onClose={handleCloseBar}
+          anchorOrigin={{
+            horizontal: "center",
+            vertical: "top",
+          }}
+        >
+          <Alert
+            onClose={handleCloseBar}
+            severity="error"
+            sx={{ width: "100%" }}
+          >
+            Please Login
+          </Alert>
+        </Snackbar>
+      ) : (
+        <Snackbar
+          open={openBar}
+          autoHideDuration={6000}
+          onClose={handleCloseBar}
+          anchorOrigin={{
+            horizontal: "center",
+            vertical: "top",
+          }}
+        >
+          <Alert
+            onClose={handleCloseBar}
+            severity="success"
+            sx={{ width: "100%" }}
+          >
+            {addCart?.message}
+          </Alert>
+        </Snackbar>
+      )}
       {Object.keys(filterData).length > 0 ? (
         <Details
           productDetail={filterData || []}
