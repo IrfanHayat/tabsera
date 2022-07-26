@@ -105,7 +105,7 @@ export default function NavBar() {
 {console.log(asPath)}
 
       <CssBaseline />
-      {currentHost !='localhost' ? 
+      {currentHost !='137.74.4.23' ? 
       <>
       <TopNav /> 
     
