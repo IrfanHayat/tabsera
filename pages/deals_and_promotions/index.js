@@ -5,7 +5,7 @@ import { getDeals } from "../../slice/dealsPromotionsSlice";
 import Grid from "@mui/material/Grid";
 import DealsAndPromotions from "../../container/DealsAndPromotions/DealsAndPromotions";
 
-import { TransitionGroup } from 'react-transition-group';
+import { TransitionGroup } from "react-transition-group";
 import { useRouter } from "next/router";
 import ActionAreaCard from "../../container/Card";
 const Index = () => {
@@ -14,7 +14,6 @@ const Index = () => {
   const router = useRouter();
 
   const viewProduct = (item) => {
-   
     router.push({
       pathname: "/product_detail",
       query: { productId: item.bundleId },
@@ -26,15 +25,17 @@ const Index = () => {
 
   useEffect(() => {}, [dealsData]);
 
-
   return (
-    <Grid container justifyContent="center" >
-    
-      <DealsAndPromotions
-        viewProduct={viewProduct}
-        dealsData={dealsData && dealsData}
-      />
-      
+    <Grid container justifyContent="center">
+      {dealsData.length > 0 ? (
+        <DealsAndPromotions
+          viewProduct={viewProduct}
+          dealsData={dealsData && dealsData}
+        />
+      ) : (
+        ""
+      )}
+
       {/* {dealsData.map((result) => (
         <ActionAreaCard
           dealsData={dealsData && dealsData}

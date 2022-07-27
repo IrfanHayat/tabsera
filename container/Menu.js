@@ -26,7 +26,7 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function PersistentDrawerLeft() {
   const { data, isLoading, isFetching, isError } = useGetAllProductsQuery();
-
+  const { dealsData } = useSelector((state) => state.deals);
   // const product = useSelector((state) => state.product.productData);
   //const { productData, loading } = useSelector((state) => state.product);
   let product = data?.response;
@@ -164,9 +164,10 @@ export default function PersistentDrawerLeft() {
               }
             />
           </Grid>
-          <Grid item xs={12} md={12}>
-            <MenuCard heading="Deals & Promotions" />
-            {/* <Item>
+          {dealsData.length > 0 ? (
+            <Grid item xs={12} md={12}>
+              <MenuCard heading="Deals & Promotions" />
+              {/* <Item>
             <CarouselApp
               heading="Deals And Promotions"
               product={dealsPromotions}
@@ -174,7 +175,10 @@ export default function PersistentDrawerLeft() {
               // addToCartHandler={addToCartHandler}
             />
           </Item> */}
-          </Grid>
+            </Grid>
+          ) : (
+            ""
+          )}
           {featureProduct != "" ? (
             <Grid item xs={12} md={12}>
               <Item>
