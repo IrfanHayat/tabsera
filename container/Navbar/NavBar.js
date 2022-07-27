@@ -77,8 +77,8 @@ export default function NavBar() {
   useEffect(() => {
     //dispatch(getTotalCartQuantity());
     dispatch(getCategory());
-    // setQunatityProduct(result.payload)
-    if (typeof window !== "undefined") {
+    // setQunatityProduct(result.payload) 
+    if (typeof window !== "undefined" &&  window.location !== window.parent.location) {
       const hostname = window.location.hostname;
       setCurrentHost(hostname);
       console.log(hostname)
