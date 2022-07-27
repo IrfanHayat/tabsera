@@ -38,7 +38,7 @@ import { getTotalCartQuantity } from "../../slice/basketSlice";
 // import { ListItemText } from "@mui/material";
 const drawerWidth = 10;
 import Paper from "@mui/material/Paper";
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 import Button from "@mui/material/Button";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
@@ -46,15 +46,15 @@ import Menu from "@mui/material/Menu";
 import WidgetsOutlinedIcon from "@mui/icons-material/WidgetsOutlined";
 import Categories from "./Components/Categories";
 import NavDown from "./Components/NavDown";
-import {header,footer} from '../../helper/config/config'
+import { header, footer } from "../../helper/config/config";
 import { useRouter, withRouter } from "next/router";
-import {loginUser} from '../../slice/authSlice'
+import { loginUser } from "../../slice/authSlice";
 
 export default function NavBar() {
   const category = useSelector((state) => state.category.categoryData);
 
   let router = useRouter();
-  let {asPath} = useRouter();
+  let { asPath } = useRouter();
   let dispatch = useDispatch();
 
   const [showLogin, setShowLogin] = useState(false);
@@ -68,27 +68,25 @@ export default function NavBar() {
   const [openCategories, setOpenCategories] = React.useState(null);
   const openCat = Boolean(openCategories);
   // const [isTopNavActive, setIsTopNavActive] = useState(false);
-  const [currentHost,setCurrentHost]= useState();
+  const [currentHost, setCurrentHost] = useState();
 
   const routers = useRouter();
   let isTopNavActive;
   // let href= "https://www.tabsera.com";
-  
+
   useEffect(() => {
     //dispatch(getTotalCartQuantity());
     dispatch(getCategory());
     // setQunatityProduct(result.payload)
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       const hostname = window.location.hostname;
       setCurrentHost(hostname);
-      console.log(hostname)
-   }
-   if(routers.query?.userName!='' && routers.query?.pwd){
-      dispatch(loginUser(routers.query))
-   }
+      console.log(hostname);
+    }
+    if (routers.query?.userName != "" && routers.query?.pwd) {
+      dispatch(loginUser(routers.query));
+    }
   }, []);
-
-
 
   const categoryData = (categories) => {
     setCategoriesData(categories);
@@ -107,38 +105,38 @@ export default function NavBar() {
   }, []);
 
   return (
-    <Box sx={{ flexGrow: 1 }} >
+    <Box sx={{ flexGrow: 1 }}>
       {/* {router.pathname === "/" ? */}
-{console.log(currentHost)}
-{console.log(asPath)}
-{console.log(header)}
+      {console.log(currentHost)}
+      {console.log(asPath)}
+      {console.log(header)}
       <CssBaseline />
-      {currentHost !='137.74.4.23' && header!=true ? 
-      <>
-      <TopNav /> 
-    
-      <AppBar
-        sx={{
-          color: "inherit",
-          // bgcolor: "#bdbdbd",
-          // height: "95%",
-          // bgcolor: "#0277bd",
-          justifyContent: "center",
-          padding: "5px",
-        }}
-        position="static"
-      >
-        <Toolbar>
-          <Image src="/logo.png" height={40} width={100}></Image>
-          <Box component="div" sx={{ flexGrow: 1 }} />
-          <SignInModal show={showLogin} close={() => setShowLogin(false)} />
-        </Toolbar>
-      
-      </AppBar>
-      </>
-        : ""} 
-        <NavDown />
+      {currentHost != "137.74.4.23" && header != true ? (
+        <>
+          <TopNav />
 
+          <AppBar
+            sx={{
+              color: "inherit",
+              // bgcolor: "#bdbdbd",
+              // height: "95%",
+              // bgcolor: "#0277bd",
+              justifyContent: "center",
+              padding: "5px",
+            }}
+            position="static"
+          >
+            <Toolbar>
+              <Image src="/logo.png" height={40} width={100}></Image>
+              <Box component="div" sx={{ flexGrow: 1 }} />
+              <SignInModal show={showLogin} close={() => setShowLogin(false)} />
+            </Toolbar>
+          </AppBar>
+        </>
+      ) : (
+        ""
+      )}
+      <NavDown />
     </Box>
   );
 }
