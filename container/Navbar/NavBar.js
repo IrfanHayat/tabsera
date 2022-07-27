@@ -38,7 +38,6 @@ import { getTotalCartQuantity } from "../../slice/basketSlice";
 // import { ListItemText } from "@mui/material";
 const drawerWidth = 10;
 import Paper from "@mui/material/Paper";
-import { useRouter } from "next/router";
 import Button from "@mui/material/Button";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
@@ -84,6 +83,8 @@ export default function NavBar() {
       console.log(hostname)
    }
    if(routers.query?.userName!='' && routers.query?.pwd){
+    console.log(routers.query?.userName)
+    console.log(routers.query?.pwd)
       dispatch(loginUser(routers.query))
    }
   }, []);

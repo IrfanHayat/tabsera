@@ -44,6 +44,8 @@ export const loginUser = createAsyncThunk(
     try {
         let cookiesWebsite=new Cookies()
         let dataEncrypt;
+        console.log(values.userName)
+        console.log(values.pwd)
         if(values?.userName){
          dataEncrypt = {
             deviceId: "",
