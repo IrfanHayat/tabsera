@@ -47,7 +47,8 @@ import WidgetsOutlinedIcon from "@mui/icons-material/WidgetsOutlined";
 import Categories from "./Components/Categories";
 import NavDown from "./Components/NavDown";
 import {header,footer} from '../../helper/config/config'
-
+import { useRouter, withRouter } from "next/router";
+import {loginUser} from '../../slice/authSlice'
 
 export default function NavBar() {
   const category = useSelector((state) => state.category.categoryData);
@@ -68,6 +69,8 @@ export default function NavBar() {
   const openCat = Boolean(openCategories);
   // const [isTopNavActive, setIsTopNavActive] = useState(false);
   const [currentHost,setCurrentHost]= useState();
+
+  const routers = useRouter();
   let isTopNavActive;
   // let href= "https://www.tabsera.com";
   
@@ -79,6 +82,9 @@ export default function NavBar() {
       const hostname = window.location.hostname;
       setCurrentHost(hostname);
       console.log(hostname)
+   }
+   if(routers.query?.userName!='' && routers.query?.pwd){
+      dispatch(loginUser(routers.query))
    }
   }, []);
 

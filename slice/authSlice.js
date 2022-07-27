@@ -43,17 +43,32 @@ export const loginUser = createAsyncThunk(
   async (values, { rejectWithValue }) => {
     try {
         let cookiesWebsite=new Cookies()
-      
-        const dataEncrypt = {
-             deviceId: "",
-            // imsi: "",
-          
-            channelId:1,
-            mobileNumber: values.phone.replace(/[^\d]/g, ''),
-           //  otp: "127484",
-            password: values.password
-            // registrationToken: ""
-        };
+        let dataEncrypt;
+        if(values?.userName){
+         dataEncrypt = {
+            deviceId: "",
+           // imsi: "",
+         
+           channelId:1,
+           mobileNumber: values?.userName,
+          //  otp: "127484",
+           password: values.pwd
+           // registrationToken: ""
+       }; 
+        }else{
+         dataEncrypt = {
+            deviceId: "",
+           // imsi: "",
+         
+           channelId:1,
+           mobileNumber: values.phone.replace(/[^\d]/g, ''),
+          //  otp: "127484",
+           password: values.password
+           // registrationToken: ""
+       };
+        }
+
+        
       
         //let encrypt = "EYeg8Wha6Mz6NGeWzjIBJZGcrodlGkpRUUzHcjIaugV80IelDyLdGunDQ/E25/kNyMU5LY9wGqb5Na0a3SCFZdQHTulGjAn9HwkTZSfQ5PpaqwCsEWExt3FXWJPidZkV5kkn6gHFqDt8R4QuaWIc7FNpz0vy+CeS40oiZwiuSkYVl9FJz7EqmcoIL6ioEWYuISY88I1unM9btPTW/oimRKJ/47UEkJNCKCOjNxh4clfB/X3dHnBKKR1O7En7k1MTsrwVrQUBC+gAZ5S/CdmrttwxbkvusDGj4mFBh5CqW2/1NVPI85+g/ecPSoe7gpcwcE5dQd1osNscjjxpLi7BJyypiPZtiKdz/ORUgj4j4z171cDNIVB7QCHXpAmlkd8E"
 
