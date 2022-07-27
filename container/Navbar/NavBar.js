@@ -38,10 +38,7 @@ import { getTotalCartQuantity } from "../../slice/basketSlice";
 // import { ListItemText } from "@mui/material";
 const drawerWidth = 10;
 import Paper from "@mui/material/Paper";
-<<<<<<< HEAD
-=======
 // import { useRouter } from "next/router";
->>>>>>> origin/finalDemo
 import Button from "@mui/material/Button";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
