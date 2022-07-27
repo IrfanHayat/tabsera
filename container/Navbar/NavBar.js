@@ -83,7 +83,7 @@ export default function NavBar() {
       setCurrentHost(hostname);
       console.log(hostname)
    }
-   if(routers.query?.userName!='' && routers.query?.pwd){
+   if(routers.query?.userName!='' && routers.query?.pwd!=''){
     console.log(routers.query?.userName)
     console.log(routers.query?.pwd)
       dispatch(loginUser(routers.query))
