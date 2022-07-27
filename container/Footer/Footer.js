@@ -1,13 +1,27 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import Box from "@mui/material/Box";
 import Container from "@mui/material/Container";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import PublicOutlinedIcon from "@mui/icons-material/PublicOutlined";
+import {header,footer} from '../../helper/config/config'
 
 export default function Footer() {
+  const [currentHost,setCurrentHost]= useState();
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const hostname = window.location.hostname;
+      setCurrentHost(hostname);
+      console.log(hostname)
+   }
+  
+    
+  }, [])
+  
   return (
+    <>
+    {currentHost !='137.74.4.23' && footer!=true ?
     <Box
       px={{ xs: 3, sm: 10, md: 12 }}
       py={{ xs: 5, sm: 10, md: 12 }}
@@ -125,6 +139,8 @@ export default function Footer() {
           Tabsera &reg; {new Date().getFullYear()}
         </Box>
       </Container>
-    </Box>
+    </Box>:''
+    }
+    </>
   );
 }

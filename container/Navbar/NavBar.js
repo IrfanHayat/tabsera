@@ -46,6 +46,8 @@ import Menu from "@mui/material/Menu";
 import WidgetsOutlinedIcon from "@mui/icons-material/WidgetsOutlined";
 import Categories from "./Components/Categories";
 import NavDown from "./Components/NavDown";
+import {header,footer} from '../../helper/config/config'
+
 
 export default function NavBar() {
   const category = useSelector((state) => state.category.categoryData);
@@ -101,11 +103,11 @@ export default function NavBar() {
   return (
     <Box sx={{ flexGrow: 1 }} >
       {/* {router.pathname === "/" ? */}
-{console.log(router.pathname)}
+{console.log(currentHost)}
 {console.log(asPath)}
-
+{console.log(header)}
       <CssBaseline />
-      {currentHost !='137.74.4.23' ? 
+      {currentHost !='137.74.4.23' && header!=true ? 
       <>
       <TopNav /> 
     
