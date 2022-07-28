@@ -77,17 +77,20 @@ export default function NavBar() {
   useEffect(() => {
     //dispatch(getTotalCartQuantity());
     dispatch(getCategory());
-    // setQunatityProduct(result.payload) 
-    if (typeof window !== "undefined" &&  window.location !== window.parent.location) {
+    // setQunatityProduct(result.payload)
+    if (
+      typeof window !== "undefined" &&
+      window.location !== window.parent.location
+    ) {
       const hostname = window.location.hostname;
       setCurrentHost(hostname);
-      console.log(hostname)
-   }
-   if(routers.query?.userName!='' && routers.query?.pwd!=''){
-    console.log(routers.query?.userName)
-    console.log(routers.query?.pwd)
-      dispatch(loginUser(routers.query))
-   }
+      console.log(hostname);
+    }
+    if (routers.query?.userName != "" && routers.query?.pwd != "") {
+      console.log(routers.query?.userName);
+      console.log(routers.query?.pwd);
+      dispatch(loginUser(routers.query));
+    }
   }, []);
 
   const categoryData = (categories) => {

@@ -19,8 +19,13 @@ export default function ActionAreaCard({
 }) {
   return (
     // <Box>
+
     <Card
-      onClick={(e) => viewProduct(product)}
+      onClick={(e) =>
+        product?.productImage
+          ? viewProduct(product)
+          : viewCategory(product.category_id)
+      }
       sx={{
         mx: 0.4,
         my: 2,
@@ -43,7 +48,7 @@ export default function ActionAreaCard({
           <Image
             // className={cx(styles.media, mediaStyles.root)}
             src={product?.productImage}
-            // onClick={(e) => viewProduct(product)}
+            onClick={(e) => viewProduct(product)}
             alt="shirt"
             width={245}
             height={200}
