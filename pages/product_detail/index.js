@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Snackbar from "@mui/material/Snackbar";
 import {
   addToBasket,
-  buyItem,
+  BuyNewItem,
   addToCart,
   getCartItems,
   getTotalCartQuantity,
@@ -21,6 +21,7 @@ function Product_detail(props) {
   const { filterProductData } = useSelector((state) => state.product);
   const { productData } = useSelector((state) => state.product);
   const { addCart } = useSelector((state) => state.basket.cart);
+  const { addBuyItem } = useSelector((state) => state.basket);
 
   const { merchantData } = useSelector((state) => state.merchant);
   const { shipmentData } = useSelector((state) => state.shipments);
@@ -28,13 +29,16 @@ function Product_detail(props) {
   let [productImage, setProductImage] = useState();
   let [productAttributes, setProductAttributes] = useState([]);
   let [price, setPrice] = useState();
-
+  let [status, setStatus] = useState();
+  let [buyStatus, setBuyStatus] = useState();
+  let [flag, setFlag] = useState(false);
   let router = useRouter();
   let dispatch = useDispatch();
   let [filterData, setFilterData] = useState({});
   const [openBar, setOpenBar] = React.useState(false);
   const { cartItems } = useSelector((state) => state.basket.cart);
 
+  console.log(addBuyItem)
   const viewStore = (merchantId) => {
     router.push({
       pathname: "/merchant_store",
@@ -88,8 +92,9 @@ function Product_detail(props) {
   };
 
   useEffect(() => {
-    console.log(addCart);
+    setStatus(addCart);
   }, [addCart]);
+
   useMemo(() => skuData(filterProductData.skus), [filterProductData.skus]);
 
   const addToCartHandler = async (item, skus) => {
@@ -109,8 +114,8 @@ function Product_detail(props) {
       // console.log(product);
       await dispatch(addToCart(product));
       dispatch(getCartItems());
-      // console.log(addCart);
-      if (addCart?.resultCode == 4000) {
+      console.log(addCart);
+      if (status?.resultCode == 4000) {
         setOpenBar(true);
       }
 
@@ -120,8 +125,8 @@ function Product_detail(props) {
       // console.log(item);
       await dispatch(addToCart(item));
       dispatch(getCartItems());
-      // console.log(addCart);
-      if (addCart?.resultCode == 4000) {
+      console.log(addCart);
+      if (status?.resultCode == 4000) {
         setOpenBar(true);
       }
       setTimeout(() => {
@@ -145,7 +150,7 @@ function Product_detail(props) {
     dispatch(getCartItems());
   }, []);
 
-  const BuyHandler = (item, skus) => {
+  const BuyHandler = async (item, skus) => {
     if (skus) {
       let product = {
         product_id: item.product_id,
@@ -159,19 +164,35 @@ function Product_detail(props) {
         skus: [skus],
       };
 
-      dispatch(buyItem(product));
+      dispatch(BuyNewItem(product));
+      if (status?.resultCode == 4000) {
+        setOpenBar(true);
+
+      }
       // dispatch(addToCart(product));
       dispatch(getTotalCartQuantity(true));
-      router.push("/shipping_information");
+      //router.push("/shipping_information");
     } else {
-      dispatch(buyItem(item));
-      // dispatch(addToCart(item));
-      setTimeout(() => {
-        dispatch(getTotalCartQuantity());
-      }, 1000);
+      let result = await dispatch(BuyNewItem(item));
+      console.log(result)
+      console.log("status", status.resultCode)
+      console.log(status)
 
-      router.push("/shipping_information");
+      // dispatch(addToCart(item));
+      if (result.payload.resultCode == 4000) {
+        setOpenBar(true);
+        setBuyStatus(true)
+      } else {
+        localStorage.setItem('buyItem', true)
+        router.push("/shipping_information");
+      }
+      // setTimeout(() => {
+      //   dispatch(getTotalCartQuantity());
+      // }, 1000);
+
+
     }
+
 
     // if (item.product_id) {
 
@@ -184,13 +205,21 @@ function Product_detail(props) {
     //   router.push("/cart");
     // }
   };
+
+  useEffect(() => {
+    console.log(status)
+    if (status?.resultCode == 4000) {
+      setOpenBar(true);
+    }
+  }, [status])
+
   const checkoutHandler = () => {
     router.push("/shipping");
   };
 
   return (
     <>
-      {addCart?.resultCode === 4000 ? (
+      {status?.resultCode === 4000 || buyStatus == true ? (
         <Snackbar
           open={openBar}
           autoHideDuration={2000}
@@ -223,7 +252,7 @@ function Product_detail(props) {
             severity="success"
             sx={{ width: "100%" }}
           >
-            {addCart?.message}
+            Add to Cart Successfully
           </Alert>
         </Snackbar>
       )}
