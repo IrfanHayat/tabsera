@@ -19,8 +19,10 @@ const initialState = {
       ? localStorage.getItem("buyCartItems")
       : [],
     addCart: {},
-  },
+    
 
+  },
+  addBuyItem:{},
   // userIfo:localStorage.getItem("userInfo")
   // ? JSON.parse(localStorage.getItem("userInfo"))
   // : [],
@@ -141,6 +143,121 @@ export const addToCart = createAsyncThunk("cart/addCart", async (product) => {
         );
         let cart = {
           cart_id: result.data.response.cartId,
+          sku: skus_value,
+          // price: cost,
+          qty: tempProductItem.qty,
+        };
+
+        await instance.post(`${url}/ecommerce/carts/items`, cart);
+      }
+    }
+    let result3 = await instance.post(`${url}/ecommerce/carts`);
+    return result3.data.response.items;
+  }
+});
+
+export const BuyNewItem = createAsyncThunk("cart/BuyCartItems", async (product) => {
+  let result = await instance.post(`${url}/ecommerce/carts`);
+  console.log(result);
+  if (result.data.resultCode === 4000) {
+    return result.data;
+  }
+  if (result.data.response.items.length > 0) {
+    let existingIndex = result.data.response.items.findIndex((item) => {
+      let itemName = item.name;
+      let productName = product.product_name;
+      return itemName === productName;
+    });
+
+    if (existingIndex == 0) {
+      result.data.response.items[existingIndex] = {
+        ...result.data.response.items[existingIndex],
+        qty: result.data.response.items[existingIndex].qty + 1,
+      };
+      await instance.put(
+        `${url}/ecommerce/carts/items/${result.data.response.items[existingIndex].cart_item_id}`,
+        result.data.response.items[existingIndex]
+      );
+      return result;
+    } else {
+      let tempProductItem = { ...product, qty: 1 };
+
+      let result2 = await instance.get(
+        `${url}/ecommerce/products/${tempProductItem.product_id}`
+      );
+
+      if (tempProductItem.skus.length > 0) {
+        let skus_value;
+        tempProductItem.skus.map((result) => {
+          skus_value = result.sku;
+        });
+        let result = await instance.get(
+          `${url}/ecommerce/products/${tempProductItem.product_id}`
+        );
+        let cart = {
+          cart_id: null,
+          sku: skus_value,
+          qty: tempProductItem.qty,
+        };
+        await instance.post(`${url}/ecommerce/carts/items`, cart);
+      } else {
+        let skus = result2.data.response.skus;
+
+        if (skus.length > 0) {
+          let skus_value;
+          skus.map((result) => {
+            skus_value = result.sku;
+          });
+          let result = await instance.get(
+            `${url}/ecommerce/products/${tempProductItem.product_id}`
+          );
+          let cart = {
+            cart_id: null,
+            sku: skus_value,
+            // price: cost,
+            qty: tempProductItem.qty,
+          };
+
+          await instance.post(`${url}/ecommerce/carts/items`, cart);
+        }
+      }
+      let result3 = await instance.post(`${url}/ecommerce/carts`);
+      return result3;
+    }
+  } else {
+    let tempProductItem = { ...product, qty: 1 };
+
+    let result2 = await instance.get(
+      `${url}/ecommerce/products/${tempProductItem.product_id}`
+    );
+
+    if (tempProductItem.skus.length > 0) {
+      let skus_value;
+      tempProductItem.skus.map((result) => {
+        skus_value = result.sku;
+      });
+      let result = await instance.get(
+        `${url}/ecommerce/products/${tempProductItem.product_id}`
+      );
+      let cart = {
+        cart_id: null,
+        sku: skus_value,
+        qty: tempProductItem.qty,
+      };
+    await instance.post(`${url}/ecommerce/carts/items`, cart);
+    } else {
+      let skus = result2.data.response.skus;
+
+      if (skus.length > 0) {
+        let skus_value;
+        skus.map((result) => {
+          skus_value = result.sku;
+        });
+        let result = await instance.get(
+          `${url}/ecommerce/products/${tempProductItem.product_id}`
+        );
+        let cart = {
+          cart_id:null,
           sku: skus_value,
           // price: cost,
           qty: tempProductItem.qty,
@@ -486,6 +603,21 @@ export const basketSlice = createSlice({
       state.loading = false;
     });
     builder.addCase(addToCart.rejected, (state, action) => {
+      return {
+        ...state,
+        loading: "rejected",
+        error: action.payload,
+      };
+    });
+    builder.addCase(BuyNewItem.pending, (state, action) => {
+      return { ...state, loading: true };
+    });
+    builder.addCase(BuyNewItem.fulfilled, (state, action) => {
+      console.log(action.payload);
+      state.addBuyItem = action.payload;
+      state.loading = false;
+    });
+    builder.addCase(BuyNewItem.rejected, (state, action) => {
       return {
         ...state,
         loading: "rejected",

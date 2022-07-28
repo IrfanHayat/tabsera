@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Snackbar from "@mui/material/Snackbar";
 import {
   addToBasket,
-  buyItem,
+  BuyNewItem,
   addToCart,
   getCartItems,
   getTotalCartQuantity,
@@ -21,6 +21,7 @@ function Product_detail(props) {
   const { filterProductData } = useSelector((state) => state.product);
   const { productData } = useSelector((state) => state.product);
   const { addCart } = useSelector((state) => state.basket.cart);
+  const { addBuyItem } = useSelector((state) => state.basket);
 
   const { merchantData } = useSelector((state) => state.merchant);
   const { shipmentData } = useSelector((state) => state.shipments);
@@ -28,7 +29,7 @@ function Product_detail(props) {
   let [productImage, setProductImage] = useState();
   let [productAttributes, setProductAttributes] = useState([]);
   let [price, setPrice] = useState();
-
+  let [status, setStatus] = useState();
   let router = useRouter();
   let dispatch = useDispatch();
   let [filterData, setFilterData] = useState({});
@@ -88,8 +89,12 @@ function Product_detail(props) {
   };
 
   useEffect(() => {
-    console.log(addCart);
+    setStatus(addCart);
   }, [addCart]);
+
+  useEffect(() => {
+    setStatus(addBuyItem);
+  }, [addBuyItem]);
   useMemo(() => skuData(filterProductData.skus), [filterProductData.skus]);
 
   const addToCartHandler = async (item, skus) => {
@@ -110,7 +115,7 @@ function Product_detail(props) {
       await dispatch(addToCart(product));
       dispatch(getCartItems());
       console.log(addCart);
-      if (addCart?.resultCode == 4000) {
+      if (status?.resultCode == 4000) {
         setOpenBar(true);
       }
 
@@ -121,7 +126,7 @@ function Product_detail(props) {
       await dispatch(addToCart(item));
       dispatch(getCartItems());
       console.log(addCart);
-      if (addCart?.resultCode == 4000) {
+      if (status?.resultCode == 4000) {
         setOpenBar(true);
       }
       setTimeout(() => {
@@ -159,18 +164,28 @@ function Product_detail(props) {
         skus: [skus],
       };
 
-      dispatch(buyItem(product));
+      dispatch(BuyNewItem(product));
+      if (status?.resultCode == 4000) {
+        setOpenBar(true);
+      }
       // dispatch(addToCart(product));
       dispatch(getTotalCartQuantity(true));
-      router.push("/shipping_information");
+      //router.push("/shipping_information");
     } else {
-      dispatch(buyItem(item));
+      console.log(status)
+      dispatch(BuyNewItem(item));
       // dispatch(addToCart(item));
+      if (status?.resultCode == 4000) {
+        setOpenBar(true);
+      }else  if(status?.data?.resultCode==2000 || status?.length>0 || Object.keys(status).length==0){
+        localStorage.setItem('buyItem',true)
+        router.push("/shipping_information");
+    }
       setTimeout(() => {
         dispatch(getTotalCartQuantity());
       }, 1000);
-
-      router.push("/shipping_information");
+       
+     
     }
 
     // if (item.product_id) {
@@ -190,7 +205,7 @@ function Product_detail(props) {
 
   return (
     <>
-      {addCart?.resultCode === 4000 ? (
+      {status?.resultCode === 4000 ? (
         <Snackbar
           open={openBar}
           autoHideDuration={2000}
@@ -223,7 +238,7 @@ function Product_detail(props) {
             severity="success"
             sx={{ width: "100%" }}
           >
-            {addCart?.message}
+            Add to Cart Successfully
           </Alert>
         </Snackbar>
       )}

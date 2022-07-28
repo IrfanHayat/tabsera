@@ -76,7 +76,7 @@ const Index = () => {
     );
 
     setShippementData(result1[0]);
-
+    
     let obj = {
       address: result1[0]?.address,
       bundle_id: null,
