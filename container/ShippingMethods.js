@@ -44,7 +44,6 @@ function ShippingMethods({
 
   return (
     <>
-    
       <CheckoutWizard activeStep={3} />
       <Grid container mt={5} justifyContent={"center"}>
         <Grid item md={9} xs={12}>
@@ -66,36 +65,37 @@ function ShippingMethods({
                     {userData.first_name} {userData.last_name}
                   </ListItemText>
                 </ListItem>
-              </List>
-              
-              {/* <List>
+                {/* </List> */}
+
+                {/* <List>
                 <ListItem>
                   <ListItemIcon>
                     <PhoneIcon />{" "}
                   </ListItemIcon>
                 </ListItem>
               </List> */}
-              {userData.email?
-              <List>
-              <ListItem>
-                <ListItemIcon>
-                  <EmailIcon />
-                </ListItemIcon>
-                <ListItemText>{userData.email}</ListItemText>
-              </ListItem>
-            </List>:''
-              }
-              
+                {userData.email ? (
+                  <List>
+                    <ListItem>
+                      <ListItemIcon>
+                        <EmailIcon />
+                      </ListItemIcon>
+                      <ListItemText>{userData.email}</ListItemText>
+                    </ListItem>
+                  </List>
+                ) : (
+                  ""
+                )}
 
-              <List>
+                {/* <List> */}
                 <ListItem>
                   <ListItemIcon>
                     <DomainAddOutlinedIcon />
                   </ListItemIcon>
                   <ListItemText> {shippementData?.address}</ListItemText>
                 </ListItem>
-              </List>
-              <List>
+                {/* </List> */}
+                {/* <List> */}
                 <ListItem>
                   <ListItemIcon>
                     <AddLocationAltOutlinedIcon />
@@ -113,15 +113,9 @@ function ShippingMethods({
           </Card>
         </Grid>
 
-        <Grid item md={9} sm={12}>
+        <Grid item md={9} xs={12}>
           <Card className={classes.section}>
-            <Box
-              sx={{
-                borderBottom: 1,
-                borderColor: "divider",
-                p: 2,
-              }}
-            >
+            <Box sx={{ borderBottom: 1, borderColor: "divider", p: 2 }}>
               <FormControl>
                 <Typography variant="h6" style={{ fontWeight: "bold" }}>
                   Shipping Methods
@@ -130,7 +124,7 @@ function ShippingMethods({
                 <List>
                   <ListItem sx={{ display: "flex" }}>
                     <RadioGroup
-                      row
+                      // row
                       aria-labelledby="demo-row-radio-buttons-group-label"
                       name="row-radio-buttons-group"
                       // value={labelValue}
@@ -155,15 +149,9 @@ function ShippingMethods({
           </Card>
         </Grid>
 
-        <Grid item md={9} sm={12}>
+        <Grid item md={9} xs={12}>
           <Card className={classes.section}>
-            <Box
-              sx={{
-                borderBottom: 1,
-                borderColor: "divider",
-                p: 2,
-              }}
-            >
+            <Box sx={{ borderBottom: 1, borderColor: "divider", p: 2 }}>
               <Typography variant="h6" style={{ fontWeight: "bold" }}>
                 Shipping Charges
               </Typography>

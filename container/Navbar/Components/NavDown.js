@@ -68,7 +68,6 @@ const styles = (theme) => ({
 // });
 
 export default function NavDown(props) {
-  const classes = props;
   const category = useSelector((state) => state.category.categoryData);
   //const [quantityProduct,setQunatityProduct]=useState()
   const { cartTotalQuantity } = useSelector((state) => state.basket.cart);
@@ -83,14 +82,8 @@ export default function NavDown(props) {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
-  const isMenuOpen = Boolean(anchorEl);
-  const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const [categoriesData, setCategoriesData] = useState([]);
-  const theme = useTheme();
   const [openCategories, setOpenCategories] = React.useState(null);
-  const openCat = Boolean(openCategories);
-
-  const [value, setValue] = React.useState(0);
 
   useEffect(() => {
     //dispatch(getTotalCartQuantity());
@@ -153,10 +146,6 @@ export default function NavDown(props) {
         ))}
     </List>
   );
-
-  React.useEffect(async () => {
-    await dispatch(getProduct());
-  }, []);
 
   return (
     <Box sx={{ flexGrow: 1 }}>

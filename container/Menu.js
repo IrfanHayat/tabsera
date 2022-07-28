@@ -28,7 +28,7 @@ export default function PersistentDrawerLeft() {
   const { data, isLoading, isFetching, isError } = useGetAllProductsQuery();
   const { dealsData } = useSelector((state) => state.deals);
   // const product = useSelector((state) => state.product.productData);
-  //const { productData, loading } = useSelector((state) => state.product);
+  // const { productData, loading } = useSelector((state) => state.product);
   let product = data?.response;
 
   const featureProduct = useSelector(
@@ -61,58 +61,65 @@ export default function PersistentDrawerLeft() {
   };
 
   //groupBy
-  function groupArrayOfObjects(list, key, category1) {
-    return list.reduce(function (rv, x) {
-      rv[x[key].split(" ").join("")] = rv[x[key].split(" ").join("")] || [];
-      rv[x[key].split(" ").join("")].push(x);
+  // function groupArrayOfObjects(list, key, category1) {
+  //   return list.reduce(function (rv, x) {
+  //     rv[x[key].split(" ").join("")] = rv[x[key].split(" ").join("")] || [];
+  //     rv[x[key].split(" ").join("")].push(x);
 
-      return rv;
-    }, {});
-  }
+  //     return rv;
+  //   }, {});
+  // }
 
   useEffect(() => {
     dispatch(getFeatureProduct());
 
     dispatch(getCategory());
+  }, []);
+
+  function groupArrayOfObjects(list) {
+    const grouped = _.groupBy(list, (items) => items.categoryName);
+    return grouped;
+  }
+  useEffect(() => {
     if (data) {
-      var groupedCategory = groupArrayOfObjects(data.response, "categoryName");
+      var groupedCategory = groupArrayOfObjects(data.response);
       setGroupedProduct(groupedCategory);
     }
   }, [product, data]);
 
-  const categoryData = (category) => {
-    let result1 =
-      category &&
-      category.map((result) => {
-        if (result.child.length > 0) {
-          return result.child;
-        }
-      });
-    let result3 =
-      category &&
-      category.map((result) => {
-        if (result.child.length > 0) {
-          return result.category_name;
-        }
-      });
+  // const categoryData = (category) => {
+  //   let result1 =
+  //     category &&
+  //     category.map((result) => {
+  //       if (result.child.length > 0) {
+  //         return result.child;
+  //       }
+  //     });
+  //   let result3 =
+  //     category &&
+  //     category.map((result) => {
+  //       if (result.child.length > 0) {
+  //         return result.category_name;
+  //       }
+  //     });
 
-    let result2 = result1 && result1.filter((result) => result != undefined);
-    let result4 = result3 && result3.filter((result) => result != undefined);
+  //   let result2 = result1 && result1.filter((result) => result != undefined);
+  //   let result4 = result3 && result3.filter((result) => result != undefined);
 
-    if (groupProduct) {
-      let result5 = Object.keys(groupProduct).map((pro) => {
-        if (pro == result4.toString().split(" ").join("")) {
-          let result = groupProduct[pro].concat(result2[0]);
-          groupProduct[pro] = result;
-          return groupProduct;
-        }
-      });
-      let result6 = result5.filter((result) => result != undefined);
-      setGroupedProduct(result6[0]);
-    }
-  };
+  //   if (groupProduct) {
+  //     let result5 = Object.keys(groupProduct).map((pro) => {
+  //       if (pro == result4.toString().split(" ").join("")) {
+  //         let result = groupProduct[pro].concat(result2[0]);
+  //         groupProduct[pro] = result;
+  //         return groupProduct;
+  //       }
+  //     });
+  //     let result6 = result5.filter((result) => result != undefined);
+  //     setGroupedProduct(result6[0]);
+  //   }
+  // };
 
-  useMemo(() => categoryData(category), [category && category && groupProduct]);
+  // useMemo(() => categoryData(category), [category && category && groupProduct]);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(event.currentTarget);
@@ -124,9 +131,9 @@ export default function PersistentDrawerLeft() {
 
   // ----------------------------------------------------------------------------------
 
-  React.useEffect(async () => {
-    await dispatch(getProduct());
-  }, []);
+  // React.useEffect(() => {
+  //   dispatch(getProduct());
+  // }, []);
 
   const dealsPromotions = <div>yes</div>;
   return (
@@ -154,7 +161,7 @@ export default function PersistentDrawerLeft() {
             ):()
           */}
 
-          <Grid xs={12} md={12}>
+          <Grid item xs={12} md={12}>
             <NewCarousel
               product={
                 product &&
@@ -194,9 +201,9 @@ export default function PersistentDrawerLeft() {
             ""
           )}
           {groupProduct &&
-            Object.keys(groupProduct).map((key) => (
-              <Grid item xs={12} md={12}>
-                <Item key={key}>
+            Object.keys(groupProduct).map((key, index) => (
+              <Grid item xs={12} md={12} key={index}>
+                <Item>
                   <CarouselApp
                     heading={key}
                     product={groupProduct[key]}

@@ -22,7 +22,12 @@ function CalculateBill({ productPrice, checkoutHandler }) {
   return (
     <Grid item md={12} xs={12}>
       {/* <Card> */}
-      <Typography variant="h6" align="center">
+      <Typography
+        component="h5"
+        variant="h5"
+        style={{ fontWeight: "bold" }}
+        align="center"
+      >
         {" "}
         Order Summary
       </Typography>

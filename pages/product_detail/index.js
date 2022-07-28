@@ -55,7 +55,7 @@ function Product_detail(props) {
   }, [router.query.productId]);
 
   useEffect(() => {
-    dispatch(getProduct());
+    // dispatch(getProduct());
     if (filterProductData.merchant_id) {
       dispatch(getMerchantWithId(filterProductData.merchant_id));
     }
@@ -105,22 +105,22 @@ function Product_detail(props) {
         product_images: item.product_images,
         skus: [skus],
       };
-      console.log("product");
-      console.log(product);
+      // console.log("product");
+      // console.log(product);
       await dispatch(addToCart(product));
       dispatch(getCartItems());
-      console.log(addCart);
+      // console.log(addCart);
       if (addCart?.resultCode == 4000) {
         setOpenBar(true);
       }
 
       await dispatch(getTotalCartQuantity());
     } else {
-      console.log("item");
-      console.log(item);
+      // console.log("item");
+      // console.log(item);
       await dispatch(addToCart(item));
       dispatch(getCartItems());
-      console.log(addCart);
+      // console.log(addCart);
       if (addCart?.resultCode == 4000) {
         setOpenBar(true);
       }

@@ -41,7 +41,6 @@ export default function CarouselApp({
         height: "400px",
       }}
     >
-
       <Box
         sx={{
           display: "flex",
@@ -65,7 +64,7 @@ export default function CarouselApp({
         >
           {heading}
         </Box>
-     
+
         <Box
           component="div"
           sx={{
@@ -92,7 +91,7 @@ export default function CarouselApp({
           </Button>
         </Box>
       </Box>
-     
+
       <Carousel
         breakPoints={breakPoints}
         // disableArrowsOnEnd={false}
@@ -107,10 +106,9 @@ export default function CarouselApp({
         // autoPlaySpeed={2000}
         // itemsToShow={2}
       >
-
-
-        {product?.map((item) => (
+        {product?.map((item, index) => (
           <ActionAreaCard
+            key={index}
             product={item}
             viewProduct={viewProduct}
             addToCartHandler={addToCartHandler}
@@ -121,7 +119,6 @@ export default function CarouselApp({
           ></ActionAreaCard>
         ))}
       </Carousel>
- 
     </Box>
   );
 }

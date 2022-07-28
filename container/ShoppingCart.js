@@ -37,13 +37,12 @@ function CartScreen({
 }) {
   return (
     <Box sx={{ flexGrow: 1, display: "grid", p: 3 }}>
-      <Typography component="h4" variant="h5">
+      <Typography component="h5" variant="h5" style={{ fontWeight: "bold" }}>
         {heading}
       </Typography>
 
       {productCartData &&
         productCartData.map((item) => (
-          
           <Grid
             container
             spacing={1}
@@ -62,8 +61,12 @@ function CartScreen({
               m={2}
               style={{ height: "150px", width: "150px" }}
             >
-              
-              <NextLink href={`/product_detail?productId=${localStorage.getItem("productId")}`} passHref>
+              <NextLink
+                href={`/product_detail?productId=${localStorage.getItem(
+                  "productId"
+                )}`}
+                passHref
+              >
                 <Link>
                   <CardMedia
                     component="img"
