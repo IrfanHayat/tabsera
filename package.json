@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "node server.js",
+    "dev": "next -p 3006",
     "build": "next build",
-    "start": "NODE_ENV=production node server.js"
-    
+    "start": "next start -p 3006",
+    "lint": "next lint"
   },
   "dependencies": {
     "@emotion/react": "^11.9.0",
