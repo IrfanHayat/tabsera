@@ -71,7 +71,6 @@ function Details({
   price,
   viewStore,
 }) {
- 
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
     ...theme.typography.body2,
@@ -97,7 +96,7 @@ function Details({
     setValue(index);
   };
   let router = useRouter();
-  
+
   return (
     <>
       <Grid
@@ -124,8 +123,9 @@ function Details({
             showArrows={false}
           >
             {skusProduct
-              ? skusProduct.sku_images.map((result) => (
+              ? skusProduct.sku_images.map((result, index) => (
                   <Image
+                    key={index}
                     //  className={cx(styles.media, mediaStyles.root)}
                     src={result}
                     alt="shirt"
@@ -135,6 +135,7 @@ function Details({
                 ))
               : productImage && (
                   <Image
+                    // key={index}
                     //  className={cx(styles.media, mediaStyles.root)}
                     src={productImage[0]}
                     alt="shirt"
@@ -239,15 +240,29 @@ function Details({
 
           <Grid item xs={6} md={3}>
             {skusProduct
-              ? skusProduct.attributes.map((result) => (
-                  <Typography>
-                    {result.attribute_name}:{result.value}
-                  </Typography>
+              ? skusProduct.attributes.map((result, index) => (
+                  <List key={index}>
+                    <ListItemText>
+                      <Typography>{result.attribute_name}</Typography>
+                    </ListItemText>
+                    <ListItemText>
+                      <Typography>{result.value}</Typography>
+                    </ListItemText>
+                  </List>
                 ))
-              : productAttributes.map((result) => (
-                  <Typography>
-                    {result.attribute_name}:{result.value}
-                  </Typography>
+              : productAttributes.map((result, index) => (
+                  // <List key={index}>
+                  <ListItem key={index}>
+                    <ListItemText>
+                      <Typography style={{ fontWeight: "bold" }}>
+                        {result.attribute_name} :
+                      </Typography>
+                    </ListItemText>
+                    <ListItemText>
+                      <Typography>{result.value}</Typography>
+                    </ListItemText>
+                  </ListItem>
+                  // </List>
                 ))}
           </Grid>
 
@@ -261,12 +276,13 @@ function Details({
               itemsToShow={4}
             >
               {productDetail &&
-                productDetail.skus?.map((results) => (
+                productDetail.skus?.map((results, index) => (
                   <Image
                     //  className={cx(styles.media, mediaStyles.root)}
                     onClick={() => {
                       viewVariantsProduct(results);
                     }}
+                    key={index}
                     src={results.sku_images[0]}
                     alt="shirt"
                     width={100}
@@ -340,7 +356,6 @@ function Details({
                   </List>
                   <List>
                     <ListItem>Seller Rating :</ListItem>
-                    
                   </List>
                   <Stack>
                     <Button

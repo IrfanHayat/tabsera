@@ -68,12 +68,6 @@ export default function TopNav(props) {
     theme.direction = i18n.dir();
   };
 
-  const categoryData = (categories) => {
-    setCategoriesData(categories);
-  };
-
-  useMemo(() => categoryData(category), [category && category]);
-
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
   };
@@ -113,8 +107,11 @@ export default function TopNav(props) {
 
   const languageData = (
     <div>
-      {locales?.locales.map((locale) => (
-        <MenuItem sx={{ width: "70px", textTransform: "uppercase" }}>
+      {locales?.locales.map((locale, index) => (
+        <MenuItem
+          sx={{ width: "70px", textTransform: "uppercase" }}
+          key={index}
+        >
           <ListItemText onClick={() => changeLanguageHandler(locale)}>
             {" "}
             {locale}
@@ -256,8 +253,12 @@ export default function TopNav(props) {
       >
         <Container>
           <Toolbar>
-            <NavLink href="/about"><Typography>{t("About Us")}</Typography></NavLink>
-            <NavLink href="/contact_us"><Typography>Contact Us</Typography></NavLink>
+            <NavLink href="/about">
+              <Typography>{t("About Us")}</Typography>
+            </NavLink>
+            <NavLink href="/contact_us">
+              <Typography>Contact Us</Typography>
+            </NavLink>
 
             <Box sx={{ flexGrow: 1 }} />
 

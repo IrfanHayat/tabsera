@@ -117,7 +117,7 @@ const Index = () => {
   // }, [items, product]);
 
   const viewProduct = (item) => {
-    console.log(item)
+    console.log(item);
     router.push({
       pathname: `/product_detail`,
       query: { productId: item.productId },

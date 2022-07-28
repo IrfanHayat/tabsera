@@ -47,13 +47,21 @@ function ShippingInformation({
   return (
     <>
       <CheckoutWizard activeStep={1} />
-      <Grid container mt={5} sx={{ mx: "5rem" }}>
+      <Grid container mt={5}>
         {/* <Grid item md={2}></Grid> */}
         <Grid
           md={12}
           sm={12}
+          container
+          spacing={0}
+          direction="column"
+          alignItems="center"
+          justifyContent="center"
+          // style={{ minHeight: "100vh" }}
+          // ml={10}
           item
-          sx={{ display: "container", justifyContent: "center" }}
+          // justifyContent="center"
+          // sx={{ display: "flex" }}
         >
           <FormControl>
             <RadioGroup
@@ -95,16 +103,16 @@ function ShippingInformation({
         </Grid>
 
         {buttonKey === 1 ? (
-          <Grid item md={3} sm={3} mt={5}>
+          <Grid item md={3} mt={4} justifyContent="center">
             <FormControl>
               <FormLabel style={{ fontWeight: "bold" }}>
                 Shipping Addresses
               </FormLabel>
 
-              <List>
-                <ListItem sx={{ display: "flex", p: 1, m: 1 }}>
+              <List sx={{ display: "flex", p: 1, m: 1 }}>
+                <ListItem>
                   <RadioGroup
-                    row
+                    // row
                     aria-labelledby="demo-row-radio-buttons-group-label"
                     name="row-radio-buttons-group"
                     // value={labelValue}

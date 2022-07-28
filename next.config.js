@@ -12,15 +12,15 @@ module.exports = {
       // },
     ];
   },
- distDir: 'build',
-  reactStrictMode: true,
+  distDir: "build",
+  reactStrictMode: false,
   //useFileSystemPublicRoutes: false,
   images: {
     domains: [
       "res.cloudinary.com",
       "b.zmtcdn.com",
       "tijaricloud.com",
-      "tabsera.com"
+      "tabsera.com",
       // "localhost:3000",
     ],
   },
