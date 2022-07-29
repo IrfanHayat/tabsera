@@ -43,12 +43,14 @@ const NavLink = styled("a")(() => ({
   fontFamily: "Raleway, Almarai, sans-serif",
   fontWeight: 300,
   color: "white",
-  mt: 20,
-  marginLeft: 50,
+  // mt: 20,
+  marginLeft: 5,
   ":hover": {
-    // boxShadow: 20, // theme.shadows[20]
+    boxShadow: 20, // theme.shadows[20]
     transform: "scale(1.1)",
-    // color: "white",
+    color: "white",
+    // color: "yellow",
+
     transformOrigin: "bottomleft",
     // opacity: 0.5,
     cursor: "pointer",
@@ -147,7 +149,7 @@ export default function NavBar() {
   );
   const myAccount = (
     <div>
-      <MenuItem>
+      <MenuItem value={10}>
         <ListItemIcon>
           <AccountBoxIcon fontSize="small" />
         </ListItemIcon>
@@ -236,6 +238,7 @@ export default function NavBar() {
 
   const renderMobileMenu = (
     <Menu
+      sx={{ color: "black" }}
       anchorEl={mobileMoreAnchorEl}
       anchorOrigin={{
         vertical: "top",
@@ -272,18 +275,23 @@ export default function NavBar() {
           {/* <TopNav /> */}
 
           <AppBar
+            style={{ height: "80px" }}
             sx={{
               color: "inherit",
               // bgcolor: "#bdbdbd",
               // height: "95%",
               // bgcolor: "#0277bd",
               justifyContent: "center",
+              // alignItems: "center",
               padding: "5px",
             }}
             position="static"
           >
             <Toolbar sx={{ flexWrap: "wrap" }}>
               <Image src="/logo.png" height={40} width={100}></Image>
+              <NavLink sx={{ color: "white", mt: 2, ml: 3 }} href="/">
+                Home
+              </NavLink>
               <Box component="div" sx={{ flexGrow: 1 }} />
               <Box
                 sx={{
@@ -295,7 +303,7 @@ export default function NavBar() {
                   },
                 }}
               >
-                <NavLink
+                {/* <NavLink
                   variant="button"
                   color="text.primary"
                   href="/contact_us"
@@ -310,11 +318,26 @@ export default function NavBar() {
                   sx={{ mx: 2.5, textDecoration: "none" }}
                 >
                   {t("About Us")}
-                </NavLink>
-
-                <NavSelect Title="Account" Data={myAccount} />
-                <NavSelect Title="Currency" Data={currencyData} />
-                <NavSelect Title="Language" Data={languageData} />
+                </NavLink> */}
+                {/* <FormControl sx={{ minWidth: 80, color: "black" }}>
+                  <TextField
+                    select
+                    // value={age}
+                    // onChange={handleChange}
+                    defaultValue={10}
+                    // label="Account"
+                    variant="standard"
+                    InputProps={{
+                      disableUnderline: true,
+                      "aria-label": "Without label",
+                    }}
+                  >
+                    {myAccount}
+                  </TextField>
+                </FormControl> */}
+                <NavSelect Title="Account" Data={myAccount} color="white" />
+                <NavSelect Title="Currency" Data={currencyData} color="white" />
+                <NavSelect Title="Language" Data={languageData} color="white" />
               </Box>
               {/* <Button href="#" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
                 Login

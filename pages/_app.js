@@ -27,9 +27,9 @@ const MyApp = ({ Component, pageProps }) => {
       <StylesProvider jss={jss}>
         <ThemeProvider theme={theme}>
           {/* <CookiesProvider> */}
-          {/* <Head>
+          <Head>
             <link rel="icon" href="/favicon.png" />
-          </Head> */}
+          </Head>
           <NavBar />
 
           <Container maxWidth="lg">

@@ -7,11 +7,6 @@ export default function Home(children) {
     //<div className={styles.container}>
     //<Layout>
     <Box>
-      <Head>
-        {/* <title>Next App</title> */}
-        <link rel="icon" href="/favicon.png" />
-      </Head>
-
       <Product></Product>
     </Box>
     //</Layout>
