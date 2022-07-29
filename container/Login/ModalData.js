@@ -81,7 +81,7 @@ export default function ModalLoginData({ handleClose, open }) {
         console.log(result.payload)
         console.log(Cookies.get("productId"))
         result.payload && Cookies.get("productId") ?
-            (router.push("/product_detail", Cookies.get("productId")), setLginSccess(true), handleClickBar(), handleClose())
+            (router.push("/product_detail?productId=", Cookies.get("productId")), setLginSccess(true), handleClickBar(), handleClose())
             :
             result.payload
                 ? (router.push("/"), setLginSccess(true), handleClickBar(), handleClose())
