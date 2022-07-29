@@ -10,7 +10,7 @@ import { header, footer } from "../../helper/config/config";
 export default function Footer() {
   const [currentHost, setCurrentHost] = useState();
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if (typeof window !== "undefined" && window.location !== window.parent.location) {
       const hostname = window.location.hostname;
       setCurrentHost(hostname);
     }
@@ -18,7 +18,7 @@ export default function Footer() {
 
   return (
     <>
-      {currentHost != "137.74.4.23" && footer != true && window.location !== window.parent.location ? (
+      {currentHost != "137.74.4.23" && footer != true ? (
         <Box
           px={{ xs: 3, sm: 10, md: 12 }}
           py={{ xs: 5, sm: 10, md: 12 }}
