@@ -41,7 +41,7 @@ export default function ActionAreaCard({
           cursor: "pointer",
         },
       }}
-      // className={cx(styles.root)}
+    // className={cx(styles.root)}
     >
       {product?.productImage && (
         <>
@@ -52,7 +52,8 @@ export default function ActionAreaCard({
             alt="shirt"
             width={245}
             height={200}
-            // loading="eager"
+            loading="eager"
+            priority
           ></Image>
         </>
       )}
@@ -64,7 +65,7 @@ export default function ActionAreaCard({
           alt="shirt"
           width={245}
           height={200}
-          // loading="eager"
+        // loading="eager"
         ></Image>
       )}
       {product?.category_name && (
