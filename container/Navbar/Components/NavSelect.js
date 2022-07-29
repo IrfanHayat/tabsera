@@ -10,7 +10,7 @@ import { ListItemIcon } from "@mui/material";
 import { ListItemText } from "@mui/material";
 import ContentCopy from "@mui/icons-material/ContentCopy";
 import Typography from "@mui/material/Typography";
-export default function NavSelect({ Title, Data, clr, startIcon }) {
+export default function NavSelect({ Title, Data, clr, startIcon, color }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [isActive, setIsActive] = React.useState(false);
 
@@ -43,17 +43,18 @@ export default function NavSelect({ Title, Data, clr, startIcon }) {
           // component: "a",
           fontFamily: "monospace",
           fontWeight: 300,
-          color: "black",
+          color: { color },
           // marginLeft: 50,
+          // mt: 3,
           textDecoration: "none",
           textTransform: "capitalize",
           // underline: "hover",
           // color: { color: clr ? { clr } : linkcolor },
           ":hover": {
             // boxShadow: 20, // theme.shadows[20]
-            // transform: "scale(1.1)",
-            color: "blue",
-            // transformOrigin: "bottomleft",
+            transform: "scale(1.1)",
+            // color: "yellow",
+            transformOrigin: "bottomleft",
             // opacity: 0.5,
             cursor: "pointer",
           },
@@ -70,7 +71,7 @@ export default function NavSelect({ Title, Data, clr, startIcon }) {
         {/* <KeyboardArrowRightIcon /> */}
         <Typography> {Title} </Typography>
       </Button>
-    
+
       <Menu
         // sx={{ width: 320, maxWidth: "100%" }}
         id="basic-menu"
@@ -117,7 +118,7 @@ export default function NavSelect({ Title, Data, clr, startIcon }) {
             <ContentCopy fontSize="small" />
           </ListItemIcon>
           <ListItemText>Copy</ListItemText> */}
-       <Typography> {Data} </Typography>  
+        <Typography> {Data} </Typography>
         {/* </MenuItem> */}
         {/* <MenuItem onClick={handleClose}>My account</MenuItem>
         <MenuItem onClick={handleClose}>Logout</MenuItem> */}

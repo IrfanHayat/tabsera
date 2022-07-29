@@ -29,18 +29,22 @@ import { ListItemIcon } from "@mui/material";
 import { Container } from "@mui/system";
 import { logoutUser } from "../../../slice/authSlice";
 import Cookies from "js-cookie";
+import Image from "next/image";
+import SignInModal from "../../Login/SignIn";
 
 const NavLink = styled("a")(() => ({
   wrap: "noWrap",
   component: "a",
-  fontFamily: "monospace",
+  fontFamily: "Raleway, Almarai, sans-serif",
   fontWeight: 300,
-  color: "inherit",
+  color: "white",
   marginLeft: 50,
   ":hover": {
-    // textDecoration: "underline",
-    color: "blue",
-
+    // boxShadow: 20, // theme.shadows[20]
+    transform: "scale(1.1)",
+    // color: "white",
+    transformOrigin: "bottomleft",
+    // opacity: 0.5,
     cursor: "pointer",
   },
   textDecoration: "none",
@@ -59,6 +63,7 @@ export default function TopNav(props) {
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
   const [categoriesData, setCategoriesData] = useState([]);
   const dispatch = useDispatch();
+  const [showLogin, setShowLogin] = useState(false);
 
   const theme = useTheme();
 
@@ -241,34 +246,36 @@ export default function TopNav(props) {
     <Box sx={{ flexGrow: 1 }}>
       <CssBaseline />
       <AppBar
-        style={{ height: "40px" }}
+        style={{ height: "90px" }}
         sx={{
           justifyContent: "center",
           padding: "5px",
           // bgcolor: "#f6f9fc",
-          bgcolor: "white",
+          bgcolor: "inderit",
           color: "black",
         }}
         position="static"
       >
-        <Container>
-          <Toolbar>
+        {/* <Container> */}
+        <Toolbar>
+          <Image src="/logo.png" height={40} width={100}></Image>
+          <Box sx={{ flexGrow: 1 }} />
+
+          {/* <Box sx={{ flexGrow: 1 }} /> */}
+
+          <Box
+            sx={{
+              display: { xs: "none", md: "flex", justifyContent: "center" },
+            }}
+          >
             <NavLink href="/about">
               <Typography>{t("About Us")}</Typography>
             </NavLink>
             <NavLink href="/contact_us">
               <Typography>Contact Us</Typography>
             </NavLink>
-
-            <Box sx={{ flexGrow: 1 }} />
-
-            <Box
-              sx={{
-                display: { xs: "none", md: "flex", justifyContent: "center" },
-              }}
-            >
-              <NavSelect Title="Account" Data={myAccount} />
-              {/* <FormControl sx={{ m: 1, minWidth: 80 }}>
+            <NavSelect Title="Account" Data={myAccount} />
+            {/* <FormControl sx={{ m: 1, minWidth: 80 }}>
                 <TextField
                   select
                   // value={age}
@@ -285,23 +292,24 @@ export default function TopNav(props) {
                   <MenuItem value={30}>Thirty</MenuItem>
                 </TextField>
               </FormControl> */}
-              <NavSelect Title="Currency" Data={currencyData} />
-              <NavSelect Title="Language" Data={languageData} />
-            </Box>
-            <Box sx={{ display: { xs: "flex", md: "none" } }}>
-              <IconButton
-                size="large"
-                aria-label="show more"
-                aria-controls={mobileMenuId}
-                aria-haspopup="true"
-                onClick={handleMobileMenuOpen}
-                color="inherit"
-              >
-                <MoreIcon />
-              </IconButton>
-            </Box>
-          </Toolbar>
-        </Container>
+            <NavSelect Title="Currency" Data={currencyData} />
+            <NavSelect Title="Language" Data={languageData} />
+            <SignInModal show={showLogin} close={() => setShowLogin(false)} />
+          </Box>
+          <Box sx={{ display: { xs: "flex", md: "none" } }}>
+            <IconButton
+              size="large"
+              aria-label="show more"
+              aria-controls={mobileMenuId}
+              aria-haspopup="true"
+              onClick={handleMobileMenuOpen}
+              color="inherit"
+            >
+              <MoreIcon />
+            </IconButton>
+          </Box>
+        </Toolbar>
+        {/* </Container> */}
       </AppBar>
       {renderMobileMenu}
       {renderMenu}{" "}
