@@ -18,7 +18,7 @@ export default function Footer() {
 
   return (
     <>
-      {currentHost != "137.74.4.23" && footer != true ? (
+      {currentHost != "137.74.4.23" && footer != true && window.location !== window.parent.location ? (
         <Box
           px={{ xs: 3, sm: 10, md: 12 }}
           py={{ xs: 5, sm: 10, md: 12 }}
@@ -105,8 +105,8 @@ export default function Footer() {
                 container
                 direction="row"
                 alignItems="center"
-                // px={{ xs: 1, sm: 3 }}
-                // py={{ xs: 1, sm: 3 }}
+              // px={{ xs: 1, sm: 3 }}
+              // py={{ xs: 1, sm: 3 }}
               >
                 <Grid item>
                   <PublicOutlinedIcon />
