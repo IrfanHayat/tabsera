@@ -265,23 +265,26 @@ function Details({
             <Divider />
 
             {/* </ListItem> */}
-            <ListItem>
-              <Stack
-                direction="row"
-                spacing={2}
-                sx={{
-                  display: {
-                    xs: "none",
-                    md: "flex",
+            <ListItem
+              sx={{
+                // display: "flex",
+                display: {
+                  xs: "none",
+                  md: "flex",
 
-                    justifyContent: "center",
-                    alignItems: "center",
-                    flexWrap: "wrap",
+                  // display: "flex",
 
-                    // bgcolor: "#f6f9fc",
-                  },
-                }}
-              >
+                  // flexWrap: "wrap",
+
+                  // bgcolor: "#f6f9fc",
+                },
+                display: "flex",
+                justifyContent: "flex-end",
+                p: 1,
+                m: 1,
+              }}
+            >
+              <Stack direction="row" spacing={2}>
                 <Button
                   // fullWidth
                   variant="contained"
@@ -315,7 +318,7 @@ function Details({
           </List>
         </Grid>
 
-        <Grid container spacing={1} style={{ marginTop: "40px" }}>
+        <Grid container spacing={1} m={1}>
           <Grid item md={12} xs={12}>
             <Card>
               <AppBar

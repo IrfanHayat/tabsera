@@ -155,6 +155,7 @@ export default function PersistentDrawerLeft() {
           sx={{
             flexGrow: 1,
           }}
+          maxWidth="lg"
         >
           {/* {loading ? ( 
         <CircularProgress/>

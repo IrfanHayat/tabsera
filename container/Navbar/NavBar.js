@@ -288,10 +288,15 @@ export default function NavBar() {
             position="static"
           >
             <Toolbar sx={{ flexWrap: "wrap" }}>
-              <Image src="/logo.png" height={45} width={100}></Image>
-              <NavLink sx={{ color: "white", ml: 3 }} href="/">
+              <Image
+                src="/logo.png"
+                height={45}
+                width={100}
+                onClick={() => router.push("/")}
+              ></Image>
+              {/* <NavLink sx={{ color: "white", ml: 3 }} href="/">
                 Home
-              </NavLink>
+              </NavLink> */}
               <Box component="div" sx={{ flexGrow: 1 }} />
               <Box
                 sx={{
