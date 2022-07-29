@@ -42,13 +42,13 @@ export default function Categories({ Title, Data, clr, startIcon }) {
           color: "black",
           textDecoration: "none",
           textTransform: "capitalize",
-        m:1,
-        p:1,
+          m: 1,
+          p: 1,
           ":hover": {
             // boxShadow: 20, // theme.shadows[20]
-            // transform: "scale(1.1)",
-            color: "white",
-            // transformOrigin: "bottomleft",
+            transform: "scale(1.1)",
+            // color: "white",
+            transformOrigin: "bottomleft",
             // opacity: 0.5,
             cursor: "pointer",
           },
@@ -63,7 +63,7 @@ export default function Categories({ Title, Data, clr, startIcon }) {
         }
       >
         {/* <KeyboardArrowRightIcon /> */}
-       <Typography> {Title}</Typography>
+        <Typography> {Title}</Typography>
       </Button>
       <Menu
         // sx={{ width: 320, maxWidth: "100%" }}
@@ -97,7 +97,7 @@ export default function Categories({ Title, Data, clr, startIcon }) {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-       <Typography>  {Data}</Typography> 
+        <Typography> {Data}</Typography>
       </Menu>
     </>
   );

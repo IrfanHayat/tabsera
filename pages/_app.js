@@ -5,7 +5,7 @@ import "../styles/globals.css";
 import { SessionProvider } from "next-auth/react";
 import { jssPreset, StylesProvider } from "@mui/styles";
 import { ThemeProvider } from "@mui/material/styles";
-
+import Head from "next/head";
 import { theme } from "../theme";
 import { CookiesProvider } from "react-cookie";
 import NavBar from "../container/Navbar/NavBar";
@@ -27,6 +27,9 @@ const MyApp = ({ Component, pageProps }) => {
       <StylesProvider jss={jss}>
         <ThemeProvider theme={theme}>
           {/* <CookiesProvider> */}
+          {/* <Head>
+            <link rel="icon" href="/favicon.png" />
+          </Head> */}
           <NavBar />
 
           <Container maxWidth="lg">

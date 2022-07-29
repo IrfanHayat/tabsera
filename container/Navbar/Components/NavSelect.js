@@ -43,7 +43,7 @@ export default function NavSelect({ Title, Data, clr, startIcon }) {
           // component: "a",
           fontFamily: "monospace",
           fontWeight: 300,
-          color: "black",
+          color: "white",
           // marginLeft: 50,
           textDecoration: "none",
           textTransform: "capitalize",
@@ -51,9 +51,9 @@ export default function NavSelect({ Title, Data, clr, startIcon }) {
           // color: { color: clr ? { clr } : linkcolor },
           ":hover": {
             // boxShadow: 20, // theme.shadows[20]
-            // transform: "scale(1.1)",
-            color: "blue",
-            // transformOrigin: "bottomleft",
+            transform: "scale(1.1)",
+            // color: "white",
+            transformOrigin: "bottomleft",
             // opacity: 0.5,
             cursor: "pointer",
           },
@@ -70,7 +70,7 @@ export default function NavSelect({ Title, Data, clr, startIcon }) {
         {/* <KeyboardArrowRightIcon /> */}
         <Typography> {Title} </Typography>
       </Button>
-    
+
       <Menu
         // sx={{ width: 320, maxWidth: "100%" }}
         id="basic-menu"
@@ -117,7 +117,7 @@ export default function NavSelect({ Title, Data, clr, startIcon }) {
             <ContentCopy fontSize="small" />
           </ListItemIcon>
           <ListItemText>Copy</ListItemText> */}
-       <Typography> {Data} </Typography>  
+        <Typography> {Data} </Typography>
         {/* </MenuItem> */}
         {/* <MenuItem onClick={handleClose}>My account</MenuItem>
         <MenuItem onClick={handleClose}>Logout</MenuItem> */}

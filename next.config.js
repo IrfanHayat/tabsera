@@ -21,6 +21,7 @@ module.exports = {
       "b.zmtcdn.com",
       "tijaricloud.com",
       "tabsera.com",
+      "137.74.4.23",
       // "localhost:3000",
     ],
   },

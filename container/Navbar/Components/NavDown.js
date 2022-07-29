@@ -152,9 +152,13 @@ export default function NavDown(props) {
       <AppBar
         // className={classes.root}
         sx={{
-          color: "inherit",
+          color: "secondary",
           boxShadow: 0,
-          // bgcolor: "#bdbdbd",
+          bgcolor: "#f6f9fc",
+          // sx={{  }}
+          borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
+          // bgcolor: "background.paper",
+
           // height: "95%",
           // bgcolor: "#0277bd",
           justifyContent: "center",
@@ -187,7 +191,9 @@ export default function NavDown(props) {
               height: "40px",
               justifyContent: "center",
               borderRadius: 24,
-              border: "none",
+              border: 0.1,
+              // border: "none",
+              borderColor: "grey.500",
             }}
           >
             <Autocomplete
@@ -195,7 +201,6 @@ export default function NavDown(props) {
               id="free-solo-2-demo"
               // disableClearable
               // popupIcon={<SearchIcon />}
-
               options={searchHintData ? searchHintData : ""}
               onInputChange={handleInputChange}
               onKeyUp={handleInputClick}
@@ -206,6 +211,7 @@ export default function NavDown(props) {
                   {...params}
                   placeholder="Search Product and Brand ...."
                   variant="standard"
+                  sx={{ borderColor: "primary.main" }}
                   // color="primary"
                   color="primary"
                   focused
@@ -230,7 +236,7 @@ export default function NavDown(props) {
               aria-describedby={id}
               variant="contained"
               onClick={handleClick}
-              color="inherit"
+              color="primary"
 
               // onMouseEnter={handleClick}
               // onMouseLeave={handleClick}

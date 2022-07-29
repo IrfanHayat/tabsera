@@ -161,11 +161,11 @@ export default function PersistentDrawerLeft() {
             ):()
           */}
 
-          <Grid item xs={12} md={12}>
+          <Grid item xs={12} md={12} mt={1}>
             <NewCarousel
               product={
                 product &&
-                product.slice([5], [9]).map((item, i) => {
+                product.slice([6], [12]).map((item, i) => {
                   return item;
                 })
               }
