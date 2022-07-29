@@ -13,6 +13,9 @@ import MuiAlert from "@mui/material/Alert";
 import { useRouter, withRouter } from "next/router";
 import { getProductWithId, getProduct } from "../../slice/productSlice";
 import { getMerchantWithId } from "../../slice/merchantSlice";
+import ModalData from "../../container/Login/ModalData";
+import Cookies from 'js-cookie'
+
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -30,6 +33,7 @@ function Product_detail(props) {
   let [productAttributes, setProductAttributes] = useState([]);
   let [price, setPrice] = useState();
   let [status, setStatus] = useState();
+  const [showLogin, setShowLogin] = useState(false);
   let [buyStatus, setBuyStatus] = useState();
   let [flag, setFlag] = useState(false);
   let router = useRouter();
@@ -37,6 +41,12 @@ function Product_detail(props) {
   let [filterData, setFilterData] = useState({});
   const [openBar, setOpenBar] = React.useState(false);
   const { cartItems } = useSelector((state) => state.basket.cart);
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   console.log(addBuyItem)
   const viewStore = (merchantId) => {
@@ -116,7 +126,9 @@ function Product_detail(props) {
       dispatch(getCartItems());
       console.log(addCart);
       if (status?.resultCode == 4000) {
-        setOpenBar(true);
+        // setOpenBar(true);
+        Cookies.set('productId', router.query.productId)
+        setOpen(true);
       }
 
       await dispatch(getTotalCartQuantity());
@@ -127,7 +139,9 @@ function Product_detail(props) {
       dispatch(getCartItems());
       console.log(addCart);
       if (status?.resultCode == 4000) {
-        setOpenBar(true);
+        //setOpenBar(true);
+        setOpen(true);
+        Cookies.set('productId', router.query.productId)
       }
       setTimeout(() => {
         dispatch(getTotalCartQuantity());
@@ -166,7 +180,10 @@ function Product_detail(props) {
 
       dispatch(BuyNewItem(product));
       if (status?.resultCode == 4000) {
-        setOpenBar(true);
+        setOpen(true);
+        Cookies.set('productId', router.query.productId)
+        // setOpenBar(true);
+
 
       }
       // dispatch(addToCart(product));
@@ -180,7 +197,9 @@ function Product_detail(props) {
 
       // dispatch(addToCart(item));
       if (result.payload.resultCode == 4000) {
-        setOpenBar(true);
+        // setOpenBar(true);
+        Cookies.set('productId', router.query.productId)
+        setOpen(true);
         setBuyStatus(true)
       } else {
         localStorage.setItem('buyItem', true)
@@ -217,27 +236,32 @@ function Product_detail(props) {
     router.push("/shipping");
   };
 
+
   return (
     <>
+
+
       {status?.resultCode === 4000 || buyStatus == true ? (
-        <Snackbar
-          open={openBar}
-          autoHideDuration={2000}
-          onClose={handleCloseBar}
-          anchorOrigin={{
-            horizontal: "center",
-            vertical: "top",
-          }}
-        >
-          <Alert
-            onClose={handleCloseBar}
-            severity="error"
-            sx={{ width: "100%" }}
-          >
-            Please Login
-          </Alert>
-        </Snackbar>
+        <ModalData handleClose={handleClose} open={open}></ModalData>
+        // <Snackbar
+        //   open={openBar}
+        //   autoHideDuration={2000}
+        //   onClose={handleCloseBar}
+        //   anchorOrigin={{
+        //     horizontal: "center",
+        //     vertical: "top",
+        //   }}
+        // >
+        //   <Alert
+        //     onClose={handleCloseBar}
+        //     severity="error"
+        //     sx={{ width: "100%" }}
+        //   >
+        //     Please Login
+        //   </Alert>
+        // </Snackbar>
       ) : (
+
         <Snackbar
           open={openBar}
           autoHideDuration={6000}
@@ -267,6 +291,7 @@ function Product_detail(props) {
           price={price}
           checkoutHandler={checkoutHandler}
           viewStore={viewStore}
+          productIdRoute={router.query.productId}
         ></Details>
       ) : (
         <Details
@@ -279,6 +304,7 @@ function Product_detail(props) {
           price={price}
           checkoutHandler={checkoutHandler}
           viewStore={viewStore}
+          productIdRoute={router.query.productId}
         ></Details>
       )}
     </>

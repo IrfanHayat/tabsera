@@ -26,6 +26,9 @@ import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import SearchIcon from "@mui/icons-material/Search";
 import MoreIcon from "@mui/icons-material/MoreVert";
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+
+import Link from "next/link";
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
   { width: 550, itemsToShow: 2 },
@@ -41,6 +44,12 @@ const StyledFab = styled(Fab)({
   right: 0,
   margin: "0 auto",
 });
+
+function handleClick(event) {
+  event.preventDefault();
+  console.info('You clicked a breadcrumb.');
+}
+
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -86,6 +95,7 @@ function Details({
   BuyHandler,
   price,
   viewStore,
+  productIdRoute
 }) {
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -115,11 +125,26 @@ function Details({
 
   return (
     <>
+      <div role="presentation" onClick={handleClick}>
+        <Breadcrumbs aria-label="breadcrumb">
+          <Link underline="hover" color="inherit" href="/">
+            Home
+          </Link>
+          <Link
+            underline="hover"
+            color="inherit"
+            href={`/product_detail?productId=${productIdRoute}`}
+          >
+            Product Detail
+          </Link>
+          <Typography color="text.primary">{productDetail?.product_name}</Typography>
+        </Breadcrumbs>
+      </div>
       <Grid
         container
         spacing={1}
         sx={{ paddingTop: 2 }}
-        // justifyContent="center"
+      // justifyContent="center"
       >
         {/* <Grid item md={12} xs={12} ml={1}>
           <Typography variant="h6" style={{ fontWeight: "bold" }}>
@@ -142,27 +167,27 @@ function Details({
               >
                 {skusProduct
                   ? skusProduct.sku_images.map((result, index) => (
-                      <Image
-                        key={index}
-                        //  className={cx(styles.media, mediaStyles.root)}
-                        src={result}
-                        alt="shirt"
-                        // objectFit="contain"
-                        width={1500}
-                        height={1000}
-                      ></Image>
-                    ))
+                    <Image
+                      key={index}
+                      //  className={cx(styles.media, mediaStyles.root)}
+                      src={result}
+                      alt="shirt"
+                      // objectFit="contain"
+                      width={1500}
+                      height={1000}
+                    ></Image>
+                  ))
                   : productImage && (
-                      <Image
-                        // key={index}
-                        //  className={cx(styles.media, mediaStyles.root)}
-                        src={productImage[0]}
-                        alt="shirt"
-                        objectFit="contain"
-                        width={1500}
-                        height={1000}
-                      ></Image>
-                    )}
+                    <Image
+                      // key={index}
+                      //  className={cx(styles.media, mediaStyles.root)}
+                      src={productImage[0]}
+                      alt="shirt"
+                      objectFit="contain"
+                      width={1500}
+                      height={1000}
+                    ></Image>
+                  )}
               </Carousel>
             </ListItem>
           </List>
@@ -207,32 +232,32 @@ function Details({
             {/* <ListItem> */}
             {skusProduct
               ? skusProduct.attributes.map((result, index) => (
-                  // <List key={index}>
-                  <ListItem key={index}>
-                    <ListItemText>
-                      <Typography>{result.attribute_name}</Typography>
-                    </ListItemText>
-                    <ListItemText>
-                      <Typography>{result.value}</Typography>
-                    </ListItemText>
-                  </ListItem>
-                  // </List>
-                ))
+                // <List key={index}>
+                <ListItem key={index}>
+                  <ListItemText>
+                    <Typography>{result.attribute_name}</Typography>
+                  </ListItemText>
+                  <ListItemText>
+                    <Typography>{result.value}</Typography>
+                  </ListItemText>
+                </ListItem>
+                // </List>
+              ))
               : productAttributes.map((result, index) => (
-                  // <List key={index}>
-                  <ListItem key={index}>
-                    <ListItemText>
-                      <Typography style={{ fontWeight: "bold" }}>
-                        {result.attribute_name} :
-                      </Typography>
-                    </ListItemText>
-                    <ListItemText>
-                      <Typography>{result.value}</Typography>
-                    </ListItemText>
-                  </ListItem>
+                // <List key={index}>
+                <ListItem key={index}>
+                  <ListItemText>
+                    <Typography style={{ fontWeight: "bold" }}>
+                      {result.attribute_name} :
+                    </Typography>
+                  </ListItemText>
+                  <ListItemText>
+                    <Typography>{result.value}</Typography>
+                  </ListItemText>
+                </ListItem>
 
-                  // </List>
-                ))}
+                // </List>
+              ))}
             <Divider />
             <Typography variant="h5" style={{ fontWeight: "bold" }}>
               Skus
@@ -383,7 +408,7 @@ function Details({
                     <Button
                       variant="text"
                       onClick={() => viewStore(merchantDetail?.merchant_id)}
-                      // onClick={viewStore}
+                    // onClick={viewStore}
                     >
                       Visit Store
                     </Button>
