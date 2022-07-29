@@ -3,7 +3,7 @@ import instance from "../helper/axios/httpRequest";
 import productData from "../data/product";
 import { url, setHeaders } from "../helper/axios/config";
 //import Cookies from 'universal-cookie';
-
+//
 export const getMerchantWithId = createAsyncThunk(
   "merchant/getMerchantWithId",
   async (id) => {
