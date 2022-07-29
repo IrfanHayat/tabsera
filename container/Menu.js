@@ -137,7 +137,7 @@ export default function PersistentDrawerLeft() {
 
   const dealsPromotions = <div>yes</div>;
   return (
-    <Box>
+    <Grid>
       {isLoading ? (
         <Grid
           sx={{
@@ -150,13 +150,7 @@ export default function PersistentDrawerLeft() {
           <CircularProgress size={140} />
         </Grid>
       ) : (
-        <Box
-          component="main"
-          sx={{
-            flexGrow: 1,
-          }}
-          maxWidth="lg"
-        >
+        <Grid component="main" maxWidth="xl">
           {/* {loading ? ( 
         <CircularProgress/>
             ):()
@@ -215,8 +209,8 @@ export default function PersistentDrawerLeft() {
                 </Item>
               </Grid>
             ))}
-        </Box>
+        </Grid>
       )}
-    </Box>
+    </Grid>
   );
 }

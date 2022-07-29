@@ -118,6 +118,7 @@ function Details({
       <Grid
         container
         spacing={1}
+        maxWidth="xl"
         sx={{ paddingTop: 2 }}
         // justifyContent="center"
       >
@@ -167,8 +168,11 @@ function Details({
             </ListItem>
           </List>
         </Grid>
+        {/* <Grid item md={2} sm={12}>
+          YEs
+        </Grid> */}
 
-        <Grid item md={5} sm={6}>
+        <Grid item md={5} sm={12}>
           <List>
             <ListItem>
               <ListItemText>

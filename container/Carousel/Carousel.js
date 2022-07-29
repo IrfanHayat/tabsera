@@ -12,7 +12,7 @@ import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrow
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
   { width: 550, itemsToShow: 2 },
-  { width: 768, itemsToShow: 4 },
+  { width: 768, itemsToShow: 5 },
   { width: 1200, itemsToShow: 5 },
 ];
 
@@ -28,7 +28,7 @@ export default function CarouselApp({
   let [categoryView, setCategoryView] = useState(false);
   let [cartView, setCartView] = useState(false);
   const [rtl, setrtl] = useState(false);
-  console.log(product)
+  console.log(product);
   return (
     <Box
       container
@@ -83,7 +83,7 @@ export default function CarouselApp({
             href="/all_products"
             underline="none"
             size="small"
-            sx={{ fontSize: "0.75rem", fontWeight: "600" }}
+            sx={{ fontSize: "0.70rem", fontWeight: "600" }}
             // style={{ fontWeight: "bold" }}
             // dir="rtl"
             // endIcon={dir ? rtl: <KeyboardDoubleArrowLeftIcon />: <DoubleArrowIcon />}
