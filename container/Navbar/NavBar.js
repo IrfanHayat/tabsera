@@ -288,7 +288,7 @@ export default function NavBar() {
             position="static"
           >
             <Toolbar sx={{ flexWrap: "wrap" }}>
-              <Image src="/logo.png" height={45} width={100}></Image>
+              <Image onClick={() => router.push("/")} src="/logo.png" height={45} width={100}></Image>
               <NavLink sx={{ color: "white", ml: 3 }} href="/">
                 Home
               </NavLink>
