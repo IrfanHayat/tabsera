@@ -390,7 +390,7 @@ export default function Shipping({
                     // fullWidth
                     variant="contained"
                     color="error"
-                    onClick={() => router.push("/")}
+                    onClick={() => router.push("/shipping_information")}
                   >
                     Back
                   </Button>
