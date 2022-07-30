@@ -139,17 +139,18 @@ function Product_detail(props) {
       // console.log("item");
       // console.log(item);
       let result = await dispatch(addToCart(item));
-      dispatch(getCartItems());
-      console.log(result);
       if (result?.payload.resultCode == 4000) {
         //setOpenBar(true);
 
         setOpen(true);
         Cookies.set('productId', router.query.productId)
       }
-      setTimeout(() => {
-        dispatch(getTotalCartQuantity());
-      }, 1000);
+
+      dispatch(getCartItems());
+      dispatch(getTotalCartQuantity());
+
+      console.log(result);
+
       //  router.push("/cart");
     }
 
@@ -200,7 +201,7 @@ function Product_detail(props) {
       console.log(status)
 
       // dispatch(addToCart(item));
-      if (result.payload.resultCode == 4000) {
+      if (result?.payload?.resultCode == 4000) {
         // setOpenBar(true);
         Cookies.set('productId', router.query.productId)
         setOpen(true);

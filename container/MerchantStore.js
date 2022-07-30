@@ -68,7 +68,7 @@ function MerchantStore({ merchantStoreDetail }) {
   };
   let router = useRouter();
 
-  
+
 
   const viewProduct = (item) => {
     router.push({
@@ -133,7 +133,7 @@ function MerchantStore({ merchantStoreDetail }) {
 
             <TabPanel value={value} index={0}>
               <Grid container>
-                {merchantStoreDetail?.map((result) => (
+                {merchantStoreDetail && merchantStoreDetail?.map((result) => (
                   <ActionAreaCard
                     product={result}
                     viewProduct={viewProduct}
@@ -154,7 +154,7 @@ function MerchantStore({ merchantStoreDetail }) {
                 // fullWidth
                 variant="contained"
                 color="error"
-                onClick={() =>router.push(`/product_detail?productId=${localStorage.getItem("productId")}`)}
+                onClick={() => router.push(`/product_detail?productId=${localStorage.getItem("productId")}`)}
               >
                 Back
               </Button>

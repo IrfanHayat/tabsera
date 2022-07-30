@@ -20,7 +20,7 @@ import Divider from "@mui/material/Divider";
 import NavDown from "./Components/NavDown";
 import { header, footer } from "../../helper/config/config";
 import { useRouter, withRouter } from "next/router";
-import { loginUser } from "../../slice/authSlice";
+import { loginUser, logoutUser } from "../../slice/authSlice";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemText from "@mui/material/ListItemText";
 import { ListItemIcon } from "@mui/material";
