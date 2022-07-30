@@ -103,65 +103,69 @@ function ShippingInformation({
         </Grid>
 
         {buttonKey === 1 ? (
-          <Grid item md={3} mt={4} justifyContent="center">
-            <FormControl>
-              <FormLabel style={{ fontWeight: "bold" }}>
-                Shipping Addresses
-              </FormLabel>
+          <Grid container>
+            <Grid item md={1}></Grid>
 
-              <List sx={{ display: "flex", p: 1, m: 1 }}>
-                <ListItem>
-                  <RadioGroup
-                    // row
-                    aria-labelledby="demo-row-radio-buttons-group-label"
-                    name="row-radio-buttons-group"
-                    // value={labelValue}
-                    onChange={handleChange}
+            <Grid item md={3} mt={4} justifyContent="center">
+              <FormControl>
+                <FormLabel style={{ fontWeight: "bold" }}>
+                  Shipping Addresses
+                </FormLabel>
+
+                <List sx={{ display: "flex", p: 1, m: 1 }}>
+                  <ListItem>
+                    <RadioGroup
+                      // row
+                      aria-labelledby="demo-row-radio-buttons-group-label"
+                      name="row-radio-buttons-group"
+                      // value={labelValue}
+                      onChange={handleChange}
+                    >
+                      {shippementAddress &&
+                        shippementAddress.map((result) =>
+                          result.address_default_billing === false ? (
+                            <FormControlLabel
+                              value={result.address_id}
+                              control={<Radio />}
+                              label={result.address}
+                              onClick={() => setRadioCheck(true)}
+                            />
+                          ) : (
+                            ""
+                          )
+                        )}
+                    </RadioGroup>
+                  </ListItem>
+                </List>
+                <Stack direction="row" spacing={2}>
+                  <Button
+                    onClick={checkoutHandler}
+                    variant="contained"
+                    color="primary"
+                    disabled={radioCheck ? "" : "disabled"}
+                    // href="/shipping_methods"
+                    // startIcon={<AddIcon />}
                   >
-                    {shippementAddress &&
-                      shippementAddress.map((result) =>
-                        result.address_default_billing === false ? (
-                          <FormControlLabel
-                            value={result.address_id}
-                            control={<Radio />}
-                            label={result.address}
-                            onClick={() => setRadioCheck(true)}
-                          />
-                        ) : (
-                          ""
-                        )
-                      )}
-                  </RadioGroup>
-                </ListItem>
-              </List>
-              <Stack direction="row" spacing={2}>
-                <Button
-                  onClick={checkoutHandler}
-                  variant="contained"
-                  color="primary"
-                  disabled={radioCheck ? "" : "disabled"}
-                  // href="/shipping_methods"
-                  // startIcon={<AddIcon />}
-                >
-                  Continue
-                </Button>
+                    Continue
+                  </Button>
 
-                <Button
-                  // fullWidth
-                  variant="contained"
-                  color="error"
-                  onClick={() =>
-                    router.push(
-                      `/product_detail?productId=${localStorage.getItem(
-                        "productId"
-                      )}`
-                    )
-                  }
-                >
-                  Back
-                </Button>
-              </Stack>
-            </FormControl>
+                  <Button
+                    // fullWidth
+                    variant="contained"
+                    color="error"
+                    onClick={() =>
+                      router.push(
+                        `/product_detail?productId=${localStorage.getItem(
+                          "productId"
+                        )}`
+                      )
+                    }
+                  >
+                    Back
+                  </Button>
+                </Stack>
+              </FormControl>
+            </Grid>
           </Grid>
         ) : (
           ""

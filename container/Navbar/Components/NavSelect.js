@@ -2,8 +2,9 @@ import * as React from "react";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 // import { ListItemIcon, ContentCopy, ListItemText } from "@mui/material";
 import { Link } from "@mui/material";
 import { ListItemIcon } from "@mui/material";
@@ -52,9 +53,9 @@ export default function NavSelect({ Title, Data, clr, startIcon, color }) {
           // color: { color: clr ? { clr } : linkcolor },
           ":hover": {
             // boxShadow: 20, // theme.shadows[20]
-            transform: "scale(1.1)",
+            // transform: "scale(1.1)",
             // color: "yellow",
-            transformOrigin: "bottomleft",
+            // transformOrigin: "bottomleft",
             // opacity: 0.5,
             cursor: "pointer",
           },
@@ -62,9 +63,9 @@ export default function NavSelect({ Title, Data, clr, startIcon, color }) {
         startIcon={startIcon}
         endIcon={
           isActive ? (
-            <KeyboardArrowDownIcon />
+            <KeyboardArrowUpIcon />
           ) : (
-            <KeyboardArrowRightIcon fontSize="small" />
+            <KeyboardArrowDownIcon fontSize="small" />
           )
         }
       >

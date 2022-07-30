@@ -4,6 +4,8 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
+
 // import { ListItemIcon, ContentCopy, ListItemText } from "@mui/material";
 import { Link, Typography } from "@mui/material";
 import { ListItemIcon } from "@mui/material";
@@ -56,9 +58,9 @@ export default function Categories({ Title, Data, clr, startIcon }) {
         startIcon={startIcon}
         endIcon={
           isActive ? (
-            <KeyboardArrowDownIcon />
+            <KeyboardArrowUpIcon />
           ) : (
-            <KeyboardArrowRightIcon fontSize="small" />
+            <KeyboardArrowDownIcon fontSize="small" />
           )
         }
       >

@@ -32,8 +32,8 @@ const MyApp = ({ Component, pageProps }) => {
           </Head>
           <NavBar />
 
-          <Container maxWidth="lg">
-            <Box sx={{ minHeight: "80vh" }}>
+          <Container maxWidth="xl" sx={{ minHeight: "80vh" }}>
+            <Box>
               {/* <RouteGuard> */}
               <Component {...pageProps} />
               {/* </RouteGuard> */}
