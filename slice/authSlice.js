@@ -20,6 +20,9 @@ const initialState = {
   registerError: "",
   loginStatus: "",
   loginError: "",
+  logOutStatus: "",
+  logOutStatus: "",
+  logOut: {},
   userLoaded: false,
 };
 
@@ -109,6 +112,20 @@ export const getUser = createAsyncThunk(
   }
 );
 
+export const logOutCustomer = createAsyncThunk(
+  "auth/logOutCustomer",
+  async () => {
+    // try {
+    console.log("i ma herere");
+    const result = await instance.get(`${url}/customers/logout`);
+    console.log(result);
+    return result;
+    // } catch (error) {
+    // return rejectWithValue(error.response.data);
+    // }
+  }
+);
+
 const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -131,6 +148,7 @@ const authSlice = createSlice({
     },
     logoutUser(state, action) {
       //   let dispatch=useDispatch()
+      //  const result = await instance.get(`${url}/customers/logout`);
       removeFromBasket();
       localStorage.removeItem("token");
       localStorage.removeItem("name");
@@ -221,6 +239,22 @@ const authSlice = createSlice({
         ...state,
         getUserStatus: "rejected",
         getUserError: action.payload,
+      };
+    });
+
+    builder.addCase(logOutCustomer.pending, (state, action) => {
+      return { ...state, logOutStatus: "pending" };
+    });
+    builder.addCase(logOutCustomer.fulfilled, (state, action) => {
+      if (action.payload) {
+        state.logOut = action.payload;
+      }
+    });
+    builder.addCase(logOutCustomer.rejected, (state, action) => {
+      return {
+        ...state,
+        logOutStatus: "rejected",
+        logOutError: action.payload,
       };
     });
   },

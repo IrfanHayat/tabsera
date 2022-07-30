@@ -20,7 +20,7 @@ import Divider from "@mui/material/Divider";
 import NavDown from "./Components/NavDown";
 import { header, footer } from "../../helper/config/config";
 import { useRouter, withRouter } from "next/router";
-import { loginUser, logoutUser } from "../../slice/authSlice";
+import { loginUser, logoutUser, logOutCustomer } from "../../slice/authSlice";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemText from "@mui/material/ListItemText";
 import { ListItemIcon } from "@mui/material";
@@ -37,7 +37,8 @@ import IconButton from "@mui/material/IconButton";
 import Link from "@mui/material/Link";
 import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
-import Cookies from 'js-cookie'
+import Cookies from "js-cookie";
+// import { logOutCustomer } from "../../slice/authSlice";
 const NavLink = styled("a")(() => ({
   wrap: "noWrap",
   component: "a",
@@ -93,10 +94,11 @@ export default function NavBar() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
-  const logOut = () => {
-    dispatch(logoutUser());
-    Cookies.remove("connect.sid");
-    router.push("/login");
+  const logOut = async () => {
+    let result = await dispatch(logOutCustomer());
+    // Cookies.remove("connect.sid");
+    // router.push("/");
+    console.log(result);
   };
   useEffect(() => {
     changeLanguageHandler();
