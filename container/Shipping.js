@@ -355,13 +355,15 @@ export default function Shipping({
                     row
                     aria-labelledby="demo-row-radio-buttons-group-label"
                     name="row-radio-buttons-group"
-                    value={labelValue}
-                    onChange={handleChange}
+                    // value={labelValue}
+                    // onChange={handleChange}
                   >
                     {labels.map((result) => (
                       <FormControlLabel
                         value={result.address_label_id}
-                        control={<Radio />}
+                        control={
+                          <Radio onChange={() => handleChange(result)} />
+                        }
                         label={result.address_label_name}
                         onClick={() => setRadioCheck(true)}
                       />

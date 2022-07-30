@@ -26,9 +26,8 @@ import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import SearchIcon from "@mui/icons-material/Search";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import Breadcrumbs from '@mui/material/Breadcrumbs';
-
-import Link from "next/link";
+import Breadcrumbs from "@mui/material/Breadcrumbs";
+import Link from "@mui/material/Link";
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
   { width: 550, itemsToShow: 2 },
@@ -47,9 +46,8 @@ const StyledFab = styled(Fab)({
 
 function handleClick(event) {
   event.preventDefault();
-  console.info('You clicked a breadcrumb.');
+  console.info("You clicked a breadcrumb.");
 }
-
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -95,7 +93,7 @@ function Details({
   BuyHandler,
   price,
   viewStore,
-  productIdRoute
+  productIdRoute,
 }) {
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -125,34 +123,51 @@ function Details({
 
   return (
     <>
-      <div role="presentation" onClick={handleClick}>
+      <Box
+        role="presentation"
+        onClick={handleClick}
+        sx={{ display: "flex", m: 1 }}
+      >
         <Breadcrumbs aria-label="breadcrumb">
-          <Link underline="hover" color="inherit" href="/">
+          <Link
+            underline="hover"
+            color="inherit"
+            onClick={() => router.push("/")}
+          >
             Home
           </Link>
           <Link
             underline="hover"
             color="inherit"
-            href={`/product_detail?productId=${productIdRoute}`}
+            onClick={() =>
+              router.push(`/product_detail?productId=${productIdRoute}`)
+            }
           >
             Product Detail
           </Link>
-          <Typography color="text.primary">{productDetail?.product_name}</Typography>
+          <Typography
+            underline="hover"
+            color="text.primary"
+            href="/material-ui/react-breadcrumbs/"
+            aria-current="page"
+          >
+            {productDetail?.product_name}
+          </Typography>
         </Breadcrumbs>
-      </div>
+      </Box>
       <Grid
         container
         spacing={1}
         maxWidth="xl"
         sx={{ paddingTop: 2 }}
-      // justifyContent="center"
+        // justifyContent="center"
       >
         {/* <Grid item md={12} xs={12} ml={1}>
           <Typography variant="h6" style={{ fontWeight: "bold" }}>
             Product Details
           </Typography>
         </Grid> */}
-
+        {/* <Grid item md={1} sm={1}></Grid> */}
         <Grid item md={5} xs={12}>
           <List>
             <ListItem sx={{ m: 1 }}>
@@ -168,36 +183,41 @@ function Details({
               >
                 {skusProduct
                   ? skusProduct.sku_images.map((result, index) => (
-                    <Image
-                      key={index}
-                      //  className={cx(styles.media, mediaStyles.root)}
-                      src={result}
-                      alt="shirt"
-                      // objectFit="contain"
-                      width={1500}
-                      height={1000}
-                    ></Image>
-                  ))
+                      <Image
+                        key={index}
+                        //  className={cx(styles.media, mediaStyles.root)}
+                        src={result}
+                        alt="shirt"
+                        // objectFit="contain"
+                        width={1500}
+                        height={1000}
+                      ></Image>
+                    ))
                   : productImage && (
-                    <Image
-                      // key={index}
-                      //  className={cx(styles.media, mediaStyles.root)}
-                      src={productImage[0]}
-                      alt="shirt"
-                      objectFit="contain"
-                      width={1500}
-                      height={1000}
-                    ></Image>
-                  )}
+                      <Image
+                        // key={index}
+                        //  className={cx(styles.media, mediaStyles.root)}
+                        src={productImage[0]}
+                        alt="shirt"
+                        objectFit="contain"
+                        width={1500}
+                        height={1000}
+                      ></Image>
+                    )}
               </Carousel>
             </ListItem>
           </List>
         </Grid>
-        {/* <Grid item md={2} sm={12}>
-          YEs
-        </Grid> */}
 
-        <Grid item md={5} sm={12}>
+        <Grid
+          item
+          md={7}
+          sm={12}
+          xs={12}
+          sx={{ display: "flex" }}
+          justifyContent="center"
+          alignItems="center"
+        >
           <List>
             <ListItem>
               <ListItemText>
@@ -206,7 +226,7 @@ function Details({
                 </Typography>
               </ListItemText>
             </ListItem>
-            <Divider />
+            <Divider fullWidth />
             <ListItem>
               <ListItemText>
                 <Typography style={{ fontWeight: "bold" }}>
@@ -236,32 +256,32 @@ function Details({
             {/* <ListItem> */}
             {skusProduct
               ? skusProduct.attributes.map((result, index) => (
-                // <List key={index}>
-                <ListItem key={index}>
-                  <ListItemText>
-                    <Typography>{result.attribute_name}</Typography>
-                  </ListItemText>
-                  <ListItemText>
-                    <Typography>{result.value}</Typography>
-                  </ListItemText>
-                </ListItem>
-                // </List>
-              ))
+                  // <List key={index}>
+                  <ListItem key={index}>
+                    <ListItemText>
+                      <Typography>{result.attribute_name}</Typography>
+                    </ListItemText>
+                    <ListItemText>
+                      <Typography>{result.value}</Typography>
+                    </ListItemText>
+                  </ListItem>
+                  // </List>
+                ))
               : productAttributes.map((result, index) => (
-                // <List key={index}>
-                <ListItem key={index}>
-                  <ListItemText>
-                    <Typography style={{ fontWeight: "bold" }}>
-                      {result.attribute_name} :
-                    </Typography>
-                  </ListItemText>
-                  <ListItemText>
-                    <Typography>{result.value}</Typography>
-                  </ListItemText>
-                </ListItem>
+                  // <List key={index}>
+                  <ListItem key={index}>
+                    <ListItemText>
+                      <Typography style={{ fontWeight: "bold" }}>
+                        {result.attribute_name} :
+                      </Typography>
+                    </ListItemText>
+                    <ListItemText>
+                      <Typography>{result.value}</Typography>
+                    </ListItemText>
+                  </ListItem>
 
-                // </List>
-              ))}
+                  // </List>
+                ))}
             <Divider />
             <Typography variant="h5" style={{ fontWeight: "bold" }}>
               Skus
@@ -299,6 +319,7 @@ function Details({
                 // display: "flex",
                 display: {
                   xs: "none",
+                  sm: "none",
                   md: "flex",
 
                   // display: "flex",
@@ -346,6 +367,7 @@ function Details({
             </ListItem>
           </List>
         </Grid>
+        {/* <Grid item md={1} sm={1}></Grid> */}
 
         <Grid container spacing={1} m={1}>
           <Grid item md={12} xs={12}>
@@ -415,7 +437,7 @@ function Details({
                     <Button
                       variant="text"
                       onClick={() => viewStore(merchantDetail?.merchant_id)}
-                    // onClick={viewStore}
+                      // onClick={viewStore}
                     >
                       Visit Store
                     </Button>
@@ -428,7 +450,7 @@ function Details({
             </Card>
           </Grid>
         </Grid>
-        <AppBar
+        {/* <AppBar
           position="fixed"
           color="inherit"
           sx={{
@@ -480,7 +502,7 @@ function Details({
               </Button>
             </Stack>
           </Toolbar>
-        </AppBar>
+        </AppBar> */}
       </Grid>
     </>
   );
