@@ -48,7 +48,7 @@ function Shipping1() {
 
   const classes = useStyles();
 
-  const submitHandler = (value) => {
+  const submitHandler = async (value) => {
     let obj = {
       addresses: [
         {
@@ -73,9 +73,10 @@ function Shipping1() {
         },
       ],
     };
-  
 
-    dispatch(addShipmentAddress(obj));
+
+    let result = await dispatch(addShipmentAddress(obj));
+    console.log(result)
     //  localStorage.setItem("shippingAddress", JSON.stringify(value));
     // router.push("/shipping_information");
   };

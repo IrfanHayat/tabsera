@@ -19,10 +19,10 @@ const initialState = {
       ? localStorage.getItem("buyCartItems")
       : [],
     addCart: {},
-    
+
 
   },
-  addBuyItem:{},
+  addBuyItem: {},
   // userIfo:localStorage.getItem("userInfo")
   // ? JSON.parse(localStorage.getItem("userInfo"))
   // : [],
@@ -245,7 +245,7 @@ export const BuyNewItem = createAsyncThunk("cart/BuyCartItems", async (product) 
         sku: skus_value,
         qty: tempProductItem.qty,
       };
-    await instance.post(`${url}/ecommerce/carts/items`, cart);
+      await instance.post(`${url}/ecommerce/carts/items`, cart);
     } else {
       let skus = result2.data.response.skus;
 
@@ -258,7 +258,7 @@ export const BuyNewItem = createAsyncThunk("cart/BuyCartItems", async (product) 
           `${url}/ecommerce/products/${tempProductItem.product_id}`
         );
         let cart = {
-          cart_id:null,
+          cart_id: null,
           sku: skus_value,
           // price: cost,
           qty: tempProductItem.qty,
@@ -324,7 +324,7 @@ export const basketSlice = createSlice({
             `${url}/ecommerce/carts/items/${state.cart.cartItems[existingIndex].cart_item_id}`,
             state.cart.cartItems[existingIndex]
           )
-          .then((result) => {});
+          .then((result) => { });
       } else {
         let skus;
         let tempProductItem = { ...action.payload, qty: 1 };
@@ -354,7 +354,7 @@ export const basketSlice = createSlice({
 
                 instance
                   .post(`${url}/ecommerce/carts/items`, cart)
-                  .then((result) => {});
+                  .then((result) => { });
 
                 instance.post(`${url}/ecommerce/carts`).then((result) => {
                   localStorage.setItem(
@@ -465,7 +465,7 @@ export const basketSlice = createSlice({
             `${url}/ecommerce/carts/items/${state.cart.cartItems[itemIndex].cart_item_id}`,
             state.cart.cartItems[itemIndex]
           )
-          .then((result) => {});
+          .then((result) => { });
       } else if (state.cart.cartItems[itemIndex].qty === 1) {
         const nextCartItems = state.cart.cartItems.filter(
           (item) => item.cart_item_id !== action.payload.cart_item_id
@@ -476,7 +476,7 @@ export const basketSlice = createSlice({
             `${url}/ecommerce/carts/items/${state.cart.cartItems[itemIndex].cart_item_id}`,
             nextCartItems
           )
-          .then((result) => {});
+          .then((result) => { });
         state.cart.cartItems = nextCartItems;
       }
 
@@ -500,7 +500,7 @@ export const basketSlice = createSlice({
               `${url}/ecommerce/carts/items/${cartItem.cart_item_id}`,
               state.cart.cartItems
             )
-            .then((result) => {});
+            .then((result) => { });
         }
 
         localStorage.setItem("cartItems", JSON.stringify(state.cart.cartItems));

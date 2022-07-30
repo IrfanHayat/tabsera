@@ -161,7 +161,7 @@ export default function Shipping({
                         onChange(item);
                         getStates(item);
                       }}
-                      value={value}
+                      value={value || null}
                       sx={{ width: 800 }}
                       options={countryList}
                       getOptionLabel={(item) =>
@@ -200,7 +200,7 @@ export default function Shipping({
                         getCities(item);
                       }}
                       sx={{ width: 800 }}
-                      value={value}
+                      value={value || null}
                       options={states}
                       getOptionLabel={(item) => (item.state ? item.state : "")}
                       getOptionSelected={(option, value) =>
@@ -235,8 +235,9 @@ export default function Shipping({
                         onChange(item);
                       }}
                       sx={{ width: 800 }}
-                      value={value}
+                      value={value || null}
                       options={cityData}
+                      key={(item) => (item.city ? item.city : "")}
                       getOptionLabel={(item) => (item.city ? item.city : "")}
                       getOptionSelected={(option, value) =>
                         value === undefined ||
@@ -263,7 +264,7 @@ export default function Shipping({
                 <Controller
                   name="address"
                   control={control}
-                  defaultValue=""
+
                   rules={{
                     required: true,
                     minLength: 2,
