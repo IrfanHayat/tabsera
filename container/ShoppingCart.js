@@ -35,6 +35,7 @@ function CartScreen({
   checkoutHandler,
   productPrice,
 }) {
+  console.log(productCartData);
   return (
     <Box sx={{ flexGrow: 1, display: "grid", p: 3 }}>
       <Typography component="h5" variant="h5" style={{ fontWeight: "bold" }}>
@@ -71,7 +72,7 @@ function CartScreen({
                   <CardMedia
                     component="img"
                     style={{ height: "100%", width: "100%" }}
-                    image={item.image_URL}
+                    image={productCartData.image_URL}
                     alt="green iguana"
                   />
                 </Link>
