@@ -516,25 +516,28 @@ export const basketSlice = createSlice({
       //   cart = state.cart.addCart;
       // }
       // console.log(cart);
-      let { total, quantity } = current(state.cart.cartItems).reduce(
-        (cartTotal, cartItem) => {
-          const { price, qty } = cartItem;
-          const itemTotal = price * qty;
 
-          cartTotal.total += itemTotal;
-          cartTotal.quantity += qty;
+      if (current(state?.cart?.cartItems) != "undefined") {
+        let { total, quantity } = current(state?.cart?.cartItems).reduce(
+          (cartTotal, cartItem) => {
+            const { price, qty } = cartItem;
+            const itemTotal = price * qty;
 
-          return cartTotal;
-        },
-        {
-          total: 0,
-          quantity: 0,
-        }
-      );
-      total = parseFloat(total.toFixed(2));
-      state.cart.cartTotalQuantity = quantity;
+            cartTotal.total += itemTotal;
+            cartTotal.quantity += qty;
 
-      state.cart.cartTotalAmount = total;
+            return cartTotal;
+          },
+          {
+            total: 0,
+            quantity: 0,
+          }
+        );
+        total = parseFloat(total.toFixed(2));
+        state.cart.cartTotalQuantity = quantity;
+
+        state.cart.cartTotalAmount = total;
+      }
     },
     clearBasket(state, action) {
       state.cart.cartItems = [];

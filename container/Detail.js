@@ -211,12 +211,12 @@ function Details({
 
         <Grid
           item
-          md={7}
+          md={6}
           sm={12}
           xs={12}
-          sx={{ display: "flex" }}
-          justifyContent="center"
-          alignItems="center"
+          // sx={{ display: "flex" }}
+          // justifyContent="center"
+          // alignItems="center"
         >
           <List>
             <ListItem>
@@ -328,7 +328,7 @@ function Details({
 
                   // bgcolor: "#f6f9fc",
                 },
-                display: "flex",
+                // display: "flex",
                 justifyContent: "flex-end",
                 p: 1,
                 m: 1,
@@ -367,7 +367,7 @@ function Details({
             </ListItem>
           </List>
         </Grid>
-        {/* <Grid item md={1} sm={1}></Grid> */}
+        <Grid item md={1} sm={1}></Grid>
 
         <Grid container spacing={1} m={1}>
           <Grid item md={12} xs={12}>

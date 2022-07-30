@@ -97,7 +97,7 @@ export default function NavBar() {
   const logOut = async () => {
     let result = await dispatch(logOutCustomer());
     // Cookies.remove("connect.sid");
-    // router.push("/");
+    router.push("/");
     console.log(result);
   };
   useEffect(() => {

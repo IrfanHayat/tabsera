@@ -13,16 +13,17 @@ import { getTotals } from "../../slice/basketSlice";
 const Index = () => {
   let router = useRouter();
 
-  const { shippingAddressData} = useSelector(
-    state => state.shipments
-  );
+  const { shippingAddressData } = useSelector((state) => state.shipments);
   let [shippingAddres, setShippingAddess] = useState();
 
   let dispatch = useDispatch();
 
   const checkoutHandler = () => {
     dispatch(getCountry());
-    router.push({ pathname: "/shipping_methods", query: {addressId:shippingAddres.address_id} });
+    router.push({
+      pathname: "/shipping_methods",
+      query: { addressId: shippingAddres.address_id },
+    });
   };
   const checkoutHandler1 = () => {
     dispatch(getCountry());
@@ -30,11 +31,10 @@ const Index = () => {
   };
 
   const handleChange = (event, value) => {
-   
-    let result = shippingAddressData.filter(result =>
+    let result = shippingAddressData.filter((result) =>
       result.address_id == value ? result : ""
     )[0];
-   
+
     setShippingAddess(result);
     let obj = {
       address: result.address,
@@ -53,9 +53,9 @@ const Index = () => {
     dispatch(getCustomer());
   }, []);
 
-  useEffect(() => {
-    dispatch(getTotals());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(getTotals());
+  // }, []);
 
   useEffect(() => {
     dispatch(getShipmentAddress());
