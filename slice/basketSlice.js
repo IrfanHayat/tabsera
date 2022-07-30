@@ -601,6 +601,7 @@ export const basketSlice = createSlice({
     builder.addCase(addToCart.fulfilled, (state, action) => {
       console.log(action.payload);
       state.cart.addCart = action.payload;
+      state.cart.cartItems = action.payload;
       state.loading = false;
     });
     builder.addCase(addToCart.rejected, (state, action) => {

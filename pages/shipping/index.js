@@ -76,9 +76,11 @@ function Shipping1() {
 
 
     let result = await dispatch(addShipmentAddress(obj));
-    console.log(result)
-    //  localStorage.setItem("shippingAddress", JSON.stringify(value));
-    // router.push("/shipping_information");
+    if (result.payload) {
+      //  localStorage.setItem("shippingAddress", JSON.stringify(value));
+      router.push("/shipping_information");
+    }
+
   };
 
   const getStates = (value) => {
