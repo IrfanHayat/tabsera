@@ -15,7 +15,7 @@ export const getLockers = createAsyncThunk(
 );
 
 export const addShipmentLockers = createAsyncThunk(
-  "add/customers/addresses/lockers",
+  "add/customers/addresses/lockers/find",
   async (shipmentData) => {
     // const encrypt = Encryption(shipmentData);
 
@@ -23,11 +23,11 @@ export const addShipmentLockers = createAsyncThunk(
       requestBody: shipmentData,
     };
     const result = await instance.post(
-      `${url}/customers/addresses/lockers`,
+      `${url}/customers/addresses/lockers/find`,
       requestBody
     );
-
-    return result.data.response;
+    console.log(result.data.lockers)
+    return result.data.lockers;
   }
 );
 
@@ -52,14 +52,16 @@ export const getLockerState = createAsyncThunk("states", async (id) => {
   const result = await instance.get(
     `${url}/customers/addresses/lockers/states/${id}`
   );
-  return result.data.response;
+
+  return result.data.states;
 });
 
 export const getLockerCity = createAsyncThunk("cities", async (id) => {
   const result = await instance.get(
     `${url}/customers/addresses/lockers/cities/${id}`
   );
-  return result.data.response;
+  console.log(result.data)
+  return result.data.cities;
 });
 
 const addLockers = createSlice({
@@ -123,7 +125,7 @@ const addLockers = createSlice({
       return { ...state, loading: true };
     });
     builder.addCase(getLockerState.fulfilled, (state, action) => {
-      state.lockerStatesData = action.payload || [];
+      state.lockerStatesData = action.payload;
       state.loading = false;
     });
     builder.addCase(getLockerState.rejected, (state, action) => {
