@@ -53,8 +53,8 @@ export default function Footer() {
 
             <Grid
               item
-              // xs={12}
-              // sm={3}
+              xs={12}
+              sm={12}
               md={9}
               container
               direction="row"
@@ -62,7 +62,7 @@ export default function Footer() {
             >
               <Box
                 // textAlign="center"
-                sx={{ display: "flex" }}
+                sx={{ display: "flex", flexWrap: "wrap" }}
                 justifyContent="center"
                 // pt={{ xs: 2, sm: 5 }}
                 // pb={{ xs: 2, sm: 0 }}
