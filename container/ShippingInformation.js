@@ -27,7 +27,6 @@ function ShippingInformation({
 }) {
   const [buttonKey, setButtonKey] = React.useState(1);
   let router = useRouter();
-
   let buttonText;
 
   if (buttonKey === 1) {
@@ -37,6 +36,7 @@ function ShippingInformation({
   }
 
   const [radioCheck, setRadioCheck] = useState(false);
+  const [radioCheck1, setRadioCheck1] = useState(false);
   // const handleChange = (event) => {
   //   setButtonKey(event.target.value);
   // };
@@ -70,7 +70,9 @@ function ShippingInformation({
               name="row-radio-buttons-group"
             >
               <FormControlLabel
-                onClick={() => setButtonKey(1)}
+                onClick={() => {
+                  setButtonKey(1), setRadioCheck(true);
+                }}
                 value="address"
                 // buttonKey={1}
                 // onChange={handleChange}
@@ -80,7 +82,10 @@ function ShippingInformation({
               <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
               <FormControlLabel
                 // buttonKey={2}
-                onClick={() => setButtonKey(2)}
+                onClick={() => {
+                  setButtonKey(2), setRadioCheck(true);
+                }}
+                // onClick={() => setRadioCheck(true)}
                 // onClick={setButtonKey(2)}
                 value="lockers"
                 // onChange={handleChange}
@@ -92,6 +97,7 @@ function ShippingInformation({
               onClick={checkoutHandler1}
               variant="contained"
               color="primary"
+              disabled={radioCheck ? "" : "disabled"}
               // buttonKey={buttonKey}
               // href="/shipping"
               startIcon={<AddIcon />}
@@ -128,7 +134,7 @@ function ShippingInformation({
                               value={result.address_id}
                               control={<Radio />}
                               label={result.address}
-                              onClick={() => setRadioCheck(true)}
+                              onClick={() => setRadioCheck1(true)}
                             />
                           ) : (
                             ""
@@ -142,7 +148,7 @@ function ShippingInformation({
                     onClick={checkoutHandler}
                     variant="contained"
                     color="primary"
-                    disabled={radioCheck ? "" : "disabled"}
+                    disabled={radioCheck1 ? "" : "disabled"}
                     // href="/shipping_methods"
                     // startIcon={<AddIcon />}
                   >
