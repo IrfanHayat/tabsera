@@ -27,6 +27,9 @@ const Index = () => {
     router.push({ pathname: "/placeorder", query: { addressId: router.query.addressId, shipId: shippingMethodId.shipping_method_id, shipName: shippingMethodId.shipping_method_name } });
   };
 
+
+  console.log(shipmentMethodData)
+
   useEffect(() => {
     console.log(cartId)
   }, [cartId])
