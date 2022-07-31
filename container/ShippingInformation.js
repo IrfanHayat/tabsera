@@ -60,8 +60,8 @@ function ShippingInformation({
           // style={{ minHeight: "100vh" }}
           // ml={10}
           item
-          // justifyContent="center"
-          // sx={{ display: "flex" }}
+        // justifyContent="center"
+        // sx={{ display: "flex" }}
         >
           <FormControl>
             <RadioGroup
@@ -95,7 +95,7 @@ function ShippingInformation({
               // buttonKey={buttonKey}
               // href="/shipping"
               startIcon={<AddIcon />}
-              // label=" Add Addresss"
+            // label=" Add Addresss"
             >
               {buttonText}
             </Button>
@@ -106,7 +106,7 @@ function ShippingInformation({
           <Grid container>
             <Grid item md={1}></Grid>
 
-            <Grid item md={3} mt={4} justifyContent="center">
+            <Grid item md={12} mt={4} justifyContent="center">
               <FormControl>
                 <FormLabel style={{ fontWeight: "bold" }}>
                   Shipping Addresses
@@ -127,7 +127,7 @@ function ShippingInformation({
                             <FormControlLabel
                               value={result.address_id}
                               control={<Radio />}
-                              label={result.address}
+                              label={`${result.address_label_name},${result.address},"",${result.city},${result.state},${result.country}`}
                               onClick={() => setRadioCheck(true)}
                             />
                           ) : (
@@ -143,8 +143,8 @@ function ShippingInformation({
                     variant="contained"
                     color="primary"
                     disabled={radioCheck ? "" : "disabled"}
-                    // href="/shipping_methods"
-                    // startIcon={<AddIcon />}
+                  // href="/shipping_methods"
+                  // startIcon={<AddIcon />}
                   >
                     Continue
                   </Button>

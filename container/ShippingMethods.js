@@ -67,13 +67,15 @@ function ShippingMethods({
                 </ListItem>
                 {/* </List> */}
 
-                {/* <List>
-                <ListItem>
-                  <ListItemIcon>
-                    <PhoneIcon />{" "}
-                  </ListItemIcon>
-                </ListItem>
-              </List> */}
+                <List>
+                  <ListItem>
+                    <ListItemIcon>
+                      <PhoneIcon />
+
+                    </ListItemIcon>
+                    {localStorage.getItem("mobileNumber") ? <ListItemText>{localStorage.getItem("mobileNumber")}</ListItemText> : <ListItemText>{"3215890184"}</ListItemText>}
+                  </ListItem>
+                </List>
                 {userData.email ? (
                   <List>
                     <ListItem>
@@ -84,7 +86,14 @@ function ShippingMethods({
                     </ListItem>
                   </List>
                 ) : (
-                  ""
+                  <List>
+                    <ListItem>
+                      <ListItemIcon>
+                        <EmailIcon />
+                      </ListItemIcon>
+                      <ListItemText>{"test@gmail.com"}</ListItemText>
+                    </ListItem>
+                  </List>
                 )}
 
                 {/* <List> */}
@@ -92,19 +101,19 @@ function ShippingMethods({
                   <ListItemIcon>
                     <DomainAddOutlinedIcon />
                   </ListItemIcon>
-                  <ListItemText> {shippementData?.address}</ListItemText>
+                  <ListItemText>{shippementData?.address_label_name} {shippementData?.address}," ",{shippementData?.city},{shippementData?.state},
+                    {shippementData?.country}</ListItemText>
                 </ListItem>
                 {/* </List> */}
                 {/* <List> */}
-                <ListItem>
+                {/* <ListItem>
                   <ListItemIcon>
                     <AddLocationAltOutlinedIcon />
                   </ListItemIcon>
                   <ListItemText>
-                    {shippementData?.city},{shippementData?.state},
-                    {shippementData?.country}
+                    
                   </ListItemText>
-                </ListItem>
+                </ListItem> */}
               </List>
             </Box>
             {/* <TabPanel value={value} index={2}>
@@ -127,7 +136,7 @@ function ShippingMethods({
                       // row
                       aria-labelledby="demo-row-radio-buttons-group-label"
                       name="row-radio-buttons-group"
-                      // value={labelValue}
+                    // value={labelValue}
                     >
                       {shipmentMethodData &&
                         shipmentMethodData.map((result) => (
@@ -173,7 +182,7 @@ function ShippingMethods({
                     Subtotal{" "}
                     {productPrice && shippingCharges
                       ? productPrice?.reduce((a, c) => a + c.qty * c.price, 0) +
-                        shippingCharges
+                      shippingCharges
                       : productPrice?.reduce((a, c) => a + c.qty * c.price, 0)}
                   </ListItemText>
                 </ListItem>
@@ -184,7 +193,7 @@ function ShippingMethods({
                   variant="contained"
                   color="primary"
                   disabled={radioCheck ? "" : "disabled"}
-                  // startIcon={<AddIcon />}
+                // startIcon={<AddIcon />}
                 >
                   Continue to Place Order
                 </Button>

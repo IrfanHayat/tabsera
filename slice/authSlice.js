@@ -61,6 +61,7 @@ export const loginUser = createAsyncThunk(
           // registrationToken: ""
         };
       } else {
+        localStorage.setItem("mobileNumber", values.phone.replace(/[^\d]/g, ""))
         dataEncrypt = {
           deviceId: "",
           // imsi: "",
