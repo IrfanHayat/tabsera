@@ -28,6 +28,7 @@ import DomainAddOutlinedIcon from "@mui/icons-material/DomainAddOutlined";
 import AddLocationAltOutlinedIcon from "@mui/icons-material/AddLocationAltOutlined";
 import { useRouter } from "next/router";
 import { RouteGuard } from "../RouterGuard";
+import localStorage from "localStorage";
 
 function ShippingMethods({
   classes,
