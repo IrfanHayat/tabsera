@@ -168,7 +168,7 @@ function ShippingInformation({
                     onClick={checkoutHandler}
                     variant="contained"
                     color="primary"
-                    disabled={radioCheck1 ? "" : "disabled"}
+                    disabled={radioCheck ? "" : "disabled"}
                   // href="/shipping_methods"
                   // startIcon={<AddIcon />}
                   >
