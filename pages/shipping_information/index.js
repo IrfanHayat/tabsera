@@ -32,6 +32,7 @@ const Index = () => {
   } = useSelector((state) => state.lockers);
   const { shippingAddressData } = useSelector((state) => state.shipments);
   let [shippingAddres, setShippingAddess] = useState();
+  let [shippingLockerAddres, setShippingLockerAddess] = useState();
 
   let dispatch = useDispatch();
 
@@ -110,11 +111,33 @@ const Index = () => {
     dispatch(getLockerCity(value.state_id));
     console.log(lockerCityData);
   };
-  const handleChangeLocker = (value) => {
+  const handleChangeLocker = (event, value) => {
     console.log(value);
+    let result = lockersAddressData.filter((result) =>
+      result.locker_id == value ? result : ""
+    )[0];
+    console.log(result);
+
+    setShippingLockerAddess(result);
+    let obj = {
+      address: result.locker_address,
+      bundle_id: null,
+      cart_id: 611,
+      city_id: result.city_id,
+      country_id: result.country_id,
+      shipment_method_type: "locker",
+      sku_id: null,
+      state_id: result.state_id,
+    };
+
+    dispatch(getShipmentsMethods(obj));
   };
-  const checkoutHandlerLocker = (value) => {
-    console.log(value);
+  const checkoutHandlerLocker = (event) => {
+    console.log(shippingLockerAddres);
+    router.push({
+      pathname: "/shipping_methods",
+      query: { lockerId: shippingLockerAddres.locker_id },
+    });
   };
   return (
     <div>
