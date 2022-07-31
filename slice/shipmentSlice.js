@@ -3,47 +3,58 @@ import instance from "../helper/axios/httpRequest";
 import productData from "../data/product";
 import { url, setHeaders } from "../helper/axios/config";
 //import Cookies from 'universal-cookie';
-import Encryption from '../helper/encryption/encryptAes';
+import Encryption from "../helper/encryption/encryptAes";
 
+export const getLabels = createAsyncThunk(
+  "customers/address/labels",
+  async () => {
+    const result = await instance.get(`${url}/customers/address/labels`);
 
+    return result.data.response;
+  }
+);
 
-export const getLabels = createAsyncThunk("customers/address/labels", async () => {
-  const result = await instance.get(`${url}/customers/address/labels`);
-  
-  return result.data.response;
-});
+export const addShipmentAddress = createAsyncThunk(
+  "add/customers/addresses",
+  async (shipmentData) => {
+    // const encrypt = Encryption(shipmentData);
 
+    const requestBody = {
+      requestBody: shipmentData,
+    };
+    const result = await instance.post(
+      `${url}/customers/addresses`,
+      requestBody
+    );
 
-export const addShipmentAddress = createAsyncThunk("add/customers/addresses", async (shipmentData) => {
- 
-  // const encrypt = Encryption(shipmentData);
-  
-  const requestBody = {
-      requestBody: shipmentData
-  };
-  const result = await instance.post(`${url}/customers/addresses`,requestBody);
-  
-  return result.data.response;
-});
+    return result.data.response;
+  }
+);
 
+export const getShipmentAddress = createAsyncThunk(
+  "get/customers/addresses",
+  async () => {
+    const result = await instance.get(`${url}/customers/addresses`);
 
-export const getShipmentAddress = createAsyncThunk("get/customers/addresses", async () => {
-  const result = await instance.get(`${url}/customers/addresses`);
-  
-  return result.data.response;
-});
+    return result.data.response;
+  }
+);
 
+export const updateShipmentAddress = createAsyncThunk(
+  "put/customers/addresses",
+  async (shipmentData) => {
+    const result = await instance.put(
+      `${url}/customers/addresses`,
+      shipmentData
+    );
 
-export const updateShipmentAddress = createAsyncThunk("put/customers/addresses", async (shipmentData) => {
-  const result = await instance.put(`${url}/customers/addresses`,shipmentData);
-  
-  return result.data.response;
-});
-
+    return result.data.response;
+  }
+);
 
 export const getCountry = createAsyncThunk("countries", async () => {
   const result = await instance.get(`${url}/countries`);
-  
+
   return result.data.response;
 });
 
@@ -57,51 +68,54 @@ export const getCity = createAsyncThunk("cities", async (id) => {
   return result.data.response;
 });
 
-export const getCustomer = createAsyncThunk(
-  "auth/getCustomer",
-  async () => {
-  
-      const response = await instance.get(`${url}/customers`);
+export const getCustomer = createAsyncThunk("auth/getCustomer", async () => {
+  const response = await instance.get(`${url}/customers`);
 
-      return response.data.response;
-    
+  return response.data.response;
+});
+
+export const getShipmentsMethods = createAsyncThunk(
+  "ecommerce/shipments/methods",
+  async (shipmentData) => {
+    // const encrypt = Encryption(shipmentData);
+    const requestBody = {
+      requestBody: shipmentData,
+    };
+    const result = await instance.post(
+      `${url}/ecommerce/shipments/methods`,
+      requestBody
+    );
+
+    return result.data.response;
   }
 );
 
+export const getShipmentsCharges = createAsyncThunk(
+  "ecommerce/shipments/charges",
+  async (shipmentData) => {
+    const requestBody = {
+      requestBody: shipmentData,
+    };
+    const result = await instance.post(
+      `${url}/ecommerce/shipments/charges`,
+      requestBody
+    );
 
-export const getShipmentsMethods = createAsyncThunk("ecommerce/shipments/methods", async (shipmentData) => {
-  // const encrypt = Encryption(shipmentData);
-        const requestBody = {
-            requestBody: shipmentData
-        };
-  const result = await instance.post(`${url}/ecommerce/shipments/methods`,requestBody);
-  
-  return result.data.response;
-});
-
-export const getShipmentsCharges = createAsyncThunk("ecommerce/shipments/charges", async (shipmentData) => {
-  
-        const requestBody = {
-            requestBody: shipmentData
-        };
-  const result = await instance.post(`${url}/ecommerce/shipments/charges`,requestBody);
-  
-  return result.data.response;
-});
-
-
+    return result.data.response;
+  }
+);
 
 const addShipments = createSlice({
   name: "shipments",
   initialState: {
     shipmentMethodData: [],
-    labels:[],
-    countryData:[],
-    states:[],
-    cityData:[],
-    userData:{},
-    shippingCharges:{},
-    shippingAddressData:[],
+    labels: [],
+    countryData: [],
+    states: [],
+    cityData: [],
+    userData: {},
+    shippingCharges: {},
+    shippingAddressData: [],
     loading: false,
     error: null,
   },
@@ -167,7 +181,7 @@ const addShipments = createSlice({
       return { ...state, loading: true };
     });
     builder.addCase(updateShipmentAddress.fulfilled, (state, action) => {
-     // state.labels = action.payload || [];
+      // state.labels = action.payload || [];
       state.loading = false;
     });
     builder.addCase(updateShipmentAddress.rejected, (state, action) => {
@@ -237,7 +251,6 @@ const addShipments = createSlice({
       return { ...state, loading: true };
     });
     builder.addCase(getShipmentsCharges.fulfilled, (state, action) => {
-      
       state.shippingCharges = action.payload || {};
       state.loading = false;
     });

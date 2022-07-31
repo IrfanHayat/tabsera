@@ -18,6 +18,13 @@ import FormLabel from "@mui/material/FormLabel";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import List from "@mui/material/List";
+import Accordion from "@mui/material/Accordion";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import Autocomplete from "@mui/material/Autocomplete";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { Controller, useForm } from "react-hook-form";
+import { TextField } from "@mui/material";
 //import Divider from "@mui/material";
 function ShippingInformation({
   checkoutHandler,
@@ -27,9 +34,14 @@ function ShippingInformation({
 }) {
   const [buttonKey, setButtonKey] = React.useState(1);
   let router = useRouter();
-
   let buttonText;
-
+  const {
+    handleSubmit,
+    control,
+    register,
+    setError,
+    formState: { errors },
+  } = useForm();
   if (buttonKey === 1) {
     buttonText = "Address";
   } else {
@@ -37,6 +49,7 @@ function ShippingInformation({
   }
 
   const [radioCheck, setRadioCheck] = useState(false);
+  const [radioCheck1, setRadioCheck1] = useState(false);
   // const handleChange = (event) => {
   //   setButtonKey(event.target.value);
   // };
@@ -70,7 +83,9 @@ function ShippingInformation({
               name="row-radio-buttons-group"
             >
               <FormControlLabel
-                onClick={() => setButtonKey(1)}
+                onClick={() => {
+                  setButtonKey(1), setRadioCheck(true);
+                }}
                 value="address"
                 // buttonKey={1}
                 // onChange={handleChange}
@@ -80,7 +95,10 @@ function ShippingInformation({
               <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
               <FormControlLabel
                 // buttonKey={2}
-                onClick={() => setButtonKey(2)}
+                onClick={() => {
+                  setButtonKey(2), setRadioCheck(true);
+                }}
+                // onClick={() => setRadioCheck(true)}
                 // onClick={setButtonKey(2)}
                 value="lockers"
                 // onChange={handleChange}
@@ -92,6 +110,7 @@ function ShippingInformation({
               onClick={checkoutHandler1}
               variant="contained"
               color="primary"
+              disabled={radioCheck ? "" : "disabled"}
               // buttonKey={buttonKey}
               // href="/shipping"
               startIcon={<AddIcon />}
@@ -101,6 +120,7 @@ function ShippingInformation({
             </Button>
           </FormControl>
         </Grid>
+        {/* <Box>Locker Info here</Box> */}
 
         {buttonKey === 1 ? (
           <Grid container>
@@ -142,7 +162,7 @@ function ShippingInformation({
                     onClick={checkoutHandler}
                     variant="contained"
                     color="primary"
-                    disabled={radioCheck ? "" : "disabled"}
+                    disabled={radioCheck1 ? "" : "disabled"}
                   // href="/shipping_methods"
                   // startIcon={<AddIcon />}
                   >
@@ -168,7 +188,196 @@ function ShippingInformation({
             </Grid>
           </Grid>
         ) : (
-          ""
+          <Grid container spacing={2}>
+            <Grid item md={1}></Grid>
+
+            <Grid item md={10} mt={4} justifyContent="center">
+              <Accordion>
+                <AccordionSummary
+                  expandIcon={<ExpandMoreIcon />}
+                  aria-controls="panel1a-content"
+                  id="panel1a-header"
+                >
+                  <Typography>Hide Detail</Typography>
+                </AccordionSummary>
+                <AccordionDetails>
+                  <form
+                  // onSubmit={handleSubmit(submitHandler)}
+                  // className={classes.form}
+                  >
+                    <List>
+                      {/* <Stack direction="row" spacing={2}></Stack> */}
+
+                      <ListItem>
+                        <Controller
+                          control={control}
+                          name="country"
+                          rules={{ required: true }}
+                          render={({ field: { onChange, value } }) => (
+                            <Autocomplete
+                              onChange={(event, item) => {
+                                onChange(item);
+                                getStates(item);
+                              }}
+                              value={value || null}
+                              sx={{ mx: 1 }}
+                              fullWidth
+                              // options={countryList}
+                              // getOptionLabel={(item) =>
+                              //   item.country_name ? item.country_name : ""
+                              // }
+                              // getOptionSelected={(option, value) =>
+                              //   value === undefined ||
+                              //   value === "" ||
+                              //   option.country_id === value.country_id
+                              // }
+                              renderInput={(params) => (
+                                <TextField
+                                  {...params}
+                                  label="country"
+                                  // fullWidth
+                                  margin="normal"
+                                  variant="outlined"
+                                  // error={!!errors.item}
+                                  // helperText={errors.item && "item required"}
+                                  required
+                                />
+                              )}
+                            />
+                          )}
+                        />
+                      </ListItem>
+
+                      <ListItem>
+                        <Controller
+                          control={control}
+                          name="states"
+                          rules={{ required: true }}
+                          render={({ field: { onChange, value } }) => (
+                            <Autocomplete
+                              onChange={(event, item) => {
+                                onChange(item);
+                                getCities(item);
+                              }}
+                              sx={{ width: "50%", mx: 1 }}
+                              value={value || null}
+                              // options={states}
+                              // getOptionLabel={(item) =>
+                              //   item.state ? item.state : ""
+                              // }
+                              // getOptionSelected={(option, value) =>
+                              //   value === undefined ||
+                              //   value === "" ||
+                              //   option.state_id === value.state_id
+                              // }
+                              renderInput={(params) => (
+                                <TextField
+                                  {...params}
+                                  label="state"
+                                  margin="normal"
+                                  variant="outlined"
+                                  // error={!!errors.item}
+                                  // helperText={errors.item && "item required"}
+                                  required
+                                />
+                              )}
+                            />
+                          )}
+                        />
+                        {/* </ListItem> */}
+
+                        {/* <ListItem> */}
+                        <Controller
+                          control={control}
+                          name="city"
+                          rules={{ required: true }}
+                          render={({ field: { onChange, value } }) => (
+                            <Autocomplete
+                              onChange={(event, item) => {
+                                onChange(item);
+                              }}
+                              sx={{ width: "50%", mx: 1 }}
+                              value={value || null}
+                              // options={cityData}
+                              // key={(item) => (item.city ? item.city : "")}
+                              // getOptionLabel={(item) =>
+                              //   item.city ? item.city : ""
+                              // }
+                              // getOptionSelected={(option, value) =>
+                              //   value === undefined ||
+                              //   value === "" ||
+                              //   option.city_id === value.city_id
+                              // }
+                              renderInput={(params) => (
+                                <TextField
+                                  {...params}
+                                  label="city"
+                                  margin="normal"
+                                  variant="outlined"
+                                  error={!!errors.item}
+                                  helperText={errors.item && "item required"}
+                                  required
+                                />
+                              )}
+                            />
+                          )}
+                        />
+                      </ListItem>
+
+                      <ListItem>
+                        <Controller
+                          name="address"
+                          control={control}
+                          rules={{
+                            required: true,
+                            minLength: 2,
+                          }}
+                          render={({ field }) => (
+                            <TextField
+                              variant="outlined"
+                              fullWidth
+                              sx={{ mx: 1 }}
+                              id="address"
+                              label="Area"
+                              error={Boolean(errors.address)}
+                              helperText={
+                                errors.address
+                                  ? errors.address.type === "minLength"
+                                    ? "Address length is more than 1"
+                                    : "Address is required"
+                                  : ""
+                              }
+                              {...field}
+                            ></TextField>
+                          )}
+                        ></Controller>
+                      </ListItem>
+                    </List>
+
+                    <List>
+                      <ListItem>
+                        <Stack direction="row" spacing={2}>
+                          {/* <List>
+            <ListItem> */}
+                          <Button
+                            variant="contained"
+                            //href="/shipping_methods"
+                            type="submit"
+                            // fullWidth
+                            // disabled={radioCheck ? "" : "disabled"}
+                            color="primary"
+                          >
+                            Find Locker
+                          </Button>
+                        </Stack>
+                      </ListItem>
+                    </List>
+                  </form>
+                </AccordionDetails>
+              </Accordion>
+            </Grid>
+            <Grid item md={2}></Grid>
+          </Grid>
         )}
       </Grid>
     </>

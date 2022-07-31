@@ -450,7 +450,7 @@ function Details({
             </Card>
           </Grid>
         </Grid>
-        {/* <AppBar
+        <AppBar
           position="fixed"
           color="inherit"
           sx={{
@@ -502,7 +502,7 @@ function Details({
               </Button>
             </Stack>
           </Toolbar>
-        </AppBar> */}
+        </AppBar>
       </Grid>
     </>
   );

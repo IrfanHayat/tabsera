@@ -6,11 +6,14 @@ import Grid from "@mui/material/Grid";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import PublicOutlinedIcon from "@mui/icons-material/PublicOutlined";
 import { header, footer } from "../../helper/config/config";
-
+import Divider from "@mui/material/Divider";
 export default function Footer() {
   const [currentHost, setCurrentHost] = useState();
   useEffect(() => {
-    if (typeof window !== "undefined" && window.location !== window.parent.location) {
+    if (
+      typeof window !== "undefined" &&
+      window.location !== window.parent.location
+    ) {
       const hostname = window.location.hostname;
       setCurrentHost(hostname);
     }
@@ -20,112 +23,106 @@ export default function Footer() {
     <>
       {currentHost != "137.74.4.23" && footer != true ? (
         <Box
-          px={{ xs: 3, sm: 10, md: 12 }}
-          py={{ xs: 5, sm: 10, md: 12 }}
+          // px={{ xs: 3, sm: 10, md: 12 }}
+          // py={{ xs: 5, sm: 10, md: 12 }}
           component="footer"
           sx={{
-            py: 3,
-            px: 2,
+            p: 1,
             // mt: "auto",
-            mt: 2,
-            color: "white",
-            bgcolor: "primary.main",
+            // m: 1,
+            display: "flex",
+            justifyContent: "center",
+            // alignItems: "center",
+            color: "text.primary",
+            bgcolor: "#eeeeee",
           }}
         >
           {/* Hi */}
           {/* <Container fixed maxWidth="lg"> */}
-          <Grid container spacing={5}>
+          <Grid container>
+            <Grid item md={3} container direction="row" alignItems="center">
+              <Box
+                textAlign="center"
+                sx={{ m: 1, p: 1 }}
+                // pt={{ xs: 2, sm: 5 }}
+                // pb={{ xs: 2, sm: 0 }}
+              >
+                © {new Date().getFullYear()} Tabsera. All Rights Reserved
+              </Box>
+            </Grid>
+
             <Grid
               item
               xs={12}
-              sm={3}
+              sm={12}
+              md={9}
               container
               direction="row"
               alignItems="center"
             >
-              <Box borderBottom={1}>
-                <Typography variant="h5">Contact US</Typography>
-              </Box>
-              <Grid container direction="row" alignItems="center">
-                <Grid item>
-                  <PublicOutlinedIcon />
-                </Grid>
-                <Grid item> Islambad Capital Teritory</Grid>
-              </Grid>
-              <Grid container direction="row" alignItems="center">
-                <Grid item>
-                  <EmailOutlinedIcon />
-                </Grid>
-                <Grid item>info@smartfusion.co</Grid>
-              </Grid>
-            </Grid>
-
-            <Grid item xs={12} sm={3}>
-              <Box borderBottom={1}>
-                <Typography variant="h5">Information</Typography>
-              </Box>
-              <Grid container direction="row" alignItems="center">
-                <Grid item>
-                  <PublicOutlinedIcon />
-                </Grid>
-                <Grid item> Islambad Capital Teritory</Grid>
-              </Grid>
-              <Grid container direction="row" alignItems="center">
-                <Grid item>
-                  <EmailOutlinedIcon />
-                </Grid>
-                <Grid item>info@smartfusion.co</Grid>
-              </Grid>
-            </Grid>
-
-            <Grid item xs={12} sm={3}>
-              <Box borderBottom={1}>
-                <Typography variant="h5">Account</Typography>
-              </Box>
-              <Grid container direction="row" alignItems="center">
-                <Grid item>
-                  <PublicOutlinedIcon />
-                </Grid>
-                <Grid item> Islambad Capital Teritory</Grid>
-              </Grid>
-              <Grid container direction="row" alignItems="center">
-                <Grid item>
-                  <EmailOutlinedIcon />
-                </Grid>
-                <Grid item>info@smartfusion.co</Grid>
-              </Grid>
-            </Grid>
-
-            <Grid item xs={12} sm={3}>
-              <Box borderBottom={1}>
-                <Typography variant="h5">NewsLetter</Typography>
-              </Box>
-
-              <Grid
-                container
-                direction="row"
-                alignItems="center"
-              // px={{ xs: 1, sm: 3 }}
-              // py={{ xs: 1, sm: 3 }}
+              <Box
+                // textAlign="center"
+                sx={{ display: "flex", flexWrap: "wrap" }}
+                justifyContent="center"
+                // pt={{ xs: 2, sm: 5 }}
+                // pb={{ xs: 2, sm: 0 }}
               >
-                <Grid item>
-                  <PublicOutlinedIcon />
-                </Grid>
-                <Grid item> Islambad Capital Teritory</Grid>
-              </Grid>
-
-              <Grid container direction="row" alignItems="center">
-                <Grid item>
-                  <EmailOutlinedIcon />
-                </Grid>
-                <Grid item>info@smartfusion.co</Grid>
-              </Grid>
+                <Typography>Country & Region : Somalia</Typography>
+                <Divider
+                  sx={{ height: 28, mx: 2 }}
+                  orientation="vertical"
+                  color="grey"
+                />
+                <Typography>Turkey</Typography>
+                <Divider
+                  sx={{ height: 28, mx: 2 }}
+                  orientation="vertical"
+                  color="grey"
+                />
+                <Typography>France</Typography>
+                <Divider
+                  sx={{ height: 28, mx: 2 }}
+                  orientation="vertical"
+                  color="grey"
+                />
+                <Typography>Pakistan</Typography>
+                <Divider
+                  sx={{ height: 28, mx: 2 }}
+                  orientation="vertical"
+                  color="grey"
+                />
+                <Typography>Indonesia</Typography>
+                <Divider
+                  sx={{ height: 28, mx: 2 }}
+                  orientation="vertical"
+                  color="grey"
+                />
+                <Typography>Poland</Typography>{" "}
+                <Divider
+                  sx={{ height: 28, mx: 2 }}
+                  orientation="vertical"
+                  color="grey"
+                />
+                <Typography>Chille</Typography>{" "}
+                <Divider
+                  sx={{ height: 28, mx: 2 }}
+                  orientation="vertical"
+                  color="grey"
+                />
+                <Typography>Malaysia</Typography>{" "}
+                <Divider
+                  sx={{ height: 28, mx: 2 }}
+                  orientation="vertical"
+                  color="grey"
+                />
+                <Typography>Bangladesh</Typography>
+              </Box>
             </Grid>
           </Grid>
 
-          <Box textAlign="center" pt={{ xs: 2, sm: 5 }} pb={{ xs: 2, sm: 0 }}>
-            Tabsera &reg; {new Date().getFullYear()}
-          </Box>
+          {/* <Box textAlign="center" pt={{ xs: 2, sm: 5 }} pb={{ xs: 2, sm: 0 }}>
+            &reg; {new Date().getFullYear()} Tabsera. All Rights Reserved
+          </Box> */}
           {/* </Container> */}
         </Box>
       ) : (
