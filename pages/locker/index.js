@@ -19,10 +19,12 @@ const Locker_Detail = () => {
     (state) => state.lockers
   );
   useEffect(() => {
+    dispatch(getCountry());
     dispatch(getLockers());
   }, []);
 
   console.log(lockerLabels);
+  console.log(countryData);
 
   let [labelValue, setLabelValue] = useState("");
 

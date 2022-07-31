@@ -8,16 +8,34 @@ import {
   getCountry,
   getCustomer,
 } from "../../slice/shipmentSlice";
+import {
+  // addShipmentLockers,
+  // getLockers,
+  getLockerCountry,
+  getLockerState,
+  getLockerCity,
+  addShipmentLockers
+  // getCity,
+  // getState,
+} from "../../slice/lockerSlice";
 import { getTotals } from "../../slice/basketSlice";
+import { ContactPageSharp } from "@mui/icons-material";
 
 const Index = () => {
   let router = useRouter();
-
+  const { lockerLabels, lockerCountryData, lockerStatesData, lockerCityData } = useSelector(
+    (state) => state.lockers
+  );
   const { shippingAddressData } = useSelector((state) => state.shipments);
   let [shippingAddres, setShippingAddess] = useState();
 
   let dispatch = useDispatch();
 
+  console.log(lockerCountryData)
+  useEffect(() => {
+    dispatch(getLockerCountry());
+    // dispatch(getLockers());
+  }, []);
   const checkoutHandler = () => {
     dispatch(getCountry());
     router.push({
@@ -61,6 +79,40 @@ const Index = () => {
     dispatch(getShipmentAddress());
   }, []);
 
+  useEffect(() => {
+    console.log(lockerCountryData)
+  }, [lockerCountryData])
+
+
+
+  const submitHandler = async (value) => {
+    console.log(value)
+    let obj = {
+      cityId: value.city.city_id,
+      countryId: value.country.country_id,
+      stateId: value.states.state_id
+    };
+    console.log(obj)
+
+    dispatch(addShipmentLockers(obj))
+
+
+
+  };
+
+  const getStates = (value) => {
+    console.log(value.country_id)
+    dispatch(getLockerState(value.country_id));
+    console.log(lockerStatesData)
+  };
+
+  const getCities = (value) => {
+    dispatch(getLockerCity(value.state_id));
+    console.log(lockerCityData)
+  };
+
+
+
   return (
     <div>
       <ShippingInformation
@@ -68,6 +120,14 @@ const Index = () => {
         shippementAddress={shippingAddressData}
         checkoutHandler={checkoutHandler}
         checkoutHandler1={checkoutHandler1}
+        lockerCountryData={lockerCountryData}
+        lockerStatesData={lockerStatesData}
+        lockerCityData={lockerCityData}
+        getStates={getStates}
+        getCities={getCities}
+        submitHandler={submitHandler}
+
+
       />
     </div>
   );

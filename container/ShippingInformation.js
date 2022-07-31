@@ -31,6 +31,12 @@ function ShippingInformation({
   shippementAddress,
   handleChange,
   checkoutHandler1,
+  lockerCountryData,
+  lockerCityData,
+  submitHandler,
+  lockerStatesData,
+  getStates,
+  getCities
 }) {
   const [buttonKey, setButtonKey] = React.useState(1);
   let router = useRouter();
@@ -202,7 +208,7 @@ function ShippingInformation({
                 </AccordionSummary>
                 <AccordionDetails>
                   <form
-                  // onSubmit={handleSubmit(submitHandler)}
+                    onSubmit={handleSubmit(submitHandler)}
                   // className={classes.form}
                   >
                     <List>
@@ -222,15 +228,15 @@ function ShippingInformation({
                               value={value || null}
                               sx={{ mx: 1 }}
                               fullWidth
-                              // options={countryList}
-                              // getOptionLabel={(item) =>
-                              //   item.country_name ? item.country_name : ""
-                              // }
-                              // getOptionSelected={(option, value) =>
-                              //   value === undefined ||
-                              //   value === "" ||
-                              //   option.country_id === value.country_id
-                              // }
+                              options={lockerCountryData}
+                              getOptionLabel={(item) =>
+                                item.country_name ? item.country_name : ""
+                              }
+                              getOptionSelected={(option, value) =>
+                                value === undefined ||
+                                value === "" ||
+                                option.country_id === value.country_id
+                              }
                               renderInput={(params) => (
                                 <TextField
                                   {...params}
@@ -261,15 +267,15 @@ function ShippingInformation({
                               }}
                               sx={{ width: "50%", mx: 1 }}
                               value={value || null}
-                              // options={states}
-                              // getOptionLabel={(item) =>
-                              //   item.state ? item.state : ""
-                              // }
-                              // getOptionSelected={(option, value) =>
-                              //   value === undefined ||
-                              //   value === "" ||
-                              //   option.state_id === value.state_id
-                              // }
+                              options={lockerStatesData}
+                              getOptionLabel={(item) =>
+                                item.state_name ? item.state_name : ""
+                              }
+                              getOptionSelected={(option, value) =>
+                                value === undefined ||
+                                value === "" ||
+                                option.state_id === value.state_id
+                              }
                               renderInput={(params) => (
                                 <TextField
                                   {...params}
@@ -298,16 +304,16 @@ function ShippingInformation({
                               }}
                               sx={{ width: "50%", mx: 1 }}
                               value={value || null}
-                              // options={cityData}
-                              // key={(item) => (item.city ? item.city : "")}
-                              // getOptionLabel={(item) =>
-                              //   item.city ? item.city : ""
-                              // }
-                              // getOptionSelected={(option, value) =>
-                              //   value === undefined ||
-                              //   value === "" ||
-                              //   option.city_id === value.city_id
-                              // }
+                              options={lockerCityData}
+                              key={(item) => (item.city_name ? item.city_name : "")}
+                              getOptionLabel={(item) =>
+                                item.city_name ? item.city_name : ""
+                              }
+                              getOptionSelected={(option, value) =>
+                                value === undefined ||
+                                value === "" ||
+                                option.city_id === value.city_id
+                              }
                               renderInput={(params) => (
                                 <TextField
                                   {...params}
@@ -324,34 +330,6 @@ function ShippingInformation({
                         />
                       </ListItem>
 
-                      <ListItem>
-                        <Controller
-                          name="address"
-                          control={control}
-                          rules={{
-                            required: true,
-                            minLength: 2,
-                          }}
-                          render={({ field }) => (
-                            <TextField
-                              variant="outlined"
-                              fullWidth
-                              sx={{ mx: 1 }}
-                              id="address"
-                              label="Area"
-                              error={Boolean(errors.address)}
-                              helperText={
-                                errors.address
-                                  ? errors.address.type === "minLength"
-                                    ? "Address length is more than 1"
-                                    : "Address is required"
-                                  : ""
-                              }
-                              {...field}
-                            ></TextField>
-                          )}
-                        ></Controller>
-                      </ListItem>
                     </List>
 
                     <List>

@@ -15,7 +15,7 @@ export const getLockers = createAsyncThunk(
 );
 
 export const addShipmentLockers = createAsyncThunk(
-  "add/customers/addresses/lockers",
+  "add/customers/addresses/lockers/find",
   async (shipmentData) => {
     // const encrypt = Encryption(shipmentData);
 
@@ -23,11 +23,11 @@ export const addShipmentLockers = createAsyncThunk(
       requestBody: shipmentData,
     };
     const result = await instance.post(
-      `${url}/customers/addresses/lockers`,
+      `${url}/customers/addresses/lockers/find`,
       requestBody
     );
-
-    return result.data.response;
+    console.log(result.data.lockers)
+    return result.data.lockers;
   }
 );
 
@@ -40,26 +40,28 @@ export const addShipmentLockers = createAsyncThunk(
 //   }
 // );
 
-export const getCountry = createAsyncThunk("countries", async () => {
+export const getLockerCountry = createAsyncThunk("countries", async () => {
   const result = await instance.get(
     `${url}/customers/addresses/lockers/countries`
   );
-
-  return result.data.response;
+  console.log(result.data.countries);
+  return result.data.countries;
 });
 
-export const getState = createAsyncThunk("states", async (id) => {
+export const getLockerState = createAsyncThunk("states", async (id) => {
   const result = await instance.get(
     `${url}/customers/addresses/lockers/states/${id}`
   );
-  return result.data.response;
+
+  return result.data.states;
 });
 
-export const getCity = createAsyncThunk("cities", async (id) => {
+export const getLockerCity = createAsyncThunk("cities", async (id) => {
   const result = await instance.get(
     `${url}/customers/addresses/lockers/cities/${id}`
   );
-  return result.data.response;
+  console.log(result.data)
+  return result.data.cities;
 });
 
 const addLockers = createSlice({
@@ -67,9 +69,9 @@ const addLockers = createSlice({
   initialState: {
     lockersAddressData: [],
     lockerLabels: [],
-    countryData: [],
-    states: [],
-    cityData: [],
+    lockerCountryData: [],
+    lockerStatesData: [],
+    lockerCityData: [],
     // userData: {},
     // shippingAddressData: [],
     loading: false,
@@ -105,42 +107,42 @@ const addLockers = createSlice({
         error: action.payload,
       };
     });
-    builder.addCase(getCountry.pending, (state, action) => {
+    builder.addCase(getLockerCountry.pending, (state, action) => {
       return { ...state, loading: true };
     });
-    builder.addCase(getCountry.fulfilled, (state, action) => {
-      state.countryData = action.payload;
+    builder.addCase(getLockerCountry.fulfilled, (state, action) => {
+      state.lockerCountryData = action.payload;
       state.loading = false;
     });
-    builder.addCase(getCountry.rejected, (state, action) => {
+    builder.addCase(getLockerCountry.rejected, (state, action) => {
       return {
         ...state,
         loading: "rejected",
         error: action.payload,
       };
     });
-    builder.addCase(getState.pending, (state, action) => {
+    builder.addCase(getLockerState.pending, (state, action) => {
       return { ...state, loading: true };
     });
-    builder.addCase(getState.fulfilled, (state, action) => {
-      state.states = action.payload;
+    builder.addCase(getLockerState.fulfilled, (state, action) => {
+      state.lockerStatesData = action.payload;
       state.loading = false;
     });
-    builder.addCase(getState.rejected, (state, action) => {
+    builder.addCase(getLockerState.rejected, (state, action) => {
       return {
         ...state,
         loading: "rejected",
         error: action.payload,
       };
     });
-    builder.addCase(getCity.pending, (state, action) => {
+    builder.addCase(getLockerCity.pending, (state, action) => {
       return { ...state, loading: true };
     });
-    builder.addCase(getCity.fulfilled, (state, action) => {
-      state.cityData = action.payload || [];
+    builder.addCase(getLockerCity.fulfilled, (state, action) => {
+      state.lockerCityData = action.payload || [];
       state.loading = false;
     });
-    builder.addCase(getCity.rejected, (state, action) => {
+    builder.addCase(getLockerCity.rejected, (state, action) => {
       return {
         ...state,
         loading: "rejected",
