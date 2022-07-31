@@ -38,9 +38,11 @@ function Placeorder() {
     cart: { cartItems },
   } = useSelector((state) => state.basket);
 
- useEffect(()=>{
-   
- },[shippingCharges])
+  console.log(cartItems)
+
+  useEffect(() => {
+
+  }, [shippingCharges])
 
   useEffect(() => {
     //dispatch(getCartItems())
@@ -78,10 +80,10 @@ function Placeorder() {
 
   console.log(cartItems);
 
-  
 
-  const placeOrderHandler=(shippementData,userData)=>{
-    
+
+  const placeOrderHandler = (shippementData, userData) => {
+
     // let newCartItems=cartItems.map(result=>{
     //     let newObj={
     //         merchantId:result.merchant_id,
@@ -90,68 +92,69 @@ function Placeorder() {
     //     }
     //     return newObj
     // })
-    
-
-//    let obj={
-//     "isBuyNow": true,
-//     "orderAmount": 3.0,
-//     "cartItems": [
-//         {
-//             "discount": 0,
-//             "merchantId": 215,
-//             "origPrice": 3.0,
-//             "price": 3,
-//             "quantity": 1,
-//             "sku": "SKU_1582873943422"
-//         }
-//     ],
-//     "coupons": [],
-//     "orderDiscount": 0.0,
-//     "discounts": [],
-//     "paymentInfo": {
-//         "paymentAmount": 3,
-//         "paymentCurreny": "PKR"
-//     },
-//     "rewards": [],
-//     "shippingInfo": {
-//         "contactInfo": {
-//             "address": "johar",
-//             "cityId": 11,
-//             "cityName": "Lahore",
-//             "countryId": 1,
-//             "countryName": "Pakistan",
-//             "email": "mailto:umar.ismail@smartfusion.co",
-//             "firstName": "um",
-//             "lastName": "is",
-//             "mobileNumber": "03215890184",
-//             "stateId": 3,
-//             "stateName": "Punjab"
-//         },
-//         "origShippingCharges": 45,
-//         "shipment_method_type": "address",
-//         "shippingCharges": 45,
-//         "shippingDiscount": 0,
-//         "shippingMethodId": 3
-//     },
-//     "origOrderAmount": 3.0
-// }
 
 
-let newCartItems=cartItems.map(result=>{
-      let obj={};
-       obj.discount=0;
-       obj.merchantId=result.merchant_id
-       obj.origPrice=result.price
-       obj.price=result.price  
-       obj.quantity=result.qty
-       obj.sku=result.sku
-       return obj
-})
+    //    let obj={
+    //     "isBuyNow": true,
+    //     "orderAmount": 3.0,
+    //     "cartItems": [
+    //         {
+    //             "discount": 0,
+    //             "merchantId": 215,
+    //             "origPrice": 3.0,
+    //             "price": 3,
+    //             "quantity": 1,
+    //             "sku": "SKU_1582873943422"
+    //         }
+    //     ],
+    //     "coupons": [],
+    //     "orderDiscount": 0.0,
+    //     "discounts": [],
+    //     "paymentInfo": {
+    //         "paymentAmount": 3,
+    //         "paymentCurreny": "PKR"
+    //     },
+    //     "rewards": [],
+    //     "shippingInfo": {
+    //         "contactInfo": {
+    //             "address": "johar",
+    //             "cityId": 11,
+    //             "cityName": "Lahore",
+    //             "countryId": 1,
+    //             "countryName": "Pakistan",
+    //             "email": "mailto:umar.ismail@smartfusion.co",
+    //             "firstName": "um",
+    //             "lastName": "is",
+    //             "mobileNumber": "03215890184",
+    //             "stateId": 3,
+    //             "stateName": "Punjab"
+    //         },
+    //         "origShippingCharges": 45,
+    //         "shipment_method_type": "address",
+    //         "shippingCharges": 45,
+    //         "shippingDiscount": 0,
+    //         "shippingMethodId": 3
+    //     },
+    //     "origOrderAmount": 3.0
+    // }
 
 
-    let obj={
+    let newCartItems = cartItems.map(result => {
+      let obj = {};
+      obj.discount = 0;
+      obj.merchantId = result.merchant_id
+      obj.origPrice = result.price
+      obj.price = result.price
+      obj.quantity = result.qty
+      obj.sku = result.sku
+      return obj
+    })
+
+
+
+    let obj = {
       "isBuyNow": false,
-      "orderAmount":cartItems.reduce((a, c) => a + c.qty * c.price, 0),
+      "orderAmount": cartItems.reduce((a, c) => a + c.qty * c.price, 0),
       "cartItems": newCartItems,
       "coupons": [],
       "orderDiscount": 0.0,
@@ -183,13 +186,13 @@ let newCartItems=cartItems.map(result=>{
       },
       "origOrderAmount": cartItems.reduce((a, c) => a + c.qty * c.price, 0)
     }
-    
+
     setOpenBar(true);
     dispatch(addOrder(obj))
     router.push('/payment')
   }
 
-   
+
   return (
     <>
       <PlaceOrder1
