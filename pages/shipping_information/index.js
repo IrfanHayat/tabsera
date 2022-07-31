@@ -8,16 +8,30 @@ import {
   getCountry,
   getCustomer,
 } from "../../slice/shipmentSlice";
+import {
+  // addShipmentLockers,
+  // getLockers,
+  getLockerCountry,
+  // getCity,
+  // getState,
+} from "../../slice/lockerSlice";
 import { getTotals } from "../../slice/basketSlice";
 
 const Index = () => {
   let router = useRouter();
-
+  const { lockerLabels, countryData, states, cityData } = useSelector(
+    (state) => state.lockers
+  );
   const { shippingAddressData } = useSelector((state) => state.shipments);
   let [shippingAddres, setShippingAddess] = useState();
 
   let dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(getLockerCountry());
+    // dispatch(getLockers());
+  }, []);
+  console.log(countryData);
   const checkoutHandler = () => {
     dispatch(getCountry());
     router.push({
