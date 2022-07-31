@@ -55,6 +55,7 @@ function ShippingInformation({
   //   buttonText = "Add Address";
   // } else {
   //   buttonText = "Add Locker";
+  //   buttonText = "Add Locker";
   // }
 
   const [radioCheckLocker, setRadioCheckLocker] = useState(false);
