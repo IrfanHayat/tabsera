@@ -42,6 +42,7 @@ function PlaceOrder({
   userData,
   shippementData,
   shippmentName,
+  shippementLockerData,
   shippingAddress,
   shippingPrice,
   taxPrice,
@@ -123,11 +124,13 @@ function PlaceOrder({
                   <ListItemIcon>
                     <DomainAddOutlinedIcon />
                   </ListItemIcon>
-                  <ListItemText>{shippementData?.address}</ListItemText>
+                  {shippementLockerData ?
+                    <ListItemText>{shippementLockerData?.locker_address} </ListItemText> : <ListItemText>{shippementData?.address_label_name} {shippementData?.address}," ",{shippementData?.city},{shippementData?.state},
+                      {shippementData?.country}</ListItemText>}
                 </ListItem>
                 {/* </List>
               <List> */}
-                <ListItem>
+                {/* <ListItem>
                   <ListItemIcon>
                     <AddLocationAltOutlinedIcon />
                   </ListItemIcon>
@@ -135,7 +138,7 @@ function PlaceOrder({
                     {shippementData?.city},{shippementData?.state},
                     {shippementData?.country}
                   </ListItemText>
-                </ListItem>
+                </ListItem> */}
               </List>
             </Box>
             {/* <TabPanel value={value} index={2}>
@@ -287,13 +290,13 @@ function PlaceOrder({
                         <strong>
                           {productPrice && shippingCharges
                             ? productPrice.reduce(
-                                (a, c) => a + c.qty * c.price,
-                                0
-                              ) + shippingCharges
+                              (a, c) => a + c.qty * c.price,
+                              0
+                            ) + shippingCharges
                             : productPrice.reduce(
-                                (a, c) => a + c.qty * c.price,
-                                0
-                              )}
+                              (a, c) => a + c.qty * c.price,
+                              0
+                            )}
                         </strong>
                       </Typography>
                     </Grid>
@@ -332,7 +335,7 @@ function PlaceOrder({
                   }
                   variant="contained"
                   color="primary"
-                  // fullWidth
+                // fullWidth
                 >
                   Place Order
                 </Button>

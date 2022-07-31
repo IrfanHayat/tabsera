@@ -17,7 +17,16 @@ function Placeorder() {
   let [groupProductData, setGroupedProductData] = useState();
   const { userData, shippingAddressData, shippingCharges, shipmentMethodData } =
     useSelector((state) => state.shipments);
+
+  const {
+    lockersAddressData,
+    lockerLabels,
+    lockerCountryData,
+    lockerStatesData,
+    lockerCityData,
+  } = useSelector((state) => state.lockers);
   const [shippementData, setShippementData] = useState();
+  const [shippementLockerData, setShippementLockerData] = useState();
   const [shippementCharges, setShippementCharges] = useState();
   const classes = useStyles();
   // const router = useRouter();
@@ -65,14 +74,26 @@ function Placeorder() {
     dispatch(getTotals());
   }, []);
   useEffect(() => {
-    let result1 = shippingAddressData.filter((result) =>
-      result.address_id == router.query.addressId ? result : ""
-    );
 
-    setShippementData(result1[0]);
+    if (router.query.addressId) {
+      let result1 = shippingAddressData.filter((result) =>
+        result.address_id == router.query.addressId ? result : ""
+      );
 
-    dispatch(getCustomer());
-  }, [router, shippementData, shippingAddressData]);
+      setShippementData(result1[0]);
+
+      dispatch(getCustomer());
+    } else {
+      let result1 = lockersAddressData.filter((result) =>
+        result.locker_id == router.query.lockerId ? result : ""
+      );
+
+      setShippementLockerData(result1[0]);
+
+      dispatch(getCustomer());
+    }
+
+  }, [router, shippementData, shippingAddressData, shippementLockerData]);
 
   useEffect(() => {
     dispatch(getShipmentAddress());
@@ -139,57 +160,111 @@ function Placeorder() {
     // }
 
 
-    let newCartItems = cartItems.map(result => {
-      let obj = {};
-      obj.discount = 0;
-      obj.merchantId = result.merchant_id
-      obj.origPrice = result.price
-      obj.price = result.price
-      obj.quantity = result.qty
-      obj.sku = result.sku
-      return obj
-    })
 
 
 
-    let obj = {
-      "isBuyNow": false,
-      "orderAmount": cartItems.reduce((a, c) => a + c.qty * c.price, 0),
-      "cartItems": newCartItems,
-      "coupons": [],
-      "orderDiscount": 0.0,
-      "discounts": [],
-      "paymentInfo": {
-        "paymentAmount": cartItems.reduce((a, c) => a + c.qty * c.price, 0),
-        "paymentCurreny": "PKR"
-      },
-      rewards: [],
-      shippingInfo: {
-        contactInfo: {
-          address: shippementData.address,
-          cityId: shippementData.city_id,
-          cityName: shippementData.city,
-          countryId: shippementData.country_id,
-          countryName: shippementData.country,
-          email: "",
-          firstName: userData.first_name,
-          lastName: userData.last_name,
-          mobileNumber: "",
-          stateId: shippementData.state_id,
-          stateName: shippementData.state,
+
+
+    if (router.query.addressId) {
+      let newCartItems = cartItems.map(result => {
+        let obj = {};
+        obj.discount = 0;
+        obj.merchantId = result.merchant_id
+        obj.origPrice = result.price
+        obj.price = result.price
+        obj.quantity = result.qty
+        obj.sku = result.sku
+        return obj
+      })
+      let obj = {
+        "isBuyNow": false,
+        "orderAmount": cartItems.reduce((a, c) => a + c.qty * c.price, 0),
+        "cartItems": newCartItems,
+        "coupons": [],
+        "orderDiscount": 0.0,
+        "discounts": [],
+        "paymentInfo": {
+          "paymentAmount": cartItems.reduce((a, c) => a + c.qty * c.price, 0),
+          "paymentCurreny": "PKR"
         },
-        origShippingCharges: shippementCharges,
-        shippingCharges: shippementCharges,
-        shippingDiscount: 0,
-        shippingMethodId: router.query.shipId,
-        shipment_method_type: "address",
-      },
-      "origOrderAmount": cartItems.reduce((a, c) => a + c.qty * c.price, 0)
+        rewards: [],
+        shippingInfo: {
+          contactInfo: {
+            address: shippementData.address,
+            cityId: shippementData.city_id,
+            cityName: shippementData.city,
+            countryId: shippementData.country_id,
+            countryName: shippementData.country,
+            email: "",
+            firstName: userData.first_name,
+            lastName: userData.last_name,
+            mobileNumber: "",
+            stateId: shippementData.state_id,
+            stateName: shippementData.state,
+          },
+          origShippingCharges: shippementCharges,
+          shippingCharges: shippementCharges,
+          shippingDiscount: 0,
+          shippingMethodId: router.query.shipId,
+          shipment_method_type: "address",
+        },
+        "origOrderAmount": cartItems.reduce((a, c) => a + c.qty * c.price, 0)
+      }
+
+      setOpenBar(true);
+      dispatch(addOrder(obj))
+      router.push('/payment')
+    } else {
+      let newCartItems = cartItems.map(result => {
+        let obj = {};
+        obj.discount = 0;
+        obj.merchantId = result.merchant_id
+        obj.origPrice = result.price
+        obj.price = result.price
+        obj.quantity = result.qty
+        obj.sku = result.sku
+        return obj
+      })
+      let obj = {
+        "isBuyNow": false,
+        "orderAmount": cartItems.reduce((a, c) => a + c.qty * c.price, 0),
+        "cartItems": newCartItems,
+        "coupons": [],
+        "orderDiscount": 0.0,
+        "discounts": [],
+        "paymentInfo": {
+          "paymentAmount": cartItems.reduce((a, c) => a + c.qty * c.price, 0),
+          "paymentCurreny": "PKR"
+        },
+        rewards: [],
+        shippingInfo: {
+          contactInfo: {
+            address: shippementLockerData.address,
+            cityId: shippementLockerData.city_id,
+            // cityName: shippementLockerData.city,
+            countryId: shippementLockerData.country_id,
+            // countryName: shippementLockerData.country,
+            email: "",
+            firstName: userData.first_name,
+            lastName: userData.last_name,
+            mobileNumber: "",
+            stateId: shippementLockerData.state_id,
+            //stateName: shippementLockerData.state,
+          },
+          origShippingCharges: shippementCharges,
+          shippingCharges: shippementCharges,
+          shippingDiscount: 0,
+          shippingMethodId: router.query.shipId,
+          shipment_method_type: "locker",
+        },
+        "origOrderAmount": cartItems.reduce((a, c) => a + c.qty * c.price, 0)
+      }
+
+      setOpenBar(true);
+      dispatch(addOrder(obj))
+      router.push('/payment')
     }
 
-    setOpenBar(true);
-    dispatch(addOrder(obj))
-    router.push('/payment')
   }
 
 
@@ -213,6 +288,7 @@ function Placeorder() {
         shippmentName={router.query.shipName}
         handleCloseBar={handleCloseBar}
         openBar={openBar}
+        shippementLockerData={shippementLockerData}
       ></PlaceOrder1>
     </>
   );

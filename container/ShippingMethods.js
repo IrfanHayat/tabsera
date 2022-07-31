@@ -39,6 +39,7 @@ function ShippingMethods({
   userData,
   productPrice,
   shippingCharges,
+  shippementLockerData
 }) {
   let router = useRouter();
   const [radioCheck, setRadioCheck] = useState(false);
@@ -102,8 +103,10 @@ function ShippingMethods({
                   <ListItemIcon>
                     <DomainAddOutlinedIcon />
                   </ListItemIcon>
-                  <ListItemText>{shippementData?.address_label_name} {shippementData?.address}," ",{shippementData?.city},{shippementData?.state},
-                    {shippementData?.country}</ListItemText>
+                  {console.log(shippementLockerData)}
+                  {shippementLockerData ?
+                    <ListItemText>{shippementLockerData?.locker_address} </ListItemText> : <ListItemText>{shippementData?.address_label_name} {shippementData?.address}," ",{shippementData?.city},{shippementData?.state},
+                      {shippementData?.country}</ListItemText>}
                 </ListItem>
                 {/* </List> */}
                 {/* <List> */}
