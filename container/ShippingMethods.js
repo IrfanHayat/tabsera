@@ -153,7 +153,7 @@ function ShippingMethods({
                       // row
                       aria-labelledby="demo-row-radio-buttons-group-label"
                       name="row-radio-buttons-group"
-                      // value={labelValue}
+                    // value={labelValue}
                     >
                       {shipmentMethodData &&
                         shipmentMethodData.map((result) => (
@@ -192,14 +192,14 @@ function ShippingMethods({
                   {/* <ListItemText>$ 0.0</ListItemText> */}
                 </ListItem>
                 <ListItem>
-                  <ListItemText>Shipping Cost {shippingCharges}</ListItemText>
+                  <ListItemText>Shipping Cost {shippingCharges ? shippingCharges : 0}</ListItemText>
                 </ListItem>
                 <ListItem>
                   <ListItemText>
                     Subtotal{" "}
                     {productPrice && shippingCharges
                       ? productPrice?.reduce((a, c) => a + c.qty * c.price, 0) +
-                        shippingCharges
+                      shippingCharges
                       : productPrice?.reduce((a, c) => a + c.qty * c.price, 0)}
                   </ListItemText>
                 </ListItem>
@@ -210,7 +210,7 @@ function ShippingMethods({
                   variant="contained"
                   color="primary"
                   disabled={radioCheck ? "" : "disabled"}
-                  // startIcon={<AddIcon />}
+                // startIcon={<AddIcon />}
                 >
                   Continue to Place Order
                 </Button>
