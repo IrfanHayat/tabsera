@@ -212,9 +212,14 @@ function Placeorder() {
       }
       let result = await dispatch(addOrder(obj))
       console.log(result)
-      setOpenBar(true);
+      if (result.payload.customerOrderNo != null) {
+        setOpenBar(true);
+        setTimeout(() => {
+          router.push('/payment')
+        }, 1000)
 
-      router.push('/payment')
+      }
+
     } else {
       let newCartItems = cartItems.map(result => {
         let obj = {};
