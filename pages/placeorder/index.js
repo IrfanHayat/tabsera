@@ -221,6 +221,7 @@ function Placeorder() {
       }
 
     } else {
+      console.log(shippementLockerData)
       let newCartItems = cartItems.map(result => {
         let obj = {};
         obj.discount = 0;
@@ -236,39 +237,52 @@ function Placeorder() {
         "orderAmount": cartItems.reduce((a, c) => a + c.qty * c.price, 0),
         "cartItems": newCartItems,
         "coupons": [],
-        "orderDiscount": 0.0,
+        "orderDiscount": "0.0",
         "discounts": [],
         "paymentInfo": {
           "paymentAmount": cartItems.reduce((a, c) => a + c.qty * c.price, 0),
           "paymentCurreny": "PKR"
         },
-        rewards: [],
-        shippingInfo: {
-          contactInfo: {
-            address: shippementLockerData.address,
-            cityId: shippementLockerData.city_id,
-            // cityName: shippementLockerData.city,
-            countryId: shippementLockerData.country_id,
-            // countryName: shippementLockerData.country,
-            email: "",
-            firstName: userData.first_name,
-            lastName: userData.last_name,
-            mobileNumber: "",
-            stateId: shippementLockerData.state_id,
-            //stateName: shippementLockerData.state,
+        "rewards": [],
+        "shippingInfo": {
+          "contactInfo": {
+            "address": "Islamabad",
+            "addressId": shippementLockerData.locker_id,
+            "cityId": 11,
+            "cityName": "",
+            "countryId": 1,
+            "countryName": "Pakistan",
+            "email": "",
+            "firstName": userData.first_name,
+            "lastName": userData.last_name,
+            "mobileNumber": "",
+            "stateId": 2724,
+            "stateName": "Pakistan"
           },
-          origShippingCharges: shippementCharges,
-          shippingCharges: shippementCharges,
-          shippingDiscount: 0,
-          shippingMethodId: router.query.shipId,
-          shipment_method_type: "locker",
+          "origShippingCharges": shippementCharges,
+          "shipmentMethodType": "locker",
+          "shippingCharges": shippementCharges,
+          "shippingDiscount": "0",
+          "shippingMethodId": router.query.shipId
         },
         "origOrderAmount": cartItems.reduce((a, c) => a + c.qty * c.price, 0)
       }
 
-      setOpenBar(true);
-      dispatch(addOrder(obj))
-      router.push('/payment')
+
+
+
+      console.log(obj)
+
+      let result = await dispatch(addOrder(obj))
+      console.log(result)
+      if (Object.keys(result.payload).length > 0) {
+        setOpenBar(true);
+        setTimeout(() => {
+          router.push('/payment')
+        }, 1000)
+
+      }
+
     }
 
   }
