@@ -135,6 +135,7 @@ function Product_detail(props) {
       }
 
       await dispatch(getTotalCartQuantity());
+      router.push("/cart");
     } else {
       // console.log("item");
       // console.log(item);
@@ -151,7 +152,7 @@ function Product_detail(props) {
 
       console.log(result);
 
-      //  router.push("/cart");
+      router.push("/cart");
     }
 
     // if (item.product_id) {
@@ -208,7 +209,7 @@ function Product_detail(props) {
         setBuyStatus(true)
       } else {
         localStorage.setItem('buyItem', true)
-        router.push("/shipping_information");
+        router.push("/cart");
       }
       // setTimeout(() => {
       //   dispatch(getTotalCartQuantity());

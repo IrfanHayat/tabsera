@@ -70,7 +70,7 @@ export default function Shipping({
 
   return (
     <>
-      <CheckoutWizard activeStep={0} />
+      <CheckoutWizard activeStep={1} />
       <Grid container p={2}>
         <Grid item md={2}></Grid>
 
@@ -357,8 +357,8 @@ export default function Shipping({
                   row
                   aria-labelledby="demo-row-radio-buttons-group-label"
                   name="row-radio-buttons-group"
-                  // value={labelValue}
-                  // onChange={handleChange}
+                // value={labelValue}
+                // onChange={handleChange}
                 >
                   {labels.map((result) => (
                     <FormControlLabel

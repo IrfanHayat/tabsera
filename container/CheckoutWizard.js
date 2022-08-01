@@ -12,13 +12,13 @@ export default function CheckoutWizard({ activeStep = 0 }) {
           sx={{ mt: 5, width: "100%" }}
         >
           {[
-            // "Login",
-            "Shipping Information",
+            "Checkout",
+            "Select Shipping Address",
+            "Enter shipping Information ",
+            "Shipping Info",
             "Place Order",
-            "Shipping Method",
-            "Order Summary ",
             "Payment Method",
-            "Order Success",
+            "Order Complete",
           ].map((step) => (
             <Step
               key={step}

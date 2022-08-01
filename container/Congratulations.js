@@ -6,7 +6,7 @@ import Stack from "@mui/material/Stack";
 const Congratulations = () => {
   return (
     <>
-      <CheckoutWizard activeStep={5} />
+      <CheckoutWizard activeStep={6} />
       <Box
         direction="column"
         sx={{

@@ -41,7 +41,7 @@ export default function Payment({
 
   return (
     <Grid container>
-      <CheckoutWizard activeStep={4}></CheckoutWizard>
+      <CheckoutWizard activeStep={5}></CheckoutWizard>
       <Grid item sx={{ margin: 5 }}>
         <form>
           <Typography variant="h6" style={{ fontWeight: "bold" }}>
@@ -54,7 +54,7 @@ export default function Payment({
                   // row
                   aria-labelledby="demo-row-radio-buttons-group-label"
                   name="row-radio-buttons-group"
-                  // value={labelValue}
+                // value={labelValue}
                 >
                   {/* <FormControlLabel
             value="female"

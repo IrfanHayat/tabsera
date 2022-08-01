@@ -212,7 +212,7 @@ function ShippingMethods({
                   disabled={radioCheck ? "" : "disabled"}
                 // startIcon={<AddIcon />}
                 >
-                  Continue to Place Order
+                  Review Order
                 </Button>
                 <Button
                   // fullWidth

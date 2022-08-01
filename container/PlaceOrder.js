@@ -77,7 +77,7 @@ function PlaceOrder({
 
   return (
     <>
-      <CheckoutWizard activeStep={3}></CheckoutWizard>
+      <CheckoutWizard activeStep={4}></CheckoutWizard>
 
       <Grid container mt={5} justifyContent={"center"}>
         <Grid item md={9} xs={12}>
@@ -298,13 +298,13 @@ function PlaceOrder({
                         <strong>
                           {productPrice && shippingCharges
                             ? productPrice.reduce(
-                                (a, c) => a + c.qty * c.price,
-                                0
-                              ) + shippingCharges
+                              (a, c) => a + c.qty * c.price,
+                              0
+                            ) + shippingCharges
                             : productPrice.reduce(
-                                (a, c) => a + c.qty * c.price,
-                                0
-                              )}
+                              (a, c) => a + c.qty * c.price,
+                              0
+                            )}
                         </strong>
                       </Typography>
                     </Grid>
@@ -343,7 +343,7 @@ function PlaceOrder({
                   }
                   variant="contained"
                   color="primary"
-                  // fullWidth
+                // fullWidth
                 >
                   Place Order
                 </Button>
