@@ -36,7 +36,10 @@ function ShippingInformation({
   submitHandler,
   lockerStatesData,
   getStates,
-  getCities
+  getCities,
+  lockersAddressData,
+  checkoutHandlerLocker,
+  handleChangeLocker,
 }) {
   const [buttonKey, setButtonKey] = React.useState(1);
   let router = useRouter();
@@ -79,8 +82,8 @@ function ShippingInformation({
           // style={{ minHeight: "100vh" }}
           // ml={10}
           item
-        // justifyContent="center"
-        // sx={{ display: "flex" }}
+          // justifyContent="center"
+          // sx={{ display: "flex" }}
         >
           <FormControl>
             <RadioGroup
@@ -89,9 +92,7 @@ function ShippingInformation({
               name="row-radio-buttons-group"
             >
               <FormControlLabel
-                onClick={() => {
-                  setButtonKey(1), setRadioCheck(true);
-                }}
+                onClick={() => setButtonKey(1)}
                 value="address"
                 // buttonKey={1}
                 // onChange={handleChange}
@@ -101,9 +102,7 @@ function ShippingInformation({
               <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
               <FormControlLabel
                 // buttonKey={2}
-                onClick={() => {
-                  setButtonKey(2), setRadioCheck(true);
-                }}
+                onClick={() => setButtonKey(2)}
                 // onClick={() => setRadioCheck(true)}
                 // onClick={setButtonKey(2)}
                 value="lockers"
@@ -116,11 +115,11 @@ function ShippingInformation({
               onClick={checkoutHandler1}
               variant="contained"
               color="primary"
-              disabled={radioCheck ? "" : "disabled"}
+              // disabled={radioCheck ? "" : "disabled"}
               // buttonKey={buttonKey}
               // href="/shipping"
               startIcon={<AddIcon />}
-            // label=" Add Addresss"
+              // label=" Add Addresss"
             >
               {buttonText}
             </Button>
@@ -169,8 +168,8 @@ function ShippingInformation({
                     variant="contained"
                     color="primary"
                     disabled={radioCheck ? "" : "disabled"}
-                  // href="/shipping_methods"
-                  // startIcon={<AddIcon />}
+                    // href="/shipping_methods"
+                    // startIcon={<AddIcon />}
                   >
                     Continue
                   </Button>
@@ -209,7 +208,7 @@ function ShippingInformation({
                 <AccordionDetails>
                   <form
                     onSubmit={handleSubmit(submitHandler)}
-                  // className={classes.form}
+                    // className={classes.form}
                   >
                     <List>
                       {/* <Stack direction="row" spacing={2}></Stack> */}
@@ -305,7 +304,9 @@ function ShippingInformation({
                               sx={{ width: "50%", mx: 1 }}
                               value={value || null}
                               options={lockerCityData}
-                              key={(item) => (item.city_name ? item.city_name : "")}
+                              key={(item) =>
+                                item.city_name ? item.city_name : ""
+                              }
                               getOptionLabel={(item) =>
                                 item.city_name ? item.city_name : ""
                               }
@@ -329,7 +330,6 @@ function ShippingInformation({
                           )}
                         />
                       </ListItem>
-
                     </List>
 
                     <List>
@@ -351,6 +351,42 @@ function ShippingInformation({
                       </ListItem>
                     </List>
                   </form>
+                  <List>
+                    {console.log(lockersAddressData)}
+                    <ListItem>
+                      <RadioGroup
+                        // row
+                        aria-labelledby="demo-row-radio-buttons-group-label"
+                        name="row-radio-buttons-group"
+                        // value={labelValue}
+                        onChange={handleChangeLocker}
+                      >
+                        {lockersAddressData.length > 0 &&
+                          lockersAddressData?.map((result) => (
+                            <FormControlLabel
+                              value={result.locker_id}
+                              control={<Radio />}
+                              label={`${result.locker_name},${result.locker_address}`}
+                              onClick={() => setRadioCheck(true)}
+                            />
+                          ))}
+                      </RadioGroup>
+                    </ListItem>
+                    <ListItem>
+                      <Stack direction="row" spacing={2}>
+                        <Button
+                          onClick={checkoutHandlerLocker}
+                          variant="contained"
+                          color="primary"
+                          // disabled={radioCheck ? "" : "disabled"}
+                          // href="/shipping_methods"
+                          // startIcon={<AddIcon />}
+                        >
+                          Continue
+                        </Button>
+                      </Stack>
+                    </ListItem>
+                  </List>
                 </AccordionDetails>
               </Accordion>
             </Grid>

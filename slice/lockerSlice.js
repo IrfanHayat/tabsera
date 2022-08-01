@@ -26,7 +26,7 @@ export const addShipmentLockers = createAsyncThunk(
       `${url}/customers/addresses/lockers/find`,
       requestBody
     );
-    console.log(result.data.lockers)
+    console.log(result.data.lockers);
     return result.data.lockers;
   }
 );
@@ -60,7 +60,7 @@ export const getLockerCity = createAsyncThunk("cities", async (id) => {
   const result = await instance.get(
     `${url}/customers/addresses/lockers/cities/${id}`
   );
-  console.log(result.data)
+  console.log(result.data);
   return result.data.cities;
 });
 
@@ -93,6 +93,22 @@ const addLockers = createSlice({
     //     error: action.payload,
     //   };
     // });
+
+    builder.addCase(addShipmentLockers.pending, (state, action) => {
+      return { ...state, loading: true };
+    });
+    builder.addCase(addShipmentLockers.fulfilled, (state, action) => {
+      state.lockersAddressData = action.payload;
+      state.loading = false;
+    });
+    builder.addCase(addShipmentLockers.rejected, (state, action) => {
+      return {
+        ...state,
+        loading: "rejected",
+        error: action.payload,
+      };
+    });
+
     builder.addCase(getLockers.pending, (state, action) => {
       return { ...state, loading: true };
     });

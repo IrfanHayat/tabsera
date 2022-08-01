@@ -14,24 +14,29 @@ import {
   getLockerCountry,
   getLockerState,
   getLockerCity,
-  addShipmentLockers
+  addShipmentLockers,
   // getCity,
   // getState,
 } from "../../slice/lockerSlice";
 import { getTotals } from "../../slice/basketSlice";
-import { ContactPageSharp } from "@mui/icons-material";
+import { ContactPageSharp, Login } from "@mui/icons-material";
 
 const Index = () => {
   let router = useRouter();
-  const { lockerLabels, lockerCountryData, lockerStatesData, lockerCityData } = useSelector(
-    (state) => state.lockers
-  );
+  const {
+    lockersAddressData,
+    lockerLabels,
+    lockerCountryData,
+    lockerStatesData,
+    lockerCityData,
+  } = useSelector((state) => state.lockers);
   const { shippingAddressData } = useSelector((state) => state.shipments);
   let [shippingAddres, setShippingAddess] = useState();
 
   let dispatch = useDispatch();
 
-  console.log(lockerCountryData)
+  console.log(lockersAddressData, "lAD");
+
   useEffect(() => {
     dispatch(getLockerCountry());
     // dispatch(getLockers());
@@ -80,39 +85,37 @@ const Index = () => {
   }, []);
 
   useEffect(() => {
-    console.log(lockerCountryData)
-  }, [lockerCountryData])
-
-
+    console.log(lockerCountryData);
+  }, [lockerCountryData]);
 
   const submitHandler = async (value) => {
-    console.log(value)
+    console.log(value);
     let obj = {
       cityId: value.city.city_id,
       countryId: value.country.country_id,
-      stateId: value.states.state_id
+      stateId: value.states.state_id,
     };
-    console.log(obj)
+    console.log(obj);
 
-    dispatch(addShipmentLockers(obj))
-
-
-
+    dispatch(addShipmentLockers(obj));
   };
 
   const getStates = (value) => {
-    console.log(value.country_id)
+    console.log(value.country_id);
     dispatch(getLockerState(value.country_id));
-    console.log(lockerStatesData)
+    console.log(lockerStatesData);
   };
 
   const getCities = (value) => {
     dispatch(getLockerCity(value.state_id));
-    console.log(lockerCityData)
+    console.log(lockerCityData);
   };
-
-
-
+  const handleChangeLocker = (value) => {
+    console.log(value);
+  };
+  const checkoutHandlerLocker = (value) => {
+    console.log(value);
+  };
   return (
     <div>
       <ShippingInformation
@@ -126,8 +129,9 @@ const Index = () => {
         getStates={getStates}
         getCities={getCities}
         submitHandler={submitHandler}
-
-
+        lockersAddressData={lockersAddressData}
+        checkoutHandlerLocker={checkoutHandlerLocker}
+        handleChangeLocker={handleChangeLocker}
       />
     </div>
   );
