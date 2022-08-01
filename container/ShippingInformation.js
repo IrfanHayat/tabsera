@@ -25,6 +25,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Controller, useForm } from "react-hook-form";
 import { TextField } from "@mui/material";
+import Chip from "@mui/material/Chip";
 //import Divider from "@mui/material";
 function ShippingInformation({
   checkoutHandler,
@@ -70,7 +71,7 @@ function ShippingInformation({
   // }, [buttonKey]);
   return (
     <>
-      <CheckoutWizard activeStep={1} />
+      <CheckoutWizard activeStep={0} />
       <Grid container mt={5}>
         {/* <Grid item md={2}></Grid> */}
         <Grid
@@ -84,8 +85,8 @@ function ShippingInformation({
           // style={{ minHeight: "100vh" }}
           // ml={10}
           item
-        // justifyContent="center"
-        // sx={{ display: "flex" }}
+          // justifyContent="center"
+          // sx={{ display: "flex" }}
         >
           <FormControl>
             <RadioGroup
@@ -111,7 +112,6 @@ function ShippingInformation({
                   setButtonKey(2);
                   setRadioCheckLocker(true);
                 }}
-                // onClick={() => setRadioCheck(true)}
                 // onClick={setButtonKey(2)}
                 value="lockers"
                 // onChange={handleChange}
@@ -119,7 +119,7 @@ function ShippingInformation({
                 label="Locker"
               />
             </RadioGroup>
-            <Button
+            {/* <Button
               onClick={() => {
                 buttonKey === 1 ? checkoutHandler1() : null;
               }}
@@ -129,25 +129,83 @@ function ShippingInformation({
               // buttonKey={buttonKey}
               // href="/shipping"
               startIcon={<AddIcon />}
-            // label=" Add Addresss"
+              // label=" Add Addresss"
             >
               {buttonKey === 1 ? "Add Address" : "Add Locker"}
-            </Button>
+            </Button> */}
           </FormControl>
         </Grid>
         {/* <Box>Locker Info here</Box> */}
+
+        <Grid container>
+          <Grid item md={1}></Grid>
+
+          <Grid item md={8} mt={4}>
+            {/* <Box> */}
+            <List
+              sx={{
+                display: "flex",
+                // p: 1,
+                // m: 1,
+                justifyContent: "space-between",
+              }}
+            >
+              <ListItem>
+                <FormLabel style={{ fontWeight: "bold" }}>
+                  {buttonKey === 1 ? " Addresses" : "Lockers"}
+                </FormLabel>
+              </ListItem>
+              <ListItem>
+                <Button
+                  onClick={() => {
+                    buttonKey === 1 ? checkoutHandler1() : null;
+                  }}
+                  variant="contained"
+                  color="primary"
+                  disabled={radioCheckLocker ? "" : "disabled"}
+                  // buttonKey={buttonKey}
+                  // href="/shipping"
+                  startIcon={<AddIcon />}
+                  // label=" Add Addresss"
+                >
+                  {buttonKey === 1 ? "Add Address" : "Add Locker"}
+                </Button>
+              </ListItem>
+            </List>
+            {/* </Box> */}
+          </Grid>
+        </Grid>
 
         {buttonKey === 1 ? (
           <Grid container>
             <Grid item md={1}></Grid>
 
-            <Grid item md={12} mt={4} justifyContent="center">
+            <Grid item md={6} m={1} justifyContent="center">
               <FormControl>
-                <FormLabel style={{ fontWeight: "bold" }}>
-                  Shipping Addresses
-                </FormLabel>
-
-                <List sx={{ display: "flex", p: 1, m: 1 }}>
+                {/* <List sx={{ display: "flex", p: 1, m: 1 }}>
+                  <ListItem>
+                    <FormLabel style={{ fontWeight: "bold" }}>
+                      {buttonKey === 1 ? " Addresses" : "Lockers"}
+                    </FormLabel>
+                  </ListItem>
+                  <ListItem>
+                    <Button
+                      onClick={() => {
+                        buttonKey === 1 ? checkoutHandler1() : null;
+                      }}
+                      variant="contained"
+                      color="primary"
+                      disabled={radioCheckLocker ? "" : "disabled"}
+                      // buttonKey={buttonKey}
+                      // href="/shipping"
+                      startIcon={<AddIcon />}
+                      // label=" Add Addresss"
+                    >
+                      {buttonKey === 1 ? "Add Address" : "Add Locker"}
+                    </Button>
+                  </ListItem>
+                </List> */}
+                <List sx={{ display: "flex" }}>
                   <ListItem>
                     <RadioGroup
                       // row
@@ -162,7 +220,27 @@ function ShippingInformation({
                             <FormControlLabel
                               value={result.address_id}
                               control={<Radio />}
-                              label={`${result.address_label_name},${result.address},"",${result.city},${result.state},${result.country}`}
+                              label={
+                                <Box>
+                                  <Chip
+                                    label={result.address_label_name}
+                                    color={
+                                      result.address_label_name === "Home"
+                                        ? "primary"
+                                        : "error"
+                                    }
+                                    size="small"
+                                    sx={{ m: 1 }}
+                                  />
+                                  {/* {result.address_label_name} */}
+                                  {result.address}
+                                  {result.city}
+                                  {result.state}
+                                  {result.country}
+                                  {/* </Typography> */}
+                                </Box>
+                              }
+                              // label={`${result.address_label_name},${result.address},"",${result.city},${result.state},${result.country}`}
                               onClick={() => setRadioCheck(true)}
                             />
                           ) : (
@@ -178,8 +256,8 @@ function ShippingInformation({
                     variant="contained"
                     color="primary"
                     disabled={radioCheck ? "" : "disabled"}
-                  // href="/shipping_methods"
-                  // startIcon={<AddIcon />}
+                    // href="/shipping_methods"
+                    // startIcon={<AddIcon />}
                   >
                     Continue
                   </Button>
@@ -203,208 +281,217 @@ function ShippingInformation({
             </Grid>
           </Grid>
         ) : (
-          <Grid container spacing={2}>
-            <Grid item md={1}></Grid>
+          <Grid
+            container
+            // spacing={0}
+            direction="row"
+            alignItems="center"
+            justifyContent="center"
 
-            <Grid item md={10} mt={4} justifyContent="center">
-              <Accordion>
+            // maxWidth="xl"
+          >
+            {/* <Grid item md={4}></Grid> */}
+            {/* <Grid container> */}
+            {/* <Grid item md={1}></Grid> */}
+
+            {/* <Grid item md={6} mt={4} justifyContent="center"></Grid> */}
+            <Grid item mt={4} md={8} sm={12}>
+              {/* <Accordion>
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
                   aria-controls="panel1a-content"
                   id="panel1a-header"
-                >
-                  <Typography>Hide Detail</Typography>
-                </AccordionSummary>
-                <AccordionDetails>
-                  <form
-                    onSubmit={handleSubmit(submitHandler)}
-                  // className={classes.form}
-                  >
-                    <List>
-                      {/* <Stack direction="row" spacing={2}></Stack> */}
+                > */}
+              {/* <Typography>Hide Details</Typography> */}
+              {/* </AccordionSummary> */}
+              {/* <AccordionDetails> */}
+              <form
+                onSubmit={handleSubmit(submitHandler)}
+                // className={classes.form}
+              >
+                <List>
+                  {/* <Stack direction="row" spacing={2}></Stack> */}
 
-                      <ListItem>
-                        <Controller
-                          control={control}
-                          name="country"
-                          rules={{ required: true }}
-                          render={({ field: { onChange, value } }) => (
-                            <Autocomplete
-                              onChange={(event, item) => {
-                                onChange(item);
-                                getStates(item);
-                              }}
-                              value={value || null}
-                              sx={{ mx: 1 }}
-                              fullWidth
-                              options={lockerCountryData}
-                              getOptionLabel={(item) =>
-                                item.country_name ? item.country_name : ""
-                              }
-                              getOptionSelected={(option, value) =>
-                                value === undefined ||
-                                value === "" ||
-                                option.country_id === value.country_id
-                              }
-                              renderInput={(params) => (
-                                <TextField
-                                  {...params}
-                                  label="country"
-                                  // fullWidth
-                                  margin="normal"
-                                  variant="outlined"
-                                  // error={!!errors.item}
-                                  // helperText={errors.item && "item required"}
-                                  required
-                                />
-                              )}
+                  <ListItem>
+                    <Controller
+                      control={control}
+                      name="country"
+                      rules={{ required: true }}
+                      render={({ field: { onChange, value } }) => (
+                        <Autocomplete
+                          onChange={(event, item) => {
+                            onChange(item);
+                            getStates(item);
+                          }}
+                          value={value || null}
+                          sx={{ mx: 1 }}
+                          fullWidth
+                          options={lockerCountryData}
+                          getOptionLabel={(item) =>
+                            item.country_name ? item.country_name : ""
+                          }
+                          getOptionSelected={(option, value) =>
+                            value === undefined ||
+                            value === "" ||
+                            option.country_id === value.country_id
+                          }
+                          renderInput={(params) => (
+                            <TextField
+                              {...params}
+                              label="country"
+                              // fullWidth
+                              margin="normal"
+                              variant="outlined"
+                              // error={!!errors.item}
+                              // helperText={errors.item && "item required"}
+                              required
                             />
                           )}
                         />
-                      </ListItem>
+                      )}
+                    />
+                  </ListItem>
 
-                      <ListItem>
-                        <Controller
-                          control={control}
-                          name="states"
-                          rules={{ required: true }}
-                          render={({ field: { onChange, value } }) => (
-                            <Autocomplete
-                              onChange={(event, item) => {
-                                onChange(item);
-                                getCities(item);
-                              }}
-                              sx={{ width: "50%", mx: 1 }}
-                              value={value || null}
-                              options={lockerStatesData}
-                              getOptionLabel={(item) =>
-                                item.state_name ? item.state_name : ""
-                              }
-                              getOptionSelected={(option, value) =>
-                                value === undefined ||
-                                value === "" ||
-                                option.state_id === value.state_id
-                              }
-                              renderInput={(params) => (
-                                <TextField
-                                  {...params}
-                                  label="state"
-                                  margin="normal"
-                                  variant="outlined"
-                                  // error={!!errors.item}
-                                  // helperText={errors.item && "item required"}
-                                  required
-                                />
-                              )}
+                  <ListItem>
+                    <Controller
+                      control={control}
+                      name="states"
+                      rules={{ required: true }}
+                      render={({ field: { onChange, value } }) => (
+                        <Autocomplete
+                          onChange={(event, item) => {
+                            onChange(item);
+                            getCities(item);
+                          }}
+                          sx={{ width: "50%", mx: 1 }}
+                          value={value || null}
+                          options={lockerStatesData}
+                          getOptionLabel={(item) =>
+                            item.state_name ? item.state_name : ""
+                          }
+                          getOptionSelected={(option, value) =>
+                            value === undefined ||
+                            value === "" ||
+                            option.state_id === value.state_id
+                          }
+                          renderInput={(params) => (
+                            <TextField
+                              {...params}
+                              label="state"
+                              margin="normal"
+                              variant="outlined"
+                              // error={!!errors.item}
+                              // helperText={errors.item && "item required"}
+                              required
                             />
                           )}
                         />
-                        {/* </ListItem> */}
+                      )}
+                    />
+                    {/* </ListItem> */}
 
-                        {/* <ListItem> */}
-                        <Controller
-                          control={control}
-                          name="city"
-                          rules={{ required: true }}
-                          render={({ field: { onChange, value } }) => (
-                            <Autocomplete
-                              onChange={(event, item) => {
-                                onChange(item);
-                              }}
-                              sx={{ width: "50%", mx: 1 }}
-                              value={value || null}
-                              options={lockerCityData}
-                              key={(item) =>
-                                item.city_name ? item.city_name : ""
-                              }
-                              getOptionLabel={(item) =>
-                                item.city_name ? item.city_name : ""
-                              }
-                              getOptionSelected={(option, value) =>
-                                value === undefined ||
-                                value === "" ||
-                                option.city_id === value.city_id
-                              }
-                              renderInput={(params) => (
-                                <TextField
-                                  {...params}
-                                  label="city"
-                                  margin="normal"
-                                  variant="outlined"
-                                  error={!!errors.item}
-                                  helperText={errors.item && "item required"}
-                                  required
-                                />
-                              )}
+                    {/* <ListItem> */}
+                    <Controller
+                      control={control}
+                      name="city"
+                      rules={{ required: true }}
+                      render={({ field: { onChange, value } }) => (
+                        <Autocomplete
+                          onChange={(event, item) => {
+                            onChange(item);
+                          }}
+                          sx={{ width: "50%", mx: 1 }}
+                          value={value || null}
+                          options={lockerCityData}
+                          key={(item) => (item.city_name ? item.city_name : "")}
+                          getOptionLabel={(item) =>
+                            item.city_name ? item.city_name : ""
+                          }
+                          getOptionSelected={(option, value) =>
+                            value === undefined ||
+                            value === "" ||
+                            option.city_id === value.city_id
+                          }
+                          renderInput={(params) => (
+                            <TextField
+                              {...params}
+                              label="city"
+                              margin="normal"
+                              variant="outlined"
+                              error={!!errors.item}
+                              helperText={errors.item && "item required"}
+                              required
                             />
                           )}
                         />
-                      </ListItem>
-                    </List>
+                      )}
+                    />
+                  </ListItem>
+                </List>
 
-                    <List>
-                      <ListItem>
-                        <Stack direction="row" spacing={2}>
-                          {/* <List>
+                <List>
+                  <ListItem>
+                    <Stack direction="row" spacing={2}>
+                      {/* <List>
             <ListItem> */}
-                          <Button
-                            variant="contained"
-                            //href="/shipping_methods"
-                            type="submit"
-                            // fullWidth
-                            // disabled={radioCheck ? "" : "disabled"}
-                            color="primary"
-                          >
-                            Find Locker
-                          </Button>
-                        </Stack>
-                      </ListItem>
-                    </List>
-                  </form>
-                  <List>
-                    <ListItem>
-                      <RadioGroup
-                        // row
-                        aria-labelledby="demo-row-radio-buttons-group-label"
-                        name="row-radio-buttons-group"
-                        // value={labelValue}
-                        onChange={handleChangeLocker}
+                      <Button
+                        variant="contained"
+                        //href="/shipping_methods"
+                        type="submit"
+                        // fullWidth
+                        // disabled={radioCheck ? "" : "disabled"}
+                        color="primary"
                       >
-                        {lockersAddressData.length > 0 &&
-                          lockersAddressData?.map((result) => (
-                            <FormControlLabel
-                              value={result.locker_id}
-                              control={<Radio />}
-                              label={`${result.locker_name},${result.locker_address}`}
-                              onClick={() => setRadioCheck1(true)}
-                            />
-                          ))}
-                      </RadioGroup>
-                    </ListItem>
+                        Find Locker
+                      </Button>
+                    </Stack>
+                  </ListItem>
+                </List>
+              </form>
+              <Grid container>
+                <ListItem>
+                  <RadioGroup
+                    // row
+                    aria-labelledby="demo-row-radio-buttons-group-label"
+                    name="row-radio-buttons-group"
+                    // value={labelValue}
+                    onChange={handleChangeLocker}
+                  >
+                    {lockersAddressData.length > 0 &&
+                      lockersAddressData?.map((result) => (
+                        <FormControlLabel
+                          value={result.locker_id}
+                          control={<Radio />}
+                          label={`${result.locker_name},${result.locker_address}`}
+                          onClick={() => setRadioCheck1(true)}
+                        />
+                      ))}
+                  </RadioGroup>
+                </ListItem>
 
-                    {lockersAddressData.length > 0 ? (
-                      <ListItem>
-                        <Stack direction="row" spacing={2}>
-                          <Button
-                            onClick={(e) => checkoutHandlerLocker(e)}
-                            variant="contained"
-                            color="primary"
-                            disabled={radioCheck1 ? "" : "disabled"}
-                          // href="/shipping_methods"
-                          // startIcon={<AddIcon />}
-                          >
-                            Continue
-                          </Button>
-                        </Stack>
-                      </ListItem>
-                    ) : (
-                      ""
-                    )}
-                  </List>
-                </AccordionDetails>
-              </Accordion>
+                {lockersAddressData.length > 0 ? (
+                  <ListItem>
+                    <Stack direction="row" spacing={2}>
+                      <Button
+                        onClick={(e) => checkoutHandlerLocker(e)}
+                        variant="contained"
+                        color="primary"
+                        disabled={radioCheck1 ? "" : "disabled"}
+                        // href="/shipping_methods"
+                        // startIcon={<AddIcon />}
+                      >
+                        Continue
+                      </Button>
+                    </Stack>
+                  </ListItem>
+                ) : (
+                  ""
+                )}
+              </Grid>
+              {/* </AccordionDetails>
+              </Accordion> */}
             </Grid>
-            <Grid item md={2}></Grid>
+            {/* <Grid item md={2}></Grid> */}
           </Grid>
         )}
       </Grid>

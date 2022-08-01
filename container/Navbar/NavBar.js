@@ -143,8 +143,9 @@ export default function NavBar() {
           key={index}
         >
           <ListItemText onClick={() => changeLanguageHandler(locale)}>
-            {" "}
-            {locale}
+            <Typography sx={{ textTransform: "uppercase" }}>
+              {locale}
+            </Typography>
           </ListItemText>
         </MenuItem>
       ))}
@@ -318,6 +319,13 @@ export default function NavBar() {
               >
                 Home
               </NavLink>
+              {/* <NavLink
+                sx={{ color: "white", ml: 3 }}
+                onClick={() => router.push("/about")}
+              >
+                {t("About Us")}
+              </NavLink> */}
+
               <Box component="div" sx={{ flexGrow: 1 }} />
               <Box
                 sx={{

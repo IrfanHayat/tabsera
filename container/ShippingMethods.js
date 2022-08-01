@@ -39,14 +39,14 @@ function ShippingMethods({
   userData,
   productPrice,
   shippingCharges,
-  shippementLockerData
+  shippementLockerData,
 }) {
   let router = useRouter();
   const [radioCheck, setRadioCheck] = useState(false);
 
   return (
     <>
-      <CheckoutWizard activeStep={3} />
+      <CheckoutWizard activeStep={2} />
       <Grid container mt={5} justifyContent={"center"}>
         <Grid item md={9} xs={12}>
           <Card className={classes.section}>
@@ -73,9 +73,14 @@ function ShippingMethods({
                   <ListItem>
                     <ListItemIcon>
                       <PhoneIcon />
-
                     </ListItemIcon>
-                    {localStorage.getItem("mobileNumber") ? <ListItemText>{localStorage.getItem("mobileNumber")}</ListItemText> : <ListItemText>{"3215890184"}</ListItemText>}
+                    {localStorage.getItem("mobileNumber") ? (
+                      <ListItemText>
+                        {localStorage.getItem("mobileNumber")}
+                      </ListItemText>
+                    ) : (
+                      <ListItemText>{"3215890184"}</ListItemText>
+                    )}
                   </ListItem>
                 </List>
                 {userData.email ? (
@@ -104,9 +109,17 @@ function ShippingMethods({
                     <DomainAddOutlinedIcon />
                   </ListItemIcon>
                   {console.log(shippementLockerData)}
-                  {shippementLockerData ?
-                    <ListItemText>{shippementLockerData?.locker_address} </ListItemText> : <ListItemText>{shippementData?.address_label_name} {shippementData?.address}," ",{shippementData?.city},{shippementData?.state},
-                      {shippementData?.country}</ListItemText>}
+                  {shippementLockerData ? (
+                    <ListItemText>
+                      {shippementLockerData?.locker_address}{" "}
+                    </ListItemText>
+                  ) : (
+                    <ListItemText>
+                      {shippementData?.address_label_name}{" "}
+                      {shippementData?.address}," ",{shippementData?.city},
+                      {shippementData?.state},{shippementData?.country}
+                    </ListItemText>
+                  )}
                 </ListItem>
                 {/* </List> */}
                 {/* <List> */}
@@ -140,7 +153,7 @@ function ShippingMethods({
                       // row
                       aria-labelledby="demo-row-radio-buttons-group-label"
                       name="row-radio-buttons-group"
-                    // value={labelValue}
+                      // value={labelValue}
                     >
                       {shipmentMethodData &&
                         shipmentMethodData.map((result) => (
@@ -186,7 +199,7 @@ function ShippingMethods({
                     Subtotal{" "}
                     {productPrice && shippingCharges
                       ? productPrice?.reduce((a, c) => a + c.qty * c.price, 0) +
-                      shippingCharges
+                        shippingCharges
                       : productPrice?.reduce((a, c) => a + c.qty * c.price, 0)}
                   </ListItemText>
                 </ListItem>
@@ -197,7 +210,7 @@ function ShippingMethods({
                   variant="contained"
                   color="primary"
                   disabled={radioCheck ? "" : "disabled"}
-                // startIcon={<AddIcon />}
+                  // startIcon={<AddIcon />}
                 >
                   Continue to Place Order
                 </Button>

@@ -70,7 +70,7 @@ export default function Shipping({
 
   return (
     <>
-      <CheckoutWizard activeStep={2} />
+      <CheckoutWizard activeStep={0} />
       <Grid container p={2}>
         <Grid item md={2}></Grid>
 
