@@ -126,8 +126,14 @@ function Payement() {
           transactionTypeId: 8,
         },
       };
-      dispatch(postPayment(obj));
-      setOpenBar(true);
+      let result = await dispatch(postPayment(obj));
+      if (result.payload.resultCode == 2000) {
+
+        setTimeout(() => {
+          router.push('/congratulations')
+        }, 1000)
+      }
+
       // router.push("/paymentIframe");
     }
   }
