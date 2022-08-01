@@ -51,12 +51,13 @@ function ShippingInformation({
     setError,
     formState: { errors },
   } = useForm();
-  if (buttonKey === 1) {
-    buttonText = "Address";
-  } else {
-    buttonText = "Locker";
-  }
+  // if (buttonKey === 1) {
+  //   buttonText = "Add Address";
+  // } else {
+  //   buttonText = "Add Locker";
+  // }
 
+  const [radioCheckLocker, setRadioCheckLocker] = useState(false);
   const [radioCheck, setRadioCheck] = useState(false);
   const [radioCheck1, setRadioCheck1] = useState(false);
   // const handleChange = (event) => {
@@ -92,7 +93,10 @@ function ShippingInformation({
               name="row-radio-buttons-group"
             >
               <FormControlLabel
-                onClick={() => setButtonKey(1)}
+                onClick={() => {
+                  setButtonKey(1);
+                  setRadioCheckLocker(true);
+                }}
                 value="address"
                 // buttonKey={1}
                 // onChange={handleChange}
@@ -102,7 +106,10 @@ function ShippingInformation({
               <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
               <FormControlLabel
                 // buttonKey={2}
-                onClick={() => setButtonKey(2)}
+                onClick={() => {
+                  setButtonKey(2);
+                  setRadioCheckLocker(true);
+                }}
                 // onClick={() => setRadioCheck(true)}
                 // onClick={setButtonKey(2)}
                 value="lockers"
@@ -112,16 +119,18 @@ function ShippingInformation({
               />
             </RadioGroup>
             <Button
-              onClick={checkoutHandler1}
+              onClick={() => {
+                buttonKey === 1 ? checkoutHandler1() : null;
+              }}
               variant="contained"
               color="primary"
-              // disabled={radioCheck ? "" : "disabled"}
+              disabled={radioCheckLocker ? "" : "disabled"}
               // buttonKey={buttonKey}
               // href="/shipping"
               startIcon={<AddIcon />}
               // label=" Add Addresss"
             >
-              {buttonText}
+              {buttonKey === 1 ? "Add Address" : "Add Locker"}
             </Button>
           </FormControl>
         </Grid>
@@ -352,7 +361,6 @@ function ShippingInformation({
                     </List>
                   </form>
                   <List>
-                    {console.log(lockersAddressData)}
                     <ListItem>
                       <RadioGroup
                         // row
@@ -367,25 +375,30 @@ function ShippingInformation({
                               value={result.locker_id}
                               control={<Radio />}
                               label={`${result.locker_name},${result.locker_address}`}
-                              onClick={() => setRadioCheck(true)}
+                              onClick={() => setRadioCheck1(true)}
                             />
                           ))}
                       </RadioGroup>
                     </ListItem>
-                    <ListItem>
-                      <Stack direction="row" spacing={2}>
-                        <Button
-                          onClick={checkoutHandlerLocker}
-                          variant="contained"
-                          color="primary"
-                          // disabled={radioCheck ? "" : "disabled"}
-                          // href="/shipping_methods"
-                          // startIcon={<AddIcon />}
-                        >
-                          Continue
-                        </Button>
-                      </Stack>
-                    </ListItem>
+
+                    {lockersAddressData.length > 0 ? (
+                      <ListItem>
+                        <Stack direction="row" spacing={2}>
+                          <Button
+                            onClick={(e) => checkoutHandlerLocker(e)}
+                            variant="contained"
+                            color="primary"
+                            disabled={radioCheck1 ? "" : "disabled"}
+                            // href="/shipping_methods"
+                            // startIcon={<AddIcon />}
+                          >
+                            Continue
+                          </Button>
+                        </Stack>
+                      </ListItem>
+                    ) : (
+                      ""
+                    )}
                   </List>
                 </AccordionDetails>
               </Accordion>
