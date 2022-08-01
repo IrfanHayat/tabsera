@@ -69,12 +69,20 @@ function CartScreen({
                 passHref
               >
                 <Link>
-                  <CardMedia
-                    component="img"
-                    style={{ height: "100%", width: "100%" }}
-                    image={productCartData.image_URL}
-                    alt="green iguana"
-                  />
+                  {item.image_URL && (
+                    <>
+                      <Image
+                        // className={cx(styles.media, mediaStyles.root)}
+                        src={item.image_URL}
+                        alt="product"
+                        width={245}
+                        height={200}
+                        loading="eager"
+                        priority
+                      ></Image>
+                    </>
+                  )}
+
                 </Link>
               </NextLink>
             </Grid>
