@@ -103,7 +103,7 @@ function Placeorder() {
 
 
 
-  const placeOrderHandler = (shippementData, userData) => {
+  const placeOrderHandler = async (shippementData, userData) => {
 
     // let newCartItems=cartItems.map(result=>{
     //     let newObj={
@@ -210,9 +210,10 @@ function Placeorder() {
         },
         "origOrderAmount": cartItems.reduce((a, c) => a + c.qty * c.price, 0)
       }
-
+      let result = await dispatch(addOrder(obj))
+      console.log(result)
       setOpenBar(true);
-      dispatch(addOrder(obj))
+
       router.push('/payment')
     } else {
       let newCartItems = cartItems.map(result => {

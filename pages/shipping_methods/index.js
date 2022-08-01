@@ -32,7 +32,7 @@ const Index = () => {
   let dispatch = useDispatch();
 
   const checkoutHandler = () => {
-    if (router.query.address_id) {
+    if (router.query.addressId) {
       router.push({ pathname: "/placeorder", query: { addressId: router.query.addressId, shipId: shippingMethodId.shipping_method_id, shipName: shippingMethodId.shipping_method_name } });
     } else {
       router.push({ pathname: "/placeorder", query: { lockerId: router.query.lockerId, shipId: shippingMethodId.shipping_method_id, shipName: shippingMethodId.shipping_method_name } });
@@ -112,9 +112,9 @@ const Index = () => {
 
 
       let obj
-      if (buyCartItems) {
+      if (buyCartItems && localStorage.getItem("buyCartItems")) {
         obj = {
-          cartId: 167,
+          cartId: cartId,
           shipmentMethodId: value.shipping_method_id,
           shipmentMethodType: "locker",
           shippingAddress: {
