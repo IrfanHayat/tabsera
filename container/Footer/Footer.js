@@ -29,7 +29,7 @@ export default function Footer() {
           sx={{
             p: 1,
             // mt: "auto",
-            // m: 1,
+            m: 1,
             display: "flex",
             justifyContent: "center",
             // alignItems: "center",

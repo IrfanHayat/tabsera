@@ -99,9 +99,14 @@ function Payement() {
       if (result1.payload.resultCode == 5000) {
         setStatus(result1.payload)
         setOpenBar(true);
+
+
       } else {
         setStatus(result1.payload)
         setOpenBar(true);
+        setTimeout(() => {
+          router.push('/congratulations')
+        }, 1000)
       }
       // router.push("/paymentIframe");   
     }

@@ -1,4 +1,4 @@
-import { Grid, Step, StepLabel, Stepper } from "@mui/material";
+import { Grid, Step, StepLabel, Stepper, Typography } from "@mui/material";
 import React from "react";
 import useStyles from "../utils/styles";
 export default function CheckoutWizard({ activeStep = 0 }) {
@@ -12,15 +12,23 @@ export default function CheckoutWizard({ activeStep = 0 }) {
           sx={{ mt: 5, width: "100%" }}
         >
           {[
-            "Login",
+            // "Login",
             "Shipping Information",
-            "Shipping Address",
-            "Shipping Info",
             "Place Order",
+            "Shipping Method",
+            "Order Summary ",
             "Payment Method",
+            "Order Success",
           ].map((step) => (
-            <Step key={step} sx={{ width: "35%" }}>
-              <StepLabel>{step}</StepLabel>
+            <Step
+              key={step}
+              sx={{
+                width: "27%",
+              }}
+            >
+              <StepLabel>
+                <Typography style={{ fontSize: 12 }}>{step}</Typography>
+              </StepLabel>
             </Step>
           ))}
         </Stepper>

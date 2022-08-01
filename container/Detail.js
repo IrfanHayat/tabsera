@@ -306,7 +306,7 @@ function Details({
                       src={results.sku_images[0]}
                       alt="shirt"
                       width={100}
-                      height={100}
+                      height={80}
                     ></Image>
                   ))}
               </Carousel>
@@ -453,6 +453,7 @@ function Details({
         <AppBar
           position="fixed"
           color="inherit"
+          bgcolor="#f6f9fc"
           sx={{
             top: "auto",
             bottom: 0,

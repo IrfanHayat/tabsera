@@ -48,6 +48,7 @@ export default function CarouselApp({
           justifyContent: "space-between",
           // p: 1,
           m: 1,
+          // flexWrap: "wrap",
           // bgcolor: "background.paper",
           borderRadius: 1,
         }}
@@ -72,7 +73,8 @@ export default function CarouselApp({
             display: "flex",
             justifyContent: "flex-end",
             // display: "inline",
-            mx: 6,
+            mx: 5,
+            // flexWrap: "wrap",
             // mx: 5,
             // my: 2,
           }}
@@ -86,9 +88,9 @@ export default function CarouselApp({
             sx={{ fontSize: "0.70rem", fontWeight: "600" }}
             // style={{ fontWeight: "bold" }}
             // dir="rtl"
-            // endIcon={dir ? rtl: <KeyboardDoubleArrowLeftIcon />: <DoubleArrowIcon />}
+            // endIcon={<DoubleArrowIcon />}
           >
-            View All &gt;&gt;
+            View All {">>"}
           </Button>
         </Box>
       </Box>

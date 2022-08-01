@@ -13,14 +13,16 @@ export const theme = createTheme({
       default: "#F6F9FC",
     },
   },
+
   typography: {
     allVariants: {
-      fontFamily: 'Raleway, Almarai, sans-serif',
+      fontFamily: "Raleway, Almarai, sans-serif",
       // fontFamily: 'serif',
-      textTransform: 'none',
+      textTransform: "none",
       fontSize: 14,
-    },},
-    
+    },
+  },
+
   // typography: {
   //   fontFamily: "serif, Arial",
   // },
