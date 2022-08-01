@@ -7,6 +7,7 @@ import React, {
 } from "react";
 // import ShoppingCart from "../../component/ShoppingCart";
 import { useSelector, useDispatch } from "react-redux";
+import CheckoutWizard from "../../container/CheckoutWizard";
 import {
   addToBasket,
   clearBasket,
@@ -95,22 +96,23 @@ function Cart() {
     // />
     // <NewShoppingCart/>
     <>
+      <CheckoutWizard activeStep={0} />
       {cartItems && groupProductData
         ? Object.keys(groupProductData).map((key) => (
-            <ShoppingCart
-              key={key}
-              heading={
-                groupProductData[key].map((result) => result.merchant_name)[0]
-              }
-              productCartData={groupProductData[key]}
-              productPrice={cartItems}
-              handleAddToCart={handleAddToCart}
-              handleDecreaseCart={handleDecreaseCart}
-              handleClearCart={handleClearCart}
-              removeItemHandler={removeItemHandler}
-              checkoutHandler={checkoutHandler}
-            ></ShoppingCart>
-          ))
+          <ShoppingCart
+            key={key}
+            heading={
+              groupProductData[key].map((result) => result.merchant_name)[0]
+            }
+            productCartData={groupProductData[key]}
+            productPrice={cartItems}
+            handleAddToCart={handleAddToCart}
+            handleDecreaseCart={handleDecreaseCart}
+            handleClearCart={handleClearCart}
+            removeItemHandler={removeItemHandler}
+            checkoutHandler={checkoutHandler}
+          ></ShoppingCart>
+        ))
         : ""}
       {cartItems ? (
         <CalculateBill

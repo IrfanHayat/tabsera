@@ -26,7 +26,7 @@ import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
 import IndeterminateCheckBoxOutlinedIcon from "@mui/icons-material/IndeterminateCheckBoxOutlined";
-import CheckoutWizard from "../container/CheckoutWizard";
+
 function CartScreen({
   heading,
   productCartData,
@@ -40,7 +40,7 @@ function CartScreen({
   return (
     <>
 
-      <CheckoutWizard activeStep={0} />
+
       <Box sx={{ flexGrow: 1, display: "grid", p: 3 }}>
         <Typography component="h5" variant="h5" style={{ fontWeight: "bold" }}>
           {heading}
