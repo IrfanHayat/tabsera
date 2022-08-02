@@ -282,7 +282,7 @@ function PlaceOrder({
                       <Typography>Shipping:</Typography>
                     </Grid>
                     <Grid item xs={3}>
-                      <Typography align="right">{shippingCharges}</Typography>
+                      <Typography align="right">{shippingCharges ? shippingCharges : 0}</Typography>
                     </Grid>
                   </Grid>
                 </ListItem>

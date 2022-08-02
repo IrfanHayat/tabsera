@@ -202,8 +202,8 @@ function Placeorder() {
             stateId: shippementData.state_id,
             stateName: shippementData.state,
           },
-          origShippingCharges: shippementCharges,
-          shippingCharges: shippementCharges,
+          origShippingCharges: shippementCharges ? shippementCharges : 0,
+          shippingCharges: shippementCharges ? shippementCharges : 0,
           shippingDiscount: 0,
           shippingMethodId: router.query.shipId,
           shipment_method_type: "address",
@@ -259,9 +259,9 @@ function Placeorder() {
             "stateId": 2724,
             "stateName": "Pakistan"
           },
-          "origShippingCharges": shippementCharges,
+          "origShippingCharges": shippementCharges ? shippementCharges : 0,
           "shipmentMethodType": "locker",
-          "shippingCharges": shippementCharges,
+          "shippingCharges": shippementCharges ? shippementCharges : 0,
           "shippingDiscount": "0",
           "shippingMethodId": router.query.shipId
         },
