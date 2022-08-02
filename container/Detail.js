@@ -103,11 +103,13 @@ function Details({
     color: theme.palette.text.secondary,
   }));
   let [skusProduct, setSkusProduct] = useState();
+  let [skusFlag, setSkusFlag] = useState(false);
   let [variantOneProduct, setVariantOneProduct] = useState();
   //let [productDetailOne,setProductDetailOne]=useState();
 
   const viewVariantsProduct = (result) => {
     setSkusProduct(result);
+    setSkusFlag(true)
   };
 
   const theme = useTheme();
@@ -160,7 +162,7 @@ function Details({
         spacing={1}
         maxWidth="xl"
         sx={{ paddingTop: 2 }}
-        // justifyContent="center"
+      // justifyContent="center"
       >
         {/* <Grid item md={12} xs={12} ml={1}>
           <Typography variant="h6" style={{ fontWeight: "bold" }}>
@@ -181,29 +183,30 @@ function Details({
                 // itemsToShow={2}
                 showArrows={false}
               >
-                {skusProduct
-                  ? skusProduct.sku_images.map((result, index) => (
-                      <Image
-                        key={index}
-                        //  className={cx(styles.media, mediaStyles.root)}
-                        src={result}
-                        alt="shirt"
-                        // objectFit="contain"
-                        width={1500}
-                        height={1000}
-                      ></Image>
-                    ))
+
+                {Object.keys(productDetail).length > 0 && skusFlag == false
+                  ? productDetail.product_images[0].media_images.map((result, index) => (
+                    <Image
+                      key={index}
+                      //  className={cx(styles.media, mediaStyles.root)}
+                      src={result}
+                      alt="shirt"
+                      // objectFit="contain"
+                      width={1500}
+                      height={1000}
+                    ></Image>
+                  ))
                   : productImage && (
-                      <Image
-                        // key={index}
-                        //  className={cx(styles.media, mediaStyles.root)}
-                        src={productImage[0]}
-                        alt="shirt"
-                        objectFit="contain"
-                        width={1500}
-                        height={1000}
-                      ></Image>
-                    )}
+                    <Image
+                      // key={index}
+                      //  className={cx(styles.media, mediaStyles.root)}
+                      src={productImage[0]}
+                      alt="shirt"
+                      objectFit="contain"
+                      width={1500}
+                      height={1000}
+                    ></Image>
+                  )}
               </Carousel>
             </ListItem>
           </List>
@@ -214,9 +217,9 @@ function Details({
           md={6}
           sm={12}
           xs={12}
-          // sx={{ display: "flex" }}
-          // justifyContent="center"
-          // alignItems="center"
+        // sx={{ display: "flex" }}
+        // justifyContent="center"
+        // alignItems="center"
         >
           <List>
             <ListItem>
@@ -256,32 +259,32 @@ function Details({
             {/* <ListItem> */}
             {skusProduct
               ? skusProduct.attributes.map((result, index) => (
-                  // <List key={index}>
-                  <ListItem key={index}>
-                    <ListItemText>
-                      <Typography>{result.attribute_name}</Typography>
-                    </ListItemText>
-                    <ListItemText>
-                      <Typography>{result.value}</Typography>
-                    </ListItemText>
-                  </ListItem>
-                  // </List>
-                ))
+                // <List key={index}>
+                <ListItem key={index}>
+                  <ListItemText>
+                    <Typography>{result.attribute_name}</Typography>
+                  </ListItemText>
+                  <ListItemText>
+                    <Typography>{result.value}</Typography>
+                  </ListItemText>
+                </ListItem>
+                // </List>
+              ))
               : productAttributes.map((result, index) => (
-                  // <List key={index}>
-                  <ListItem key={index}>
-                    <ListItemText>
-                      <Typography style={{ fontWeight: "bold" }}>
-                        {result.attribute_name} :
-                      </Typography>
-                    </ListItemText>
-                    <ListItemText>
-                      <Typography>{result.value}</Typography>
-                    </ListItemText>
-                  </ListItem>
+                // <List key={index}>
+                <ListItem key={index}>
+                  <ListItemText>
+                    <Typography style={{ fontWeight: "bold" }}>
+                      {result.attribute_name} :
+                    </Typography>
+                  </ListItemText>
+                  <ListItemText>
+                    <Typography>{result.value}</Typography>
+                  </ListItemText>
+                </ListItem>
 
-                  // </List>
-                ))}
+                // </List>
+              ))}
             <Divider />
             <Typography variant="h5" style={{ fontWeight: "bold" }}>
               Skus
@@ -437,7 +440,7 @@ function Details({
                     <Button
                       variant="text"
                       onClick={() => viewStore(merchantDetail?.merchant_id)}
-                      // onClick={viewStore}
+                    // onClick={viewStore}
                     >
                       Visit Store
                     </Button>

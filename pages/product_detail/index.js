@@ -293,7 +293,7 @@ function Product_detail(props) {
       )}
       {Object.keys(filterData).length > 0 ? (
         <Details
-          productDetail={filterData || []}
+          productDetail={filterData || {}}
           merchantDetail={merchantData}
           addToCartHandler={addToCartHandler}
           BuyHandler={BuyHandler}
@@ -306,7 +306,7 @@ function Product_detail(props) {
         ></Details>
       ) : (
         <Details
-          productDetail={filterProductData || []}
+          productDetail={filterProductData || {}}
           merchantDetail={merchantData}
           addToCartHandler={addToCartHandler}
           BuyHandler={BuyHandler}
