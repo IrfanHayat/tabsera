@@ -43,11 +43,12 @@ export default function Shipping({
 
   let router = useRouter();
 
-  useEffect(() => {
-    setCountryList(countryData);
+  // useEffect(() => {
+  //   console.log(countryData)
+  //   setCountryList(countryData);
 
-    //setValue("item", { id: 3, name: "item3" });
-  }, []);
+  //   //setValue("item", { id: 3, name: "item3" });
+  // }, []);
 
   // useEffect(() => {
 
@@ -153,6 +154,7 @@ export default function Shipping({
                 )}
               ></Controller>
             </ListItem>
+            {console.log(countryData)}
             <ListItem>
               <Controller
                 control={control}
@@ -166,7 +168,7 @@ export default function Shipping({
                     }}
                     value={value || null}
                     sx={{ width: 800 }}
-                    options={countryList}
+                    options={countryData}
                     getOptionLabel={(item) =>
                       item.country_name ? item.country_name : ""
                     }

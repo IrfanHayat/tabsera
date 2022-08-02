@@ -37,6 +37,8 @@ function Shipping1() {
     getValues,
   } = useForm();
 
+
+  console.log(countryData)
   // const { location } = shippingAddress;
 
   const handleChange = (event, value) => {
