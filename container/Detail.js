@@ -103,11 +103,13 @@ function Details({
     color: theme.palette.text.secondary,
   }));
   let [skusProduct, setSkusProduct] = useState();
+  let [skusFlag, setSkusFlag] = useState(false);
   let [variantOneProduct, setVariantOneProduct] = useState();
   //let [productDetailOne,setProductDetailOne]=useState();
 
   const viewVariantsProduct = (result) => {
     setSkusProduct(result);
+    setSkusFlag(true);
   };
 
   const theme = useTheme();
@@ -181,18 +183,20 @@ function Details({
                 // itemsToShow={2}
                 showArrows={false}
               >
-                {skusProduct
-                  ? skusProduct.sku_images.map((result, index) => (
-                      <Image
-                        key={index}
-                        //  className={cx(styles.media, mediaStyles.root)}
-                        src={result}
-                        alt="shirt"
-                        // objectFit="contain"
-                        width={1500}
-                        height={1000}
-                      ></Image>
-                    ))
+                {productDetail && skusFlag == false
+                  ? productDetail?.product_images[0].media_images.map(
+                      (result, index) => (
+                        <Image
+                          key={index}
+                          //  className={cx(styles.media, mediaStyles.root)}
+                          src={result}
+                          alt="shirt"
+                          // objectFit="contain"
+                          width={1500}
+                          height={1000}
+                        ></Image>
+                      )
+                    )
                   : productImage && (
                       <Image
                         // key={index}

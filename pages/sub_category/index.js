@@ -6,13 +6,12 @@ import { addToBasket } from "../../slice/basketSlice";
 import { useSelector, useDispatch } from "react-redux";
 import Grid from "@mui/material/Grid";
 import Container from "@mui/material/Container";
-import { Typography } from "@mui/material";
+import { Typography, Box } from "@mui/material";
 function SubCategory() {
   const { productDataWithCategoryId } = useSelector((state) => state.category);
   const router = useRouter();
   const dispatch = useDispatch();
 
-  
   const viewProduct = (item) => {
     router.push({
       pathname: "/product_detail",
@@ -43,15 +42,15 @@ function SubCategory() {
   return (
     <>
       <Container maxWidth="lg">
-        <Typography component="h4" variant="h4">
-          Sub Products
-        </Typography>
+        <Box component="h4" variant="h4">
+          Sub Categories
+        </Box>
         <Grid container wrap="wrap" sx={{ overflow: "auto" }}>
           {" "}
           {productDataWithCategoryId &&
             productDataWithCategoryId?.map((item) => (
               <ActionAreaCard
-              key={item}
+                key={item}
                 product={item}
                 viewProduct={viewProduct}
                 addToCartHandler={addToCartHandler}

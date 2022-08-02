@@ -24,7 +24,7 @@ import VariableWidthGrid from "../../container/NewShoppingCart";
 import ShoppingCart from "../../container/ShoppingCart";
 import CalculateBill from "../../container/CalculateBill";
 import _ from "lodash";
-import { Grid } from "@mui/material";
+import { Grid, Box, Typography, Stack } from "@mui/material";
 
 function Cart() {
   const { cartTotalQuantity, cartTotalAmount } = useSelector(
@@ -97,35 +97,103 @@ function Cart() {
     // <NewShoppingCart/>
     <>
       <CheckoutWizard activeStep={0} />
-      {cartItems && groupProductData
-        ? Object.keys(groupProductData).map((key) => (
-          <ShoppingCart
-            key={key}
-            heading={
-              groupProductData[key].map((result) => result.merchant_name)[0]
-            }
-            productCartData={groupProductData[key]}
-            productPrice={cartItems}
-            handleAddToCart={handleAddToCart}
-            handleDecreaseCart={handleDecreaseCart}
-            handleClearCart={handleClearCart}
-            removeItemHandler={removeItemHandler}
-            checkoutHandler={checkoutHandler}
-          ></ShoppingCart>
-        ))
-        : ""}
-      {cartItems ? (
-        <CalculateBill
-          productPrice={cartItems}
-          handleAddToCart={handleAddToCart}
-          handleDecreaseCart={handleDecreaseCart}
-          handleClearCart={handleClearCart}
-          removeItemHandler={removeItemHandler}
-          checkoutHandler={checkoutHandler}
-        ></CalculateBill>
-      ) : (
-        ""
-      )}
+      <Grid container>
+        {cartItems && groupProductData ? (
+          Object.keys(groupProductData).map((key) => (
+            <>
+              <Grid item md={12} sx={12}>
+                <Typography
+                  component="h5"
+                  variant="h5"
+                  style={{ fontWeight: "bold" }}
+                  // align="center"
+                >
+                  Cart Details
+                </Typography>
+              </Grid>
+              <Grid item md={8} sx={12}>
+                <ShoppingCart
+                  key={key}
+                  heading={
+                    groupProductData[key].map(
+                      (result) => result.merchant_name
+                    )[0]
+                  }
+                  productCartData={groupProductData[key]}
+                  productPrice={cartItems}
+                  handleAddToCart={handleAddToCart}
+                  handleDecreaseCart={handleDecreaseCart}
+                  handleClearCart={handleClearCart}
+                  removeItemHandler={removeItemHandler}
+                  checkoutHandler={checkoutHandler}
+                ></ShoppingCart>
+              </Grid>
+              <Grid item md={4} sm={12} sx={{ width: "100%" }}>
+                <CalculateBill
+                  productPrice={cartItems}
+                  handleAddToCart={handleAddToCart}
+                  handleDecreaseCart={handleDecreaseCart}
+                  handleClearCart={handleClearCart}
+                  removeItemHandler={removeItemHandler}
+                  checkoutHandler={checkoutHandler}
+                ></CalculateBill>
+              </Grid>
+            </>
+          ))
+        ) : (
+          <Box
+            direction="column"
+            sx={{
+              display: "flex",
+
+              width: "100%",
+              maxWidth: 500,
+              m: "auto",
+              //   height: "100vh",
+              minHeight: "50vh",
+              // bgcolor: "white",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Stack
+              direction="column"
+              justifyContent="center"
+              alignItems="center"
+              spacing={2}
+            >
+              <Box
+                variant="h1"
+                component="h1"
+                sx={{
+                  display: "flex",
+                  color: "warning.main",
+                }}
+              >
+                Your Cart is Empty...!!
+              </Box>
+
+              {/* <Box variant="h5  " component="h5" sx={{ color: "text.primary" }}>
+                Your Cart is Empty
+              </Box> */}
+            </Stack>
+          </Box>
+        )}
+        {/* {cartItems ? (
+          <Grid item md={4} sx={{ top: 0 }}>
+            <CalculateBill
+              productPrice={cartItems}
+              handleAddToCart={handleAddToCart}
+              handleDecreaseCart={handleDecreaseCart}
+              handleClearCart={handleClearCart}
+              removeItemHandler={removeItemHandler}
+              checkoutHandler={checkoutHandler}
+            ></CalculateBill>
+          </Grid>
+        ) : (
+          <Box>Your Cart Is Empty</Box>
+        )} */}
+      </Grid>
     </>
   );
 }

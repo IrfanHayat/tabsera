@@ -20,7 +20,7 @@ import {
 import { RouteGuard } from "../RouterGuard";
 function CalculateBill({ productPrice, checkoutHandler }) {
   return (
-    <Grid item md={12} xs={12}>
+    <Grid item md={12} xs={12} sx={{ mt: 3, pt: 1, bgcolor: "white" }}>
       {/* <Card> */}
       <Typography
         component="h5"

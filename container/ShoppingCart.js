@@ -39,9 +39,7 @@ function CartScreen({
   console.log(productCartData);
   return (
     <>
-
-
-      <Box sx={{ flexGrow: 1, display: "grid", p: 3 }}>
+      <Grid container sx={{ p: 1, m: 1, bgcolor: "white" }}>
         <Typography component="h5" variant="h5" style={{ fontWeight: "bold" }}>
           {heading}
         </Typography>
@@ -86,7 +84,6 @@ function CartScreen({
                         ></Image>
                       </>
                     )}
-
                   </Link>
                 </NextLink>
               </Grid>
@@ -95,12 +92,15 @@ function CartScreen({
                   href={`/product_detail?product_name=${item.id}`}
                   passHref
                 >
-                  <Typography variant="body" style={{ textDecoration: "none " }}>
+                  <Typography
+                    variant="body"
+                    style={{ textDecoration: "none " }}
+                  >
                     {item.name}
                   </Typography>
                 </NextLink>
               </Grid>
-              <Grid item md={1} sm={1}>
+              <Grid item md={2} sm={1}>
                 <IconButton
                   onClick={() => handleDecreaseCart(item)}
                   aria-label="reduce item"
@@ -128,7 +128,7 @@ function CartScreen({
               <Grid item md={2} sm={2} align="right">
                 ${item.price}
               </Grid>
-              <Grid item md={1} sm={1} align="right">
+              <Grid item md={2} sm={1} align="right">
                 <IconButton
                   aria-label="delete"
                   size="large"
@@ -155,7 +155,7 @@ function CartScreen({
             </Grid> */}
             </Grid>
           ))}
-      </Box>
+      </Grid>
     </>
   );
 }

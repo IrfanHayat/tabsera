@@ -36,9 +36,13 @@ export default function CarouselApp({
 
       style={{ width: "100%" }}
       sx={{
-        bgcolor: "#f6f9fc",
+        // bgcolor: "#f6f9fc",
+        border: 0,
+        boxShadow: 0,
         // my: 1,
+        // bgcolor: "background.paper",
         p: 1,
+        m: 1,
         height: "400px",
       }}
     >
@@ -48,6 +52,7 @@ export default function CarouselApp({
           justifyContent: "space-between",
           // p: 1,
           m: 1,
+          // bgcolor: "#f6f9fc",
           // flexWrap: "wrap",
           // bgcolor: "background.paper",
           borderRadius: 1,
@@ -56,10 +61,10 @@ export default function CarouselApp({
         <Box
           sx={{
             mx: 5,
-            color: (theme) =>
-              theme.palette.mode === "dark" ? "grey.300" : "grey.800",
-            borderColor: (theme) =>
-              theme.palette.mode === "dark" ? "grey.800" : "grey.300",
+            // color: (theme) =>
+            //   theme.palette.mode === "dark" ? "grey.300" : "grey.800",
+            // borderColor: (theme) =>
+            //   theme.palette.mode === "dark" ? "grey.800" : "grey.300",
             fontSize: "1.1rem",
             fontWeight: "600",
           }}
@@ -105,7 +110,7 @@ export default function CarouselApp({
         focusOnSelect={true}
         // enableSwipe={true}
         // enableMouseSwipe={true}
-        enableAutoPlay={true}
+        // enableAutoPlay={true}
         // autoPlaySpeed={2000}
         // itemsToShow={2}
       >

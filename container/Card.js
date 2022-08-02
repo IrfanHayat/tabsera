@@ -5,7 +5,7 @@ import Card from "@mui/material/Card";
 
 import CardActions from "@mui/material/CardActions";
 import Typography from "@mui/material/Typography";
-
+import { alpha } from "@mui/material";
 import makeStyles from "@mui/styles/makeStyles";
 
 export default function ActionAreaCard({
@@ -32,16 +32,19 @@ export default function ActionAreaCard({
         // marginTop: 1,
         // marginBottom: 1,
         padding: 0.5,
-        maxWidth: 300,
+        width: "576px",
         height: 310,
         ":hover": {
           boxShadow: 5, // theme.shadows[20]
           transform: "scale(1.05)",
           // opacity: 0.5,
+          backgroundColor: alpha("#e0e0e0", 1),
+          // borderColor: (theme) =>
+          // theme.palette.mode === "dark" ? "grey.800" : "grey.300",
           cursor: "pointer",
         },
       }}
-    // className={cx(styles.root)}
+      // className={cx(styles.root)}
     >
       {product?.productImage && (
         <>
@@ -65,7 +68,7 @@ export default function ActionAreaCard({
           alt="shirt"
           width={245}
           height={200}
-        // loading="eager"
+          // loading="eager"
         ></Image>
       )}
       {product?.category_name && (
