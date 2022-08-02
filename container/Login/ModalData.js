@@ -37,6 +37,7 @@ import ModalData from "./ModalData";
 import { useTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Cookies from 'js-cookie'
+import { addToCart, getCartItems, getTotalCartQuantity } from "../../slice/basketSlice";
 
 
 // import MuiPhoneNumber from "material-ui-phone-number-2";
@@ -79,9 +80,10 @@ export default function ModalLoginData({ handleClose, open }) {
         let result = await dispatch(loginUser(data));
 
         console.log(result.payload)
-        console.log(Cookies.get("productId"))
-        Object.keys(result.payload).length > 0 && Cookies.get("productId") ?
-            (router.push(`/product_detail?productId=${Cookies.get("productId")}`), setLginSccess(true), handleClickBar(), handleClose())
+        console.log(JSON.parse(Cookies.get("item")))
+        Object.keys(result.payload).length > 0 && Cookies.get("productId") || Cookies.get("item") ?
+            (await dispatch(addToCart(JSON.parse(Cookies.get("item")))), dispatch(getCartItems()),
+                dispatch(getTotalCartQuantity()), setTimeout(() => { router.push("/cart") }, 1000), setLginSccess(true), handleClickBar(), handleClose())
             :
             result.payload
                 ? (router.push("/"), setLginSccess(true), handleClickBar(), handleClose())

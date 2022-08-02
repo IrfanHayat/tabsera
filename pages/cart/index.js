@@ -8,6 +8,7 @@ import React, {
 // import ShoppingCart from "../../component/ShoppingCart";
 import { useSelector, useDispatch } from "react-redux";
 import CheckoutWizard from "../../container/CheckoutWizard";
+import Cookies from 'js-cookie'
 import {
   addToBasket,
   clearBasket,
@@ -25,6 +26,7 @@ import ShoppingCart from "../../container/ShoppingCart";
 import CalculateBill from "../../container/CalculateBill";
 import _ from "lodash";
 import { Grid } from "@mui/material";
+import localStorage from "localStorage";
 
 function Cart() {
   const { cartTotalQuantity, cartTotalAmount } = useSelector(
@@ -55,6 +57,7 @@ function Cart() {
 
     setTimeout(() => {
       dispatch(getTotalCartQuantity());
+
     }, 1000);
   };
   const removeItemHandler = (item) => {
@@ -96,7 +99,8 @@ function Cart() {
     // />
     // <NewShoppingCart/>
     <>
-      <CheckoutWizard activeStep={0} />
+
+      {localStorage.getItem("login") == 'true' ? <CheckoutWizard activeStep={0} /> : ""}
       {cartItems && groupProductData
         ? Object.keys(groupProductData).map((key) => (
           <ShoppingCart

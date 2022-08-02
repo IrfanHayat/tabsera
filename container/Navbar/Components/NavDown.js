@@ -16,6 +16,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useSelector, useDispatch } from "react-redux";
 import { InputAdornment } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
+import Cookies from 'js-cookie'
+
 import {
   getProduct,
   getProductSearchWithHint,
@@ -46,6 +48,7 @@ import Menu from "@mui/material/Menu";
 import WidgetsOutlinedIcon from "@mui/icons-material/WidgetsOutlined";
 import Categories from "../Components/Categories";
 import { makeStyles } from "@mui/styles";
+import localStorage from "localStorage";
 
 const styles = (theme) => ({
   root: {
@@ -90,6 +93,10 @@ export default function NavDown(props) {
     dispatch(getCategory());
     // setQunatityProduct(result.payload)
   }, []);
+
+  useEffect(() => {
+    console.log(cartTotalQuantity)
+  }, cartTotalQuantity)
 
   const categoryData = (categories) => {
     setCategoriesData(categories);
@@ -238,12 +245,20 @@ export default function NavDown(props) {
               onClick={handleClick}
               color="primary"
 
-              // onMouseEnter={handleClick}
-              // onMouseLeave={handleClick}
+            // onMouseEnter={handleClick}
+            // onMouseLeave={handleClick}
             >
-              <Badge color="error" badgeContent={cartTotalQuantity} max={99}>
-                <ShoppingCartOutlinedIcon />
-              </Badge>
+              {console.log(localStorage.getItem("login"))}
+              {console.log(cartTotalQuantity)}
+              {
+                localStorage.getItem("login") == 'true' ?
+                  <Badge color="error" badgeContent={cartTotalQuantity != undefined || cartTotalQuantity != 0 || cartTotalQuantity ? cartTotalQuantity : 1} max={99}>
+                    <ShoppingCartOutlinedIcon />
+                  </Badge> :
+                  < ShoppingCartOutlinedIcon />
+
+              }
+
               {/* </Tooltip> */}
             </IconButton>
             <Popover
@@ -261,11 +276,11 @@ export default function NavDown(props) {
                 vertical: "top",
                 horizontal: "center",
               }}
-              //keepMounted={true}
-              // anchorOrigin={{
-              //   vertical: "bottom",
-              //   horizontal: "left"62
-              // }}
+            //keepMounted={true}
+            // anchorOrigin={{
+            //   vertical: "bottom",
+            //   horizontal: "left"62
+            // }}
             >
               {cartTotalQuantity > 0 ? (
                 // <div>

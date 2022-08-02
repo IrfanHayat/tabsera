@@ -130,12 +130,11 @@ function Product_detail(props) {
         Cookies.set('productId', router.query.productId)
 
         setOpen(true);
-
+        Cookies.set('item', JSON.stringify(product))
 
       }
-
       await dispatch(getTotalCartQuantity());
-      //router.push("/cart");
+      // router.push("/cart");
     } else {
       // console.log("item");
       // console.log(item);
@@ -144,11 +143,16 @@ function Product_detail(props) {
         //setOpenBar(true);
 
         setOpen(true);
-        Cookies.set('productId', router.query.productId)
+        Cookies.set('item', JSON.stringify(item))
+      } else {
+
+        dispatch(getCartItems());
+        dispatch(getTotalCartQuantity());
+        setTimeout(() => {
+          router.push('/cart')
+        }, 1000)
       }
 
-      dispatch(getCartItems());
-      dispatch(getTotalCartQuantity());
 
       console.log(result);
 
@@ -207,6 +211,7 @@ function Product_detail(props) {
         Cookies.set('productId', router.query.productId)
         setOpen(true);
         setBuyStatus(true)
+        Cookies.set('item', JSON.stringify(item))
       } else {
         localStorage.setItem('buyItem', true)
         router.push("/cart");
