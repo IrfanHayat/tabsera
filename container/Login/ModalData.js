@@ -79,11 +79,10 @@ export default function ModalLoginData({ handleClose, open }) {
 
         let result = await dispatch(loginUser(data));
 
-        console.log(result.payload)
-        console.log(JSON.parse(Cookies.get("item")))
-        Object.keys(result.payload).length > 0 && Cookies.get("productId") || Cookies.get("item") ?
+
+        Object.keys(result.payload).length > 0 && Cookies.get("item") ?
             (await dispatch(addToCart(JSON.parse(Cookies.get("item")))), dispatch(getCartItems()),
-                dispatch(getTotalCartQuantity()), setTimeout(() => { router.push("/cart") }, 1000), setLginSccess(true), handleClickBar(), handleClose())
+                dispatch(getTotalCartQuantity()), setTimeout(() => { Cookies.remove("item"), router.push("/cart") }, 1000), setLginSccess(true), handleClickBar(), handleClose())
             :
             result.payload
                 ? (router.push("/"), setLginSccess(true), handleClickBar(), handleClose())
