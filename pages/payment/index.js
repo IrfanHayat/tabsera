@@ -96,17 +96,21 @@ function Payement() {
         }
       }
       let result1 = await dispatch(postPayment(obj))
-      if (result1.payload.resultCode == 5000) {
-        setStatus(result1.payload)
-        setOpenBar(true);
+      console.log(result1)
+      if (result1.payload.resultCode == 2000) {
 
 
-      } else {
+
         setStatus(result1.payload)
         setOpenBar(true);
         setTimeout(() => {
           router.push('/congratulations')
         }, 1000)
+
+      } else {
+
+        setStatus(result1.payload)
+        setOpenBar(true);
       }
       // router.push("/paymentIframe");   
     }
