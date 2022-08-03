@@ -11,6 +11,7 @@ import { useSelector, useDispatch } from "react-redux";
 
 const initialState = {
   token: localStorage.getItem("token"),
+  userName: "",
   phone: "",
   password: "",
   _id: "",
@@ -57,11 +58,14 @@ export const loginUser = createAsyncThunk(
           channelId: 1,
           mobileNumber: values?.userName,
           //  otp: "127484",
-          password: values.pwd,
+          password: values.password,
           // registrationToken: ""
         };
       } else {
-        localStorage.setItem("mobileNumber", values.phone.replace(/[^\d]/g, ""))
+        localStorage.setItem(
+          "mobileNumber",
+          values.phone.replace(/[^\d]/g, "")
+        );
         dataEncrypt = {
           deviceId: "",
           // imsi: "",

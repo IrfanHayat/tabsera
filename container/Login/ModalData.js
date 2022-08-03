@@ -69,9 +69,16 @@ export default function ModalLoginData({ handleClose, open }) {
     }
     setOpenBar(false);
   };
-  const submitHandler = async ({ phone, password }) => {
+  const submitHandler = async ({ userName, phone, password }) => {
     //   closeSnackbar();
-    let data = { phone, password };
+    let data;
+    if (userName) {
+      data = { userName, password };
+    } else {
+      data = { phone, password };
+    }
+
+    console.log(data);
 
     let result = await dispatch(loginUser(data));
 
