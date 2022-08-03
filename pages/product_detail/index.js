@@ -129,7 +129,7 @@ function Product_detail(props) {
         //setOpenBar(true);
 
         setOpen(true);
-        Cookies.set('item', JSON.stringify(item))
+        Cookies.set('item', JSON.stringify(product))
       } else {
 
         dispatch(getCartItems());
@@ -194,7 +194,7 @@ function Product_detail(props) {
         skus: [skus],
       };
 
-      let result = await dispatch(BuyNewItem(item));
+      let result = await dispatch(BuyNewItem(product));
       console.log(result)
       console.log("status", status.resultCode)
       console.log(status)
@@ -205,7 +205,7 @@ function Product_detail(props) {
         Cookies.set('productId', router.query.productId)
         setOpen(true);
         setBuyStatus(true)
-        Cookies.set('item', JSON.stringify(item))
+        Cookies.set('item', JSON.stringify(product))
       } else {
         localStorage.setItem('buyItem', true)
         router.push("/cart");
