@@ -208,7 +208,7 @@ export default function NavDown(props) {
               id="free-solo-2-demo"
               // disableClearable
               // popupIcon={<SearchIcon />}
-              options={searchHintData ? searchHintData : ""}
+              options={searchHintData ? searchHintData : []}
               onInputChange={handleInputChange}
               onKeyUp={handleInputClick}
               renderInput={(params) => (
