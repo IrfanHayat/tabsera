@@ -88,9 +88,9 @@ function Payement() {
           "amount": cartTotalAmount.toString(),
           "pin": null,//'123456',
           "orderId": placeOrderData?.orderId,
-          "parentPaymentMethodId": selectPaymentMethod?.parent_payment_method_id,
-          "paymentGatewayId": selectPaymentMethod?.payment_gateway_id,
-          "paymentMethodId": selectPaymentMethod?.payment_method_id,
+          "parentPaymentMethodId": 0,
+          "paymentGatewayId": 4,
+          "paymentMethodId": 3,
           "serviceTypeId": 6,
           "transactionTypeId": 8
         }
@@ -144,7 +144,7 @@ function Payement() {
   const handleChange = (result) => {
     setSelectPaymentMethod(result)
     console.log(result)
-    if (result?.payment_mode == "API" && result.payment_method_name != "Tabsera Wallet") {
+    if (result?.payment_mode == "API") {
       setShowModal(true)
       setOpen(true)
     }

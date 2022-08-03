@@ -126,7 +126,7 @@ function CartScreen({
                 </IconButton>
               </Grid>
               <Grid item md={2} sm={2} align="right">
-                ${item.price}
+                {item.price}
               </Grid>
               <Grid item md={1} sm={1} align="right">
                 <IconButton

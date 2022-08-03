@@ -219,7 +219,7 @@ function PlaceOrder({
                                     <Typography>{item.qty}</Typography>
                                   </TableCell>
                                   <TableCell align="right">
-                                    <Typography>${item.price}</Typography>
+                                    <Typography>RS.{item.price}</Typography>
                                   </TableCell>
                                 </TableRow>
                               ))}
