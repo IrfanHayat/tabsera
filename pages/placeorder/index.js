@@ -166,59 +166,118 @@ function Placeorder() {
 
 
     if (router.query.addressId) {
-      let newCartItems = cartItems.map(result => {
-        let obj = {};
-        obj.discount = 0;
-        obj.merchantId = result.merchant_id
-        obj.origPrice = result.price
-        obj.price = result.price
-        obj.quantity = result.qty
-        obj.sku = result.sku
-        return obj
-      })
-      let obj = {
-        "isBuyNow": false,
-        "orderAmount": cartItems.reduce((a, c) => a + c.qty * c.price, 0),
-        "cartItems": newCartItems,
-        "coupons": [],
-        "orderDiscount": 0.0,
-        "discounts": [],
-        "paymentInfo": {
-          "paymentAmount": cartItems.reduce((a, c) => a + c.qty * c.price, 0),
-          "paymentCurreny": "PKR"
-        },
-        rewards: [],
-        shippingInfo: {
-          contactInfo: {
-            address: shippementData.address,
-            cityId: shippementData.city_id,
-            cityName: shippementData.city,
-            countryId: shippementData.country_id,
-            countryName: shippementData.country,
-            email: "",
-            firstName: userData.first_name,
-            lastName: userData.last_name,
-            mobileNumber: "",
-            stateId: shippementData.state_id,
-            stateName: shippementData.state,
+      console.log(localStorage.getItem('buyCartItems'))
+      if (localStorage.getItem('buyCartItems')) {
+        let newCartItems = cartItems.map(result => {
+          let obj = {};
+          obj.discount = 0;
+          obj.merchantId = result.merchant_id
+          obj.origPrice = result.price
+          obj.price = result.price
+          obj.quantity = result.qty
+          obj.sku = result.sku
+          return obj
+        })
+        let obj = {
+          "isBuyNow": true,
+          "orderAmount": cartItems.reduce((a, c) => a + c.qty * c.price, 0),
+          "cartItems": newCartItems,
+          "coupons": [],
+          "orderDiscount": 0.0,
+          "discounts": [],
+          "paymentInfo": {
+            "paymentAmount": cartItems.reduce((a, c) => a + c.qty * c.price, 0),
+            "paymentCurreny": "PKR"
           },
-          origShippingCharges: shippementCharges ? shippementCharges : 0,
-          shippingCharges: shippementCharges ? shippementCharges : 0,
-          shippingDiscount: 0,
-          shippingMethodId: router.query.shipId,
-          shipment_method_type: "address",
-        },
-        "origOrderAmount": cartItems.reduce((a, c) => a + c.qty * c.price, 0)
-      }
-      let result = await dispatch(addOrder(obj))
-      console.log(result)
-      if (result.payload.customerOrderNo != null) {
-        setOpenBar(true);
-        setTimeout(() => {
-          router.push('/payment')
-        }, 1000)
+          rewards: [],
+          shippingInfo: {
+            contactInfo: {
+              address: shippementData.address,
+              cityId: shippementData.city_id,
+              cityName: shippementData.city,
+              countryId: shippementData.country_id,
+              countryName: shippementData.country,
+              email: "",
+              firstName: userData.first_name,
+              lastName: userData.last_name,
+              mobileNumber: "",
+              stateId: shippementData.state_id,
+              stateName: shippementData.state,
+            },
+            origShippingCharges: shippementCharges ? shippementCharges : 0,
+            shippingCharges: shippementCharges ? shippementCharges : 0,
+            shippingDiscount: 0,
+            shippingMethodId: router.query.shipId,
+            shipment_method_type: "address",
+          },
+          "origOrderAmount": cartItems.reduce((a, c) => a + c.qty * c.price, 0)
+        }
+        console.log(obj)
+        let result = await dispatch(addOrder(obj))
 
+        if (result.payload.customerOrderNo != null) {
+          setOpenBar(true);
+          setTimeout(() => {
+            router.push('/payment')
+          }, 1000)
+
+        }
+      } else {
+        let newCartItems = cartItems.map(result => {
+          let obj = {};
+          obj.discount = 0;
+          obj.merchantId = result.merchant_id
+          obj.origPrice = result.price
+          obj.price = result.price
+          obj.quantity = result.qty
+          obj.sku = result.sku
+          return obj
+        })
+        let obj = {
+          "isBuyNow": false,
+          "orderAmount": cartItems.reduce((a, c) => a + c.qty * c.price, 0),
+          "cartItems": newCartItems,
+          "coupons": [],
+          "orderDiscount": 0.0,
+          "discounts": [],
+          "paymentInfo": {
+            "paymentAmount": cartItems.reduce((a, c) => a + c.qty * c.price, 0),
+            "paymentCurreny": "PKR"
+          },
+          rewards: [],
+          shippingInfo: {
+            contactInfo: {
+              address: shippementData.address,
+              cityId: shippementData.city_id,
+              cityName: shippementData.city,
+              countryId: shippementData.country_id,
+              countryName: shippementData.country,
+              email: "",
+              firstName: userData.first_name,
+              lastName: userData.last_name,
+              mobileNumber: "",
+              stateId: shippementData.state_id,
+              stateName: shippementData.state,
+            },
+            origShippingCharges: shippementCharges ? shippementCharges : 0,
+            shippingCharges: shippementCharges ? shippementCharges : 0,
+            shippingDiscount: 0,
+            shippingMethodId: router.query.shipId,
+            shipment_method_type: "address",
+          },
+          "origOrderAmount": cartItems.reduce((a, c) => a + c.qty * c.price, 0)
+        }
+        let result = await dispatch(addOrder(obj))
+
+        if (result.payload.customerOrderNo != null) {
+          setOpenBar(true);
+          setTimeout(() => {
+            router.push('/payment')
+          }, 1000)
+
+        }
       }
+
 
     } else {
       console.log(shippementLockerData)
