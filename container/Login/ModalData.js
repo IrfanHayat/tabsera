@@ -79,14 +79,31 @@ export default function ModalLoginData({ handleClose, open }) {
 
         let result = await dispatch(loginUser(data));
 
+        console.log(result)
+        if (Object.keys(result.payload).length > 0 || result.payload == '' && Cookies.get("item")) {
+            console.log("I am here")
+            if (result.payload == '') {
+                setLginSccess(false);
+                handleClickBar()
+                handleClose()
+            } else {
+                await dispatch(addToCart(JSON.parse(Cookies.get("item"))))
+                dispatch(getCartItems())
+                dispatch(getTotalCartQuantity())
+                setTimeout(() => { Cookies.remove("item"), router.push("/cart") }, 1000)
+                setLginSccess(true)
+                handleClickBar()
+                handleClose()
+            }
 
-        Object.keys(result.payload).length > 0 && Cookies.get("item") ?
-            (await dispatch(addToCart(JSON.parse(Cookies.get("item")))), dispatch(getCartItems()),
-                dispatch(getTotalCartQuantity()), setTimeout(() => { Cookies.remove("item"), router.push("/cart") }, 1000), setLginSccess(true), handleClickBar(), handleClose())
-            :
+
+        } else {
             result.payload
                 ? (router.push("/"), setLginSccess(true), handleClickBar(), handleClose())
-                : (setLginSccess(false), handleClickBar(), router.push("/login"));
+                : (setLginSccess(false), handleClickBar(), handleClose(), router.push("/"));
+
+        }
+
 
 
 
