@@ -170,47 +170,47 @@ function Details({
           </Typography>
         </Grid> */}
         {/* <Grid item md={1} sm={1}></Grid> */}
-        <Grid item md={5} xs={12}>
-          <List>
-            <ListItem sx={{ m: 1 }}>
-              <Carousel
-                // breakPoints={breakPoints}
-                //  disableArrowsOnEnd={false}
-                // showArrows={false}
-                // pagination={true}
-                pagination={false}
-                // showEmptySlots={true}
-                // itemsToShow={2}
-                showArrows={false}
-              >
-                {productDetail && skusFlag == false
-                  ? productDetail?.product_images[0].media_images.map(
-                      (result, index) => (
-                        <Image
-                          key={index}
-                          //  className={cx(styles.media, mediaStyles.root)}
-                          src={result}
-                          alt="shirt"
-                          // objectFit="contain"
-                          width={1500}
-                          height={1000}
-                        ></Image>
-                      )
-                    )
-                  : productImage && (
-                      <Image
-                        // key={index}
-                        //  className={cx(styles.media, mediaStyles.root)}
-                        src={productImage[0]}
-                        alt="shirt"
-                        objectFit="contain"
-                        width={1500}
-                        height={1000}
-                      ></Image>
-                    )}
-              </Carousel>
-            </ListItem>
-          </List>
+        <Grid item md={6} xs={12} sx={{ width: "100%" }}>
+          {/* <List> */}
+          {/* <ListItem sx={{ m: 1 }}> */}
+          <Carousel
+            // breakPoints={breakPoints}
+            //  disableArrowsOnEnd={false}
+            // showArrows={false}
+            // pagination={true}
+            pagination={false}
+            // showEmptySlots={true}
+            // itemsToShow={2}
+            showArrows={false}
+          >
+            {productDetail && skusFlag == false
+              ? productDetail?.product_images[0].media_images.map(
+                  (result, index) => (
+                    <Image
+                      key={index}
+                      //  className={cx(styles.media, mediaStyles.root)}
+                      src={result}
+                      alt="shirt"
+                      // objectFit="contain"
+                      width={1500}
+                      height={1000}
+                    ></Image>
+                  )
+                )
+              : productImage && (
+                  <Image
+                    // key={index}
+                    //  className={cx(styles.media, mediaStyles.root)}
+                    src={productImage[0]}
+                    alt="shirt"
+                    objectFit="contain"
+                    width={1500}
+                    height={1000}
+                  ></Image>
+                )}
+          </Carousel>
+          {/* </ListItem> */}
+          {/* </List> */}
         </Grid>
 
         <Grid
