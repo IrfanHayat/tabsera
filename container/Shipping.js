@@ -365,7 +365,7 @@ export default function Shipping({
                   {labels.map((result) => (
                     <FormControlLabel
                       value={result.address_label_id}
-                      control={<Radio onChange={() => handleChange(result)} />}
+                      control={<Radio onChange={() => handleChange(result.address_label_id)} />}
                       label={result.address_label_name}
                       onClick={() => setRadioCheck(true)}
                     />

@@ -37,11 +37,12 @@ function Shipping1() {
     getValues,
   } = useForm();
 
-
+  console.log(labels)
   console.log(countryData)
   // const { location } = shippingAddress;
 
-  const handleChange = (event, value) => {
+  const handleChange = (value) => {
+    console.log(value)
     setLabelValue({ value });
   };
   useEffect(() => {
@@ -51,6 +52,7 @@ function Shipping1() {
   const classes = useStyles();
 
   const submitHandler = async (value) => {
+    console.log(labelValue.value)
     let obj = {
       addresses: [
         {
