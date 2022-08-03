@@ -204,7 +204,7 @@ export const BuyNewItem = createAsyncThunk(
           localStorage.setItem("buyCartItems", true)
 
           let cart = {
-            cart_id: null,
+            cart_id: result.data.response.cartId,
             sku: skus_value,
             qty: tempProductItem.qty,
           };
@@ -220,7 +220,7 @@ export const BuyNewItem = createAsyncThunk(
 
             localStorage.setItem("buyCartItems", true)
             let cart = {
-              cart_id: null,
+              cart_id: result.data.response.cartId,
               sku: skus_value,
               // price: cost,
               qty: tempProductItem.qty,
@@ -247,7 +247,7 @@ export const BuyNewItem = createAsyncThunk(
         });
         localStorage.setItem("buyCartItems", true)
         let cart = {
-          cart_id: null,
+          cart_id: result.data.response.cartId,
           sku: skus_value,
           qty: tempProductItem.qty,
         };
@@ -262,7 +262,7 @@ export const BuyNewItem = createAsyncThunk(
           });
           localStorage.setItem("buyCartItems", true)
           let cart = {
-            cart_id: null,
+            cart_id: result.data.response.cartId,
             sku: skus_value,
             // price: cost,
             qty: tempProductItem.qty,

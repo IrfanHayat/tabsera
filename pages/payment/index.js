@@ -139,8 +139,8 @@ function Payement() {
   }
   const handleChange = (result) => {
     setSelectPaymentMethod(result)
-
-    if (result?.payment_mode == "API") {
+    console.log(result)
+    if (result?.payment_mode == "API" && result.payment_method_name != "Tabsera Wallet") {
       setShowModal(true)
       setOpen(true)
     }

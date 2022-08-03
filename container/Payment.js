@@ -117,25 +117,7 @@ export default function Payment({
         </form>
       </Grid>
       {console.log(status)}
-      {status?.resultCode === 5000 ? (
-        <Snackbar
-          open={openBar}
-          autoHideDuration={2000}
-          onClose={handleCloseBar}
-          anchorOrigin={{
-            horizontal: "center",
-            vertical: "top",
-          }}
-        >
-          <Alert
-            onClose={handleCloseBar}
-            severity="error"
-            sx={{ width: "100%" }}
-          >
-            {status?.message}
-          </Alert>
-        </Snackbar>
-      ) : (
+      {status?.resultCode === 2000 ? (
         <Snackbar
           open={openBar}
           autoHideDuration={6000}
@@ -148,6 +130,25 @@ export default function Payment({
           <Alert
             onClose={handleCloseBar}
             severity="success"
+            sx={{ width: "100%" }}
+          >
+            {status?.message}
+          </Alert>
+        </Snackbar>
+
+      ) : (
+        <Snackbar
+          open={openBar}
+          autoHideDuration={2000}
+          onClose={handleCloseBar}
+          anchorOrigin={{
+            horizontal: "center",
+            vertical: "top",
+          }}
+        >
+          <Alert
+            onClose={handleCloseBar}
+            severity="error"
             sx={{ width: "100%" }}
           >
             {status?.message}

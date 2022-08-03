@@ -74,11 +74,11 @@ export default function ModalLoginData({ handleClose, open }) {
         }
         setOpenBar(false);
     };
-    const submitHandler = async ({ userName, password }) => {
+    const submitHandler = async ({ userName, pwd }) => {
         //   closeSnackbar();
         let data;
 
-        data = { userName, password };
+        data = { userName, pwd };
 
 
         console.log(data);
@@ -264,7 +264,7 @@ export default function ModalLoginData({ handleClose, open }) {
                                     )}
                                 ></Controller>
                                 <Controller
-                                    name="password"
+                                    name="pwd"
                                     control={control}
                                     defaultValue=""
                                     rules={{
@@ -276,7 +276,7 @@ export default function ModalLoginData({ handleClose, open }) {
                                             variant="outlined"
                                             fullWidth
                                             sx={{ m: 1 }}
-                                            id="password"
+                                            id="pwd"
                                             label="Password"
                                             type={showPassword ? "text" : "password"}
                                             // inputProps={{ type: "password" }}
