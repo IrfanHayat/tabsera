@@ -124,15 +124,21 @@ function Product_detail(props) {
       // console.log(product);
       let result = await dispatch(addToCart(product));
       dispatch(getCartItems());
-      console.log(addCart);
+
       if (result?.payload?.resultCode == 4000) {
-        // setOpenBar(true);
-        Cookies.set('productId', router.query.productId)
+        //setOpenBar(true);
 
         setOpen(true);
-        Cookies.set('item', JSON.stringify(product))
+        Cookies.set('item', JSON.stringify(item))
+      } else {
 
+        dispatch(getCartItems());
+        dispatch(getTotalCartQuantity());
+        setTimeout(() => {
+          router.push('/cart')
+        }, 1000)
       }
+
       await dispatch(getTotalCartQuantity());
       // router.push("/cart");
     } else {
@@ -188,13 +194,21 @@ function Product_detail(props) {
         skus: [skus],
       };
 
-      dispatch(BuyNewItem(product));
-      if (status?.resultCode == 4000) {
-        setOpen(true);
-        Cookies.set('productId', router.query.productId)
+      let result = await dispatch(BuyNewItem(item));
+      console.log(result)
+      console.log("status", status.resultCode)
+      console.log(status)
+
+      // dispatch(addToCart(item));
+      if (result?.payload?.resultCode == 4000) {
         // setOpenBar(true);
-
-
+        Cookies.set('productId', router.query.productId)
+        setOpen(true);
+        setBuyStatus(true)
+        Cookies.set('item', JSON.stringify(item))
+      } else {
+        localStorage.setItem('buyItem', true)
+        router.push("/cart");
       }
       // dispatch(addToCart(product));
       dispatch(getTotalCartQuantity(true));
