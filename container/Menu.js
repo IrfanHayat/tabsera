@@ -169,14 +169,14 @@ export default function PersistentDrawerLeft() {
           {dealsData.length > 0 ? (
             <Grid item xs={12} md={12}>
               <MenuCard heading="Deals & Promotions" />
-              {/* <Item>
-            <CarouselApp
-              heading="Deals And Promotions"
-              product={dealsPromotions}
-              // viewProduct={viewProduct}
-              // addToCartHandler={addToCartHandler}
-            />
-          </Item> */}
+              <Item>
+                <CarouselApp
+                  heading="Deals And Promotions"
+                  product={dealsPromotions}
+                // viewProduct={viewProduct}
+                // addToCartHandler={addToCartHandler}
+                />
+              </Item>
             </Grid>
           ) : (
             ""
