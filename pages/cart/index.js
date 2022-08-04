@@ -8,7 +8,7 @@ import React, {
 // import ShoppingCart from "../../component/ShoppingCart";
 import { useSelector, useDispatch } from "react-redux";
 import CheckoutWizard from "../../container/CheckoutWizard";
-import Cookies from 'js-cookie'
+import Cookies from "js-cookie";
 import {
   addToBasket,
   clearBasket,
@@ -25,7 +25,7 @@ import VariableWidthGrid from "../../container/NewShoppingCart";
 import ShoppingCart from "../../container/ShoppingCart";
 import CalculateBill from "../../container/CalculateBill";
 import _ from "lodash";
-import { Grid } from "@mui/material";
+import { Grid, CssBaseline, Container } from "@mui/material";
 import localStorage from "localStorage";
 
 function Cart() {
@@ -57,7 +57,6 @@ function Cart() {
 
     setTimeout(() => {
       dispatch(getTotalCartQuantity());
-
     }, 1000);
   };
   const removeItemHandler = (item) => {
@@ -99,37 +98,57 @@ function Cart() {
     // />
     // <NewShoppingCart/>
     <>
-
-      {localStorage.getItem("login") == 'true' ? <CheckoutWizard activeStep={0} /> : ""}
-      {cartItems && groupProductData
-        ? Object.keys(groupProductData).map((key) => (
-          <ShoppingCart
-            key={key}
-            heading={
-              groupProductData[key].map((result) => result.merchant_name)[0]
-            }
-            productCartData={groupProductData[key]}
-            productPrice={cartItems}
-            handleAddToCart={handleAddToCart}
-            handleDecreaseCart={handleDecreaseCart}
-            handleClearCart={handleClearCart}
-            removeItemHandler={removeItemHandler}
-            checkoutHandler={checkoutHandler}
-          ></ShoppingCart>
-        ))
-        : ""}
-      {cartItems ? (
-        <CalculateBill
-          productPrice={cartItems}
-          handleAddToCart={handleAddToCart}
-          handleDecreaseCart={handleDecreaseCart}
-          handleClearCart={handleClearCart}
-          removeItemHandler={removeItemHandler}
-          checkoutHandler={checkoutHandler}
-        ></CalculateBill>
+      {localStorage.getItem("login") == "true" ? (
+        <CheckoutWizard activeStep={0} />
       ) : (
         ""
       )}
+      <CssBaseline />
+      <div>
+        <Container fixed>
+          <Grid container spacing={3}>
+            <Grid item xs={12} sm={6} md={7} lg={7}>
+              <Grid container>
+                <Grid item xs>
+                  {cartItems && groupProductData
+                    ? Object.keys(groupProductData).map((key) => (
+                        <ShoppingCart
+                          key={key}
+                          heading={
+                            groupProductData[key].map(
+                              (result) => result.merchant_name
+                            )[0]
+                          }
+                          productCartData={groupProductData[key]}
+                          productPrice={cartItems}
+                          handleAddToCart={handleAddToCart}
+                          handleDecreaseCart={handleDecreaseCart}
+                          handleClearCart={handleClearCart}
+                          removeItemHandler={removeItemHandler}
+                          checkoutHandler={checkoutHandler}
+                        ></ShoppingCart>
+                      ))
+                    : ""}
+                </Grid>
+              </Grid>
+            </Grid>
+            {cartItems ? (
+              <Grid item xs={12} sm={6} md={5} lg={5}>
+                <CalculateBill
+                  productPrice={cartItems}
+                  handleAddToCart={handleAddToCart}
+                  handleDecreaseCart={handleDecreaseCart}
+                  handleClearCart={handleClearCart}
+                  removeItemHandler={removeItemHandler}
+                  checkoutHandler={checkoutHandler}
+                ></CalculateBill>
+              </Grid>
+            ) : (
+              ""
+            )}
+          </Grid>
+        </Container>
+      </div>
     </>
   );
 }

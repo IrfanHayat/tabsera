@@ -85,8 +85,8 @@ function ShippingInformation({
           // style={{ minHeight: "100vh" }}
           // ml={10}
           item
-        // justifyContent="center"
-        // sx={{ display: "flex" }}
+          // justifyContent="center"
+          // sx={{ display: "flex" }}
         >
           <FormControl>
             <RadioGroup
@@ -138,16 +138,16 @@ function ShippingInformation({
         {/* <Box>Locker Info here</Box> */}
 
         <Grid container>
-          <Grid item md={1}></Grid>
+          <Grid item md={1} sm={0} xs={0}></Grid>
 
-          <Grid item md={8} mt={4}>
+          <Grid item md={10} sm={12} xs={12} mt={4}>
             {/* <Box> */}
             <List
               sx={{
                 display: "flex",
                 // p: 1,
                 // m: 1,
-                justifyContent: "space-between",
+                justifyContent: "space-around",
               }}
             >
               <ListItem>
@@ -166,7 +166,7 @@ function ShippingInformation({
                   // buttonKey={buttonKey}
                   // href="/shipping"
                   startIcon={<AddIcon />}
-                // label=" Add Addresss"
+                  // label=" Add Addresss"
                 >
                   {buttonKey === 1 ? "Add Address" : "Add Locker"}
                 </Button>
@@ -205,7 +205,7 @@ function ShippingInformation({
                     </Button>
                   </ListItem>
                 </List> */}
-                <List sx={{ display: "flex" }}>
+                <List sx={{ display: "flex", maxWidth: 400 }}>
                   <ListItem>
                     <RadioGroup
                       // row
@@ -221,7 +221,7 @@ function ShippingInformation({
                               value={result.address_id}
                               control={<Radio />}
                               label={
-                                <Box>
+                                <Box sx={{ display: "flex", p: 1 }}>
                                   <Chip
                                     label={result.address_label_name}
                                     color={
@@ -230,13 +230,14 @@ function ShippingInformation({
                                         : "error"
                                     }
                                     size="small"
-                                    sx={{ m: 1 }}
+                                    sx={{ mx: 1 }}
                                   />
                                   {/* {result.address_label_name} */}
-                                  {result.address}
-                                  {result.city}
-                                  {result.state}
-                                  {result.country}
+                                  <Typography>
+                                    {result.address} {result.city}{" "}
+                                    {result.state} {result.country}
+                                  </Typography>
+
                                   {/* </Typography> */}
                                 </Box>
                               }
@@ -256,8 +257,8 @@ function ShippingInformation({
                     variant="contained"
                     color="primary"
                     disabled={radioCheck ? "" : "disabled"}
-                  // href="/shipping_methods"
-                  // startIcon={<AddIcon />}
+                    // href="/shipping_methods"
+                    // startIcon={<AddIcon />}
                   >
                     Continue
                   </Button>
@@ -288,7 +289,7 @@ function ShippingInformation({
             alignItems="center"
             justifyContent="center"
 
-          // maxWidth="xl"
+            // maxWidth="xl"
           >
             {/* <Grid item md={4}></Grid> */}
             {/* <Grid container> */}
@@ -307,7 +308,7 @@ function ShippingInformation({
               {/* <AccordionDetails> */}
               <form
                 onSubmit={handleSubmit(submitHandler)}
-              // className={classes.form}
+                // className={classes.form}
               >
                 <List>
                   {/* <Stack direction="row" spacing={2}></Stack> */}
@@ -477,8 +478,8 @@ function ShippingInformation({
                         variant="contained"
                         color="primary"
                         disabled={radioCheck1 ? "" : "disabled"}
-                      // href="/shipping_methods"
-                      // startIcon={<AddIcon />}
+                        // href="/shipping_methods"
+                        // startIcon={<AddIcon />}
                       >
                         Continue
                       </Button>

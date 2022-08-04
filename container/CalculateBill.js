@@ -16,25 +16,42 @@ import {
   ListItem,
   CardMedia,
   Paper,
+  CardContent,
+  CardActions,
+  Divider,
 } from "@mui/material";
 import { RouteGuard } from "../RouterGuard";
 function CalculateBill({ productPrice, checkoutHandler }) {
   return (
-    <Grid item md={12} xs={12}>
+    <Card item md={12} xs={12} sx={{ mt: 2 }}>
       {/* <Card> */}
-      <Typography
-        component="h5"
-        variant="h5"
-        style={{ fontWeight: "bold" }}
-        align="center"
-      >
-        {" "}
-        Order Summary
-      </Typography>
-
-      <List>
-        {/* <ListItem> */}
-        {/* <ListItemText>
+      <CardContent>
+        <Typography
+          component="h6"
+          variant="h6"
+          // m={1}
+          p={1}
+          // style={{ fontWeight: "bold" }}
+          // align="center"
+        >
+          {" "}
+          Shopping Cart
+        </Typography>
+        <Typography
+          component="h5"
+          variant="h5"
+          // m={1}
+          p={1}
+          style={{ fontWeight: "bold" }}
+          // align="center"
+        >
+          {" "}
+          Order Summary
+        </Typography>
+        <Divider />
+        <Grid container>
+          {/* <ListItem> */}
+          {/* <ListItemText>
             Total (
             {productCartData &&
               productCartData.reduce((a, c) => a + c.qty, 0)}{" "}
@@ -44,38 +61,39 @@ function CalculateBill({ productPrice, checkoutHandler }) {
           </ListItemText>
         </ListItem> */}
 
-        <ListItem>
-          <ListItemText>Total Items </ListItemText>
+          <ListItem>
+            <ListItemText>Total Items</ListItemText>
 
-          <ListItemText>
-            {productPrice && productPrice.reduce((a, c) => a + c.qty, 0)}{" "}
-          </ListItemText>
-        </ListItem>
+            <ListItemText>
+              {productPrice && productPrice.reduce((a, c) => a + c.qty, 0)}{" "}
+            </ListItemText>
+          </ListItem>
 
-        <ListItem>
-          <ListItemText> Total Price </ListItemText>
-          <ListItemText>
-            {/* Total Price = $ */}$
-            {productPrice &&
-              productPrice.reduce((a, c) => a + c.qty * c.price, 0)}
-          </ListItemText>
-        </ListItem>
-
-        <ListItem>
-          <RouteGuard>
-            <Button
-              onClick={checkoutHandler}
-              variant="contained"
-              color="primary"
-              fullWidth
-            >
-              Check Out
-            </Button>
-          </RouteGuard>
-        </ListItem>
-      </List>
+          <ListItem>
+            <ListItemText> Total Price </ListItemText>
+            <ListItemText>
+              {/* Total Price = $ */}$
+              {productPrice &&
+                productPrice.reduce((a, c) => a + c.qty * c.price, 0)}
+            </ListItemText>
+          </ListItem>
+        </Grid>
+      </CardContent>
+      <CardActions>
+        {" "}
+        <RouteGuard>
+          <Button
+            onClick={checkoutHandler}
+            variant="contained"
+            color="primary"
+            fullWidth
+          >
+            Check Out
+          </Button>
+        </RouteGuard>
+      </CardActions>
       {/* </Card> */}
-    </Grid>
+    </Card>
   );
 }
 
