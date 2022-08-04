@@ -12,6 +12,9 @@ import placeOrderReducer from "../slice/placeOrderSlice";
 import mrechantStoreReducer from "../slice/merchantStoreSlice";
 import reviewsReducer from "../slice/reviewsSlice";
 import lockerReducer from "../slice/lockerSlice";
+import discountsReducer from "../slice/discountsSlice";
+import freeShippingReducer from "../slice/freeShippingSlice";
+import couponsReducer from "../slice/couponsSlice";
 
 export const store = configureStore({
   reducer: {
@@ -27,6 +30,9 @@ export const store = configureStore({
     reviews: reviewsReducer,
     merchantStore: mrechantStoreReducer,
     lockers: lockerReducer,
+    discounts: discountsReducer,
+    freeShipping: freeShippingReducer,
+    coupons: couponsReducer,
     [productsApi.reducerPath]: productsApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>

@@ -16,6 +16,7 @@ import CarouselApp from "./Carousel/Carousel";
 import { useGetAllProductsQuery } from "../RTK/productApi";
 import MenuCard from "./DealsAndPromotions/MenuCards";
 import { CircularProgress } from "@mui/material";
+import { getDiscounts } from "../slice/discountsSlice";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -27,6 +28,11 @@ const Item = styled(Paper)(({ theme }) => ({
 export default function PersistentDrawerLeft() {
   const { data, isLoading, isFetching, isError } = useGetAllProductsQuery();
   const { dealsData } = useSelector((state) => state.deals);
+  const { discountsData } = useSelector((state) => state.discounts);
+  const { couponsData } = useSelector((state) => state.coupons);
+
+  console.log(discountsData);
+  console.log(dealsData);
   // const product = useSelector((state) => state.product.productData);
   // const { productData, loading } = useSelector((state) => state.product);
   let product = data?.response;
@@ -72,7 +78,7 @@ export default function PersistentDrawerLeft() {
 
   useEffect(() => {
     dispatch(getFeatureProduct());
-
+    dispatch(getDiscounts());
     dispatch(getCategory());
   }, []);
 
@@ -173,8 +179,8 @@ export default function PersistentDrawerLeft() {
                 <CarouselApp
                   heading="Deals And Promotions"
                   product={dealsPromotions}
-                // viewProduct={viewProduct}
-                // addToCartHandler={addToCartHandler}
+                  // viewProduct={viewProduct}
+                  // addToCartHandler={addToCartHandler}
                 />
               </Item>
             </Grid>
