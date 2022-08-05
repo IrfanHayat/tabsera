@@ -12,6 +12,7 @@ import {
   TableCell,
   Link,
   ListItemText,
+  Divider,
   Button,
   Card,
   List,
@@ -19,6 +20,7 @@ import {
   CardMedia,
   Box,
   Paper,
+  CardContent,
 } from "@mui/material";
 
 import { withRouter } from "next/router";
@@ -39,9 +41,9 @@ function CartScreen({
   console.log(productCartData);
   return (
     <>
+      {/* <Card sx={{ flexGrow: 1, display: "grid", p: 3 }}>
+        <CardMedia></CardMedia>
 
-
-      <Box sx={{ flexGrow: 1, display: "grid", p: 3 }}>
         <Typography component="h5" variant="h5" style={{ fontWeight: "bold" }}>
           {heading}
         </Typography>
@@ -56,7 +58,6 @@ function CartScreen({
                 textAlign: "center",
                 display: "flex",
                 alignItems: "center",
-                // mx: 5,
               }}
             >
               <Grid
@@ -76,7 +77,6 @@ function CartScreen({
                     {item.image_URL && (
                       <>
                         <Image
-                          // className={cx(styles.media, mediaStyles.root)}
                           src={item.image_URL}
                           alt="product"
                           width={245}
@@ -86,7 +86,6 @@ function CartScreen({
                         ></Image>
                       </>
                     )}
-
                   </Link>
                 </NextLink>
               </Grid>
@@ -95,7 +94,10 @@ function CartScreen({
                   href={`/product_detail?product_name=${item.id}`}
                   passHref
                 >
-                  <Typography variant="body" style={{ textDecoration: "none " }}>
+                  <Typography
+                    variant="body"
+                    style={{ textDecoration: "none " }}
+                  >
                     {item.name}
                   </Typography>
                 </NextLink>
@@ -139,23 +141,240 @@ function CartScreen({
                   <DeleteIcon fontSize="inherit" />
                 </IconButton>
               </Grid>
-              {/* <Grid item md={2} sm={2}>
-            <Grid item md={3} sm={3}>
-              <Card>
-                <List>
-                  <ListItem>
-                    <ListItemText>
-                      Sub Total
-                      {item.qty}
-                      item : ${item.qty * item.price}
-                    </ListItemText>
-                  </ListItem>
-                </List>
-              </Card>
-            </Grid> */}
             </Grid>
           ))}
-      </Box>
+      </Card> */}
+      <Typography
+        component="h5"
+        variant="h5"
+        style={{ fontWeight: "bold" }}
+        display="flex"
+        alignItems="center"
+      >
+        {heading}
+      </Typography>
+      {productCartData &&
+        productCartData.map((item) => (
+          <Card
+            sx={{
+              display: "flex",
+              my: 2,
+              overflow: "hidden",
+
+              flexDirection: { xs: "column", md: "row" },
+            }}
+          >
+            <CardMedia
+              sx={{
+                width: 171,
+                m: "auto",
+                maxHeight: { xs: 233, md: 167 },
+                maxWidth: { xs: 350, md: 250 },
+              }}
+            >
+              {item.image_URL && (
+                <Image
+                  src={item.image_URL}
+                  alt="product"
+                  width={245}
+                  height={220}
+                  loading="eager"
+                  priority
+                ></Image>
+              )}
+            </CardMedia>
+
+            <CardContent sx={{ flex: "1 0 auto" }}>
+              <Typography
+                variant="body"
+                sx={{
+                  // textDecoration: "none ",
+                  color: "primary.main",
+                  fontSize: 18,
+                  fontWeight: 600,
+                }}
+                display="flex"
+                alignItems="center"
+              >
+                {item.name}
+              </Typography>
+              <Divider />
+              <Grid
+                container
+                // spacing={1}
+                // key={item.name}
+                // style={{
+                //   textAlign: "center",
+                //   display: "flex",
+                //   alignItems: "center",
+                // }}
+              >
+                {/* <Grid
+                  item
+                  xs="auto"
+                  sm="auto"
+                  m={2}
+                  style={{ height: "150px", width: "150px" }}
+                >
+                  <NextLink
+                    href={`/product_detail?productId=${localStorage.getItem(
+                      "productId"
+                    )}`}
+                    passHref
+                  >
+                    <Link> */}
+                {/* {item.image_URL && (
+                      <>
+                        <Image
+                          src={item.image_URL}
+                          alt="product"
+                          width={245}
+                          height={200}
+                          loading="eager"
+                          priority
+                        ></Image>
+                      </>
+                    )} */}
+                {/* </Link>
+                  </NextLink>
+                </Grid> */}
+                {/* <Grid item md={2} sm={1}>
+                  <NextLink
+                    href={`/product_detail?product_name=${item.id}`}
+                    passHref
+                  >
+                    <Typography
+                      variant="body"
+                      style={{ textDecoration: "none " }}
+                    >
+                      {item.name}
+                    </Typography>
+                  </NextLink>
+                </Grid> */}
+                {/* <Grid item md={1} sm={1}> */}
+                <Grid
+                  item
+                  xs={9}
+                  sm={9}
+                  md={9}
+                  lg={9}
+                  display="flex"
+                  alignItems="center"
+                >
+                  <Typography variant="body1" component="div">
+                    {" "}
+                    Quantity
+                  </Typography>
+                </Grid>
+                <Grid
+                  item
+                  xs={3}
+                  sm={3}
+                  md={3}
+                  lg={3}
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                >
+                  <IconButton
+                    onClick={() => handleDecreaseCart(item)}
+                    aria-label="reduce item"
+                    size="large"
+                    variant="contained"
+                    sx={{ color: "text.secondary" }}
+                  >
+                    <IndeterminateCheckBoxOutlinedIcon />
+                  </IconButton>
+
+                  <Typography className="count" align="center">
+                    {item.qty}
+                  </Typography>
+
+                  <IconButton
+                    aria-label="increase item"
+                    size="large"
+                    variant="contained"
+                    sx={{ color: "text.secondary" }}
+                    onClick={() => handleAddToCart(item)}
+                  >
+                    <AddBoxOutlinedIcon />
+                  </IconButton>
+                  {/* </Grid> */}
+                </Grid>
+                <Grid
+                  item
+                  xs={9}
+                  sm={9}
+                  md={9}
+                  lg={9}
+                  display="flex"
+                  alignItems="center"
+                >
+                  <Typography variant="body1" component="div">
+                    Price
+                  </Typography>
+                </Grid>
+
+                <Grid
+                  item
+                  xs={3}
+                  sm={3}
+                  md={3}
+                  lg={3}
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                >
+                  {" "}
+                  <Typography
+                    component="h5"
+                    variant="h5"
+                    // m={1}
+                    sx={{ color: "warning.main" }}
+                    style={{ fontWeight: "bold" }}
+                    // align="center"
+                  >
+                    Rs. {item.price}
+                  </Typography>
+                </Grid>
+
+                <Grid
+                  item
+                  xs={9}
+                  sm={9}
+                  md={9}
+                  lg={9}
+                  display="flex"
+                  alignItems="center"
+                >
+                  <Typography variant="body1" component="div">
+                    Delete
+                  </Typography>
+                </Grid>
+                <Grid
+                  item
+                  xs={3}
+                  sm={3}
+                  md={3}
+                  lg={3}
+                  display="flex"
+                  justifyContent="center"
+                  alignItems="center"
+                >
+                  <IconButton
+                    aria-label="delete"
+                    size="large"
+                    variant="contained"
+                    color="error"
+                    onClick={() => removeItemHandler(item)}
+                  >
+                    <DeleteIcon fontSize="inherit" />
+                  </IconButton>
+                </Grid>
+              </Grid>
+            </CardContent>
+          </Card>
+        ))}
     </>
   );
 }

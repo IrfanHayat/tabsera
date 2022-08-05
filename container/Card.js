@@ -31,6 +31,7 @@ export default function ActionAreaCard({
         my: 2,
         // marginTop: 1,
         // marginBottom: 1,
+        border: 0,
         padding: 0.5,
         maxWidth: 300,
         height: 310,
@@ -38,10 +39,11 @@ export default function ActionAreaCard({
           boxShadow: 5, // theme.shadows[20]
           transform: "scale(1.05)",
           // opacity: 0.5,
+
           cursor: "pointer",
         },
       }}
-    // className={cx(styles.root)}
+      // className={cx(styles.root)}
     >
       {product?.productImage && (
         <>
@@ -51,7 +53,7 @@ export default function ActionAreaCard({
             onClick={(e) => viewProduct(product)}
             alt="shirt"
             width={245}
-            height={200}
+            height={240}
             loading="eager"
             priority
           ></Image>
@@ -65,17 +67,17 @@ export default function ActionAreaCard({
           alt="shirt"
           width={245}
           height={200}
-        // loading="eager"
+          // loading="eager"
         ></Image>
       )}
       {product?.category_name && (
         <CardContent>
-          <Typography variant="overline">{product?.category_name}</Typography>
+          <Typography variant="body">{product?.category_name}</Typography>
         </CardContent>
       )}
       <CardContent>
-        <Typography variant="overline">{product?.categoryName}</Typography>
-        <Typography fontSize="0.9rem" fontWeight={600}>
+        <Typography variant="h5">{product?.categoryName}</Typography>
+        <Typography fontSize="0.9rem" variant="h5" fontWeight={600}>
           {product?.productName}
         </Typography>
       </CardContent>
