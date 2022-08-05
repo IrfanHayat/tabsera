@@ -65,16 +65,34 @@ function CalculateBill({ productPrice, checkoutHandler }) {
             <ListItemText>Total Items</ListItemText>
 
             <ListItemText>
-              {productPrice && productPrice.reduce((a, c) => a + c.qty, 0)}{" "}
+              <Typography
+                component="h5"
+                variant="h5"
+                // m={1}
+                style={{ fontWeight: "bold" }}
+                // align="center"
+              >
+                {productPrice && productPrice.reduce((a, c) => a + c.qty, 0)}{" "}
+              </Typography>
             </ListItemText>
           </ListItem>
 
           <ListItem>
             <ListItemText> Total Price </ListItemText>
             <ListItemText>
-              {/* Total Price = $ */}$
-              {productPrice &&
-                productPrice.reduce((a, c) => a + c.qty * c.price, 0)}
+              {" "}
+              <Typography
+                component="h5"
+                variant="h5"
+                // m={1}
+                sx={{ color: "warning.main" }}
+                style={{ fontWeight: "bold" }}
+                // align="center"
+              >
+                Rs.
+                {productPrice &&
+                  productPrice.reduce((a, c) => a + c.qty * c.price, 0)}
+              </Typography>
             </ListItemText>
           </ListItem>
         </Grid>
@@ -88,7 +106,7 @@ function CalculateBill({ productPrice, checkoutHandler }) {
             color="primary"
             fullWidth
           >
-            Check Out
+            Proceed To Check Out
           </Button>
         </RouteGuard>
       </CardActions>

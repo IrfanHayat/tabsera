@@ -146,8 +146,23 @@ function CartScreen({
       </Card> */}
       {productCartData &&
         productCartData.map((item) => (
-          <Card sx={{ display: "flex", mt: 2 }}>
-            <CardMedia sx={{ width: 171, m: "auto" }}>
+          <Card
+            sx={{
+              display: "flex",
+              mt: 2,
+              overflow: "hidden",
+
+              flexDirection: { xs: "column", md: "row" },
+            }}
+          >
+            <CardMedia
+              sx={{
+                width: 171,
+                m: "auto",
+                maxHeight: { xs: 233, md: 167 },
+                maxWidth: { xs: 350, md: 250 },
+              }}
+            >
               {item.image_URL && (
                 <Image
                   src={item.image_URL}
@@ -165,10 +180,22 @@ function CartScreen({
                 component="h5"
                 variant="h5"
                 style={{ fontWeight: "bold" }}
+                display="flex"
+                alignItems="center"
               >
                 {heading}
               </Typography>
-              <Typography variant="body" style={{ textDecoration: "none " }}>
+              <Typography
+                variant="body"
+                sx={{
+                  // textDecoration: "none ",
+                  color: "primary.main",
+                  fontSize: 18,
+                  fontWeight: 600,
+                }}
+                display="flex"
+                alignItems="center"
+              >
                 {item.name}
               </Typography>
               <Divider />
@@ -225,7 +252,15 @@ function CartScreen({
                   </NextLink>
                 </Grid> */}
                 {/* <Grid item md={1} sm={1}> */}
-                <Grid item xs={9} sm={9} md={9} lg={9}>
+                <Grid
+                  item
+                  xs={9}
+                  sm={9}
+                  md={9}
+                  lg={9}
+                  display="flex"
+                  alignItems="center"
+                >
                   <Typography variant="body1" component="div">
                     {" "}
                     Quantity
@@ -266,7 +301,15 @@ function CartScreen({
                   </IconButton>
                   {/* </Grid> */}
                 </Grid>
-                <Grid item xs={9} sm={9} md={9} lg={9}>
+                <Grid
+                  item
+                  xs={9}
+                  sm={9}
+                  md={9}
+                  lg={9}
+                  display="flex"
+                  alignItems="center"
+                >
                   <Typography variant="body1" component="div">
                     Price
                   </Typography>
@@ -283,12 +326,27 @@ function CartScreen({
                   alignItems="center"
                 >
                   {" "}
-                  <Typography variant="body1" component="div">
-                    {item.price}
+                  <Typography
+                    component="h5"
+                    variant="h5"
+                    // m={1}
+                    sx={{ color: "warning.main" }}
+                    style={{ fontWeight: "bold" }}
+                    // align="center"
+                  >
+                    Rs. {item.price}
                   </Typography>
                 </Grid>
 
-                <Grid item xs={9} sm={9} md={9} lg={9}>
+                <Grid
+                  item
+                  xs={9}
+                  sm={9}
+                  md={9}
+                  lg={9}
+                  display="flex"
+                  alignItems="center"
+                >
                   <Typography variant="body1" component="div">
                     Delete
                   </Typography>

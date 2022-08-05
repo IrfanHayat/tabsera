@@ -107,7 +107,7 @@ function Cart() {
       <div>
         <Container fixed>
           <Grid container spacing={3}>
-            <Grid item xs={12} sm={6} md={7} lg={7}>
+            <Grid item xs={12} sm={6} md={8} lg={8}>
               <Grid container>
                 <Grid item xs>
                   {cartItems && groupProductData
@@ -133,7 +133,7 @@ function Cart() {
               </Grid>
             </Grid>
             {cartItems ? (
-              <Grid item xs={12} sm={6} md={5} lg={5}>
+              <Grid item xs={12} sm={6} md={4} lg={4}>
                 <CalculateBill
                   productPrice={cartItems}
                   handleAddToCart={handleAddToCart}
