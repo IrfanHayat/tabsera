@@ -6,14 +6,13 @@ import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Image from "next/image";
-import Collapse from '@mui/material/Collapse';
+import Collapse from "@mui/material/Collapse";
 const DealsAndPromotions = ({ dealsData, viewProduct }) => {
   console.log("Data Deals New", dealsData);
   return (
     <>
       {/* <ActionAreaCard /> */}
       {dealsData.map((result) => (
-        
         <Card
           onClick={(e) => viewProduct(result)}
           sx={{
@@ -38,7 +37,7 @@ const DealsAndPromotions = ({ dealsData, viewProduct }) => {
             component="img"
             height="140"
             image={result?.bundleImage}
-            alt="green iguana"
+            alt={result.bundleName}
           />
 
           <CardContent>
