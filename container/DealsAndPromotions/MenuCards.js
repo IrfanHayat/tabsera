@@ -7,8 +7,11 @@ import Common from "./Common";
 // import "./styles.css";
 
 
-export default function MenuCard({ heading }) {
+export default function MenuCard({ heading, dealsData, discountsData, freeShippingData }) {
 
+  console.log(dealsData)
+  console.log(discountsData)
+  console.log(freeShippingData)
   return (
     <div className="carousel-wrapper">
       <Box
@@ -38,7 +41,7 @@ export default function MenuCard({ heading }) {
         // itemsToShow={2}
         itemsToShow={4}
       >
-
+        <Common DealName="Deals" address="deals_and_promotions" imagePath="/sales.jpg" />
         <Common DealName="Discounts" address="discounts" imagePath="/sales.jpg" />
         <Common DealName="FreeShipping" address="is_free_shipping" imagePath="/freeshippings.jpg" />
         {/* <Common DealName="Coupons" address="coupons" /> */}

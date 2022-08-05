@@ -6,7 +6,7 @@ import { getDiscounts } from "../../slice/discountsSlice";
 import { getFreeShipping } from "../../slice/freeShippingSlice";
 import { couponsData } from "../../slice/couponsSlice";
 import Grid from "@mui/material/Grid";
-import Discounts from "../../container/DealsAndPromotions/Discounts";
+import DealAndPromotions from "../../container/DealsAndPromotions/DealsAndPromotions";
 
 import { TransitionGroup } from "react-transition-group";
 import { useRouter } from "next/router";
@@ -40,7 +40,7 @@ const Index = () => {
 
 
       {dealsData.map((result) => (
-        <ActionAreaCard
+        <DealAndPromotions
           dealsData={dealsData && dealsData}
           viewProduct={viewProduct}
         />

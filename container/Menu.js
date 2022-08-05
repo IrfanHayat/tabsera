@@ -30,6 +30,7 @@ export default function PersistentDrawerLeft() {
   const { data, isLoading, isFetching, isError } = useGetAllProductsQuery();
   const { dealsData } = useSelector((state) => state.deals);
   const { discountsData } = useSelector((state) => state.discounts);
+  const { freeShippingData } = useSelector((state) => state.freeShipping);
   const { couponsData } = useSelector((state) => state.coupons);
 
   console.log(discountsData);
@@ -179,7 +180,7 @@ export default function PersistentDrawerLeft() {
           </Grid>
 
           <Grid item xs={12} md={12}>
-            <MenuCard heading="Deals & Promotions" />
+            <MenuCard heading="Deals & Promotions" dealsData={dealsData} discountsData={discountsData} freeShippingData={freeShippingData} />
             {/* <Item>
                 <CarouselApp
                   heading="Deals And Promotions"
