@@ -1,12 +1,14 @@
-import { Box } from "@mui/system";
+import Box from "@mui/system/Box";
 import React, { useState } from "react";
-import ReactDOM from "react-dom";
+
 import Carousel from "react-elastic-carousel";
 import Common from "./Common";
 // import Item from "./Item";
 // import "./styles.css";
 
+
 export default function MenuCard({ heading }) {
+
   return (
     <div className="carousel-wrapper">
       <Box
@@ -36,10 +38,10 @@ export default function MenuCard({ heading }) {
         // itemsToShow={2}
         itemsToShow={4}
       >
-        <Common DealName="Deals" />
-        <Common DealName="Discounts" />
-        <Common DealName="FreeShipping" />
-        <Common DealName="Coupons" />
+
+        <Common DealName="Discounts" address="discounts" imagePath="/sales.jpg" />
+        <Common DealName="FreeShipping" address="is_free_shipping" imagePath="/freeshippings.jpg" />
+        {/* <Common DealName="Coupons" address="coupons" /> */}
       </Carousel>
     </div>
   );

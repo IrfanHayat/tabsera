@@ -6,7 +6,8 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 
 import { useSelector, useDispatch } from "react-redux";
-
+import { getFreeShipping } from "../slice/freeShippingSlice";
+import { getDeals } from "../slice/dealsPromotionsSlice";
 import { useRouter } from "next/router";
 import { addToBasket } from "../slice/basketSlice";
 import { getProduct, getFeatureProduct } from "../slice/productSlice";
@@ -80,6 +81,10 @@ export default function PersistentDrawerLeft() {
     dispatch(getFeatureProduct());
     dispatch(getDiscounts());
     dispatch(getCategory());
+    dispatch(getFreeShipping());
+    dispatch(getDeals());
+
+
   }, []);
 
   function groupArrayOfObjects(list) {
@@ -172,21 +177,19 @@ export default function PersistentDrawerLeft() {
               }
             />
           </Grid>
-          {dealsData.length > 0 ? (
-            <Grid item xs={12} md={12}>
-              <MenuCard heading="Deals & Promotions" />
-              <Item>
+
+          <Grid item xs={12} md={12}>
+            <MenuCard heading="Deals & Promotions" />
+            {/* <Item>
                 <CarouselApp
                   heading="Deals And Promotions"
                   product={dealsPromotions}
                   // viewProduct={viewProduct}
                   // addToCartHandler={addToCartHandler}
                 />
-              </Item>
-            </Grid>
-          ) : (
-            ""
-          )}
+              </Item> */}
+          </Grid>
+
           {featureProduct != "" ? (
             <Grid item xs={12} md={12}>
               <Item>

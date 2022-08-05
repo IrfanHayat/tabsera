@@ -25,7 +25,7 @@ const Discounts = ({ discountsData, viewProduct }) => {
             // maxWidth: 300,
             width: 250,
             // maxWidth: 250,
-            height: 250,
+            height: 300,
             ":hover": {
               boxShadow: 5, // theme.shadows[20]
               transform: "scale(1.05)",
@@ -37,16 +37,20 @@ const Discounts = ({ discountsData, viewProduct }) => {
           <CardMedia
             component="img"
             height="140"
-            image={result?.bundleImage}
+            image={result?.productImage}
             alt="green iguana"
           />
 
           <CardContent>
             <Typography gutterBottom variant="overline" component="div">
-              {result.bundleName}
+              {result.productName}
             </Typography>
+
             <Typography gutterBottom variant="overline" component="div">
-              {result.bundleCost}
+              Rs {result.productCost}
+            </Typography>
+            <Typography gutterBottom style={{ textDecorationLine: 'line-through' }} variant="overline" component="div">
+              Rs {result.originalPrice} discount {result.discountPercent}
             </Typography>
           </CardContent>
         </Card>

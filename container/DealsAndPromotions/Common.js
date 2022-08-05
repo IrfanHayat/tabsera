@@ -8,7 +8,7 @@ import Typography from "@mui/material/Typography";
 import Image from "next/image";
 import result from "../Carousel/lion.jpg";
 import { useRouter } from "next/router";
-const Common = ({ DealName }) => {
+const Common = ({ DealName, address, imagePath }) => {
   let router = useRouter();
   return (
     <>
@@ -29,12 +29,12 @@ const Common = ({ DealName }) => {
             cursor: "pointer",
           },
         }}
-        onClick={(e) => router.push("/deals_and_promotions")}
+        onClick={(e) => router.push(`/${address}`)}
       >
         <CardMedia
           component="img"
           height="140"
-          image={result}
+          image={imagePath}
           alt="deals & Promotions"
         />
 
