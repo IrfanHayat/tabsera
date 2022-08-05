@@ -39,8 +39,10 @@ const Index = () => {
 
 
 
-      {dealsData.map((result) => (
+      {dealsData.map((result, index) => (
+
         <DealAndPromotions
+          key={index}
           dealsData={dealsData && dealsData}
           viewProduct={viewProduct}
         />
