@@ -135,7 +135,7 @@ const Index = () => {
     dispatch(getShipmentsMethods(obj));
     router.push({
       pathname: "/shipping_details",
-      query: { lockerId: shippingLockerAddres.locker_id },
+      query: { lockerId: result.locker_id },
     });
   };
   const checkoutHandlerLocker = (event) => {
