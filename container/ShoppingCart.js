@@ -144,12 +144,21 @@ function CartScreen({
             </Grid>
           ))}
       </Card> */}
+      <Typography
+        component="h5"
+        variant="h5"
+        style={{ fontWeight: "bold" }}
+        display="flex"
+        alignItems="center"
+      >
+        {heading}
+      </Typography>
       {productCartData &&
         productCartData.map((item) => (
           <Card
             sx={{
               display: "flex",
-              mt: 2,
+              my: 2,
               overflow: "hidden",
 
               flexDirection: { xs: "column", md: "row" },
@@ -176,15 +185,6 @@ function CartScreen({
             </CardMedia>
 
             <CardContent sx={{ flex: "1 0 auto" }}>
-              <Typography
-                component="h5"
-                variant="h5"
-                style={{ fontWeight: "bold" }}
-                display="flex"
-                alignItems="center"
-              >
-                {heading}
-              </Typography>
               <Typography
                 variant="body"
                 sx={{

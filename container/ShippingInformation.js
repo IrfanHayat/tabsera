@@ -84,6 +84,8 @@ function ShippingInformation({
           justifyContent="center"
           // style={{ minHeight: "100vh" }}
           // ml={10}
+          border={1}
+          borderColor="primary.main"
           item
           // justifyContent="center"
           // sx={{ display: "flex" }}
@@ -182,6 +184,7 @@ function ShippingInformation({
             <Grid item md={1}></Grid>
 
             <Grid item md={6} m={1} justifyContent="center">
+              <Divider />
               <FormControl>
                 {/* <List sx={{ display: "flex", p: 1, m: 1 }}>
                   <ListItem>

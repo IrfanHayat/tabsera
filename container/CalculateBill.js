@@ -23,7 +23,7 @@ import {
 import { RouteGuard } from "../RouterGuard";
 function CalculateBill({ productPrice, checkoutHandler }) {
   return (
-    <Card item md={12} xs={12} sx={{ mt: 2 }}>
+    <Card item md={12} xs={12} sx={{ mt: 4.5 }}>
       {/* <Card> */}
       <CardContent>
         <Typography

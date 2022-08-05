@@ -39,7 +39,6 @@ export default function ActionAreaCard({
           boxShadow: 5, // theme.shadows[20]
           transform: "scale(1.05)",
           // opacity: 0.5,
-          bgcolor: "#e0e0e0",
 
           cursor: "pointer",
         },

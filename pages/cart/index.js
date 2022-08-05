@@ -98,15 +98,17 @@ function Cart() {
     // />
     // <NewShoppingCart/>
     <>
-      {localStorage.getItem("login") == "true" ? (
-        <CheckoutWizard activeStep={0} />
-      ) : (
-        ""
-      )}
+      <Grid container>
+        {localStorage.getItem("login") == "true" ? (
+          <CheckoutWizard activeStep={0} />
+        ) : (
+          ""
+        )}
+      </Grid>
       <CssBaseline />
       <div>
         <Container fixed>
-          <Grid container spacing={3}>
+          <Grid container spacing={3} sx={{ mt: 2 }}>
             <Grid item xs={12} sm={6} md={8} lg={8}>
               <Grid container>
                 <Grid item xs>
