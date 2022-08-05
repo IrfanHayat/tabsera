@@ -6,12 +6,15 @@ import Common from "./Common";
 // import Item from "./Item";
 // import "./styles.css";
 
-
-export default function MenuCard({ heading, dealsData, discountsData, freeShippingData }) {
-
-  console.log(dealsData)
-  console.log(discountsData)
-  console.log(freeShippingData)
+export default function MenuCard({
+  heading,
+  dealsData,
+  discountsData,
+  freeShippingData,
+}) {
+  console.log(dealsData);
+  console.log(discountsData);
+  console.log(freeShippingData);
   return (
     <div className="carousel-wrapper">
       <Box
@@ -39,11 +42,23 @@ export default function MenuCard({ heading, dealsData, discountsData, freeShippi
         enableAutoPlay={true}
         // autoPlaySpeed={2000}
         // itemsToShow={2}
-        itemsToShow={4}
+        itemsToShow={3}
       >
-        <Common DealName="Deals" address="deals_and_promotions" imagePath="/sales.jpg" />
-        <Common DealName="Discounts" address="discounts" imagePath="/sales.jpg" />
-        <Common DealName="FreeShipping" address="is_free_shipping" imagePath="/freeshippings.jpg" />
+        <Common
+          DealName="Deals"
+          address="deals_and_promotions"
+          imagePath="/sales.jpg"
+        />
+        <Common
+          DealName="Discounts"
+          address="discounts"
+          imagePath="/sales.jpg"
+        />
+        <Common
+          DealName="FreeShipping"
+          address="is_free_shipping"
+          imagePath="/freeshippings.jpg"
+        />
         {/* <Common DealName="Coupons" address="coupons" /> */}
       </Carousel>
     </div>

@@ -84,8 +84,6 @@ export default function PersistentDrawerLeft() {
     dispatch(getCategory());
     dispatch(getFreeShipping());
     dispatch(getDeals());
-
-
   }, []);
 
   function groupArrayOfObjects(list) {
@@ -168,19 +166,24 @@ export default function PersistentDrawerLeft() {
             ):()
           */}
 
-          <Grid item xs={12} md={12} mt={1}>
-            <NewCarousel
-              product={
-                product &&
-                product.slice([6], [12]).map((item, i) => {
-                  return item;
-                })
-              }
-            />
-          </Grid>
+          {/* <Grid item xs={12} md={12}> */}
+          <NewCarousel
+            product={
+              product &&
+              product.slice([6], [12]).map((item, i) => {
+                return item;
+              })
+            }
+          />
+          {/* </Grid> */}
 
           <Grid item xs={12} md={12}>
-            <MenuCard heading="Deals & Promotions" dealsData={dealsData} discountsData={discountsData} freeShippingData={freeShippingData} />
+            <MenuCard
+              heading="Deals & Promotions"
+              dealsData={dealsData}
+              discountsData={discountsData}
+              freeShippingData={freeShippingData}
+            />
             {/* <Item>
                 <CarouselApp
                   heading="Deals And Promotions"

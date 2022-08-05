@@ -26,6 +26,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Controller, useForm } from "react-hook-form";
 import { TextField } from "@mui/material";
 import Chip from "@mui/material/Chip";
+import Image from "next/image";
 //import Divider from "@mui/material";
 function ShippingInformation({
   checkoutHandler,
@@ -71,25 +72,25 @@ function ShippingInformation({
   // }, [buttonKey]);
   return (
     <>
-
       <Grid container mt={5} sx={{ bgcolor: "background.paper" }}>
         {/* <Grid item md={2}></Grid> */}
         <Grid
           md={12}
           sm={12}
-          container
-          spacing={0}
-          direction="column"
+          display="flex"
           alignItems="center"
-          justifyContent="center"
-          // style={{ minHeight: "100vh" }}
+          justifyContent="space-between"
+          style={{ minHeight: "10vh" }}
           // ml={10}
-          border={1}
+          // border={1}
           borderColor="primary.main"
           item
-        // justifyContent="center"
-        // sx={{ display: "flex" }}
+          // justifyContent="center"
+          sx={{ p: 1 }}
         >
+          <FormLabel style={{ fontWeight: "bold" }}>
+            {buttonKey === 1 ? "Select Address" : "Select Lockers"}
+          </FormLabel>
           <FormControl>
             <RadioGroup
               row
@@ -121,29 +122,27 @@ function ShippingInformation({
                 label="Locker"
               />
             </RadioGroup>
-            {/* <Button
-              onClick={() => {
-                buttonKey === 1 ? checkoutHandler1() : null;
-              }}
-              variant="contained"
-              color="primary"
-              disabled={radioCheckLocker ? "" : "disabled"}
-              // buttonKey={buttonKey}
-              // href="/shipping"
-              startIcon={<AddIcon />}
-              // label=" Add Addresss"
-            >
-              {buttonKey === 1 ? "Add Address" : "Add Locker"}
-            </Button> */}
           </FormControl>
+          <Button
+            onClick={() => {
+              buttonKey === 1 ? checkoutHandler1() : null;
+            }}
+            variant="contained"
+            color="primary"
+            disabled={radioCheckLocker ? "" : "disabled"}
+            // buttonKey={buttonKey}
+            // href="/shipping"
+            startIcon={<AddIcon />}
+            // label=" Add Addresss"
+          >
+            {buttonKey === 1 ? "Add Address" : "Add Locker"}
+          </Button>
         </Grid>
         {/* <Box>Locker Info here</Box> */}
 
-        <Grid container>
-          <Grid item md={1} sm={0} xs={0}></Grid>
+        {/* <Grid container>
 
-          <Grid item md={10} sm={12} xs={12} mt={4}>
-            {/* <Box> */}
+          <Grid item md={12} sm={12} xs={12} mt={4}>
             <List
               sx={{
                 display: "flex",
@@ -166,25 +165,18 @@ function ShippingInformation({
                   variant="contained"
                   color="primary"
                   disabled={radioCheckLocker ? "" : "disabled"}
-                  // buttonKey={buttonKey}
-                  // href="/shipping"
                   startIcon={<AddIcon />}
-                // label=" Add Addresss"
                 >
                   {buttonKey === 1 ? "Add Address" : "Add Locker"}
                 </Button>
               </ListItem>
             </List>
-            {/* </Box> */}
           </Grid>
-        </Grid>
-        <Divider />
+        </Grid> */}
         {buttonKey === 1 ? (
           <Grid container sx={{ bgcolor: "background.paper" }}>
-            <Grid item md={1}></Grid>
-
+            {/* <Grid item md={1}></Grid> */}
             <Grid item md={6} m={1} justifyContent="center">
-              <Divider />
               <FormControl>
                 {/* <List sx={{ display: "flex", p: 1, m: 1 }}>
                   <ListItem>
@@ -209,7 +201,7 @@ function ShippingInformation({
                     </Button>
                   </ListItem>
                 </List> */}
-                <List sx={{ display: "flex", maxWidth: 400 }}>
+                <List sx={{ display: "flex" }}>
                   <ListItem>
                     <RadioGroup
                       // row
@@ -284,17 +276,17 @@ function ShippingInformation({
             container
             // spacing={0}
             direction="row"
-            alignItems="center"
+            // alignItems="center"
             justifyContent="center"
 
-          // maxWidth="xl"
+            // maxWidth="xl"
           >
             {/* <Grid item md={4}></Grid> */}
             {/* <Grid container> */}
             {/* <Grid item md={1}></Grid> */}
 
             {/* <Grid item md={6} mt={4} justifyContent="center"></Grid> */}
-            <Grid item mt={4} md={8} sm={12}>
+            <Grid item mt={4} md={12} sm={12}>
               {/* <Accordion>
                 <AccordionSummary
                   expandIcon={<ExpandMoreIcon />}
@@ -306,7 +298,7 @@ function ShippingInformation({
               {/* <AccordionDetails> */}
               <form
                 onSubmit={handleSubmit(submitHandler)}
-              // className={classes.form}
+                // className={classes.form}
               >
                 <List>
                   {/* <Stack direction="row" spacing={2}></Stack> */}
@@ -323,8 +315,8 @@ function ShippingInformation({
                             getStates(item);
                           }}
                           value={value || null}
-                          sx={{ mx: 1 }}
-                          fullWidth
+                          sx={{ width: "25%", mx: 1 }}
+                          // fullWidth
                           options={lockerCountryData}
                           getOptionLabel={(item) =>
                             item.country_name ? item.country_name : ""
@@ -349,9 +341,9 @@ function ShippingInformation({
                         />
                       )}
                     />
-                  </ListItem>
+                    {/* </ListItem> */}
 
-                  <ListItem>
+                    {/* <ListItem> */}
                     <Controller
                       control={control}
                       name="states"
@@ -362,7 +354,7 @@ function ShippingInformation({
                             onChange(item);
                             getCities(item);
                           }}
-                          sx={{ width: "50%", mx: 1 }}
+                          sx={{ width: "25%", mx: 1 }}
                           value={value || null}
                           options={lockerStatesData}
                           getOptionLabel={(item) =>
@@ -399,7 +391,7 @@ function ShippingInformation({
                           onChange={(event, item) => {
                             onChange(item);
                           }}
-                          sx={{ width: "50%", mx: 1 }}
+                          sx={{ width: "25%", mx: 1 }}
                           value={value || null}
                           options={lockerCityData}
                           key={(item) => (item.city_name ? item.city_name : "")}
@@ -425,27 +417,35 @@ function ShippingInformation({
                         />
                       )}
                     />
+                    <Button
+                      variant="contained"
+                      //href="/shipping_methods"
+                      type="submit"
+                      // fullWidth
+                      size="large"
+                      // disabled={radioCheck ? "" : "disabled"}
+                      color="primary"
+                    >
+                      Find Locker
+                    </Button>
                   </ListItem>
                 </List>
 
-                <List>
+                {/* <List>
                   <ListItem>
                     <Stack direction="row" spacing={2}>
-                      {/* <List>
-            <ListItem> */}
+                    
                       <Button
                         variant="contained"
-                        //href="/shipping_methods"
                         type="submit"
-                        // fullWidth
-                        // disabled={radioCheck ? "" : "disabled"}
+                      
                         color="primary"
                       >
                         Find Locker
                       </Button>
                     </Stack>
                   </ListItem>
-                </List>
+                </List> */}
               </form>
               <Grid container>
                 <ListItem>
@@ -461,7 +461,30 @@ function ShippingInformation({
                         <FormControlLabel
                           value={result.locker_id}
                           control={<Radio />}
-                          label={`${result.locker_name},${result.locker_address}`}
+                          label={
+                            <Box
+                              sx={{
+                                display: "flex",
+                                alignItems: "center",
+                              }}
+                            >
+                              <Image // className={cx(styles.media, mediaStyles.root)}
+                                src={"/locker_pic.jpg"}
+                                // onClick={(e) => viewCategory(product.category_id)}
+                                alt={"locker"}
+                                width={45}
+                                height={45}
+                              ></Image>
+                              <Typography
+                                sx={{
+                                  p: 1,
+                                }}
+                              >
+                                {result.locker_name}
+                              </Typography>
+                              <Typography>{result.locker_address}</Typography>
+                            </Box>
+                          }
                           onClick={() => setRadioCheck1(true)}
                         />
                       ))}

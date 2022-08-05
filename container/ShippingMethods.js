@@ -12,7 +12,7 @@ import React, { useState } from "react";
 import CheckoutWizard from "../container/CheckoutWizard";
 import AddIcon from "@mui/icons-material/Add";
 import Card from "@mui/material/Card";
-
+import Image from "next/image";
 import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
@@ -46,9 +46,8 @@ function ShippingMethods({
 
   return (
     <>
-
       <Grid container mt={5} justifyContent={"center"}>
-        <Grid item md={9} xs={12}>
+        <Grid item md={12} xs={12}>
           <Card className={classes.section}>
             <Box sx={{ borderBottom: 1, borderColor: "divider", p: 2 }}>
               <Typography variant="h6" style={{ fontWeight: "bold" }}>
@@ -139,7 +138,7 @@ function ShippingMethods({
           </Card>
         </Grid>
 
-        <Grid item md={9} xs={12}>
+        <Grid item md={12} xs={12}>
           <Card className={classes.section}>
             <Box sx={{ borderBottom: 1, borderColor: "divider", p: 2 }}>
               <FormControl>
@@ -153,7 +152,7 @@ function ShippingMethods({
                       // row
                       aria-labelledby="demo-row-radio-buttons-group-label"
                       name="row-radio-buttons-group"
-                    // value={labelValue}
+                      // value={labelValue}
                     >
                       {shipmentMethodData &&
                         shipmentMethodData.map((result) => (
@@ -163,8 +162,32 @@ function ShippingMethods({
                             control={
                               <Radio onChange={() => handleChange(result)} />
                             }
-                            label={result.shipping_method_name}
+                            label={
+                              <Box
+                                sx={{
+                                  display: "flex",
+                                  alignItems: "center",
+                                }}
+                              >
+                                <Image
+                                  // className={cx(styles.media, mediaStyles.root)}
+                                  src={result.shipping_method_icon_url}
+                                  // onClick={(e) => viewCategory(product.category_id)}
+                                  alt={"locker"}
+                                  width={45}
+                                  height={20}
+                                ></Image>
+                                <Typography
+                                  sx={{
+                                    p: 1,
+                                  }}
+                                >
+                                  {result.shipping_method_name}
+                                </Typography>
+                              </Box>
+                            }
                             onClick={() => setRadioCheck(true)}
+                            sx={{ ml: 1 }}
                           />
                         ))}
                     </RadioGroup>
@@ -175,7 +198,7 @@ function ShippingMethods({
           </Card>
         </Grid>
 
-        <Grid item md={9} xs={12}>
+        <Grid item md={12} xs={12}>
           <Card className={classes.section}>
             <Box sx={{ borderBottom: 1, borderColor: "divider", p: 2 }}>
               <Typography variant="h6" style={{ fontWeight: "bold" }}>
@@ -184,22 +207,25 @@ function ShippingMethods({
               {/* <Box sx={{ display: "inline", margin: 5 }}> */}
               <List>
                 <ListItem>
+                  <ListItemText>Subtotal</ListItemText>
                   <ListItemText>
-                    Subtotal{" "}
                     {productPrice &&
                       productPrice.reduce((a, c) => a + c.qty * c.price, 0)}
                   </ListItemText>
                   {/* <ListItemText>$ 0.0</ListItemText> */}
                 </ListItem>
                 <ListItem>
-                  <ListItemText>Shipping Cost {shippingCharges ? shippingCharges : 0}</ListItemText>
+                  <ListItemText>Shipping Cost</ListItemText>
+                  <ListItemText>
+                    {shippingCharges ? shippingCharges : 0}
+                  </ListItemText>
                 </ListItem>
                 <ListItem>
+                  <ListItemText>Total Cost </ListItemText>
                   <ListItemText>
-                    Subtotal{" "}
                     {productPrice && shippingCharges
                       ? productPrice?.reduce((a, c) => a + c.qty * c.price, 0) +
-                      shippingCharges
+                        shippingCharges
                       : productPrice?.reduce((a, c) => a + c.qty * c.price, 0)}
                   </ListItemText>
                 </ListItem>
@@ -210,7 +236,7 @@ function ShippingMethods({
                   variant="contained"
                   color="primary"
                   disabled={radioCheck ? "" : "disabled"}
-                // startIcon={<AddIcon />}
+                  // startIcon={<AddIcon />}
                 >
                   Review Order
                 </Button>

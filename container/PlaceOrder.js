@@ -80,7 +80,7 @@ function PlaceOrder({
       <CheckoutWizard activeStep={2}></CheckoutWizard>
 
       <Grid container mt={5} justifyContent={"center"}>
-        <Grid item md={9} xs={12}>
+        <Grid item md={12} xs={12}>
           <Card className={classes.section}>
             <Box
               sx={{
@@ -233,7 +233,7 @@ function PlaceOrder({
             </Box>
           </Card>
         </Grid>
-        <Grid item md={9} xs={12}>
+        <Grid item md={12} xs={12}>
           <Card className={classes.section}>
             <Box
               sx={{
@@ -282,7 +282,9 @@ function PlaceOrder({
                       <Typography>Shipping:</Typography>
                     </Grid>
                     <Grid item xs={3}>
-                      <Typography align="right">{shippingCharges ? shippingCharges : 0}</Typography>
+                      <Typography align="right">
+                        {shippingCharges ? shippingCharges : 0}
+                      </Typography>
                     </Grid>
                   </Grid>
                 </ListItem>
@@ -298,13 +300,13 @@ function PlaceOrder({
                         <strong>
                           {productPrice && shippingCharges
                             ? productPrice.reduce(
-                              (a, c) => a + c.qty * c.price,
-                              0
-                            ) + shippingCharges
+                                (a, c) => a + c.qty * c.price,
+                                0
+                              ) + shippingCharges
                             : productPrice.reduce(
-                              (a, c) => a + c.qty * c.price,
-                              0
-                            )}
+                                (a, c) => a + c.qty * c.price,
+                                0
+                              )}
                         </strong>
                       </Typography>
                     </Grid>
@@ -343,11 +345,11 @@ function PlaceOrder({
                   }
                   variant="contained"
                   color="primary"
-                // fullWidth
+                  // fullWidth
                 >
-                  Place Order
+                  Proceed to Pay
                 </Button>
-                <Button
+                {/* <Button
                   // fullWidth
                   variant="contained"
                   color="error"
@@ -360,7 +362,7 @@ function PlaceOrder({
                   }
                 >
                   Back
-                </Button>
+                </Button> */}
               </Stack>
             </Box>
           </Card>
