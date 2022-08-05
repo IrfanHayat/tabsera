@@ -72,7 +72,7 @@ function ShippingInformation({
   return (
     <>
       <CheckoutWizard activeStep={1} />
-      <Grid container mt={5}>
+      <Grid container mt={5} sx={{ bgcolor: "background.paper" }}>
         {/* <Grid item md={2}></Grid> */}
         <Grid
           md={12}
@@ -147,6 +147,7 @@ function ShippingInformation({
                 display: "flex",
                 // p: 1,
                 // m: 1,
+                bgcolor: "background.paper",
                 justifyContent: "space-around",
               }}
             >
@@ -175,9 +176,9 @@ function ShippingInformation({
             {/* </Box> */}
           </Grid>
         </Grid>
-
+        <Divider />
         {buttonKey === 1 ? (
-          <Grid container>
+          <Grid container sx={{ bgcolor: "background.paper" }}>
             <Grid item md={1}></Grid>
 
             <Grid item md={6} m={1} justifyContent="center">
@@ -267,13 +268,7 @@ function ShippingInformation({
                     // fullWidth
                     variant="contained"
                     color="error"
-                    onClick={() =>
-                      router.push(
-                        `/product_detail?productId=${localStorage.getItem(
-                          "productId"
-                        )}`
-                      )
-                    }
+                    onClick={() => router.push(`/cart`)}
                   >
                     Back
                   </Button>

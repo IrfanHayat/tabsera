@@ -36,7 +36,7 @@ export default function CarouselApp({
 
       style={{ width: "100%" }}
       sx={{
-        bgcolor: "#f6f9fc",
+        // bgcolor: "#f6f9fc",
         // my: 1,
         p: 1,
         height: "400px",
@@ -105,7 +105,7 @@ export default function CarouselApp({
         focusOnSelect={true}
         // enableSwipe={true}
         // enableMouseSwipe={true}
-        enableAutoPlay={true}
+        // enableAutoPlay={true}
         // autoPlaySpeed={2000}
         // itemsToShow={2}
       >
