@@ -37,11 +37,13 @@ export default function ActionAreaCard({
         ":hover": {
           boxShadow: 5, // theme.shadows[20]
           transform: "scale(1.05)",
-          // opacity: 0.5,
+          background:
+            "linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, " +
+            "rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)",
           cursor: "pointer",
         },
       }}
-    // className={cx(styles.root)}
+      // className={cx(styles.root)}
     >
       {product?.productImage && (
         <>
@@ -65,7 +67,7 @@ export default function ActionAreaCard({
           alt="shirt"
           width={245}
           height={200}
-        // loading="eager"
+          // loading="eager"
         ></Image>
       )}
       {product?.category_name && (
