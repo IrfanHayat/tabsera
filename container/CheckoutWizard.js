@@ -5,7 +5,7 @@ export default function CheckoutWizard({ activeStep = 0 }) {
   const classes = useStyles();
   return (
     <Grid container maxWidth="xl">
-      <Grid item md={12} xs={6} sm={12}>
+      <Grid item md={12} xs={12} sm={12}>
         <Stepper
           activeStep={activeStep}
           alternativeLabel
@@ -21,7 +21,7 @@ export default function CheckoutWizard({ activeStep = 0 }) {
             <Step
               key={step}
               sx={{
-                width: "27%",
+                width: "40%",
               }}
             >
               <StepLabel>

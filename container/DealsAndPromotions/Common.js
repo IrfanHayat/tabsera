@@ -20,7 +20,7 @@ const Common = ({ DealName, address, imagePath }) => {
           // marginBottom: 1,
           padding: 0.5,
           // maxWidth: 300,
-          width: 250,
+          width: 350,
           height: 200,
           ":hover": {
             boxShadow: 5, // theme.shadows[20]
