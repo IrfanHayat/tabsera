@@ -39,7 +39,12 @@ const Common = ({ DealName, address, imagePath }) => {
         />
 
         <CardContent>
-          <Typography gutterBottom variant="overline" component="div">
+          <Typography
+            gutterBottom
+            variant="h5"
+            style={{ fontWeight: "bold" }}
+            component="div"
+          >
             {DealName}
           </Typography>
         </CardContent>
