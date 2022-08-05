@@ -38,7 +38,7 @@ const Discounts = ({ discountsData, viewProduct }) => {
             component="img"
             height="140"
             image={result?.productImage}
-            alt="green iguana"
+            alt={result.productName}
           />
 
           <CardContent>
@@ -49,7 +49,12 @@ const Discounts = ({ discountsData, viewProduct }) => {
             <Typography gutterBottom variant="overline" component="div">
               Rs {result.productCost}
             </Typography>
-            <Typography gutterBottom style={{ textDecorationLine: 'line-through' }} variant="overline" component="div">
+            <Typography
+              gutterBottom
+              style={{ textDecorationLine: "line-through" }}
+              variant="overline"
+              component="div"
+            >
               Rs {result.originalPrice} discount {result.discountPercent}
             </Typography>
           </CardContent>

@@ -5,13 +5,19 @@ import Carousel from "react-elastic-carousel";
 import Common from "./Common";
 // import Item from "./Item";
 // import "./styles.css";
-
+const breakPoints = [
+  { width: 1, itemsToShow: 1 },
+  { width: 550, itemsToShow: 2 },
+  { width: 768, itemsToShow: 3 },
+  { width: 1200, itemsToShow: 3 },
+];
 export default function MenuCard({
   heading,
   dealsData,
   discountsData,
   freeShippingData,
 }) {
+
   console.log(dealsData);
   console.log(discountsData);
   console.log(freeShippingData);
@@ -49,12 +55,13 @@ export default function MenuCard({
               // autoPlaySpeed={2000}
               // itemsToShow={2}
               itemsToShow={3}
+              breakPoints={breakPoints}
             >
               {
                 dealsData ? <Common
                   DealName="Deals"
                   address="deals_and_promotions"
-                  imagePath="/sales.jpg"
+                  imagePath="/deals.jpg"
                 /> : <></>
               }
 
