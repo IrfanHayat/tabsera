@@ -7,7 +7,7 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import CheckoutWizard from "../container/CheckoutWizard";
+
 import AddIcon from "@mui/icons-material/Add";
 import { Box } from "@mui/system";
 import Radio from "@mui/material/Radio";
@@ -71,7 +71,7 @@ function ShippingInformation({
   // }, [buttonKey]);
   return (
     <>
-      <CheckoutWizard activeStep={1} />
+
       <Grid container mt={5} sx={{ bgcolor: "background.paper" }}>
         {/* <Grid item md={2}></Grid> */}
         <Grid
@@ -87,8 +87,8 @@ function ShippingInformation({
           border={1}
           borderColor="primary.main"
           item
-          // justifyContent="center"
-          // sx={{ display: "flex" }}
+        // justifyContent="center"
+        // sx={{ display: "flex" }}
         >
           <FormControl>
             <RadioGroup
@@ -169,7 +169,7 @@ function ShippingInformation({
                   // buttonKey={buttonKey}
                   // href="/shipping"
                   startIcon={<AddIcon />}
-                  // label=" Add Addresss"
+                // label=" Add Addresss"
                 >
                   {buttonKey === 1 ? "Add Address" : "Add Locker"}
                 </Button>
@@ -255,14 +255,14 @@ function ShippingInformation({
                     </RadioGroup>
                   </ListItem>
                 </List>
-                <Stack direction="row" spacing={2}>
+                {/* <Stack direction="row" spacing={2}>
                   <Button
                     onClick={checkoutHandler}
                     variant="contained"
                     color="primary"
                     disabled={radioCheck ? "" : "disabled"}
-                    // href="/shipping_methods"
-                    // startIcon={<AddIcon />}
+                  // href="/shipping_methods"
+                  // startIcon={<AddIcon />}
                   >
                     Continue
                   </Button>
@@ -275,7 +275,7 @@ function ShippingInformation({
                   >
                     Back
                   </Button>
-                </Stack>
+                </Stack> */}
               </FormControl>
             </Grid>
           </Grid>
@@ -287,7 +287,7 @@ function ShippingInformation({
             alignItems="center"
             justifyContent="center"
 
-            // maxWidth="xl"
+          // maxWidth="xl"
           >
             {/* <Grid item md={4}></Grid> */}
             {/* <Grid container> */}
@@ -306,7 +306,7 @@ function ShippingInformation({
               {/* <AccordionDetails> */}
               <form
                 onSubmit={handleSubmit(submitHandler)}
-                // className={classes.form}
+              // className={classes.form}
               >
                 <List>
                   {/* <Stack direction="row" spacing={2}></Stack> */}
@@ -468,7 +468,7 @@ function ShippingInformation({
                   </RadioGroup>
                 </ListItem>
 
-                {lockersAddressData.length > 0 ? (
+                {/* {lockersAddressData.length > 0 ? (
                   <ListItem>
                     <Stack direction="row" spacing={2}>
                       <Button
@@ -476,8 +476,8 @@ function ShippingInformation({
                         variant="contained"
                         color="primary"
                         disabled={radioCheck1 ? "" : "disabled"}
-                        // href="/shipping_methods"
-                        // startIcon={<AddIcon />}
+                      // href="/shipping_methods"
+                      // startIcon={<AddIcon />}
                       >
                         Continue
                       </Button>
@@ -485,7 +485,7 @@ function ShippingInformation({
                   </ListItem>
                 ) : (
                   ""
-                )}
+                )} */}
               </Grid>
               {/* </AccordionDetails>
               </Accordion> */}

@@ -46,7 +46,7 @@ function ShippingMethods({
 
   return (
     <>
-      <CheckoutWizard activeStep={2} />
+
       <Grid container mt={5} justifyContent={"center"}>
         <Grid item md={9} xs={12}>
           <Card className={classes.section}>
@@ -218,7 +218,7 @@ function ShippingMethods({
                   // fullWidth
                   variant="contained"
                   color="error"
-                  onClick={() => router.push("/shipping_information")}
+                  onClick={() => router.push("/cart")}
                 >
                   Back
                 </Button>

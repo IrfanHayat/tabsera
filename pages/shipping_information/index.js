@@ -44,10 +44,7 @@ const Index = () => {
   }, []);
   const checkoutHandler = () => {
     dispatch(getCountry());
-    router.push({
-      pathname: "/shipping_methods",
-      query: { addressId: shippingAddres.address_id },
-    });
+
   };
   const checkoutHandler1 = () => {
     dispatch(getCountry());
@@ -72,6 +69,11 @@ const Index = () => {
     };
 
     dispatch(getShipmentsMethods(obj));
+
+    router.push({
+      pathname: "/shipping_details",
+      query: { addressId: result.address_id },
+    });
   };
   useEffect(() => {
     dispatch(getCustomer());
@@ -131,11 +133,15 @@ const Index = () => {
     };
 
     dispatch(getShipmentsMethods(obj));
+    router.push({
+      pathname: "/shipping_details",
+      query: { lockerId: shippingLockerAddres.locker_id },
+    });
   };
   const checkoutHandlerLocker = (event) => {
     console.log(shippingLockerAddres);
     router.push({
-      pathname: "/shipping_methods",
+      pathname: "/shipping_details",
       query: { lockerId: shippingLockerAddres.locker_id },
     });
   };

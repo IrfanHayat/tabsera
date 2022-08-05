@@ -77,7 +77,7 @@ function PlaceOrder({
 
   return (
     <>
-      <CheckoutWizard activeStep={4}></CheckoutWizard>
+      <CheckoutWizard activeStep={2}></CheckoutWizard>
 
       <Grid container mt={5} justifyContent={"center"}>
         <Grid item md={9} xs={12}>
@@ -353,7 +353,7 @@ function PlaceOrder({
                   color="error"
                   onClick={() =>
                     router.push(
-                      `shipping_methods?addressId=${JSON.parse(
+                      `shipping_details?addressId=${JSON.parse(
                         localStorage.getItem("addressId")
                       )}`
                     )

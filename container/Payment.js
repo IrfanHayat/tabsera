@@ -41,7 +41,7 @@ export default function Payment({
 
   return (
     <Grid container>
-      <CheckoutWizard activeStep={5}></CheckoutWizard>
+      <CheckoutWizard activeStep={3}></CheckoutWizard>
       <Grid item sx={{ margin: 5 }}>
         <form>
           <Typography variant="h6" style={{ fontWeight: "bold" }}>

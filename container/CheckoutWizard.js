@@ -13,11 +13,9 @@ export default function CheckoutWizard({ activeStep = 0 }) {
         >
           {[
             "Checkout",
-            "Select Shipping Address",
-            "Enter shipping Information ",
             "Shipping Info",
-            "Place Order",
-            "Payment Method",
+            "Review Order",
+            "Pay",
             "Order Complete",
           ].map((step) => (
             <Step
