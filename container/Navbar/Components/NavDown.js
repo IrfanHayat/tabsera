@@ -16,7 +16,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import { useSelector, useDispatch } from "react-redux";
 import { InputAdornment } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
-import Cookies from 'js-cookie'
+import Cookies from "js-cookie";
 
 import {
   getProduct,
@@ -86,7 +86,7 @@ export default function NavDown(props) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const [categoriesData, setCategoriesData] = useState([]);
-  const [openCategories, setOpenCategories] = React.useState(null);
+  const [camapaigns, setCamapaigns] = React.useState(false);
 
   useEffect(() => {
     //dispatch(getTotalCartQuantity());
@@ -95,8 +95,8 @@ export default function NavDown(props) {
   }, []);
 
   useEffect(() => {
-    console.log(cartTotalQuantity)
-  }, cartTotalQuantity)
+    console.log(cartTotalQuantity);
+  }, cartTotalQuantity);
 
   const categoryData = (categories) => {
     setCategoriesData(categories);
@@ -135,21 +135,29 @@ export default function NavDown(props) {
   const open1 = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
 
+  console.log(categoriesData, "categoriesData");
   const categories = (
     <List>
       {categoriesData &&
         categoriesData?.map((text, index) => (
-          <MenuItem
-            key={text.category_id}
-            disablePadding
-            sx={{ marginLeft: 3 }}
-          >
-            <ListItemText
-              primary={text.category_name}
-              onClick={(e) => viewCategory(text.category_id)}
-            />
+          <>
+            <MenuItem key={text.category_id} disablePadding sx={{ m: 1 }}>
+              <ListItemIcon>
+                <Image
+                  src={text.category_image}
+                  alt={text.category_name}
+                  width={20}
+                  height={20}
+                ></Image>
+                {/* {text.category_image} */}
+              </ListItemIcon>
+              <ListItemText
+                primary={text.category_name}
+                onClick={(e) => viewCategory(text.category_id)}
+              />
+            </MenuItem>
             <Divider />
-          </MenuItem>
+          </>
         ))}
     </List>
   );
@@ -181,11 +189,29 @@ export default function NavDown(props) {
           <Box>
             <Categories
               startIcon={<WidgetsIcon />}
-              Title="Categories"
-              Data={categories}
+              Title={camapaigns ? "Campaigns" : "Categories"}
+              Data={camapaigns ? "No Campaigns" : categories}
+              // Data={categories}
             />
           </Box>
-
+          <Stack direction="row" spacing={1}>
+            <Button
+              variant={camapaigns ? "contained" : "outlined"}
+              onClick={() => setCamapaigns(true)}
+              // disabled={camapaigns ? "disabled" : " "}
+              size={"small"}
+            >
+              Campaigns
+            </Button>
+            <Button
+              variant={camapaigns ? "outlined" : "contained"}
+              onClick={() => setCamapaigns(false)}
+              // disabled={camapaigns ? "" : "disabled"}
+              size={"small"}
+            >
+              Categories
+            </Button>
+          </Stack>
           <Box sx={{ flexGrow: 0.5 }} />
 
           <Stack
@@ -245,19 +271,28 @@ export default function NavDown(props) {
               onClick={handleClick}
               color="primary"
 
-            // onMouseEnter={handleClick}
-            // onMouseLeave={handleClick}
+              // onMouseEnter={handleClick}
+              // onMouseLeave={handleClick}
             >
               {console.log(localStorage.getItem("login"))}
               {console.log(cartTotalQuantity)}
-              {
-                localStorage.getItem("login") == 'true' ?
-                  <Badge color="error" badgeContent={cartTotalQuantity != undefined || cartTotalQuantity != 0 || cartTotalQuantity ? cartTotalQuantity : 1} max={99}>
-                    <ShoppingCartOutlinedIcon />
-                  </Badge> :
-                  < ShoppingCartOutlinedIcon />
-
-              }
+              {localStorage.getItem("login") == "true" ? (
+                <Badge
+                  color="error"
+                  badgeContent={
+                    cartTotalQuantity != undefined ||
+                    cartTotalQuantity != 0 ||
+                    cartTotalQuantity
+                      ? cartTotalQuantity
+                      : 1
+                  }
+                  max={99}
+                >
+                  <ShoppingCartOutlinedIcon />
+                </Badge>
+              ) : (
+                <ShoppingCartOutlinedIcon />
+              )}
 
               {/* </Tooltip> */}
             </IconButton>
@@ -276,11 +311,11 @@ export default function NavDown(props) {
                 vertical: "top",
                 horizontal: "center",
               }}
-            //keepMounted={true}
-            // anchorOrigin={{
-            //   vertical: "bottom",
-            //   horizontal: "left"62
-            // }}
+              //keepMounted={true}
+              // anchorOrigin={{
+              //   vertical: "bottom",
+              //   horizontal: "left"62
+              // }}
             >
               {cartTotalQuantity > 0 ? (
                 // <div>

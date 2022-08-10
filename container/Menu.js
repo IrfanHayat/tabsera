@@ -16,9 +16,12 @@ import NewCarousel from "./Carousel/NewCarousel";
 import CarouselApp from "./Carousel/Carousel";
 import { useGetAllProductsQuery } from "../RTK/productApi";
 import MenuCard from "./DealsAndPromotions/MenuCards";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, Typography } from "@mui/material";
 import { getDiscounts } from "../slice/discountsSlice";
-
+import Button from "@mui/material/Button";
+import NavSelect from "./Navbar/Components/NavSelect";
+import MenuItem from "@mui/material/MenuItem";
+import ListItemText from "@mui/material/ListItemText";
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
@@ -38,6 +41,20 @@ export default function PersistentDrawerLeft() {
   // const product = useSelector((state) => state.product.productData);
   // const { productData, loading } = useSelector((state) => state.product);
   let product = data?.response;
+
+  const sortingCategories = (
+    <div>
+      <MenuItem>
+        <ListItemText>Price</ListItemText>
+      </MenuItem>
+      <MenuItem>
+        <ListItemText>Rating</ListItemText>
+      </MenuItem>
+      <MenuItem>
+        <ListItemText>Orders</ListItemText>
+      </MenuItem>
+    </div>
+  );
 
   const featureProduct = useSelector(
     (state) => state.product.featureProductData
@@ -161,39 +178,50 @@ export default function PersistentDrawerLeft() {
         </Grid>
       ) : (
         <Grid component="main" maxWidth="xl">
-          {/* {loading ? ( 
-        <CircularProgress/>
-            ):()
-          */}
-
-          {/* <Grid item xs={12} md={12}> */}
-          <NewCarousel
+          {/* <NewCarousel
             product={
               product &&
               product.slice([6], [12]).map((item, i) => {
                 return item;
               })
             }
-          />
-          {/* </Grid> */}
+          /> */}
 
-          <Grid item xs={12} md={12}>
+          {/* <Grid item xs={12} md={12}>
             <MenuCard
               heading="Deals & Promotions"
               dealsData={dealsData}
               discountsData={discountsData}
               freeShippingData={freeShippingData}
             />
-            {/* <Item>
-                <CarouselApp
-                  heading="Deals And Promotions"
-                  product={dealsPromotions}
-                  // viewProduct={viewProduct}
-                  // addToCartHandler={addToCartHandler}
-                />
-              </Item> */}
-          </Grid>
+          </Grid> */}
 
+          <Box
+            sx={{
+              display: "flex",
+              // justifyContent: "space-around",
+              p: 1,
+              my: 1,
+              bgcolor: "background.paper",
+              borderRadius: 0,
+            }}
+          >
+            <Box>
+              <Typography sx={{ display: "inline" }}>List By : </Typography>
+              <Button variant="text">Products</Button>
+              <Button variant="text">Sellers</Button>
+              <Button variant="text">Categories</Button>
+            </Box>
+            <Box sx={{ flexGrow: 0.85 }} />
+            <Box>
+              {/* <Button variant="text">Sort By</Button> */}
+              <NavSelect
+                Title="Sort By"
+                Data={sortingCategories}
+                color="black"
+              />
+            </Box>
+          </Box>
           {featureProduct != "" ? (
             <Grid item xs={12} md={12}>
               <Item>
