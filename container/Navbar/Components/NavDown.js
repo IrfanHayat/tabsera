@@ -194,7 +194,15 @@ export default function NavDown(props) {
               // Data={categories}
             />
           </Box>
-          <Stack direction="row" spacing={1}>
+          <Box
+            sx={{
+              display: "flex",
+              // my: 2,
+              overflow: "hidden",
+
+              flexDirection: { xs: "column", md: "row" },
+            }}
+          >
             <Button
               variant={camapaigns ? "contained" : "outlined"}
               onClick={() => setCamapaigns(true)}
@@ -208,10 +216,11 @@ export default function NavDown(props) {
               onClick={() => setCamapaigns(false)}
               // disabled={camapaigns ? "" : "disabled"}
               size={"small"}
+              sx={{ ml: 0.5 }}
             >
               Categories
             </Button>
-          </Stack>
+          </Box>
           <Box sx={{ flexGrow: 0.5 }} />
 
           <Stack
