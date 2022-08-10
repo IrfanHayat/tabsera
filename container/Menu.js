@@ -22,6 +22,11 @@ import Button from "@mui/material/Button";
 import NavSelect from "./Navbar/Components/NavSelect";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemText from "@mui/material/ListItemText";
+import ViewAllProducts from '../pages/all_products'
+import ProductGetByCategory from '../pages/get_all_products_by_category';
+import ProductGetByMerchant from '../pages/get_all_products_by_merchant';
+
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
@@ -31,13 +36,14 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function PersistentDrawerLeft() {
   const { data, isLoading, isFetching, isError } = useGetAllProductsQuery();
-  const { dealsData } = useSelector((state) => state.deals);
-  const { discountsData } = useSelector((state) => state.discounts);
-  const { freeShippingData } = useSelector((state) => state.freeShipping);
-  const { couponsData } = useSelector((state) => state.coupons);
 
-  console.log(discountsData);
-  console.log(dealsData);
+  // show all products
+  const [showProduct, setShowProduct] = useState(false)
+  // show all categories
+  const [showAllCategoryPro, setShowAllCategoryPro] = useState(false)
+  // show all merchants
+  const [showAllMerchantPro, setShowAllMerchantPro] = useState(false)
+
   // const product = useSelector((state) => state.product.productData);
   // const { productData, loading } = useSelector((state) => state.product);
   let product = data?.response;
@@ -59,9 +65,6 @@ export default function PersistentDrawerLeft() {
   const featureProduct = useSelector(
     (state) => state.product.featureProductData
   );
-  const category = useSelector((state) => state.category.categoryData);
-
-  let [groupProduct, setGroupedProduct] = useState();
 
   let router = useRouter();
   let dispatch = useDispatch();
@@ -98,64 +101,30 @@ export default function PersistentDrawerLeft() {
   useEffect(() => {
     dispatch(getFeatureProduct());
     dispatch(getDiscounts());
-    dispatch(getCategory());
     dispatch(getFreeShipping());
     dispatch(getDeals());
   }, []);
 
-  function groupArrayOfObjects(list) {
-    const grouped = _.groupBy(list, (items) => items.categoryName);
-    return grouped;
+
+  const showAllProducts = () => {
+    setShowProduct(true)
+    setShowAllCategoryPro(false)
+    setShowAllMerchantPro(false)
   }
-  useEffect(() => {
-    if (data) {
-      var groupedCategory = groupArrayOfObjects(data.response);
-      setGroupedProduct(groupedCategory);
-    }
-  }, [product, data]);
 
-  // const categoryData = (category) => {
-  //   let result1 =
-  //     category &&
-  //     category.map((result) => {
-  //       if (result.child.length > 0) {
-  //         return result.child;
-  //       }
-  //     });
-  //   let result3 =
-  //     category &&
-  //     category.map((result) => {
-  //       if (result.child.length > 0) {
-  //         return result.category_name;
-  //       }
-  //     });
 
-  //   let result2 = result1 && result1.filter((result) => result != undefined);
-  //   let result4 = result3 && result3.filter((result) => result != undefined);
-
-  //   if (groupProduct) {
-  //     let result5 = Object.keys(groupProduct).map((pro) => {
-  //       if (pro == result4.toString().split(" ").join("")) {
-  //         let result = groupProduct[pro].concat(result2[0]);
-  //         groupProduct[pro] = result;
-  //         return groupProduct;
-  //       }
-  //     });
-  //     let result6 = result5.filter((result) => result != undefined);
-  //     setGroupedProduct(result6[0]);
-  //   }
-  // };
-
-  // useMemo(() => categoryData(category), [category && category && groupProduct]);
-
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
-
-  const handleMobileMenuClose = () => {
-    setMobileMoreAnchorEl(null);
-  };
-
+  const showAllCategoriesProduct = () => {
+    console.log("ccc")
+    setShowAllCategoryPro(true)
+    setShowProduct(false)
+    setShowAllMerchantPro(false)
+  }
+  const showAllMerchantsProduct = () => {
+    console.log("ccc")
+    setShowAllMerchantPro(true)
+    setShowProduct(false)
+    setShowAllCategoryPro(false)
+  }
   // ----------------------------------------------------------------------------------
 
   // React.useEffect(() => {
@@ -178,6 +147,20 @@ export default function PersistentDrawerLeft() {
         </Grid>
       ) : (
         <Grid component="main" maxWidth="xl">
+          {featureProduct != "" ? (
+            <Grid item xs={12} md={12}>
+              <Item>
+                <CarouselApp
+                  heading="Featured Products"
+                  product={featureProduct}
+                  viewProduct={viewProduct}
+                  addToCartHandler={addToCartHandler}
+                />
+              </Item>
+            </Grid>
+          ) : (
+            ""
+          )}
           {/* <NewCarousel
             product={
               product &&
@@ -208,9 +191,9 @@ export default function PersistentDrawerLeft() {
           >
             <Box>
               <Typography sx={{ display: "inline" }}>List By : </Typography>
-              <Button variant="text">Products</Button>
-              <Button variant="text">Sellers</Button>
-              <Button variant="text">Categories</Button>
+              <Button variant="text" onClick={showAllProducts}>Products</Button>
+              <Button variant="text" onClick={showAllMerchantsProduct}>Sellers</Button>
+              <Button variant="text" onClick={showAllCategoriesProduct}>Categories</Button>
             </Box>
             <Box sx={{ flexGrow: 0.85 }} />
             <Box>
@@ -222,34 +205,16 @@ export default function PersistentDrawerLeft() {
               />
             </Box>
           </Box>
-          {featureProduct != "" ? (
-            <Grid item xs={12} md={12}>
-              <Item>
-                <CarouselApp
-                  heading="Featured Products"
-                  product={featureProduct}
-                  viewProduct={viewProduct}
-                  addToCartHandler={addToCartHandler}
-                />
-              </Item>
-            </Grid>
-          ) : (
-            ""
-          )}
-          {groupProduct &&
-            Object.keys(groupProduct).map((key, index) => (
-              <Grid item xs={12} md={12} key={index}>
-                <Item>
-                  <CarouselApp
-                    heading={key}
-                    product={groupProduct[key]}
-                    viewProduct={viewProduct}
-                    addToCartHandler={addToCartHandler}
-                    viewCategory={viewCategory}
-                  />
-                </Item>
-              </Grid>
-            ))}
+
+          {
+            showProduct ?
+              <ViewAllProducts></ViewAllProducts> : <></>
+
+          }
+          {showAllCategoryPro ?
+            <ProductGetByCategory data={data} Item={Item}></ProductGetByCategory> : <></>}
+          {showAllMerchantPro ?
+            <ProductGetByMerchant data={data} Item={Item}></ProductGetByMerchant> : <></>}
         </Grid>
       )}
     </Grid>
