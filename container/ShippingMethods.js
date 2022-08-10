@@ -68,38 +68,38 @@ function ShippingMethods({
                 </ListItem>
                 {/* </List> */}
 
-                <List>
+                {/* <List> */}
+                <ListItem>
+                  <ListItemIcon>
+                    <PhoneIcon />
+                  </ListItemIcon>
+                  {localStorage.getItem("mobileNumber") ? (
+                    <ListItemText>
+                      {localStorage.getItem("mobileNumber")}
+                    </ListItemText>
+                  ) : (
+                    <ListItemText>{"3215890184"}</ListItemText>
+                  )}
+                </ListItem>
+                {/* </List> */}
+                {userData.email ? (
+                  // <List>
                   <ListItem>
                     <ListItemIcon>
-                      <PhoneIcon />
+                      <EmailIcon />
                     </ListItemIcon>
-                    {localStorage.getItem("mobileNumber") ? (
-                      <ListItemText>
-                        {localStorage.getItem("mobileNumber")}
-                      </ListItemText>
-                    ) : (
-                      <ListItemText>{"3215890184"}</ListItemText>
-                    )}
+                    <ListItemText>{userData.email}</ListItemText>
                   </ListItem>
-                </List>
-                {userData.email ? (
-                  <List>
-                    <ListItem>
-                      <ListItemIcon>
-                        <EmailIcon />
-                      </ListItemIcon>
-                      <ListItemText>{userData.email}</ListItemText>
-                    </ListItem>
-                  </List>
                 ) : (
-                  <List>
-                    <ListItem>
-                      <ListItemIcon>
-                        <EmailIcon />
-                      </ListItemIcon>
-                      <ListItemText>{"test@gmail.com"}</ListItemText>
-                    </ListItem>
-                  </List>
+                  // </List>
+                  // <List>
+                  <ListItem>
+                    <ListItemIcon>
+                      <EmailIcon />
+                    </ListItemIcon>
+                    <ListItemText>{"test@gmail.com"}</ListItemText>
+                  </ListItem>
+                  // </List>
                 )}
 
                 {/* <List> */}

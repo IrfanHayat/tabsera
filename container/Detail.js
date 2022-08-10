@@ -28,6 +28,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
+import Rating from "@mui/material/Rating";
+
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
   { width: 550, itemsToShow: 2 },
@@ -109,7 +111,7 @@ function Details({
 
   const viewVariantsProduct = (result) => {
     setSkusProduct(result);
-    setSkusFlag(true)
+    setSkusFlag(true);
   };
 
   const theme = useTheme();
@@ -122,13 +124,14 @@ function Details({
     setValue(index);
   };
   let router = useRouter();
-
+  console.log("productDetail", productDetail);
   return (
     <>
       <Box
         role="presentation"
         onClick={handleClick}
         sx={{ display: "flex", m: 1 }}
+        direction="row"
       >
         <Breadcrumbs aria-label="breadcrumb">
           <Link
@@ -156,13 +159,37 @@ function Details({
             {productDetail?.product_name}
           </Typography>
         </Breadcrumbs>
+        <Box sx={{ flexGrow: 0.5 }}></Box>
+        <Stack
+          direction="row"
+          spacing={3}
+          // sx={{
+          //   display: "flex",
+          //   justifyContent: "space-between",
+          // }}
+        >
+          <Typography
+            sx={{ color: "error.main" }}
+            style={{ fontWeight: "bold" }}
+          >
+            {productDetail?.merchant_name}
+          </Typography>
+          <Button
+            variant="text"
+            onClick={() => viewStore(merchantDetail?.merchant_id)}
+            // onClick={viewStore}
+            size="small"
+          >
+            Visit Store
+          </Button>
+        </Stack>
       </Box>
       <Grid
         container
         spacing={1}
         maxWidth="xl"
         sx={{ paddingTop: 2 }}
-      // justifyContent="center"
+        // justifyContent="center"
       >
         {/* <Grid item md={12} xs={12} ml={1}>
           <Typography variant="h6" style={{ fontWeight: "bold" }}>
@@ -183,31 +210,43 @@ function Details({
                 // itemsToShow={2}
                 showArrows={false}
               >
-
                 {Object.keys(productDetail).length > 0 && skusFlag == false
-                  ? productDetail.product_images[0].media_images.map((result, index) => (
-                    <Image
-                      key={index}
-                      //  className={cx(styles.media, mediaStyles.root)}
-                      src={result}
-                      alt="shirt"
-                      // objectFit="contain"
-                      width={1500}
-                      height={1000}
-                    ></Image>
-                  ))
+                  ? productDetail.product_images[0].media_images.map(
+                      (result, index) => (
+                        <Image
+                          key={index}
+                          //  className={cx(styles.media, mediaStyles.root)}
+                          src={result}
+                          alt="shirt"
+                          // objectFit="contain"
+                          width={1500}
+                          height={1000}
+                        ></Image>
+                      )
+                    )
                   : productImage && (
-                    <Image
-                      // key={index}
-                      //  className={cx(styles.media, mediaStyles.root)}
-                      src={productImage[0]}
-                      alt="shirt"
-                      objectFit="contain"
-                      width={1500}
-                      height={1000}
-                    ></Image>
-                  )}
+                      <Image
+                        // key={index}
+                        //  className={cx(styles.media, mediaStyles.root)}
+                        src={productImage[0]}
+                        alt="shirt"
+                        objectFit="contain"
+                        width={1500}
+                        height={1000}
+                      ></Image>
+                    )}
               </Carousel>
+            </ListItem>
+            <ListItem>
+              {" "}
+              <Stack spacing={1}>
+                <Rating
+                  name="size-small"
+                  defaultValue={3}
+                  size="small"
+                  readOnly
+                />
+              </Stack>
             </ListItem>
           </List>
         </Grid>
@@ -217,9 +256,9 @@ function Details({
           md={6}
           sm={12}
           xs={12}
-        // sx={{ display: "flex" }}
-        // justifyContent="center"
-        // alignItems="center"
+          // sx={{ display: "flex" }}
+          // justifyContent="center"
+          // alignItems="center"
         >
           <List>
             <ListItem>
@@ -259,32 +298,32 @@ function Details({
             {/* <ListItem> */}
             {skusProduct
               ? skusProduct.attributes.map((result, index) => (
-                // <List key={index}>
-                <ListItem key={index}>
-                  <ListItemText>
-                    <Typography>{result.attribute_name}</Typography>
-                  </ListItemText>
-                  <ListItemText>
-                    <Typography>{result.value}</Typography>
-                  </ListItemText>
-                </ListItem>
-                // </List>
-              ))
+                  // <List key={index}>
+                  <ListItem key={index}>
+                    <ListItemText>
+                      <Typography>{result.attribute_name}</Typography>
+                    </ListItemText>
+                    <ListItemText>
+                      <Typography>{result.value}</Typography>
+                    </ListItemText>
+                  </ListItem>
+                  // </List>
+                ))
               : productAttributes.map((result, index) => (
-                // <List key={index}>
-                <ListItem key={index}>
-                  <ListItemText>
-                    <Typography style={{ fontWeight: "bold" }}>
-                      {result.attribute_name} :
-                    </Typography>
-                  </ListItemText>
-                  <ListItemText>
-                    <Typography>{result.value}</Typography>
-                  </ListItemText>
-                </ListItem>
+                  // <List key={index}>
+                  <ListItem key={index}>
+                    <ListItemText>
+                      <Typography style={{ fontWeight: "bold" }}>
+                        {result.attribute_name} :
+                      </Typography>
+                    </ListItemText>
+                    <ListItemText>
+                      <Typography>{result.value}</Typography>
+                    </ListItemText>
+                  </ListItem>
 
-                // </List>
-              ))}
+                  // </List>
+                ))}
             <Divider />
             <Typography variant="h5" style={{ fontWeight: "bold" }}>
               Skus
@@ -403,7 +442,7 @@ function Details({
                     {...a11yProps(1)}
                   />
                   <Tab
-                    label="Store"
+                    label="Similar Products"
                     style={{ fontWeight: "bold" }}
                     {...a11yProps(2)}
                   />
@@ -422,7 +461,8 @@ function Details({
                 </TabPanel>
                 <TabPanel value={value} index={2} dir={theme.direction}>
                   {/* {productDetail?.merchant_name} */}
-                  <List>
+                  Similar Products
+                  {/* <List>
                     <ListItem>Name : {merchantDetail?.merchant_name}</ListItem>
                   </List>
                   <List>
@@ -440,11 +480,11 @@ function Details({
                     <Button
                       variant="text"
                       onClick={() => viewStore(merchantDetail?.merchant_id)}
-                    // onClick={viewStore}
+                      // onClick={viewStore}
                     >
                       Visit Store
                     </Button>
-                  </Stack>
+                  </Stack> */}
                 </TabPanel>
               </SwipeableViews>
               {/* <TabPanel value={value} index={2}>

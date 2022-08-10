@@ -88,8 +88,9 @@ function ShippingInformation({
           // justifyContent="center"
           sx={{ p: 1 }}
         >
-          <FormLabel style={{ fontWeight: "bold" }}>
-            {buttonKey === 1 ? "Select Address" : "Select Lockers"}
+          <FormLabel style={{ fontWeight: "bold", color: "black" }}>
+            {/* {buttonKey === 1 ? "Select Address" : "Select Lockers"} */}
+            Ship To :
           </FormLabel>
           <FormControl>
             <RadioGroup
@@ -97,6 +98,18 @@ function ShippingInformation({
               aria-labelledby="demo-row-radio-buttons-group-label"
               name="row-radio-buttons-group"
             >
+              <FormControlLabel
+                onClick={() => {
+                  setButtonKey(3);
+                  setRadioCheckLocker(true);
+                }}
+                value="school"
+                // buttonKey={1}
+                // onChange={handleChange}
+                control={<Radio />}
+                label="School"
+              />
+              <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
               <FormControlLabel
                 onClick={() => {
                   setButtonKey(1);
@@ -135,7 +148,11 @@ function ShippingInformation({
             startIcon={<AddIcon />}
             // label=" Add Addresss"
           >
-            {buttonKey === 1 ? "Add Address" : "Add Locker"}
+            {buttonKey === 1
+              ? "Add Address"
+              : buttonKey === 2
+              ? "Add Locker"
+              : "Add School Address"}
           </Button>
         </Grid>
         {/* <Box>Locker Info here</Box> */}
@@ -271,7 +288,7 @@ function ShippingInformation({
               </FormControl>
             </Grid>
           </Grid>
-        ) : (
+        ) : buttonKey === 2 ? (
           <Grid
             container
             // spacing={0}
@@ -515,6 +532,10 @@ function ShippingInformation({
             </Grid>
             {/* <Grid item md={2}></Grid> */}
           </Grid>
+        ) : buttonKey === 3 ? (
+          <Box>School</Box>
+        ) : (
+          ""
         )}
       </Grid>
     </>
