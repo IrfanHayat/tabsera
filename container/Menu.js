@@ -25,7 +25,7 @@ import ListItemText from "@mui/material/ListItemText";
 import ViewAllProducts from '../pages/all_products'
 import ProductGetByCategory from '../pages/get_all_products_by_category';
 import ProductGetByMerchant from '../pages/get_all_products_by_merchant';
-
+import _ from "lodash";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -41,6 +41,8 @@ export default function PersistentDrawerLeft() {
   const [showProduct, setShowProduct] = useState(false)
   // show all categories
   const [showAllCategoryPro, setShowAllCategoryPro] = useState(false)
+  const [filterData, setFilterData] = useState()
+
   // show all merchants
   const [showAllMerchantPro, setShowAllMerchantPro] = useState(false)
 
@@ -48,16 +50,68 @@ export default function PersistentDrawerLeft() {
   // const { productData, loading } = useSelector((state) => state.product);
   let product = data?.response;
 
+  const sortData = (type) => {
+    var f_data;
+    switch (type) {
+      case 'price_asc': {
+        f_data = data.response.slice().sort(function (a, b) {
+          return parseFloat(b.productCost) - parseFloat(a.productCost);
+        });
+        console.log(f_data)
+        setFilterData(f_data)
+      }
+
+        break;
+      case 'price_desc':
+        f_data = data.response.slice().sort(function (a, b) {
+          return parseFloat(a.productCost) - parseFloat(b.productCost);
+        });
+        console.log(f_data)
+        setFilterData(f_data)
+      case 'rating_asc':
+        f_data = data.response.slice().sort(function (a, b) {
+          return parseFloat(b.averageRating) - parseFloat(a.averageRating);
+        });
+        console.log(f_data)
+        setFilterData(f_data)
+        break;
+      case 'rating_desc':
+        f_data = data.response.slice().sort(function (a, b) {
+          return parseFloat(a.averageRating) - parseFloat(b.averageRating);
+        });
+        setFilterData(f_data)
+        break;
+      // case 'order_asc':
+      //   text = "Today is Sunday";
+      //   break;
+      // case 'order_desc':
+      //   text = "Today is Sunday";
+      //   break;
+      default:
+        "Looking forward to the Weekend";
+    }
+  }
+
   const sortingCategories = (
+
     <div>
       <MenuItem>
-        <ListItemText>Price</ListItemText>
+        <ListItemText onClick={() => sortData('price_asc')}>Price: High-To-Low </ListItemText>
       </MenuItem>
       <MenuItem>
-        <ListItemText>Rating</ListItemText>
+        <ListItemText onClick={() => sortData('price_desc')}>Price: Low-To-High </ListItemText>
       </MenuItem>
       <MenuItem>
-        <ListItemText>Orders</ListItemText>
+        <ListItemText onClick={() => sortData('rating_asc')}>Rating: High-To-Low</ListItemText>
+      </MenuItem>
+      <MenuItem>
+        <ListItemText onClick={() => sortData('rating_desc')}>Rating: Low-To-High</ListItemText>
+      </MenuItem>
+      <MenuItem>
+        <ListItemText onClick={() => sortData('order_asc')}>Orders: High-To-Low</ListItemText>
+      </MenuItem>
+      <MenuItem>
+        <ListItemText onClick={() => sortData('order_desc')}>Orders: Low-To-High</ListItemText>
       </MenuItem>
     </div>
   );
@@ -208,13 +262,13 @@ export default function PersistentDrawerLeft() {
 
           {
             showProduct ?
-              <ViewAllProducts Item={Item}></ViewAllProducts> : <></>
+              <ViewAllProducts Item={Item} data={filterData ? filterData : data.response}></ViewAllProducts> : <></>
 
           }
           {showAllCategoryPro ?
-            <ProductGetByCategory data={data} Item={Item}></ProductGetByCategory> : <></>}
+            <ProductGetByCategory data={filterData ? filterData : data.response} Item={Item}></ProductGetByCategory> : <></>}
           {showAllMerchantPro ?
-            <ProductGetByMerchant data={data} Item={Item}></ProductGetByMerchant> : <></>}
+            <ProductGetByMerchant data={filterData ? filterData : data.response} Item={Item}></ProductGetByMerchant> : <></>}
         </Grid>
       )}
     </Grid>

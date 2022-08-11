@@ -89,11 +89,12 @@ const style = {
   padding: 8,
 };
 
-const Index = ({ Item }) => {
+const Index = ({ Item, data }) => {
   // state = {
   //   items: Array.from({ length: 20 }),
   //   hasMore: true,
   // };
+  console.log(data)
 
   const { productData, loading } = useSelector((state) => state.product);
   let product = productData;
@@ -186,7 +187,7 @@ const Index = ({ Item }) => {
           <CircularProgress size={140} />
         ) : (
           // </Box>
-          product.map((item, index) => (
+          product && data.length < 1 ? product.map((item, index) => (
             <Item>
               <ActionAreaCard
                 product={item}
@@ -197,7 +198,19 @@ const Index = ({ Item }) => {
                 {/* {item?.productName}> */}
               </ActionAreaCard>
             </Item>
-          ))
+          )) :
+            data.map((item, index) => (
+              <Item>
+                <ActionAreaCard
+                  product={item}
+                  viewProduct={viewProduct}
+                  addToCartHandler={addToCartHandler}
+                  key={index}
+                >
+                  {/* {item?.productName}> */}
+                </ActionAreaCard>
+              </Item>
+            ))
         )}
       </Grid>
       {/* </InfiniteScroll> */}

@@ -141,7 +141,7 @@ export default function ActionAreaCard({
           {product.productName ? (
             <IconButton
               key={product.id}
-              // onClick={(e) => addToCartHandler(product)}
+              onClick={(e) => addToCartHandler(product)}
               color="primary"
               aria-label="add to shopping cart"
             >

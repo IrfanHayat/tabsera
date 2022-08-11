@@ -6,8 +6,6 @@
     "dev": "next -p 3006",
     "build": "next build",
     "start": "NODE_ENV=production node server.js"
-    
-
   },
   "dependencies": {
     "@emotion/react": "^11.9.0",

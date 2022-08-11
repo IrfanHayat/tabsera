@@ -39,12 +39,12 @@ function Index({ data, Item }) {
         console.log("----------list")
         console.log(list)
         console.log("----------list")
-        const grouped = _.groupBy(list, (items) => items.merchantId);
+        const grouped = _.groupBy(list, (items) => items.merchantName);
         return grouped;
     }
     useEffect(() => {
         if (data) {
-            var groupedCategory = groupArrayOfObjects(data.response);
+            var groupedCategory = groupArrayOfObjects(data);
             setGroupedProduct(groupedCategory);
         }
     }, [data]);

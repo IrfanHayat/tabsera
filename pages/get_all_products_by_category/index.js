@@ -41,7 +41,7 @@ function Index({ data, Item }) {
     }
     useEffect(() => {
         if (data) {
-            var groupedCategory = groupArrayOfObjects(data.response);
+            var groupedCategory = groupArrayOfObjects(data);
             setGroupedProduct(groupedCategory);
         }
     }, [data]);
