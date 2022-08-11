@@ -89,7 +89,7 @@ const style = {
   padding: 8,
 };
 
-const Index = () => {
+const Index = ({ Item }) => {
   // state = {
   //   items: Array.from({ length: 20 }),
   //   hasMore: true,
@@ -187,14 +187,16 @@ const Index = () => {
         ) : (
           // </Box>
           product.map((item, index) => (
-            <ActionAreaCard
-              product={item}
-              viewProduct={viewProduct}
-              addToCartHandler={addToCartHandler}
-              key={index}
-            >
-              {/* {item?.productName}> */}
-            </ActionAreaCard>
+            <Item>
+              <ActionAreaCard
+                product={item}
+                viewProduct={viewProduct}
+                addToCartHandler={addToCartHandler}
+                key={index}
+              >
+                {/* {item?.productName}> */}
+              </ActionAreaCard>
+            </Item>
           ))
         )}
       </Grid>

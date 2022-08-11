@@ -208,7 +208,7 @@ export default function PersistentDrawerLeft() {
 
           {
             showProduct ?
-              <ViewAllProducts></ViewAllProducts> : <></>
+              <ViewAllProducts Item={Item}></ViewAllProducts> : <></>
 
           }
           {showAllCategoryPro ?
