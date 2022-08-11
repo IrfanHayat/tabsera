@@ -8,7 +8,7 @@ export const getFreeShipping = createAsyncThunk(
   "bundles/getFreeShipping",
   async () => {
     const result = await instance.get(
-      `${url}/marketplace/promotions/freeshipping/products`
+      `${url}/ecommerce/promotions/freeshipping/products`
     );
 
     console.log(result);

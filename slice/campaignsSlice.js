@@ -7,7 +7,7 @@ import { url, setHeaders } from "../helper/axios/config";
 export const getCampaigns = createAsyncThunk(
   "bundles/getCampaigns",
   async () => {
-    const result = await instance.get(`${url}/marketplace/campaigns/`);
+    const result = await instance.get(`${url}/ecommerce/campaigns/`);
 
     console.log(result);
     return result.data.response;
