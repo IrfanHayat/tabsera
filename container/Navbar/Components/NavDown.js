@@ -24,6 +24,7 @@ import {
   getProductSearch,
 } from "../../../slice/productSlice";
 import { getCategory } from "../../../slice/categorySlice";
+import { getCampaigns } from "../../../slice/campaignsSlice";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { AppBar, Grid, Stack, Typography } from "@mui/material";
 import SignInModal from "../../Login/SignIn";
@@ -74,6 +75,7 @@ export default function NavDown(props) {
   const category = useSelector((state) => state.category.categoryData);
   //const [quantityProduct,setQunatityProduct]=useState()
   const { cartTotalQuantity } = useSelector((state) => state.basket.cart);
+  const { campaignsData } = useSelector((state) => state.campaigns);
   const { searchHintData, searchDetail } = useSelector(
     (state) => state.product
   );
@@ -88,9 +90,12 @@ export default function NavDown(props) {
   const [categoriesData, setCategoriesData] = useState([]);
   const [camapaigns, setCamapaigns] = React.useState(false);
 
+  console.log(campaignsData)
+
   useEffect(() => {
     //dispatch(getTotalCartQuantity());
     dispatch(getCategory());
+    dispatch(getCampaigns())
     // setQunatityProduct(result.payload)
   }, []);
 
@@ -162,6 +167,35 @@ export default function NavDown(props) {
     </List>
   );
 
+
+
+  const campaigns = (
+    <List>
+      {campaignsData &&
+        campaignsData?.map((text, index) => (
+          <>
+            <MenuItem key={text.campaignId} disablePadding sx={{ m: 1 }}>
+              <ListItemIcon>
+                <Image
+                  src={text.imageURL}
+                  alt={text.campaignName}
+                  width={20}
+                  height={20}
+                ></Image>
+                {/* {text.category_image} */}
+              </ListItemIcon>
+              <ListItemText
+                primary={text.campaignName}
+                onClick={(e) => viewCampaing(text.campaignId)}
+              />
+            </MenuItem>
+            <Divider />
+          </>
+        ))}
+    </List>
+  );
+
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -190,7 +224,7 @@ export default function NavDown(props) {
             <Categories
               startIcon={<WidgetsIcon />}
               Title={camapaigns ? "Campaigns" : "Categories"}
-              Data={camapaigns ? "No Campaigns" : categories ? categories : 'No Category Available'}
+              Data={camapaigns ? campaigns : categories ? categories : 'No Category Available'}
             // Data={categories}
             />
           </Box>

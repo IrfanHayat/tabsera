@@ -11,6 +11,10 @@ import PreviewOutlinedIcon from "@mui/icons-material/PreviewOutlined";
 import { Box } from "@mui/system";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
 import makeStyles from "@mui/styles/makeStyles";
+import { useSpring, animated } from "react-spring";
+
+
+
 
 export default function ActionAreaCard({
   product,
@@ -21,6 +25,11 @@ export default function ActionAreaCard({
   categoryView,
   cartView,
 }) {
+  const props = useSpring({
+    opacity: 1,
+    from: { opacity: 0 }
+  });
+  const AnimatedTypography = animated(Typography);
   return (
     // <Box>
 

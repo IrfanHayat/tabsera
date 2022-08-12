@@ -5,9 +5,11 @@ import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 
 export default function CategoryProduct({
+    Item,
     product,
     heading,
     content,
+
     viewProduct,
     addToCartHandler,
     viewCategory,
@@ -19,76 +21,72 @@ export default function CategoryProduct({
     console.log(product);
     return (
         <>
-            <Box
+
+
+
+            {/* <Box
+                component="div"
                 sx={{
                     display: "flex",
-                    justifyContent: "space-between",
-                    // p: 1,
-                    m: 1,
+                    justifyContent: "flex-end",
+                    // display: "inline",
+                    mx: 5,
                     // flexWrap: "wrap",
-                    // bgcolor: "background.paper",
-                    borderRadius: 1,
+                    // mx: 5,
+                    // my: 2,
                 }}
             >
-                <Box
-                    sx={{
-                        mx: 5,
-                        color: (theme) =>
-                            theme.palette.mode === "dark" ? "grey.300" : "grey.800",
-                        borderColor: (theme) =>
-                            theme.palette.mode === "dark" ? "grey.800" : "grey.300",
-                        fontSize: "1.1rem",
-                        fontWeight: "600",
-                    }}
-                >
-                    {heading}
-                </Box>
-
-                <Box
-                    component="div"
-                    sx={{
-                        display: "flex",
-                        justifyContent: "flex-end",
-                        // display: "inline",
-                        mx: 5,
-                        // flexWrap: "wrap",
-                        // mx: 5,
-                        // my: 2,
-                    }}
-                >
-                    <Button
-                        // dir="rtl"
-                        variant="text"
-                        href="/all_products"
-                        underline="none"
-                        size="small"
-                        sx={{ fontSize: "0.70rem", fontWeight: "600" }}
-                    // style={{ fontWeight: "bold" }}
+                <Button
                     // dir="rtl"
-                    // endIcon={<DoubleArrowIcon />}
-                    >
-                        View All {">>"}
-                    </Button>
-                </Box>
-            </Box>
+                    variant="text"
+                    href="/all_products"
+                    underline="none"
+                    size="small"
+                    sx={{ fontSize: "0.70rem", fontWeight: "600" }}
+                // style={{ fontWeight: "bold" }}
+                // dir="rtl"
+                // endIcon={<DoubleArrowIcon />}
+                >
+                    View All {">>"}
+                </Button>
+            </Box> */}
 
+            <Box
+                sx={{
+                    pl: 2,
+                    color: (theme) =>
+                        theme.palette.mode === "dark" ? "grey.300" : "grey.800",
+                    borderColor: (theme) =>
+                        theme.palette.mode === "dark" ? "grey.800" : "grey.300",
+                    fontSize: "1rem",
+                    fontWeight: "600",
+                    alignItems: 'center'
+                }}
+            >
+                {heading}
+            </Box>
             <Grid
+
                 container
                 justifyContent="center"
                 alignItems="center"
                 minHeight={500}
             >
+
+
                 {product?.map((item, index) => (
-                    <ActionAreaCard
-                        key={index}
-                        product={item}
-                        viewProduct={viewProduct}
-                        addToCartHandler={addToCartHandler}
-                        viewCategory={viewCategory}
-                        productView={productView}
-                        categoryView={categoryView}
-                        cartView={cartView}
-                    ></ActionAreaCard>
+                    <Item >
+                        <ActionAreaCard
+                            key={index}
+                            product={item}
+                            viewProduct={viewProduct}
+                            addToCartHandler={addToCartHandler}
+                            viewCategory={viewCategory}
+                            productView={productView}
+                            categoryView={categoryView}
+                            cartView={cartView}
+                        ></ActionAreaCard>
+                    </Item>
                 ))}
             </Grid>
         </>

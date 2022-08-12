@@ -27,6 +27,17 @@ import ProductGetByCategory from '../pages/get_all_products_by_category';
 import ProductGetByMerchant from '../pages/get_all_products_by_merchant';
 import _ from "lodash";
 
+import Checkbox from '@mui/material/Checkbox';
+import FormLabel from '@mui/material/FormLabel';
+import FormControl from '@mui/material/FormControl';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormHelperText from '@mui/material/FormHelperText';
+
+import SortFilter from "./Filter/SortFilter";
+
+
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
@@ -49,6 +60,37 @@ export default function PersistentDrawerLeft() {
   // const product = useSelector((state) => state.product.productData);
   // const { productData, loading } = useSelector((state) => state.product);
   let product = data?.response;
+
+  // checkbox 
+  const [state, setState] = React.useState({
+    deals: false,
+    discounts: false,
+    freeShipping: false,
+  });
+
+  const handleChange = (event) => {
+    console.log(event.target.name)
+    console.log(event.target.checked)
+    if (event.target.name == 'deals') {
+      router.push('/deals_and_promotions')
+    }
+    if (event.target.name == 'discounts') {
+      router.push('/discounts')
+    }
+    if (event.target.name == 'freeShipping') {
+      router.push('/is_free_shipping')
+    }
+
+
+
+  };
+
+  const { deals, discounts, freeShipping } = state;
+  const error = [deals, discounts, freeShipping].filter((v) => v).length !== 2;
+  /////////
+
+
+
 
   const sortData = (type) => {
     var f_data;
@@ -200,10 +242,11 @@ export default function PersistentDrawerLeft() {
           <CircularProgress size={140} />
         </Grid>
       ) : (
-        <Grid component="main" maxWidth="xl">
+        <Grid component="main" sx={{ mt: 2 }} maxWidth="xl">
           {featureProduct != "" ? (
             <Grid item xs={12} md={12}>
               <Item>
+
                 <CarouselApp
                   heading="Featured Products"
                   product={featureProduct}
@@ -233,42 +276,66 @@ export default function PersistentDrawerLeft() {
             />
           </Grid> */}
 
-          <Box
-            sx={{
-              display: "flex",
-              // justifyContent: "space-around",
-              p: 1,
-              my: 1,
-              bgcolor: "background.paper",
-              borderRadius: 0,
-            }}
-          >
-            <Box>
-              <Typography sx={{ display: "inline" }}>List By : </Typography>
-              <Button variant="text" onClick={showAllProducts}>Products</Button>
-              <Button variant="text" onClick={showAllMerchantsProduct}>Sellers</Button>
-              <Button variant="text" onClick={showAllCategoriesProduct}>Categories</Button>
-            </Box>
-            <Box sx={{ flexGrow: 0.85 }} />
-            <Box>
-              {/* <Button variant="text">Sort By</Button> */}
-              <NavSelect
-                Title="Sort By"
-                Data={sortingCategories}
-                color="black"
-              />
-            </Box>
-          </Box>
+          <SortFilter data={data.response} setFilterData={setFilterData} showAllProducts={showAllProducts} showAllMerchantsProduct={showAllMerchantsProduct} showAllCategoriesProduct={showAllCategoriesProduct}></SortFilter>
+          <Grid sx={{ display: "flex", flexDirection: 'row' }}>
+            <Box
+              sx={{
 
-          {
-            showProduct ?
-              <ViewAllProducts Item={Item} data={filterData ? filterData : data.response}></ViewAllProducts> : <></>
+                p: 1,
+                my: 1,
+                bgcolor: "background.paper",
+                borderRadius: 0,
+              }}
+            >
+              <Box>
+                <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
 
-          }
-          {showAllCategoryPro ?
-            <ProductGetByCategory data={filterData ? filterData : data.response} Item={Item}></ProductGetByCategory> : <></>}
-          {showAllMerchantPro ?
-            <ProductGetByMerchant data={filterData ? filterData : data.response} Item={Item}></ProductGetByMerchant> : <></>}
+                  <FormGroup>
+                    <FormControlLabel
+                      control={
+                        <Checkbox checked={deals} onChange={handleChange} name="deals" />
+                      }
+                      label="Deals And pormotions"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox checked={discounts} onChange={handleChange} name="discounts" />
+                      }
+                      label="Discounts"
+                    />
+                    <FormControlLabel
+                      control={
+                        <Checkbox checked={freeShipping} onChange={handleChange} name="freeShipping" />
+                      }
+                      label="Free Shipping"
+                    />
+                  </FormGroup>
+
+                </FormControl>
+
+              </Box>
+
+            </Box>
+
+            {
+              showProduct == false && showAllCategoryPro == false && showAllMerchantPro == false ?
+                <ViewAllProducts Item={Item} data={filterData ? filterData : data.response}></ViewAllProducts> : <></>
+
+            }
+
+            {
+              showProduct ?
+                <ViewAllProducts Item={Item} data={filterData ? filterData : data.response}></ViewAllProducts> : <></>
+
+            }
+            <Grid sx={{ display: 'flex', flexDirection: "column" }}>
+              {showAllCategoryPro ?
+                <ProductGetByCategory data={filterData ? filterData : data.response} Item={Item}></ProductGetByCategory> : <></>}
+
+              {showAllMerchantPro ?
+                <ProductGetByMerchant data={filterData ? filterData : data.response} Item={Item}></ProductGetByMerchant> : <></>}
+            </Grid>
+          </Grid>
         </Grid>
       )}
     </Grid>

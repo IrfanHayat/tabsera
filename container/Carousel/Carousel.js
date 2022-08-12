@@ -37,9 +37,9 @@ export default function CarouselApp({
       style={{ width: "100%" }}
       sx={{
         // bgcolor: "#f6f9fc",
-        // my: 1,
-        p: 1,
-        height: "400px",
+        mt: 2,
+        // p: 2,
+        height: "500px",
       }}
     >
       <Box
@@ -86,9 +86,9 @@ export default function CarouselApp({
             underline="none"
             size="small"
             sx={{ fontSize: "0.70rem", fontWeight: "600" }}
-            // style={{ fontWeight: "bold" }}
-            // dir="rtl"
-            // endIcon={<DoubleArrowIcon />}
+          // style={{ fontWeight: "bold" }}
+          // dir="rtl"
+          // endIcon={<DoubleArrowIcon />}
           >
             View All {">>"}
           </Button>
@@ -103,11 +103,11 @@ export default function CarouselApp({
         showEmptySlots={true}
         itemsToScroll={1}
         focusOnSelect={true}
-        // enableSwipe={true}
-        // enableMouseSwipe={true}
-        // enableAutoPlay={true}
-        // autoPlaySpeed={2000}
-        // itemsToShow={2}
+      // enableSwipe={true}
+      // enableMouseSwipe={true}
+      // enableAutoPlay={true}
+      // autoPlaySpeed={2000}
+      // itemsToShow={2}
       >
         {product?.map((item, index) => (
           <ActionAreaCard

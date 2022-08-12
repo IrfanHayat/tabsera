@@ -81,6 +81,7 @@ import { useRouter, withRouter } from "next/router";
 import ReactLoading from "react-loading";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
+import Fade from '@mui/material/Fade';
 
 const style = {
   height: 30,
@@ -94,10 +95,12 @@ const Index = ({ Item, data }) => {
   //   items: Array.from({ length: 20 }),
   //   hasMore: true,
   // };
-  console.log(data)
+
 
   const { productData, loading } = useSelector((state) => state.product);
   let product = productData;
+
+
   let newProduct = product.slice([0], [5]).map((item, i) => {
     return item;
   });
@@ -174,19 +177,8 @@ const Index = ({ Item, data }) => {
         alignItems="center"
         minHeight={500}
       >
-        {loading ? (
-          // <Box sx={{ display: "flex" }}>
-          // <ReactLoading
-          //   type="spokes"
-          //   color="blue"
-          //   height={70}
-          //   width={70}
-          //   // timeout={1000}
-          // />
 
-          <CircularProgress size={140} />
-        ) : (
-          // </Box>
+        {
           product && data.length < 1 ? product.map((item, index) => (
             <Item>
               <ActionAreaCard
@@ -200,18 +192,18 @@ const Index = ({ Item, data }) => {
             </Item>
           )) :
             data.map((item, index) => (
-              <Item>
-                <ActionAreaCard
-                  product={item}
-                  viewProduct={viewProduct}
-                  addToCartHandler={addToCartHandler}
-                  key={index}
-                >
-                  {/* {item?.productName}> */}
-                </ActionAreaCard>
-              </Item>
+
+              <ActionAreaCard
+                product={item}
+                viewProduct={viewProduct}
+                addToCartHandler={addToCartHandler}
+                key={index}
+              >
+                {/* {item?.productName}> */}
+              </ActionAreaCard>
+
             ))
-        )}
+        }
       </Grid>
       {/* </InfiniteScroll> */}
     </>

@@ -85,15 +85,16 @@ function Index({ data, Item }) {
             {groupProduct ?
                 Object.keys(groupProduct).map((key, index) => (
                     <Grid item xs={12} md={12} key={index}>
-                        <Item>
-                            <CategoryProduct
-                                heading={key}
-                                product={groupProduct[key]}
-                                viewProduct={viewProduct}
-                                addToCartHandler={addToCartHandler}
-                                viewCategory={viewCategory}
-                            />
-                        </Item>
+
+                        <CategoryProduct
+                            Item={Item}
+                            heading={key}
+                            product={groupProduct[key]}
+                            viewProduct={viewProduct}
+                            addToCartHandler={addToCartHandler}
+                            viewCategory={viewCategory}
+                        />
+
                     </Grid>
                 )) : <></>}
         </>
