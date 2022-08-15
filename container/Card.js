@@ -61,6 +61,7 @@ export default function ActionAreaCard({
       {product?.productImage && (
         <>
           <Image
+            data-aos="fade-up"
             // className={cx(styles.media, mediaStyles.root)}
             src={product?.productImage}
             onClick={(e) => viewProduct(product)}

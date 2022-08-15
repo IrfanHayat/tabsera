@@ -248,7 +248,7 @@ export default function PersistentDrawerLeft() {
       ) : (
         <Grid component="main" sx={{ mt: 2 }} maxWidth="xl">
           {featureProduct != "" ? (
-            <Grid item xs={12} md={12}>
+            <Grid data-aos="fade-up" item xs={12} md={12}>
               <Item>
 
                 <CarouselApp
