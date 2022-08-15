@@ -86,6 +86,9 @@ function SortFilter({ data, setFilterData, showAllProducts, showAllMerchantsProd
         bgcolor: "background.paper",
         borderRadius: 0,
       }}
+      data-aos="fade-down"
+
+
     >
       <Box>
         <Typography sx={{ display: "inline" }}>List By : </Typography>

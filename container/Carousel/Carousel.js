@@ -67,7 +67,7 @@ export default function CarouselApp({
           {heading}
         </Box>
 
-        <Box
+        {/* <Box
           component="div"
           sx={{
             display: "flex",
@@ -92,7 +92,7 @@ export default function CarouselApp({
           >
             View All {">>"}
           </Button>
-        </Box>
+        </Box> */}
       </Box>
 
       <Carousel
@@ -103,11 +103,11 @@ export default function CarouselApp({
         showEmptySlots={true}
         itemsToScroll={1}
         focusOnSelect={true}
-      // enableSwipe={true}
-      // enableMouseSwipe={true}
-      // enableAutoPlay={true}
-      // autoPlaySpeed={2000}
-      // itemsToShow={2}
+        // enableSwipe={true}
+        // enableMouseSwipe={true}
+        // enableAutoPlay={true}
+        // autoPlaySpeed={2000}
+        itemsToShow={2}
       >
         {product?.map((item, index) => (
           <ActionAreaCard

@@ -38,6 +38,7 @@ import Link from "@mui/material/Link";
 import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import Cookies from "js-cookie";
+
 // import { logOutCustomer } from "../../slice/authSlice";
 const NavLink = styled("a")(() => ({
   wrap: "noWrap",
@@ -272,7 +273,7 @@ export default function NavBar() {
   );
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box data-aos="fade-down" sx={{ flexGrow: 1 }}>
       {/* {router.pathname === "/" ? */}
 
       <CssBaseline />
@@ -320,6 +321,7 @@ export default function NavBar() {
                 onClick={() => router.push("/")}
               >
                 Home
+
               </NavLink>
               {/* <NavLink
                 sx={{ color: "white", ml: 3 }}

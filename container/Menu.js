@@ -35,7 +35,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import FormHelperText from '@mui/material/FormHelperText';
 
 import SortFilter from "./Filter/SortFilter";
-
+import { motion } from 'framer-motion'
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -71,15 +71,19 @@ export default function PersistentDrawerLeft() {
   const handleChange = (event) => {
     console.log(event.target.name)
     console.log(event.target.checked)
-    if (event.target.name == 'deals') {
-      router.push('/deals_and_promotions')
-    }
-    if (event.target.name == 'discounts') {
-      router.push('/discounts')
-    }
-    if (event.target.name == 'freeShipping') {
-      router.push('/is_free_shipping')
-    }
+    setState({
+      ...state,
+      [event.target.name]: event.target.checked,
+    });
+    // if (event.target.name == 'deals') {
+    //   router.push('/deals_and_promotions')
+    // }
+    // if (event.target.name == 'discounts') {
+    //   router.push('/discounts')
+    // }
+    // if (event.target.name == 'freeShipping') {
+    //   router.push('/is_free_shipping')
+    // }
 
 
 
@@ -276,8 +280,9 @@ export default function PersistentDrawerLeft() {
             />
           </Grid> */}
 
-          <SortFilter data={data.response} setFilterData={setFilterData} showAllProducts={showAllProducts} showAllMerchantsProduct={showAllMerchantsProduct} showAllCategoriesProduct={showAllCategoriesProduct}></SortFilter>
-          <Grid sx={{ display: "flex", flexDirection: 'row' }}>
+          <SortFilter data={data?.response} setFilterData={setFilterData} showAllProducts={showAllProducts} showAllMerchantsProduct={showAllMerchantsProduct} showAllCategoriesProduct={showAllCategoriesProduct}></SortFilter>
+
+          <Grid data-aos="fade-up" sx={{ display: "flex" }}>
             <Box
               sx={{
 
@@ -288,27 +293,46 @@ export default function PersistentDrawerLeft() {
               }}
             >
               <Box>
+
                 <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
 
                   <FormGroup>
-                    <FormControlLabel
-                      control={
-                        <Checkbox checked={deals} onChange={handleChange} name="deals" />
-                      }
-                      label="Deals And pormotions"
-                    />
-                    <FormControlLabel
-                      control={
-                        <Checkbox checked={discounts} onChange={handleChange} name="discounts" />
-                      }
-                      label="Discounts"
-                    />
-                    <FormControlLabel
-                      control={
-                        <Checkbox checked={freeShipping} onChange={handleChange} name="freeShipping" />
-                      }
-                      label="Free Shipping"
-                    />
+                    <motion.div
+                      className="animatable"
+
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      <FormControlLabel
+                        control={
+                          <Checkbox checked={deals} onChange={handleChange} name="deals" />
+                        }
+                        label="Deals And pormotions"
+                      />
+                    </motion.div>
+                    <motion.div
+                      className="animatable"
+
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      <FormControlLabel
+                        control={
+                          <Checkbox checked={discounts} onChange={handleChange} name="discounts" />
+                        }
+                        label="Discounts"
+                      />
+                    </motion.div>
+                    <motion.div
+                      className="animatable"
+
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      <FormControlLabel
+                        control={
+                          <Checkbox checked={freeShipping} onChange={handleChange} name="freeShipping" />
+                        }
+                        label="Free Shipping"
+                      />
+                    </motion.div>
                   </FormGroup>
 
                 </FormControl>
@@ -319,25 +343,29 @@ export default function PersistentDrawerLeft() {
 
             {
               showProduct == false && showAllCategoryPro == false && showAllMerchantPro == false ?
-                <ViewAllProducts Item={Item} data={filterData ? filterData : data.response}></ViewAllProducts> : <></>
+                <ViewAllProducts Item={Item} data={filterData ? filterData : data?.response}></ViewAllProducts> : <></>
 
             }
 
             {
               showProduct ?
-                <ViewAllProducts Item={Item} data={filterData ? filterData : data.response}></ViewAllProducts> : <></>
+                <ViewAllProducts Item={Item} data={filterData ? filterData : data?.response}></ViewAllProducts> : <></>
 
             }
+
             <Grid sx={{ display: 'flex', flexDirection: "column" }}>
               {showAllCategoryPro ?
-                <ProductGetByCategory data={filterData ? filterData : data.response} Item={Item}></ProductGetByCategory> : <></>}
+                <ProductGetByCategory data={filterData ? filterData : data?.response} Item={Item}></ProductGetByCategory> : <></>}
 
               {showAllMerchantPro ?
-                <ProductGetByMerchant data={filterData ? filterData : data.response} Item={Item}></ProductGetByMerchant> : <></>}
+                <ProductGetByMerchant data={filterData ? filterData : data?.response} Item={Item}></ProductGetByMerchant> : <></>}
+
             </Grid>
           </Grid>
+
         </Grid>
-      )}
-    </Grid>
+      )
+      }
+    </Grid >
   );
 }

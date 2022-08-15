@@ -1,6 +1,6 @@
 import { Provider } from "react-redux";
 import { store } from "../app/store";
-
+import { useEffect } from "react";
 import "../styles/globals.css";
 import { SessionProvider } from "next-auth/react";
 import { jssPreset, StylesProvider } from "@mui/styles";
@@ -15,11 +15,20 @@ import "../locales/i18n";
 import rtl from "jss-rtl";
 import { create } from "jss";
 import { Container } from "@mui/material";
+import AOS from "aos";
+import "aos/dist/aos.css";
 import { RouteGuard } from "../RouterGuard";
 
 const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 
 const MyApp = ({ Component, pageProps }) => {
+  useEffect(() => {
+    AOS.init({
+      easing: "ease-out-cubic",
+      // once: true,
+      offset: 50,
+    });
+  }, []);
   return (
     //  <SessionProvider session={pageProps.session}>
 
