@@ -36,6 +36,7 @@ import FormHelperText from '@mui/material/FormHelperText';
 
 import SortFilter from "./Filter/SortFilter";
 import { motion } from 'framer-motion'
+import DealsAndPromotions from "../pages/deals_and_promotions";
 
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -68,16 +69,27 @@ export default function PersistentDrawerLeft() {
     freeShipping: false,
   });
 
-  const handleChange = (event) => {
+  //deals and promotions
+  let [dealsData, setDealsData] = useState()
+  let [showDeals, setShowDeals] = useState(false)
+
+
+
+  const handleChange = async (event) => {
     console.log(event.target.name)
     console.log(event.target.checked)
     setState({
       ...state,
       [event.target.name]: event.target.checked,
     });
-    // if (event.target.name == 'deals') {
-    //   router.push('/deals_and_promotions')
-    // }
+    if (event.target.name == 'deals') {
+      let deals = await dispatch(getDeals());
+
+      setDealsData(deals.payload)
+      setShowProduct(false)
+      setShowDeals(true)
+
+    }
     // if (event.target.name == 'discounts') {
     //   router.push('/discounts')
     // }
@@ -96,71 +108,7 @@ export default function PersistentDrawerLeft() {
 
 
 
-  const sortData = (type) => {
-    var f_data;
-    switch (type) {
-      case 'price_asc': {
-        f_data = data.response.slice().sort(function (a, b) {
-          return parseFloat(b.productCost) - parseFloat(a.productCost);
-        });
-        console.log(f_data)
-        setFilterData(f_data)
-      }
 
-        break;
-      case 'price_desc':
-        f_data = data.response.slice().sort(function (a, b) {
-          return parseFloat(a.productCost) - parseFloat(b.productCost);
-        });
-        console.log(f_data)
-        setFilterData(f_data)
-      case 'rating_asc':
-        f_data = data.response.slice().sort(function (a, b) {
-          return parseFloat(b.averageRating) - parseFloat(a.averageRating);
-        });
-        console.log(f_data)
-        setFilterData(f_data)
-        break;
-      case 'rating_desc':
-        f_data = data.response.slice().sort(function (a, b) {
-          return parseFloat(a.averageRating) - parseFloat(b.averageRating);
-        });
-        setFilterData(f_data)
-        break;
-      // case 'order_asc':
-      //   text = "Today is Sunday";
-      //   break;
-      // case 'order_desc':
-      //   text = "Today is Sunday";
-      //   break;
-      default:
-        "Looking forward to the Weekend";
-    }
-  }
-
-  const sortingCategories = (
-
-    <div>
-      <MenuItem>
-        <ListItemText onClick={() => sortData('price_asc')}>Price: High-To-Low </ListItemText>
-      </MenuItem>
-      <MenuItem>
-        <ListItemText onClick={() => sortData('price_desc')}>Price: Low-To-High </ListItemText>
-      </MenuItem>
-      <MenuItem>
-        <ListItemText onClick={() => sortData('rating_asc')}>Rating: High-To-Low</ListItemText>
-      </MenuItem>
-      <MenuItem>
-        <ListItemText onClick={() => sortData('rating_desc')}>Rating: Low-To-High</ListItemText>
-      </MenuItem>
-      <MenuItem>
-        <ListItemText onClick={() => sortData('order_asc')}>Orders: High-To-Low</ListItemText>
-      </MenuItem>
-      <MenuItem>
-        <ListItemText onClick={() => sortData('order_desc')}>Orders: Low-To-High</ListItemText>
-      </MenuItem>
-    </div>
-  );
 
   const featureProduct = useSelector(
     (state) => state.product.featureProductData
@@ -210,6 +158,7 @@ export default function PersistentDrawerLeft() {
     setShowProduct(true)
     setShowAllCategoryPro(false)
     setShowAllMerchantPro(false)
+    setShowDeals(false)
   }
 
 
@@ -342,7 +291,7 @@ export default function PersistentDrawerLeft() {
             </Box>
 
             {
-              showProduct == false && showAllCategoryPro == false && showAllMerchantPro == false ?
+              showProduct == false && showAllCategoryPro == false && showAllMerchantPro == false && showDeals == false ?
                 <ViewAllProducts Item={Item} data={filterData ? filterData : data?.response}></ViewAllProducts> : <></>
 
             }
@@ -350,6 +299,11 @@ export default function PersistentDrawerLeft() {
             {
               showProduct ?
                 <ViewAllProducts Item={Item} data={filterData ? filterData : data?.response}></ViewAllProducts> : <></>
+
+            }
+            {
+              showDeals ?
+                <DealsAndPromotions data={filterData ? filterData : dealsData}></DealsAndPromotions> : <></>
 
             }
 
