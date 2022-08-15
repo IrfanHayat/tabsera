@@ -31,15 +31,15 @@ export default function CarouselApp({
   console.log(product);
   return (
     <Box
-      container
+      // container
       // spacing={1}
 
       style={{ width: "100%" }}
       sx={{
-        // bgcolor: "#f6f9fc",
+        bgcolor: "background.paper",
         mt: 2,
         // p: 2,
-        height: "500px",
+        // height: "500px",
       }}
     >
       <Box
@@ -67,7 +67,7 @@ export default function CarouselApp({
           {heading}
         </Box>
 
-        {/* <Box
+        <Box
           component="div"
           sx={{
             display: "flex",
@@ -86,13 +86,13 @@ export default function CarouselApp({
             underline="none"
             size="small"
             sx={{ fontSize: "0.70rem", fontWeight: "600" }}
-          // style={{ fontWeight: "bold" }}
-          // dir="rtl"
-          // endIcon={<DoubleArrowIcon />}
+            // style={{ fontWeight: "bold" }}
+            // dir="rtl"
+            // endIcon={<DoubleArrowIcon />}
           >
             View All {">>"}
           </Button>
-        </Box> */}
+        </Box>
       </Box>
 
       <Carousel
@@ -107,7 +107,7 @@ export default function CarouselApp({
         // enableMouseSwipe={true}
         // enableAutoPlay={true}
         // autoPlaySpeed={2000}
-        itemsToShow={2}
+        // itemsToShow={2}
       >
         {product?.map((item, index) => (
           <ActionAreaCard

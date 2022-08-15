@@ -22,46 +22,46 @@ import Button from "@mui/material/Button";
 import NavSelect from "./Navbar/Components/NavSelect";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemText from "@mui/material/ListItemText";
-import ViewAllProducts from '../pages/all_products'
-import ProductGetByCategory from '../pages/get_all_products_by_category';
-import ProductGetByMerchant from '../pages/get_all_products_by_merchant';
+import ViewAllProducts from "../pages/all_products";
+import ProductGetByCategory from "../pages/get_all_products_by_category";
+import ProductGetByMerchant from "../pages/get_all_products_by_merchant";
 import _ from "lodash";
 
-import Checkbox from '@mui/material/Checkbox';
-import FormLabel from '@mui/material/FormLabel';
-import FormControl from '@mui/material/FormControl';
-import FormGroup from '@mui/material/FormGroup';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormHelperText from '@mui/material/FormHelperText';
+import Checkbox from "@mui/material/Checkbox";
+import FormLabel from "@mui/material/FormLabel";
+import FormControl from "@mui/material/FormControl";
+import FormGroup from "@mui/material/FormGroup";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormHelperText from "@mui/material/FormHelperText";
 
 import SortFilter from "./Filter/SortFilter";
-import { motion } from 'framer-motion'
-
+import { motion } from "framer-motion";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
-  ...theme.typography.body2,
+  ...theme.typography.body,
   padding: theme.spacing(1),
-  color: theme.palette.text.primary,
+  margin: theme.spacing(0.5),
+  // color: theme.palette.text.primary,
 }));
 
 export default function PersistentDrawerLeft() {
   const { data, isLoading, isFetching, isError } = useGetAllProductsQuery();
 
   // show all products
-  const [showProduct, setShowProduct] = useState(false)
+  const [showProduct, setShowProduct] = useState(false);
   // show all categories
-  const [showAllCategoryPro, setShowAllCategoryPro] = useState(false)
-  const [filterData, setFilterData] = useState()
+  const [showAllCategoryPro, setShowAllCategoryPro] = useState(false);
+  const [filterData, setFilterData] = useState();
 
   // show all merchants
-  const [showAllMerchantPro, setShowAllMerchantPro] = useState(false)
+  const [showAllMerchantPro, setShowAllMerchantPro] = useState(false);
 
   // const product = useSelector((state) => state.product.productData);
   // const { productData, loading } = useSelector((state) => state.product);
   let product = data?.response;
 
-  // checkbox 
+  // checkbox
   const [state, setState] = React.useState({
     deals: false,
     discounts: false,
@@ -69,8 +69,8 @@ export default function PersistentDrawerLeft() {
   });
 
   const handleChange = (event) => {
-    console.log(event.target.name)
-    console.log(event.target.checked)
+    console.log(event.target.name);
+    console.log(event.target.checked);
     setState({
       ...state,
       [event.target.name]: event.target.checked,
@@ -84,48 +84,43 @@ export default function PersistentDrawerLeft() {
     // if (event.target.name == 'freeShipping') {
     //   router.push('/is_free_shipping')
     // }
-
-
-
   };
 
   const { deals, discounts, freeShipping } = state;
   const error = [deals, discounts, freeShipping].filter((v) => v).length !== 2;
   /////////
 
-
-
-
   const sortData = (type) => {
     var f_data;
     switch (type) {
-      case 'price_asc': {
-        f_data = data.response.slice().sort(function (a, b) {
-          return parseFloat(b.productCost) - parseFloat(a.productCost);
-        });
-        console.log(f_data)
-        setFilterData(f_data)
-      }
+      case "price_asc":
+        {
+          f_data = data.response.slice().sort(function (a, b) {
+            return parseFloat(b.productCost) - parseFloat(a.productCost);
+          });
+          console.log(f_data);
+          setFilterData(f_data);
+        }
 
         break;
-      case 'price_desc':
+      case "price_desc":
         f_data = data.response.slice().sort(function (a, b) {
           return parseFloat(a.productCost) - parseFloat(b.productCost);
         });
-        console.log(f_data)
-        setFilterData(f_data)
-      case 'rating_asc':
+        console.log(f_data);
+        setFilterData(f_data);
+      case "rating_asc":
         f_data = data.response.slice().sort(function (a, b) {
           return parseFloat(b.averageRating) - parseFloat(a.averageRating);
         });
-        console.log(f_data)
-        setFilterData(f_data)
+        console.log(f_data);
+        setFilterData(f_data);
         break;
-      case 'rating_desc':
+      case "rating_desc":
         f_data = data.response.slice().sort(function (a, b) {
           return parseFloat(a.averageRating) - parseFloat(b.averageRating);
         });
-        setFilterData(f_data)
+        setFilterData(f_data);
         break;
       // case 'order_asc':
       //   text = "Today is Sunday";
@@ -136,28 +131,39 @@ export default function PersistentDrawerLeft() {
       default:
         "Looking forward to the Weekend";
     }
-  }
+  };
 
   const sortingCategories = (
-
     <div>
       <MenuItem>
-        <ListItemText onClick={() => sortData('price_asc')}>Price: High-To-Low </ListItemText>
+        <ListItemText onClick={() => sortData("price_asc")}>
+          Price: High-To-Low{" "}
+        </ListItemText>
       </MenuItem>
       <MenuItem>
-        <ListItemText onClick={() => sortData('price_desc')}>Price: Low-To-High </ListItemText>
+        <ListItemText onClick={() => sortData("price_desc")}>
+          Price: Low-To-High{" "}
+        </ListItemText>
       </MenuItem>
       <MenuItem>
-        <ListItemText onClick={() => sortData('rating_asc')}>Rating: High-To-Low</ListItemText>
+        <ListItemText onClick={() => sortData("rating_asc")}>
+          Rating: High-To-Low
+        </ListItemText>
       </MenuItem>
       <MenuItem>
-        <ListItemText onClick={() => sortData('rating_desc')}>Rating: Low-To-High</ListItemText>
+        <ListItemText onClick={() => sortData("rating_desc")}>
+          Rating: Low-To-High
+        </ListItemText>
       </MenuItem>
       <MenuItem>
-        <ListItemText onClick={() => sortData('order_asc')}>Orders: High-To-Low</ListItemText>
+        <ListItemText onClick={() => sortData("order_asc")}>
+          Orders: High-To-Low
+        </ListItemText>
       </MenuItem>
       <MenuItem>
-        <ListItemText onClick={() => sortData('order_desc')}>Orders: Low-To-High</ListItemText>
+        <ListItemText onClick={() => sortData("order_desc")}>
+          Orders: Low-To-High
+        </ListItemText>
       </MenuItem>
     </div>
   );
@@ -205,26 +211,24 @@ export default function PersistentDrawerLeft() {
     dispatch(getDeals());
   }, []);
 
-
   const showAllProducts = () => {
-    setShowProduct(true)
-    setShowAllCategoryPro(false)
-    setShowAllMerchantPro(false)
-  }
-
+    setShowProduct(true);
+    setShowAllCategoryPro(false);
+    setShowAllMerchantPro(false);
+  };
 
   const showAllCategoriesProduct = () => {
-    console.log("ccc")
-    setShowAllCategoryPro(true)
-    setShowProduct(false)
-    setShowAllMerchantPro(false)
-  }
+    console.log("ccc");
+    setShowAllCategoryPro(true);
+    setShowProduct(false);
+    setShowAllMerchantPro(false);
+  };
   const showAllMerchantsProduct = () => {
-    console.log("ccc")
-    setShowAllMerchantPro(true)
-    setShowProduct(false)
-    setShowAllCategoryPro(false)
-  }
+    console.log("ccc");
+    setShowAllMerchantPro(true);
+    setShowProduct(false);
+    setShowAllCategoryPro(false);
+  };
   // ----------------------------------------------------------------------------------
 
   // React.useEffect(() => {
@@ -246,11 +250,38 @@ export default function PersistentDrawerLeft() {
           <CircularProgress size={140} />
         </Grid>
       ) : (
-        <Grid component="main" sx={{ mt: 2 }} maxWidth="xl">
-          {featureProduct != "" ? (
-            <Grid data-aos="fade-up" item xs={12} md={12}>
-              <Item>
+        <Grid component="main" maxWidth="xl">
+          <Grid
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              // p: 1,
+              // m: 1,
+              // bgcolor: "background.paper",
+              // borderRadius: 1,
+            }}
+            // data-aos="fade-up"
+          >
+            <Item
+              sx={{
+                width: {
+                  md: "20%",
+                  //  sm: "50%", xs: "50%"
+                },
+              }}
+            >
+              Categories
+            </Item>
 
+            {featureProduct != "" ? (
+              <Item
+                sx={{
+                  width: {
+                    md: "80%",
+                    //  sm: "50%", xs: "50%"
+                  },
+                }}
+              >
                 <CarouselApp
                   heading="Featured Products"
                   product={featureProduct}
@@ -258,114 +289,135 @@ export default function PersistentDrawerLeft() {
                   addToCartHandler={addToCartHandler}
                 />
               </Item>
-            </Grid>
-          ) : (
-            ""
-          )}
-          {/* <NewCarousel
-            product={
-              product &&
-              product.slice([6], [12]).map((item, i) => {
-                return item;
-              })
-            }
-          /> */}
+            ) : (
+              ""
+            )}
+          </Grid>
+          <SortFilter
+            data={data?.response}
+            setFilterData={setFilterData}
+            showAllProducts={showAllProducts}
+            showAllMerchantsProduct={showAllMerchantsProduct}
+            showAllCategoriesProduct={showAllCategoriesProduct}
+          ></SortFilter>
 
-          {/* <Grid item xs={12} md={12}>
-            <MenuCard
-              heading="Deals & Promotions"
-              dealsData={dealsData}
-              discountsData={discountsData}
-              freeShippingData={freeShippingData}
-            />
-          </Grid> */}
-
-          <SortFilter data={data?.response} setFilterData={setFilterData} showAllProducts={showAllProducts} showAllMerchantsProduct={showAllMerchantsProduct} showAllCategoriesProduct={showAllCategoriesProduct}></SortFilter>
-
-          <Grid data-aos="fade-up" sx={{ display: "flex" }}>
-            <Box
+          <Grid
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              // p: 1,
+              // m: 1,
+              // bgcolor: "background.paper",
+              // borderRadius: 1,
+            }}
+            // data-aos="fade-up"
+          >
+            <Item
               sx={{
-
-                p: 1,
-                my: 1,
-                bgcolor: "background.paper",
-                borderRadius: 0,
+                width: {
+                  md: "20%",
+                  //  sm: "50%", xs: "50%"
+                },
+                maxHeight: "200px",
               }}
             >
-              <Box>
+              <FormControl
+                sx={{ m: 3 }}
+                component="fieldset"
+                variant="standard"
+              >
+                <FormGroup>
+                  <motion.div className="animatable" whileTap={{ scale: 0.9 }}>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={deals}
+                          onChange={handleChange}
+                          name="deals"
+                        />
+                      }
+                      label="Deals And pormotions"
+                    />
+                  </motion.div>
+                  <motion.div className="animatable" whileTap={{ scale: 0.9 }}>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={discounts}
+                          onChange={handleChange}
+                          name="discounts"
+                        />
+                      }
+                      label="Discounts"
+                    />
+                  </motion.div>
+                  <motion.div className="animatable" whileTap={{ scale: 0.9 }}>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          checked={freeShipping}
+                          onChange={handleChange}
+                          name="freeShipping"
+                        />
+                      }
+                      label="Free Shipping"
+                    />
+                  </motion.div>
+                </FormGroup>
+              </FormControl>
+            </Item>
 
-                <FormControl sx={{ m: 3 }} component="fieldset" variant="standard">
+            <Item
+              sx={{
+                width: {
+                  md: "80%",
+                  //  sm: "50%", xs: "50%"
+                },
+              }}
+            >
+              {showProduct == false &&
+              showAllCategoryPro == false &&
+              showAllMerchantPro == false ? (
+                <ViewAllProducts
+                  Item={Item}
+                  data={filterData ? filterData : data?.response}
+                ></ViewAllProducts>
+              ) : (
+                <></>
+              )}
 
-                  <FormGroup>
-                    <motion.div
-                      className="animatable"
+              {showProduct ? (
+                <ViewAllProducts
+                  Item={Item}
+                  data={filterData ? filterData : data?.response}
+                ></ViewAllProducts>
+              ) : (
+                <></>
+              )}
 
-                      whileTap={{ scale: 0.9 }}
-                    >
-                      <FormControlLabel
-                        control={
-                          <Checkbox checked={deals} onChange={handleChange} name="deals" />
-                        }
-                        label="Deals And pormotions"
-                      />
-                    </motion.div>
-                    <motion.div
-                      className="animatable"
+              {/* <Grid sx={{ display: "flex", flexDirection: "column" }}> */}
+              {showAllCategoryPro ? (
+                <ProductGetByCategory
+                  data={filterData ? filterData : data?.response}
+                  Item={Item}
+                ></ProductGetByCategory>
+              ) : (
+                <></>
+              )}
 
-                      whileTap={{ scale: 0.9 }}
-                    >
-                      <FormControlLabel
-                        control={
-                          <Checkbox checked={discounts} onChange={handleChange} name="discounts" />
-                        }
-                        label="Discounts"
-                      />
-                    </motion.div>
-                    <motion.div
-                      className="animatable"
-
-                      whileTap={{ scale: 0.9 }}
-                    >
-                      <FormControlLabel
-                        control={
-                          <Checkbox checked={freeShipping} onChange={handleChange} name="freeShipping" />
-                        }
-                        label="Free Shipping"
-                      />
-                    </motion.div>
-                  </FormGroup>
-
-                </FormControl>
-
-              </Box>
-
-            </Box>
-
-            {
-              showProduct == false && showAllCategoryPro == false && showAllMerchantPro == false ?
-                <ViewAllProducts Item={Item} data={filterData ? filterData : data?.response}></ViewAllProducts> : <></>
-
-            }
-
-            {
-              showProduct ?
-                <ViewAllProducts Item={Item} data={filterData ? filterData : data?.response}></ViewAllProducts> : <></>
-
-            }
-
-            <Grid sx={{ display: 'flex', flexDirection: "column" }}>
-              {showAllCategoryPro ?
-                <ProductGetByCategory data={filterData ? filterData : data?.response} Item={Item}></ProductGetByCategory> : <></>}
-
-              {showAllMerchantPro ?
-                <ProductGetByMerchant data={filterData ? filterData : data?.response} Item={Item}></ProductGetByMerchant> : <></>}
-
-            </Grid>
+              {showAllMerchantPro ? (
+                <ProductGetByMerchant
+                  data={filterData ? filterData : data?.response}
+                  Item={Item}
+                ></ProductGetByMerchant>
+              ) : (
+                <></>
+              )}
+            </Item>
           </Grid>
-
         </Grid>
-      )
-      }
-    </Grid >
+        // </Grid>
+      )}
+    </Grid>
   );
 }
