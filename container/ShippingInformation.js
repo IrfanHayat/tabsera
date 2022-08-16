@@ -18,6 +18,7 @@ import FormLabel from "@mui/material/FormLabel";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import List from "@mui/material/List";
+import { MenuItem } from "@mui/material";
 import Accordion from "@mui/material/Accordion";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -74,6 +75,58 @@ function ShippingInformation({
     <>
       <Grid container mt={5} sx={{ bgcolor: "background.paper" }}>
         {/* <Grid item md={2}></Grid> */}
+        <Grid
+          md={12}
+          sm={12}
+          display="flex"
+          alignItems="center"
+          // justifyContent="space-between"
+          style={{ minHeight: "10vh" }}
+          // ml={10}
+          // border={1}
+          borderColor="primary.main"
+          item
+          // justifyContent="center"
+          // sx={{ p: 1 }}
+        >
+          <FormLabel style={{ fontWeight: "bold", color: "black" }}>
+            Purchase For :{" "}
+          </FormLabel>
+
+          <FormControl sx={{ m: 1, minWidth: 80 }}>
+            <TextField
+              select
+              // value={age}
+              // onChange={handleChange}
+              defaultValue={10}
+              variant="standard"
+              InputProps={{
+                // startAdornment: (
+                //   <InputAdornment position="start">
+                //     <WidgetsIcon />
+                //   </InputAdornment>
+                // ),
+                disableUnderline: true,
+                "aria-label": "Without label",
+              }}
+            >
+              <MenuItem
+                value={10}
+                // onClick={() => handleChangeCategoryAndCampaigns(1)}
+              >
+                Student 1
+              </MenuItem>
+              <Divider />
+              <MenuItem
+                value={20}
+                // onClick={() => handleChangeCategoryAndCampaigns(2)}
+              >
+                Student 2
+              </MenuItem>
+              {/* <Divider /> */}
+            </TextField>
+          </FormControl>
+        </Grid>
         <Grid
           md={12}
           sm={12}

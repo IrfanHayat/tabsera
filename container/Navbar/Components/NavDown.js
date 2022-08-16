@@ -257,7 +257,7 @@ export default function NavDown(props) {
               select
               // value={age}
               // onChange={handleChange}
-              startIcon={<WidgetsIcon />}
+              // startIcon={<WidgetsIcon />}
               defaultValue={10}
               variant="standard"
               InputProps={{
@@ -295,7 +295,7 @@ export default function NavDown(props) {
               flexDirection: { xs: "column", md: "row" },
             }}
           >
-            <Button
+            {/* <Button
               variant={camapaigns ? "contained" : "outlined"}
               onClick={() => setCamapaigns(true)}
               // disabled={camapaigns ? "disabled" : " "}
@@ -311,7 +311,7 @@ export default function NavDown(props) {
               sx={{ ml: 0.5 }}
             >
               Categories
-            </Button>
+            </Button> */}
           </Box>
           <Box sx={{ flexGrow: 0.5 }} />
 
@@ -327,7 +327,7 @@ export default function NavDown(props) {
               borderRadius: 24,
               border: 0.1,
               // border: "none",
-              borderColor: "grey.500",
+              borderColor: "primary.main",
             }}
           >
             <Autocomplete

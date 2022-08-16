@@ -34,11 +34,11 @@ export default function CarouselApp({
       // container
       // spacing={1}
 
-      style={{ width: "100%" }}
+      // style={{ width: "100%" }}
       sx={{
-        bgcolor: "background.paper",
-        mt: 2,
-        // p: 2,
+        bgcolor: "#F6F9FC",
+        // m: 1,
+        // p: 1,
         // height: "500px",
       }}
     >
@@ -46,6 +46,7 @@ export default function CarouselApp({
         sx={{
           display: "flex",
           justifyContent: "space-between",
+          flexWrap: "wrap",
           // p: 1,
           m: 1,
           // flexWrap: "wrap",
@@ -98,7 +99,7 @@ export default function CarouselApp({
       <Carousel
         breakPoints={breakPoints}
         // disableArrowsOnEnd={false}
-        showArrows={true}
+        // showArrows={false}
         pagination={false}
         showEmptySlots={true}
         itemsToScroll={1}
@@ -106,7 +107,7 @@ export default function CarouselApp({
         // enableSwipe={true}
         // enableMouseSwipe={true}
         // enableAutoPlay={true}
-        // autoPlaySpeed={2000}
+        // autoPlaySpeed={3000}
         // itemsToShow={2}
       >
         {product?.map((item, index) => (

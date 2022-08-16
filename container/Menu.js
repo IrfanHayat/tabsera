@@ -44,9 +44,9 @@ import SortFilter from "./Filter/SortFilter";
 import { motion } from "framer-motion";
 
 const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#F6F9FC",
   ...theme.typography.body,
-  padding: theme.spacing(1),
+  // padding: theme.spacing(1),
   margin: theme.spacing(0.5),
   // color: theme.palette.text.primary,
 }));
@@ -315,7 +315,8 @@ export default function PersistentDrawerLeft() {
               sx={{
                 width: {
                   md: "20%",
-                  //  sm: "50%", xs: "50%"
+                  sm: "40%",
+                  xs: "40%",
                   display: "flex",
                   // direction: "column",
                   // fontWeight: "bold",
@@ -338,7 +339,7 @@ export default function PersistentDrawerLeft() {
                       Categories
                     </Typography>
                     {category?.map((result) => (
-                      <>
+                      <Box sx={{ display: "flex", flexWrap: "wrap" }}>
                         <ListItem>
                           <ListItemIcon>
                             <Image
@@ -348,9 +349,9 @@ export default function PersistentDrawerLeft() {
                             ></Image>
                           </ListItemIcon>
                           <ListItemText>{result.category_name}</ListItemText>
+                          {/* <Divider fullwidth /> */}
                         </ListItem>
-                        <Divider fullwidth />
-                      </>
+                      </Box>
                     ))}
                   </>
                 ) : (
@@ -369,8 +370,8 @@ export default function PersistentDrawerLeft() {
                             ></Image>
                           </ListItemIcon>
                           <ListItemText>{result.campaignName}</ListItemText>
+                          {/* <Divider /> */}
                         </ListItem>
-                        <Divider />
                       </>
                     ))}
                   </>
@@ -382,8 +383,10 @@ export default function PersistentDrawerLeft() {
               <Item
                 sx={{
                   width: {
+                    // m: 1,
                     md: "80%",
-                    //  sm: "50%", xs: "50%"
+                    sm: "60%",
+                    xs: "60%",
                   },
                 }}
               >
@@ -419,10 +422,17 @@ export default function PersistentDrawerLeft() {
           >
             <Item
               sx={{
+                // width: {
+                //   md: "20%",
+                //   sm: "30%",
+                //   xs: "30%",
+                // },
                 width: {
                   md: "20%",
-                  //  sm: "50%", xs: "50%"
+                  sm: "40%",
+                  xs: "40%",
                 },
+                display: "flex",
                 maxHeight: "200px",
               }}
             >
@@ -475,8 +485,10 @@ export default function PersistentDrawerLeft() {
             <Item
               sx={{
                 width: {
+                  // m: 1,
                   md: "80%",
-                  //  sm: "50%", xs: "50%"
+                  sm: "60%",
+                  xs: "60%",
                 },
               }}
             >
