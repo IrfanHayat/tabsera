@@ -22,6 +22,7 @@ import {
 } from "@mui/material";
 import { RouteGuard } from "../RouterGuard";
 function CalculateBill({ productPrice, checkoutHandler }) {
+  console.log(productPrice)
   return (
     <Card item md={12} xs={12} sx={{ mt: 4.5 }}>
       {/* <Card> */}
@@ -31,8 +32,8 @@ function CalculateBill({ productPrice, checkoutHandler }) {
           variant="h6"
           // m={1}
           p={1}
-          // style={{ fontWeight: "bold" }}
-          // align="center"
+        // style={{ fontWeight: "bold" }}
+        // align="center"
         >
           {" "}
           Shopping Cart
@@ -43,7 +44,7 @@ function CalculateBill({ productPrice, checkoutHandler }) {
           // m={1}
           p={1}
           style={{ fontWeight: "bold" }}
-          // align="center"
+        // align="center"
         >
           {" "}
           Order Summary
@@ -70,9 +71,9 @@ function CalculateBill({ productPrice, checkoutHandler }) {
                 variant="h5"
                 // m={1}
                 style={{ fontWeight: "bold" }}
-                // align="center"
+              // align="center"
               >
-                {productPrice && productPrice.reduce((a, c) => a + c.qty, 0)}{" "}
+                {productPrice ? productPrice?.reduce((a, c) => a + c.qty, 0) : <></>}
               </Typography>
             </ListItemText>
           </ListItem>
@@ -87,11 +88,11 @@ function CalculateBill({ productPrice, checkoutHandler }) {
                 // m={1}
                 sx={{ color: "warning.main" }}
                 style={{ fontWeight: "bold" }}
-                // align="center"
+              // align="center"
               >
                 Rs.
-                {productPrice &&
-                  productPrice.reduce((a, c) => a + c.qty * c.price, 0)}
+                {productPrice ?
+                  productPrice.reduce((a, c) => a + c.qty * c.price, 0) : <></>}
               </Typography>
             </ListItemText>
           </ListItem>

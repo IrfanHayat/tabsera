@@ -268,23 +268,7 @@ function Product_detail(props) {
 
       {status?.resultCode === 4000 || buyStatus == true ? (
         <ModalData handleClose={handleClose} open={open}></ModalData>
-        // <Snackbar
-        //   open={openBar}
-        //   autoHideDuration={2000}
-        //   onClose={handleCloseBar}
-        //   anchorOrigin={{
-        //     horizontal: "center",
-        //     vertical: "top",
-        //   }}
-        // >
-        //   <Alert
-        //     onClose={handleCloseBar}
-        //     severity="error"
-        //     sx={{ width: "100%" }}
-        //   >
-        //     Please Login
-        //   </Alert>
-        // </Snackbar>
+
       ) : (
 
         <Snackbar

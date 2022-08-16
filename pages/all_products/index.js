@@ -10,9 +10,11 @@ import _ from "lodash";
 import {
   addToBasket,
   clearBasket,
+  addToCart,
   decreaseBasket,
   getTotals,
   removeFromBasket,
+  getCartItems
 } from "../../slice/basketSlice";
 import { useRouter, withRouter } from "next/router";
 // import AddPagination from "../../container/AddPagination/AddPagination";
@@ -52,7 +54,9 @@ const Index = ({ Item, data }) => {
 
   useEffect(async () => {
     await dispatch(getProduct());
+
   }, []);
+
 
   // React.useEffect(() => {
   //   setItems(product);
@@ -67,7 +71,7 @@ const Index = ({ Item, data }) => {
   };
 
   const addToCartHandler = (product) => {
-    dispatch(addToBasket(product));
+    dispatch(addToCart(product));
     router.push("/cart");
   };
 

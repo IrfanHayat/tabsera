@@ -12,7 +12,7 @@ import { Box } from "@mui/system";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
 import makeStyles from "@mui/styles/makeStyles";
 import { useSpring, animated } from "react-spring";
-
+import { Skeleton } from "@mui/material";
 export default function ActionAreaCard({
   product,
   viewProduct,
@@ -31,11 +31,7 @@ export default function ActionAreaCard({
     // <Box>
 
     <Card
-      onClick={(e) =>
-        product?.productImage
-          ? viewProduct(product)
-          : viewCategory(product.category_id)
-      }
+
       sx={{
         mx: 0.4,
         my: 2,
@@ -54,39 +50,46 @@ export default function ActionAreaCard({
           cursor: "pointer",
         },
       }}
-      // className={cx(styles.root)}
+    // className={cx(styles.root)}
     >
-      {product?.productImage && (
-        <>
+      {Object.keys(product?.productImage).length > 0 ?
+        < Image
+          data-aos="fade-up"
+          // className={cx(styles.media, mediaStyles.root)}
+          src={product?.productImage}
+          onClick={(e) => viewProduct(product)}
+          alt={product.productName}
+          width={245}
+          height={240}
+          loading="eager"
+          priority
+        ></Image>
+
+        //  <Skeleton variant="rectangular" width={210} height={118} />
+
+        :
+        <Skeleton variant="rectangular" width={245} height={240} />
+      }
+      {
+        product?.category_image && (
           <Image
-            data-aos="fade-up"
             // className={cx(styles.media, mediaStyles.root)}
-            src={product?.productImage}
-            onClick={(e) => viewProduct(product)}
+            src={product?.category_image}
+            onClick={(e) => viewCategory(product.category_id)}
             alt="shirt"
             width={245}
-            height={240}
-            loading="eager"
-            priority
-          ></Image>
-        </>
-      )}
-      {product?.category_image && (
-        <Image
-          // className={cx(styles.media, mediaStyles.root)}
-          src={product?.category_image}
-          onClick={(e) => viewCategory(product.category_id)}
-          alt="shirt"
-          width={245}
-          height={200}
+            height={200}
           // loading="eager"
-        ></Image>
-      )}
-      {product?.category_name && (
-        <CardContent>
-          <Typography variant="body">{product?.category_name}</Typography>
-        </CardContent>
-      )}
+          ></Image>
+        )
+      }
+      {
+        product?.category_name && (
+          <CardContent>
+            <Typography variant="body">{product?.category_name}</Typography>
+          </CardContent>
+        )
+      }
       <CardContent>
         {/* <Typography variant="h5">{product?.categoryName}</Typography> */}
         <Typography fontSize="0.9rem" variant="h5" fontWeight={600}>
@@ -160,7 +163,7 @@ export default function ActionAreaCard({
           )}
         </Box>
       </CardContent>
-    </Card>
+    </Card >
     // </Box>
   );
 }

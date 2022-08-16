@@ -46,7 +46,7 @@ import SortFilter from "./Filter/SortFilter";
 import { motion } from 'framer-motion'
 import DealsAndPromotions from "../pages/deals_and_promotions";
 import Discounts from "../pages/discounts";
-
+import FreeShipping from "../pages/is_free_shipping";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -91,6 +91,10 @@ export default function PersistentDrawerLeft() {
   let [discountData, setDiscountData] = useState()
   let [showDiscounts, setShowDiscounts] = useState(false)
 
+  //freeShipping
+  let [freeShippingData, setFreeShippingData] = useState()
+  let [showFreeShipping, setShowFreeShipping] = useState(false)
+
 
 
 
@@ -108,6 +112,7 @@ export default function PersistentDrawerLeft() {
       setShowAllCategoryPro(false)
       setShowAllMerchantPro(false)
       setShowDiscounts(false)
+      setShowFreeShipping(false)
 
     }
     if (event.target.value == 'discounts') {
@@ -115,16 +120,31 @@ export default function PersistentDrawerLeft() {
       console.log(discounts.payload)
       setDiscountData(discounts.payload)
       setShowProduct(false)
-      setShowDiscounts(true)
+      setShowDiscounts(false)
 
       setShowAllCategoryPro(false)
       setShowAllMerchantPro(false)
       setShowDeals(false)
+      setShowFreeShipping(false)
+    }
+    if (event.target.value == 'freeShipping') {
+      let freeShipping = await dispatch(getFreeShipping());
+      console.log(freeShipping.payload)
+      setFreeShippingData(freeShipping.payload)
+      setShowProduct(false)
+      setShowDiscounts(false)
+      setShowFreeShipping(true)
+      setShowAllCategoryPro(false)
+      setShowAllMerchantPro(false)
+      setShowDeals(false)
+      setShowDiscounts(false)
     }
     // if (event.target.name == 'freeShipping') {
     //   router.push('/is_free_shipping')
     // }
   };
+
+
 
 
 
@@ -261,11 +281,17 @@ export default function PersistentDrawerLeft() {
 
   const showAllCategoriesProduct = () => {
     console.log("ccc");
-    setShowAllCategoryPro(true);
-    setShowProduct(false);
-    setShowAllMerchantPro(false);
-    setShowDeals(false)
-    // setShowDiscounts(false)
+    if (showFreeShipping == true) {
+      setShowAllCategoryPro(true);
+      setShowFreeShipping(true)
+    } else {
+      setShowAllCategoryPro(true);
+      setShowProduct(false);
+      setShowAllMerchantPro(false);
+      setShowDeals(false)
+      setShowDiscounts(false)
+    }
+
   };
   const showAllMerchantsProduct = () => {
     console.log("ccc");
@@ -433,8 +459,18 @@ export default function PersistentDrawerLeft() {
                   value={value}
 
                 >
-                  <FormControlLabel value="deals" control={<Radio onChange={handleChange} />} label="Deals And Promotions" />
-                  <FormControlLabel value="discounts" control={<Radio onChange={handleChange} />} label="Discounts" />
+                  <motion.div className="animatable" whileTap={{ scale: 0.9 }}>
+                    <FormControlLabel value="deals" control={<Radio onChange={handleChange} />} label="Deals And Promotions" />
+
+                  </motion.div>
+                  <motion.div className="animatable" whileTap={{ scale: 0.9 }}>
+                    <FormControlLabel value="discounts" control={<Radio onChange={handleChange} />} label="Discounts" />
+
+                  </motion.div>
+                  <motion.div className="animatable" whileTap={{ scale: 0.9 }}>
+                    <FormControlLabel value="freeShipping" control={<Radio onChange={handleChange} />} label="freeShipping" />
+
+                  </motion.div>
                 </RadioGroup>
               </FormControl>
               {/* <FormControl
@@ -493,7 +529,7 @@ export default function PersistentDrawerLeft() {
             >
               {showProduct == false &&
                 showAllCategoryPro == false &&
-                showAllMerchantPro == false && showDeals == false && showDiscounts == false ? (
+                showAllMerchantPro == false && showDeals == false && showDiscounts == false && showFreeShipping == false ? (
                 <ViewAllProducts
                   Item={Item}
                   data={filterData ? filterData : data?.response}
@@ -503,7 +539,7 @@ export default function PersistentDrawerLeft() {
               )}
 
               {showProduct && showDiscounts == false && showAllCategoryPro == false &&
-                showAllMerchantPro == false && showDeals == false ? (
+                showAllMerchantPro == false && showDeals == false && showFreeShipping == false ? (
                 <ViewAllProducts
                   Item={Item}
                   data={filterData ? filterData : data?.response}
@@ -520,14 +556,23 @@ export default function PersistentDrawerLeft() {
 
               {
 
-                showDiscounts ?
+                showDiscounts && showProduct == false &&
+                  showAllMerchantPro == false && showDeals == false && showFreeShipping == false ?
                   <Discounts data={filterData ? filterData : discountData} showProduct={showProduct} showAllCategoryPro={showAllCategoryPro} showAllMerchantPro={showAllMerchantPro} filterData={filterData}></Discounts> : <></>
+
+              }
+
+              {
+
+                showFreeShipping && showProduct == false &&
+                  showAllMerchantPro == false && showDeals == false && showDiscounts == false ?
+                  <FreeShipping data={filterData ? filterData : freeShippingData} showProduct={showProduct} showAllCategoryPro={showAllCategoryPro} showAllMerchantPro={showAllMerchantPro} filterData={filterData}></FreeShipping> : <></>
 
               }
 
               {/* <Grid sx={{ display: "flex", flexDirection: "column" }}> */}
               {showAllCategoryPro && showDiscounts == false &&
-                showAllMerchantPro == false && showDeals == false ? (
+                showAllMerchantPro == false && showDeals == false && showFreeShipping == false ? (
                 <ProductGetByCategory
                   data={filterData ? filterData : data?.response}
                   Item={Item}

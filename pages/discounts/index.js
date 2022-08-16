@@ -55,12 +55,14 @@ function Index({ data, showProduct, showAllCategoryPro, showAllMerchantPro, filt
                                 viewProduct={viewProduct}
                                 discountsData={filterData ? filterData : discountsData}
                             // dealsData={dealsData && dealsData}
-                            /> : <Discounts
+                            /> : <></>}
+
+                        {showProduct ?
+                            <Discounts
                                 viewProduct={viewProduct}
                                 discountsData={filterData ? filterData : data}
                             // dealsData={dealsData && dealsData}
-                            />}
-
+                            /> : <></>}
                         {showAllCategoryPro ?
                             <ProductGetByCategory data={filterData ? filterData : discountsData} Item={Item}></ProductGetByCategory> : <></>}
 

@@ -34,6 +34,7 @@ function Cart() {
   );
   const { cartItems } = useSelector((state) => state.basket.cart);
 
+  console.log(cartItems)
   let [groupProductData, setGroupedProductData] = useState();
   let router = useRouter();
   let dispatch = useDispatch();
@@ -41,6 +42,9 @@ function Cart() {
   useEffect(() => {
     dispatch(getCartItems());
   }, []);
+  useEffect(() => {
+
+  }, [cartItems])
 
   useEffect(() => {
     var groupedCategory = groupArrayOfObjects(cartItems);
