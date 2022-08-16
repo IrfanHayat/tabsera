@@ -11,7 +11,7 @@ import DealAndPromotions from "../../container/DealsAndPromotions/DealsAndPromot
 import { TransitionGroup } from "react-transition-group";
 import { useRouter } from "next/router";
 import ActionAreaCard from "../../container/Card";
-const Index = ({ data }) => {
+const Index = ({ data, showProduct }) => {
   const { dealsData } = useSelector((state) => state.deals);
 
 
@@ -40,21 +40,33 @@ const Index = ({ data }) => {
 
 
       {
-        dealsData ?
+        dealsData && showProduct == false ?
           <DealAndPromotions
 
             dealsData={dealsData && dealsData}
             viewProduct={viewProduct}
           />
 
-          :
+          : <></>
 
+
+      }
+
+      {
+        data && showProduct == true ?
           <DealAndPromotions
 
             dealsData={data && data}
             viewProduct={viewProduct}
           />
+
+          : <></>
+
+
       }
+
+
+
     </Grid>
   );
 };

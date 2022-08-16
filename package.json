@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next -p 3006",
     "build": "next build",
-    "start": "NODE_ENV=production node server.js"
+    "start": "NODE_ENV=production node server.js",
+     "lint": "next lint"
   },
   "dependencies": {
     "@emotion/react": "^11.9.0",

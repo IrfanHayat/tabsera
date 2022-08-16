@@ -6,6 +6,7 @@ import { getCategory } from "../../slice/categorySlice";
 import { addToBasket } from "../../slice/basketSlice";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
+import CarouselApp from '../../container/Carousel/Carousel';
 
 function Index({ data, Item }) {
 
@@ -87,16 +88,22 @@ function Index({ data, Item }) {
         <>
             {groupProduct ?
                 Object.keys(groupProduct).map((key, index) => (
-
-
-                    <CategoryProduct
-                        Item={Item}
+                    <CarouselApp
                         heading={key}
                         product={groupProduct[key]}
                         viewProduct={viewProduct}
                         addToCartHandler={addToCartHandler}
                         viewCategory={viewCategory}
                     />
+
+                    // <CategoryProduct
+                    //     Item={Item}
+                    //     heading={key}
+                    //     product={groupProduct[key]}
+                    //     viewProduct={viewProduct}
+                    //     addToCartHandler={addToCartHandler}
+                    //     viewCategory={viewCategory}
+                    // />
 
 
                 )) : <></>}

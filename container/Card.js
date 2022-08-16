@@ -13,9 +13,6 @@ import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutl
 import makeStyles from "@mui/styles/makeStyles";
 import { useSpring, animated } from "react-spring";
 
-
-
-
 export default function ActionAreaCard({
   product,
   viewProduct,
@@ -27,7 +24,7 @@ export default function ActionAreaCard({
 }) {
   const props = useSpring({
     opacity: 1,
-    from: { opacity: 0 }
+    from: { opacity: 0 },
   });
   const AnimatedTypography = animated(Typography);
   return (
@@ -56,7 +53,7 @@ export default function ActionAreaCard({
           cursor: "pointer",
         },
       }}
-    // className={cx(styles.root)}
+      // className={cx(styles.root)}
     >
       {product?.productImage && (
         <>
@@ -81,7 +78,7 @@ export default function ActionAreaCard({
           alt="shirt"
           width={245}
           height={200}
-        // loading="eager"
+          // loading="eager"
         ></Image>
       )}
       {product?.category_name && (

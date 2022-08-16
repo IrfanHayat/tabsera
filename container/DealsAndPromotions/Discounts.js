@@ -35,6 +35,7 @@ const Discounts = ({ discountsData, viewProduct }) => {
           }}
         >
           <CardMedia
+            data-aos="fade-up"
             component="img"
             height="140"
             image={result?.productImage}

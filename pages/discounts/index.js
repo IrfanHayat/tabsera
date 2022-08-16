@@ -17,34 +17,14 @@ const Item = styled(Paper)(({ theme }) => ({
     color: theme.palette.text.primary,
 }));
 
-function Index() {
+function Index({ data, showProduct, showAllCategoryPro, showAllMerchantPro, filterData }) {
     const { discountsData } = useSelector((state) => state.discounts);
     let dispatch = useDispatch();
     const router = useRouter();
-    const [filterData, setFilterData] = useState()
-    const [showAllMerchantPro, setShowAllMerchantPro] = useState(false)
-    const [showAllCategoryPro, setShowAllCategoryPro] = useState(false)
-    const [showProduct, setShowProduct] = useState(false)
+
+
     //sort 
-    const showAllProducts = () => {
-        setShowProduct(true)
-        setShowAllCategoryPro(false)
-        setShowAllMerchantPro(false)
-    }
 
-
-    const showAllCategoriesProduct = () => {
-        console.log("ccc")
-        setShowAllCategoryPro(true)
-        setShowProduct(false)
-        setShowAllMerchantPro(false)
-    }
-    const showAllMerchantsProduct = () => {
-        console.log("ccc")
-        setShowAllMerchantPro(true)
-        setShowProduct(false)
-        setShowAllCategoryPro(false)
-    }
 
 
     //
@@ -66,16 +46,21 @@ function Index() {
 
     return (
         <>
-            <SortFilter data={discountsData} setFilterData={setFilterData} showAllProducts={showAllProducts} showAllMerchantsProduct={showAllMerchantsProduct} showAllCategoriesProduct={showAllCategoriesProduct}></SortFilter>
+
             <Grid container justifyContent="center">
                 {discountsData.length > 0 ? (
                     <>
-                        {showProduct ?
+                        {discountsData && showProduct == false ?
                             <Discounts
                                 viewProduct={viewProduct}
                                 discountsData={filterData ? filterData : discountsData}
                             // dealsData={dealsData && dealsData}
-                            /> : <></>}
+                            /> : <Discounts
+                                viewProduct={viewProduct}
+                                discountsData={filterData ? filterData : data}
+                            // dealsData={dealsData && dealsData}
+                            />}
+
                         {showAllCategoryPro ?
                             <ProductGetByCategory data={filterData ? filterData : discountsData} Item={Item}></ProductGetByCategory> : <></>}
 
