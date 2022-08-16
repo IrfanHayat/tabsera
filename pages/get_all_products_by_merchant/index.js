@@ -94,6 +94,7 @@ function Index({ data, Item }) {
                         viewProduct={viewProduct}
                         addToCartHandler={addToCartHandler}
                         viewCategory={viewCategory}
+                        key={index}
                     />
 
                     // <CategoryProduct

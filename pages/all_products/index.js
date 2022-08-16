@@ -122,8 +122,9 @@ const Index = ({ Item, data }) => {
 
         {
           product && data?.length < 1 ? product.map((item, index) => (
-            <Item>
+            <Item key={index}>
               <ActionAreaCard
+
                 product={item}
                 viewProduct={viewProduct}
                 addToCartHandler={addToCartHandler}
