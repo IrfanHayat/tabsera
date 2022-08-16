@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
-
+import Image from "next/image";
 import { useSelector, useDispatch } from "react-redux";
 import { getFreeShipping } from "../slice/freeShippingSlice";
 import { getDeals } from "../slice/dealsPromotionsSlice";
@@ -12,11 +12,18 @@ import { useRouter } from "next/router";
 import { addToBasket } from "../slice/basketSlice";
 import { getProduct, getFeatureProduct } from "../slice/productSlice";
 import { getCategory } from "../slice/categorySlice";
+import { getCampaigns } from "../slice/campaignsSlice";
 import NewCarousel from "./Carousel/NewCarousel";
 import CarouselApp from "./Carousel/Carousel";
 import { useGetAllProductsQuery } from "../RTK/productApi";
 import MenuCard from "./DealsAndPromotions/MenuCards";
-import { CircularProgress, Typography } from "@mui/material";
+import RadioGroup from '@mui/material/RadioGroup';
+import {
+  CircularProgress,
+  ListItem,
+  ListItemIcon,
+  Typography,
+} from "@mui/material";
 import { getDiscounts } from "../slice/discountsSlice";
 import Button from "@mui/material/Button";
 import NavSelect from "./Navbar/Components/NavSelect";
@@ -25,7 +32,8 @@ import ListItemText from "@mui/material/ListItemText";
 import ViewAllProducts from "../pages/all_products";
 import ProductGetByCategory from "../pages/get_all_products_by_category";
 import ProductGetByMerchant from "../pages/get_all_products_by_merchant";
-import _ from "lodash";
+import _, { result } from "lodash";
+import Divider from "@mui/material/Divider";
 import Radio from '@mui/material/Radio';
 import Checkbox from "@mui/material/Checkbox";
 import FormLabel from "@mui/material/FormLabel";
@@ -33,7 +41,7 @@ import FormControl from "@mui/material/FormControl";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormHelperText from "@mui/material/FormHelperText";
-import RadioGroup from '@mui/material/RadioGroup';
+import { List } from "@mui/material";
 import SortFilter from "./Filter/SortFilter";
 import { motion } from 'framer-motion'
 import DealsAndPromotions from "../pages/deals_and_promotions";
@@ -62,8 +70,12 @@ export default function PersistentDrawerLeft() {
   // const product = useSelector((state) => state.product.productData);
   // const { productData, loading } = useSelector((state) => state.product);
   let product = data?.response;
+
+  const [compaigns, setCompaigns] = useState();
+  const [category, setCategory] = useState();
+  const [showList, setShowList] = useState(false);
   const [value, setValue] = React.useState();
-  // checkbox 
+  // checkbox
   const [state, setState] = React.useState({
     deals: false,
     discounts: false,
@@ -122,6 +134,40 @@ export default function PersistentDrawerLeft() {
 
 
 
+  const sortingCategories = (
+    <div>
+      <MenuItem>
+        <ListItemText onClick={() => sortData("price_asc")}>
+          Price: High-To-Low{" "}
+        </ListItemText>
+      </MenuItem>
+      <MenuItem>
+        <ListItemText onClick={() => sortData("price_desc")}>
+          Price: Low-To-High{" "}
+        </ListItemText>
+      </MenuItem>
+      <MenuItem>
+        <ListItemText onClick={() => sortData("rating_asc")}>
+          Rating: High-To-Low
+        </ListItemText>
+      </MenuItem>
+      <MenuItem>
+        <ListItemText onClick={() => sortData("rating_desc")}>
+          Rating: Low-To-High
+        </ListItemText>
+      </MenuItem>
+      <MenuItem>
+        <ListItemText onClick={() => sortData("order_asc")}>
+          Orders: High-To-Low
+        </ListItemText>
+      </MenuItem>
+      <MenuItem>
+        <ListItemText onClick={() => sortData("order_desc")}>
+          Orders: Low-To-High
+        </ListItemText>
+      </MenuItem>
+    </div>
+  );
 
   const featureProduct = useSelector(
     (state) => state.product.featureProductData
@@ -158,6 +204,44 @@ export default function PersistentDrawerLeft() {
   //     return rv;
   //   }, {});
   // }
+
+  useEffect(async () => {
+    if (router?.query?.key == 1) {
+      let categoryResult = await dispatch(getCategory());
+      setCategory(categoryResult.payload);
+      setShowList(false);
+    } else {
+      let compaignsResult = await dispatch(getCampaigns());
+      setCompaigns(compaignsResult.payload);
+      setShowList(true);
+    }
+    // let data = dispatch(getCategory());
+    // console.log(data);
+    // dispatch(getCampaigns());
+  }, [router?.query?.key]);
+
+  async function getCompaignsData() {
+    if (router?.query?.key == 1) {
+      let categoryResult = await dispatch(getCategory());
+      setCategory(categoryResult.payload);
+      setShowList(false);
+    } else {
+      let compaignsResult = await dispatch(getCampaigns());
+      setCompaigns(compaignsResult.payload);
+      setShowList(true);
+    }
+
+    // console.log(categoryResult.payload);
+    // {
+    //   router?.query?.key == 1
+    //     ? (setCompaigns(compaignsResult.payload), setShowList(true))
+    //     : // console.log(compaignsResult.payload)
+    //       (setCategory(categoryResult.payload), setShowList(false));
+    //   // console.log(categoryResult.payload);
+    // }
+  }
+
+  // console.log(compaigns);
 
   useEffect(() => {
     dispatch(getFeatureProduct());
@@ -213,6 +297,8 @@ export default function PersistentDrawerLeft() {
         </Grid>
       ) : (
         <Grid component="main" maxWidth="xl">
+          {/* {console.log(compaigns)} */}
+
           <Grid
             sx={{
               display: "flex",
@@ -229,10 +315,66 @@ export default function PersistentDrawerLeft() {
                 width: {
                   md: "20%",
                   //  sm: "50%", xs: "50%"
+                  display: "flex",
+                  // direction: "column",
+                  // fontWeight: "bold",
+                  // alignItems: "center",
+                  // justifyContent: "center",
                 },
               }}
             >
-              Categories
+
+              <List>
+                {/* {category?.length > 0 && showList == false ? (
+                  <Typography>Categories</Typography>
+                ) : (
+                  <Typography>Categories</Typography>
+                )} */}
+
+                {category?.length > 0 && showList == false ? (
+                  <>
+                    <Typography style={{ fontWeight: "bold" }}>
+                      Categories
+                    </Typography>
+                    {category?.map((result) => (
+                      <>
+                        <ListItem>
+                          <ListItemIcon>
+                            <Image
+                              src={result.category_image}
+                              width={20}
+                              height={20}
+                            ></Image>
+                          </ListItemIcon>
+                          <ListItemText>{result.category_name}</ListItemText>
+                        </ListItem>
+                        <Divider fullwidth />
+                      </>
+                    ))}
+                  </>
+                ) : (
+                  <>
+                    <Typography style={{ fontWeight: "bold" }}>
+                      Campaigns
+                    </Typography>
+                    {compaigns?.map((result) => (
+                      <>
+                        <ListItem>
+                          <ListItemIcon>
+                            <Image
+                              src={result.imageURL}
+                              width={20}
+                              height={20}
+                            ></Image>
+                          </ListItemIcon>
+                          <ListItemText>{result.campaignName}</ListItemText>
+                        </ListItem>
+                        <Divider />
+                      </>
+                    ))}
+                  </>
+                )}
+              </List>
             </Item>
 
             {featureProduct != "" ? (

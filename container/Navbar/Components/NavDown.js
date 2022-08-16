@@ -17,7 +17,8 @@ import { useSelector, useDispatch } from "react-redux";
 import { InputAdornment } from "@mui/material";
 import MenuItem from "@mui/material/MenuItem";
 import Cookies from "js-cookie";
-
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
 import {
   getProduct,
   getProductSearchWithHint,
@@ -89,13 +90,18 @@ export default function NavDown(props) {
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const [categoriesData, setCategoriesData] = useState([]);
   const [camapaigns, setCamapaigns] = React.useState(false);
-
-  console.log(campaignsData)
+  const [key, setKey] = useState(1);
+  console.log("campaignsData,", campaignsData);
 
   useEffect(() => {
     //dispatch(getTotalCartQuantity());
     dispatch(getCategory());
-    dispatch(getCampaigns())
+    dispatch(getCampaigns());
+
+    router.push({
+      pathname: "/",
+      query: { key: 1 },
+    });
     // setQunatityProduct(result.payload)
   }, []);
 
@@ -130,6 +136,21 @@ export default function NavDown(props) {
 
   function handleInputChange(event, value) {
     dispatch(getProductSearchWithHint(value));
+  }
+
+  function handleChangeCategoryAndCampaigns(key) {
+    if (key == 1) {
+      router.push({
+        pathname: "/",
+        query: { key: 1 },
+      });
+    }
+    if (key == 2) {
+      router.push({
+        pathname: "/",
+        query: { key: 2 },
+      });
+    }
   }
 
   async function handleInputClick(e) {
@@ -167,8 +188,6 @@ export default function NavDown(props) {
     </List>
   );
 
-
-
   const campaigns = (
     <List>
       {campaignsData &&
@@ -195,7 +214,6 @@ export default function NavDown(props) {
     </List>
   );
 
-
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -220,14 +238,54 @@ export default function NavDown(props) {
         position="sticky"
       >
         <Toolbar>
-          <Box>
+          {/* <Box>
             <Categories
               startIcon={<WidgetsIcon />}
               Title={camapaigns ? "Campaigns" : "Categories"}
-              Data={camapaigns ? campaigns : categories ? categories : 'No Category Available'}
-            // Data={categories}
+              Data={
+                camapaigns
+                  ? campaigns
+                  : categories
+                  ? categories
+                  : "No Category Available"
+              }
+              // Data={categories}
             />
-          </Box>
+          </Box> */}
+          <FormControl sx={{ m: 1, minWidth: 80 }}>
+            <TextField
+              select
+              // value={age}
+              // onChange={handleChange}
+              startIcon={<WidgetsIcon />}
+              defaultValue={10}
+              variant="standard"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <WidgetsIcon />
+                  </InputAdornment>
+                ),
+                disableUnderline: true,
+                "aria-label": "Without label",
+              }}
+            >
+              <MenuItem
+                value={10}
+                onClick={() => handleChangeCategoryAndCampaigns(1)}
+              >
+                Categories
+              </MenuItem>
+              <Divider />
+              <MenuItem
+                value={20}
+                onClick={() => handleChangeCategoryAndCampaigns(2)}
+              >
+                Campaigns
+              </MenuItem>
+              {/* <Divider /> */}
+            </TextField>
+          </FormControl>
           <Box
             sx={{
               display: "flex",
@@ -314,8 +372,8 @@ export default function NavDown(props) {
               onClick={handleClick}
               color="primary"
 
-            // onMouseEnter={handleClick}
-            // onMouseLeave={handleClick}
+              // onMouseEnter={handleClick}
+              // onMouseLeave={handleClick}
             >
               {console.log(localStorage.getItem("login"))}
               {console.log(cartTotalQuantity)}
@@ -324,8 +382,8 @@ export default function NavDown(props) {
                   color="error"
                   badgeContent={
                     cartTotalQuantity != undefined ||
-                      cartTotalQuantity != 0 ||
-                      cartTotalQuantity
+                    cartTotalQuantity != 0 ||
+                    cartTotalQuantity
                       ? cartTotalQuantity
                       : 1
                   }
@@ -354,11 +412,11 @@ export default function NavDown(props) {
                 vertical: "top",
                 horizontal: "center",
               }}
-            //keepMounted={true}
-            // anchorOrigin={{
-            //   vertical: "bottom",
-            //   horizontal: "left"62
-            // }}
+              //keepMounted={true}
+              // anchorOrigin={{
+              //   vertical: "bottom",
+              //   horizontal: "left"62
+              // }}
             >
               {cartTotalQuantity > 0 ? (
                 // <div>

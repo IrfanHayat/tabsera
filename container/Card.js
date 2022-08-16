@@ -42,6 +42,7 @@ export default function ActionAreaCard({
         // marginTop: 1,
         // marginBottom: 1,
         border: 0,
+        bgcolor: "background.paper",
         padding: 0.5,
         maxWidth: 300,
         height: 350,
