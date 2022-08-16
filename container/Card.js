@@ -33,17 +33,21 @@ export default function ActionAreaCard({
     <Card
 
       sx={{
-        mx: 0.4,
-        my: 2,
+        m: 1,
+        // mx: 0.4,
+        // my: 2,
         // marginTop: 1,
         // marginBottom: 1,
-        border: 0,
+        boxShadow: 0,
+        // border: 0,
         bgcolor: "background.paper",
         padding: 0.5,
-        maxWidth: 300,
-        height: 350,
+        width: 200,
+        // maxWidth: 280,
+        height: 300,
         ":hover": {
-          boxShadow: 5, // theme.shadows[20]
+          border: 1,
+          boxShadow: 1, // theme.shadows[20]
           transform: "scale(1.05)",
           // opacity: 0.5,
 

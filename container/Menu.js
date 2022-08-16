@@ -137,7 +137,7 @@ export default function PersistentDrawerLeft() {
       setShowAllCategoryPro(false)
       setShowAllMerchantPro(false)
       setShowDeals(false)
-      setShowDiscounts(false)
+      setShowDiscounts()
     }
     // if (event.target.name == 'freeShipping') {
     //   router.push('/is_free_shipping')
@@ -340,7 +340,8 @@ export default function PersistentDrawerLeft() {
               sx={{
                 width: {
                   md: "20%",
-                  //  sm: "50%", xs: "50%"
+                  sm: "40%",
+                  xs: "40%",
                   display: "flex",
                   // direction: "column",
                   // fontWeight: "bold",
@@ -394,8 +395,8 @@ export default function PersistentDrawerLeft() {
                             ></Image>
                           </ListItemIcon>
                           <ListItemText>{result.campaignName}</ListItemText>
+                          {/* <Divider /> */}
                         </ListItem>
-                        <Divider />
                       </>
                     ))}
                   </>
@@ -407,8 +408,10 @@ export default function PersistentDrawerLeft() {
               <Item
                 sx={{
                   width: {
+                    // m: 1,
                     md: "80%",
-                    //  sm: "50%", xs: "50%"
+                    sm: "60%",
+                    xs: "60%",
                   },
                 }}
               >
@@ -446,8 +449,10 @@ export default function PersistentDrawerLeft() {
               sx={{
                 width: {
                   md: "20%",
-                  //  sm: "50%", xs: "50%"
+                  sm: "40%",
+                  xs: "40%",
                 },
+                display: "flex",
                 maxHeight: "200px",
               }}
             >
@@ -522,8 +527,10 @@ export default function PersistentDrawerLeft() {
             <Item
               sx={{
                 width: {
+                  // m: 1,
                   md: "80%",
-                  //  sm: "50%", xs: "50%"
+                  sm: "60%",
+                  xs: "60%",
                 },
               }}
             >

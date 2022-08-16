@@ -29,6 +29,7 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
 import Rating from "@mui/material/Rating";
+import ReactImageMagnify from "react-image-magnify";
 
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
@@ -213,15 +214,46 @@ function Details({
                 {Object.keys(productDetail).length > 0 && skusFlag == false
                   ? productDetail.product_images[0].media_images.map(
                       (result, index) => (
-                        <Image
-                          key={index}
-                          //  className={cx(styles.media, mediaStyles.root)}
-                          src={result}
-                          alt="shirt"
-                          // objectFit="contain"
-                          width={1500}
-                          height={1000}
-                        ></Image>
+                        <ReactImageMagnify
+                          {...{
+                            smallImage: {
+                              alt: "Wristwatch by Ted Baker London",
+                              // isFluidWidth: true,
+                              width: 1200,
+                              height: 400,
+                              src: result,
+                              // sizes:
+                              //   "(min-width: 800px) 33.5vw, (min-width: 415px) 50vw, 100vw",
+                            },
+                            largeImage: {
+                              src: result,
+                              width: 1200,
+                              height: 1800,
+                            },
+
+                            enlargedImagePosition: "over",
+                            // enlargedImageContainerDimensions: {
+                            //   width: "150%",
+                            //   height: "150%",
+                            // },
+                            enlargedImageContainerStyle: {
+                              zIndex: "1500",
+                            },
+                            enlargedImageContainerDimensions: {
+                              width: "100%",
+                              height: "100%",
+                            },
+                          }}
+                        />
+                        // <Image
+                        //   key={index}
+                        //   //  className={cx(styles.media, mediaStyles.root)}
+                        //   src={result}
+                        //   alt="shirt"
+                        //   // objectFit="contain"
+                        //   width={1500}
+                        //   height={1000}
+                        // ></Image>
                       )
                     )
                   : productImage && (

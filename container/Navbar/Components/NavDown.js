@@ -175,7 +175,7 @@ export default function NavDown(props) {
                   width={20}
                   height={20}
                 ></Image>
-                {/* {text.category_image} */}
+                {/ {text.category_image} /}
               </ListItemIcon>
               <ListItemText
                 primary={text.category_name}
@@ -201,7 +201,7 @@ export default function NavDown(props) {
                   width={20}
                   height={20}
                 ></Image>
-                {/* {text.category_image} */}
+                {/ {text.category_image} /}
               </ListItemIcon>
               <ListItemText
                 primary={text.campaignName}
@@ -238,26 +238,13 @@ export default function NavDown(props) {
         position="sticky"
       >
         <Toolbar>
-          {/* <Box>
-            <Categories
-              startIcon={<WidgetsIcon />}
-              Title={camapaigns ? "Campaigns" : "Categories"}
-              Data={
-                camapaigns
-                  ? campaigns
-                  : categories
-                  ? categories
-                  : "No Category Available"
-              }
-              // Data={categories}
-            />
-          </Box> */}
+
           <FormControl sx={{ m: 1, minWidth: 80 }}>
             <TextField
               select
               // value={age}
               // onChange={handleChange}
-              startIcon={<WidgetsIcon />}
+              // startIcon={<WidgetsIcon />}
               defaultValue={10}
               variant="standard"
               InputProps={{
@@ -283,10 +270,10 @@ export default function NavDown(props) {
               >
                 Campaigns
               </MenuItem>
-              {/* <Divider /> */}
+
             </TextField>
           </FormControl>
-          {/* <Box
+          <Box
             sx={{
               display: "flex",
               // my: 2,
@@ -295,24 +282,8 @@ export default function NavDown(props) {
               flexDirection: { xs: "column", md: "row" },
             }}
           >
-            <Button
-              variant={camapaigns ? "contained" : "outlined"}
-              onClick={() => setCamapaigns(true)}
-              // disabled={camapaigns ? "disabled" : " "}
-              size={"small"}
-            >
-              Campaigns
-            </Button>
-            <Button
-              variant={camapaigns ? "outlined" : "contained"}
-              onClick={() => setCamapaigns(false)}
-              // disabled={camapaigns ? "" : "disabled"}
-              size={"small"}
-              sx={{ ml: 0.5 }}
-            >
-              Categories
-            </Button>
-          </Box> */}
+
+          </Box>
           <Box sx={{ flexGrow: 0.5 }} />
 
           <Stack
@@ -327,7 +298,7 @@ export default function NavDown(props) {
               borderRadius: 24,
               border: 0.1,
               // border: "none",
-              borderColor: "grey.500",
+              borderColor: "primary.main",
             }}
           >
             <Autocomplete
@@ -395,7 +366,7 @@ export default function NavDown(props) {
                 <ShoppingCartOutlinedIcon />
               )}
 
-              {/* </Tooltip> */}
+
             </IconButton>
             <Popover
               id={id}
@@ -440,11 +411,11 @@ export default function NavDown(props) {
                   </Typography>
                 </Box>
               )}
-              {/* <ShoppingCart /> */}
+
             </Popover>
           </div>
         </Toolbar>
-        {/* </Container> */}
+
       </AppBar>
     </Box>
   );
