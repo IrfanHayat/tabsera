@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Carousel from "react-elastic-carousel";
+import Carousel, { consts } from "react-elastic-carousel";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import ActionAreaCard from "../Card";
@@ -12,7 +12,8 @@ import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrow
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
   { width: 550, itemsToShow: 2 },
@@ -97,6 +98,17 @@ export default function CarouselApp({
   let [cartView, setCartView] = useState(false);
   const [rtl, setrtl] = useState(false);
   console.log(product);
+
+  function myArrow({ type, onClick, isEdge }) {
+    const pointer =
+      type === consts.PREV ? <ArrowBackIosNewIcon /> : <ArrowForwardIosIcon />;
+    return (
+      <Button onClick={onClick} disabled={isEdge}>
+        {pointer}
+      </Button>
+    );
+  }
+
   return (
     <Box
       // container
@@ -172,6 +184,7 @@ export default function CarouselApp({
         showEmptySlots={true}
         itemsToScroll={1}
         focusOnSelect={true}
+        renderArrow={myArrow}
         // enableSwipe={true}
         // enableMouseSwipe={true}
         // enableAutoPlay={true}
