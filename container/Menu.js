@@ -120,7 +120,7 @@ export default function PersistentDrawerLeft() {
       console.log(discounts.payload)
       setDiscountData(discounts.payload)
       setShowProduct(false)
-      setShowDiscounts(false)
+      setShowDiscounts(true)
 
       setShowAllCategoryPro(false)
       setShowAllMerchantPro(false)
@@ -213,6 +213,7 @@ export default function PersistentDrawerLeft() {
   const addToCartHandler = (product) => {
     dispatch(addToBasket(product));
     router.push("/cart");
+
   };
 
   //groupBy
@@ -270,12 +271,17 @@ export default function PersistentDrawerLeft() {
     dispatch(getDeals());
   }, []);
 
+  useEffect(() => {
+
+  }, [featureProduct])
+
   const showAllProducts = () => {
     setShowProduct(true)
     setShowAllCategoryPro(false)
     setShowAllMerchantPro(false)
     setShowDeals(false)
-    //setShowDiscounts(false)
+    setShowDiscounts(false)
+    setShowFreeShipping(false)
   }
 
 
@@ -571,8 +577,7 @@ export default function PersistentDrawerLeft() {
 
               {
 
-                showFreeShipping && showProduct == false &&
-                  showAllMerchantPro == false && showDeals == false && showDiscounts == false ?
+                showFreeShipping ?
                   <FreeShipping data={filterData ? filterData : freeShippingData} showProduct={showProduct} showAllCategoryPro={showAllCategoryPro} showAllMerchantPro={showAllMerchantPro} filterData={filterData}></FreeShipping> : <></>
 
               }

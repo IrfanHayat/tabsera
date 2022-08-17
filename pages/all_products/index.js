@@ -14,14 +14,19 @@ import {
   decreaseBasket,
   getTotals,
   removeFromBasket,
-  getCartItems
+  getCartItems,
+  getTotalCartQuantity
 } from "../../slice/basketSlice";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 import { useRouter, withRouter } from "next/router";
 // import AddPagination from "../../container/AddPagination/AddPagination";
 import ReactLoading from "react-loading";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
 import Fade from '@mui/material/Fade';
+import ModalData from "../../container/Login/ModalData";
+import Cookies from 'js-cookie'
 
 const style = {
   height: 30,
@@ -39,8 +44,9 @@ const Index = ({ Item, data }) => {
 
   const { productData, loading } = useSelector((state) => state.product);
   let product = productData;
-
-
+  let [status, setStatus] = useState()
+  const [openBar, setOpenBar] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
   let newProduct = product.slice([0], [5]).map((item, i) => {
     return item;
   });
@@ -69,10 +75,33 @@ const Index = ({ Item, data }) => {
       query: { productId: item.productId },
     });
   };
+  const handleCloseBar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenBar(false);
+  };
 
-  const addToCartHandler = (product) => {
-    dispatch(addToCart(product));
-    router.push("/cart");
+  const addToCartHandler = async (product) => {
+    let result = await dispatch(addToCart(product));
+    console.log(result)
+    if (result?.payload?.resultCode == 4000) {
+      //setOpenBar(true);
+      setStatus(result?.payload)
+      setOpen(true);
+      Cookies.set('item', JSON.stringify(product))
+    } else {
+
+      dispatch(getCartItems());
+      dispatch(getTotalCartQuantity());
+      setTimeout(() => {
+        router.push('/cart')
+      }, 1000)
+    }
+
+  };
+  const handleClose = () => {
+    setOpen(false);
   };
 
   const fetchMoreData = () => {
@@ -88,6 +117,29 @@ const Index = ({ Item, data }) => {
 
   return (
     <>
+      {status?.resultCode === 4000 ? (
+        <ModalData handleClose={handleClose} open={open}></ModalData>
+
+      ) : (
+
+        <Snackbar
+          open={openBar}
+          autoHideDuration={6000}
+          onClose={handleCloseBar}
+          anchorOrigin={{
+            horizontal: "center",
+            vertical: "top",
+          }}
+        >
+          <Alert
+            onClose={handleCloseBar}
+            severity="success"
+            sx={{ width: "100%" }}
+          >
+            Add to Cart Successfully
+          </Alert>
+        </Snackbar>
+      )}
       {/* <InfiniteScroll
         dataLength={items.length}
         next={fetchMoreData}

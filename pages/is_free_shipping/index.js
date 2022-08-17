@@ -48,7 +48,7 @@ function Index({ data, showProduct, showAllCategoryPro, showAllMerchantPro, filt
                 ) : (
                     ""
                 )}
-                {showAllCategoryPro && data.length > 0 ? (
+                {/* {showAllCategoryPro && data.length > 0 ? (
                     <FreeShipping
                         viewProduct={viewProduct}
                         freeShippingData={data && data}
@@ -56,7 +56,7 @@ function Index({ data, showProduct, showAllCategoryPro, showAllMerchantPro, filt
                     />
                 ) : (
                     ""
-                )}
+                )} */}
 
             </Grid>
         </>
