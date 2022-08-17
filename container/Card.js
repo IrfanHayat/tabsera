@@ -12,7 +12,12 @@ import { Box } from "@mui/system";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
 import makeStyles from "@mui/styles/makeStyles";
 import { useSpring, animated } from "react-spring";
-
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
+import ImageListItemBar from "@mui/material/ImageListItemBar";
+// import IconButton from "@mui/material/IconButton";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
+import Chip from "@mui/material/Chip";
 export default function ActionAreaCard({
   product,
   viewProduct,
@@ -27,6 +32,7 @@ export default function ActionAreaCard({
     from: { opacity: 0 },
   });
   const AnimatedTypography = animated(Typography);
+  console.log("freee", product);
   return (
     // <Box>
 
@@ -62,17 +68,39 @@ export default function ActionAreaCard({
     >
       {product?.productImage && (
         <>
-          <Image
-            data-aos="fade-up"
-            // className={cx(styles.media, mediaStyles.root)}
-            src={product?.productImage}
-            onClick={(e) => viewProduct(product)}
-            alt="shirt"
-            width={245}
-            height={240}
-            loading="eager"
-            priority
-          ></Image>
+          <ImageListItem key={product.productImage}>
+            <Image
+              data-aos="fade-up"
+              // className={cx(styles.media, mediaStyles.root)}
+              src={product?.productImage}
+              onClick={(e) => viewProduct(product)}
+              alt="shirt"
+              width={245}
+              height={240}
+              loading="eager"
+              priority
+            ></Image>
+            {product.isfreeShipping ? (
+              <ImageListItemBar
+                sx={{ background: "none" }}
+                position="top"
+                actionIcon={
+                  <IconButton>
+                    <Chip
+                      sx={{ color: "yellow" }}
+                      icon={<StarBorderIcon />}
+                      label="Free Shipping"
+                      size="small"
+                      color="success"
+                    />
+                  </IconButton>
+                }
+                actionPosition="left"
+              />
+            ) : (
+              ""
+            )}
+          </ImageListItem>
         </>
       )}
       {product?.category_image && (
