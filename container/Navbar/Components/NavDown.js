@@ -155,6 +155,7 @@ export default function NavDown(props) {
 
   async function handleInputClick(e) {
     let result = await dispatch(getProductSearch(e.target.value));
+    console.log(result)
   }
 
   // ----------------------------------------------------------------------------------
