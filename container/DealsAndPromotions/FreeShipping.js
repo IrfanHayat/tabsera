@@ -48,7 +48,7 @@ const FreeShipping = ({ freeShippingData, viewProduct }) => {
               // className={cx(styles.media, mediaStyles.root)}
               src={result?.productImage}
               onClick={(e) => viewProduct(result)}
-              alt="shirt"
+              alt={result.productName}
               width={245}
               height={240}
               loading="eager"
@@ -75,12 +75,7 @@ const FreeShipping = ({ freeShippingData, viewProduct }) => {
               ""
             )}
           </ImageListItem>
-          <CardMedia
-            component="img"
-            height="140"
-            image={result?.productImage}
-            alt={result.productName}
-          />
+
 
           <CardContent>
             <Typography gutterBottom variant="overline" component="div">
