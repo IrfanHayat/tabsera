@@ -22,7 +22,8 @@ import DialogTitle from "@mui/material/DialogTitle";
 
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
-
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
 import InputAdornment from "@material-ui/core/InputAdornment";
 // import TextField from "@material-ui/core/TextField";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -216,6 +217,18 @@ export default function ModalLoginData({ handleClose, open }) {
             style={{ fontSize: 24, fontWeight: "bold" }}
           >
             Sign In
+            <IconButton
+              aria-label="close"
+              onClick={handleClose}
+              sx={{
+                position: "absolute",
+                right: 8,
+                top: 8,
+                color: (theme) => theme.palette.grey[500],
+              }}
+            >
+              <CloseIcon />
+            </IconButton>
           </DialogTitle>
           <Avatar sx={{ bgcolor: "secondary.main" }}>
             <LockOutlinedIcon />
