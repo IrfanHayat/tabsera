@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useRouter } from "next/router";
 import FreeShipping from "../../container/DealsAndPromotions/FreeShipping";
 import Grid from '@mui/material/Grid';
+import ViewAllProducts from "../../pages/all_products";
 function Index({ data, showProduct, showAllCategoryPro, showAllMerchantPro, filterData }) {
     const { freeShippingData } = useSelector((state) => state.freeShipping);
 
@@ -30,9 +31,9 @@ function Index({ data, showProduct, showAllCategoryPro, showAllMerchantPro, filt
         <>
             <Grid container justifyContent="center">
                 {freeShippingData.length > 0 && showProduct == false && showAllCategoryPro == false && showAllMerchantPro == false ? (
-                    <FreeShipping
+                    <ViewAllProducts
                         viewProduct={viewProduct}
-                        freeShippingData={freeShippingData && freeShippingData}
+                        data={freeShippingData && freeShippingData}
                     // dealsData={dealsData && dealsData}
                     />
                 ) : (
@@ -40,9 +41,9 @@ function Index({ data, showProduct, showAllCategoryPro, showAllMerchantPro, filt
                 )}
                 {showAllCategoryPro}
                 {showProduct && showAllCategoryPro == false && data.length > 0 ? (
-                    <FreeShipping
+                    <ViewAllProducts
                         viewProduct={viewProduct}
-                        freeShippingData={data && data}
+                        data={data && data}
                     // dealsData={dealsData && dealsData}
                     />
                 ) : (

@@ -50,7 +50,7 @@ const FreeShipping = ({ freeShippingData, viewProduct }) => {
               onClick={(e) => viewProduct(result)}
               alt={result.productName}
               width={245}
-              height={240}
+              height={210}
               loading="eager"
               priority
             ></Image>
