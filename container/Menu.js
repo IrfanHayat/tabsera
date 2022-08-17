@@ -9,7 +9,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getFreeShipping } from "../slice/freeShippingSlice";
 import { getDeals } from "../slice/dealsPromotionsSlice";
 import { useRouter } from "next/router";
-import { addToBasket } from "../slice/basketSlice";
+import { addToBasket, addToCart, getCartItems, getTotalCartQuantity } from "../slice/basketSlice";
 import { getProduct, getFeatureProduct } from "../slice/productSlice";
 import { getCategory } from "../slice/categorySlice";
 import { getCampaigns } from "../slice/campaignsSlice";
@@ -47,6 +47,8 @@ import { motion } from 'framer-motion'
 import DealsAndPromotions from "../pages/deals_and_promotions";
 import Discounts from "../pages/discounts";
 import FreeShipping from "../pages/is_free_shipping";
+import Snackbar from "@mui/material/Snackbar";
+import Alert from "@mui/material/Alert";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -75,6 +77,9 @@ export default function PersistentDrawerLeft() {
   const [category, setCategory] = useState();
   const [showList, setShowList] = useState(false);
   const [value, setValue] = React.useState();
+  let [status, setStatus] = useState()
+  const [openBar, setOpenBar] = React.useState(false);
+  const [open, setOpen] = React.useState(false);
   // checkbox
   const [state, setState] = React.useState({
     deals: false,
@@ -210,9 +215,22 @@ export default function PersistentDrawerLeft() {
     });
   };
 
-  const addToCartHandler = (product) => {
-    dispatch(addToBasket(product));
-    router.push("/cart");
+  const addToCartHandler = async (product) => {
+    let result = await dispatch(addToCart(product));
+    console.log(result)
+    if (result?.payload?.resultCode == 4000) {
+      //setOpenBar(true);
+      setStatus(result?.payload)
+      setOpen(true);
+      Cookies.set('item', JSON.stringify(product))
+    } else {
+
+      dispatch(getCartItems());
+      dispatch(getTotalCartQuantity());
+      setTimeout(() => {
+        router.push('/cart')
+      }, 1000)
+    }
 
   };
 

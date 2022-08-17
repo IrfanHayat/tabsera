@@ -12,7 +12,12 @@ import { Box } from "@mui/system";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
 import makeStyles from "@mui/styles/makeStyles";
 import { useSpring, animated } from "react-spring";
-import { Skeleton } from "@mui/material";
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
+import ImageListItemBar from "@mui/material/ImageListItemBar";
+// import IconButton from "@mui/material/IconButton";
+import StarBorderIcon from "@mui/icons-material/StarBorder";
+import Chip from "@mui/material/Chip";
 export default function ActionAreaCard({
   product,
   viewProduct,
@@ -27,6 +32,7 @@ export default function ActionAreaCard({
     from: { opacity: 0 },
   });
   const AnimatedTypography = animated(Typography);
+  console.log("freee", product);
   return (
     // <Box>
 
@@ -56,36 +62,54 @@ export default function ActionAreaCard({
       }}
     // className={cx(styles.root)}
     >
-      {Object.keys(product?.productImage).length > 0 ?
-        < Image
-          data-aos="fade-up"
+      {product?.productImage && (
+        <>
+          <ImageListItem key={product.productImage}>
+            <Image
+              data-aos="fade-up"
+              // className={cx(styles.media, mediaStyles.root)}
+              src={product?.productImage}
+              onClick={(e) => viewProduct(product)}
+              alt="shirt"
+              width={245}
+              height={240}
+              loading="eager"
+              priority
+            ></Image>
+            {product.isfreeShipping ? (
+              <ImageListItemBar
+                sx={{ background: "none" }}
+                position="top"
+                actionIcon={
+                  <IconButton>
+                    <Chip
+                      sx={{ color: "yellow" }}
+                      icon={<StarBorderIcon />}
+                      label="Free Shipping"
+                      size="small"
+                      color="success"
+                    />
+                  </IconButton>
+                }
+                actionPosition="left"
+              />
+            ) : (
+              ""
+            )}
+          </ImageListItem>
+        </>
+      )}
+      {product?.category_image && (
+        <Image
           // className={cx(styles.media, mediaStyles.root)}
-          src={product?.productImage}
-          onClick={(e) => viewProduct(product)}
-          alt={product.productName}
+          src={product?.category_image}
+          onClick={(e) => viewCategory(product.category_id)}
+          alt="shirt"
           width={245}
-          height={240}
-          loading="eager"
-          priority
+          height={200}
+        // loading="eager"
         ></Image>
-
-        //  <Skeleton variant="rectangular" width={210} height={118} />
-
-        :
-        <Skeleton variant="rectangular" width={245} height={240} />
-      }
-      {
-        product?.category_image && (
-          <Image
-            // className={cx(styles.media, mediaStyles.root)}
-            src={product?.category_image}
-            onClick={(e) => viewCategory(product.category_id)}
-            alt="shirt"
-            width={245}
-            height={200}
-          // loading="eager"
-          ></Image>
-        )
+      )
       }
       {
         product?.category_name && (
@@ -156,7 +180,7 @@ export default function ActionAreaCard({
           {product.productName ? (
             <IconButton
               key={product.id}
-              onClick={(e) => addToCartHandler(product)}
+              onClick={() => addToCartHandler(product)}
               color="primary"
               aria-label="add to shopping cart"
             >
