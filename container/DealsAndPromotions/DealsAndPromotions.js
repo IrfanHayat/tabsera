@@ -14,6 +14,7 @@ import ImageListItemBar from "@mui/material/ImageListItemBar";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import Chip from "@mui/material/Chip";
 import IconButton from "@mui/material/IconButton";
+import LoyaltyIcon from "@mui/icons-material/Loyalty";
 const DealsAndPromotions = ({ dealsData, viewProduct }) => {
   console.log("Data Deals New", dealsData);
   return (
@@ -59,19 +60,17 @@ const DealsAndPromotions = ({ dealsData, viewProduct }) => {
               actionIcon={
                 <IconButton>
                   <Chip
-                    sx={{ m: 1, color: "yellow" }}
-                    icon={<StarBorderIcon />}
+                    // sx={{ m: 1, color: "yellow" }}
+                    icon={<LoyaltyIcon />}
                     label="Deals"
                     size="small"
-                    color="success"
+                    color="primary"
                   />
                 </IconButton>
               }
               actionPosition="left"
             />
-
           </ImageListItem>
-
 
           <CardContent>
             <Typography gutterBottom variant="overline" component="div">

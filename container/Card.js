@@ -18,6 +18,9 @@ import ImageListItemBar from "@mui/material/ImageListItemBar";
 // import IconButton from "@mui/material/IconButton";
 import StarBorderIcon from "@mui/icons-material/StarBorder";
 import Chip from "@mui/material/Chip";
+import LocalShippingIcon from "@mui/icons-material/LocalShipping";
+import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined";
+import CardMedia from "@mui/material/CardMedia";
 export default function ActionAreaCard({
   product,
   viewProduct,
@@ -44,7 +47,9 @@ export default function ActionAreaCard({
         // marginTop: 1,
         // marginBottom: 1,
         boxShadow: 0,
-        // border: 0,
+        borderRadius: 2,
+        // border: 1,
+        // borderColor: "#9E9E9E ",
         bgcolor: "background.paper",
         padding: 0.5,
         width: 200,
@@ -52,6 +57,7 @@ export default function ActionAreaCard({
         height: 300,
         ":hover": {
           border: 1,
+          borderColor: "#9E9E9E ",
           boxShadow: 1, // theme.shadows[20]
           transform: "scale(1.05)",
           // opacity: 0.5,
@@ -64,17 +70,33 @@ export default function ActionAreaCard({
       {product?.productImage && (
         <>
           <ImageListItem key={product.productImage}>
-            <Image
+            <CardMedia
+              // component="img"
+              component="img"
+              // height="194"
+              image={product?.productImage}
+              alt={product?.productName}
+              sx={{
+                top: 0,
+                width: "100%",
+                height: 180,
+                objectFit: "cover",
+                // position: "absolute",
+                // maxHeight: { xs: 233, md: 167 },
+                // maxWidth: { xs: 350, md: 250 },
+              }}
+            ></CardMedia>
+            {/* <Image
               data-aos="fade-up"
               // className={cx(styles.media, mediaStyles.root)}
               src={product?.productImage}
               onClick={(e) => viewProduct(product)}
-              alt="shirt"
+              alt={product?.productName}
               width={245}
               height={240}
               loading="eager"
               priority
-            ></Image>
+            ></Image> */}
             {product.isfreeShipping ? (
               <ImageListItemBar
                 sx={{ background: "none" }}
@@ -82,15 +104,15 @@ export default function ActionAreaCard({
                 actionIcon={
                   <IconButton>
                     <Chip
-                      sx={{ color: "yellow" }}
-                      icon={<StarBorderIcon />}
-                      label="Free Shipping"
+                      // sx={{ color: "yellow" }}
+                      icon={<LocalShippingIcon />}
+                      label="Free"
                       size="small"
-                      color="success"
+                      color="error"
                     />
                   </IconButton>
                 }
-                actionPosition="left"
+                actionPosition="right"
               />
             ) : (
               ""
@@ -116,7 +138,12 @@ export default function ActionAreaCard({
       )}
       <CardContent>
         {/* <Typography variant="h5">{product?.categoryName}</Typography> */}
-        <Typography fontSize="0.9rem" variant="h5" fontWeight={600}>
+        <Typography
+          fontSize="0.9rem"
+          variant="h5"
+          fontWeight={600}
+          // display="inline"
+        >
           {product?.productName}
         </Typography>
         {/* <Typography variant="h5" sx={{ color: "error.main" }}>
@@ -132,6 +159,7 @@ export default function ActionAreaCard({
             name="size-small"
             defaultValue={product?.averageRating}
             size="small"
+            // fontSize={24}
             readOnly
           />
         </Stack>
@@ -169,7 +197,12 @@ export default function ActionAreaCard({
             <PreviewOutlinedIcon />
           </IconButton>
         )} */}
-          <Typography variant="h5" sx={{ color: "error.main", p: 1 }}>
+          <Typography
+            fontSize="0.9rem"
+            variant="h5"
+            fontWeight={600}
+            sx={{ color: "warning.dark", p: 1 }}
+          >
             {" "}
             RS. {product?.productCost}
           </Typography>

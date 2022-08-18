@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 import ActionAreaCard from "../../container/Card";
@@ -15,7 +14,7 @@ import {
   getTotals,
   removeFromBasket,
   getCartItems,
-  getTotalCartQuantity
+  getTotalCartQuantity,
 } from "../../slice/basketSlice";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
@@ -24,9 +23,9 @@ import { useRouter, withRouter } from "next/router";
 import ReactLoading from "react-loading";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
-import Fade from '@mui/material/Fade';
+import Fade from "@mui/material/Fade";
 import ModalData from "../../container/Login/ModalData";
-import Cookies from 'js-cookie'
+import Cookies from "js-cookie";
 
 const style = {
   height: 30,
@@ -41,10 +40,9 @@ const Index = ({ Item, data }) => {
   //   hasMore: true,
   // };
 
-
   const { productData, loading } = useSelector((state) => state.product);
   let product = productData;
-  let [status, setStatus] = useState()
+  let [status, setStatus] = useState();
   const [openBar, setOpenBar] = React.useState(false);
   const [open, setOpen] = React.useState(false);
   let newProduct = product.slice([0], [5]).map((item, i) => {
@@ -60,9 +58,7 @@ const Index = ({ Item, data }) => {
 
   useEffect(async () => {
     await dispatch(getProduct());
-
   }, []);
-
 
   // React.useEffect(() => {
   //   setItems(product);
@@ -84,21 +80,19 @@ const Index = ({ Item, data }) => {
 
   const addToCartHandler = async (product) => {
     let result = await dispatch(addToCart(product));
-    console.log(result)
+    console.log(result);
     if (result?.payload?.resultCode == 4000) {
       //setOpenBar(true);
-      setStatus(result?.payload)
+      setStatus(result?.payload);
       setOpen(true);
-      Cookies.set('item', JSON.stringify(product))
+      Cookies.set("item", JSON.stringify(product));
     } else {
-
       dispatch(getCartItems());
       dispatch(getTotalCartQuantity());
       setTimeout(() => {
-        router.push('/cart')
-      }, 1000)
+        router.push("/cart");
+      }, 1000);
     }
-
   };
   const handleClose = () => {
     setOpen(false);
@@ -119,9 +113,7 @@ const Index = ({ Item, data }) => {
     <>
       {status?.resultCode === 4000 ? (
         <ModalData handleClose={handleClose} open={open}></ModalData>
-
       ) : (
-
         <Snackbar
           open={openBar}
           autoHideDuration={6000}
@@ -171,34 +163,29 @@ const Index = ({ Item, data }) => {
         alignItems="center"
         minHeight={500}
       >
-
-        {
-          product && data?.length < 1 ? product.map((item, index) => (
-            <Item key={index}>
-              <ActionAreaCard
-
-                product={item}
-                viewProduct={viewProduct}
-                addToCartHandler={addToCartHandler}
-                key={index}
-              >
-                {/* {item?.productName}> */}
-              </ActionAreaCard>
-            </Item>
-          )) :
-            data?.map((item, index) => (
-
-              <ActionAreaCard
-                product={item}
-                viewProduct={viewProduct}
-                addToCartHandler={addToCartHandler}
-                key={index}
-              >
-                {/* {item?.productName}> */}
-              </ActionAreaCard>
-
+        {product && data?.length < 1
+          ? product.map((item, index) => (
+              <Item key={index}>
+                <ActionAreaCard
+                  product={item}
+                  viewProduct={viewProduct}
+                  addToCartHandler={addToCartHandler}
+                  key={index}
+                >
+                  {/* {item?.productName}> */}
+                </ActionAreaCard>
+              </Item>
             ))
-        }
+          : data?.map((item, index) => (
+              <ActionAreaCard
+                product={item}
+                viewProduct={viewProduct}
+                addToCartHandler={addToCartHandler}
+                key={index}
+              >
+                {/* {item?.productName}> */}
+              </ActionAreaCard>
+            ))}
       </Grid>
       {/* </InfiniteScroll> */}
     </>

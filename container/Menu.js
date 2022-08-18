@@ -251,7 +251,7 @@ export default function PersistentDrawerLeft() {
     // let data = dispatch(getCategory());
     // console.log(data);
     // dispatch(getCampaigns());
-  }, [router?.query?.key]);
+  }, [router?.query?.key, categoryData, campaignsData]);
 
   async function getCompaignsData() {
     if (router?.query?.key == 1) {
@@ -363,7 +363,7 @@ export default function PersistentDrawerLeft() {
               }}
             >
               <List dense>
-                {router?.query?.key == 1 ? (
+                {router?.query?.key == 1 && category?.length > 0 ? (
                   <>
                     {category?.map((result) => (
                       <ListItem
@@ -398,7 +398,7 @@ export default function PersistentDrawerLeft() {
                       </ListItem>
                     ))}
                   </>
-                ) : router?.query?.key == 2 ? (
+                ) : (
                   <>
                     {compaigns?.map((result) => (
                       <ListItem
@@ -436,8 +436,6 @@ export default function PersistentDrawerLeft() {
                       </ListItem>
                     ))}
                   </>
-                ) : (
-                  ""
                 )}
               </List>
             </Item>

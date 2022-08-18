@@ -155,7 +155,7 @@ export default function NavDown(props) {
 
   async function handleInputClick(e) {
     let result = await dispatch(getProductSearch(e.target.value));
-    console.log(result)
+    console.log(result);
   }
 
   // ----------------------------------------------------------------------------------
@@ -239,7 +239,6 @@ export default function NavDown(props) {
         position="sticky"
       >
         <Toolbar>
-
           <FormControl sx={{ m: 1, minWidth: 80 }}>
             <TextField
               select
@@ -260,18 +259,17 @@ export default function NavDown(props) {
             >
               <MenuItem
                 value={10}
-                onClick={() => handleChangeCategoryAndCampaigns(1)}
-              >
-                Categories
-              </MenuItem>
-              <Divider />
-              <MenuItem
-                value={20}
                 onClick={() => handleChangeCategoryAndCampaigns(2)}
               >
                 Campaigns
               </MenuItem>
-
+              <Divider />
+              <MenuItem
+                value={20}
+                onClick={() => handleChangeCategoryAndCampaigns(1)}
+              >
+                Categories
+              </MenuItem>
             </TextField>
           </FormControl>
           <Box
@@ -282,9 +280,7 @@ export default function NavDown(props) {
 
               flexDirection: { xs: "column", md: "row" },
             }}
-          >
-
-          </Box>
+          ></Box>
           <Box sx={{ flexGrow: 0.5 }} />
 
           <Stack
@@ -344,8 +340,8 @@ export default function NavDown(props) {
               onClick={handleClick}
               color="primary"
 
-            // onMouseEnter={handleClick}
-            // onMouseLeave={handleClick}
+              // onMouseEnter={handleClick}
+              // onMouseLeave={handleClick}
             >
               {console.log(localStorage.getItem("login"))}
               {console.log(cartTotalQuantity)}
@@ -354,8 +350,8 @@ export default function NavDown(props) {
                   color="error"
                   badgeContent={
                     cartTotalQuantity != undefined ||
-                      cartTotalQuantity != 0 ||
-                      cartTotalQuantity
+                    cartTotalQuantity != 0 ||
+                    cartTotalQuantity
                       ? cartTotalQuantity
                       : 1
                   }
@@ -366,8 +362,6 @@ export default function NavDown(props) {
               ) : (
                 <ShoppingCartOutlinedIcon />
               )}
-
-
             </IconButton>
             <Popover
               id={id}
@@ -384,11 +378,11 @@ export default function NavDown(props) {
                 vertical: "top",
                 horizontal: "center",
               }}
-            //keepMounted={true}
-            // anchorOrigin={{
-            //   vertical: "bottom",
-            //   horizontal: "left"62
-            // }}
+              //keepMounted={true}
+              // anchorOrigin={{
+              //   vertical: "bottom",
+              //   horizontal: "left"62
+              // }}
             >
               {cartTotalQuantity > 0 ? (
                 // <div>
@@ -412,11 +406,9 @@ export default function NavDown(props) {
                   </Typography>
                 </Box>
               )}
-
             </Popover>
           </div>
         </Toolbar>
-
       </AppBar>
     </Box>
   );
