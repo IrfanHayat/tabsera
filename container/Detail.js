@@ -160,37 +160,35 @@ function Details({
             {productDetail?.product_name}
           </Typography>
         </Breadcrumbs>
-        <Box sx={{ flexGrow: 0.5 }}></Box>
-        <Stack
-          direction="row"
-          spacing={3}
-          // sx={{
-          //   display: "flex",
-          //   justifyContent: "space-between",
-          // }}
-        >
-          <Typography
-            sx={{ color: "error.main" }}
-            style={{ fontWeight: "bold" }}
-          >
-            {productDetail?.merchant_name}
-          </Typography>
-          <Button
-            variant="text"
-            onClick={() => viewStore(merchantDetail?.merchant_id)}
-            // onClick={viewStore}
-            size="small"
-          >
-            Visit Store
-          </Button>
-        </Stack>
+
+
+
+
       </Box>
+      <Grid sx={{ display: "flex", justifyContent: "center", justifyContent: 'flex-end', paddingRight: "10%" }}>
+        <Typography
+          sx={{ color: "error.main", alignSelf: "center" }}
+          style={{ fontWeight: "bold" }}
+        >
+          Sold By: {productDetail?.merchant_name}
+        </Typography>
+        <Button
+          variant="text"
+          onClick={() => viewStore(merchantDetail?.merchant_id)}
+        // onClick={viewStore}
+
+
+
+        >
+          Visit Store
+        </Button>
+      </Grid>
       <Grid
         container
         spacing={1}
         maxWidth="xl"
         sx={{ paddingTop: 2 }}
-        // justifyContent="center"
+      // justifyContent="center"
       >
         {/* <Grid item md={12} xs={12} ml={1}>
           <Typography variant="h6" style={{ fontWeight: "bold" }}>
@@ -199,20 +197,21 @@ function Details({
         </Grid> */}
         {/* <Grid item md={1} sm={1}></Grid> */}
         <Grid item md={5} xs={12}>
-          <List>
-            <ListItem sx={{ m: 1 }}>
-              <Carousel
-                // breakPoints={breakPoints}
-                //  disableArrowsOnEnd={false}
-                // showArrows={false}
-                // pagination={true}
-                pagination={false}
-                // showEmptySlots={true}
-                // itemsToShow={2}
-                showArrows={false}
-              >
-                {Object.keys(productDetail).length > 0 && skusFlag == false
-                  ? productDetail.product_images[0].media_images.map(
+          <Card>
+            <List>
+              <ListItem sx={{ m: 1 }}>
+                <Carousel
+                  // breakPoints={breakPoints}
+                  //  disableArrowsOnEnd={false}
+                  // showArrows={false}
+                  // pagination={true}
+                  pagination={false}
+                  showEmptySlots={true}
+                  // itemsToShow={2}
+                  showArrows={false}
+                >
+                  {Object.keys(productDetail).length > 0 && skusFlag == false
+                    ? productDetail.product_images[0].media_images.map(
                       (result, index) => (
                         <ReactImageMagnify
                           {...{
@@ -256,7 +255,7 @@ function Details({
                         // ></Image>
                       )
                     )
-                  : productImage && (
+                    : productImage && (
                       <Image
                         // key={index}
                         //  className={cx(styles.media, mediaStyles.root)}
@@ -267,20 +266,24 @@ function Details({
                         height={1000}
                       ></Image>
                     )}
-              </Carousel>
-            </ListItem>
-            <ListItem>
-              {" "}
-              <Stack spacing={1}>
+                </Carousel>
+              </ListItem>
+
+              <ListItem sx={{ display: "flex", justifyContent: "center" }}>
+
+
+
                 <Rating
                   name="size-small"
                   defaultValue={3}
-                  size="small"
+                  // size="small"
                   readOnly
                 />
-              </Stack>
-            </ListItem>
-          </List>
+
+              </ListItem>
+
+            </List>
+          </Card>
         </Grid>
 
         <Grid
@@ -288,158 +291,170 @@ function Details({
           md={6}
           sm={12}
           xs={12}
-          // sx={{ display: "flex" }}
-          // justifyContent="center"
-          // alignItems="center"
+
+        // sx={{ display: "flex" }}
+        // justifyContent="center"
+        // alignItems="center"
         >
-          <List>
-            <ListItem>
-              <ListItemText>
-                <Typography style={{ fontWeight: "bold", fontSize: 28 }}>
-                  {productDetail?.product_name}
-                </Typography>
-              </ListItemText>
-            </ListItem>
-            <Divider fullWidth />
-            <ListItem>
-              <ListItemText>
-                <Typography style={{ fontWeight: "bold" }}>
-                  {productDetail?.category_name}
-                </Typography>
-              </ListItemText>
-              {/* </ListItem> */}
+          <Card>
+
+            <List>
+              <ListItem>
+                <ListItemText>
+                  <Typography style={{ fontWeight: "bold", fontSize: 28 }}>
+                    {productDetail?.product_name}
+                  </Typography>
+                </ListItemText>
+              </ListItem>
+              <Divider fullWidth />
+              <Grid md={12}>
+                <ListItem>
+                  <ListItemText md={6}>
+                    <Typography style={{ fontWeight: "bold" }}>
+                      Category: {productDetail?.category_name}
+                    </Typography>
+                  </ListItemText>
+                  {/* </ListItem> */}
+                  {/* <ListItem> */}
+                  <ListItemText md={6} sx={{ color: "error.main" }}>
+                    <Typography style={{ fontWeight: "bold" }}>
+                      PKR.{skusProduct ? skusProduct.cost : price}
+                    </Typography>
+                  </ListItemText>
+                </ListItem>
+              </Grid>
+              <Grid md={12}>
+                <ListItem>
+
+                  {/* </ListItem> */}
+                  {/* <ListItem> */}
+                  <ListItemText md={6} sx={{ color: "success.main" }}>
+                    <Typography style={{ fontWeight: "bold" }}>In Stock</Typography>
+                  </ListItemText>
+                </ListItem>
+              </Grid>
               {/* <ListItem> */}
-              <ListItemText sx={{ color: "error.main" }}>
-                <Typography style={{ fontWeight: "bold" }}>
-                  Rs.{skusProduct ? skusProduct.cost : price}
-                </Typography>
-              </ListItemText>
-            </ListItem>
-            <ListItem>
-              <ListItemText sx={{ color: "primary.main" }}>
-                <Typography style={{ fontWeight: "bold" }}>
-                  Sold By: {productDetail?.merchant_name}
-                </Typography>
-              </ListItemText>
-              {/* </ListItem> */}
-              {/* <ListItem> */}
-              <ListItemText sx={{ color: "success.main" }}>
-                <Typography style={{ fontWeight: "bold" }}>In Stock</Typography>
-              </ListItemText>
-            </ListItem>
-            {/* <ListItem> */}
-            {skusProduct
-              ? skusProduct.attributes.map((result, index) => (
+              {skusProduct
+                ? skusProduct.attributes.map((result, index) => (
                   // <List key={index}>
-                  <ListItem key={index}>
-                    <ListItemText>
-                      <Typography>{result.attribute_name}</Typography>
-                    </ListItemText>
-                    <ListItemText>
-                      <Typography>{result.value}</Typography>
-                    </ListItemText>
-                  </ListItem>
+                  <Grid md={12}>
+                    <ListItem key={index}>
+                      <ListItemText md={6}>
+                        <Typography>{result.attribute_name}:  <Typography>{result.value}</Typography>
+                        </Typography>
+                      </ListItemText>
+
+
+                    </ListItem>
+                  </Grid>
                   // </List>
                 ))
-              : productAttributes.map((result, index) => (
+                : productAttributes.map((result, index) => (
                   // <List key={index}>
                   <ListItem key={index}>
                     <ListItemText>
                       <Typography style={{ fontWeight: "bold" }}>
-                        {result.attribute_name} :
+                        {result.attribute_name} :{result.value}
                       </Typography>
                     </ListItemText>
-                    <ListItemText>
-                      <Typography>{result.value}</Typography>
-                    </ListItemText>
+
                   </ListItem>
 
                   // </List>
                 ))}
-            <Divider />
-            <Typography variant="h5" style={{ fontWeight: "bold" }}>
-              Skus
-            </Typography>
-            <Box sx={{ display: "flex", m: 1 }}>
-              <Carousel
-                // breakPoints={breakPoints}
-                disableArrowsOnEnd={true}
-                showArrows={false}
-                pagination={false}
-                // showEmptySlots={true}
-                itemsToShow={4}
-              >
-                {productDetail &&
-                  productDetail.skus?.map((results, index) => (
-                    <Image
-                      //  className={cx(styles.media, mediaStyles.root)}
-                      onClick={() => {
-                        viewVariantsProduct(results);
-                      }}
-                      key={index}
-                      src={results.sku_images[0]}
-                      alt="shirt"
-                      width={100}
-                      height={80}
-                    ></Image>
-                  ))}
-              </Carousel>
-            </Box>
-            <Divider />
+              <Divider />
+              <Grid md={12}>
+                <ListItem >
+                  <ListItemText md={6}>
+                    <Typography variant="h5" style={{ fontWeight: "bold" }}>
+                      Skus
+                    </Typography>
+                  </ListItemText>
+                </ListItem>
 
-            {/* </ListItem> */}
-            <ListItem
-              sx={{
-                // display: "flex",
-                display: {
-                  xs: "none",
-                  sm: "none",
-                  md: "flex",
+                <Box md={6} sx={{ display: "flex", m: 1 }}>
+                  <Carousel
+                    // breakPoints={breakPoints}
+                    disableArrowsOnEnd={true}
+                    showArrows={false}
+                    pagination={false}
+                    showEmptySlots={true}
+                    itemsToShow={4}
+                  >
+                    {productDetail &&
+                      productDetail.skus?.map((results, index) => (
+                        <Image
+                          //  className={cx(styles.media, mediaStyles.root)}
+                          onClick={() => {
+                            viewVariantsProduct(results);
+                          }}
+                          key={index}
+                          src={results.sku_images[0]}
+                          alt="shirt"
+                          width={100}
+                          height={80}
+                        ></Image>
+                      ))}
+                  </Carousel>
+                </Box>
+              </Grid>
+              <Divider />
 
+              {/* </ListItem> */}
+              <ListItem
+                sx={{
+                  // display: "flex",
+                  display: {
+                    xs: "none",
+                    sm: "none",
+                    md: "flex",
+                    // display: "flex",
+                    justifyContent: "end"
+                    // display: "flex",
+
+                    // flexWrap: "wrap",
+
+                    // bgcolor: "#f6f9fc",
+                  },
                   // display: "flex",
 
-                  // flexWrap: "wrap",
+                }}
+              >
+                <Stack direction="row" spacing={2}>
+                  <Button
+                    // fullWidth
+                    variant="contained"
+                    color="info"
+                    type="submit"
+                    size="large"
+                    // href="/shipping_information"
+                    onClick={() => {
+                      skusProduct
+                        ? BuyHandler(productDetail, skusProduct)
+                        : BuyHandler(productDetail);
+                    }}
+                  >
+                    Buy Now
+                  </Button>
+                  <Button
+                    // fullWidth
+                    variant="contained"
+                    color="warning"
+                    onClick={() => {
+                      skusProduct
+                        ? addToCartHandler(productDetail, skusProduct)
+                        : addToCartHandler(productDetail);
+                    }}
+                    size="large"
+                  >
+                    Add to cart
+                  </Button>
+                </Stack>
+              </ListItem>
+            </List>
 
-                  // bgcolor: "#f6f9fc",
-                },
-                // display: "flex",
-                justifyContent: "flex-end",
-                p: 1,
-                m: 1,
-              }}
-            >
-              <Stack direction="row" spacing={2}>
-                <Button
-                  // fullWidth
-                  variant="contained"
-                  color="info"
-                  type="submit"
-                  size="large"
-                  // href="/shipping_information"
-                  onClick={() => {
-                    skusProduct
-                      ? BuyHandler(productDetail, skusProduct)
-                      : BuyHandler(productDetail);
-                  }}
-                >
-                  Buy Now
-                </Button>
-                <Button
-                  // fullWidth
-                  variant="contained"
-                  color="warning"
-                  onClick={() => {
-                    skusProduct
-                      ? addToCartHandler(productDetail, skusProduct)
-                      : addToCartHandler(productDetail);
-                  }}
-                  size="large"
-                >
-                  Add to cart
-                </Button>
-              </Stack>
-            </ListItem>
-          </List>
+
+          </Card>
         </Grid>
         <Grid item md={1} sm={1}></Grid>
 
