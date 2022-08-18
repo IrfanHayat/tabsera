@@ -339,8 +339,8 @@ function Details({
                   // <List key={index}>
                   <Grid md={12}>
                     <ListItem key={index}>
-                      <ListItemText md={6}>
-                        <Typography>{result.attribute_name}:  <Typography>{result.value}</Typography>
+                      <ListItemText md={6} >
+                        <Typography style={{ fontWeight: "bold" }}>{result.attribute_name}:  {result.value}
                         </Typography>
                       </ListItemText>
 
