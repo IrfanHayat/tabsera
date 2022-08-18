@@ -65,15 +65,17 @@ export default function ActionAreaCard({
           cursor: "pointer",
         },
       }}
-      // className={cx(styles.root)}
+    // className={cx(styles.root)}
     >
       {product?.productImage && (
         <>
           <ImageListItem key={product.productImage}>
             <CardMedia
               // component="img"
+              data-aos="fade-up"
               component="img"
               // height="194"
+              onClick={(e) => viewProduct(product)}
               image={product?.productImage}
               alt={product?.productName}
               sx={{
@@ -128,7 +130,7 @@ export default function ActionAreaCard({
           alt="shirt"
           width={245}
           height={200}
-          // loading="eager"
+        // loading="eager"
         ></Image>
       )}
       {product?.category_name && (
@@ -142,7 +144,7 @@ export default function ActionAreaCard({
           fontSize="0.9rem"
           variant="h5"
           fontWeight={600}
-          // display="inline"
+        // display="inline"
         >
           {product?.productName}
         </Typography>
