@@ -342,7 +342,7 @@ function Details({
                 </Typography>
               </ListItemText>
             </ListItem>
-
+            <Divider />
             <ListItem>
               <ListItemText md={6}>
                 <Typography style={{ fontWeight: "bold" }}>
