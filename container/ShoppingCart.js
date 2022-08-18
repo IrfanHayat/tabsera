@@ -40,7 +40,7 @@ function CartScreen({
 }) {
   console.log(productCartData);
   return (
-    <>
+    <Box sx={{ bgcolor: "background.paper", p: 2 }}>
       {/* <Card sx={{ flexGrow: 1, display: "grid", p: 3 }}>
         <CardMedia></CardMedia>
 
@@ -144,12 +144,11 @@ function CartScreen({
             </Grid>
           ))}
       </Card> */}
+
       <Typography
+        style={{ fontWeight: "bold", m: 3 }}
         component="h5"
         variant="h5"
-        style={{ fontWeight: "bold" }}
-        display="flex"
-        alignItems="center"
       >
         {heading}
       </Typography>
@@ -164,25 +163,32 @@ function CartScreen({
               flexDirection: { xs: "column", md: "row" },
             }}
           >
-            <CardMedia
-              sx={{
-                width: 171,
-                m: "auto",
-                maxHeight: { xs: 233, md: 167 },
-                maxWidth: { xs: 350, md: 250 },
-              }}
-            >
-              {item.image_URL && (
-                <Image
-                  src={item.image_URL}
-                  alt="product"
-                  width={245}
-                  height={220}
-                  loading="eager"
-                  priority
-                ></Image>
-              )}
-            </CardMedia>
+            {item.image_URL && (
+              <CardMedia
+                // component="img"
+                component="img"
+                // height="194"
+                image={item.image_URL}
+                alt={item.name}
+                sx={{
+                  width: 171,
+                  m: "auto",
+                  maxHeight: { xs: 233, md: 167 },
+                  maxWidth: { xs: 350, md: 250 },
+                }}
+              >
+                {/* {item.image_URL && (
+                  <Image
+                    src={item.image_URL}
+                    alt="product"
+                    width={245}
+                    height={220}
+                    loading="eager"
+                    priority
+                  ></Image>
+                )} */}
+              </CardMedia>
+            )}
 
             <CardContent sx={{ flex: "1 0 auto" }}>
               <Typography
@@ -281,7 +287,8 @@ function CartScreen({
                     aria-label="reduce item"
                     size="large"
                     variant="contained"
-                    sx={{ color: "text.secondary" }}
+                    color="error"
+                    // sx={{ color:  "text.secondary" }}
                   >
                     <IndeterminateCheckBoxOutlinedIcon />
                   </IconButton>
@@ -294,7 +301,8 @@ function CartScreen({
                     aria-label="increase item"
                     size="large"
                     variant="contained"
-                    sx={{ color: "text.secondary" }}
+                    color="success"
+                    // sx={{ color: "text.secondary" }}
                     onClick={() => handleAddToCart(item)}
                   >
                     <AddBoxOutlinedIcon />
@@ -375,7 +383,7 @@ function CartScreen({
             </CardContent>
           </Card>
         ))}
-    </>
+    </Box>
   );
 }
 
