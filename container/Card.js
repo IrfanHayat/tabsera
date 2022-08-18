@@ -37,7 +37,6 @@ export default function ActionAreaCard({
     // <Box>
 
     <Card
-
       sx={{
         m: 1,
         // mx: 0.4,
@@ -60,7 +59,7 @@ export default function ActionAreaCard({
           cursor: "pointer",
         },
       }}
-    // className={cx(styles.root)}
+      // className={cx(styles.root)}
     >
       {product?.productImage && (
         <>
@@ -107,17 +106,14 @@ export default function ActionAreaCard({
           alt="shirt"
           width={245}
           height={200}
-        // loading="eager"
+          // loading="eager"
         ></Image>
-      )
-      }
-      {
-        product?.category_name && (
-          <CardContent>
-            <Typography variant="body">{product?.category_name}</Typography>
-          </CardContent>
-        )
-      }
+      )}
+      {product?.category_name && (
+        <CardContent>
+          <Typography variant="body">{product?.category_name}</Typography>
+        </CardContent>
+      )}
       <CardContent>
         {/* <Typography variant="h5">{product?.categoryName}</Typography> */}
         <Typography fontSize="0.9rem" variant="h5" fontWeight={600}>
@@ -191,7 +187,7 @@ export default function ActionAreaCard({
           )}
         </Box>
       </CardContent>
-    </Card >
+    </Card>
     // </Box>
   );
 }

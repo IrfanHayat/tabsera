@@ -391,7 +391,7 @@ export default function PersistentDrawerLeft() {
                           <Image
                             src={result.category_image}
                             width={50}
-                            height={40}
+                            height={30}
                           ></Image>
                         </ListItemIcon>
                         <ListItemText>{result.category_name}</ListItemText>
@@ -427,7 +427,7 @@ export default function PersistentDrawerLeft() {
                           <Image
                             src={result.imageURL}
                             width={50}
-                            height={40}
+                            height={30}
                           ></Image>
                         </ListItemIcon>
                         <ListItemText>{result.campaignName}</ListItemText>
@@ -533,7 +533,7 @@ export default function PersistentDrawerLeft() {
               </FormControl>
             </Grid>
           </Grid>
-          <Grid sx={{ display: "flex" }}>
+          <Grid>
             {showProduct == false &&
             showAllCategoryPro == false &&
             showAllMerchantPro == false &&
