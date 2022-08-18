@@ -31,7 +31,7 @@ import Link from "@mui/material/Link";
 import Rating from "@mui/material/Rating";
 import ReactImageMagnify from "react-image-magnify";
 import Brightness1Icon from '@mui/icons-material/Brightness1';
-import 'react-color-picker/index.css'
+
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
   { width: 550, itemsToShow: 2 },
