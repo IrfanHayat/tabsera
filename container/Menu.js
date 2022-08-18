@@ -283,7 +283,7 @@ export default function PersistentDrawerLeft() {
     dispatch(getDeals());
   }, []);
 
-  useEffect(() => {}, [featureProduct]);
+  useEffect(() => { }, [featureProduct]);
 
   const showAllProducts = () => {
     setShowProduct(true);
@@ -346,10 +346,11 @@ export default function PersistentDrawerLeft() {
               // bgcolor: "background.paper",
               // borderRadius: 1,
             }}
-            // data-aos="fade-up"
+          // data-aos="fade-up"
           >
             <Item
               sx={{
+                m: 1,
                 width: {
                   md: "20%",
                   sm: "40%",
@@ -383,7 +384,7 @@ export default function PersistentDrawerLeft() {
                         secondaryAction={
                           <ArrowForwardIosIcon
                             sx={{ fontSize: 12 }}
-                            // fontSize="small"
+                          // fontSize="small"
                           />
                         }
                       >
@@ -418,7 +419,7 @@ export default function PersistentDrawerLeft() {
                         secondaryAction={
                           <ArrowForwardIosIcon
                             sx={{ fontSize: 12 }}
-                            // fontSize="small"
+                          // fontSize="small"
                           />
                         }
                       >
@@ -445,8 +446,9 @@ export default function PersistentDrawerLeft() {
             {featureProduct != "" ? (
               <Item
                 sx={{
+                  m: 1,
                   width: {
-                    // m: 1,
+
                     md: "80%",
                     sm: "60%",
                     xs: "60%",
@@ -478,7 +480,7 @@ export default function PersistentDrawerLeft() {
                 // borderRadius: 1,
               }
             }
-            // data-aos="fade-up"
+          // data-aos="fade-up"
           >
             <Grid
               item
@@ -533,13 +535,13 @@ export default function PersistentDrawerLeft() {
               </FormControl>
             </Grid>
           </Grid>
-          <Grid sx={{ display: "flex" }}>
+          <Grid>
             {showProduct == false &&
-            showAllCategoryPro == false &&
-            showAllMerchantPro == false &&
-            showDeals == false &&
-            showDiscounts == false &&
-            showFreeShipping == false ? (
+              showAllCategoryPro == false &&
+              showAllMerchantPro == false &&
+              showDeals == false &&
+              showDiscounts == false &&
+              showFreeShipping == false ? (
               <ViewAllProducts
                 Item={Item}
                 data={filterData ? filterData : data?.response}
@@ -549,11 +551,11 @@ export default function PersistentDrawerLeft() {
             )}
 
             {showProduct &&
-            showDiscounts == false &&
-            showAllCategoryPro == false &&
-            showAllMerchantPro == false &&
-            showDeals == false &&
-            showFreeShipping == false ? (
+              showDiscounts == false &&
+              showAllCategoryPro == false &&
+              showAllMerchantPro == false &&
+              showDeals == false &&
+              showFreeShipping == false ? (
               <ViewAllProducts
                 Item={Item}
                 data={filterData ? filterData : data?.response}
@@ -575,10 +577,10 @@ export default function PersistentDrawerLeft() {
             )}
 
             {showDiscounts &&
-            showProduct == false &&
-            showAllMerchantPro == false &&
-            showDeals == false &&
-            showFreeShipping == false ? (
+              showProduct == false &&
+              showAllMerchantPro == false &&
+              showDeals == false &&
+              showFreeShipping == false ? (
               <Discounts
                 data={filterData ? filterData : discountData}
                 showProduct={showProduct}
@@ -604,10 +606,10 @@ export default function PersistentDrawerLeft() {
 
             {/* <Grid sx={{ display: "flex", flexDirection: "column" }}> */}
             {showAllCategoryPro &&
-            showDiscounts == false &&
-            showAllMerchantPro == false &&
-            showDeals == false &&
-            showFreeShipping == false ? (
+              showDiscounts == false &&
+              showAllMerchantPro == false &&
+              showDeals == false &&
+              showFreeShipping == false ? (
               <ProductGetByCategory
                 data={filterData ? filterData : data?.response}
                 Item={Item}
