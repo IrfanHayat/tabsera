@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import Carousel from "react-material-ui-carousel";
 import { Paper, Button } from "@mui/material";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+import ActionAreaCard from "../Card";
 import Image from "next/image";
-function NewCarousel({ product }) {
+function NewCarousel({
+  product,
+  heading,
+  content,
+  viewProduct,
+  addToCartHandler,
+  viewCategory,
+}) {
   var items = product;
+  let [productView, setProuctView] = useState(false);
+  let [categoryView, setCategoryView] = useState(false);
+  let [cartView, setCartView] = useState(false);
+  const [rtl, setrtl] = useState(false);
+  console.log(product);
 
   return (
     <Carousel
@@ -15,8 +28,26 @@ function NewCarousel({ product }) {
       NextIcon={<ArrowRightIcon />}
       PrevIcon={<ArrowLeftIcon />}
     >
-      {items?.map((item, i) => (
-        <Item key={i} item={item} />
+      {product?.map((item, index) => (
+        //   <Image
+        //   // layout="fill"
+        //   width={2000}
+        //   // object-fit="cover"
+        //   objectFit="contain"
+        //   height={500}
+        //   // style={{ width: "100%", height: "300px" }}
+        //   src={props?.item?.productImage}
+        // ></Image>
+        <ActionAreaCard
+          key={index}
+          product={item}
+          viewProduct={viewProduct}
+          addToCartHandler={addToCartHandler}
+          viewCategory={viewCategory}
+          productView={productView}
+          categoryView={categoryView}
+          cartView={cartView}
+        ></ActionAreaCard>
       ))}
     </Carousel>
   );

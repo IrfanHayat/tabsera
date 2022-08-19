@@ -144,7 +144,8 @@ export default function ActionAreaCard({
           fontSize="0.9rem"
           variant="h5"
           fontWeight={600}
-        // display="inline"
+          // display="inline"
+          noWrap
         >
           {product?.productName}
         </Typography>

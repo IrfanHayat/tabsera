@@ -86,33 +86,10 @@ function SubCategory() {
   return (
     <>
 
-      <Grid
-        maxWidth="xl"
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          // p: 1,
-          // m: 1,
-          // bgcolor: "background.paper",
-          // borderRadius: 1,
-        }}
-      // data-aos="fade-up"
-      >
+      <Grid>
         <Item
-          sx={{
-            m: 1,
-            width: {
-              md: "20%",
-              sm: "40%",
-              xs: "40%",
-              display: "flex",
-              height: "100vh"
-              // direction: "column",
-              // fontWeight: "bold",
-              // alignItems: "center",
-              // justifyContent: "center",
-            },
-          }}
+          sx={{ display: 'inline-flex' }}
+
         >
           <List dense>
 
