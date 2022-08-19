@@ -161,12 +161,15 @@ export default function ActionAreaCard({
           RS. {product?.productCost}
         </Typography>
         {product.discountPercent ? (
-          <Grid sx={{ display: "flex", justifyContent: "space-between" }}>
+          <Grid
+            sx={{ display: "flex", justifyContent: "space-between", my: -1 }}
+          >
             <Typography
               gutterBottom
               style={{ textDecorationLine: "line-through" }}
               variant="overline"
               component="div"
+              display="inline"
             >
               Rs {product.originalPrice}
             </Typography>

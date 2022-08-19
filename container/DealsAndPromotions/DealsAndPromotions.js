@@ -134,6 +134,26 @@ const DealsAndPromotions = ({ dealsData, viewProduct }) => {
                     // maxWidth: { xs: 350, md: 250 },
                   }}
                 ></CardMedia>
+                {result?.bundleImage ? (
+                  <ImageListItemBar
+                    sx={{ background: "none" }}
+                    position="top"
+                    actionIcon={
+                      <IconButton>
+                        <Chip
+                          // sx={{ color: "yellow" }}
+                          icon={<LoyaltyIcon />}
+                          label="Deals"
+                          size="small"
+                          color="primary"
+                        />
+                      </IconButton>
+                    }
+                    actionPosition="right"
+                  />
+                ) : (
+                  ""
+                )}
                 {/* <Image
               data-aos="fade-up"
               // className={cx(styles.media, mediaStyles.root)}
