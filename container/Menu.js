@@ -23,15 +23,18 @@ import CarouselApp from "./Carousel/Carousel";
 import { useGetAllProductsQuery } from "../RTK/productApi";
 import MenuCard from "./DealsAndPromotions/MenuCards";
 import RadioGroup from "@mui/material/RadioGroup";
+
 import {
   CircularProgress,
   ListItem,
   ListItemIcon,
   Typography,
+  TextField,
+  InputAdornment,
 } from "@mui/material";
+import WidgetsIcon from "@mui/icons-material/Widgets";
 import IconButton from "@mui/material/IconButton";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
-
 import { getDiscounts } from "../slice/discountsSlice";
 import Button from "@mui/material/Button";
 import NavSelect from "./Navbar/Components/NavSelect";
@@ -117,10 +120,9 @@ export default function PersistentDrawerLeft() {
   //freeShipping
   let [freeShippingData, setFreeShippingData] = useState();
   let [showFreeShipping, setShowFreeShipping] = useState(false);
-
+  const [key, setKey] = useState(1);
   let router = useRouter();
   let dispatch = useDispatch();
-
 
   const handleChange = async (event) => {
     console.log(event.target.value);
@@ -213,14 +215,12 @@ export default function PersistentDrawerLeft() {
     (state) => state.product.featureProductData
   );
 
-
   const viewProduct = (item) => {
     router.push({
       pathname: "/product_detail",
       query: { productId: item },
     });
   };
-
 
   const addToCartHandler = async (product) => {
     let result = await dispatch(addToCart(product));
@@ -249,8 +249,8 @@ export default function PersistentDrawerLeft() {
   //   }, {});
   // }
 
-  useEffect(async () => {
-    if (router?.query?.key == 1) {
+  useEffect(() => {
+    if (key == 1) {
       // let categoryResult = await dispatch(getCategory());
       setCategory(categoryData);
       // setShowList(false);
@@ -262,7 +262,7 @@ export default function PersistentDrawerLeft() {
     // let data = dispatch(getCategory());
     // console.log(data);
     // dispatch(getCampaigns());
-  }, [router?.query?.key, categoryData, campaignsData]);
+  }, [key, categoryData, campaignsData]);
 
   async function getCompaignsData() {
     if (router?.query?.key == 1) {
@@ -349,6 +349,7 @@ export default function PersistentDrawerLeft() {
         <>
           <Grid
             maxWidth="xl"
+            // container
             sx={{
               display: "flex",
               justifyContent: "space-between",
@@ -366,7 +367,7 @@ export default function PersistentDrawerLeft() {
                   md: "20%",
                   sm: "40%",
                   xs: "40%",
-                  display: "flex",
+                  // display: "flex",
                   // direction: "column",
                   // fontWeight: "bold",
                   // alignItems: "center",
@@ -374,8 +375,35 @@ export default function PersistentDrawerLeft() {
                 },
               }}
             >
+              <FormControl sx={{ m: 1, minWidth: 80 }}>
+                <TextField
+                  select
+                  // value={age}
+                  // onChange={handleChange}
+                  // startIcon={<WidgetsIcon />}
+                  defaultValue={20}
+                  variant="standard"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <WidgetsIcon />
+                      </InputAdornment>
+                    ),
+                    disableUnderline: true,
+                    "aria-label": "Without label",
+                  }}
+                >
+                  <MenuItem value={10} onClick={() => setKey(2)}>
+                    Campaigns
+                  </MenuItem>
+                  <Divider />
+                  <MenuItem value={20} onClick={() => setKey(1)}>
+                    Categories
+                  </MenuItem>
+                </TextField>
+              </FormControl>
               <List dense>
-                {router?.query?.key == 1 && category?.length > 0 ? (
+                {key == 1 && category?.length > 0 ? (
                   <>
                     {category?.map((result) => (
                       <ListItem
@@ -406,11 +434,15 @@ export default function PersistentDrawerLeft() {
                             height={30}
                           ></Image>
                         </ListItemIcon>
-                        <ListItemText onClick={(e) => viewCategory(result.category_id)}>{result.category_name}</ListItemText>
+                        <ListItemText
+                          onClick={(e) => viewCategory(result.category_id)}
+                        >
+                          {result.category_name}
+                        </ListItemText>
                       </ListItem>
                     ))}
                   </>
-                ) : (
+                ) : key == 2 && compaigns?.length > 0 ? (
                   <>
                     {compaigns?.map((result) => (
                       <ListItem
@@ -448,6 +480,8 @@ export default function PersistentDrawerLeft() {
                       </ListItem>
                     ))}
                   </>
+                ) : (
+                  ""
                 )}
               </List>
             </Item>
@@ -457,7 +491,6 @@ export default function PersistentDrawerLeft() {
                 sx={{
                   m: 1,
                   width: {
-
                     md: "80%",
                     sm: "60%",
                     xs: "60%",
@@ -473,6 +506,7 @@ export default function PersistentDrawerLeft() {
                   NextIcon={<ArrowRightIcon />}
                   PrevIcon={<ArrowLeftIcon />}
                   height={300}
+                // navButtonsAlwaysVisible={true}
                 >
                   {featureProduct?.map((result) => (
                     <>
@@ -680,7 +714,7 @@ export default function PersistentDrawerLeft() {
               showFreeShipping == false ? (
               <Discounts
                 data={filterData ? filterData : discountData}
-                showProduct={showProduct}
+                showDiscounts={showDiscounts}
                 showAllCategoryPro={showAllCategoryPro}
                 showAllMerchantPro={showAllMerchantPro}
                 filterData={filterData}

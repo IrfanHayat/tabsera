@@ -20,7 +20,8 @@ import StarBorderIcon from "@mui/icons-material/StarBorder";
 import Chip from "@mui/material/Chip";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined";
-import CardMedia from "@mui/material/CardMedia";
+import { CardMedia, Button, Grid } from "@mui/material";
+import { result } from "lodash";
 export default function ActionAreaCard({
   product,
   viewProduct,
@@ -36,6 +37,7 @@ export default function ActionAreaCard({
   });
   const AnimatedTypography = animated(Typography);
   console.log("freee", product);
+  let height = product.discountPercent ? "57vh" : "57vh";
   return (
     // <Box>
 
@@ -51,10 +53,10 @@ export default function ActionAreaCard({
         // border: 1,
         // borderColor: "#9E9E9E ",
         bgcolor: "background.paper",
-        padding: 0.5,
-        width: 200,
+        // padding: 0.5,
+        width: 250,
         // maxWidth: 280,
-        height: 300,
+        height: { height },
         ":hover": {
           border: 1,
           borderColor: "#9E9E9E ",
@@ -81,7 +83,7 @@ export default function ActionAreaCard({
               sx={{
                 top: 0,
                 width: "100%",
-                height: 180,
+                height: 200,
                 objectFit: "cover",
                 // position: "absolute",
                 // maxHeight: { xs: 233, md: 167 },
@@ -133,13 +135,13 @@ export default function ActionAreaCard({
         // loading="eager"
         ></Image>
       )}
-      {product?.category_name && (
-        <CardContent>
-          <Typography variant="body">{product?.category_name}</Typography>
-        </CardContent>
-      )}
-      <CardContent>
+
+      <Grid md={12} sx={{ m: 0.5 }}>
         {/* <Typography variant="h5">{product?.categoryName}</Typography> */}
+        {product?.category_name && (
+          <Typography variant="body">{product?.category_name}</Typography>
+        )}
+
         <Typography
           fontSize="0.9rem"
           variant="h5"
@@ -149,24 +151,35 @@ export default function ActionAreaCard({
         >
           {product?.productName}
         </Typography>
-        {/* <Typography variant="h5" sx={{ color: "error.main" }}>
+
+        <Typography
+          fontSize="1rem"
+          variant="h5"
+          fontWeight={600}
+          sx={{ color: "warning.dark" }}
+        >
           {" "}
           RS. {product?.productCost}
-        </Typography> */}
+        </Typography>
+        {product.discountPercent ? (
+          <Grid sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Typography
+              fontSize="0.7rem"
 
-        {/* <Typography fontSize="0.9rem" variant="h5" fontWeight={600}>
-          {product?.averageRating}
-        </Typography> */}
-        <Stack spacing={1}>
-          <Rating
-            name="size-small"
-            defaultValue={product?.averageRating}
-            size="small"
-            // fontSize={24}
-            readOnly
-          />
-        </Stack>
-        <Box
+
+              style={{ textDecorationLine: "line-through" }}
+            >
+              Rs {product.originalPrice}
+            </Typography>
+            {"   "}
+            <Typography fontSize="0.7rem">
+              - {product.discountPercent} %
+            </Typography>
+          </Grid>
+        ) : (
+          <></>
+        )}
+        {/* <Box
           sx={{
             display: "flex",
             justifyContent: "space-between",
@@ -176,40 +189,35 @@ export default function ActionAreaCard({
             bgcolor: "background.paper",
             borderRadius: 1,
           }}
-        >
-          {/* {product.productName ? (
-          <IconButton
-            key={product.id}
-            onClick={(e) => viewProduct(product)}
-            color="primary"
-            aria-label="add to shopping cart"
-          >
-            <PreviewOutlinedIcon />
-          </IconButton>
-        ) : (
-          ""
-        )}
-
-        {product?.category_name && (
-          <IconButton
-            key={product.id}
-            onClick={(e) => viewCategory(product.category_id)}
-            color="primary"
-            aria-label="add to shopping cart"
-          >
-            <PreviewOutlinedIcon />
-          </IconButton>
-        )} */}
-          <Typography
-            fontSize="0.9rem"
-            variant="h5"
-            fontWeight={600}
-            sx={{ color: "warning.dark", p: 1 }}
-          >
-            {" "}
-            RS. {product?.productCost}
-          </Typography>
+        > */}
+        <Grid md={3}>
+          <Rating
+            name="size-small"
+            defaultValue={product?.averageRating}
+            size="small"
+            // fontSize={24}
+            readOnly
+          />
+        </Grid>
+        <Grid md={6}>
           {product.productName ? (
+            <Button
+              variant="contained"
+              size="small"
+
+              key={product.id}
+              onClick={() => addToCartHandler(product)}
+              endIcon={<AddShoppingCartOutlinedIcon fontSize="small" />}
+            >
+              {" "}
+              Add To Cart
+            </Button>
+          ) : (
+            ""
+          )}
+        </Grid>
+
+        {/* {product.productName ? (
             <IconButton
               key={product.id}
               onClick={() => addToCartHandler(product)}
@@ -220,9 +228,9 @@ export default function ActionAreaCard({
             </IconButton>
           ) : (
             ""
-          )}
-        </Box>
-      </CardContent>
+          )} */}
+        {/* </Box> */}
+      </Grid>
     </Card>
     // </Box>
   );

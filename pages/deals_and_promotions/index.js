@@ -35,7 +35,7 @@ const Index = ({ data, showProduct }) => {
   useEffect(() => { }, [dealsData]);
 
   return (
-    <Grid container justifyContent="center">
+    <Grid container >
 
 
 

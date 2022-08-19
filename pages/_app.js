@@ -41,13 +41,13 @@ const MyApp = ({ Component, pageProps }) => {
           </Head>
           <NavBar />
 
-          <Container maxWidth="xl" sx={{ minHeight: "80vh" }}>
-            <Box>
-              {/* <RouteGuard> */}
-              <Component {...pageProps} />
-              {/* </RouteGuard> */}
-            </Box>
-          </Container>
+          {/* <Container maxWidth="xl" sx={{ minHeight: "80vh" }}> */}
+          <Box>
+            {/* <RouteGuard> */}
+            <Component {...pageProps} />
+            {/* </RouteGuard> */}
+          </Box>
+          {/* </Container> */}
           <Footer />
           {/* </CookiesProvider> */}
         </ThemeProvider>

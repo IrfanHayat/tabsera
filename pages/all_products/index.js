@@ -27,7 +27,6 @@ import Fade from "@mui/material/Fade";
 import ModalData from "../../container/Login/ModalData";
 import Cookies from "js-cookie";
 import {
-
   getProductSearchWithHint,
   getProductSearch,
 } from "../../slice/productSlice";
@@ -50,7 +49,7 @@ const Index = ({ Item, data }) => {
   let [status, setStatus] = useState();
   const [openBar, setOpenBar] = React.useState(false);
   const [open, setOpen] = React.useState(false);
-  let [searchData, setSearchData] = useState()
+  let [searchData, setSearchData] = useState();
   let newProduct = product.slice([0], [5]).map((item, i) => {
     return item;
   });
@@ -62,18 +61,14 @@ const Index = ({ Item, data }) => {
   let router = useRouter();
   let dispatch = useDispatch();
 
-
   useEffect(async () => {
-
     let result = await dispatch(getProductSearch(router?.query?.data));
     console.log(result);
-    setSearchData(result.payload)
-
-  }, [searchData])
-
+    setSearchData(result.payload);
+  }, [searchData]);
 
   useEffect(async () => {
-    console.log(router.query)
+    console.log(router.query);
     await dispatch(getProduct());
   }, []);
 
@@ -176,22 +171,24 @@ const Index = ({ Item, data }) => {
       /> */}
       <Grid
         container
-        justifyContent="center"
-        alignItems="center"
+        // justifyContent="center"
+        // alignItems="center"
+        sx={{ display: "flex", flex: "wrap" }}
+        // margin={1}
         minHeight={500}
       >
         {product && data?.length < 1
           ? router.query.data.map((item, index) => (
-            <Item key={index}>
-              <ActionAreaCard
-                product={item}
-                viewProduct={viewProduct}
-                addToCartHandler={addToCartHandler}
-                key={index}
-              >
-                {/* {item?.productName}> */}
-              </ActionAreaCard>
-            </Item>
+            // <Item key={index}>
+            <ActionAreaCard
+              product={item}
+              viewProduct={viewProduct}
+              addToCartHandler={addToCartHandler}
+              key={index}
+            >
+              {/* {item?.productName}> */}
+            </ActionAreaCard>
+            // </Item>
           ))
           : data?.map((item, index) => (
             <ActionAreaCard
@@ -203,8 +200,8 @@ const Index = ({ Item, data }) => {
               {/* {item?.productName}> */}
             </ActionAreaCard>
           ))}
-        {
-          searchData?.length > 0 ? searchData?.map((item, index) => (
+        {searchData?.length > 0 ? (
+          searchData?.map((item, index) => (
             <ActionAreaCard
               product={item}
               viewProduct={viewProduct}
@@ -212,9 +209,11 @@ const Index = ({ Item, data }) => {
               key={index}
             >
               {/* {item?.productName}> */}
-            </ActionAreaCard>)) : <></>
-        }
-
+            </ActionAreaCard>
+          ))
+        ) : (
+          <></>
+        )}
       </Grid>
       {/* </InfiniteScroll> */}
     </>

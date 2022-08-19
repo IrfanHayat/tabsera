@@ -1,5 +1,5 @@
 import * as React from "react";
-import  styled  from "@mui/system/styled";
+import styled from "@mui/system/styled";
 import Box from "@mui/material/Box";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
@@ -14,10 +14,10 @@ const Item = styled(Paper)(({ theme }) => ({
 
 export default function Product() {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <Grid item xs={12} md={12}>
-         <Menu /> 
-      </Grid>
-    </Box>
+    <>
+      {/* <Grid item xs={12} md={12}> */}
+      <Menu />
+      {/* </Grid> */}
+    </>
   );
 }
