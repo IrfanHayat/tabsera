@@ -56,7 +56,9 @@ const Index = ({ Item, data }) => {
   let router = useRouter();
   let dispatch = useDispatch();
 
+
   useEffect(async () => {
+    console.log(router.query)
     await dispatch(getProduct());
   }, []);
 
@@ -164,19 +166,8 @@ const Index = ({ Item, data }) => {
         minHeight={500}
       >
         {product && data?.length < 1
-          ? product.map((item, index) => (
-              <Item key={index}>
-                <ActionAreaCard
-                  product={item}
-                  viewProduct={viewProduct}
-                  addToCartHandler={addToCartHandler}
-                  key={index}
-                >
-                  {/* {item?.productName}> */}
-                </ActionAreaCard>
-              </Item>
-            ))
-          : data?.map((item, index) => (
+          ? router.query.data.map((item, index) => (
+            <Item key={index}>
               <ActionAreaCard
                 product={item}
                 viewProduct={viewProduct}
@@ -185,7 +176,18 @@ const Index = ({ Item, data }) => {
               >
                 {/* {item?.productName}> */}
               </ActionAreaCard>
-            ))}
+            </Item>
+          ))
+          : data?.map((item, index) => (
+            <ActionAreaCard
+              product={item}
+              viewProduct={viewProduct}
+              addToCartHandler={addToCartHandler}
+              key={index}
+            >
+              {/* {item?.productName}> */}
+            </ActionAreaCard>
+          ))}
       </Grid>
       {/* </InfiniteScroll> */}
     </>

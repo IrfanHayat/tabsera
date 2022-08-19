@@ -109,6 +109,10 @@ export default function PersistentDrawerLeft() {
   let [freeShippingData, setFreeShippingData] = useState();
   let [showFreeShipping, setShowFreeShipping] = useState(false);
 
+  let router = useRouter();
+  let dispatch = useDispatch();
+
+
   const handleChange = async (event) => {
     console.log(event.target.value);
 
@@ -194,8 +198,6 @@ export default function PersistentDrawerLeft() {
     (state) => state.product.featureProductData
   );
 
-  let router = useRouter();
-  let dispatch = useDispatch();
 
   const viewProduct = (item) => {
     router.push({
