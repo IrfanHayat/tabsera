@@ -154,13 +154,19 @@ export default function NavDown(props) {
   }
 
   async function handleInputClick(e) {
-    let result = await dispatch(getProductSearch(e.target.value));
-    console.log(result);
-    router.push({
-      pathname: "/all_products",
-      query: { data: result.payload }
+    // let result = await dispatch(getProductSearch(e.target.value));
+    // console.log(result);
+    if (event.key === 'Enter') {
+      // Prevent's default 'Enter' behavior.
+      event.defaultMuiPrevented = true;
+      router.push({
+        pathname: "/all_products",
+        query: { data: e.target.value }
 
-    });
+      });
+      // your handler code
+    }
+
   }
 
   // ----------------------------------------------------------------------------------
@@ -310,7 +316,7 @@ export default function NavDown(props) {
               // popupIcon={<SearchIcon />}
               options={searchHintData ? searchHintData : []}
               onInputChange={handleInputChange}
-              onKeyUp={handleInputClick}
+              onKeyDown={handleInputClick}
               renderInput={(params) => (
                 <TextField
                   // InputProps={{ disableUnderline: true }}

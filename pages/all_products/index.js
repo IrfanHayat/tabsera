@@ -26,6 +26,11 @@ import Box from "@mui/material/Box";
 import Fade from "@mui/material/Fade";
 import ModalData from "../../container/Login/ModalData";
 import Cookies from "js-cookie";
+import {
+
+  getProductSearchWithHint,
+  getProductSearch,
+} from "../../slice/productSlice";
 
 const style = {
   height: 30,
@@ -45,6 +50,7 @@ const Index = ({ Item, data }) => {
   let [status, setStatus] = useState();
   const [openBar, setOpenBar] = React.useState(false);
   const [open, setOpen] = React.useState(false);
+  let [searchData, setSearchData] = useState()
   let newProduct = product.slice([0], [5]).map((item, i) => {
     return item;
   });
@@ -55,6 +61,15 @@ const Index = ({ Item, data }) => {
 
   let router = useRouter();
   let dispatch = useDispatch();
+
+
+  useEffect(async () => {
+
+    let result = await dispatch(getProductSearch(router?.query?.data));
+    console.log(result);
+    setSearchData(result.payload)
+
+  }, [searchData])
 
 
   useEffect(async () => {
@@ -188,6 +203,18 @@ const Index = ({ Item, data }) => {
               {/* {item?.productName}> */}
             </ActionAreaCard>
           ))}
+        {
+          searchData?.length > 0 ? searchData?.map((item, index) => (
+            <ActionAreaCard
+              product={item}
+              viewProduct={viewProduct}
+              addToCartHandler={addToCartHandler}
+              key={index}
+            >
+              {/* {item?.productName}> */}
+            </ActionAreaCard>)) : <></>
+        }
+
       </Grid>
       {/* </InfiniteScroll> */}
     </>

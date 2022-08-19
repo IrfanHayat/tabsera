@@ -158,6 +158,12 @@ export default function PersistentDrawerLeft() {
   };
 
   /////////
+  const viewCategory = (item) => {
+    router.push({
+      pathname: "/sub_category",
+      query: { sub_category: item },
+    });
+  };
 
   const sortingCategories = (
     <div>
@@ -206,12 +212,6 @@ export default function PersistentDrawerLeft() {
     });
   };
 
-  const viewCategory = (item) => {
-    router.push({
-      pathname: "/sub_category",
-      query: { sub_category: item },
-    });
-  };
 
   const addToCartHandler = async (product) => {
     let result = await dispatch(addToCart(product));
@@ -397,7 +397,7 @@ export default function PersistentDrawerLeft() {
                             height={30}
                           ></Image>
                         </ListItemIcon>
-                        <ListItemText>{result.category_name}</ListItemText>
+                        <ListItemText onClick={(e) => viewCategory(result.category_id)}>{result.category_name}</ListItemText>
                       </ListItem>
                     ))}
                   </>
