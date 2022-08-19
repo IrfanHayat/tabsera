@@ -74,6 +74,7 @@ export default function ActionAreaCard({
               // component="img"
               component="img"
               // height="194"
+              onClick={(e) => viewProduct(product)}
               image={product?.productImage}
               alt={product?.productName}
               sx={{
@@ -143,6 +144,7 @@ export default function ActionAreaCard({
           variant="h5"
           fontWeight={600}
           // display="inline"
+          noWrap
         >
           {product?.productName}
         </Typography>

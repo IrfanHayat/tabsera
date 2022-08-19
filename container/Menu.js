@@ -29,6 +29,9 @@ import {
   ListItemIcon,
   Typography,
 } from "@mui/material";
+import IconButton from "@mui/material/IconButton";
+import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
+
 import { getDiscounts } from "../slice/discountsSlice";
 import Button from "@mui/material/Button";
 import NavSelect from "./Navbar/Components/NavSelect";
@@ -46,7 +49,7 @@ import FormControl from "@mui/material/FormControl";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import FormHelperText from "@mui/material/FormHelperText";
-import { List } from "@mui/material";
+import { List, Stack } from "@mui/material";
 import SortFilter from "./Filter/SortFilter";
 import { motion } from "framer-motion";
 import DealsAndPromotions from "../pages/deals_and_promotions";
@@ -55,6 +58,11 @@ import FreeShipping from "../pages/is_free_shipping";
 import Snackbar from "@mui/material/Snackbar";
 import Alert from "@mui/material/Alert";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import Carousel from "react-material-ui-carousel";
+import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+import CardMedia from "@mui/material/CardMedia";
+import Rating from "@mui/material/Rating";
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
@@ -200,7 +208,7 @@ export default function PersistentDrawerLeft() {
   const viewProduct = (item) => {
     router.push({
       pathname: "/product_detail",
-      query: { productId: item.productId },
+      query: { productId: item },
     });
   };
 
@@ -439,7 +447,7 @@ export default function PersistentDrawerLeft() {
                 )}
               </List>
             </Item>
-
+            {console.log(featureProduct)}
             {featureProduct != "" ? (
               <Item
                 sx={{
@@ -451,12 +459,97 @@ export default function PersistentDrawerLeft() {
                   },
                 }}
               >
-                <CarouselApp
+                {/* <NewCarousel /> */}
+                <Carousel
+                  animation="slide"
+                  swipe
+                  interval={1000}
+                  NextIcon={<ArrowRightIcon />}
+                  PrevIcon={<ArrowLeftIcon />}
+                  height={300}
+                >
+                  {featureProduct?.map((result) => (
+                    <>
+                      <CardMedia
+                        // component="img"
+                        component="img"
+                        // height="194"
+                        onClick={(e) => viewProduct(result.productId)}
+                        image={result?.productImage}
+                        alt="featured Product"
+                        sx={{
+                          top: 0,
+                          width: "100%",
+                          height: 290,
+                          objectFit: "cover",
+                        }}
+                      ></CardMedia>
+
+                      <Box
+                        // square
+                        // elevation={0}
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          height: 50,
+                          // pl: 2,
+                          justifyContent: "space-between",
+                          p: 1,
+                          bgcolor: "background.default",
+                        }}
+                      >
+                        <Typography
+                          fontSize="0.9rem"
+                          variant="h5"
+                          fontWeight={600}
+                          // display="inline"
+                          noWrap
+                        >
+                          {result?.productName}
+                        </Typography>
+
+                        <Rating
+                          name="size-small"
+                          defaultValue={result?.averageRating}
+                          size="small"
+                          // fontSize={24}
+                          readOnly
+                        />
+                        <Typography
+                          fontSize="0.9rem"
+                          variant="h5"
+                          fontWeight={600}
+                          sx={{ color: "warning.dark", p: 1 }}
+                        >
+                          Rs. {result?.productCost}
+                        </Typography>
+                        {result.productName ? (
+                          <IconButton
+                            key={result.id}
+                            onClick={() => addToCartHandler(result)}
+                            color="primary"
+                            aria-label="add to shopping cart"
+                          >
+                            <AddShoppingCartOutlinedIcon fontSize="small" />
+                          </IconButton>
+                        ) : (
+                          ""
+                        )}
+                      </Box>
+                    </>
+                  ))}
+                </Carousel>
+                {/* <NewCarousel
+                  product={featureProduct}
+                  viewProduct={viewProduct}
+                  addToCartHandler={addToCartHandler}
+                /> */}
+                {/* <CarouselApp
                   heading="Featured Products"
                   product={featureProduct}
                   viewProduct={viewProduct}
                   addToCartHandler={addToCartHandler}
-                />
+                /> */}
               </Item>
             ) : (
               ""
