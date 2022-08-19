@@ -23,15 +23,18 @@ import CarouselApp from "./Carousel/Carousel";
 import { useGetAllProductsQuery } from "../RTK/productApi";
 import MenuCard from "./DealsAndPromotions/MenuCards";
 import RadioGroup from "@mui/material/RadioGroup";
+
 import {
   CircularProgress,
   ListItem,
   ListItemIcon,
   Typography,
+  TextField,
+  InputAdornment,
 } from "@mui/material";
+import WidgetsIcon from "@mui/icons-material/Widgets";
 import IconButton from "@mui/material/IconButton";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
-
 import { getDiscounts } from "../slice/discountsSlice";
 import Button from "@mui/material/Button";
 import NavSelect from "./Navbar/Components/NavSelect";
@@ -116,10 +119,9 @@ export default function PersistentDrawerLeft() {
   //freeShipping
   let [freeShippingData, setFreeShippingData] = useState();
   let [showFreeShipping, setShowFreeShipping] = useState(false);
-
+  const [key, setKey] = useState(1);
   let router = useRouter();
   let dispatch = useDispatch();
-
 
   const handleChange = async (event) => {
     console.log(event.target.value);
@@ -212,14 +214,12 @@ export default function PersistentDrawerLeft() {
     (state) => state.product.featureProductData
   );
 
-
   const viewProduct = (item) => {
     router.push({
       pathname: "/product_detail",
       query: { productId: item },
     });
   };
-
 
   const addToCartHandler = async (product) => {
     let result = await dispatch(addToCart(product));
@@ -248,8 +248,8 @@ export default function PersistentDrawerLeft() {
   //   }, {});
   // }
 
-  useEffect(async () => {
-    if (router?.query?.key == 1) {
+  useEffect(() => {
+    if (key == 1) {
       // let categoryResult = await dispatch(getCategory());
       setCategory(categoryData);
       // setShowList(false);
@@ -261,7 +261,7 @@ export default function PersistentDrawerLeft() {
     // let data = dispatch(getCategory());
     // console.log(data);
     // dispatch(getCampaigns());
-  }, [router?.query?.key, categoryData, campaignsData]);
+  }, [key, categoryData, campaignsData]);
 
   async function getCompaignsData() {
     if (router?.query?.key == 1) {
@@ -293,7 +293,7 @@ export default function PersistentDrawerLeft() {
     dispatch(getDeals());
   }, []);
 
-  useEffect(() => { }, [featureProduct]);
+  useEffect(() => {}, [featureProduct]);
 
   const showAllProducts = () => {
     setShowProduct(true);
@@ -348,6 +348,7 @@ export default function PersistentDrawerLeft() {
         <>
           <Grid
             maxWidth="xl"
+            // container
             sx={{
               display: "flex",
               justifyContent: "space-between",
@@ -356,7 +357,7 @@ export default function PersistentDrawerLeft() {
               // bgcolor: "background.paper",
               // borderRadius: 1,
             }}
-          // data-aos="fade-up"
+            // data-aos="fade-up"
           >
             <Item
               sx={{
@@ -365,7 +366,7 @@ export default function PersistentDrawerLeft() {
                   md: "20%",
                   sm: "40%",
                   xs: "40%",
-                  display: "flex",
+                  // display: "flex",
                   // direction: "column",
                   // fontWeight: "bold",
                   // alignItems: "center",
@@ -373,8 +374,35 @@ export default function PersistentDrawerLeft() {
                 },
               }}
             >
+              <FormControl sx={{ m: 1, minWidth: 80 }}>
+                <TextField
+                  select
+                  // value={age}
+                  // onChange={handleChange}
+                  // startIcon={<WidgetsIcon />}
+                  defaultValue={20}
+                  variant="standard"
+                  InputProps={{
+                    startAdornment: (
+                      <InputAdornment position="start">
+                        <WidgetsIcon />
+                      </InputAdornment>
+                    ),
+                    disableUnderline: true,
+                    "aria-label": "Without label",
+                  }}
+                >
+                  <MenuItem value={10} onClick={() => setKey(2)}>
+                    Campaigns
+                  </MenuItem>
+                  <Divider />
+                  <MenuItem value={20} onClick={() => setKey(1)}>
+                    Categories
+                  </MenuItem>
+                </TextField>
+              </FormControl>
               <List dense>
-                {router?.query?.key == 1 && category?.length > 0 ? (
+                {key == 1 && category?.length > 0 ? (
                   <>
                     {category?.map((result) => (
                       <ListItem
@@ -394,7 +422,7 @@ export default function PersistentDrawerLeft() {
                         secondaryAction={
                           <ArrowForwardIosIcon
                             sx={{ fontSize: 12 }}
-                          // fontSize="small"
+                            // fontSize="small"
                           />
                         }
                       >
@@ -405,11 +433,15 @@ export default function PersistentDrawerLeft() {
                             height={30}
                           ></Image>
                         </ListItemIcon>
-                        <ListItemText onClick={(e) => viewCategory(result.category_id)}>{result.category_name}</ListItemText>
+                        <ListItemText
+                          onClick={(e) => viewCategory(result.category_id)}
+                        >
+                          {result.category_name}
+                        </ListItemText>
                       </ListItem>
                     ))}
                   </>
-                ) : (
+                ) : key == 2 && compaigns?.length > 0 ? (
                   <>
                     {compaigns?.map((result) => (
                       <ListItem
@@ -429,7 +461,7 @@ export default function PersistentDrawerLeft() {
                         secondaryAction={
                           <ArrowForwardIosIcon
                             sx={{ fontSize: 12 }}
-                          // fontSize="small"
+                            // fontSize="small"
                           />
                         }
                       >
@@ -447,6 +479,8 @@ export default function PersistentDrawerLeft() {
                       </ListItem>
                     ))}
                   </>
+                ) : (
+                  ""
                 )}
               </List>
             </Item>
@@ -456,7 +490,6 @@ export default function PersistentDrawerLeft() {
                 sx={{
                   m: 1,
                   width: {
-
                     md: "80%",
                     sm: "60%",
                     xs: "60%",
@@ -471,6 +504,7 @@ export default function PersistentDrawerLeft() {
                   NextIcon={<ArrowRightIcon />}
                   PrevIcon={<ArrowLeftIcon />}
                   height={300}
+                  navButtonsAlwaysVisible={true}
                 >
                   {featureProduct?.map((result) => (
                     <>
@@ -573,14 +607,15 @@ export default function PersistentDrawerLeft() {
                 // borderRadius: 1,
               }
             }
-          // data-aos="fade-up"
+            // data-aos="fade-up"
           >
             <Grid
               item
               md={12}
+              // sm={6}
               sx={{
-                display: "flex",
-                flexDirection: "row",
+                display: { md: "flex", sm: "" },
+                // flexDirection: "row",
                 bgcolor: "background.paper",
                 m: 1,
                 p: 1,
@@ -588,53 +623,92 @@ export default function PersistentDrawerLeft() {
                 alignItems: "center",
               }}
             >
-              <SortFilter
-                data={data?.response}
-                setFilterData={setFilterData}
-                showAllProducts={showAllProducts}
-                showAllMerchantsProduct={showAllMerchantsProduct}
-                showAllCategoriesProduct={showAllCategoriesProduct}
-              ></SortFilter>
+              <Grid
+                item
+                md={6}
+                sm={12}
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  bgcolor: "background.paper",
+                  m: 1,
+                  p: 1,
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <SortFilter
+                  data={data?.response}
+                  setFilterData={setFilterData}
+                  showAllProducts={showAllProducts}
+                  showAllMerchantsProduct={showAllMerchantsProduct}
+                  showAllCategoriesProduct={showAllCategoriesProduct}
+                ></SortFilter>
+              </Grid>
               {/* <Box sx={{ flexGrow: 1 }} /> */}
-              <FormControl>
-                <RadioGroup
-                  row
-                  aria-labelledby="demo-controlled-radio-buttons-group"
-                  name="controlled-radio-buttons-group"
-                  value={value}
-                >
-                  <motion.div className="animatable" whileTap={{ scale: 0.9 }}>
-                    <FormControlLabel
-                      value="deals"
-                      control={<Radio onChange={handleChange} />}
-                      label="Deals And Promotions"
-                    />
-                  </motion.div>
-                  <motion.div className="animatable" whileTap={{ scale: 0.9 }}>
-                    <FormControlLabel
-                      value="discounts"
-                      control={<Radio onChange={handleChange} />}
-                      label="Discounts"
-                    />
-                  </motion.div>
-                  <motion.div className="animatable" whileTap={{ scale: 0.9 }}>
-                    <FormControlLabel
-                      value="freeShipping"
-                      control={<Radio onChange={handleChange} />}
-                      label="freeShipping"
-                    />
-                  </motion.div>
-                </RadioGroup>
-              </FormControl>
+              <Grid
+                item
+                md={6}
+                sm={12}
+                sx={{
+                  display: "flex",
+                  flexDirection: "row",
+                  bgcolor: "background.paper",
+                  m: 1,
+                  p: 1,
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                }}
+              >
+                <FormControl>
+                  <RadioGroup
+                    row
+                    aria-labelledby="demo-controlled-radio-buttons-group"
+                    name="controlled-radio-buttons-group"
+                    value={value}
+                  >
+                    <motion.div
+                      className="animatable"
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      <FormControlLabel
+                        value="deals"
+                        control={<Radio onChange={handleChange} />}
+                        label="Deals And Promotions"
+                      />
+                    </motion.div>
+                    <motion.div
+                      className="animatable"
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      <FormControlLabel
+                        value="discounts"
+                        control={<Radio onChange={handleChange} />}
+                        label="Discounts"
+                      />
+                    </motion.div>
+                    <motion.div
+                      className="animatable"
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      <FormControlLabel
+                        value="freeShipping"
+                        control={<Radio onChange={handleChange} />}
+                        label="freeShipping"
+                      />
+                    </motion.div>
+                  </RadioGroup>
+                </FormControl>
+              </Grid>
             </Grid>
           </Grid>
           <Grid>
             {showProduct == false &&
-              showAllCategoryPro == false &&
-              showAllMerchantPro == false &&
-              showDeals == false &&
-              showDiscounts == false &&
-              showFreeShipping == false ? (
+            showAllCategoryPro == false &&
+            showAllMerchantPro == false &&
+            showDeals == false &&
+            showDiscounts == false &&
+            showFreeShipping == false ? (
               <ViewAllProducts
                 Item={Item}
                 data={filterData ? filterData : data?.response}
@@ -644,11 +718,11 @@ export default function PersistentDrawerLeft() {
             )}
 
             {showProduct &&
-              showDiscounts == false &&
-              showAllCategoryPro == false &&
-              showAllMerchantPro == false &&
-              showDeals == false &&
-              showFreeShipping == false ? (
+            showDiscounts == false &&
+            showAllCategoryPro == false &&
+            showAllMerchantPro == false &&
+            showDeals == false &&
+            showFreeShipping == false ? (
               <ViewAllProducts
                 Item={Item}
                 data={filterData ? filterData : data?.response}
@@ -670,13 +744,13 @@ export default function PersistentDrawerLeft() {
             )}
 
             {showDiscounts &&
-              showProduct == false &&
-              showAllMerchantPro == false &&
-              showDeals == false &&
-              showFreeShipping == false ? (
+            showProduct == false &&
+            showAllMerchantPro == false &&
+            showDeals == false &&
+            showFreeShipping == false ? (
               <Discounts
                 data={filterData ? filterData : discountData}
-                showProduct={showProduct}
+                showDiscounts={showDiscounts}
                 showAllCategoryPro={showAllCategoryPro}
                 showAllMerchantPro={showAllMerchantPro}
                 filterData={filterData}
@@ -699,10 +773,10 @@ export default function PersistentDrawerLeft() {
 
             {/* <Grid sx={{ display: "flex", flexDirection: "column" }}> */}
             {showAllCategoryPro &&
-              showDiscounts == false &&
-              showAllMerchantPro == false &&
-              showDeals == false &&
-              showFreeShipping == false ? (
+            showDiscounts == false &&
+            showAllMerchantPro == false &&
+            showDeals == false &&
+            showFreeShipping == false ? (
               <ProductGetByCategory
                 data={filterData ? filterData : data?.response}
                 Item={Item}

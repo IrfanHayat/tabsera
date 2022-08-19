@@ -20,7 +20,8 @@ import StarBorderIcon from "@mui/icons-material/StarBorder";
 import Chip from "@mui/material/Chip";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined";
-import CardMedia from "@mui/material/CardMedia";
+import { CardMedia, Button, Grid } from "@mui/material";
+import { result } from "lodash";
 export default function ActionAreaCard({
   product,
   viewProduct,
@@ -36,6 +37,7 @@ export default function ActionAreaCard({
   });
   const AnimatedTypography = animated(Typography);
   console.log("freee", product);
+  let height = product.discountPercent ? 350 : 320;
   return (
     // <Box>
 
@@ -54,7 +56,7 @@ export default function ActionAreaCard({
         padding: 0.5,
         width: 200,
         // maxWidth: 280,
-        height: 300,
+        height: { height },
         ":hover": {
           border: 1,
           borderColor: "#9E9E9E ",
@@ -65,7 +67,7 @@ export default function ActionAreaCard({
           cursor: "pointer",
         },
       }}
-    // className={cx(styles.root)}
+      // className={cx(styles.root)}
     >
       {product?.productImage && (
         <>
@@ -81,7 +83,7 @@ export default function ActionAreaCard({
               sx={{
                 top: 0,
                 width: "100%",
-                height: 180,
+                height: 200,
                 objectFit: "cover",
                 // position: "absolute",
                 // maxHeight: { xs: 233, md: 167 },
@@ -130,16 +132,15 @@ export default function ActionAreaCard({
           alt="shirt"
           width={245}
           height={200}
-        // loading="eager"
+          // loading="eager"
         ></Image>
       )}
-      {product?.category_name && (
-        <CardContent>
-          <Typography variant="body">{product?.category_name}</Typography>
-        </CardContent>
-      )}
-      <CardContent>
+
+      <Box sx={{ m: 1 }}>
         {/* <Typography variant="h5">{product?.categoryName}</Typography> */}
+        {product?.category_name && (
+          <Typography variant="body">{product?.category_name}</Typography>
+        )}
         <Typography
           fontSize="0.9rem"
           variant="h5"
@@ -149,24 +150,35 @@ export default function ActionAreaCard({
         >
           {product?.productName}
         </Typography>
-        {/* <Typography variant="h5" sx={{ color: "error.main" }}>
+
+        <Typography
+          fontSize="1rem"
+          variant="h5"
+          fontWeight={600}
+          sx={{ color: "warning.dark" }}
+        >
           {" "}
           RS. {product?.productCost}
-        </Typography> */}
-
-        {/* <Typography fontSize="0.9rem" variant="h5" fontWeight={600}>
-          {product?.averageRating}
-        </Typography> */}
-        <Stack spacing={1}>
-          <Rating
-            name="size-small"
-            defaultValue={product?.averageRating}
-            size="small"
-            // fontSize={24}
-            readOnly
-          />
-        </Stack>
-        <Box
+        </Typography>
+        {product.discountPercent ? (
+          <Grid sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Typography
+              gutterBottom
+              style={{ textDecorationLine: "line-through" }}
+              variant="overline"
+              component="div"
+            >
+              Rs {product.originalPrice}
+            </Typography>
+            {"   "}
+            <Typography gutterBottom variant="overline">
+              {product.discountPercent} %
+            </Typography>
+          </Grid>
+        ) : (
+          <></>
+        )}
+        {/* <Box
           sx={{
             display: "flex",
             justifyContent: "space-between",
@@ -176,40 +188,29 @@ export default function ActionAreaCard({
             bgcolor: "background.paper",
             borderRadius: 1,
           }}
-        >
-          {/* {product.productName ? (
-          <IconButton
+        > */}
+        <Rating
+          name="size-small"
+          defaultValue={product?.averageRating}
+          size="small"
+          // fontSize={24}
+          readOnly
+        />
+        {product.productName ? (
+          <Button
+            variant="contained"
+            size="small"
             key={product.id}
-            onClick={(e) => viewProduct(product)}
-            color="primary"
-            aria-label="add to shopping cart"
+            onClick={() => addToCartHandler(product)}
+            endIcon={<AddShoppingCartOutlinedIcon fontSize="small" />}
           >
-            <PreviewOutlinedIcon />
-          </IconButton>
+            {" "}
+            Add To Cart
+          </Button>
         ) : (
           ""
         )}
-
-        {product?.category_name && (
-          <IconButton
-            key={product.id}
-            onClick={(e) => viewCategory(product.category_id)}
-            color="primary"
-            aria-label="add to shopping cart"
-          >
-            <PreviewOutlinedIcon />
-          </IconButton>
-        )} */}
-          <Typography
-            fontSize="0.9rem"
-            variant="h5"
-            fontWeight={600}
-            sx={{ color: "warning.dark", p: 1 }}
-          >
-            {" "}
-            RS. {product?.productCost}
-          </Typography>
-          {product.productName ? (
+        {/* {product.productName ? (
             <IconButton
               key={product.id}
               onClick={() => addToCartHandler(product)}
@@ -220,9 +221,9 @@ export default function ActionAreaCard({
             </IconButton>
           ) : (
             ""
-          )}
-        </Box>
-      </CardContent>
+          )} */}
+        {/* </Box> */}
+      </Box>
     </Card>
     // </Box>
   );
