@@ -9,9 +9,7 @@ import Button from "@mui/material/Button";
 function SortFilter({
   data,
   setFilterData,
-  showAllProducts,
-  showAllMerchantsProduct,
-  showAllCategoriesProduct,
+
 }) {
   const sortData = (type) => {
     var f_data;
@@ -100,20 +98,9 @@ function SortFilter({
         // bgcolor: "background.paper",
         // borderRadius: 0,
       }}
-      // data-aos="fade-down"
+    // data-aos="fade-down"
     >
-      <Box>
-        <Typography sx={{ display: "inline" }}>List By : </Typography>
-        <Button variant="text" onClick={showAllProducts}>
-          Products
-        </Button>
-        <Button variant="text" onClick={showAllMerchantsProduct}>
-          Sellers
-        </Button>
-        <Button variant="text" onClick={showAllCategoriesProduct}>
-          Categories
-        </Button>
-      </Box>
+
       {/* <Box sx={{ flexGrow: 0.85 }} /> */}
       <Box
         sx={{

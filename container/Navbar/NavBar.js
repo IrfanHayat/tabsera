@@ -273,7 +273,7 @@ export default function NavBar() {
   );
 
   return (
-    <Box data-aos="fade-down" sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1 }}>
       {/* {router.pathname === "/" ? */}
 
       <CssBaseline />

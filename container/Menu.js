@@ -70,6 +70,7 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.primary,
 }));
 import ListItemButton from "@mui/material/ListItemButton";
+import ListFilter from "./Filter/ListFilter";
 export default function PersistentDrawerLeft() {
   const { data, isLoading, isFetching, isError } = useGetAllProductsQuery();
   const { categoryData } = useSelector((state) => state.category);
@@ -467,6 +468,7 @@ export default function PersistentDrawerLeft() {
                 <Carousel
                   animation="slide"
                   swipe
+                  navButtonsAlwaysVisible={true}
                   interval={1000}
                   NextIcon={<ArrowRightIcon />}
                   PrevIcon={<ArrowLeftIcon />}
@@ -588,14 +590,11 @@ export default function PersistentDrawerLeft() {
                 alignItems: "center",
               }}
             >
-              <SortFilter
-                data={data?.response}
-                setFilterData={setFilterData}
-                showAllProducts={showAllProducts}
-                showAllMerchantsProduct={showAllMerchantsProduct}
-                showAllCategoriesProduct={showAllCategoriesProduct}
-              ></SortFilter>
+
               {/* <Box sx={{ flexGrow: 1 }} /> */}
+              <ListFilter showAllProducts={showAllProducts}
+                showAllMerchantsProduct={showAllMerchantsProduct}
+                showAllCategoriesProduct={showAllCategoriesProduct}></ListFilter>
               <FormControl>
                 <RadioGroup
                   row
@@ -626,6 +625,11 @@ export default function PersistentDrawerLeft() {
                   </motion.div>
                 </RadioGroup>
               </FormControl>
+              <SortFilter
+                data={data?.response}
+                setFilterData={setFilterData}
+
+              ></SortFilter>
             </Grid>
           </Grid>
           <Grid>

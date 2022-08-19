@@ -23,7 +23,7 @@ import { styled, useTheme, alpha } from "@mui/material/styles";
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
-  padding: theme.spacing(1),
+  // padding: theme.spacing(1),
   color: theme.palette.text.primary,
 }));
 function SubCategory() {
@@ -60,6 +60,8 @@ function SubCategory() {
     dispatch(getProductWithCategoryId(id));
   };
 
+  console.log(productDataWithCategoryId)
+
   const children = (
     <Box sx={{ display: 'flex', flexDirection: 'column', ml: 3 }}>
       <FormControlLabel
@@ -88,52 +90,52 @@ function SubCategory() {
 
       <Grid>
         <Item
-          sx={{ display: 'inline-flex' }}
+          sx={{ display: 'inline-flex', height: "100vh" }}
 
         >
           <List dense>
 
-            <>
 
-              <ListItem
-                // spacing={2}
-                // sx={{ p: 1 }}
-                // alignItems="flex-start"
-                sx={{
-                  ":hover": {
-                    // border: 1,
-                    // boxShadow: 1, // theme.shadows[20]
-                    transform: "scale(1.05)",
-                    // opacity: 0.5,
-                    color: "primary.main",
-                    cursor: "pointer",
-                  },
-                }}
 
-              >
-                <ListItemIcon>
-                  {/* <Image
+            <ListItem
+              // spacing={2}
+              // sx={{ p: 1 }}
+              // alignItems="flex-start"
+              sx={{
+                ":hover": {
+                  // border: 1,
+                  // boxShadow: 1, // theme.shadows[20]
+                  transform: "scale(1.05)",
+                  // opacity: 0.5,
+                  color: "primary.main",
+                  cursor: "pointer",
+                },
+              }}
+
+            >
+              <ListItemIcon>
+                {/* <Image
                     // src={result.category_image}
                     width={50}
                     height={30}
                   ></Image> */}
-                </ListItemIcon>
-                <ListItemText >
-                  <FormControlLabel
-                    label="Parent"
-                    control={
-                      <Checkbox
-                        checked={checked[0] && checked[1]}
-                        indeterminate={checked[0] !== checked[1]}
-                        onChange={handleChange1}
-                      />
-                    }
-                  />
-                  {children}
-                </ListItemText>
-              </ListItem>
+              </ListItemIcon>
+              <ListItemText >
+                <FormControlLabel
+                  label="Parent"
+                  control={
+                    <Checkbox
+                      checked={checked[0] && checked[1]}
+                      indeterminate={checked[0] !== checked[1]}
+                      onChange={handleChange1}
+                    />
+                  }
+                />
+                {children}
+              </ListItemText>
+            </ListItem>
 
-            </>
+
 
           </List>
         </Item>
