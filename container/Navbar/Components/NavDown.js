@@ -98,10 +98,10 @@ export default function NavDown(props) {
     dispatch(getCategory());
     dispatch(getCampaigns());
 
-    router.push({
-      pathname: "/",
-      query: { key: 1 },
-    });
+    // router.push({
+    //   pathname: "/",
+    //   query: { key: 1 },
+    // });
     // setQunatityProduct(result.payload)
   }, []);
 

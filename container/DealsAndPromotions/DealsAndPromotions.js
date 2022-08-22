@@ -38,7 +38,7 @@ const DealsAndPromotions = ({ dealsData, viewProduct }) => {
             // borderColor: "#9E9E9E ",
             bgcolor: "background.paper",
             // padding: 0.5,
-            width: 250,
+            width: 252,
             // maxWidth: 280,
             height: "57vh",
             ":hover": {
@@ -74,6 +74,26 @@ const DealsAndPromotions = ({ dealsData, viewProduct }) => {
                     // maxWidth: { xs: 350, md: 250 },
                   }}
                 ></CardMedia>
+                {result?.bundleImage ? (
+                  <ImageListItemBar
+                    sx={{ background: "none" }}
+                    position="top"
+                    actionIcon={
+                      <IconButton>
+                        <Chip
+                          // sx={{ color: "yellow" }}
+                          icon={<LoyaltyIcon />}
+                          label="Deals"
+                          size="small"
+                          color="primary"
+                        />
+                      </IconButton>
+                    }
+                    actionPosition="right"
+                  />
+                ) : (
+                  ""
+                )}
                 {/* <Image
                 data-aos="fade-up"
                 // className={cx(styles.media, mediaStyles.root)}
