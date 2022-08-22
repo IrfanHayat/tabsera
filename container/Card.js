@@ -20,7 +20,9 @@ import StarBorderIcon from "@mui/icons-material/StarBorder";
 import Chip from "@mui/material/Chip";
 import LocalShippingIcon from "@mui/icons-material/LocalShipping";
 import LocalShippingOutlinedIcon from "@mui/icons-material/LocalShippingOutlined";
-import { CardMedia, Button, Grid } from "@mui/material";
+import { CardMedia, Button, Grid, AppBar } from "@mui/material";
+import Badge from "@mui/material/Badge";
+
 import { result } from "lodash";
 export default function ActionAreaCard({
   product,
@@ -56,7 +58,7 @@ export default function ActionAreaCard({
         padding: 0.5,
         width: 200,
         // maxWidth: 280,
-        height: { height },
+        height: 340,
         ":hover": {
           border: 1,
           borderColor: "#9E9E9E ",
@@ -138,50 +140,65 @@ export default function ActionAreaCard({
 
       <Box sx={{ m: 1 }}>
         {/* <Typography variant="h5">{product?.categoryName}</Typography> */}
-        {product?.category_name && (
-          <Typography variant="body">{product?.category_name}</Typography>
-        )}
-        <Typography
-          fontSize="0.9rem"
-          variant="h5"
-          fontWeight={600}
-          // display="inline"
-          noWrap
-        >
-          {product?.productName}
-        </Typography>
-
-        <Typography
-          fontSize="1rem"
-          variant="h5"
-          fontWeight={600}
-          sx={{ color: "warning.dark" }}
-        >
-          {" "}
-          RS. {product?.productCost}
-        </Typography>
-        {product.discountPercent ? (
-          <Grid
-            sx={{ display: "flex", justifyContent: "space-between", my: -1 }}
+        <Box sx={{ height: 85 }}>
+          {product?.category_name && (
+            <Typography variant="body">{product?.category_name}</Typography>
+          )}
+          <Typography
+            fontSize="0.9rem"
+            variant="h5"
+            fontWeight={600}
+            // display="inline"
+            noWrap
           >
-            <Typography
-              gutterBottom
-              style={{ textDecorationLine: "line-through" }}
-              variant="overline"
-              component="div"
-              display="inline"
+            {product?.productName}
+          </Typography>
+
+          <Typography
+            fontSize="1rem"
+            variant="h5"
+            fontWeight={600}
+            sx={{ color: "warning.dark" }}
+          >
+            {" "}
+            RS. {product?.productCost}
+          </Typography>
+          {product.discountPercent ? (
+            <Grid
+              sx={{ display: "flex", justifyContent: "space-between", my: -1 }}
             >
-              Rs {product.originalPrice}
-            </Typography>
-            {"   "}
-            <Typography gutterBottom variant="overline">
+              <Typography
+                fontSize="0.7rem"
+                gutterBottom
+                style={{ textDecorationLine: "line-through" }}
+                variant="overline"
+                component="div"
+                display="inline"
+              >
+                Rs {product.originalPrice}
+              </Typography>
+              {"   "}
+              {/* <Typography gutterBottom variant="overline">
               {product.discountPercent} %
-            </Typography>
-          </Grid>
-        ) : (
-          <></>
-        )}
-        {/* <Box
+            </Typography> */}
+              {/* <Badge
+              badgeContent={`-${product.discountPercent}%`}
+              color="primary"
+              noWrap
+            ></Badge> */}
+              <Chip
+                // sx={{ color: "yellow" }}
+                // icon={<LocalShippingIcon />}
+                label={`-${product.discountPercent}%`}
+                size="small"
+                // color="warning"
+                sx={{ bgcolor: "yellow" }}
+              />
+            </Grid>
+          ) : (
+            <></>
+          )}
+          {/* <Box
           sx={{
             display: "flex",
             justifyContent: "space-between",
@@ -192,27 +209,30 @@ export default function ActionAreaCard({
             borderRadius: 1,
           }}
         > */}
-        <Rating
-          name="size-small"
-          defaultValue={product?.averageRating}
-          size="small"
-          // fontSize={24}
-          readOnly
-        />
-        {product.productName ? (
-          <Button
-            variant="contained"
+          <Rating
+            name="size-small"
+            defaultValue={product?.averageRating}
             size="small"
-            key={product.id}
-            onClick={() => addToCartHandler(product)}
-            endIcon={<AddShoppingCartOutlinedIcon fontSize="small" />}
-          >
-            {" "}
-            Add To Cart
-          </Button>
-        ) : (
-          ""
-        )}
+            // fontSize={24}
+            readOnly
+          />
+        </Box>
+        <Box sx={{ mb: 3, display: "flex", alignItems: "center" }}>
+          {product.productName ? (
+            <Button
+              variant="contained"
+              size="small"
+              key={product.id}
+              onClick={() => addToCartHandler(product)}
+              endIcon={<AddShoppingCartOutlinedIcon fontSize="small" />}
+            >
+              {" "}
+              Add To Cart
+            </Button>
+          ) : (
+            ""
+          )}
+        </Box>
         {/* {product.productName ? (
             <IconButton
               key={product.id}

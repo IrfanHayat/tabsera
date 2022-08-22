@@ -30,7 +30,7 @@ import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
 import Rating from "@mui/material/Rating";
 import ReactImageMagnify from "react-image-magnify";
-import Brightness1Icon from '@mui/icons-material/Brightness1';
+import Brightness1Icon from "@mui/icons-material/Brightness1";
 
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
@@ -161,12 +161,15 @@ function Details({
             {productDetail?.product_name}
           </Typography>
         </Breadcrumbs>
-
-
-
-
       </Box>
-      <Grid sx={{ display: "flex", justifyContent: "center", justifyContent: 'flex-end', paddingRight: "10%" }}>
+      <Grid
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          justifyContent: "flex-end",
+          paddingRight: "10%",
+        }}
+      >
         <Typography
           sx={{ color: "error.main", alignSelf: "center" }}
           style={{ fontWeight: "bold" }}
@@ -176,21 +179,17 @@ function Details({
         <Button
           variant="text"
           onClick={() => viewStore(merchantDetail?.merchant_id)}
-        // onClick={viewStore}
-
-
-
+          // onClick={viewStore}
         >
           Visit Store
         </Button>
       </Grid>
       <Grid
-
         container
         spacing={1}
         maxWidth="xl"
         sx={{ paddingTop: 2, backgroundColor: "white" }}
-      // justifyContent="center"
+        // justifyContent="center"
       >
         {/* <Grid item md={12} xs={12} ml={1}>
           <Typography variant="h6" style={{ fontWeight: "bold" }}>
@@ -199,8 +198,7 @@ function Details({
         </Grid> */}
         {/* <Grid item md={1} sm={1}></Grid> */}
 
-        <Grid item md={5} xs={12}>
-
+        <Grid item md={4} xs={12}>
           <List>
             <ListItem sx={{ m: 1 }}>
               <Carousel
@@ -215,7 +213,50 @@ function Details({
               >
                 {Object.keys(productDetail).length > 0 && skusFlag == false
                   ? productDetail.product_images[0].media_images.map(
-                    (result, index) => (
+                      (result, index) => (
+                        <ReactImageMagnify
+                          {...{
+                            smallImage: {
+                              alt: "Wristwatch by Ted Baker London",
+                              // isFluidWidth: true,
+                              width: 450,
+                              height: 400,
+                              src: result,
+                              // sizes:
+                              //   "(min-width: 800px) 33.5vw, (min-width: 415px) 50vw, 100vw",
+                            },
+                            largeImage: {
+                              src: result,
+                              width: 1200,
+                              height: 1800,
+                            },
+
+                            enlargedImagePosition: "over",
+                            // enlargedImageContainerDimensions: {
+                            //   width: "150%",
+                            //   height: "150%",
+                            // },
+                            enlargedImageContainerStyle: {
+                              zIndex: "1500",
+                            },
+                            enlargedImageContainerDimensions: {
+                              width: "50%",
+                              height: "100%",
+                            },
+                          }}
+                        />
+                        // <Image
+                        //   key={index}
+                        //   //  className={cx(styles.media, mediaStyles.root)}
+                        //   src={result}
+                        //   alt="shirt"
+                        //   // objectFit="contain"
+                        //   width={1000}
+                        //   height={900}
+                        // ></Image>
+                      )
+                    )
+                  : productImage && (
                       <ReactImageMagnify
                         {...{
                           smallImage: {
@@ -223,12 +264,12 @@ function Details({
                             // isFluidWidth: true,
                             width: 400,
                             height: 500,
-                            src: result,
+                            src: productImage[0],
                             // sizes:
                             //   "(min-width: 800px) 33.5vw, (min-width: 415px) 50vw, 100vw",
                           },
                           largeImage: {
-                            src: result,
+                            src: productImage[0],
                             width: 1200,
                             height: 1800,
                           },
@@ -248,101 +289,66 @@ function Details({
                         }}
                       />
                       // <Image
-                      //   key={index}
+                      //   // key={index}
                       //   //  className={cx(styles.media, mediaStyles.root)}
-                      //   src={result}
+                      //   src={productImage[0]}
                       //   alt="shirt"
-                      //   // objectFit="contain"
-                      //   width={1000}
-                      //   height={900}
+                      //   objectFit="contain"
+                      //   width={500}
+                      //   height={1000}
                       // ></Image>
-                    )
-                  )
-                  : productImage && (
-                    <ReactImageMagnify
-                      {...{
-                        smallImage: {
-                          alt: "Wristwatch by Ted Baker London",
-                          // isFluidWidth: true,
-                          width: 400,
-                          height: 500,
-                          src: productImage[0],
-                          // sizes:
-                          //   "(min-width: 800px) 33.5vw, (min-width: 415px) 50vw, 100vw",
-                        },
-                        largeImage: {
-                          src: productImage[0],
-                          width: 1200,
-                          height: 1800,
-                        },
-
-                        enlargedImagePosition: "over",
-                        // enlargedImageContainerDimensions: {
-                        //   width: "150%",
-                        //   height: "150%",
-                        // },
-                        enlargedImageContainerStyle: {
-                          zIndex: "1500",
-                        },
-                        enlargedImageContainerDimensions: {
-                          width: "50%",
-                          height: "100%",
-                        },
-                      }}
-                    />
-                    // <Image
-                    //   // key={index}
-                    //   //  className={cx(styles.media, mediaStyles.root)}
-                    //   src={productImage[0]}
-                    //   alt="shirt"
-                    //   objectFit="contain"
-                    //   width={500}
-                    //   height={1000}
-                    // ></Image>
-                  )}
+                    )}
               </Carousel>
             </ListItem>
 
-            <ListItem sx={{ display: "flex", justifyContent: "center" }}>
-
-
-
+            {/* <ListItem sx={{ display: "flex", justifyContent: "center" }}>
               <Rating
                 name="size-small"
                 defaultValue={3}
                 // size="small"
                 readOnly
               />
-
-            </ListItem>
-
+            </ListItem> */}
           </List>
-
-
-
         </Grid>
 
         <Grid
           item
-          md={6}
+          md={5}
           sm={12}
           xs={12}
 
-        // sx={{ display: "flex" }}
-        // justifyContent="center"
-        // alignItems="center"
+          // sx={{ display: "flex" }}
+          // justifyContent="center"
+          // alignItems="center"
         >
-
-
           <List>
             <ListItem>
               <ListItemText>
-                <Typography style={{ fontWeight: "bold", fontSize: 28 }}>
+                <Typography
+                  style={{
+                    fontWeight: "bold",
+                    fontSize: 28,
+                    display: "inline",
+                  }}
+                >
                   {productDetail?.product_name}
                 </Typography>
+                <Typography style={{ fontWeight: "bold", display: "inline" }}>
+                  In Stock
+                </Typography>
+                <ListItemText></ListItemText>
               </ListItemText>
             </ListItem>
-            <Divider />
+            {/* <Divider /> */}
+            <ListItem>
+              <Rating
+                name="size-small"
+                defaultValue={3}
+                // size="small"
+                readOnly
+              />
+            </ListItem>
             <ListItem>
               <ListItemText md={6}>
                 <Typography style={{ fontWeight: "bold" }}>
@@ -360,14 +366,14 @@ function Details({
 
             <Divider fullWidth />
 
-
             <Grid md={12}>
               <ListItem>
-
                 {/* </ListItem> */}
                 {/* <ListItem> */}
                 <ListItemText md={6} sx={{ color: "success.main" }}>
-                  <Typography style={{ fontWeight: "bold" }}>In Stock</Typography>
+                  <Typography style={{ fontWeight: "bold" }}>
+                    In Stock
+                  </Typography>
                 </ListItemText>
               </ListItem>
             </Grid>
@@ -375,34 +381,58 @@ function Details({
             {/* <ListItem> */}
             {skusProduct
               ? skusProduct.attributes.map((result, index) => (
-                // <List key={index}>
-                <Grid md={12}>
+                  // <List key={index}>
+                  <Grid md={12}>
+                    <ListItem key={index}>
+                      <ListItemText md={6}>
+                        <Typography style={{ fontWeight: "bold" }}>
+                          {result.attribute_name == "Color" ? (
+                            <>
+                              {result.attribute_name}:
+                              <Brightness1Icon
+                                sx={{
+                                  position: "relative",
+                                  top: 6,
+                                  left: 5,
+                                  color: result.value,
+                                }}
+                              />
+                            </>
+                          ) : (
+                            <>
+                              {result.attribute_name}: {result.value}{" "}
+                            </>
+                          )}
+                        </Typography>
+                      </ListItemText>
+                    </ListItem>
+                  </Grid>
+                  // </List>
+                ))
+              : productAttributes.map((result, index) => (
+                  // <List key={index}>
                   <ListItem key={index}>
-                    <ListItemText md={6} >
-                      <Typography style={{ fontWeight: "bold" }}>{result.attribute_name == 'Color' ? (<>{result.attribute_name}:<Brightness1Icon sx={{ position: "relative", top: 6, left: 5, color: result.value }} /></>) : (<>{result.attribute_name}:  {result.value} </>)}
+                    <ListItemText>
+                      <Typography style={{ fontWeight: "bold" }}>
+                        {result.attribute_name == "Color" ? (
+                          <>
+                            {result.attribute_name}:{" "}
+                            <Brightness1Icon sx={{ color: result.value }} />
+                          </>
+                        ) : (
+                          <>
+                            {result.attribute_name}: {result.value}{" "}
+                          </>
+                        )}
                       </Typography>
                     </ListItemText>
-
-
                   </ListItem>
-                </Grid>
-                // </List>
-              ))
-              : productAttributes.map((result, index) => (
-                // <List key={index}>
-                <ListItem key={index}>
-                  <ListItemText>
-                    <Typography style={{ fontWeight: "bold" }}>{result.attribute_name == 'Color' ? (<>{result.attribute_name}:   <Brightness1Icon sx={{ color: result.value }} /></>) : (<>{result.attribute_name}:  {result.value} </>)}
-                    </Typography>
-                  </ListItemText>
 
-                </ListItem>
-
-                // </List>
-              ))}
+                  // </List>
+                ))}
             <Divider />
             <Grid md={12}>
-              <ListItem >
+              <ListItem>
                 <ListItemText md={6}>
                   <Typography variant="h5" style={{ fontWeight: "bold" }}>
                     Skus
@@ -447,7 +477,7 @@ function Details({
                   sm: "none",
                   md: "flex",
                   // display: "flex",
-                  justifyContent: "end"
+                  justifyContent: "end",
                   // display: "flex",
 
                   // flexWrap: "wrap",
@@ -455,7 +485,6 @@ function Details({
                   // bgcolor: "#f6f9fc",
                 },
                 // display: "flex",
-
               }}
             >
               <Stack direction="row" spacing={2}>
@@ -490,9 +519,6 @@ function Details({
               </Stack>
             </ListItem>
           </List>
-
-
-
         </Grid>
         <Grid item md={1} sm={1}></Grid>
 
