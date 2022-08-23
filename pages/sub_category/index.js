@@ -138,8 +138,8 @@ function SubCategory() {
 
     return (
       <Box sx={{ display: 'flex', flexDirection: 'column', ml: 2 }}>
-        {subCategories.map(result => <List>
-          <ListItem>{result.category_name}</ListItem></List>)}
+        {subCategories.map((result, index) => <List>
+          <ListItem key={index}>{result.category_name}</ListItem></List>)}
         {/* {
           subCategories?.map(result => {
             <List>
@@ -238,8 +238,8 @@ function SubCategory() {
           <Typography>Brands</Typography>
           {
 
-            brands?.map(result => (
-              <FormControlLabel control={<Checkbox defaultChecked />} label={result.brand_name} />
+            brands?.map((result, index) => (
+              <FormControlLabel key={index} control={<Checkbox defaultChecked />} label={result.brand_name} />
             ))
           }
 

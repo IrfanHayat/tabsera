@@ -461,21 +461,20 @@ function Details({
               </Carousel>
             </Box>
           </Grid>
-          <Box sx={{ display: "flex", p: 1, direction: "column" }}>
+          {/* <Box sx={{ display: "flex", p: 1, direction: "column" }}>
             <Grid container>
               <Grid display="flex" alignItems="center">
                 <Typography>Quantity : </Typography>
               </Grid>
-              {/* {productDetail &&
-                productDetail?.map((item) => ( */}
+
               <Grid display="flex" justifyContent="center" alignItems="center">
                 <IconButton
-                  // onClick={() => handleDecreaseCart(item)}
+
                   aria-label="reduce item"
                   size="large"
                   variant="contained"
                   color="error"
-                // sx={{ color:  "text.secondary" }}
+
                 >
                   <IndeterminateCheckBoxOutlinedIcon />
                 </IconButton>
@@ -489,15 +488,14 @@ function Details({
                   size="large"
                   variant="contained"
                   color="success"
-                // sx={{ color: "text.secondary" }}
-                // onClick={() => handleAddToCart(item)}
+
                 >
                   <AddBoxOutlinedIcon />
                 </IconButton>
               </Grid>
-              {/* ))} */}
+
             </Grid>
-          </Box>
+          </Box> */}
           <Grid container spacing={1}>
             {/* <Stack direction="row" > */}
             <Grid item md={6} sm={6}>
