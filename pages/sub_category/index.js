@@ -1,7 +1,7 @@
 import React, { useState, useMemo, useRef, useEffect } from "react";
 
 import ActionAreaCard from "../../container/Card";
-import { getProductWithCategoryId } from "../../slice/categorySlice";
+import { getProductWithCategoryId, getCategoryBrand, getCategory } from "../../slice/categorySlice";
 import { useRouter, withRouter } from "next/router";
 import { addToBasket } from "../../slice/basketSlice";
 import { useSelector, useDispatch } from "react-redux";
@@ -74,6 +74,9 @@ function SubCategory() {
   const MinInput = useRef(null);
   const [filterPrice, setFilterPrice] = useState([])
   const [flag, setFlag] = useState(false)
+  const [brands, setBrands] = useState([])
+  const [subCategories, setSubCategories] = useState([])
+  const [parentCategories, setParentCategories] = useState([])
 
   const viewProduct = (item) => {
     router.push({
@@ -103,22 +106,59 @@ function SubCategory() {
     dispatch(getProductWithCategoryId(id));
   };
 
+  useEffect(async () => {
+    let result = await dispatch(getCategoryBrand())
+    let results = result?.payload.filter(result => result.category_id == router?.query?.sub_category)
+    console.log(results)
+    results.map(category => {
+      setBrands(category.brands)
+    })
+
+  }, [])
+
+  useEffect(async () => {
+    let result = await dispatch(getCategory())
+    let results = result?.payload.filter(result => result.category_id == router?.query?.sub_category)
+    console.log(results)
+    results?.map(category => {
+      setParentCategories(category.category_name)
+      setSubCategories(category.child)
+    })
+
+  }, [])
+
+  useEffect(() => {
+
+  }, [subCategories])
+
+
+
+
+
+
   console.log(productDataWithCategoryId)
 
-  const children = (
-    <Box sx={{ display: 'flex', flexDirection: 'column', ml: 2 }}>
-      <List>
-        <ListItem>
-          Child1
-        </ListItem>
-      </List>
-      <List>
-        <ListItem>
-          Child2
-        </ListItem>
-      </List>
-    </Box>
-  );
+  const children = (subCategories) => {
+
+    return (
+      <Box sx={{ display: 'flex', flexDirection: 'column', ml: 2 }}>
+        {subCategories.map(result => <List>
+          <ListItem>{result.category_name}</ListItem></List>)}
+        {/* {
+          subCategories?.map(result => {
+            <List>
+              <ListItem>
+                {"Hello"}
+              </ListItem>
+            </List>
+          })
+
+        } */}
+
+
+      </Box>
+    );
+  }
   useMemo(() => {
 
     let id = router?.query?.sub_category;
@@ -166,19 +206,10 @@ function SubCategory() {
             Related Category
 
             <ListItem
-              // spacing={2}
-              // sx={{ p: 1 }}
-              // alignItems="flex-start"
-              sx={{
-                ":hover": {
-                  // border: 1,
-                  // boxShadow: 1, // theme.shadows[20]
-                  transform: "scale(1.05)",
-                  // opacity: 0.5,
-                  color: "primary.main",
-                  cursor: "pointer",
-                },
-              }}
+            // spacing={2}
+            // sx={{ p: 1 }}
+            // alignItems="flex-start"
+
 
             >
               <ListItemIcon>
@@ -188,9 +219,10 @@ function SubCategory() {
         height={30}
       ></Image> */}
               </ListItemIcon>
+              {console.log(subCategories)}
               <ListItemText >
-                Parent Category
-                {children}
+                {parentCategories}
+                {subCategories.length > 0 ? children(subCategories) : ''}
               </ListItemText>
             </ListItem>
 
@@ -201,18 +233,26 @@ function SubCategory() {
 
         </Item>
         <Divider></Divider>
-        <Item><FormGroup>
-
-        </FormGroup></Item>
-        <Divider></Divider>
         <Item sx={{ border: 0, boxShadow: 0 }}>
+          <Typography>Brands</Typography>
+          {
+
+            brands?.map(result => (
+              <FormControlLabel control={<Checkbox defaultChecked />} label={result.brand_name} />
+            ))
+          }
+
+        </Item>
+        <Divider></Divider>
+        {/* <Item sx={{ border: 0, boxShadow: 0 }}>
           <FormControlLabel control={<Checkbox defaultChecked />} label="Colors" />
 
         </Item>
         <Divider></Divider>
+
         <Item sx={{ border: 0, boxShadow: 0 }}><FormControlLabel control={<Checkbox defaultChecked />} label="Size" /></Item>
         <Divider></Divider>
-        <Item sx={{ border: 0, boxShadow: 0 }}><FormControlLabel control={<Checkbox defaultChecked />} label="Materials" /></Item>
+        <Item sx={{ border: 0, boxShadow: 0 }}><FormControlLabel control={<Checkbox defaultChecked />} label="Materials" /></Item> */}
       </Grid>
       <Grid item xs={9} >
         <Item sx={{ minHeight: "100vh" }}>
