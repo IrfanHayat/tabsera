@@ -15,8 +15,10 @@ import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import SwipeableViews from "react-swipeable-views";
 import Image from "next/image";
-import Carousel from "react-elastic-carousel";
-import { AppBar, Stack, Divider } from "@mui/material";
+import Carousel, { consts } from "react-elastic-carousel";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
+import { AppBar, Stack, Divider, ListItemIcon } from "@mui/material";
 import { useRouter } from "next/router";
 import { useTheme } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
@@ -31,7 +33,13 @@ import Link from "@mui/material/Link";
 import Rating from "@mui/material/Rating";
 import ReactImageMagnify from "react-image-magnify";
 import Brightness1Icon from "@mui/icons-material/Brightness1";
-
+import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
+import IndeterminateCheckBoxOutlinedIcon from "@mui/icons-material/IndeterminateCheckBoxOutlined";
+import SettingsBackupRestoreIcon from "@mui/icons-material/SettingsBackupRestore";
+import NotInterestedIcon from "@mui/icons-material/NotInterested";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import ShareIcon from "@mui/icons-material/Share";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
   { width: 550, itemsToShow: 2 },
@@ -97,6 +105,8 @@ function Details({
   BuyHandler,
   price,
   viewStore,
+  handleAddToCart,
+  handleDecreaseCart,
   productIdRoute,
 }) {
   const Item = styled(Paper)(({ theme }) => ({
@@ -106,6 +116,17 @@ function Details({
     textAlign: "center",
     color: theme.palette.text.secondary,
   }));
+
+  function myArrow({ type, onClick, isEdge }) {
+    const pointer =
+      type === consts.PREV ? <ArrowBackIosNewIcon /> : <ArrowForwardIosIcon />;
+    return (
+      <Button onClick={onClick} disabled={isEdge}>
+        {pointer}
+      </Button>
+    );
+  }
+
   let [skusProduct, setSkusProduct] = useState();
   let [skusFlag, setSkusFlag] = useState(false);
   let [variantOneProduct, setVariantOneProduct] = useState();
@@ -132,7 +153,7 @@ function Details({
       <Box
         role="presentation"
         onClick={handleClick}
-        sx={{ display: "flex", m: 1 }}
+        sx={{ display: "flex", p: 2, bgcolor: "#fafafa" }}
         direction="row"
       >
         <Breadcrumbs aria-label="breadcrumb">
@@ -162,43 +183,15 @@ function Details({
           </Typography>
         </Breadcrumbs>
       </Box>
-      <Grid
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          justifyContent: "flex-end",
-          paddingRight: "10%",
-        }}
-      >
-        <Typography
-          sx={{ color: "error.main", alignSelf: "center" }}
-          style={{ fontWeight: "bold" }}
-        >
-          Sold By: {productDetail?.merchant_name}
-        </Typography>
-        <Button
-          variant="text"
-          onClick={() => viewStore(merchantDetail?.merchant_id)}
-          // onClick={viewStore}
-        >
-          Visit Store
-        </Button>
-      </Grid>
+
       <Grid
         container
         spacing={1}
         maxWidth="xl"
-        sx={{ paddingTop: 2, backgroundColor: "white" }}
+        sx={{ backgroundColor: "#fafafa", pt: 1 }}
         // justifyContent="center"
       >
-        {/* <Grid item md={12} xs={12} ml={1}>
-          <Typography variant="h6" style={{ fontWeight: "bold" }}>
-            Product Details
-          </Typography>
-        </Grid> */}
-        {/* <Grid item md={1} sm={1}></Grid> */}
-
-        <Grid item md={4} xs={12}>
+        <Grid item md={4} xs={12} sx={{ bgcolor: "white" }}>
           <List>
             <ListItem sx={{ m: 1 }}>
               <Carousel
@@ -261,9 +254,9 @@ function Details({
                         {...{
                           smallImage: {
                             alt: "Wristwatch by Ted Baker London",
-                            // isFluidWidth: true,
-                            width: 400,
-                            height: 500,
+                            isFluidWidth: true,
+                            // width: 100,
+                            // height: 200,
                             src: productImage[0],
                             // sizes:
                             //   "(min-width: 800px) 33.5vw, (min-width: 415px) 50vw, 100vw",
@@ -300,15 +293,34 @@ function Details({
                     )}
               </Carousel>
             </ListItem>
-
-            {/* <ListItem sx={{ display: "flex", justifyContent: "center" }}>
-              <Rating
-                name="size-small"
-                defaultValue={3}
-                // size="small"
-                readOnly
-              />
-            </ListItem> */}
+            {console.log(productDetail)}
+            <ListItem>
+              {/* <Box md={6} sx={{ display: "flex", m: 1 }}> */}
+              <Carousel
+                // breakPoints={breakPoints}
+                disableArrowsOnEnd={true}
+                // showArrows={false}
+                renderArrow={myArrow}
+                pagination={false}
+                showEmptySlots={true}
+                itemsToShow={4}
+              >
+                {productDetail &&
+                  productDetail.product_images?.map((results, index) => (
+                    <Image
+                      onClick={() => {
+                        setSkusFlag(false);
+                      }}
+                      key={index}
+                      src={results.media_images[0]}
+                      alt="shirt"
+                      width={100}
+                      height={80}
+                    ></Image>
+                  ))}
+              </Carousel>
+              {/* </Box> */}
+            </ListItem>
           </List>
         </Grid>
 
@@ -317,291 +329,304 @@ function Details({
           md={5}
           sm={12}
           xs={12}
-
-          // sx={{ display: "flex" }}
-          // justifyContent="center"
-          // alignItems="center"
+          sx={{ px: 2, py: 4, bgcolor: "white" }}
         >
-          <List>
-            <ListItem>
-              <ListItemText>
-                <Typography
-                  style={{
-                    fontWeight: "bold",
-                    fontSize: 28,
-                    display: "inline",
-                  }}
-                >
-                  {productDetail?.product_name}
-                </Typography>
-                <Typography style={{ fontWeight: "bold", display: "inline" }}>
-                  In Stock
-                </Typography>
-                <ListItemText></ListItemText>
-              </ListItemText>
-            </ListItem>
-            {/* <Divider /> */}
-            <ListItem>
-              <Rating
-                name="size-small"
-                defaultValue={3}
-                // size="small"
-                readOnly
-              />
-            </ListItem>
-            <ListItem>
-              <ListItemText md={6}>
-                <Typography style={{ fontWeight: "bold" }}>
-                  Category: {productDetail?.category_name}
-                </Typography>
-              </ListItemText>
-              {/* </ListItem> */}
-              {/* <ListItem> */}
-              <ListItemText md={6} sx={{ color: "error.main" }}>
-                <Typography style={{ fontWeight: "bold", fontSize: 48 }}>
-                  PKR.{skusProduct ? skusProduct.cost : price}
-                </Typography>
-              </ListItemText>
-            </ListItem>
-
-            <Divider fullWidth />
-
-            <Grid md={12}>
-              <ListItem>
-                {/* </ListItem> */}
-                {/* <ListItem> */}
-                <ListItemText md={6} sx={{ color: "success.main" }}>
-                  <Typography style={{ fontWeight: "bold" }}>
-                    In Stock
-                  </Typography>
-                </ListItemText>
-              </ListItem>
-            </Grid>
-            <Divider />
-            {/* <ListItem> */}
-            {skusProduct
-              ? skusProduct.attributes.map((result, index) => (
-                  // <List key={index}>
-                  <Grid md={12}>
-                    <ListItem key={index}>
-                      <ListItemText md={6}>
-                        <Typography style={{ fontWeight: "bold" }}>
-                          {result.attribute_name == "Color" ? (
-                            <>
-                              {result.attribute_name}:
-                              <Brightness1Icon
-                                sx={{
-                                  position: "relative",
-                                  top: 6,
-                                  left: 5,
-                                  color: result.value,
-                                }}
-                              />
-                            </>
-                          ) : (
-                            <>
-                              {result.attribute_name}: {result.value}{" "}
-                            </>
-                          )}
-                        </Typography>
-                      </ListItemText>
-                    </ListItem>
-                  </Grid>
-                  // </List>
-                ))
-              : productAttributes.map((result, index) => (
-                  // <List key={index}>
-                  <ListItem key={index}>
-                    <ListItemText>
-                      <Typography style={{ fontWeight: "bold" }}>
-                        {result.attribute_name == "Color" ? (
-                          <>
-                            {result.attribute_name}:{" "}
-                            <Brightness1Icon sx={{ color: result.value }} />
-                          </>
-                        ) : (
-                          <>
-                            {result.attribute_name}: {result.value}{" "}
-                          </>
-                        )}
-                      </Typography>
-                    </ListItemText>
-                  </ListItem>
-
-                  // </List>
-                ))}
-            <Divider />
-            <Grid md={12}>
-              <ListItem>
-                <ListItemText md={6}>
-                  <Typography variant="h5" style={{ fontWeight: "bold" }}>
-                    Skus
-                  </Typography>
-                </ListItemText>
-              </ListItem>
-
-              <Box md={6} sx={{ display: "flex", m: 1 }}>
-                <Carousel
-                  // breakPoints={breakPoints}
-                  disableArrowsOnEnd={true}
-                  showArrows={false}
-                  pagination={false}
-                  showEmptySlots={true}
-                  itemsToShow={4}
-                >
-                  {productDetail &&
-                    productDetail.skus?.map((results, index) => (
-                      <Image
-                        //  className={cx(styles.media, mediaStyles.root)}
-                        onClick={() => {
-                          viewVariantsProduct(results);
-                        }}
-                        key={index}
-                        src={results.sku_images[0]}
-                        alt="shirt"
-                        width={100}
-                        height={80}
-                      ></Image>
-                    ))}
-                </Carousel>
-              </Box>
-            </Grid>
-            <Divider />
-
-            {/* </ListItem> */}
-            <ListItem
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+            }}
+          >
+            <Typography
               sx={{
-                // display: "flex",
-                display: {
-                  xs: "none",
-                  sm: "none",
-                  md: "flex",
-                  // display: "flex",
-                  justifyContent: "end",
-                  // display: "flex",
-
-                  // flexWrap: "wrap",
-
-                  // bgcolor: "#f6f9fc",
-                },
-                // display: "flex",
+                fontWeight: "bold",
+                fontSize: 28,
               }}
             >
-              <Stack direction="row" spacing={2}>
-                <Button
-                  // fullWidth
-                  variant="contained"
-                  color="info"
-                  type="submit"
-                  size="large"
-                  // href="/shipping_information"
-                  onClick={() => {
-                    skusProduct
-                      ? BuyHandler(productDetail, skusProduct)
-                      : BuyHandler(productDetail);
-                  }}
-                >
-                  Buy Now
-                </Button>
-                <Button
-                  // fullWidth
-                  variant="contained"
-                  color="warning"
-                  onClick={() => {
-                    skusProduct
-                      ? addToCartHandler(productDetail, skusProduct)
-                      : addToCartHandler(productDetail);
-                  }}
-                  size="large"
-                >
-                  Add to cart
-                </Button>
-              </Stack>
-            </ListItem>
-          </List>
-        </Grid>
-        <Grid item md={1} sm={1}></Grid>
+              {productDetail?.product_name}
+            </Typography>
+            <Typography
+              sx={{
+                fontWeight: "bold",
+                // display: "inline",
+                color: "success.main",
+              }}
+            >
+              In Stock
+            </Typography>
+          </Box>
+          <Box sx={{ display: "flex", justifyContent: "space-between", my: 1 }}>
+            <Rating name="size-small" defaultValue={3} size="small" readOnly />
+            <Stack spacing={2} direction="row">
+              <ShareIcon />
+              <FavoriteBorderIcon color="error" />
+            </Stack>
+          </Box>
+          <Box sx={{ display: "flex" }}>
+            {skusFlag && skusProduct
+              ? skusProduct.attributes.map((result, index) => (
+                  <Grid container key={index}>
+                    {result.attribute_name == "Color" ? (
+                      <>
+                        <Grid item md={4}>
+                          {result.attribute_name}:
+                        </Grid>
+                        <Grid item md={3}>
+                          <ListItemIcon>
+                            <Brightness1Icon
+                              sx={{
+                                // position: "relative",
+                                // top: 6,
+                                // left: 5,
+                                color: result.value,
+                              }}
+                            />
+                          </ListItemIcon>
+                        </Grid>
+                      </>
+                    ) : (
+                      <Typography style={{ fontWeight: "bold" }}>
+                        {result.attribute_name}: {result.value}{" "}
+                      </Typography>
+                    )}
+                  </Grid>
+                ))
+              : productAttributes.map((result, index) => (
+                  <Grid container key={index}>
+                    {result.attribute_name == "Color" ? (
+                      <>
+                        <Grid item md={4}>
+                          <Typography> {result.attribute_name}: </Typography>
+                        </Grid>
+                        <Grid item md={3}>
+                          <ListItemIcon>
+                            <Brightness1Icon sx={{ color: result.value }} />
+                          </ListItemIcon>
+                        </Grid>
+                      </>
+                    ) : (
+                      <Typography>
+                        {result.attribute_name}: {result.value}{" "}
+                      </Typography>
+                    )}
+                  </Grid>
+                ))}
+          </Box>
+          <Divider fullWidth />
+          <Divider />
+          <Box sx={{ py: 1 }}>
+            <Box
+              color="warning.main"
+              style={{ display: "block", fontSize: 36 }}
+            >
+              PKR.{skusProduct ? skusProduct.cost : price}
+            </Box>
 
-        <Grid container spacing={1} m={1}>
-          <Grid item md={12} xs={12}>
-            <Card>
-              <AppBar
-                sx={{
-                  borderBottom: 1,
-                  borderColor: "divider",
-                  position: "static",
+            <Box
+              color="neutral"
+              style={{ display: "block", textDecoration: "line-through" }}
+            >
+              PKR.{skusProduct ? skusProduct.cost : price}
+            </Box>
+          </Box>
+          <Divider />
+          <Grid md={12}>
+            <Typography variant="h5">Skus</Typography>
+
+            <Box md={6} sx={{ display: "flex", m: 1 }}>
+              <Carousel
+                // breakPoints={breakPoints}
+                disableArrowsOnEnd={true}
+                // showArrows={false}
+                renderArrow={myArrow}
+                pagination={false}
+                showEmptySlots={true}
+                itemsToShow={4}
+              >
+                {productDetail &&
+                  productDetail.skus?.map((results, index) => (
+                    <Image
+                      //  className={cx(styles.media, mediaStyles.root)}
+                      onClick={() => {
+                        viewVariantsProduct(results);
+                      }}
+                      key={index}
+                      src={results.sku_images[0]}
+                      alt="shirt"
+                      width={100}
+                      height={80}
+                    ></Image>
+                  ))}
+              </Carousel>
+            </Box>
+          </Grid>
+          <Box sx={{ display: "flex", p: 1, direction: "column" }}>
+            <Grid container>
+              <Grid display="flex" alignItems="center">
+                <Typography>Quantity : </Typography>
+              </Grid>
+              {/* {productDetail &&
+                productDetail?.map((item) => ( */}
+              <Grid display="flex" justifyContent="center" alignItems="center">
+                <IconButton
+                  // onClick={() => handleDecreaseCart(item)}
+                  aria-label="reduce item"
+                  size="large"
+                  variant="contained"
+                  color="error"
+                  // sx={{ color:  "text.secondary" }}
+                >
+                  <IndeterminateCheckBoxOutlinedIcon />
+                </IconButton>
+
+                <Typography className="count" align="center">
+                  0
+                </Typography>
+
+                <IconButton
+                  aria-label="increase item"
+                  size="large"
+                  variant="contained"
+                  color="success"
+                  // sx={{ color: "text.secondary" }}
+                  // onClick={() => handleAddToCart(item)}
+                >
+                  <AddBoxOutlinedIcon />
+                </IconButton>
+              </Grid>
+              {/* ))} */}
+            </Grid>
+          </Box>
+          <Grid container spacing={1}>
+            {/* <Stack direction="row" > */}
+            <Grid item md={6} sm={6}>
+              <Button
+                fullWidth
+                width="300px"
+                variant="contained"
+                color="info"
+                type="submit"
+                size="large"
+                // href="/shipping_information"
+                onClick={() => {
+                  skusProduct
+                    ? BuyHandler(productDetail, skusProduct)
+                    : BuyHandler(productDetail);
                 }}
               >
-                {/* <AppBar></AppBar> */}
-                <Tabs
-                  value={value}
-                  onChange={handleChange}
-                  aria-label="full width tabs example"
-                  variant="fullWidth"
-                  indicatorColor="secondary"
-                  // textColor="secondary"
-                  textColor="inherit"
-                >
-                  <Tab
-                    label="Description"
-                    style={{ fontWeight: "bold" }}
-                    {...a11yProps(0)}
-                  />
-                  <Tab
-                    label="Rating"
-                    style={{ fontWeight: "bold" }}
-                    {...a11yProps(1)}
-                  />
-                  <Tab
-                    label="Similar Products"
-                    style={{ fontWeight: "bold" }}
-                    {...a11yProps(2)}
-                  />
-                </Tabs>
-              </AppBar>
-              <SwipeableViews
-                axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-                index={value}
-                onChangeIndex={handleChangeIndex}
+                Buy Now
+              </Button>
+            </Grid>
+            <Grid item md={6} sm={6}>
+              <Button
+                fullWidth
+                variant="contained"
+                color="warning"
+                onClick={() => {
+                  skusProduct
+                    ? addToCartHandler(productDetail, skusProduct)
+                    : addToCartHandler(productDetail);
+                }}
+                size="large"
               >
-                <TabPanel value={value} index={0} dir={theme.direction}>
-                  {productDetail?.product_desc}
-                </TabPanel>
-                <TabPanel value={value} index={1} dir={theme.direction}>
-                  Rating
-                </TabPanel>
-                <TabPanel value={value} index={2} dir={theme.direction}>
-                  {/* {productDetail?.merchant_name} */}
-                  Similar Products
-                  {/* <List>
-                    <ListItem>Name : {merchantDetail?.merchant_name}</ListItem>
-                  </List>
-                  <List>
-                    <ListItem>Location : {merchantDetail?.city}</ListItem>
-                  </List>
-                  <List>
-                    <ListItem>
-                      Joined Tabsera : {merchantDetail?.created_date}
-                    </ListItem>
-                  </List>
-                  <List>
-                    <ListItem>Seller Rating :</ListItem>
-                  </List>
-                  <Stack>
-                    <Button
-                      variant="text"
-                      onClick={() => viewStore(merchantDetail?.merchant_id)}
-                      // onClick={viewStore}
-                    >
-                      Visit Store
-                    </Button>
-                  </Stack> */}
-                </TabPanel>
-              </SwipeableViews>
-              {/* <TabPanel value={value} index={2}>
-              {merchantDetail?.city}
-            </TabPanel> */}
-            </Card>
+                Add to cart
+              </Button>
+            </Grid>
+            {/* </Stack> */}
+          </Grid>
+        </Grid>
+        <Grid sx={{ bgcolor: "#fafafa" }} item md={3} sm={12} xs={12}>
+          {" "}
+          <Box
+            sx={{
+              p: 1,
+              display: "flex",
+              // justifyContent: "center",
+              // justifyContent: "flex-end",
+              // paddingRight: "10%",
+              // flexWrap: "noWrap",
+              alignItems: "flex-start",
+              flexDirection: "column",
+            }}
+          >
+            <List>
+              <Typography display="inline-block">Service :</Typography>
+              <ListItem>
+                <ListItemIcon>
+                  <SettingsBackupRestoreIcon fontSize="small" />
+                </ListItemIcon>
+                <ListItemText>7 Days Returns</ListItemText>
+              </ListItem>
+              <ListItem>
+                <ListItemIcon>
+                  <NotInterestedIcon fontSize="small" />{" "}
+                </ListItemIcon>
+                <ListItemText>Warranty Not Available</ListItemText>
+              </ListItem>
+            </List>
+            {/* <Button
+              variant="text"
+              onClick={() => viewStore(merchantDetail?.merchant_id)}
+              // onClick={viewStore}
+            >
+              Visit Store
+            </Button> */}
+          </Box>
+          <Divider />
+          <Box
+            sx={{
+              p: 1,
+              display: "flex",
+              // justifyContent: "center",
+              // justifyContent: "flex-end",
+              // paddingRight: "10%",
+              // flexWrap: "noWrap",
+              alignItems: "flex-start",
+              flexDirection: "column",
+            }}
+          >
+            <Typography display="inline-block">Sold By:</Typography>
+            <List>
+              <ListItem>
+                {/* <ListItemText> */}
+                <Typography
+                  // sx={{ color: "error.main" }}
+                  style={{ fontSize: 24 }}
+                >
+                  {productDetail?.merchant_name}
+                </Typography>
+                {/* </ListItemText> */}
+              </ListItem>
+              <ListItem>
+                {/* <ListItemText> */}
+                <Button
+                  variant="text"
+                  onClick={() => viewStore(merchantDetail?.merchant_id)}
+                  // onClick={viewStore}
+                >
+                  Visit Store
+                </Button>
+                {/* </ListItemText> */}
+              </ListItem>
+            </List>
+          </Box>
+          <Divider />
+        </Grid>
+
+        <Grid container sx={{ p: 1 }}>
+          <Grid item md={9} xs={9} sx={{ background: "white", p: 1 }}>
+            <Grid container>{productDetail?.product_desc}</Grid>
+            {/* <Grid item md={9} xs={9}>
+              <Typography style={{ fontWeight: "bold" }}>Rating :</Typography>
+            </Grid> */}
+          </Grid>
+
+          <Grid item md={3} xs={12}>
+            <Typography style={{ fontWeight: "bold" }}>
+              {" "}
+              Similar Products :
+            </Typography>
           </Grid>
         </Grid>
         <AppBar
