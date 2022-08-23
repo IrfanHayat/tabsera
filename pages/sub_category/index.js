@@ -1,4 +1,5 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useRef, useEffect } from "react";
+
 import ActionAreaCard from "../../container/Card";
 import { getProductWithCategoryId } from "../../slice/categorySlice";
 import { useRouter, withRouter } from "next/router";
@@ -20,6 +21,7 @@ import GridViewIcon from '@mui/icons-material/GridView';
 import ViewListIcon from '@mui/icons-material/ViewList';
 import { Typography } from "@mui/material";
 import Box from '@mui/material/Box';
+import makeStyles from "@mui/styles/makeStyles";
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { styled, useTheme, alpha } from "@mui/material/styles";
@@ -28,6 +30,24 @@ import SortFilter from "../../container/Filter/SortFilter";
 import ListFilter from "../../container/Filter/ListFilter";
 import PageFilter from "../../container/Filter/PageFilter";
 import ViewFilter from "../../container/Filter/viewFilter";
+import Button from "@mui/material/Button";
+import PriceFilter from "../../container/Filter/PriceFilter";
+
+const useStyles = makeStyles({
+  flexGrow: {
+    flex: '1',
+  },
+  button: {
+    backgroundColor: '#3c52b2',
+    color: '#fff',
+    '&:hover': {
+      backgroundColor: '#fff',
+      color: '#3c52b2',
+    },
+  }
+})
+
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
@@ -49,6 +69,11 @@ function SubCategory() {
   const [styled, setStyled] = React.useState({ display: "flex", flexDirection: 'column' })
   const [filterData, setFilterData] = useState();
 
+  const classes = useStyles()
+  const MaxInput = useRef(null);
+  const MinInput = useRef(null);
+  const [filterPrice, setFilterPrice] = useState([])
+  const [flag, setFlag] = useState(false)
 
   const viewProduct = (item) => {
     router.push({
@@ -95,9 +120,10 @@ function SubCategory() {
     </Box>
   );
   useMemo(() => {
-    let id = router?.query?.sub_category;
 
+    let id = router?.query?.sub_category;
     getData(id);
+
   }, []);
 
   const addToCartHandler = (product) => {
@@ -118,6 +144,16 @@ function SubCategory() {
       setStyled(style)
 
     }
+
+  }
+  const priceFilter = () => {
+    let max = MaxInput.current.value;
+    let min = MinInput.current.value
+    console.log(typeof (max))
+    console.log(typeof (min))
+    let result = productDataWithCategoryId.filter(result => parseInt(result.productCost) >= parseInt(min) && parseInt(result.productCost) <= parseInt(max))
+    setFilterPrice(result)
+    setFlag(true)
 
   }
 
@@ -162,6 +198,7 @@ function SubCategory() {
 
           </List>
 
+
         </Item>
         <Divider></Divider>
         <Item><FormGroup>
@@ -185,13 +222,9 @@ function SubCategory() {
                 <Grid md={12} sx={{ display: "flex" }}>
                   <Grid item md={2} sx={{ minHeight: 5, border: 0, boxShadow: 0 }}>
                     <Item sx={{ display: "flex", border: 0, boxShadow: 0 }}>
-                      <Typography sx={{ mt: 2 }}>Price</Typography>
-
-                      <TextField sx={{ width: 100 }} id="filled-basic" label="MIN" variant="filled" />
-                      <Typography sx={{ mt: 2 }} >-</Typography>
-
-                      <TextField sx={{ width: 100 }} id="filled-basic" label="MAX" variant="filled" />
+                      <PriceFilter MinInput={MinInput} MaxInput={MaxInput} priceFilter={priceFilter}></PriceFilter>
                     </Item>
+
                   </Grid>
 
                   <Grid item md={4}>
@@ -213,8 +246,9 @@ function SubCategory() {
               </Item>
             </Grid>
             <Grid item xs={12} sx={styled}>
+              {console.log(filterPrice?.length)}
               <Item sx={{ minHeight: "90vh" }}>
-                {productDataWithCategoryId &&
+                {productDataWithCategoryId && filterPrice?.length < 1 && flag == false ?
                   productDataWithCategoryId?.map((item) => (
                     <ActionAreaCard
                       key={item}
@@ -224,8 +258,19 @@ function SubCategory() {
                       // viewCategory={viewCategory}
                       styledCard={styled}
                     ></ActionAreaCard>
-                  ))}
+                  )) :
 
+                  filterPrice.length > 0 ? filterPrice?.map((item) => (
+                    <ActionAreaCard
+                      key={item}
+                      product={item}
+                      viewProduct={viewProduct}
+                      addToCartHandler={addToCartHandler}
+                      // viewCategory={viewCategory}
+                      styledCard={styled}
+                    ></ActionAreaCard>
+                  )) : 'Product Not Found'
+                }
               </Item>
             </Grid>
           </Grid>
