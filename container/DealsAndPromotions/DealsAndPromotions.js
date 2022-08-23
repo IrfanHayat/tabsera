@@ -40,7 +40,7 @@ const DealsAndPromotions = ({ dealsData, viewProduct }) => {
             // padding: 0.5,
             width: 250,
             // maxWidth: 280,
-            height: "57vh",
+            height: 340,
             ":hover": {
               border: 1,
               borderColor: "#9E9E9E ",
@@ -51,7 +51,7 @@ const DealsAndPromotions = ({ dealsData, viewProduct }) => {
               cursor: "pointer",
             },
           }}
-        // className={cx(styles.root)}
+          // className={cx(styles.root)}
         >
           {result?.bundleImage && (
             <>
@@ -140,50 +140,48 @@ const DealsAndPromotions = ({ dealsData, viewProduct }) => {
             ></Image>
           )} */}
 
-          <Grid md={12} sx={{ m: 0.5 }}>
+          <Box sx={{ m: 1 }}>
             {/* <Typography variant="h5">{result?.categoryName}</Typography> */}
             {/* {result?.category_name && (
               <Typography variant="body">{result?.category_name}</Typography>
             )} */}
+            <Box sx={{ height: 85 }}>
+              <Typography
+                fontSize="0.9rem"
+                variant="h5"
+                fontWeight={600}
+                // display="inline"
+                noWrap
+              >
+                {result?.bundleName}
+              </Typography>
 
-            <Typography
-              fontSize="0.9rem"
-              variant="h5"
-              fontWeight={600}
-              // display="inline"
-              noWrap
-            >
-              {result?.bundleName}
-            </Typography>
-
-            <Typography
-              fontSize="1rem"
-              variant="h5"
-              fontWeight={600}
-              sx={{ color: "warning.dark" }}
-            >
-              {" "}
-              RS. {result?.bundleCost}
-            </Typography>
-            {result.discountPercent ? (
-              <Grid sx={{ display: "flex", justifyContent: "space-between" }}>
-                <Typography
-                  fontSize="0.7rem"
-
-
-                  style={{ textDecorationLine: "line-through" }}
-                >
-                  Rs {result.originalPrice}
-                </Typography>
-                {"   "}
-                <Typography fontSize="0.7rem">
-                  - {result.discountPercent} %
-                </Typography>
-              </Grid>
-            ) : (
-              <></>
-            )}
-            {/* <Box
+              <Typography
+                fontSize="1rem"
+                variant="h5"
+                fontWeight={600}
+                sx={{ color: "warning.dark" }}
+              >
+                {" "}
+                RS. {result?.bundleCost}
+              </Typography>
+              {result.discountPercent ? (
+                <>
+                  <Typography
+                    fontSize="0.7rem"
+                    style={{ textDecorationLine: "line-through" }}
+                  >
+                    Rs {result.originalPrice}
+                  </Typography>
+                  {"   "}
+                  <Typography fontSize="0.7rem">
+                    - {result.discountPercent} %
+                  </Typography>
+                </>
+              ) : (
+                <></>
+              )}
+              {/* <Box
             sx={{
               display: "flex",
               justifyContent: "space-between",
@@ -194,7 +192,7 @@ const DealsAndPromotions = ({ dealsData, viewProduct }) => {
               borderRadius: 1,
             }}
           > */}
-            <Grid md={3}>
+              {/* <Grid md={3}> */}
               <Rating
                 name="size-small"
                 defaultValue={result?.averageRating}
@@ -202,13 +200,13 @@ const DealsAndPromotions = ({ dealsData, viewProduct }) => {
                 // fontSize={24}
                 readOnly
               />
-            </Grid>
-            <Grid md={6}>
+              {/* </Grid> */}
+            </Box>
+            <Box sx={{ mb: 3, display: "flex", alignItems: "center" }}>
               {result.bundleName ? (
                 <Button
                   variant="contained"
                   size="small"
-
                   key={result.id}
                   onClick={() => addToCartHandler(result)}
                   endIcon={<AddShoppingCartOutlinedIcon fontSize="small" />}
@@ -219,7 +217,7 @@ const DealsAndPromotions = ({ dealsData, viewProduct }) => {
               ) : (
                 ""
               )}
-            </Grid>
+            </Box>
 
             {/* {product.productName ? (
               <IconButton
@@ -234,9 +232,8 @@ const DealsAndPromotions = ({ dealsData, viewProduct }) => {
               ""
             )} */}
             {/* </Box> */}
-          </Grid>
+          </Box>
         </Card>
-
       ))}
     </>
   );

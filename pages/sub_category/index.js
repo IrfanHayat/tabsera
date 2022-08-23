@@ -12,18 +12,17 @@ import {
   CircularProgress,
   ListItem,
   ListItemIcon,
-  ListItemText
-
+  ListItemText,
 } from "@mui/material";
 import FormGroup from "@mui/material/FormGroup";
-import GridViewIcon from '@mui/icons-material/GridView';
-import ViewListIcon from '@mui/icons-material/ViewList';
+import GridViewIcon from "@mui/icons-material/GridView";
+import ViewListIcon from "@mui/icons-material/ViewList";
 import { Typography } from "@mui/material";
-import Box from '@mui/material/Box';
-import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
+import Box from "@mui/material/Box";
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
 import { styled, useTheme, alpha } from "@mui/material/styles";
-import TextField from '@mui/material/TextField';
+import TextField from "@mui/material/TextField";
 import SortFilter from "../../container/Filter/SortFilter";
 import ListFilter from "../../container/Filter/ListFilter";
 import PageFilter from "../../container/Filter/PageFilter";
@@ -35,20 +34,16 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.primary,
 }));
 
-
-
-
-
-
-
 function SubCategory() {
   const { productDataWithCategoryId } = useSelector((state) => state.category);
   const router = useRouter();
   const dispatch = useDispatch();
   const [checked, setChecked] = React.useState([true, false]);
-  const [styled, setStyled] = React.useState({ display: "flex", flexDirection: 'column' })
+  const [styled, setStyled] = React.useState({
+    display: "flex",
+    flexDirection: "column",
+  });
   const [filterData, setFilterData] = useState();
-
 
   const viewProduct = (item) => {
     router.push({
@@ -78,19 +73,15 @@ function SubCategory() {
     dispatch(getProductWithCategoryId(id));
   };
 
-  console.log(productDataWithCategoryId)
+  console.log(productDataWithCategoryId);
 
   const children = (
-    <Box sx={{ display: 'flex', flexDirection: 'column', ml: 2 }}>
+    <Box sx={{ display: "flex", flexDirection: "column", ml: 2 }}>
       <List>
-        <ListItem>
-          Child1
-        </ListItem>
+        <ListItem>Child1</ListItem>
       </List>
       <List>
-        <ListItem>
-          Child2
-        </ListItem>
+        <ListItem>Child2</ListItem>
       </List>
     </Box>
   );
@@ -108,27 +99,31 @@ function SubCategory() {
   const handleView = (view) => {
     let style;
     let styleCard;
-    if (view == 'grid') {
-      style = { display: "flex", flexDirection: 'column' }
+    if (view == "grid") {
+      style = { display: "flex", flexDirection: "column" };
 
-      setStyled(style)
-
+      setStyled(style);
     } else {
-      style = { display: "flex", flexDirection: 'row', justifyContent: 'flex-start' }
-      setStyled(style)
-
+      style = {
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "flex-start",
+      };
+      setStyled(style);
     }
-
-  }
+  };
 
   return (
-    <Grid container xs={12} sx={{ mt: 2, background: "white", minWidth: "100%" }} spacing={2}>
+    <Grid
+      container
+      xs={12}
+      sx={{ mt: 2, background: "white", minWidth: "100%" }}
+      spacing={2}
+    >
       <Grid item xs={3}>
         <Item sx={{ minHeight: "100vh", border: 0, boxShadow: 0 }}>
           <List dense>
-
             Related Category
-
             <ListItem
               // spacing={2}
               // sx={{ p: 1 }}
@@ -143,7 +138,6 @@ function SubCategory() {
                   cursor: "pointer",
                 },
               }}
-
             >
               <ListItemIcon>
                 {/* <Image
@@ -152,89 +146,117 @@ function SubCategory() {
         height={30}
       ></Image> */}
               </ListItemIcon>
-              <ListItemText >
+              <ListItemText>
                 Parent Category
                 {children}
               </ListItemText>
             </ListItem>
-
-
-
           </List>
-
         </Item>
         <Divider></Divider>
-        <Item><FormGroup>
-
-        </FormGroup></Item>
+        <Item>
+          <FormGroup></FormGroup>
+        </Item>
         <Divider></Divider>
         <Item sx={{ border: 0, boxShadow: 0 }}>
-          <FormControlLabel control={<Checkbox defaultChecked />} label="Colors" />
-
+          <FormControlLabel
+            control={<Checkbox defaultChecked />}
+            label="Colors"
+          />
         </Item>
         <Divider></Divider>
-        <Item sx={{ border: 0, boxShadow: 0 }}><FormControlLabel control={<Checkbox defaultChecked />} label="Size" /></Item>
+        <Item sx={{ border: 0, boxShadow: 0 }}>
+          <FormControlLabel
+            control={<Checkbox defaultChecked />}
+            label="Size"
+          />
+        </Item>
         <Divider></Divider>
-        <Item sx={{ border: 0, boxShadow: 0 }}><FormControlLabel control={<Checkbox defaultChecked />} label="Materials" /></Item>
+        <Item sx={{ border: 0, boxShadow: 0 }}>
+          <FormControlLabel
+            control={<Checkbox defaultChecked />}
+            label="Materials"
+          />
+        </Item>
       </Grid>
-      <Grid item xs={9} >
+      <Grid item xs={9}>
         <Item sx={{ minHeight: "100vh" }}>
           <Grid sx={12}>
             <Grid item xs={12}>
               <Item sx={{ minHeight: "10vh", border: 0, boxShadow: 0 }}>
                 <Grid md={12} sx={{ display: "flex" }}>
-                  <Grid item md={2} sx={{ minHeight: 5, border: 0, boxShadow: 0 }}>
+                  <Grid
+                    item
+                    md={2}
+                    sx={{ minHeight: 5, border: 0, boxShadow: 0 }}
+                  >
                     <Item sx={{ display: "flex", border: 0, boxShadow: 0 }}>
                       <Typography sx={{ mt: 2 }}>Price</Typography>
 
-                      <TextField sx={{ width: 100 }} id="filled-basic" label="MIN" variant="filled" />
-                      <Typography sx={{ mt: 2 }} >-</Typography>
+                      <TextField
+                        sx={{ width: 100 }}
+                        id="filled-basic"
+                        label="MIN"
+                        variant="filled"
+                      />
+                      <Typography sx={{ mt: 2 }}>-</Typography>
 
-                      <TextField sx={{ width: 100 }} id="filled-basic" label="MAX" variant="filled" />
+                      <TextField
+                        sx={{ width: 100 }}
+                        id="filled-basic"
+                        label="MAX"
+                        variant="filled"
+                      />
                     </Item>
                   </Grid>
 
                   <Grid item md={4}>
-                    <Item sx={{ border: 0, boxShadow: 0 }}><ListFilter></ListFilter></Item>
+                    <Item sx={{ border: 0, boxShadow: 0 }}>
+                      <ListFilter></ListFilter>
+                    </Item>
                   </Grid>
                   <Grid item md={6}>
-                    <Item sx={{ border: 0, boxShadow: 0 }}><PageFilter></PageFilter></Item>
+                    <Item sx={{ border: 0, boxShadow: 0 }}>
+                      <PageFilter></PageFilter>
+                    </Item>
                   </Grid>
                   <Grid item md={1}>
-                    <Item sx={{ border: 0, boxShadow: 0, justifyContent: "end" }}> <SortFilter data={productDataWithCategoryId} setFilterData={setFilterData}></SortFilter></Item>
+                    <Item
+                      sx={{ border: 0, boxShadow: 0, justifyContent: "end" }}
+                    >
+                      {" "}
+                      <SortFilter
+                        data={productDataWithCategoryId}
+                        setFilterData={setFilterData}
+                      ></SortFilter>
+                    </Item>
                   </Grid>
                 </Grid>
 
                 <Grid sx={{ display: "flex", justifyContent: "flex-start" }}>
                   <ViewFilter handleView={handleView}></ViewFilter>
                 </Grid>
-
-
               </Item>
             </Grid>
             <Grid item xs={12} sx={styled}>
-              <Item sx={{ minHeight: "90vh" }}>
-                {productDataWithCategoryId &&
-                  productDataWithCategoryId?.map((item) => (
-                    <ActionAreaCard
-                      key={item}
-                      product={item}
-                      viewProduct={viewProduct}
-                      addToCartHandler={addToCartHandler}
-                      // viewCategory={viewCategory}
-                      styledCard={styled}
-                    ></ActionAreaCard>
-                  ))}
-
-              </Item>
+              {/* <Item sx={{ minHeight: "90vh" }}> */}
+              {productDataWithCategoryId &&
+                productDataWithCategoryId?.map((item) => (
+                  <ActionAreaCard
+                    key={item}
+                    product={item}
+                    viewProduct={viewProduct}
+                    addToCartHandler={addToCartHandler}
+                    // viewCategory={viewCategory}
+                    styledCard={styled}
+                  ></ActionAreaCard>
+                ))}
+              {/* </Item> */}
             </Grid>
           </Grid>
-        </Item >
-      </Grid >
-
-
-    </Grid >
-
+        </Item>
+      </Grid>
+    </Grid>
   );
 }
 

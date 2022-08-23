@@ -4,7 +4,7 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
-import Card from "@mui/material/Card";
+import { Card } from "@mui/material";
 import Button from "@mui/material/Button";
 import styled from "@mui/styles/styled";
 import Paper from "@mui/material/Paper";
@@ -16,7 +16,13 @@ import Box from "@mui/material/Box";
 import Image from "next/image";
 import Carousel from "react-elastic-carousel";
 import { useSelector } from "react-redux";
-import { AppBar, Stack } from "@mui/material";
+import {
+  AppBar,
+  CardContent,
+  CardMedia,
+  Stack,
+  IconButton,
+} from "@mui/material";
 import { useRouter } from "next/router";
 import ActionAreaCard from "./Card";
 import { result } from "lodash";
@@ -35,7 +41,7 @@ function a11yProps(index) {
 }
 function MerchantStore({ merchantStoreDetail }) {
   const { merchantData } = useSelector((state) => state.merchant);
-
+  console.log(merchantStoreDetail);
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -68,8 +74,6 @@ function MerchantStore({ merchantStoreDetail }) {
   };
   let router = useRouter();
 
-
-
   const viewProduct = (item) => {
     router.push({
       pathname: `/product_detail`,
@@ -83,14 +87,38 @@ function MerchantStore({ merchantStoreDetail }) {
         container
         spacing={1}
         sx={{ paddingTop: 2 }}
-        justifyContent="center"
+        // justifyContent="center"
       >
-        <Grid item md={12} xs={12} ml={1}>
-          <Typography variant="h6" style={{ fontWeight: "bold" }}>
-            Seller Details
-          </Typography>
+        <Grid item md={12} xs={12} ml={1} sx={{ backgroundColor: "orange" }}>
+          <Card display="flex" sx={{ width: "40%", m: 0.5, p: 1 }}>
+            <CardMedia component="img" sx={{ width: 251 }} alt=" Logo here" />
+            <Box sx={{ display: "flex", flexDirection: "column" }}>
+              <CardContent
+              // sx={{ display: "flex", justifyContent: "space-between" }}
+              >
+                <Typography component="div" variant="h5">
+                  Name: {merchantData.merchant_name}
+                </Typography>
+                <Typography
+                  variant="subtitle1"
+                  color="text.secondary"
+                  component="div"
+                >
+                  From: {merchantData.city}
+                </Typography>
+                {/* <Typography
+                  variant="subtitle1"
+                  color="text.secondary"
+                  component="div"
+                >
+                  {merchantData.city}
+                </Typography> */}
+              </CardContent>
+              {/* <CardContent>Follow</CardContent> */}
+            </Box>
+          </Card>
         </Grid>
-        <Grid item md={12} xs={12}>
+        {/* <Grid item md={12} xs={12}>
           <Box>
             {" "}
             <List>
@@ -108,58 +136,62 @@ function MerchantStore({ merchantStoreDetail }) {
               </ListItem>
             </List>
           </Box>
-        </Grid>
+        </Grid> */}
         <Grid item md={12} xs={12}>
-          <Card style={{ margin: "10px" }}>
-            <AppBar
-              sx={{
-                borderBottom: 1,
-                borderColor: "divider",
-                position: "static",
-              }}
+          <Box>
+            <Tabs
+              value={value}
+              onChange={handleChange}
+              aria-label="basic tabs example"
+              // variant="fullWidth"
+
+              indicatorColor="primary"
+              textColor="primary"
             >
-              <Tabs
-                value={value}
-                onChange={handleChange}
-                aria-label="basic tabs example"
-                variant="fullWidth"
-                indicatorColor="secondary"
-                textColor="inherit"
-              >
-                <Tab label="All Products" {...a11yProps(0)} />
-                <Tab label="Reviews" {...a11yProps(1)} />
-              </Tabs>
-            </AppBar>
+              <Tab
+                style={{ fontWeight: "bold" }}
+                label="Home Page"
+                {...a11yProps(0)}
+              />
+              <Tab
+                style={{ fontWeight: "bold" }}
+                label="All Products"
+                {...a11yProps(1)}
+              />
+              <Tab
+                style={{ fontWeight: "bold" }}
+                label="Profile"
+                {...a11yProps(2)}
+              />
+              {/* <Box>hi</Box> */}
+            </Tabs>
 
             <TabPanel value={value} index={0}>
-              <Grid container>
-                {merchantStoreDetail && merchantStoreDetail?.map((result) => (
-                  <ActionAreaCard
-                    product={result}
-                    viewProduct={viewProduct}
-                  ></ActionAreaCard>
-                ))}
+              <Grid container backgroundColor="white">
+                Home
+                {merchantStoreDetail &&
+                  merchantStoreDetail?.map((result) => (
+                    <ActionAreaCard
+                      product={result}
+                      viewProduct={viewProduct}
+                    ></ActionAreaCard>
+                  ))}
               </Grid>
             </TabPanel>
             <TabPanel value={value} index={1}>
-              Ratings and Reviews
+              All Products
+              {/* {merchantStoreDetail &&
+                  merchantStoreDetail?.map((result) => (
+                    <ActionAreaCard
+                      product={result}
+                      viewProduct={viewProduct}
+                    ></ActionAreaCard>
+                  ))} */}
             </TabPanel>
-          </Card>
-        </Grid>
-
-        <Grid container spacing={1} sx={{ p: 2 }}>
-          <Grid item xs={12} md={12}>
-            <Stack direction="row" spacing={2}>
-              <Button
-                // fullWidth
-                variant="contained"
-                color="error"
-                onClick={() => router.push(`/product_detail?productId=${localStorage.getItem("productId")}`)}
-              >
-                Back
-              </Button>
-            </Stack>
-          </Grid>
+            <TabPanel value={value} index={2}>
+              Profile
+            </TabPanel>
+          </Box>
         </Grid>
       </Grid>
     </>

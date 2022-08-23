@@ -1,0 +1,41 @@
+.box {
+  width: 100%;
+}
+
+.column {
+  /* background-color: blue; */
+  margin: 1;
+  width: 18.5%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* On screens that are 992px wide or less, go from four columns to two columns */
+@media screen and (max-width: 1024px) {
+  .column {
+    width: 23%;
+  }
+}
+@media screen and (max-width: 992px) {
+  .column {
+    width: 31%;
+  }
+}
+
+/* On screens that are 600px wide or less, make the columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 45%;
+  }
+}
+
+@media screen and (max-width: 300px) {
+  .column {
+    width: 100%;
+  }
+}
