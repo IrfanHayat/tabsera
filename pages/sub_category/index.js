@@ -138,8 +138,8 @@ function SubCategory() {
 
     return (
       <Box sx={{ display: 'flex', flexDirection: 'column', ml: 2 }}>
-        {subCategories.map((result, index) => <List>
-          <ListItem key={index}>{result.category_name}</ListItem></List>)}
+        {subCategories.map((result, index) => <List key={index}>
+          <ListItem >{result.category_name}</ListItem></List>)}
         {/* {
           subCategories?.map(result => {
             <List>
