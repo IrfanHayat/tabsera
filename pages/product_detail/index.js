@@ -261,7 +261,13 @@ function Product_detail(props) {
     router.push("/shipping");
   };
 
+  const handleAddToCart = async (item) => {
+    dispatch(addToBasket(item));
 
+    setTimeout(() => {
+      dispatch(getTotalCartQuantity());
+    }, 1000);
+  };
   return (
     <>
 
@@ -296,6 +302,7 @@ function Product_detail(props) {
           addToCartHandler={addToCartHandler}
           BuyHandler={BuyHandler}
           productImage={productImage}
+          handleAddToCart={handleAddToCart}
           productAttributes={productAttributes}
           price={price}
           checkoutHandler={checkoutHandler}
@@ -308,6 +315,7 @@ function Product_detail(props) {
           merchantDetail={merchantData}
           addToCartHandler={addToCartHandler}
           BuyHandler={BuyHandler}
+          handleAddToCart={handleAddToCart}
           productImage={productImage}
           productAttributes={productAttributes}
           price={price}

@@ -189,7 +189,7 @@ function Details({
         spacing={1}
         maxWidth="xl"
         sx={{ backgroundColor: "#fafafa", pt: 1 }}
-        // justifyContent="center"
+      // justifyContent="center"
       >
         <Grid item md={4} xs={12} sx={{ bgcolor: "white" }}>
           <List>
@@ -206,63 +206,20 @@ function Details({
               >
                 {Object.keys(productDetail).length > 0 && skusFlag == false
                   ? productDetail.product_images[0].media_images.map(
-                      (result, index) => (
-                        <ReactImageMagnify
-                          {...{
-                            smallImage: {
-                              alt: "Wristwatch by Ted Baker London",
-                              // isFluidWidth: true,
-                              width: 450,
-                              height: 400,
-                              src: result,
-                              // sizes:
-                              //   "(min-width: 800px) 33.5vw, (min-width: 415px) 50vw, 100vw",
-                            },
-                            largeImage: {
-                              src: result,
-                              width: 1200,
-                              height: 1800,
-                            },
-
-                            enlargedImagePosition: "over",
-                            // enlargedImageContainerDimensions: {
-                            //   width: "150%",
-                            //   height: "150%",
-                            // },
-                            enlargedImageContainerStyle: {
-                              zIndex: "1500",
-                            },
-                            enlargedImageContainerDimensions: {
-                              width: "50%",
-                              height: "100%",
-                            },
-                          }}
-                        />
-                        // <Image
-                        //   key={index}
-                        //   //  className={cx(styles.media, mediaStyles.root)}
-                        //   src={result}
-                        //   alt="shirt"
-                        //   // objectFit="contain"
-                        //   width={1000}
-                        //   height={900}
-                        // ></Image>
-                      )
-                    )
-                  : productImage && (
+                    (result, index) => (
                       <ReactImageMagnify
                         {...{
                           smallImage: {
                             alt: "Wristwatch by Ted Baker London",
-                            isFluidWidth: true,
-                            // width: 100,
-                            // height: 200,
-                            src: productImage[0],
+                            // isFluidWidth: true,
+                            width: 450,
+                            height: 400,
+                            src: result,
                             // sizes:
                             //   "(min-width: 800px) 33.5vw, (min-width: 415px) 50vw, 100vw",
                           },
                           largeImage: {
-                            src: productImage[0],
+                            src: result,
                             width: 1200,
                             height: 1800,
                           },
@@ -282,15 +239,58 @@ function Details({
                         }}
                       />
                       // <Image
-                      //   // key={index}
+                      //   key={index}
                       //   //  className={cx(styles.media, mediaStyles.root)}
-                      //   src={productImage[0]}
+                      //   src={result}
                       //   alt="shirt"
-                      //   objectFit="contain"
-                      //   width={500}
-                      //   height={1000}
+                      //   // objectFit="contain"
+                      //   width={1000}
+                      //   height={900}
                       // ></Image>
-                    )}
+                    )
+                  )
+                  : productImage && (
+                    <ReactImageMagnify
+                      {...{
+                        smallImage: {
+                          alt: "Wristwatch by Ted Baker London",
+                          isFluidWidth: true,
+                          // width: 100,
+                          // height: 200,
+                          src: productImage[0],
+                          // sizes:
+                          //   "(min-width: 800px) 33.5vw, (min-width: 415px) 50vw, 100vw",
+                        },
+                        largeImage: {
+                          src: productImage[0],
+                          width: 1200,
+                          height: 1800,
+                        },
+
+                        enlargedImagePosition: "over",
+                        // enlargedImageContainerDimensions: {
+                        //   width: "150%",
+                        //   height: "150%",
+                        // },
+                        enlargedImageContainerStyle: {
+                          zIndex: "1500",
+                        },
+                        enlargedImageContainerDimensions: {
+                          width: "50%",
+                          height: "100%",
+                        },
+                      }}
+                    />
+                    // <Image
+                    //   // key={index}
+                    //   //  className={cx(styles.media, mediaStyles.root)}
+                    //   src={productImage[0]}
+                    //   alt="shirt"
+                    //   objectFit="contain"
+                    //   width={500}
+                    //   height={1000}
+                    // ></Image>
+                  )}
               </Carousel>
             </ListItem>
             {console.log(productDetail)}
@@ -366,52 +366,52 @@ function Details({
           <Box sx={{ display: "flex" }}>
             {skusFlag && skusProduct
               ? skusProduct.attributes.map((result, index) => (
-                  <Grid container key={index}>
-                    {result.attribute_name == "Color" ? (
-                      <>
-                        <Grid item md={4}>
-                          {result.attribute_name}:
-                        </Grid>
-                        <Grid item md={3}>
-                          <ListItemIcon>
-                            <Brightness1Icon
-                              sx={{
-                                // position: "relative",
-                                // top: 6,
-                                // left: 5,
-                                color: result.value,
-                              }}
-                            />
-                          </ListItemIcon>
-                        </Grid>
-                      </>
-                    ) : (
-                      <Typography style={{ fontWeight: "bold" }}>
-                        {result.attribute_name}: {result.value}{" "}
-                      </Typography>
-                    )}
-                  </Grid>
-                ))
+                <Grid container key={index}>
+                  {result.attribute_name == "Color" ? (
+                    <>
+                      <Grid item md={4}>
+                        {result.attribute_name}:
+                      </Grid>
+                      <Grid item md={3}>
+                        <ListItemIcon>
+                          <Brightness1Icon
+                            sx={{
+                              // position: "relative",
+                              // top: 6,
+                              // left: 5,
+                              color: result.value,
+                            }}
+                          />
+                        </ListItemIcon>
+                      </Grid>
+                    </>
+                  ) : (
+                    <Typography style={{ fontWeight: "bold" }}>
+                      {result.attribute_name}: {result.value}{" "}
+                    </Typography>
+                  )}
+                </Grid>
+              ))
               : productAttributes.map((result, index) => (
-                  <Grid container key={index}>
-                    {result.attribute_name == "Color" ? (
-                      <>
-                        <Grid item md={4}>
-                          <Typography> {result.attribute_name}: </Typography>
-                        </Grid>
-                        <Grid item md={3}>
-                          <ListItemIcon>
-                            <Brightness1Icon sx={{ color: result.value }} />
-                          </ListItemIcon>
-                        </Grid>
-                      </>
-                    ) : (
-                      <Typography>
-                        {result.attribute_name}: {result.value}{" "}
-                      </Typography>
-                    )}
-                  </Grid>
-                ))}
+                <Grid container key={index}>
+                  {result.attribute_name == "Color" ? (
+                    <>
+                      <Grid item md={4}>
+                        <Typography> {result.attribute_name}: </Typography>
+                      </Grid>
+                      <Grid item md={3}>
+                        <ListItemIcon>
+                          <Brightness1Icon sx={{ color: result.value }} />
+                        </ListItemIcon>
+                      </Grid>
+                    </>
+                  ) : (
+                    <Typography>
+                      {result.attribute_name}: {result.value}{" "}
+                    </Typography>
+                  )}
+                </Grid>
+              ))}
           </Box>
           <Divider fullWidth />
           <Divider />
@@ -475,7 +475,7 @@ function Details({
                   size="large"
                   variant="contained"
                   color="error"
-                  // sx={{ color:  "text.secondary" }}
+                // sx={{ color:  "text.secondary" }}
                 >
                   <IndeterminateCheckBoxOutlinedIcon />
                 </IconButton>
@@ -489,8 +489,8 @@ function Details({
                   size="large"
                   variant="contained"
                   color="success"
-                  // sx={{ color: "text.secondary" }}
-                  // onClick={() => handleAddToCart(item)}
+                // sx={{ color: "text.secondary" }}
+                // onClick={() => handleAddToCart(item)}
                 >
                   <AddBoxOutlinedIcon />
                 </IconButton>
@@ -610,7 +610,7 @@ function Details({
                 <Button
                   variant="text"
                   onClick={() => viewStore(merchantDetail?.merchant_id)}
-                  // onClick={viewStore}
+                // onClick={viewStore}
                 >
                   Visit Store
                 </Button>
