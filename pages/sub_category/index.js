@@ -309,31 +309,31 @@ function SubCategory() {
             </Grid>
             <Grid item xs={12} sx={styled}>
               {console.log(filterPrice?.length)}
-              <Item sx={{ minHeight: "90vh" }}>
-                {productDataWithCategoryId && filterPrice?.length < 1 && flag == false ?
-                  productDataWithCategoryId?.map((item) => (
-                    <ActionAreaCard
-                      key={item}
-                      product={item}
-                      viewProduct={viewProduct}
-                      addToCartHandler={addToCartHandler}
-                      // viewCategory={viewCategory}
-                      styledCard={styled}
-                    ></ActionAreaCard>
-                  )) :
 
-                  filterPrice.length > 0 ? filterPrice?.map((item) => (
-                    <ActionAreaCard
-                      key={item}
-                      product={item}
-                      viewProduct={viewProduct}
-                      addToCartHandler={addToCartHandler}
-                      // viewCategory={viewCategory}
-                      styledCard={styled}
-                    ></ActionAreaCard>
-                  )) : 'Product Not Found'
-                }
-              </Item>
+              {productDataWithCategoryId && filterPrice?.length < 1 && flag == false ?
+                productDataWithCategoryId?.map((item) => (
+                  <ActionAreaCard
+                    key={item}
+                    product={item}
+                    viewProduct={viewProduct}
+                    addToCartHandler={addToCartHandler}
+                    // viewCategory={viewCategory}
+                    styledCard={styled}
+                  ></ActionAreaCard>
+                )) :
+
+                filterPrice.length > 0 ? filterPrice?.map((item) => (
+                  <ActionAreaCard
+                    key={item}
+                    product={item}
+                    viewProduct={viewProduct}
+                    addToCartHandler={addToCartHandler}
+                    // viewCategory={viewCategory}
+                    styledCard={styled}
+                  ></ActionAreaCard>
+                )) : 'Product Not Found'
+              }
+
             </Grid>
           </Grid>
         </Item >
