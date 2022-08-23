@@ -28,7 +28,7 @@ import TextField from "@mui/material/TextField";
 import SortFilter from "../../container/Filter/SortFilter";
 import ListFilter from "../../container/Filter/ListFilter";
 import PageFilter from "../../container/Filter/PageFilter";
-import ViewFilter from "../../container/Filter/viewFilter";
+import ViewFilter from "../../container/Filter/ViewFilter";
 import Button from "@mui/material/Button";
 import PriceFilter from "../../container/Filter/PriceFilter";
 
