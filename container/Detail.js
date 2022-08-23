@@ -37,6 +37,9 @@ import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
 import IndeterminateCheckBoxOutlinedIcon from "@mui/icons-material/IndeterminateCheckBoxOutlined";
 import SettingsBackupRestoreIcon from "@mui/icons-material/SettingsBackupRestore";
 import NotInterestedIcon from "@mui/icons-material/NotInterested";
+import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
+import ShareIcon from "@mui/icons-material/Share";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
   { width: 550, itemsToShow: 2 },
@@ -353,7 +356,13 @@ function Details({
               In Stock
             </Typography>
           </Box>
-          <Rating name="size-small" defaultValue={3} size="small" readOnly />
+          <Box sx={{ display: "flex", justifyContent: "space-between", my: 1 }}>
+            <Rating name="size-small" defaultValue={3} size="small" readOnly />
+            <Stack spacing={2} direction="row">
+              <ShareIcon />
+              <FavoriteBorderIcon color="error" />
+            </Stack>
+          </Box>
           <Box sx={{ display: "flex" }}>
             {skusFlag && skusProduct
               ? skusProduct.attributes.map((result, index) => (
@@ -461,7 +470,7 @@ function Details({
                 productDetail?.map((item) => ( */}
               <Grid display="flex" justifyContent="center" alignItems="center">
                 <IconButton
-                  // onClick={() => handleDecreaseCart()}
+                  // onClick={() => handleDecreaseCart(item)}
                   aria-label="reduce item"
                   size="large"
                   variant="contained"
@@ -605,85 +614,19 @@ function Details({
           <Divider />
         </Grid>
 
-        <Grid container spacing={1} m={1}>
-          <Grid item md={12} xs={12}>
-            <Card>
-              <AppBar
-                sx={{
-                  borderBottom: 1,
-                  borderColor: "divider",
-                  position: "static",
-                }}
-              >
-                <Tabs
-                  value={value}
-                  onChange={handleChange}
-                  aria-label="full width tabs example"
-                  variant="fullWidth"
-                  indicatorColor="secondary"
-                  // textColor="secondary"
-                  textColor="inherit"
-                >
-                  <Tab
-                    label="Description"
-                    style={{ fontWeight: "bold" }}
-                    {...a11yProps(0)}
-                  />
-                  <Tab
-                    label="Rating"
-                    style={{ fontWeight: "bold" }}
-                    {...a11yProps(1)}
-                  />
-                  <Tab
-                    label="Similar Products"
-                    style={{ fontWeight: "bold" }}
-                    {...a11yProps(2)}
-                  />
-                </Tabs>
-              </AppBar>
-              <SwipeableViews
-                axis={theme.direction === "rtl" ? "x-reverse" : "x"}
-                index={value}
-                onChangeIndex={handleChangeIndex}
-              >
-                <TabPanel value={value} index={0} dir={theme.direction}>
-                  {productDetail?.product_desc}
-                </TabPanel>
-                <TabPanel value={value} index={1} dir={theme.direction}>
-                  Rating
-                </TabPanel>
-                <TabPanel value={value} index={2} dir={theme.direction}>
-                  {/* {productDetail?.merchant_name} */}
-                  Similar Products
-                  {/* <List>
-                    <ListItem>Name : {merchantDetail?.merchant_name}</ListItem>
-                  </List>
-                  <List>
-                    <ListItem>Location : {merchantDetail?.city}</ListItem>
-                  </List>
-                  <List>
-                    <ListItem>
-                      Joined Tabsera : {merchantDetail?.created_date}
-                    </ListItem>
-                  </List>
-                  <List>
-                    <ListItem>Seller Rating :</ListItem>
-                  </List>
-                  <Stack>
-                    <Button
-                      variant="text"
-                      onClick={() => viewStore(merchantDetail?.merchant_id)}
-                      // onClick={viewStore}
-                    >
-                      Visit Store
-                    </Button>
-                  </Stack> */}
-                </TabPanel>
-              </SwipeableViews>
-              {/* <TabPanel value={value} index={2}>
-              {merchantDetail?.city}
-            </TabPanel> */}
-            </Card>
+        <Grid container sx={{ p: 1 }}>
+          <Grid item md={9} xs={9} sx={{ background: "white", p: 1 }}>
+            <Grid container>{productDetail?.product_desc}</Grid>
+            {/* <Grid item md={9} xs={9}>
+              <Typography style={{ fontWeight: "bold" }}>Rating :</Typography>
+            </Grid> */}
+          </Grid>
+
+          <Grid item md={3} xs={12}>
+            <Typography style={{ fontWeight: "bold" }}>
+              {" "}
+              Similar Products :
+            </Typography>
           </Grid>
         </Grid>
         <AppBar
