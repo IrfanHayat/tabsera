@@ -74,6 +74,7 @@ const Item = styled(Paper)(({ theme }) => ({
 }));
 import ListItemButton from "@mui/material/ListItemButton";
 import ListFilter from "./Filter/ListFilter";
+import PageFilter from "./Filter/PageFilter";
 export default function PersistentDrawerLeft() {
   const { data, isLoading, isFetching, isError } = useGetAllProductsQuery();
   const { categoryData } = useSelector((state) => state.category);
@@ -629,36 +630,7 @@ export default function PersistentDrawerLeft() {
               <ListFilter showAllProducts={showAllProducts}
                 showAllMerchantsProduct={showAllMerchantsProduct}
                 showAllCategoriesProduct={showAllCategoriesProduct}></ListFilter>
-              <FormControl>
-                <RadioGroup
-                  row
-                  aria-labelledby="demo-controlled-radio-buttons-group"
-                  name="controlled-radio-buttons-group"
-                  value={value}
-                >
-                  <motion.div className="animatable" whileTap={{ scale: 0.9 }}>
-                    <FormControlLabel
-                      value="deals"
-                      control={<Radio onChange={handleChange} />}
-                      label="Deals And Promotions"
-                    />
-                  </motion.div>
-                  <motion.div className="animatable" whileTap={{ scale: 0.9 }}>
-                    <FormControlLabel
-                      value="discounts"
-                      control={<Radio onChange={handleChange} />}
-                      label="Discounts"
-                    />
-                  </motion.div>
-                  <motion.div className="animatable" whileTap={{ scale: 0.9 }}>
-                    <FormControlLabel
-                      value="freeShipping"
-                      control={<Radio onChange={handleChange} />}
-                      label="freeShipping"
-                    />
-                  </motion.div>
-                </RadioGroup>
-              </FormControl>
+              <PageFilter value={value} handleChange={handleChange}></PageFilter>
               <SortFilter
                 data={data?.response}
                 setFilterData={setFilterData}

@@ -29,6 +29,7 @@ export default function ActionAreaCard({
   viewProduct,
   viewCategory,
   addToCartHandler,
+  styledCard,
   productView,
   categoryView,
   cartView,
@@ -40,12 +41,16 @@ export default function ActionAreaCard({
   const AnimatedTypography = animated(Typography);
   console.log("freee", product);
   let height = product.discountPercent ? 350 : 320;
+  let display = styledCard ? styledCard : ''
+  let width = styledCard?.flexDirection == 'row' ? 900 : 250;
+
   return (
     // <Box>
 
     <Card
       sx={{
         m: 1,
+        display: display,
         // mx: 0.4,
         // my: 2,
         // marginTop: 1,
@@ -56,7 +61,7 @@ export default function ActionAreaCard({
         // borderColor: "#9E9E9E ",
         bgcolor: "background.paper",
         padding: 0.5,
-        width: 252,
+        width: width,
         // maxWidth: 280,
         height: 340,
         ":hover": {

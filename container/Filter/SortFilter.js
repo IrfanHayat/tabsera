@@ -8,7 +8,7 @@ import Button from "@mui/material/Button";
 
 function SortFilter({
   data,
-  setFilterData,
+  setFilterData
 
 }) {
   const sortData = (type) => {

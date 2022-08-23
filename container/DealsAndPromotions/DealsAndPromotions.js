@@ -38,7 +38,7 @@ const DealsAndPromotions = ({ dealsData, viewProduct }) => {
             // borderColor: "#9E9E9E ",
             bgcolor: "background.paper",
             // padding: 0.5,
-            width: 252,
+            width: 250,
             // maxWidth: 280,
             height: "57vh",
             ":hover": {

@@ -65,8 +65,11 @@ const Index = ({ Item, data }) => {
     let result = await dispatch(getProductSearch(router?.query?.data));
     console.log(result);
     setSearchData(result.payload);
-  }, [searchData]);
+  }, []);
 
+  useEffect(() => {
+
+  }, [searchData])
   useEffect(async () => {
     console.log(router.query);
     await dispatch(getProduct());
