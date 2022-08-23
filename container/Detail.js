@@ -508,6 +508,10 @@ function Details({
                 color="info"
                 type="submit"
                 size="large"
+                sx={{
+                  background:
+                    "linear-gradient(90deg, #020024 0%, #090979 35%, #00d4ff 100%)",
+                }}
                 // href="/shipping_information"
                 onClick={() => {
                   skusProduct
@@ -522,6 +526,9 @@ function Details({
               <Button
                 fullWidth
                 variant="contained"
+                sx={{
+                  background: "linear-gradient(45deg, red 10%, yellow 100%)",
+                }}
                 color="warning"
                 onClick={() => {
                   skusProduct

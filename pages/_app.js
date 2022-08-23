@@ -42,7 +42,7 @@ const MyApp = ({ Component, pageProps }) => {
           <NavBar />
 
           {/* <Container maxWidth="xl" sx={{ minHeight: "80vh" }}> */}
-          <Box>
+          <Box sx={{ minHeight: "80vh" }}>
             {/* <RouteGuard> */}
             <Component {...pageProps} />
             {/* </RouteGuard> */}
