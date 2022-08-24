@@ -7,7 +7,7 @@ import {
   getCategory,
 } from "../../slice/categorySlice";
 import { useRouter, withRouter } from "next/router";
-import { addToBasket } from "../../slice/basketSlice";
+import { addToBasket, addToCart } from "../../slice/basketSlice";
 import { useSelector, useDispatch } from "react-redux";
 import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
@@ -35,6 +35,11 @@ import PageFilter from "../../container/Filter/PageFilter";
 import ViewFilter from "../../container/Filter/ViewFilter";
 import Button from "@mui/material/Button";
 import PriceFilter from "../../container/Filter/PriceFilter";
+import Cookies from 'js-cookie'
+import SnackBarTool from "../../container/SnackBar/SnackBar";
+import ModalLoginData from "../../container/Login/ModalData";
+
+
 
 const useStyles = makeStyles({
   flexGrow: {
@@ -77,6 +82,9 @@ function SubCategory() {
   const [brands, setBrands] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
   const [parentCategories, setParentCategories] = useState([]);
+  let [status, setStatus] = useState();
+  const [open, setOpen] = React.useState(false);
+  const [openBar, setOpenBar] = React.useState(false);
 
   const viewProduct = (item) => {
     router.push({
@@ -129,7 +137,7 @@ function SubCategory() {
     });
   }, []);
 
-  useEffect(() => {}, [subCategories]);
+  useEffect(() => { }, [subCategories]);
 
   console.log(productDataWithCategoryId);
 
@@ -159,9 +167,21 @@ function SubCategory() {
     getData(id);
   }, []);
 
-  const addToCartHandler = (product) => {
-    dispatch(addToBasket(product));
-    router.push("/cart");
+  const addToCartHandler = async (product) => {
+    let result = await dispatch(addToCart(product));
+    console.log(result);
+    if (result?.payload?.resultCode == 4000) {
+      //setOpenBar(true);
+      setStatus(result?.payload);
+      setOpen(true);
+      Cookies.set("item", JSON.stringify(product));
+    } else {
+      dispatch(getCartItems());
+      dispatch(getTotalCartQuantity());
+      setTimeout(() => {
+        router.push("/cart");
+      }, 1000);
+    }
   };
 
   const handleView = (view) => {
@@ -180,6 +200,17 @@ function SubCategory() {
       setStyled(style);
     }
   };
+  const handleCloseBar = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenBar(false);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+
   const priceFilter = () => {
     let max = MaxInput.current.value;
     let min = MinInput.current.value;
@@ -195,115 +226,118 @@ function SubCategory() {
   };
 
   return (
-    <Grid
-      container
-      // xs={12}
-      sx={{ background: "white" }}
-      // spacing={2}
-    >
-      <Grid
-        item
-        xs={4}
-        md={2}
-        sx={{
-          bgcolor: "#fafafa",
-          p: 1,
-          display: "flex",
-          flexWrap: "wrap",
-          overflow: "hidden",
-        }}
-      >
-        <List dense>
-          Related Category
-          <ListItem
-          // spacing={2}
-          // sx={{ p: 1 }}
-          // alignItems="flex-start"
-          >
-            <ListItemText>
-              {parentCategories}
-              {subCategories.length > 0 ? children(subCategories) : ""}
-            </ListItemText>
-          </ListItem>
-          <Divider />
-          <ListItem>
-            <Typography>Brands</Typography>
-          </ListItem>
-          <ListItem>
-            {brands?.map((result, index) => (
-              <FormControlLabel
-                key={index}
-                control={<Checkbox defaultChecked size="small" />}
-                label={result.brand_name}
-              />
-            ))}
-          </ListItem>
-          <Divider />
-          <ListItem>
-            <FormControlLabel
-              control={<Checkbox defaultChecked size="small" />}
-              label="Colors"
-            />
-          </ListItem>
-          <Divider />
-          <ListItem>
-            <FormControlLabel
-              control={<Checkbox defaultChecked size="small" />}
-              label="Size"
-            />
-          </ListItem>
-          <Divider />
-          <ListItem>
-            <FormControlLabel
-              control={<Checkbox defaultChecked size="small" />}
-              label="Materials"
-            />
-          </ListItem>
-        </List>
-      </Grid>
+    <>
 
-      {/* ---------------------------------------------------- */}
-      <Grid item xs={8} md={10}>
+      {open == true ? <ModalLoginData handleClose={handleClose} open={open}></ModalLoginData> : <></>}
+      <Grid
+        container
+        // xs={12}
+        sx={{ background: "white" }}
+      // spacing={2}
+      >
         <Grid
-          container
+          item
+          xs={4}
+          md={2}
           sx={{
-            display: "flex",
-            flexWrap: "wrap",
             bgcolor: "#fafafa",
             p: 1,
-            // overflow: "hidden",
-          }}
-        >
-          <PriceFilter
-            MinInput={MinInput}
-            MaxInput={MaxInput}
-            priceFilter={priceFilter}
-          ></PriceFilter>
-          <Box flexGrow={0.5} />
-          <PageFilter></PageFilter>
-        </Grid>
-        <Grid
-          container
-          sx={{
             display: "flex",
-            bgcolor: "#fafafa",
-            px: 1,
+            flexWrap: "wrap",
+            overflow: "hidden",
           }}
         >
-          <ListFilter />
-          <Box flexGrow={1} />
-          <SortFilter
-            data={productDataWithCategoryId}
-            setFilterData={setFilterData}
-          />
-          <Box flexGrow={0.1} />
-          <ViewFilter handleView={handleView} />
+          <List dense>
+            Related Category
+            <ListItem
+            // spacing={2}
+            // sx={{ p: 1 }}
+            // alignItems="flex-start"
+            >
+              <ListItemText>
+                {parentCategories}
+                {subCategories.length > 0 ? children(subCategories) : ""}
+              </ListItemText>
+            </ListItem>
+            <Divider />
+            <ListItem>
+              <Typography>Brands</Typography>
+            </ListItem>
+            <ListItem>
+              {brands?.map((result, index) => (
+                <FormControlLabel
+                  key={index}
+                  control={<Checkbox defaultChecked size="small" />}
+                  label={result.brand_name}
+                />
+              ))}
+            </ListItem>
+            <Divider />
+            <ListItem>
+              <FormControlLabel
+                control={<Checkbox defaultChecked size="small" />}
+                label="Colors"
+              />
+            </ListItem>
+            <Divider />
+            <ListItem>
+              <FormControlLabel
+                control={<Checkbox defaultChecked size="small" />}
+                label="Size"
+              />
+            </ListItem>
+            <Divider />
+            <ListItem>
+              <FormControlLabel
+                control={<Checkbox defaultChecked size="small" />}
+                label="Materials"
+              />
+            </ListItem>
+          </List>
         </Grid>
-        <Grid item xs={12} sx={styled}>
-          {console.log(filterPrice?.length)}
 
-          {productDataWithCategoryId && filterPrice?.length < 1 && flag == false
-            ? productDataWithCategoryId?.map((item) => (
+        {/* ---------------------------------------------------- */}
+        <Grid item xs={8} md={10}>
+          <Grid
+            container
+            sx={{
+              display: "flex",
+              flexWrap: "wrap",
+              bgcolor: "#fafafa",
+              p: 1,
+              // overflow: "hidden",
+            }}
+          >
+            <PriceFilter
+              MinInput={MinInput}
+              MaxInput={MaxInput}
+              priceFilter={priceFilter}
+            ></PriceFilter>
+            <Box flexGrow={0.5} />
+            <PageFilter></PageFilter>
+          </Grid>
+          <Grid
+            container
+            sx={{
+              display: "flex",
+              bgcolor: "#fafafa",
+              px: 1,
+            }}
+          >
+            <ListFilter />
+            <Box flexGrow={1} />
+            <SortFilter
+              data={productDataWithCategoryId}
+              setFilterData={setFilterData}
+            />
+            <Box flexGrow={0.1} />
+            <ViewFilter handleView={handleView} />
+          </Grid>
+          <Grid item xs={12} sx={styled}>
+            {console.log(filterPrice?.length)}
+
+            {productDataWithCategoryId && filterPrice?.length < 1 && flag == false
+              ? productDataWithCategoryId?.map((item) => (
                 <ActionAreaCard
                   key={item}
                   product={item}
@@ -313,21 +347,23 @@ function SubCategory() {
                   styledCard={styled}
                 ></ActionAreaCard>
               ))
-            : filterPrice.length > 0
-            ? filterPrice?.map((item) => (
-                <ActionAreaCard
-                  key={item}
-                  product={item}
-                  viewProduct={viewProduct}
-                  addToCartHandler={addToCartHandler}
-                  // viewCategory={viewCategory}
-                  styledCard={styled}
-                ></ActionAreaCard>
-              ))
-            : "Product Not Found"}
+              : filterPrice.length > 0
+                ? filterPrice?.map((item) => (
+                  <ActionAreaCard
+                    key={item}
+                    product={item}
+                    viewProduct={viewProduct}
+                    addToCartHandler={addToCartHandler}
+                    // viewCategory={viewCategory}
+                    styledCard={styled}
+                  ></ActionAreaCard>
+                ))
+                : "Product Not Found"}
+          </Grid>
         </Grid>
       </Grid>
-    </Grid>
+
+    </>
   );
 }
 

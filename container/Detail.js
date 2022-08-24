@@ -418,17 +418,17 @@ function Details({
               color="warning.main"
               style={{ display: "block", fontSize: 36 }}
             >
-              PKR.{skusProduct ? skusProduct.cost : price}
+              {skusProduct ? <>PKR.{skusProduct.cost}  </> : <></>}
             </Box>
 
             <Box
               color="neutral"
               style={{ display: "block", textDecoration: "line-through" }}
             >
-              PKR.{skusProduct ? skusProduct.cost : price}
+              {skusProduct ? <>PKR.{skusProduct.original_price}   <Divider /></> : <></>}
             </Box>
           </Box>
-          <Divider />
+
           <Grid md={12}>
             <Typography variant="h5">Skus</Typography>
 
