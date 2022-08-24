@@ -160,56 +160,64 @@ export default function NavBar() {
         <ListItemIcon>
           <AccountBoxIcon fontSize="small" />
         </ListItemIcon>
-        <ListItemText>My Profile</ListItemText>
+        <Link href="/profile"><ListItemText >My Profile</ListItemText></Link>
+
       </MenuItem>
 
       <MenuItem>
         <ListItemIcon>
           <FormatListBulletedIcon fontSize="small" />
         </ListItemIcon>
-        <ListItemText>My Orders</ListItemText>
+        <Link href="/orders"><ListItemText>My Orders</ListItemText></Link>
+
       </MenuItem>
 
       <MenuItem>
         <ListItemIcon>
           <FormatListBulletedIcon fontSize="small" />
         </ListItemIcon>
-        <ListItemText>My Coupons</ListItemText>
+        <Link href="/coupons"><ListItemText>My Coupons</ListItemText></Link>
+
       </MenuItem>
 
       <MenuItem>
         <ListItemIcon>
           <ReceiptIcon fontSize="small" />
         </ListItemIcon>
-        <ListItemText>My Bill Payments</ListItemText>
+        <Link href="/bills"> <ListItemText>My Bill Payments</ListItemText></Link>
+
       </MenuItem>
 
       <MenuItem>
         <ListItemIcon>
           <AdUnitsIcon fontSize="small" />
         </ListItemIcon>
-        <ListItemText>My Topups</ListItemText>
+        <Link href="/topUps">  <ListItemText>My Topups</ListItemText></Link>
+
       </MenuItem>
 
       <MenuItem>
         <ListItemIcon>
           <GppGoodOutlinedIcon fontSize="small" />
         </ListItemIcon>
-        <ListItemText>Security</ListItemText>
+        <Link href="/security"> <ListItemText>Security</ListItemText></Link>
+
       </MenuItem>
 
       <MenuItem>
         <ListItemIcon>
           <InfoOutlinedIcon fontSize="small" />
         </ListItemIcon>
-        <ListItemText>About</ListItemText>
+        <Link href="/about">  <ListItemText>About</ListItemText></Link>
+
       </MenuItem>
 
       <MenuItem>
         <ListItemIcon>
           <HelpOutlineOutlinedIcon fontSize="small" />
         </ListItemIcon>
-        <ListItemText>Help</ListItemText>
+        <Link href="/help"> <ListItemText>Help</ListItemText></Link>
+
       </MenuItem>
       <Divider />
       <MenuItem onClick={() => logOut()} alignText="center">
