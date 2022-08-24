@@ -6,11 +6,7 @@ import ListItemText from "@mui/material/ListItemText";
 import { CircularProgress, Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 
-function SortFilter({
-  data,
-  setFilterData
-
-}) {
+function SortFilter({ data, setFilterData }) {
   const sortData = (type) => {
     var f_data;
     switch (type) {
@@ -98,19 +94,9 @@ function SortFilter({
         // bgcolor: "background.paper",
         // borderRadius: 0,
       }}
-    // data-aos="fade-down"
+      // data-aos="fade-down"
     >
-
-      {/* <Box sx={{ flexGrow: 0.85 }} /> */}
-      <Box
-        sx={{
-          // p: 1,
-          mt: 0.25,
-        }}
-      >
-        {/* <Button variant="text">Sort By</Button> */}
-        <NavSelect Title="Sort By" Data={sortingCategories} color="black" />
-      </Box>
+      <NavSelect Title="Sort By" Data={sortingCategories} color="black" />
     </Box>
   );
 }

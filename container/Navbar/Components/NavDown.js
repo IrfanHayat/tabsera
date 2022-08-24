@@ -231,7 +231,7 @@ export default function NavDown(props) {
         sx={{
           color: "secondary",
           boxShadow: 0,
-          bgcolor: "#f6f9fc",
+          bgcolor: "white",
           // sx={{  }}
           borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
           // bgcolor: "background.paper",
@@ -290,7 +290,7 @@ export default function NavDown(props) {
               flexDirection: { xs: "column", md: "row" },
             }}
           ></Box>
-          <Box sx={{ flexGrow: 0.5 }} />
+          <Box sx={{ flexGrow: 1 }} />
 
           <Stack
             spacing={2}

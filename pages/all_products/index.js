@@ -174,13 +174,43 @@ const Index = ({ Item, data }) => {
         container
         // justifyContent="center"
         // alignItems="center"
-        sx={{ display: "flex", flex: "wrap" }}
-        margin="auto"
-        minHeight={500}
+        sx={{ display: "flex" }}
+        // minHeight={500}
       >
-        {product && data?.length < 1
-          ? router.query.data.map((item, index) => (
-              // <Item key={index}>
+        <Box
+          sx={{
+            display: "flex",
+            m: "auto",
+            p: "auto",
+            flexWrap: "wrap",
+            // justifyContent: "space-aound",
+          }}
+        >
+          {product && data?.length < 1
+            ? router.query.data.map((item, index) => (
+                // <Item key={index}>
+                <ActionAreaCard
+                  product={item}
+                  viewProduct={viewProduct}
+                  addToCartHandler={addToCartHandler}
+                  key={index}
+                >
+                  {/* {item?.productName}> */}
+                </ActionAreaCard>
+                // </Item>
+              ))
+            : data?.map((item, index) => (
+                <ActionAreaCard
+                  product={item}
+                  viewProduct={viewProduct}
+                  addToCartHandler={addToCartHandler}
+                  key={index}
+                >
+                  {/* {item?.productName}> */}
+                </ActionAreaCard>
+              ))}
+          {searchData?.length > 0 ? (
+            searchData?.map((item, index) => (
               <ActionAreaCard
                 product={item}
                 viewProduct={viewProduct}
@@ -189,32 +219,11 @@ const Index = ({ Item, data }) => {
               >
                 {/* {item?.productName}> */}
               </ActionAreaCard>
-              // </Item>
             ))
-          : data?.map((item, index) => (
-              <ActionAreaCard
-                product={item}
-                viewProduct={viewProduct}
-                addToCartHandler={addToCartHandler}
-                key={index}
-              >
-                {/* {item?.productName}> */}
-              </ActionAreaCard>
-            ))}
-        {searchData?.length > 0 ? (
-          searchData?.map((item, index) => (
-            <ActionAreaCard
-              product={item}
-              viewProduct={viewProduct}
-              addToCartHandler={addToCartHandler}
-              key={index}
-            >
-              {/* {item?.productName}> */}
-            </ActionAreaCard>
-          ))
-        ) : (
-          <></>
-        )}
+          ) : (
+            <></>
+          )}
+        </Box>
       </Grid>
       {/* </InfiniteScroll> */}
     </>

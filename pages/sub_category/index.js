@@ -1,7 +1,11 @@
 import React, { useState, useMemo, useRef, useEffect } from "react";
 
 import ActionAreaCard from "../../container/Card";
-import { getProductWithCategoryId, getCategoryBrand, getCategory } from "../../slice/categorySlice";
+import {
+  getProductWithCategoryId,
+  getCategoryBrand,
+  getCategory,
+} from "../../slice/categorySlice";
 import { useRouter, withRouter } from "next/router";
 import { addToBasket } from "../../slice/basketSlice";
 import { useSelector, useDispatch } from "react-redux";
@@ -19,10 +23,10 @@ import FormGroup from "@mui/material/FormGroup";
 import GridViewIcon from "@mui/icons-material/GridView";
 import ViewListIcon from "@mui/icons-material/ViewList";
 import { Typography } from "@mui/material";
-import Box from '@mui/material/Box';
+import Box from "@mui/material/Box";
 import makeStyles from "@mui/styles/makeStyles";
-import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
+import Checkbox from "@mui/material/Checkbox";
+import FormControlLabel from "@mui/material/FormControlLabel";
 import { styled, useTheme, alpha } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import SortFilter from "../../container/Filter/SortFilter";
@@ -34,18 +38,17 @@ import PriceFilter from "../../container/Filter/PriceFilter";
 
 const useStyles = makeStyles({
   flexGrow: {
-    flex: '1',
+    flex: "1",
   },
   button: {
-    backgroundColor: '#3c52b2',
-    color: '#fff',
-    '&:hover': {
-      backgroundColor: '#fff',
-      color: '#3c52b2',
+    backgroundColor: "#3c52b2",
+    color: "#fff",
+    "&:hover": {
+      backgroundColor: "#fff",
+      color: "#3c52b2",
     },
-  }
-})
-
+  },
+});
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -62,17 +65,18 @@ function SubCategory() {
   const [styled, setStyled] = React.useState({
     display: "flex",
     flexDirection: "column",
+    p: 1,
   });
   const [filterData, setFilterData] = useState();
 
-  const classes = useStyles()
+  const classes = useStyles();
   const MaxInput = useRef(null);
   const MinInput = useRef(null);
-  const [filterPrice, setFilterPrice] = useState([])
-  const [flag, setFlag] = useState(false)
-  const [brands, setBrands] = useState([])
-  const [subCategories, setSubCategories] = useState([])
-  const [parentCategories, setParentCategories] = useState([])
+  const [filterPrice, setFilterPrice] = useState([]);
+  const [flag, setFlag] = useState(false);
+  const [brands, setBrands] = useState([]);
+  const [subCategories, setSubCategories] = useState([]);
+  const [parentCategories, setParentCategories] = useState([]);
 
   const viewProduct = (item) => {
     router.push({
@@ -103,43 +107,40 @@ function SubCategory() {
   };
 
   useEffect(async () => {
-    let result = await dispatch(getCategoryBrand())
-    let results = result?.payload.filter(result => result.category_id == router?.query?.sub_category)
-    console.log(results)
-    results.map(category => {
-      setBrands(category.brands)
-    })
-
-  }, [])
+    let result = await dispatch(getCategoryBrand());
+    let results = result?.payload.filter(
+      (result) => result.category_id == router?.query?.sub_category
+    );
+    console.log(results);
+    results.map((category) => {
+      setBrands(category.brands);
+    });
+  }, []);
 
   useEffect(async () => {
-    let result = await dispatch(getCategory())
-    let results = result?.payload.filter(result => result.category_id == router?.query?.sub_category)
-    console.log(results)
-    results?.map(category => {
-      setParentCategories(category.category_name)
-      setSubCategories(category.child)
-    })
+    let result = await dispatch(getCategory());
+    let results = result?.payload.filter(
+      (result) => result.category_id == router?.query?.sub_category
+    );
+    console.log(results);
+    results?.map((category) => {
+      setParentCategories(category.category_name);
+      setSubCategories(category.child);
+    });
+  }, []);
 
-  }, [])
+  useEffect(() => {}, [subCategories]);
 
-  useEffect(() => {
-
-  }, [subCategories])
-
-
-
-
-
-
-  console.log(productDataWithCategoryId)
+  console.log(productDataWithCategoryId);
 
   const children = (subCategories) => {
-
     return (
-      <Box sx={{ display: 'flex', flexDirection: 'column', ml: 2 }}>
-        {subCategories.map((result, index) => <List key={index}>
-          <ListItem >{result.category_name}</ListItem></List>)}
+      <Box sx={{ display: "flex", flexDirection: "column", ml: 2 }}>
+        {subCategories.map((result, index) => (
+          <List key={index}>
+            <ListItem>{result.category_name}</ListItem>
+          </List>
+        ))}
         {/* {
           subCategories?.map(result => {
             <List>
@@ -150,16 +151,12 @@ function SubCategory() {
           })
 
         } */}
-
-
       </Box>
     );
-  }
+  };
   useMemo(() => {
-
     let id = router?.query?.sub_category;
     getData(id);
-
   }, []);
 
   const addToCartHandler = (product) => {
@@ -182,166 +179,155 @@ function SubCategory() {
       };
       setStyled(style);
     }
-
-  }
+  };
   const priceFilter = () => {
     let max = MaxInput.current.value;
-    let min = MinInput.current.value
-    console.log(typeof (max))
-    console.log(typeof (min))
-    let result = productDataWithCategoryId.filter(result => parseInt(result.productCost) >= parseInt(min) && parseInt(result.productCost) <= parseInt(max))
-    setFilterPrice(result)
-    setFlag(true)
-
-  }
+    let min = MinInput.current.value;
+    console.log(typeof max);
+    console.log(typeof min);
+    let result = productDataWithCategoryId.filter(
+      (result) =>
+        parseInt(result.productCost) >= parseInt(min) &&
+        parseInt(result.productCost) <= parseInt(max)
+    );
+    setFilterPrice(result);
+    setFlag(true);
+  };
 
   return (
     <Grid
       container
-      xs={12}
-      sx={{ mt: 2, background: "white", minWidth: "100%" }}
-      spacing={2}
+      // xs={12}
+      sx={{ background: "white" }}
+      // spacing={2}
     >
-      <Grid item xs={3}>
-        <Item sx={{ minHeight: "100vh", border: 0, boxShadow: 0 }}>
-          <List dense>
-            Related Category
-            <ListItem
-            // spacing={2}
-            // sx={{ p: 1 }}
-            // alignItems="flex-start"
-
-
-            >
-              <ListItemIcon>
-                {/* <Image
-        // src={result.category_image}
-        width={50}
-        height={30}
-      ></Image> */}
-              </ListItemIcon>
-              {console.log(subCategories)}
-              <ListItemText >
-                {parentCategories}
-                {subCategories.length > 0 ? children(subCategories) : ''}
-              </ListItemText>
-            </ListItem>
-
-
-
-          </List>
-
-
-        </Item>
-        <Divider></Divider>
-        <Item sx={{ border: 0, boxShadow: 0 }}>
-          <Typography>Brands</Typography>
-          {
-
-            brands?.map((result, index) => (
-              <FormControlLabel key={index} control={<Checkbox defaultChecked />} label={result.brand_name} />
-            ))
-          }
-
-        </Item>
-        <Divider></Divider>
-        <Item sx={{ border: 0, boxShadow: 0 }}>
-          <FormControlLabel
-            control={<Checkbox defaultChecked />}
-            label="Colors"
-          />
-        </Item>
-        <Divider></Divider>
-
-        <Item sx={{ border: 0, boxShadow: 0 }}>
-          <FormControlLabel
-            control={<Checkbox defaultChecked />}
-            label="Size"
-          />
-        </Item>
-        <Divider></Divider>
-        <Item sx={{ border: 0, boxShadow: 0 }}><FormControlLabel control={<Checkbox defaultChecked />} label="Materials" /></Item>
+      <Grid
+        item
+        xs={4}
+        md={2}
+        sx={{
+          bgcolor: "#fafafa",
+          p: 1,
+          display: "flex",
+          flexWrap: "wrap",
+          overflow: "hidden",
+        }}
+      >
+        <List dense>
+          Related Category
+          <ListItem
+          // spacing={2}
+          // sx={{ p: 1 }}
+          // alignItems="flex-start"
+          >
+            <ListItemText>
+              {parentCategories}
+              {subCategories.length > 0 ? children(subCategories) : ""}
+            </ListItemText>
+          </ListItem>
+          <Divider />
+          <ListItem>
+            <Typography>Brands</Typography>
+          </ListItem>
+          <ListItem>
+            {brands?.map((result, index) => (
+              <FormControlLabel
+                key={index}
+                control={<Checkbox defaultChecked size="small" />}
+                label={result.brand_name}
+              />
+            ))}
+          </ListItem>
+          <Divider />
+          <ListItem>
+            <FormControlLabel
+              control={<Checkbox defaultChecked size="small" />}
+              label="Colors"
+            />
+          </ListItem>
+          <Divider />
+          <ListItem>
+            <FormControlLabel
+              control={<Checkbox defaultChecked size="small" />}
+              label="Size"
+            />
+          </ListItem>
+          <Divider />
+          <ListItem>
+            <FormControlLabel
+              control={<Checkbox defaultChecked size="small" />}
+              label="Materials"
+            />
+          </ListItem>
+        </List>
       </Grid>
-      <Grid item xs={9}>
-        <Item sx={{ minHeight: "100vh" }}>
-          <Grid sx={12}>
-            <Grid item xs={12}>
-              <Item sx={{ minHeight: "10vh", border: 0, boxShadow: 0 }}>
-                <Grid md={12} sx={{ display: "flex" }}>
-                  <Grid
-                    item
-                    md={2}
-                    sx={{ minHeight: 5, border: 0, boxShadow: 0 }}
-                  >
-                    <Item sx={{ display: "flex", border: 0, boxShadow: 0 }}>
-                      <PriceFilter MinInput={MinInput} MaxInput={MaxInput} priceFilter={priceFilter}></PriceFilter>
-                    </Item>
 
-                  </Grid>
+      {/* ---------------------------------------------------- */}
+      <Grid item xs={8} md={10}>
+        <Grid
+          container
+          sx={{
+            display: "flex",
+            flexWrap: "wrap",
+            bgcolor: "#fafafa",
+            p: 1,
+            // overflow: "hidden",
+          }}
+        >
+          <PriceFilter
+            MinInput={MinInput}
+            MaxInput={MaxInput}
+            priceFilter={priceFilter}
+          ></PriceFilter>
+          <Box flexGrow={0.5} />
+          <PageFilter></PageFilter>
+        </Grid>
+        <Grid
+          container
+          sx={{
+            display: "flex",
+            bgcolor: "#fafafa",
+            px: 1,
+          }}
+        >
+          <ListFilter />
+          <Box flexGrow={1} />
+          <SortFilter
+            data={productDataWithCategoryId}
+            setFilterData={setFilterData}
+          />
+          <Box flexGrow={0.1} />
+          <ViewFilter handleView={handleView} />
+        </Grid>
+        <Grid item xs={12} sx={styled}>
+          {console.log(filterPrice?.length)}
 
-                  <Grid item md={4}>
-                    <Item sx={{ border: 0, boxShadow: 0 }}>
-                      <ListFilter></ListFilter>
-                    </Item>
-                  </Grid>
-                  <Grid item md={6}>
-                    <Item sx={{ border: 0, boxShadow: 0 }}>
-                      <PageFilter></PageFilter>
-                    </Item>
-                  </Grid>
-                  <Grid item md={1}>
-                    <Item
-                      sx={{ border: 0, boxShadow: 0, justifyContent: "end" }}
-                    >
-                      {" "}
-                      <SortFilter
-                        data={productDataWithCategoryId}
-                        setFilterData={setFilterData}
-                      ></SortFilter>
-                    </Item>
-                  </Grid>
-                </Grid>
-
-                <Grid sx={{ display: "flex", justifyContent: "flex-start" }}>
-                  <ViewFilter handleView={handleView}></ViewFilter>
-                </Grid>
-              </Item>
-            </Grid>
-            <Grid item xs={12} sx={styled}>
-              {console.log(filterPrice?.length)}
-
-              {productDataWithCategoryId && filterPrice?.length < 1 && flag == false ?
-                productDataWithCategoryId?.map((item) => (
-                  <ActionAreaCard
-                    key={item}
-                    product={item}
-                    viewProduct={viewProduct}
-                    addToCartHandler={addToCartHandler}
-                    // viewCategory={viewCategory}
-                    styledCard={styled}
-                  ></ActionAreaCard>
-                )) :
-
-                filterPrice.length > 0 ? filterPrice?.map((item) => (
-                  <ActionAreaCard
-                    key={item}
-                    product={item}
-                    viewProduct={viewProduct}
-                    addToCartHandler={addToCartHandler}
-                    // viewCategory={viewCategory}
-                    styledCard={styled}
-                  ></ActionAreaCard>
-                )) : 'Product Not Found'
-              }
-
-            </Grid>
-          </Grid>
-        </Item >
-      </Grid >
-
-
-    </Grid >
-
+          {productDataWithCategoryId && filterPrice?.length < 1 && flag == false
+            ? productDataWithCategoryId?.map((item) => (
+                <ActionAreaCard
+                  key={item}
+                  product={item}
+                  viewProduct={viewProduct}
+                  addToCartHandler={addToCartHandler}
+                  // viewCategory={viewCategory}
+                  styledCard={styled}
+                ></ActionAreaCard>
+              ))
+            : filterPrice.length > 0
+            ? filterPrice?.map((item) => (
+                <ActionAreaCard
+                  key={item}
+                  product={item}
+                  viewProduct={viewProduct}
+                  addToCartHandler={addToCartHandler}
+                  // viewCategory={viewCategory}
+                  styledCard={styled}
+                ></ActionAreaCard>
+              ))
+            : "Product Not Found"}
+        </Grid>
+      </Grid>
+    </Grid>
   );
 }
 
