@@ -619,7 +619,7 @@ function Details({
 
         <Grid container sx={{ p: 1 }}>
           <Grid item md={9} xs={9} sx={{ background: "white", p: 1 }}>
-            <Grid container>{productDetail?.product_desc}</Grid>
+            <Grid ><Typography sx={{ fontSize: "1rem", fontWeight: 'bold' }}>Descritpion</Typography><Typography> {productDetail?.product_desc}</Typography></Grid>
             {/* <Grid item md={9} xs={9}>
               <Typography style={{ fontWeight: "bold" }}>Rating :</Typography>
             </Grid> */}
@@ -631,6 +631,16 @@ function Details({
               Similar Products :
             </Typography>
           </Grid>
+        </Grid>
+        <Grid container sx={{ p: 1 }}>
+          <Grid item md={9} xs={9} sx={{ background: "white", p: 1 }}>
+            <Grid ><Typography sx={{ fontSize: "1rem", fontWeight: 'bold' }}>Ratings And Reviews</Typography><Typography> rating and reviews</Typography></Grid>
+            {/* <Grid item md={9} xs={9}>
+              <Typography style={{ fontWeight: "bold" }}>Rating :</Typography>
+            </Grid> */}
+          </Grid>
+
+
         </Grid>
         <AppBar
           position="fixed"
