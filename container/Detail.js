@@ -153,9 +153,10 @@ function Details({
 
   useEffect(() => {
     productDetail.product_images?.map((results, index) => {
+      console.log(results.media_images)
       setMultiProductImage(results.media_images);
     });
-  }, []);
+  }, [productDetail]);
 
   console.log(productImage)
 
@@ -292,7 +293,7 @@ function Details({
                   )}
               </Carousel>
             </ListItem>
-            {console.log(productDetail)}
+            {console.log(multiProductImage)}
             <ListItem>
 
               <Carousel
@@ -304,7 +305,7 @@ function Details({
                 showEmptySlots={true}
                 itemsToShow={4}
               >
-                {productDetail &&
+                {multiProductImage &&
                   multiProductImage?.map((results, index) => (
                     <Image
                       onClick={() => {
