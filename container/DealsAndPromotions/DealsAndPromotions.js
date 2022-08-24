@@ -51,7 +51,7 @@ const DealsAndPromotions = ({ dealsData, viewProduct }) => {
               cursor: "pointer",
             },
           }}
-          // className={cx(styles.root)}
+        // className={cx(styles.root)}
         >
           {result?.bundleImage && (
             <>
@@ -61,7 +61,7 @@ const DealsAndPromotions = ({ dealsData, viewProduct }) => {
                   data-aos="fade-up"
                   component="img"
                   // height="194"
-                  onClick={(e) => viewresult(result)}
+                  onClick={(e) => viewProduct(result)}
                   image={result?.bundleImage}
                   alt={result?.bundleName}
                   sx={{
