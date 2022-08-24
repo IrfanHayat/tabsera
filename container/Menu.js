@@ -295,7 +295,7 @@ export default function PersistentDrawerLeft() {
     dispatch(getDeals());
   }, []);
 
-  useEffect(() => { }, [featureProduct]);
+  useEffect(() => {}, [featureProduct]);
 
   const showAllProducts = () => {
     setShowProduct(true);
@@ -359,7 +359,7 @@ export default function PersistentDrawerLeft() {
               // bgcolor: "background.paper",
               // borderRadius: 1,
             }}
-          // data-aos="fade-up"
+            // data-aos="fade-up"
           >
             <Item
               sx={{
@@ -424,7 +424,7 @@ export default function PersistentDrawerLeft() {
                         secondaryAction={
                           <ArrowForwardIosIcon
                             sx={{ fontSize: 12 }}
-                          // fontSize="small"
+                            // fontSize="small"
                           />
                         }
                       >
@@ -463,7 +463,7 @@ export default function PersistentDrawerLeft() {
                         secondaryAction={
                           <ArrowForwardIosIcon
                             sx={{ fontSize: 12 }}
-                          // fontSize="small"
+                            // fontSize="small"
                           />
                         }
                       >
@@ -507,7 +507,7 @@ export default function PersistentDrawerLeft() {
                   NextIcon={<ArrowRightIcon />}
                   PrevIcon={<ArrowLeftIcon />}
                   height={300}
-                // navButtonsAlwaysVisible={true}
+                  // navButtonsAlwaysVisible={true}
                 >
                   {featureProduct?.map((result) => (
                     <>
@@ -610,7 +610,7 @@ export default function PersistentDrawerLeft() {
                 // borderRadius: 1,
               }
             }
-          // data-aos="fade-up"
+            // data-aos="fade-up"
           >
             <Grid
               item
@@ -623,28 +623,38 @@ export default function PersistentDrawerLeft() {
                 p: 1,
                 justifyContent: "space-between",
                 alignItems: "center",
+                flexWrap: "wrap",
               }}
             >
-
               {/* <Box sx={{ flexGrow: 1 }} /> */}
-              <ListFilter showAllProducts={showAllProducts}
-                showAllMerchantsProduct={showAllMerchantsProduct}
-                showAllCategoriesProduct={showAllCategoriesProduct}></ListFilter>
-              <PageFilter value={value} handleChange={handleChange}></PageFilter>
-              <SortFilter
-                data={data?.response}
-                setFilterData={setFilterData}
-
-              ></SortFilter>
+              <Box>
+                <ListFilter
+                  showAllProducts={showAllProducts}
+                  showAllMerchantsProduct={showAllMerchantsProduct}
+                  showAllCategoriesProduct={showAllCategoriesProduct}
+                ></ListFilter>
+              </Box>
+              <Box>
+                <PageFilter
+                  value={value}
+                  handleChange={handleChange}
+                ></PageFilter>
+              </Box>
+              <Box>
+                <SortFilter
+                  data={data?.response}
+                  setFilterData={setFilterData}
+                ></SortFilter>
+              </Box>
             </Grid>
           </Grid>
           <Grid>
             {showProduct == false &&
-              showAllCategoryPro == false &&
-              showAllMerchantPro == false &&
-              showDeals == false &&
-              showDiscounts == false &&
-              showFreeShipping == false ? (
+            showAllCategoryPro == false &&
+            showAllMerchantPro == false &&
+            showDeals == false &&
+            showDiscounts == false &&
+            showFreeShipping == false ? (
               <ViewAllProducts
                 Item={Item}
                 data={filterData ? filterData : data?.response}
@@ -654,11 +664,11 @@ export default function PersistentDrawerLeft() {
             )}
 
             {showProduct &&
-              showDiscounts == false &&
-              showAllCategoryPro == false &&
-              showAllMerchantPro == false &&
-              showDeals == false &&
-              showFreeShipping == false ? (
+            showDiscounts == false &&
+            showAllCategoryPro == false &&
+            showAllMerchantPro == false &&
+            showDeals == false &&
+            showFreeShipping == false ? (
               <ViewAllProducts
                 Item={Item}
                 data={filterData ? filterData : data?.response}
@@ -680,10 +690,10 @@ export default function PersistentDrawerLeft() {
             )}
 
             {showDiscounts &&
-              showProduct == false &&
-              showAllMerchantPro == false &&
-              showDeals == false &&
-              showFreeShipping == false ? (
+            showProduct == false &&
+            showAllMerchantPro == false &&
+            showDeals == false &&
+            showFreeShipping == false ? (
               <Discounts
                 data={filterData ? filterData : discountData}
                 showDiscounts={showDiscounts}
@@ -709,10 +719,10 @@ export default function PersistentDrawerLeft() {
 
             {/* <Grid sx={{ display: "flex", flexDirection: "column" }}> */}
             {showAllCategoryPro &&
-              showDiscounts == false &&
-              showAllMerchantPro == false &&
-              showDeals == false &&
-              showFreeShipping == false ? (
+            showDiscounts == false &&
+            showAllMerchantPro == false &&
+            showDeals == false &&
+            showFreeShipping == false ? (
               <ProductGetByCategory
                 data={filterData ? filterData : data?.response}
                 Item={Item}
