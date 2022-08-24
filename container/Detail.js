@@ -418,7 +418,7 @@ function Details({
               color="warning.main"
               style={{ display: "block", fontSize: 36 }}
             >
-              {skusProduct ? <>PKR.{skusProduct.cost}  </> : <></>}
+              {skusProduct ? <>PKR.{skusProduct.cost}  </> : <>PKR:{price}</>}
             </Box>
 
             <Box
