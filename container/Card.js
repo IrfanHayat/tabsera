@@ -45,14 +45,14 @@ export default function ActionAreaCard({
   let displayDesc =
     styledCard?.flexDirection == "row"
       ? {
-          display: "flex",
-          flexDirection: "column",
-          // alignItems: "center",
-          m: 1,
+        display: "flex",
+        flexDirection: "column",
+        // alignItems: "center",
+        m: 1,
 
-          // justifyContent: "space-between",
-          // justifyContent: "space-arounf",
-        }
+        // justifyContent: "space-between",
+        // justifyContent: "space-arounf",
+      }
       : { height: 85 };
   let width = styledCard?.flexDirection == "row" ? "100%" : 250;
   let height = styledCard?.flexDirection == "row" ? "100%" : 340;
@@ -60,7 +60,7 @@ export default function ActionAreaCard({
   return (
     <>
       <Card
-        className={styledCard?.flexDirection == "row" ? "" : styles.column}
+        //className={styledCard?.flexDirection == "row" ? "" : styles.column}
         sx={{
           m: 1,
           display: display,
@@ -87,7 +87,7 @@ export default function ActionAreaCard({
             cursor: "pointer",
           },
         }}
-        // className={cx(styles.root)}
+      // className={cx(styles.root)}
       >
         {product?.productImage && (
           <>
@@ -152,7 +152,7 @@ export default function ActionAreaCard({
             alt="shirt"
             width={245}
             height={200}
-            // loading="eager"
+          // loading="eager"
           ></Image>
         )}
 
