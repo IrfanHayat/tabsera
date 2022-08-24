@@ -127,7 +127,7 @@ function Product_detail(props) {
 
       if (result?.payload?.resultCode == 4000) {
         //setOpenBar(true);
-
+        setStatus(result?.payload);
         setOpen(true);
         Cookies.set('item', JSON.stringify(product))
       } else {
@@ -147,7 +147,7 @@ function Product_detail(props) {
       let result = await dispatch(addToCart(item));
       if (result?.payload?.resultCode == 4000) {
         //setOpenBar(true);
-
+        setStatus(result?.payload);
         setOpen(true);
         Cookies.set('item', JSON.stringify(item))
       } else {
