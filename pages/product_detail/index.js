@@ -93,6 +93,7 @@ function Product_detail(props) {
   }, [filterProductData.merchant_id]);
 
   const skuData = (sku) => {
+    console.log(sku)
     sku?.map((result) => {
       setProductImage(result.sku_images);
       setProductAttributes(result.attributes);

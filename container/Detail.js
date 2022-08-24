@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Grid from "@mui/material/Grid";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -131,8 +131,10 @@ function Details({
   let [skusFlag, setSkusFlag] = useState(false);
   let [variantOneProduct, setVariantOneProduct] = useState();
   //let [productDetailOne,setProductDetailOne]=useState();
+  let [multiProductImage, setMultiProductImage] = useState();
 
   const viewVariantsProduct = (result) => {
+    console.log(result)
     setSkusProduct(result);
     setSkusFlag(true);
   };
@@ -148,6 +150,15 @@ function Details({
   };
   let router = useRouter();
   console.log("productDetail", productDetail);
+
+  useEffect(() => {
+    productDetail.product_images?.map((results, index) => {
+      setMultiProductImage(results.media_images);
+    });
+  }, []);
+
+  console.log(productImage)
+
   return (
     <>
       <Box
@@ -238,64 +249,52 @@ function Details({
                           },
                         }}
                       />
-                      // <Image
-                      //   key={index}
-                      //   //  className={cx(styles.media, mediaStyles.root)}
-                      //   src={result}
-                      //   alt="shirt"
-                      //   // objectFit="contain"
-                      //   width={1000}
-                      //   height={900}
-                      // ></Image>
+
                     )
                   )
-                  : productImage && (
-                    <ReactImageMagnify
-                      {...{
-                        smallImage: {
-                          alt: "Wristwatch by Ted Baker London",
-                          isFluidWidth: true,
-                          // width: 100,
-                          // height: 200,
-                          src: productImage[0],
-                          // sizes:
-                          //   "(min-width: 800px) 33.5vw, (min-width: 415px) 50vw, 100vw",
-                        },
-                        largeImage: {
-                          src: productImage[0],
-                          width: 1200,
-                          height: 1800,
-                        },
+                  : skusProduct && (
 
-                        enlargedImagePosition: "over",
-                        // enlargedImageContainerDimensions: {
-                        //   width: "150%",
-                        //   height: "150%",
-                        // },
-                        enlargedImageContainerStyle: {
-                          zIndex: "1500",
-                        },
-                        enlargedImageContainerDimensions: {
-                          width: "50%",
-                          height: "100%",
-                        },
-                      }}
-                    />
-                    // <Image
-                    //   // key={index}
-                    //   //  className={cx(styles.media, mediaStyles.root)}
-                    //   src={productImage[0]}
-                    //   alt="shirt"
-                    //   objectFit="contain"
-                    //   width={500}
-                    //   height={1000}
-                    // ></Image>
+                    skusProduct.sku_images.map(result => (
+                      <ReactImageMagnify
+                        {...{
+                          smallImage: {
+                            alt: "Wristwatch by Ted Baker London",
+                            isFluidWidth: true,
+                            // width: 100,
+                            // height: 200,
+                            src: result,
+                            // sizes:
+                            //   "(min-width: 800px) 33.5vw, (min-width: 415px) 50vw, 100vw",
+                          },
+                          largeImage: {
+                            src: result,
+                            width: 1200,
+                            height: 1800,
+                          },
+
+                          enlargedImagePosition: "over",
+                          // enlargedImageContainerDimensions: {
+                          //   width: "150%",
+                          //   height: "150%",
+                          // },
+                          enlargedImageContainerStyle: {
+                            zIndex: "1500",
+                          },
+                          enlargedImageContainerDimensions: {
+                            width: "50%",
+                            height: "100%",
+                          },
+                        }}
+                      />
+                    ))
+
+
                   )}
               </Carousel>
             </ListItem>
             {console.log(productDetail)}
             <ListItem>
-              {/* <Box md={6} sx={{ display: "flex", m: 1 }}> */}
+
               <Carousel
                 // breakPoints={breakPoints}
                 disableArrowsOnEnd={true}
@@ -306,20 +305,19 @@ function Details({
                 itemsToShow={4}
               >
                 {productDetail &&
-                  productDetail.product_images?.map((results, index) => (
+                  multiProductImage?.map((results, index) => (
                     <Image
                       onClick={() => {
                         setSkusFlag(false);
                       }}
                       key={index}
-                      src={results.media_images[0]}
+                      src={results}
                       alt="shirt"
                       width={100}
                       height={80}
                     ></Image>
                   ))}
               </Carousel>
-              {/* </Box> */}
             </ListItem>
           </List>
         </Grid>
@@ -497,7 +495,7 @@ function Details({
             </Grid>
           </Box> */}
           <Grid container spacing={1}>
-            {/* <Stack direction="row" > */}
+
             <Grid item md={6} sm={6}>
               <Button
                 fullWidth
@@ -538,7 +536,7 @@ function Details({
                 Add to cart
               </Button>
             </Grid>
-            {/* </Stack> */}
+
           </Grid>
         </Grid>
         <Grid sx={{ bgcolor: "#fafafa" }} item md={3} sm={12} xs={12}>
@@ -594,17 +592,17 @@ function Details({
             <Typography display="inline-block">Sold By:</Typography>
             <List>
               <ListItem>
-                {/* <ListItemText> */}
+
                 <Typography
                   // sx={{ color: "error.main" }}
                   style={{ fontSize: 24 }}
                 >
                   {productDetail?.merchant_name}
                 </Typography>
-                {/* </ListItemText> */}
+
               </ListItem>
               <ListItem>
-                {/* <ListItemText> */}
+
                 <Button
                   variant="text"
                   onClick={() => viewStore(merchantDetail?.merchant_id)}
@@ -612,7 +610,7 @@ function Details({
                 >
                   Visit Store
                 </Button>
-                {/* </ListItemText> */}
+
               </ListItem>
             </List>
           </Box>
