@@ -41,7 +41,11 @@ function a11yProps(index) {
 }
 function MerchantStore({ merchantStoreDetail }) {
   const { merchantData } = useSelector((state) => state.merchant);
-  console.log(merchantStoreDetail);
+  // const [merchant, setmerchant] = useState();
+  // console.log(merchantStoreDetail);
+  // useEffect(() => {
+  //   setmerchant(merchantData);
+  // }, [input]);
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -169,24 +173,17 @@ function MerchantStore({ merchantStoreDetail }) {
             <TabPanel value={value} index={0}>
               <Grid container backgroundColor="white">
                 Home
-                {merchantStoreDetail &&
-                  merchantStoreDetail?.map((result) => (
-                    <ActionAreaCard
-                      product={result}
-                      viewProduct={viewProduct}
-                    ></ActionAreaCard>
-                  ))}
               </Grid>
             </TabPanel>
             <TabPanel value={value} index={1}>
               All Products
-              {/* {merchantStoreDetail &&
-                  merchantStoreDetail?.map((result) => (
-                    <ActionAreaCard
-                      product={result}
-                      viewProduct={viewProduct}
-                    ></ActionAreaCard>
-                  ))} */}
+              {merchantStoreDetail &&
+                merchantStoreDetail?.map((result) => (
+                  <ActionAreaCard
+                    product={result}
+                    viewProduct={viewProduct}
+                  ></ActionAreaCard>
+                ))}
             </TabPanel>
             <TabPanel value={value} index={2}>
               Profile
