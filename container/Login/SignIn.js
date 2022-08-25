@@ -7,7 +7,7 @@ import { loginUser, logoutUser, logOutCustomer } from "../../slice/authSlice";
 import { useSelector, useDispatch } from "react-redux";
 import Cookies from "js-cookie";
 import { useRouter, withRouter } from "next/router";
-
+import localStorage from "localStorage";
 // import MuiPhoneNumber from "material-ui-phone-number-2";
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
