@@ -39,6 +39,7 @@ import PriceFilter from "../../container/Filter/PriceFilter";
 import Cookies from "js-cookie";
 import SnackBarTool from "../../container/SnackBar/SnackBar";
 import ModalLoginData from "../../container/Login/ModalData";
+import SideBarFilter from "../../container/Filter/SideBarFilter";
 
 const useStyles = makeStyles({
   flexGrow: {
@@ -87,6 +88,7 @@ function SubCategory() {
   const [openBar, setOpenBar] = React.useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [categoryProductFilter, setCategoryProductFilter] = useState(false);
+
 
   const viewProduct = (item) => {
     router.push({
@@ -253,66 +255,8 @@ function SubCategory() {
         sx={{ background: "white" }}
       // spacing={2}
       >
-        <Grid
-          item
-          xs={4}
-          md={2}
-          sx={{
-            bgcolor: "#fafafa",
-            p: 1,
-            display: "flex",
-            flexWrap: "wrap",
-            overflow: "hidden",
-          }}
-        >
-          <List dense>
-            Related Category
-            <ListItem
-            // spacing={2}
-            // sx={{ p: 1 }}
-            // alignItems="flex-start"
-            >
-              <ListItemText>
-                <Typography onClick={() => categoryProduct(parentCategories)}>{parentCategories}</Typography>
-                {subCategories.length > 0 ? children(subCategories) : ""}
-              </ListItemText>
-            </ListItem>
-            <Divider />
-            <ListItem>
-              <Typography>Brands</Typography>
-            </ListItem>
-            <ListItem>
-              {brands?.map((result, index) => (
-                <FormControlLabel
-                  key={index}
-                  control={<Checkbox defaultChecked size="small" />}
-                  label={result.brand_name}
-                />
-              ))}
-            </ListItem>
-            <Divider />
-            <ListItem>
-              <FormControlLabel
-                control={<Checkbox defaultChecked size="small" />}
-                label="Colors"
-              />
-            </ListItem>
-            <Divider />
-            <ListItem>
-              <FormControlLabel
-                control={<Checkbox defaultChecked size="small" />}
-                label="Size"
-              />
-            </ListItem>
-            <Divider />
-            <ListItem>
-              <FormControlLabel
-                control={<Checkbox defaultChecked size="small" />}
-                label="Materials"
-              />
-            </ListItem>
-          </List>
-        </Grid>
+
+        <SideBarFilter categoryProduct={categoryProduct} parentCategories={parentCategories} children={children} subCategories={subCategories} brands={brands}></SideBarFilter>
 
         {/* ---------------------------------------------------- */}
         <Grid item xs={8} md={10}>
