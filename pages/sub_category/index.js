@@ -76,6 +76,7 @@ function SubCategory() {
   const MaxInput = useRef(null);
   const MinInput = useRef(null);
   const [filterPrice, setFilterPrice] = useState([]);
+  const [filterProduct, setFilterProduct] = useState([]);
   const [flag, setFlag] = useState(false);
   const [brands, setBrands] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
@@ -84,6 +85,7 @@ function SubCategory() {
   const [open, setOpen] = React.useState(false);
   const [openBar, setOpenBar] = React.useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [categoryProductFilter, setCategoryProductFilter] = useState(false);
 
   const viewProduct = (item) => {
     router.push({
@@ -136,15 +138,21 @@ function SubCategory() {
     });
   }, []);
 
-  useEffect(() => {}, [subCategories]);
+  useEffect(() => { }, [subCategories]);
 
+  function categoryProduct(name) {
+    console.log(name)
+    let result = productDataWithCategoryId.filter(category => category.categoryName == name)
+    console.log(result)
+    setFilterProduct(result)
+  }
   console.log(productDataWithCategoryId);
 
   const children = (subCategories) => {
     return (
       <Box sx={{ display: "flex", flexDirection: "column", ml: 2 }}>
         {subCategories.map((result, index) => (
-          <List key={index}>
+          <List onClick={() => categoryProduct(result.category_name)} key={index}>
             <ListItem>{result.category_name}</ListItem>
           </List>
         ))}
@@ -220,7 +228,7 @@ function SubCategory() {
         parseInt(result.productCost) >= parseInt(min) &&
         parseInt(result.productCost) <= parseInt(max)
     );
-    setFilterPrice(result);
+    setFilterProduct(result);
     setFlag(true);
   };
 
@@ -240,7 +248,7 @@ function SubCategory() {
         container
         // xs={12}
         sx={{ background: "white" }}
-        // spacing={2}
+      // spacing={2}
       >
         <Grid
           item
@@ -262,7 +270,7 @@ function SubCategory() {
             // alignItems="flex-start"
             >
               <ListItemText>
-                {parentCategories}
+                <Typography onClick={() => categoryProduct(parentCategories)}>{parentCategories}</Typography>
                 {subCategories.length > 0 ? children(subCategories) : ""}
               </ListItemText>
             </ListItem>
@@ -341,12 +349,23 @@ function SubCategory() {
             <ViewFilter handleView={handleView} />
           </Grid>
           <Grid item xs={12} sx={styled}>
-            {console.log(filterPrice?.length)}
+            {console.log(filterProduct?.length)}
 
             {productDataWithCategoryId &&
-            filterPrice?.length < 1 &&
-            flag == false
+              filterProduct?.length < 1 &&
+              flag == false
               ? productDataWithCategoryId?.map((item) => (
+                <ActionAreaCard
+                  key={item}
+                  product={item}
+                  viewProduct={viewProduct}
+                  addToCartHandler={addToCartHandler}
+                  // viewCategory={viewCategory}
+                  styledCard={styled}
+                ></ActionAreaCard>
+              ))
+              : filterProduct.length > 0
+                ? filterProduct?.map((item) => (
                   <ActionAreaCard
                     key={item}
                     product={item}
@@ -356,18 +375,7 @@ function SubCategory() {
                     styledCard={styled}
                   ></ActionAreaCard>
                 ))
-              : filterPrice.length > 0
-              ? filterPrice?.map((item) => (
-                  <ActionAreaCard
-                    key={item}
-                    product={item}
-                    viewProduct={viewProduct}
-                    addToCartHandler={addToCartHandler}
-                    // viewCategory={viewCategory}
-                    styledCard={styled}
-                  ></ActionAreaCard>
-                ))
-              : "Product Not Found"}
+                : "Product Not Found"}
           </Grid>
         </Grid>
       </Grid>
