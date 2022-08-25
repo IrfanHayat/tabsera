@@ -39,7 +39,8 @@ export default function SignIn({ isLoggedIn, setIsLoggedIn }) {
 
   return (
     <>
-      {isLoggedIn ? (
+
+      {localStorage.getItem('login') == "true" ? (
         <Button onClick={logOut} sx={{ color: "white" }}>
           Logout
         </Button>
