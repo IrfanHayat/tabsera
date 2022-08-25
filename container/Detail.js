@@ -183,7 +183,7 @@ function Details({
               router.push(`/product_detail?productId=${productIdRoute}`)
             }
           >
-            Product Detail
+            {productDetail?.category_name}
           </Link>
           <Typography
             underline="hover"
