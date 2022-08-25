@@ -35,11 +35,9 @@ import PageFilter from "../../container/Filter/PageFilter";
 import ViewFilter from "../../container/Filter/ViewFilter";
 import Button from "@mui/material/Button";
 import PriceFilter from "../../container/Filter/PriceFilter";
-import Cookies from 'js-cookie'
+import Cookies from "js-cookie";
 import SnackBarTool from "../../container/SnackBar/SnackBar";
 import ModalLoginData from "../../container/Login/ModalData";
-
-
 
 const useStyles = makeStyles({
   flexGrow: {
@@ -85,6 +83,7 @@ function SubCategory() {
   let [status, setStatus] = useState();
   const [open, setOpen] = React.useState(false);
   const [openBar, setOpenBar] = React.useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const viewProduct = (item) => {
     router.push({
@@ -137,7 +136,7 @@ function SubCategory() {
     });
   }, []);
 
-  useEffect(() => { }, [subCategories]);
+  useEffect(() => {}, [subCategories]);
 
   console.log(productDataWithCategoryId);
 
@@ -227,13 +226,21 @@ function SubCategory() {
 
   return (
     <>
-
-      {open == true ? <ModalLoginData handleClose={handleClose} open={open}></ModalLoginData> : <></>}
+      {open == true ? (
+        <ModalLoginData
+          isLoggedIn={isLoggedIn}
+          handleClose={handleClose}
+          open={open}
+          setIsLoggedIn={setIsLoggedIn}
+        ></ModalLoginData>
+      ) : (
+        <></>
+      )}
       <Grid
         container
         // xs={12}
         sx={{ background: "white" }}
-      // spacing={2}
+        // spacing={2}
       >
         <Grid
           item
@@ -336,19 +343,10 @@ function SubCategory() {
           <Grid item xs={12} sx={styled}>
             {console.log(filterPrice?.length)}
 
-            {productDataWithCategoryId && filterPrice?.length < 1 && flag == false
+            {productDataWithCategoryId &&
+            filterPrice?.length < 1 &&
+            flag == false
               ? productDataWithCategoryId?.map((item) => (
-                <ActionAreaCard
-                  key={item}
-                  product={item}
-                  viewProduct={viewProduct}
-                  addToCartHandler={addToCartHandler}
-                  // viewCategory={viewCategory}
-                  styledCard={styled}
-                ></ActionAreaCard>
-              ))
-              : filterPrice.length > 0
-                ? filterPrice?.map((item) => (
                   <ActionAreaCard
                     key={item}
                     product={item}
@@ -358,11 +356,21 @@ function SubCategory() {
                     styledCard={styled}
                   ></ActionAreaCard>
                 ))
-                : "Product Not Found"}
+              : filterPrice.length > 0
+              ? filterPrice?.map((item) => (
+                  <ActionAreaCard
+                    key={item}
+                    product={item}
+                    viewProduct={viewProduct}
+                    addToCartHandler={addToCartHandler}
+                    // viewCategory={viewCategory}
+                    styledCard={styled}
+                  ></ActionAreaCard>
+                ))
+              : "Product Not Found"}
           </Grid>
         </Grid>
       </Grid>
-
     </>
   );
 }

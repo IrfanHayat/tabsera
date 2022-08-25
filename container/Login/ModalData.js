@@ -48,7 +48,12 @@ const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
-export default function ModalLoginData({ handleClose, open }) {
+export default function ModalLoginData({
+  handleClose,
+  open,
+  setIsLoggedIn,
+  isLoggedIn,
+}) {
   const router = useRouter();
   const { redirect } = router.query; // login?redirect=/shipping
   const dispatch = useDispatch();
@@ -57,14 +62,14 @@ export default function ModalLoginData({ handleClose, open }) {
   const [showPassword, setShowPassword] = useState(false);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
-
   const [openBar, setOpenBar] = React.useState(false);
-
   const [nameLogin, setNameLogin] = React.useState(true);
-
   const handleShowPassword = () => {
     setShowPassword(!showPassword);
   };
+
+  console.log(isLoggedIn);
+
   const handleClickBar = () => {
     setOpenBar(true);
   };
@@ -108,6 +113,7 @@ export default function ModalLoginData({ handleClose, open }) {
           Cookies.remove("item"), router.push("/cart");
         }, 1000);
         setLginSccess(true);
+        setIsLoggedIn(true);
         handleClickBar();
         handleClose();
         setNameLogin(false);
@@ -115,8 +121,9 @@ export default function ModalLoginData({ handleClose, open }) {
     } else {
       result.payload
         ? (router.push("/"),
-          setLginSccess(true),
+          setLginSccess(false),
           handleClickBar(),
+          setIsLoggedIn(true),
           handleClose())
         : (setLginSccess(false),
           handleClickBar(),
@@ -165,6 +172,8 @@ export default function ModalLoginData({ handleClose, open }) {
         }, 1000);
         setLginSccess(true);
         handleClickBar();
+        setIsLoggedIn(true);
+
         handleClose();
         setNameLogin(false);
       }
@@ -172,6 +181,7 @@ export default function ModalLoginData({ handleClose, open }) {
       result.payload
         ? (router.push("/"),
           setLginSccess(true),
+          setIsLoggedIn(true),
           handleClickBar(),
           handleClose())
         : (setLginSccess(false),

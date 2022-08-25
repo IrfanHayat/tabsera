@@ -76,7 +76,7 @@ export default function NavBar() {
   let router = useRouter();
   const routers = useRouter();
   const menuId = "primary-search-account-menu";
-
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const changeLanguageHandler = (lang) => {
     i18n.changeLanguage(lang);
     document.body.dir = i18n.dir();
@@ -97,8 +97,9 @@ export default function NavBar() {
   };
   const logOut = async () => {
     let result = await dispatch(logOutCustomer());
-    localStorage.setItem('login', 'false')
-    Cookies.remove("item")
+    setIsLoggedIn(false);
+    localStorage.setItem("login", "false");
+    Cookies.remove("item");
     // Cookies.remove("connect.sid");
     router.push("/");
     console.log(result);
@@ -321,7 +322,6 @@ export default function NavBar() {
                 onClick={() => router.push("/")}
               >
                 Home
-
               </NavLink>
               {/* <NavLink
                 sx={{ color: "white", ml: 3 }}
@@ -380,7 +380,13 @@ export default function NavBar() {
               {/* <Button href="#" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
                 Login
               </Button> */}
-              <SignInModal show={showLogin} close={() => setShowLogin(false)} />
+              <SignInModal
+                isLoggedIn={isLoggedIn}
+                setIsLoggedIn={setIsLoggedIn}
+                show={showLogin}
+                logOut={logOut}
+                close={() => setShowLogin(false)}
+              />
               {/* </Toolbar> */}
 
               <Box sx={{ display: { xs: "flex", md: "none" } }}>

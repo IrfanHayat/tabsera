@@ -14,8 +14,7 @@ import { useRouter, withRouter } from "next/router";
 import { getProductWithId, getProduct } from "../../slice/productSlice";
 import { getMerchantWithId } from "../../slice/merchantSlice";
 import ModalData from "../../container/Login/ModalData";
-import Cookies from 'js-cookie'
-
+import Cookies from "js-cookie";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -43,12 +42,13 @@ function Product_detail(props) {
   const { cartItems } = useSelector((state) => state.basket.cart);
 
   const [open, setOpen] = React.useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const handleClose = () => {
     setOpen(false);
   };
 
-  console.log(addBuyItem)
+  console.log(addBuyItem);
   const viewStore = (merchantId) => {
     router.push({
       pathname: "/merchant_store",
@@ -93,7 +93,7 @@ function Product_detail(props) {
   }, [filterProductData.merchant_id]);
 
   const skuData = (sku) => {
-    console.log(sku)
+    console.log(sku);
     sku?.map((result) => {
       setProductImage(result.sku_images);
       setProductAttributes(result.attributes);
@@ -130,14 +130,13 @@ function Product_detail(props) {
         //setOpenBar(true);
         setStatus(result?.payload);
         setOpen(true);
-        Cookies.set('item', JSON.stringify(product))
+        Cookies.set("item", JSON.stringify(product));
       } else {
-
         dispatch(getCartItems());
         dispatch(getTotalCartQuantity());
         setTimeout(() => {
-          router.push('/cart')
-        }, 1000)
+          router.push("/cart");
+        }, 1000);
       }
 
       await dispatch(getTotalCartQuantity());
@@ -150,16 +149,14 @@ function Product_detail(props) {
         //setOpenBar(true);
         setStatus(result?.payload);
         setOpen(true);
-        Cookies.set('item', JSON.stringify(item))
+        Cookies.set("item", JSON.stringify(item));
       } else {
-
         dispatch(getCartItems());
         dispatch(getTotalCartQuantity());
         setTimeout(() => {
-          router.push('/cart')
-        }, 1000)
+          router.push("/cart");
+        }, 1000);
       }
-
 
       console.log(result);
 
@@ -196,19 +193,19 @@ function Product_detail(props) {
       };
 
       let result = await dispatch(BuyNewItem(product));
-      console.log(result)
-      console.log("status", status.resultCode)
-      console.log(status)
+      console.log(result);
+      console.log("status", status.resultCode);
+      console.log(status);
 
       // dispatch(addToCart(item));
       if (result?.payload?.resultCode == 4000) {
         // setOpenBar(true);
-        Cookies.set('productId', router.query.productId)
+        Cookies.set("productId", router.query.productId);
         setOpen(true);
-        setBuyStatus(true)
-        Cookies.set('item', JSON.stringify(product))
+        setBuyStatus(true);
+        Cookies.set("item", JSON.stringify(product));
       } else {
-        localStorage.setItem('buyItem', true)
+        localStorage.setItem("buyItem", true);
         router.push("/cart");
       }
       // dispatch(addToCart(product));
@@ -216,28 +213,25 @@ function Product_detail(props) {
       //router.push("/shipping_information");
     } else {
       let result = await dispatch(BuyNewItem(item));
-      console.log(result)
-      console.log("status", status.resultCode)
-      console.log(status)
+      console.log(result);
+      console.log("status", status.resultCode);
+      console.log(status);
 
       // dispatch(addToCart(item));
       if (result?.payload?.resultCode == 4000) {
         // setOpenBar(true);
-        Cookies.set('productId', router.query.productId)
+        Cookies.set("productId", router.query.productId);
         setOpen(true);
-        setBuyStatus(true)
-        Cookies.set('item', JSON.stringify(item))
+        setBuyStatus(true);
+        Cookies.set("item", JSON.stringify(item));
       } else {
-        localStorage.setItem('buyItem', true)
+        localStorage.setItem("buyItem", true);
         router.push("/cart");
       }
       // setTimeout(() => {
       //   dispatch(getTotalCartQuantity());
       // }, 1000);
-
-
     }
-
 
     // if (item.product_id) {
 
@@ -252,11 +246,11 @@ function Product_detail(props) {
   };
 
   useEffect(() => {
-    console.log(status)
+    console.log(status);
     if (status?.resultCode == 4000) {
       setOpenBar(true);
     }
-  }, [status])
+  }, [status]);
 
   const checkoutHandler = () => {
     router.push("/shipping");
@@ -271,13 +265,14 @@ function Product_detail(props) {
   };
   return (
     <>
-
-
       {status?.resultCode === 4000 || buyStatus == true ? (
-        <ModalData handleClose={handleClose} open={open}></ModalData>
-
+        <ModalData
+          isLoggedIn={isLoggedIn}
+          handleClose={handleClose}
+          open={open}
+          setIsLoggedIn={setIsLoggedIn}
+        ></ModalData>
       ) : (
-
         <Snackbar
           open={openBar}
           autoHideDuration={6000}
