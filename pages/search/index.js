@@ -270,7 +270,7 @@ function SubCategory() {
             // spacing={2}
             >
 
-                <SideBarFilter categoryProduct={categoryProduct} parentCategories={parentCategories} children={children} subCategories={subCategories} brands={brands}></SideBarFilter>
+                <SideBarFilter categoryProduct={categoryProduct} parentCategories={parentCategories} childrenCategory={children} subCategories={subCategories} brands={brands}></SideBarFilter>
 
                 {/* ---------------------------------------------------- */}
                 <Grid item xs={8} md={10}>

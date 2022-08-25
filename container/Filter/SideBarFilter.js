@@ -7,7 +7,7 @@ import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-function SideBarFilter({ categoryProduct, parentCategories, children, subCategories, brands }) {
+function SideBarFilter({ categoryProduct, parentCategories, childrenCategory, subCategories, brands }) {
     return (
         <Grid
             item
@@ -30,7 +30,7 @@ function SideBarFilter({ categoryProduct, parentCategories, children, subCategor
                 >
                     <ListItemText>
                         <Typography onClick={() => categoryProduct(parentCategories)}>{parentCategories}</Typography>
-                        {subCategories.length > 0 ? children(subCategories) : ""}
+                        {subCategories.length > 0 ? childrenCategory(subCategories) : ""}
                     </ListItemText>
                 </ListItem>
                 <Divider />
