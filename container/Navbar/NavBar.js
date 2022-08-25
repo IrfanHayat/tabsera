@@ -38,7 +38,7 @@ import Link from "@mui/material/Link";
 import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import Cookies from "js-cookie";
-
+import LogoutIcon from "@mui/icons-material/Logout";
 // import { logOutCustomer } from "../../slice/authSlice";
 const NavLink = styled("a")(() => ({
   wrap: "noWrap",
@@ -161,67 +161,74 @@ export default function NavBar() {
         <ListItemIcon>
           <AccountBoxIcon fontSize="small" />
         </ListItemIcon>
-        <Link href="/profile"><ListItemText >My Profile</ListItemText></Link>
-
+        <ListItemText onClick={() => router.push("/profile")}>
+          My Profile
+        </ListItemText>
       </MenuItem>
 
       <MenuItem>
         <ListItemIcon>
           <FormatListBulletedIcon fontSize="small" />
         </ListItemIcon>
-        <Link href="/orders"><ListItemText>My Orders</ListItemText></Link>
-
+        <ListItemText onClick={() => router.push("/orders")}>
+          My Orders
+        </ListItemText>
       </MenuItem>
 
       <MenuItem>
         <ListItemIcon>
           <FormatListBulletedIcon fontSize="small" />
         </ListItemIcon>
-        <Link href="/coupons"><ListItemText>My Coupons</ListItemText></Link>
-
+        <ListItemText onClick={() => router.push("/coupons")}>
+          My Coupons
+        </ListItemText>
       </MenuItem>
 
       <MenuItem>
         <ListItemIcon>
           <ReceiptIcon fontSize="small" />
         </ListItemIcon>
-        <Link href="/bills"> <ListItemText>My Bill Payments</ListItemText></Link>
-
+        <ListItemText onClick={() => router.push("/bills")}>
+          My Bill Payments
+        </ListItemText>
       </MenuItem>
 
       <MenuItem>
         <ListItemIcon>
           <AdUnitsIcon fontSize="small" />
         </ListItemIcon>
-        <Link href="/topUps">  <ListItemText>My Topups</ListItemText></Link>
-
+        <ListItemText onClick={() => router.push("/topUps")}>
+          My Topups
+        </ListItemText>
       </MenuItem>
 
       <MenuItem>
         <ListItemIcon>
           <GppGoodOutlinedIcon fontSize="small" />
         </ListItemIcon>
-        <Link href="/security"> <ListItemText>Security</ListItemText></Link>
-
+        <ListItemText onClick={() => router.push("/security")}>
+          Security
+        </ListItemText>
       </MenuItem>
 
       <MenuItem>
         <ListItemIcon>
           <InfoOutlinedIcon fontSize="small" />
         </ListItemIcon>
-        <Link href="/about">  <ListItemText>About</ListItemText></Link>
-
+        <ListItemText onClick={() => router.push("/about")}>About</ListItemText>
       </MenuItem>
 
       <MenuItem>
         <ListItemIcon>
           <HelpOutlineOutlinedIcon fontSize="small" />
         </ListItemIcon>
-        <Link href="/help"> <ListItemText>Help</ListItemText></Link>
-
+        <ListItemText onClick={() => router.push("/help")}>Help</ListItemText>
       </MenuItem>
       <Divider />
       <MenuItem onClick={() => logOut()} alignText="center">
+        <ListItemIcon>
+          <LogoutIcon />
+        </ListItemIcon>
         <ListItemText>Logout</ListItemText>
       </MenuItem>
     </div>
