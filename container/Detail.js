@@ -179,9 +179,9 @@ function Details({
           <Link
             underline="hover"
             color="inherit"
-            onClick={() =>
-              router.push(`/product_detail?productId=${productIdRoute}`)
-            }
+          // onClick={() =>
+          //   router.push(`/product_detail?productId=${productIdRoute}`)
+          // }
           >
             {productDetail?.category_name}
           </Link>

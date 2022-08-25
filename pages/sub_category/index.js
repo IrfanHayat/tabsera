@@ -1,5 +1,6 @@
 import React, { useState, useMemo, useRef, useEffect } from "react";
-
+import Breadcrumbs from "@mui/material/Breadcrumbs";
+import Link from "@mui/material/Link";
 import ActionAreaCard from "../../container/Card";
 import {
   getProductWithCategoryId,
@@ -150,6 +151,7 @@ function SubCategory() {
 
   const children = (subCategories) => {
     return (
+
       <Box sx={{ display: "flex", flexDirection: "column", ml: 2 }}>
         {subCategories.map((result, index) => (
           <List onClick={() => categoryProduct(result.category_name)} key={index}>
@@ -234,6 +236,7 @@ function SubCategory() {
 
   return (
     <>
+
       {open == true ? (
         <ModalLoginData
           isLoggedIn={isLoggedIn}
@@ -313,6 +316,32 @@ function SubCategory() {
 
         {/* ---------------------------------------------------- */}
         <Grid item xs={8} md={10}>
+          <Box
+            role="presentation"
+
+            sx={{ display: "flex", p: 1, bgcolor: "#fafafa" }}
+            direction="row"
+          >
+            <Breadcrumbs aria-label="breadcrumb">
+              <Link
+                underline="hover"
+                color="inherit"
+              // onClick={() => router.push("/")}
+              >
+                Category
+              </Link>
+              <Link
+                underline="hover"
+                color="inherit"
+              // onClick={() =>
+              //   router.push(`/product_detail?productId=${productIdRoute}`)
+              // }
+              >
+                {parentCategories}
+              </Link>
+
+            </Breadcrumbs>
+          </Box>
           <Grid
             container
             sx={{
@@ -341,6 +370,7 @@ function SubCategory() {
           >
             <ListFilter />
             <Box flexGrow={1} />
+
             <SortFilter
               data={productDataWithCategoryId}
               setFilterData={setFilterData}
