@@ -338,6 +338,12 @@ export default function NavBar() {
               >
                 Home
               </NavLink>
+              <NavLink
+                sx={{ color: "white", ml: 3 }}
+                onClick={() => router.push("/about")}
+              >
+                {t("About Us")}
+              </NavLink>
               {/* <NavLink
                 sx={{ color: "white", ml: 3 }}
                 onClick={() => router.push("/about")}

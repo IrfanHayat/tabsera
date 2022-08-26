@@ -54,22 +54,22 @@ export default function ActionAreaCard({
         // justifyContent: "space-arounf",
       }
       : { height: 85 };
-  let width = styledCard?.flexDirection == "row" ? "100%" : 250;
-  let height = styledCard?.flexDirection == "row" ? "100%" : 340;
+  let width = styledCard?.flexDirection == "row" ? "100%" : 212;
+  let height = styledCard?.flexDirection == "row" ? "100%" : 285;
 
   return (
     <>
       <Card
         //className={styledCard?.flexDirection == "row" ? "" : styles.column}
         sx={{
-          m: 1,
+          m: 0.7,
           display: display,
           // mx: 0.4,
           // my: 2,
           // marginTop: 1,
           // marginBottom: 1,
           boxShadow: 0,
-          borderRadius: 2,
+          borderRadius: 0,
           // border: 1,
           // borderColor: "#9E9E9E ",
           bgcolor: "background.paper",
@@ -103,7 +103,7 @@ export default function ActionAreaCard({
                 sx={{
                   top: 0,
                   width: "100%",
-                  height: 200,
+                  height: 170,
                   objectFit: "cover",
                   // position: "absolute",
                   // maxHeight: { xs: 233, md: 167 },
@@ -128,7 +128,7 @@ export default function ActionAreaCard({
                   actionIcon={
                     <IconButton>
                       <Chip
-                        // sx={{ color: "yellow" }}
+                        sx={{ height: 20, width: 65 }}
                         icon={<LocalShippingIcon />}
                         label="Free"
                         size="small"
@@ -156,7 +156,7 @@ export default function ActionAreaCard({
           ></Image>
         )}
 
-        <Box sx={{ m: 1 }}>
+        <Box sx={{ mx: 1 }}>
           {/* <Typography variant="h5">{product?.categoryName}</Typography> */}
           <Box sx={{ ...displayDesc }}>
             {product?.category_name && (
@@ -212,9 +212,9 @@ export default function ActionAreaCard({
                   // sx={{ color: "yellow" }}
                   // icon={<LocalShippingIcon />}
                   label={`-${product.discountPercent}%`}
-                  size="small"
+                  // size="small"
                   // color="warning"
-                  sx={{ bgcolor: "yellow" }}
+                  sx={{ bgcolor: "yellow", height: 15, width: 55 }}
                 />
               </Grid>
             ) : (
@@ -231,15 +231,35 @@ export default function ActionAreaCard({
             borderRadius: 1,
           }}
         > */}
-            <Rating
-              name="size-small"
-              defaultValue={product?.averageRating}
-              size="small"
-              // fontSize={24}
-              readOnly
-            />
+            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+              <Rating
+                name="size-small"
+                defaultValue={product?.averageRating}
+                size="small"
+                // fontSize={24}
+                readOnly
+              />
+              {product.productName ? (
+                <Button
+                  variant="contained"
+                  sx={{
+                    background:
+                      "linear-gradient(90deg, #020024 0%, #090979 35%, #00d4ff 100%)",
+                  }}
+                  size="small"
+                  key={product.id}
+                  onClick={() => addToCartHandler(product)}
+                  endIcon={<AddShoppingCartOutlinedIcon fontSize="small" />}
+                >
+                  {" "}
+                  {/* Add To Cart */}
+                </Button>
+              ) : (
+                ""
+              )}
+            </Box>
           </Box>
-          <Box sx={{ mb: 3, display: "flex", alignItems: "center" }}>
+          {/* <Box sx={{ mb: 3, display: "flex", alignItems: "center" }}>
             {product.productName ? (
               <Button
                 variant="contained"
@@ -252,13 +272,12 @@ export default function ActionAreaCard({
                 onClick={() => addToCartHandler(product)}
                 endIcon={<AddShoppingCartOutlinedIcon fontSize="small" />}
               >
-                {" "}
                 Add To Cart
               </Button>
             ) : (
               ""
             )}
-          </Box>
+          </Box> */}
           {/* {product.productName ? (
             <IconButton
               key={product.id}
