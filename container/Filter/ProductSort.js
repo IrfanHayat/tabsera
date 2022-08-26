@@ -20,9 +20,10 @@ export default function ShopProductSort({ data, setFilterData }) {
     const [open, setOpen] = useState(null);
     const [selectedValue, setSelectedValue] = useState();
 
-
+    console.log(data)
     const sortData = (type) => {
         setSelectedValue(type)
+        // setShowSortFilter(true)
         var f_data;
         switch (type) {
             case "price_desc":

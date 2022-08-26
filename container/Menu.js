@@ -126,7 +126,7 @@ export default function PersistentDrawerLeft() {
   const [key, setKey] = useState(1);
   const [btnKey, setBtnKey] = useState();
 
-  useEffect(() => {}, [btnKey]);
+  useEffect(() => { }, [btnKey]);
   let router = useRouter();
   let dispatch = useDispatch();
 
