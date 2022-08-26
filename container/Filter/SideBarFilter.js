@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Grid } from '@mui/material';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
@@ -6,8 +6,34 @@ import Divider from '@mui/material/Divider';
 import ListItemText from '@mui/material/ListItemText';
 import Typography from '@mui/material/Typography';
 import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
+import CheckBox from '../../container/Section/CheckBox';
 function SideBarFilter({ categoryProduct, parentCategories, childrenCategory, subCategories, brands }) {
+
+    const [Filters, setFilters] = useState({
+        brands: [],
+        //   price: []
+    })
+
+    const handleFilters = (filters, category) => {
+
+        const newFilters = { ...Filters }
+
+        newFilters[category] = filters
+
+        // if (category === "price") {
+        //     let priceValues = handlePrice(filters)
+        //     newFilters[category] = priceValues
+
+        // }
+
+        console.log(newFilters)
+
+        let result = brands.filter(result => result.brand_id == newFilters.brands[0])
+        console.log(result)
+        //showFilteredResults(newFilters)
+        setFilters(newFilters)
+    }
+
     return (
         <Grid
             item
@@ -38,23 +64,27 @@ function SideBarFilter({ categoryProduct, parentCategories, childrenCategory, su
                     <Typography>Brands</Typography>
                 </ListItem>
                 <ListItem>
-                    {brands?.map((result, index) => (
+                    {/* {brands?.map((result, index) => (
                         <FormControlLabel
                             key={index}
                             control={<Checkbox defaultChecked size="small" />}
                             label={result.brand_name}
                         />
-                    ))}
+                    ))} */}
+                    <CheckBox
+                        list={brands}
+                        handleFilters={filters => handleFilters(filters, "brands")}
+                    />
                 </ListItem>
                 <Divider />
-                <ListItem>
+                {/* <ListItem>
                     <FormControlLabel
                         control={<Checkbox defaultChecked size="small" />}
                         label="Colors"
                     />
                 </ListItem>
-                <Divider />
-                <ListItem>
+                <Divider /> */}
+                {/* <ListItem>
                     <FormControlLabel
                         control={<Checkbox defaultChecked size="small" />}
                         label="Size"
@@ -66,7 +96,7 @@ function SideBarFilter({ categoryProduct, parentCategories, childrenCategory, su
                         control={<Checkbox defaultChecked size="small" />}
                         label="Materials"
                     />
-                </ListItem>
+                </ListItem> */}
             </List>
         </Grid>
     )

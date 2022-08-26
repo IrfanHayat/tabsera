@@ -4,9 +4,10 @@ import { useEffect } from "react";
 import "../styles/globals.css";
 import { SessionProvider } from "next-auth/react";
 import { jssPreset, StylesProvider } from "@mui/styles";
-import { ThemeProvider } from "@mui/material/styles";
+import { CssBaseline } from '@mui/material';
+// import { ThemeProvider as MUIThemeProvider } from '@mui/material/styles';
 import Head from "next/head";
-import { theme } from "../theme";
+import ThemeProvider from "../Theme/theme";
 import { CookiesProvider } from "react-cookie";
 import NavBar from "../container/Navbar/NavBar";
 import Footer from "../container/Footer/Footer";
@@ -34,7 +35,7 @@ const MyApp = ({ Component, pageProps }) => {
 
     <Provider store={store}>
       <StylesProvider jss={jss}>
-        <ThemeProvider theme={theme}>
+        <ThemeProvider >
           {/* <CookiesProvider> */}
           <Head>
             <link rel="icon" href="/favicon.png" />

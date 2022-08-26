@@ -72,9 +72,7 @@ function SubCategory() {
     const dispatch = useDispatch();
     const [checked, setChecked] = React.useState([true, false]);
     const [styled, setStyled] = React.useState({
-        display: "flex",
-        flexDirection: "column",
-        p: 1,
+
     });
     const [filterData, setFilterData] = useState();
 
@@ -211,13 +209,13 @@ function SubCategory() {
         let style;
         let styleCard;
         if (view == "grid") {
-            style = { display: "flex", flexDirection: "column" };
+            style = { display: "flex", flexDirection: "row" };
 
             setStyled(style);
         } else {
             style = {
                 display: "flex",
-                flexDirection: "row",
+                flexDirection: "column",
                 justifyContent: "flex-start",
             };
             setStyled(style);
