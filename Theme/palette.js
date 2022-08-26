@@ -1,5 +1,5 @@
 import { alpha } from '@mui/material/styles';
-
+import i18n from "../locales/i18n";
 // ----------------------------------------------------------------------
 
 function createGradient(color1, color2) {
@@ -31,7 +31,7 @@ const GREY = {
 const PRIMARY = {
   lighter: '#D1E9FC',
   light: '#76B0F1',
-  main: '#2065D1',
+  main: '#3d7cff',
   dark: '#103996',
   darker: '#061B64',
   contrastText: '#fff',
@@ -99,6 +99,7 @@ const CHART_COLORS = {
 };
 
 const palette = {
+  direction: i18n.dir(),
   common: { black: '#000', white: '#fff' },
   primary: { ...PRIMARY },
   secondary: { ...SECONDARY },
