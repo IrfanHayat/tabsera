@@ -7,6 +7,7 @@ import {
   getCategoryBrand,
   getCategory,
 } from "../../slice/categorySlice";
+import ShopProductSort from "../../container/Filter/ProductSort";
 import { useRouter, withRouter } from "next/router";
 import { addToBasket, addToCart } from "../../slice/basketSlice";
 import { useSelector, useDispatch } from "react-redux";
@@ -314,11 +315,13 @@ function SubCategory() {
           >
             <ListFilter />
             <Box flexGrow={1} />
-
+            {/* 
             <SortFilter
               data={productDataWithCategoryId}
               setFilterData={setFilterData}
-            />
+            /> */}
+            <ShopProductSort data={productDataWithCategoryId}
+              setFilterData={setFilterData}></ShopProductSort>
             <Box flexGrow={0.1} />
             <ViewFilter handleView={handleView} />
           </Grid>
