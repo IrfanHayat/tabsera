@@ -27,31 +27,32 @@ const DealsAndPromotions = ({ dealsData, viewProduct }) => {
       {dealsData.map((result) => (
         <Card
           sx={{
-            m: 1,
+            m: 0.7,
+            // display: "flex",
             // mx: 0.4,
             // my: 2,
             // marginTop: 1,
             // marginBottom: 1,
             boxShadow: 0,
-            borderRadius: 2,
+            borderRadius: 0,
             // border: 1,
             // borderColor: "#9E9E9E ",
             bgcolor: "background.paper",
-            // padding: 0.5,
-            width: 250,
+            padding: 0.5,
+            width: 212,
             // maxWidth: 280,
-            height: 340,
+            height: 275,
             ":hover": {
               border: 1,
               borderColor: "#9E9E9E ",
               boxShadow: 1, // theme.shadows[20]
-              transform: "scale(1.05)",
+              transform: "scale(1)",
               // opacity: 0.5,
 
               cursor: "pointer",
             },
           }}
-        // className={cx(styles.root)}
+          // className={cx(styles.root)}
         >
           {result?.bundleImage && (
             <>
@@ -67,7 +68,7 @@ const DealsAndPromotions = ({ dealsData, viewProduct }) => {
                   sx={{
                     top: 0,
                     width: "100%",
-                    height: 200,
+                    height: 170,
                     objectFit: "cover",
                     // position: "absolute",
                     // maxHeight: { xs: 233, md: 167 },
@@ -81,7 +82,7 @@ const DealsAndPromotions = ({ dealsData, viewProduct }) => {
                     actionIcon={
                       <IconButton>
                         <Chip
-                          // sx={{ color: "yellow" }}
+                          sx={{ height: 20, width: 75 }}
                           icon={<LoyaltyIcon />}
                           label="Deals"
                           size="small"
@@ -145,43 +146,43 @@ const DealsAndPromotions = ({ dealsData, viewProduct }) => {
             {/* {result?.category_name && (
               <Typography variant="body">{result?.category_name}</Typography>
             )} */}
-            <Box sx={{ height: 85 }}>
-              <Typography
-                fontSize="0.9rem"
-                variant="h5"
-                fontWeight={600}
-                // display="inline"
-                noWrap
-              >
-                {result?.bundleName}
-              </Typography>
+            {/* <Box sx={{ height: 85 }}>  */}
+            <Typography
+              fontSize="0.9rem"
+              variant="h5"
+              fontWeight={600}
+              // display="inline"
+              noWrap
+            >
+              {result?.bundleName}
+            </Typography>
 
-              <Typography
-                fontSize="1rem"
-                variant="h5"
-                fontWeight={600}
-                sx={{ color: "warning.dark" }}
-              >
-                {" "}
-                RS. {result?.bundleCost}
-              </Typography>
-              {result.discountPercent ? (
-                <>
-                  <Typography
-                    fontSize="0.7rem"
-                    style={{ textDecorationLine: "line-through" }}
-                  >
-                    Rs {result.originalPrice}
-                  </Typography>
-                  {"   "}
-                  <Typography fontSize="0.7rem">
-                    - {result.discountPercent} %
-                  </Typography>
-                </>
-              ) : (
-                <></>
-              )}
-              {/* <Box
+            <Typography
+              fontSize="1rem"
+              variant="h5"
+              fontWeight={600}
+              sx={{ color: "warning.dark" }}
+            >
+              {" "}
+              RS. {result?.bundleCost}
+            </Typography>
+            {result.discountPercent ? (
+              <>
+                <Typography
+                  fontSize="0.7rem"
+                  style={{ textDecorationLine: "line-through" }}
+                >
+                  Rs {result.originalPrice}
+                </Typography>
+                {"   "}
+                <Typography fontSize="0.7rem">
+                  - {result.discountPercent} %
+                </Typography>
+              </>
+            ) : (
+              <></>
+            )}
+            {/* <Box
             sx={{
               display: "flex",
               justifyContent: "space-between",
@@ -192,7 +193,8 @@ const DealsAndPromotions = ({ dealsData, viewProduct }) => {
               borderRadius: 1,
             }}
           > */}
-              {/* <Grid md={3}> */}
+            {/* <Grid md={3}> */}
+            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
               <Rating
                 name="size-small"
                 defaultValue={result?.averageRating}
@@ -201,18 +203,21 @@ const DealsAndPromotions = ({ dealsData, viewProduct }) => {
                 readOnly
               />
               {/* </Grid> */}
-            </Box>
-            <Box sx={{ mb: 3, display: "flex", alignItems: "center" }}>
+              {/* </Box> */}
               {result.bundleName ? (
                 <Button
                   variant="contained"
+                  sx={{
+                    background:
+                      "linear-gradient(90deg, #020024 0%, #090979 35%, #00d4ff 100%)",
+                  }}
                   size="small"
                   key={result.id}
                   onClick={() => addToCartHandler(result)}
                   endIcon={<AddShoppingCartOutlinedIcon fontSize="small" />}
                 >
                   {" "}
-                  Add To Cart
+                  {/* Add To Cart */}
                 </Button>
               ) : (
                 ""

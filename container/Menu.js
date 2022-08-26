@@ -363,7 +363,7 @@ export default function PersistentDrawerLeft() {
           >
             <Item
               sx={{
-                m: 1,
+                m: 0.5,
                 width: {
                   md: "20%",
                   sm: "40%",
@@ -382,16 +382,18 @@ export default function PersistentDrawerLeft() {
                   // value={age}
                   // onChange={handleChange}
                   // startIcon={<WidgetsIcon />}
+                  // color="primary"
                   defaultValue={20}
                   variant="standard"
                   InputProps={{
                     startAdornment: (
                       <InputAdornment position="start">
-                        <WidgetsIcon />
+                        <WidgetsIcon color="primary" />
                       </InputAdornment>
                     ),
                     disableUnderline: true,
                     "aria-label": "Without label",
+                    // color: "primary",
                   }}
                 >
                   <MenuItem value={10} onClick={() => setKey(2)}>
@@ -490,7 +492,7 @@ export default function PersistentDrawerLeft() {
             {featureProduct != "" ? (
               <Item
                 sx={{
-                  m: 1,
+                  m: 0.5,
                   width: {
                     md: "80%",
                     sm: "60%",
@@ -614,12 +616,12 @@ export default function PersistentDrawerLeft() {
           >
             <Grid
               item
-              md={12}
+              xs={12}
               sx={{
                 display: "flex",
                 flexDirection: "row",
                 bgcolor: "background.paper",
-                m: 1,
+                m: 0.5,
                 p: 1,
                 justifyContent: "space-between",
                 alignItems: "center",

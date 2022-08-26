@@ -174,16 +174,17 @@ const Index = ({ Item, data }) => {
         container
         // justifyContent="center"
         // alignItems="center"
-        sx={{ display: "flex" }}
+        sx={{ display: "flex", justifyContent: "center" }}
         // minHeight={500}
       >
         <Box
+          px={0.5}
           sx={{
             display: "flex",
-            m: "auto",
-            p: "auto",
+            // m: "auto",
+            // p: "auto",
             flexWrap: "wrap",
-            // justifyContent: "space-aound",
+            justifyContent: "flex-start",
           }}
         >
           {product && data?.length < 1
