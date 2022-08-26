@@ -39,20 +39,20 @@ export default function ActionAreaCard({
     from: { opacity: 0 },
   });
   const AnimatedTypography = animated(Typography);
-  console.log("freee", product);
+  // console.log("freee", product);
   // let height = product.discountPercent ? 350 : 320;
   let display = styledCard ? styledCard : "";
   let displayDesc =
     styledCard?.flexDirection == "row"
       ? {
-        display: "flex",
-        flexDirection: "column",
-        // alignItems: "center",
-        m: 1,
+          display: "flex",
+          flexDirection: "column",
+          // alignItems: "center",
+          m: 1,
 
-        // justifyContent: "space-between",
-        // justifyContent: "space-arounf",
-      }
+          // justifyContent: "space-between",
+          // justifyContent: "space-arounf",
+        }
       : { height: 85 };
   let width = styledCard?.flexDirection == "row" ? "100%" : 212;
   let height = styledCard?.flexDirection == "row" ? "100%" : 285;
@@ -87,7 +87,7 @@ export default function ActionAreaCard({
             cursor: "pointer",
           },
         }}
-      // className={cx(styles.root)}
+        // className={cx(styles.root)}
       >
         {product?.productImage && (
           <>
@@ -152,7 +152,7 @@ export default function ActionAreaCard({
             alt="shirt"
             width={245}
             height={200}
-          // loading="eager"
+            // loading="eager"
           ></Image>
         )}
 

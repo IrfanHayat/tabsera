@@ -80,9 +80,9 @@ export default function PersistentDrawerLeft() {
   const { categoryData } = useSelector((state) => state.category);
   const { campaignsData } = useSelector((state) => state.campaigns);
 
-  console.log("cat DAta", categoryData);
-  console.log("camp DAta", campaignsData);
-
+  // console.log("cat DAta", categoryData);
+  // console.log("camp DAta", campaignsData);/
+  //
   // show all products
   const [showProduct, setShowProduct] = useState(false);
   // show all categories
@@ -121,7 +121,11 @@ export default function PersistentDrawerLeft() {
   //freeShipping
   let [freeShippingData, setFreeShippingData] = useState();
   let [showFreeShipping, setShowFreeShipping] = useState(false);
+
   const [key, setKey] = useState(1);
+  const [btnKey, setBtnKey] = useState();
+
+  useEffect(() => {}, [btnKey]);
   let router = useRouter();
   let dispatch = useDispatch();
 
@@ -631,6 +635,8 @@ export default function PersistentDrawerLeft() {
               {/* <Box sx={{ flexGrow: 1 }} /> */}
               <Box>
                 <ListFilter
+                  btnKey={btnKey}
+                  setBtnKey={setBtnKey}
                   showAllProducts={showAllProducts}
                   showAllMerchantsProduct={showAllMerchantsProduct}
                   showAllCategoriesProduct={showAllCategoriesProduct}
@@ -733,11 +739,15 @@ export default function PersistentDrawerLeft() {
               <></>
             )}
 
+            {/* {console.log(filterData)} */}
+
             {showAllMerchantPro ? (
-              <ProductGetByMerchant
-                data={filterData ? filterData : data?.response}
-                Item={Item}
-              ></ProductGetByMerchant>
+              <>
+                <ProductGetByMerchant
+                  data={filterData ? filterData : data?.response}
+                  Item={Item}
+                ></ProductGetByMerchant>
+              </>
             ) : (
               <></>
             )}

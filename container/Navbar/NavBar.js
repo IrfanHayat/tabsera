@@ -394,7 +394,7 @@ export default function NavBar() {
                     {myAccount}
                   </TextField>
                 </FormControl> */}
-                <NavSelect Title="Account" Data={myAccount} color="white" />
+                {/* <NavSelect Title="Account" Data={myAccount} color="white" /> */}
                 <NavSelect Title="Currency" Data={currencyData} color="white" />
                 <NavSelect Title="Language" Data={languageData} color="white" />
               </Box>
