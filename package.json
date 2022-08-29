@@ -38,6 +38,7 @@
     "i18n": "^0.15.0",
     "i18next": "^21.8.11",
     "i18next-browser-languagedetector": "^6.1.4",
+    "iconify": "^1.4.0",
     "js-cookie": "^3.0.1",
     "js-crypto-aes": "^1.0.4",
     "jss-rtl": "^0.3.0",

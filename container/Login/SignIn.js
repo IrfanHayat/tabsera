@@ -135,17 +135,11 @@ export default function SignIn({ isLoggedIn, setIsLoggedIn }) {
   return (
     <>
       {localStorage.getItem("login") == "true" ? (
-        <>
-          <NavSelect
-            Title={<Avatar sx={{ bgcolor: "green" }}>O</Avatar>}
-            Data={myAccount}
-            color="white"
-          />
-
-          {/* <Button onClick={logOut} sx={{ color: "white" }}>
-            Logout
-          </Button> */}
-        </>
+        <NavSelect
+          Title={<Avatar sx={{ bgcolor: "green" }}>O</Avatar>}
+          Data={myAccount}
+          color="white"
+        />
       ) : (
         <Button onClick={handleModalOpen} sx={{ color: "white" }}>
           Sign In

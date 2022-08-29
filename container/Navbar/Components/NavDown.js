@@ -349,8 +349,8 @@ export default function NavDown(props) {
               onClick={handleClick}
               color="primary"
 
-            // onMouseEnter={handleClick}
-            // onMouseLeave={handleClick}
+              // onMouseEnter={handleClick}
+              // onMouseLeave={handleClick}
             >
               {console.log(localStorage.getItem("login"))}
               {console.log(cartTotalQuantity)}
@@ -359,8 +359,8 @@ export default function NavDown(props) {
                   color="error"
                   badgeContent={
                     cartTotalQuantity != undefined ||
-                      cartTotalQuantity != 0 ||
-                      cartTotalQuantity
+                    cartTotalQuantity != 0 ||
+                    cartTotalQuantity
                       ? cartTotalQuantity
                       : 1
                   }
@@ -387,11 +387,11 @@ export default function NavDown(props) {
                 vertical: "top",
                 horizontal: "center",
               }}
-            //keepMounted={true}
-            // anchorOrigin={{
-            //   vertical: "bottom",
-            //   horizontal: "left"62
-            // }}
+              //keepMounted={true}
+              // anchorOrigin={{
+              //   vertical: "bottom",
+              //   horizontal: "left"62
+              // }}
             >
               {cartTotalQuantity > 0 ? (
                 // <div>
