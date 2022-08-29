@@ -16,20 +16,24 @@ const SORT_BY_OPTIONS = [
 
 ];
 
-export default function ShopProductSort({ data, setFilterData }) {
+export default function ShopProductSort({ data, setFilterData, setShowFilterData }) {
     const [open, setOpen] = useState(null);
     const [selectedValue, setSelectedValue] = useState();
 
-    console.log(data)
+
     const sortData = (type) => {
         setSelectedValue(type)
-        // setShowSortFilter(true)
+        setShowFilterData(true)
         var f_data;
         switch (type) {
             case "price_desc":
                 {
                     f_data = data.slice().sort(function (a, b) {
-                        return parseFloat(b.productCost) - parseFloat(a.productCost);
+                        if (a.productCost && b.productCost) {
+                            return parseFloat(b.productCost) - parseFloat(a.productCost);
+                        } else {
+                            return parseFloat(b.bundleCost) - parseFloat(a.bundleCost);
+                        }
                     });
                     console.log(f_data);
                     setFilterData(f_data);
@@ -38,7 +42,11 @@ export default function ShopProductSort({ data, setFilterData }) {
                 break;
             case "price_asc":
                 f_data = data.slice().sort(function (a, b) {
-                    return parseFloat(a.productCost) - parseFloat(b.productCost);
+                    if (a.productCost && b.productCost) {
+                        return parseFloat(a.productCost) - parseFloat(b.productCost);
+                    } else {
+                        return parseFloat(a.bundleCost) - parseFloat(b.bundleCost);
+                    }
                 });
                 console.log(f_data);
                 setFilterData(f_data);

@@ -14,7 +14,7 @@ import ActionAreaCard from "../../container/Card";
 const Index = ({ data, showProduct }) => {
   const { dealsData } = useSelector((state) => state.deals);
 
-
+  console.log(data)
 
   let dispatch = useDispatch();
   const router = useRouter();
@@ -40,10 +40,10 @@ const Index = ({ data, showProduct }) => {
 
 
       {
-        dealsData && showProduct == false ?
+        data && showProduct == false ?
           <DealAndPromotions
 
-            dealsData={dealsData && dealsData}
+            dealsData={data}
             viewProduct={viewProduct}
           />
 

@@ -33,7 +33,7 @@ function Index({
 
   //
 
-  console.log(discountsData);
+  console.log(data);
 
   const viewProduct = (item) => {
     router.push({
@@ -48,28 +48,19 @@ function Index({
 
   return (
     <>
+      {console.log(data)}
       <Grid container justifyContent="center">
-        {discountsData.length > 0 ? (
+        {data.length > 0 ? (
           <>
-            {discountsData && showDiscounts == false ? (
-              <Discounts
-                viewProduct={viewProduct}
-                discountsData={filterData ? filterData : discountsData}
-                // dealsData={dealsData && dealsData}
-              />
-            ) : (
-              <></>
-            )}
 
-            {showDiscounts ? (
-              <ViewAllProducts
-                viewProduct={viewProduct}
-                data={data && data}
-                // dealsData={dealsData && dealsData}
-              />
-            ) : (
-              <></>
-            )}
+
+
+            <ViewAllProducts
+              viewProduct={viewProduct}
+              data={data}
+            // dealsData={dealsData && dealsData}
+            />
+
             {showAllCategoryPro ? (
               <ProductGetByCategory
                 data={filterData ? filterData : discountsData}

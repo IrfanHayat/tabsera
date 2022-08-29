@@ -188,7 +188,7 @@ const Index = ({ Item, data }) => {
           }}
         >
           {product && data?.length < 1
-            ? router.query.data.map((item, index) => (
+            ? router.query.data?.map((item, index) => (
               // <Item key={index}>
               <ActionAreaCard
                 product={item}

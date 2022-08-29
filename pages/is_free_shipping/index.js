@@ -30,10 +30,10 @@ function Index({ data, showProduct, showAllCategoryPro, showAllMerchantPro, filt
     return (
         <>
             <Grid container justifyContent="center">
-                {freeShippingData.length > 0 && showProduct == false && showAllCategoryPro == false && showAllMerchantPro == false ? (
+                {data?.length > 0 && showProduct == false && showAllCategoryPro == false && showAllMerchantPro == false ? (
                     <ViewAllProducts
                         viewProduct={viewProduct}
-                        data={freeShippingData && freeShippingData}
+                        data={data}
                     // dealsData={dealsData && dealsData}
                     />
                 ) : (
