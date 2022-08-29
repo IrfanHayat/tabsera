@@ -179,9 +179,9 @@ function Details({
           <Link
             underline="hover"
             color="inherit"
-          // onClick={() =>
-          //   router.push(`/product_detail?productId=${productIdRoute}`)
-          // }
+            // onClick={() =>
+            //   router.push(`/product_detail?productId=${productIdRoute}`)
+            // }
           >
             {productDetail?.category_name}
           </Link>
@@ -356,13 +356,13 @@ function Details({
               <FavoriteBorderIcon color="error" />
             </Stack>
           </Box>
-          <Box sx={{ display: "flex" }}>
+          <Box sx={{ display: "flex", flexDirection: "column" }}>
             {skusFlag && skusProduct
               ? skusProduct.attributes.map((result, index) => (
                   <Grid container key={index}>
                     {result.attribute_name == "Color" ? (
                       <>
-                        <Grid item md={4}>
+                        <Grid item xs={2}>
                           {result.attribute_name}:
                         </Grid>
                         <Grid item md={3}>
@@ -386,10 +386,14 @@ function Details({
                   </Grid>
                 ))
               : productAttributes.map((result, index) => (
-                  <Grid container key={index}>
+                  <Grid
+                    container
+                    // sx={{ display: "flex", flexDirection: "column" }}
+                    key={index}
+                  >
                     {result.attribute_name == "Color" ? (
                       <>
-                        <Grid item md={4}>
+                        <Grid item xs={2}>
                           <Typography> {result.attribute_name}: </Typography>
                         </Grid>
                         <Grid item md={3}>
@@ -399,9 +403,11 @@ function Details({
                         </Grid>
                       </>
                     ) : (
+                      // <Box display="flex">
                       <Typography>
                         {result.attribute_name}: {result.value}{" "}
                       </Typography>
+                      // </Box>
                     )}
                   </Grid>
                 ))}

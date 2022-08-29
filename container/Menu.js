@@ -75,6 +75,7 @@ const Item = styled(Paper)(({ theme }) => ({
 import ListItemButton from "@mui/material/ListItemButton";
 import ListFilter from "./Filter/ListFilter";
 import PageFilter from "./Filter/PageFilter";
+import ActionAreaCard from "./Card";
 import ShopProductSort from "./Filter/ProductSort";
 export default function PersistentDrawerLeft() {
   const { data, isLoading, isFetching, isError } = useGetAllProductsQuery();
@@ -82,7 +83,6 @@ export default function PersistentDrawerLeft() {
   const { campaignsData } = useSelector((state) => state.campaigns);
 
   // console.log("cat DAta", categoryData);
-  // console.log("camp DAta", campaignsData);/
   //
   // show all products
   const [showProduct, setShowProduct] = useState(false);
@@ -98,6 +98,8 @@ export default function PersistentDrawerLeft() {
   let product = data?.response;
 
   const [compaigns, setCompaigns] = useState();
+  console.log("camp DAta", compaigns);
+
   const [category, setCategory] = useState();
   const [value, setValue] = React.useState();
   // checkbox
@@ -430,19 +432,21 @@ export default function PersistentDrawerLeft() {
               </List>
             </Item>
             {console.log(featureProduct)}
-            {featureProduct != "" ? (
-              <Item
-                sx={{
-                  m: 0.5,
-                  width: {
-                    md: "80%",
-                    sm: "60%",
-                    xs: "60%",
-                  },
-                }}
-              >
-                {/* <NewCarousel /> */}
+
+            <Item
+              sx={{
+                m: 0.5,
+
+                width: {
+                  md: "80%",
+                  sm: "60%",
+                  xs: "60%",
+                },
+              }}
+            >
+              {compaigns && compaigns.length > 0 ? (
                 <Carousel
+                  // sx={{ height: "270px", my: 1 }}
                   animation="slide"
                   swipe
                   navButtonsAlwaysVisible={true}
@@ -452,14 +456,14 @@ export default function PersistentDrawerLeft() {
                   height={300}
                 // navButtonsAlwaysVisible={true}
                 >
-                  {featureProduct?.map((result) => (
+                  {compaigns?.map((result) => (
                     <>
                       <CardMedia
                         // component="img"
                         component="img"
                         // height="194"
-                        onClick={(e) => viewProduct(result.productId)}
-                        image={result?.productImage}
+                        onClick={(e) => viewProduct(result.campaignId)}
+                        image={result?.imageURL}
                         alt="featured Product"
                         sx={{
                           top: 0,
@@ -489,6 +493,80 @@ export default function PersistentDrawerLeft() {
                           // display="inline"
                           noWrap
                         >
+                          {result?.campaignName}
+                        </Typography>
+
+                        <Typography
+                          fontSize="0.9rem"
+                          variant="h5"
+                          fontWeight={600}
+                          sx={{ color: "warning.dark", p: 1 }}
+                        >
+                          Minimum Discount Rs. {result?.minDiscount}
+                        </Typography>
+                      </Box>
+                    </>
+                  ))}
+                </Carousel>
+              ) : (
+                ""
+              )}
+
+              <Box>
+                {/* <Box sx={{ width: "20%" }}> */}
+                <Typography>Featured Products</Typography>
+                {/* <Typography>Featured Products</Typography> */}
+                {/* </Box> */}
+                {/* <Box sx={{ width: "80%" }}> */}
+                {featureProduct != "" ? (
+                  <NewCarousel
+                    product={featureProduct}
+                  // sx={{ height: "250px", my: 1 }}
+                  // animation="slide"
+                  // swipe
+                  // navButtonsAlwaysVisible={true}
+                  // interval={1000}
+                  // NextIcon={<ArrowRightIcon />}
+                  // PrevIcon={<ArrowLeftIcon />}
+                  // height={300}
+                  // navButtonsAlwaysVisible={true}
+                  >
+                    {/* {featureProduct?.map((result) => (
+                    // <ActionAreaCard ></ActionAreaCard>
+
+                    <>
+                      <CardMedia
+                        // component="img"
+                        component="img"
+                        // height="194"
+                        onClick={(e) => viewProduct(result.productId)}
+                        image={result?.productImage}
+                        alt="featured Product"
+                        sx={{
+                          top: 0,
+                          width: "100%",
+                          height: 290,
+                          objectFit: "cover",
+                        }}
+                      ></CardMedia>
+
+                      <Box
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          height: 50,
+                          // pl: 2,
+                          justifyContent: "space-between",
+                          p: 1,
+                          bgcolor: "background.default",
+                        }}
+                      >
+                        <Typography
+                          fontSize="0.9rem"
+                          variant="h5"
+                          fontWeight={600}
+                          noWrap
+                        >
                           {result?.productName}
                         </Typography>
 
@@ -496,7 +574,6 @@ export default function PersistentDrawerLeft() {
                           name="size-small"
                           defaultValue={result?.averageRating}
                           size="small"
-                          // fontSize={24}
                           readOnly
                         />
                         <Typography
@@ -521,23 +598,14 @@ export default function PersistentDrawerLeft() {
                         )}
                       </Box>
                     </>
-                  ))}
-                </Carousel>
-                {/* <NewCarousel
-                  product={featureProduct}
-                  viewProduct={viewProduct}
-                  addToCartHandler={addToCartHandler}
-                /> */}
-                {/* <CarouselApp
-                  heading="Featured Products"
-                  product={featureProduct}
-                  viewProduct={viewProduct}
-                  addToCartHandler={addToCartHandler}
-                /> */}
-              </Item>
-            ) : (
-              ""
-            )}
+                  ))} */}
+                  </NewCarousel>
+                ) : (
+                  ""
+                )}
+                {/* </Box> */}
+              </Box>
+            </Item>
           </Grid>
 
           <Grid
