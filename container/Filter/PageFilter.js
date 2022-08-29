@@ -17,21 +17,21 @@ function PageFilter({ value, handleChange }) {
         <motion.div className="animatable" whileTap={{ scale: 0.9 }}>
           <FormControlLabel
             value="deals"
-            control={<Radio onChange={handleChange} />}
+            control={<Radio onChange={(e) => handleChange(e)} />}
             label="Bundles"
           />
         </motion.div>
         <motion.div className="animatable" whileTap={{ scale: 0.9 }}>
           <FormControlLabel
             value="discounts"
-            control={<Radio onChange={handleChange} />}
+            control={<Radio onChange={(e) => handleChange(e)} />}
             label="Discounts"
           />
         </motion.div>
         <motion.div className="animatable" whileTap={{ scale: 0.9 }}>
           <FormControlLabel
             value="freeShipping"
-            control={<Radio onChange={handleChange} />}
+            control={<Radio onChange={(e) => handleChange(e)} />}
             label="freeShipping"
           />
         </motion.div>

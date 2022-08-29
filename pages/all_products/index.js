@@ -43,6 +43,7 @@ const Index = ({ Item, data }) => {
   //   items: Array.from({ length: 20 }),
   //   hasMore: true,
   // };
+  console.log(data)
 
   const { productData, loading } = useSelector((state) => state.product);
   let product = productData;
