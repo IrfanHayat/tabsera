@@ -397,17 +397,18 @@ export default function NavBar() {
                 {/* <NavSelect Title="Account" Data={myAccount} color="white" /> */}
                 <NavSelect Title="Currency" Data={currencyData} color="white" />
                 <NavSelect Title="Language" Data={languageData} color="white" />
+                <SignInModal
+                  isLoggedIn={isLoggedIn}
+                  setIsLoggedIn={setIsLoggedIn}
+                  show={showLogin}
+                  logOut={logOut}
+                  close={() => setShowLogin(false)}
+                />
               </Box>
               {/* <Button href="#" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
                 Login
               </Button> */}
-              <SignInModal
-                isLoggedIn={isLoggedIn}
-                setIsLoggedIn={setIsLoggedIn}
-                show={showLogin}
-                logOut={logOut}
-                close={() => setShowLogin(false)}
-              />
+
               {/* </Toolbar> */}
 
               <Box sx={{ display: { xs: "flex", md: "none" } }}>

@@ -163,9 +163,9 @@ export default function ActionAreaCard({
               <Typography variant="body">{product?.category_name}</Typography>
             )}
             <Typography
-              fontSize="0.9rem"
+              fontSize="0.4rem"
               variant="h5"
-              fontWeight={600}
+              fontWeight={500}
               // display="inline"
               noWrap
             >
@@ -175,7 +175,7 @@ export default function ActionAreaCard({
             <Typography
               fontSize="1rem"
               variant="h5"
-              fontWeight={600}
+              fontWeight={500}
               sx={{ color: "warning.dark" }}
             >
               {" "}
