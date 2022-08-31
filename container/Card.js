@@ -39,7 +39,6 @@ export default function ActionAreaCard({
     from: { opacity: 0 },
   });
   const AnimatedTypography = animated(Typography);
-  // console.log("freee", product);
   // let height = product.discountPercent ? 350 : 320;
   let display = styledCard ? styledCard : "";
   let displayDesc =

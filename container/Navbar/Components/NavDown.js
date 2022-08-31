@@ -91,7 +91,6 @@ export default function NavDown(props) {
   const [categoriesData, setCategoriesData] = useState([]);
   const [camapaigns, setCamapaigns] = React.useState(false);
   const [key, setKey] = useState(1);
-  console.log("campaignsData,", campaignsData);
 
   useEffect(() => {
     //dispatch(getTotalCartQuantity());
@@ -105,9 +104,7 @@ export default function NavDown(props) {
     // setQunatityProduct(result.payload)
   }, []);
 
-  useEffect(() => {
-    console.log(cartTotalQuantity);
-  }, cartTotalQuantity);
+  useEffect(() => {}, cartTotalQuantity);
 
   const categoryData = (categories) => {
     setCategoriesData(categories);
@@ -155,7 +152,6 @@ export default function NavDown(props) {
 
   async function handleInputClick(e) {
     // let result = await dispatch(getProductSearch(e.target.value));
-    // console.log(result);
     if (event.key === "Enter") {
       // Prevent's default 'Enter' behavior.
       event.defaultMuiPrevented = true;
@@ -171,7 +167,6 @@ export default function NavDown(props) {
   const open1 = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
 
-  console.log(categoriesData, "categoriesData");
   const categories = (
     <List>
       {categoriesData &&
@@ -349,18 +344,16 @@ export default function NavDown(props) {
               onClick={handleClick}
               color="primary"
 
-            // onMouseEnter={handleClick}
-            // onMouseLeave={handleClick}
+              // onMouseEnter={handleClick}
+              // onMouseLeave={handleClick}
             >
-              {console.log(localStorage.getItem("login"))}
-              {console.log(cartTotalQuantity)}
               {localStorage.getItem("login") == "true" ? (
                 <Badge
                   color="error"
                   badgeContent={
                     cartTotalQuantity != undefined ||
-                      cartTotalQuantity != 0 ||
-                      cartTotalQuantity
+                    cartTotalQuantity != 0 ||
+                    cartTotalQuantity
                       ? cartTotalQuantity
                       : 1
                   }
@@ -387,11 +380,11 @@ export default function NavDown(props) {
                 vertical: "top",
                 horizontal: "center",
               }}
-            //keepMounted={true}
-            // anchorOrigin={{
-            //   vertical: "bottom",
-            //   horizontal: "left"62
-            // }}
+              //keepMounted={true}
+              // anchorOrigin={{
+              //   vertical: "bottom",
+              //   horizontal: "left"62
+              // }}
             >
               {cartTotalQuantity > 0 ? (
                 // <div>

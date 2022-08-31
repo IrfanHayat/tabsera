@@ -34,7 +34,6 @@ function Cart() {
   );
   const { cartItems } = useSelector((state) => state.basket.cart);
 
-  console.log(cartItems)
   let [groupProductData, setGroupedProductData] = useState();
   let router = useRouter();
   let dispatch = useDispatch();
@@ -42,9 +41,7 @@ function Cart() {
   useEffect(() => {
     dispatch(getCartItems());
   }, []);
-  useEffect(() => {
-
-  }, [cartItems])
+  useEffect(() => {}, [cartItems]);
 
   useEffect(() => {
     var groupedCategory = groupArrayOfObjects(cartItems);
@@ -118,22 +115,22 @@ function Cart() {
                 <Grid item xs>
                   {cartItems && groupProductData
                     ? Object.keys(groupProductData).map((key) => (
-                      <ShoppingCart
-                        key={key}
-                        heading={
-                          groupProductData[key].map(
-                            (result) => result.merchant_name
-                          )[0]
-                        }
-                        productCartData={groupProductData[key]}
-                        productPrice={cartItems}
-                        handleAddToCart={handleAddToCart}
-                        handleDecreaseCart={handleDecreaseCart}
-                        handleClearCart={handleClearCart}
-                        removeItemHandler={removeItemHandler}
-                        checkoutHandler={checkoutHandler}
-                      ></ShoppingCart>
-                    ))
+                        <ShoppingCart
+                          key={key}
+                          heading={
+                            groupProductData[key].map(
+                              (result) => result.merchant_name
+                            )[0]
+                          }
+                          productCartData={groupProductData[key]}
+                          productPrice={cartItems}
+                          handleAddToCart={handleAddToCart}
+                          handleDecreaseCart={handleDecreaseCart}
+                          handleClearCart={handleClearCart}
+                          removeItemHandler={removeItemHandler}
+                          checkoutHandler={checkoutHandler}
+                        ></ShoppingCart>
+                      ))
                     : ""}
                 </Grid>
               </Grid>

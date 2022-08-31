@@ -107,7 +107,6 @@ function ShippingMethods({
                   <ListItemIcon>
                     <DomainAddOutlinedIcon />
                   </ListItemIcon>
-                  {console.log(shippementLockerData)}
                   {shippementLockerData ? (
                     <ListItemText>
                       {shippementLockerData?.locker_address}{" "}

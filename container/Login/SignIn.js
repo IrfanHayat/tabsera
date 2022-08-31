@@ -36,8 +36,6 @@ export default function SignIn({ isLoggedIn, setIsLoggedIn }) {
   const [open, setOpen] = React.useState(false);
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  console.log(isLoggedIn);
-
   const handleModalOpen = () => {
     setOpen(true);
   };
@@ -51,7 +49,6 @@ export default function SignIn({ isLoggedIn, setIsLoggedIn }) {
     Cookies.remove("item");
     // Cookies.remove("connect.sid");
     router.push("/");
-    console.log(result);
   };
   const myAccount = (
     <div>

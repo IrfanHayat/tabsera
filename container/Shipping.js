@@ -44,7 +44,6 @@ export default function Shipping({
   let router = useRouter();
 
   // useEffect(() => {
-  //   console.log(countryData)
   //   setCountryList(countryData);
 
   //   //setValue("item", { id: 3, name: "item3" });
@@ -154,7 +153,6 @@ export default function Shipping({
                 )}
               ></Controller>
             </ListItem>
-            {console.log(countryData)}
             <ListItem>
               <Controller
                 control={control}
@@ -359,13 +357,17 @@ export default function Shipping({
                   row
                   aria-labelledby="demo-row-radio-buttons-group-label"
                   name="row-radio-buttons-group"
-                // value={labelValue}
-                // onChange={handleChange}
+                  // value={labelValue}
+                  // onChange={handleChange}
                 >
                   {labels.map((result) => (
                     <FormControlLabel
                       value={result.address_label_id}
-                      control={<Radio onChange={() => handleChange(result.address_label_id)} />}
+                      control={
+                        <Radio
+                          onChange={() => handleChange(result.address_label_id)}
+                        />
+                      }
                       label={result.address_label_name}
                       onClick={() => setRadioCheck(true)}
                     />

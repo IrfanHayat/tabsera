@@ -20,11 +20,10 @@ import Chip from "@mui/material/Chip";
 import IconButton from "@mui/material/IconButton";
 import LoyaltyIcon from "@mui/icons-material/Loyalty";
 const DealsAndPromotions = ({ dealsData, viewProduct }) => {
-  console.log("Data Deals New", dealsData);
   return (
     <>
       {/* <ActionAreaCard /> */}
-      {dealsData.map((result) => (
+      {dealsData?.map((result) => (
         <Card
           sx={{
             m: 0.7,
@@ -52,7 +51,7 @@ const DealsAndPromotions = ({ dealsData, viewProduct }) => {
               cursor: "pointer",
             },
           }}
-        // className={cx(styles.root)}
+          // className={cx(styles.root)}
         >
           {result?.bundleImage && (
             <>

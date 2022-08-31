@@ -38,7 +38,6 @@ function CartScreen({
   checkoutHandler,
   productPrice,
 }) {
-  console.log(productCartData);
   return (
     <Box sx={{ bgcolor: "background.paper", p: 2 }}>
       <Typography

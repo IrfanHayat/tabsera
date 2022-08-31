@@ -19,7 +19,6 @@ const breakPoints = [
   { width: 1200, itemsToShow: 5 },
 ];
 
-
 export default function CarouselApp({
   product,
   heading,
@@ -32,7 +31,6 @@ export default function CarouselApp({
   let [categoryView, setCategoryView] = useState(false);
   let [cartView, setCartView] = useState(false);
   const [rtl, setrtl] = useState(false);
-  console.log(product);
 
   function myArrow({ type, onClick, isEdge }) {
     const pointer =
@@ -102,9 +100,9 @@ export default function CarouselApp({
             underline="none"
             size="small"
             sx={{ fontSize: "0.70rem", fontWeight: "600" }}
-          // style={{ fontWeight: "bold" }}
-          // dir="rtl"
-          // endIcon={<DoubleArrowIcon />}
+            // style={{ fontWeight: "bold" }}
+            // dir="rtl"
+            // endIcon={<DoubleArrowIcon />}
           >
             View All {">>"}
           </Button>
@@ -120,11 +118,11 @@ export default function CarouselApp({
         itemsToScroll={1}
         focusOnSelect={true}
         renderArrow={myArrow}
-      // enableSwipe={true}
-      // enableMouseSwipe={true}
-      // enableAutoPlay={true}
-      // autoPlaySpeed={3000}
-      // itemsToShow={2}
+        // enableSwipe={true}
+        // enableMouseSwipe={true}
+        // enableAutoPlay={true}
+        // autoPlaySpeed={3000}
+        // itemsToShow={2}
       >
         {/* <div className="slider__conatiner"> */}
         {/* <Slider {...settings}> */}

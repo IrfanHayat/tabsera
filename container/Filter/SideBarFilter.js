@@ -30,12 +30,9 @@ function SideBarFilter({
 
     // }
 
-    console.log(newFilters);
-
     let result = brands.filter(
       (result) => result.brand_id == newFilters.brands[0]
     );
-    console.log(result);
     //showFilteredResults(newFilters)
     setFilters(newFilters);
   };

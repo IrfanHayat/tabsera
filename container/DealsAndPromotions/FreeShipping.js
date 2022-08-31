@@ -16,14 +16,11 @@ import Chip from "@mui/material/Chip";
 import IconButton from "@mui/material/IconButton";
 
 const FreeShipping = ({ freeShippingData, viewProduct }) => {
-  console.log("freeShippingData New", freeShippingData);
   return (
     <>
-      {console.log(freeShippingData)}
       {/* <ActionAreaCard /> */}
       {freeShippingData.map((result) => (
         <Card
-
           sx={{
             mx: 0.4,
             my: 2,
@@ -75,7 +72,6 @@ const FreeShipping = ({ freeShippingData, viewProduct }) => {
               ""
             )}
           </ImageListItem>
-
 
           <CardContent>
             <Typography gutterBottom variant="overline" component="div">

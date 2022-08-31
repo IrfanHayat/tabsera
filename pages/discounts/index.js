@@ -50,15 +50,12 @@ function Index({
     <>
       {console.log(data)}
       <Grid container justifyContent="center">
-        {data.length > 0 ? (
+        {data?.length > 0 ? (
           <>
-
-
-
             <ViewAllProducts
               viewProduct={viewProduct}
               data={data}
-            // dealsData={dealsData && dealsData}
+              // dealsData={dealsData && dealsData}
             />
 
             {showAllCategoryPro ? (

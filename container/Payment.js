@@ -54,7 +54,7 @@ export default function Payment({
                   // row
                   aria-labelledby="demo-row-radio-buttons-group-label"
                   name="row-radio-buttons-group"
-                // value={labelValue}
+                  // value={labelValue}
                 >
                   {/* <FormControlLabel
             value="female"
@@ -116,7 +116,6 @@ export default function Payment({
           {/* </ListItem> */}
         </form>
       </Grid>
-      {console.log(status)}
       {status?.resultCode === 2000 ? (
         <Snackbar
           open={openBar}
@@ -135,7 +134,6 @@ export default function Payment({
             {status?.message}
           </Alert>
         </Snackbar>
-
       ) : (
         <Snackbar
           open={openBar}

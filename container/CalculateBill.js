@@ -22,7 +22,6 @@ import {
 } from "@mui/material";
 import { RouteGuard } from "../RouterGuard";
 function CalculateBill({ productPrice, checkoutHandler }) {
-  console.log(productPrice);
   return (
     <Card item md={12} xs={12}>
       {/* <Card> */}

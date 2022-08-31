@@ -134,7 +134,6 @@ function Details({
   let [multiProductImage, setMultiProductImage] = useState();
 
   const viewVariantsProduct = (result) => {
-    console.log(result);
     setSkusProduct(result);
     setSkusFlag(true);
   };
@@ -149,16 +148,12 @@ function Details({
     setValue(index);
   };
   let router = useRouter();
-  console.log("productDetail", productDetail);
 
   useEffect(() => {
     productDetail.product_images?.map((results, index) => {
-      console.log(results.media_images);
       setMultiProductImage(results.media_images);
     });
   }, [productDetail]);
-
-  console.log(productImage);
 
   return (
     <>
@@ -288,7 +283,6 @@ function Details({
                     ))}
               </Carousel>
             </ListItem>
-            {console.log(multiProductImage)}
             <ListItem>
               <Carousel
                 // breakPoints={breakPoints}

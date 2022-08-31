@@ -8,10 +8,8 @@ import Typography from "@mui/material/Typography";
 import Image from "next/image";
 import Collapse from "@mui/material/Collapse";
 const Discounts = ({ discountsData, viewProduct }) => {
-  console.log("discountsData New", discountsData);
   return (
     <>
-      {console.log(discountsData)}
       {/* <ActionAreaCard /> */}
       {discountsData.map((result) => (
         <Card

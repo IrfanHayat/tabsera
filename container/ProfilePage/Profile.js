@@ -52,9 +52,7 @@ export default function Profile() {
   const [sameBilling, setsameBilling] = useState(false);
   const [key, setKey] = useState(1);
   useEffect(() => {}, [sameBilling, key]);
-  const handleOnSubmit = (evt) => {
-    console.log(evt);
-  };
+  const handleOnSubmit = (evt) => {};
 
   const addNewMemeber = () => appendMemberRow({ email: "", role: "user" });
 

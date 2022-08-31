@@ -18,7 +18,6 @@ function NewCarousel({
   let [categoryView, setCategoryView] = useState(false);
   let [cartView, setCartView] = useState(false);
   const [rtl, setrtl] = useState(false);
-  console.log(product);
 
   return (
     <Carousel

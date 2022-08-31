@@ -42,7 +42,6 @@ function a11yProps(index) {
 function MerchantStore({ merchantStoreDetail }) {
   const { merchantData } = useSelector((state) => state.merchant);
   // const [merchant, setmerchant] = useState();
-  // console.log(merchantStoreDetail);
   // useEffect(() => {
   //   setmerchant(merchantData);
   // }, [input]);
