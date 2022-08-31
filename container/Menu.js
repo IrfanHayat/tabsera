@@ -306,7 +306,7 @@ export default function PersistentDrawerLeft() {
       setShowDiscounts(true);
       setShowFreeShipping(false);
     } else if (showDeals) {
-      setShowProduct()
+      setShowProduct(false)
       setShowAllCategoryPro(true)
       setShowAllMerchantPro(false)
       setShowDeals(true);
@@ -338,7 +338,7 @@ export default function PersistentDrawerLeft() {
       setShowDiscounts(true);
       setShowFreeShipping(false);
     } else if (showDeals) {
-      setShowProduct()
+      setShowProduct(false)
       setShowAllCategoryPro(false)
       setShowAllMerchantPro(true)
       setShowDeals(true);
@@ -716,7 +716,7 @@ export default function PersistentDrawerLeft() {
                 }
 
                 {
-                  showFreeShipping == false && showDeals == false ?
+                  showFreeShipping == false && showDeals == false && showDiscounts == false ?
                     <ShopProductSort data={data?.response}
                       setShowFilterData={setShowFilterData} setFilterData={setFilterData}></ShopProductSort> : <></>
                 }
@@ -772,20 +772,61 @@ export default function PersistentDrawerLeft() {
 
 
 
+            {console.log(dealsData)}
 
-            {showDeals ? (
-              <DealsAndPromotions
-                data={filterData?.length > 0 ? filterData : dealsData}
-                showProduct={showProduct}
-                showAllCategoryPro={showAllCategoryPro}
-                showAllMerchantPro={showAllMerchantPro}
-                filterData={filterData}
-              ></DealsAndPromotions>
-            ) : (
-              <></>
-            )}
+            <>
 
-            {console.log(showProduct, discountData)}
+              {showProduct &&
+
+                showAllCategoryPro == false &&
+                showAllMerchantPro == false &&
+                showDiscounts == false && showFreeShipping == false &&
+                dealsData?.length > 0 ? (
+                <DealsAndPromotions
+                  data={filterData?.length > 0 ? filterData : dealsData}
+                  showProduct={showProduct}
+                  showAllCategoryPro={showAllCategoryPro}
+                  showAllMerchantPro={showAllMerchantPro}
+                  filterData={filterData}
+                ></DealsAndPromotions>
+              ) : (
+                <> {showProduct == false &&
+
+                  showAllCategoryPro == true &&
+                  showAllMerchantPro == false &&
+                  showDiscounts == false && showFreeShipping == false &&
+                  dealsData?.length > 0 ? (
+                  <ProductGetByCategory
+                    data={filterData?.length > 0 ? filterData : dealsData}
+                    Item={Item}
+                  ></ProductGetByCategory>
+                ) : (
+                  <>{showProduct == false &&
+
+                    showAllCategoryPro == false &&
+                    showAllMerchantPro == true &&
+                    showDiscounts == false && showFreeShipping == false &&
+                    dealsData?.length > 0 ? (
+                    <ProductGetByMerchant
+                      data={filterData?.length > 0 ? filterData : dealsData}
+                      Item={Item}
+                    ></ProductGetByMerchant>
+                  ) : (
+                    <>
+                      {showDeals && showDiscounts == false && showFreeShipping == false && showProduct == false ?
+                        <DealsAndPromotions
+                          data={filterData?.length > 0 ? filterData : dealsData}
+                          showProduct={showProduct}
+                          showAllCategoryPro={showAllCategoryPro}
+                          showAllMerchantPro={showAllMerchantPro}
+                          filterData={filterData}
+                        ></DealsAndPromotions> : <></>}
+                    </>
+                  )}</>
+                )}</>
+              )}</>
+
+
 
 
             <>
