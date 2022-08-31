@@ -45,14 +45,14 @@ export default function ActionAreaCard({
   let displayDesc =
     styledCard?.flexDirection == "row"
       ? {
-          display: "flex",
-          flexDirection: "column",
-          // alignItems: "center",
-          m: 1,
+        display: "flex",
+        flexDirection: "column",
+        // alignItems: "center",
+        m: 1,
 
-          // justifyContent: "space-between",
-          // justifyContent: "space-arounf",
-        }
+        // justifyContent: "space-between",
+        // justifyContent: "space-arounf",
+      }
       : { height: 85 };
   let width = styledCard?.flexDirection == "row" ? "100%" : 212;
   let height = styledCard?.flexDirection == "row" ? "100%" : 285;
@@ -87,8 +87,63 @@ export default function ActionAreaCard({
             cursor: "pointer",
           },
         }}
-        // className={cx(styles.root)}
+      // className={cx(styles.root)}
       >
+        {product?.bundleImage && (
+          <>
+            <ImageListItem key={product.bundleImage}>
+              <CardMedia
+                // component="img"
+                data-aos="fade-up"
+                component="img"
+                // height="194"
+                onClick={(e) => viewProduct(product)}
+                image={product?.bundleImage}
+                alt={product?.bundleName}
+                sx={{
+                  top: 0,
+                  width: "100%",
+                  height: 170,
+                  objectFit: "cover",
+                  // position: "absolute",
+                  // maxHeight: { xs: 233, md: 167 },
+                  // maxWidth: { xs: 350, md: 250 },
+                }}
+              ></CardMedia>
+              {/* <Image
+              data-aos="fade-up"
+              // className={cx(styles.media, mediaStyles.root)}
+              src={product?.productImage}
+              onClick={(e) => viewProduct(product)}
+              alt={product?.productName}
+              width={245}
+              height={240}
+              loading="eager"
+              priority
+            ></Image> */}
+              {/* {product.isfreeShipping ? (
+                <ImageListItemBar
+                  sx={{ background: "none" }}
+                  position="top"
+                  actionIcon={
+                    <IconButton>
+                      <Chip
+                        sx={{ height: 20, width: 65 }}
+                        icon={<LocalShippingIcon />}
+                        label="Free"
+                        size="small"
+                        color="error"
+                      />
+                    </IconButton>
+                  }
+                  actionPosition="right"
+                />
+              ) : (
+                ""
+              )} */}
+            </ImageListItem>
+          </>
+        )}
         {product?.productImage && (
           <>
             <ImageListItem key={product.productImage}>
@@ -152,7 +207,7 @@ export default function ActionAreaCard({
             alt="shirt"
             width={245}
             height={200}
-            // loading="eager"
+          // loading="eager"
           ></Image>
         )}
 
@@ -169,7 +224,7 @@ export default function ActionAreaCard({
               // display="inline"
               noWrap
             >
-              {product?.productName}
+              {product?.productName ? product?.productName : product?.bundleName}
             </Typography>
 
             <Typography
@@ -179,7 +234,7 @@ export default function ActionAreaCard({
               sx={{ color: "warning.dark" }}
             >
               {" "}
-              RS. {product?.productCost}
+              RS. {product?.productCost ? product?.productCost : product?.bundleCost}
             </Typography>
             {product.discountPercent ? (
               <Grid

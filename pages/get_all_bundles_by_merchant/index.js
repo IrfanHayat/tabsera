@@ -8,13 +8,12 @@ import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import CarouselApp from '../../container/Carousel/Carousel';
 
-
 function Index({ data, Item }) {
 
     let [groupProduct, setGroupedProduct] = useState();
     let router = useRouter();
     let dispatch = useDispatch();
-
+    console.log(data)
     const viewProduct = (item) => {
         router.push({
             pathname: "/product_detail",
@@ -33,16 +32,15 @@ function Index({ data, Item }) {
         dispatch(addToBasket(product));
         router.push("/cart");
     };
-
-    console.log(data)
-
     useEffect(() => {
         dispatch(getCategory());
     }, []);
 
     function groupArrayOfObjects(list) {
+        console.log("----------list")
         console.log(list)
-        const grouped = _.groupBy(list, (items) => items.categoryName);
+        console.log("----------list")
+        const grouped = _.groupBy(list, (items) => items.merchantId);
         return grouped;
     }
     useEffect(() => {
@@ -90,25 +88,25 @@ function Index({ data, Item }) {
         <>
             {groupProduct ?
                 Object.keys(groupProduct).map((key, index) => (
-                    <Grid item xs={12} md={12} key={index}>
+                    <CarouselApp
+                        heading={key}
+                        product={groupProduct[key]}
+                        viewProduct={viewProduct}
+                        addToCartHandler={addToCartHandler}
+                        viewCategory={viewCategory}
+                        key={index}
+                    />
 
-                        <CarouselApp
-                            heading={key}
-                            product={groupProduct[key]}
-                            viewProduct={viewProduct}
-                            addToCartHandler={addToCartHandler}
-                            viewCategory={viewCategory}
-                        />
-                        {/* <CategoryProduct
-                            Item={Item}
-                            heading={key}
-                            product={groupProduct[key]}
-                            viewProduct={viewProduct}
-                            addToCartHandler={addToCartHandler}
-                            viewCategory={viewCategory}
-                        /> */}
+                    // <CategoryProduct
+                    //     Item={Item}
+                    //     heading={key}
+                    //     product={groupProduct[key]}
+                    //     viewProduct={viewProduct}
+                    //     addToCartHandler={addToCartHandler}
+                    //     viewCategory={viewCategory}
+                    // />
 
-                    </Grid>
+
                 )) : <></>}
         </>
     )
