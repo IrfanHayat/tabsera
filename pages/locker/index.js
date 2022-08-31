@@ -1,8 +1,9 @@
 import React from 'react'
+import Locker from '../../container/Locker'
 
 function Index() {
     return (
-        <div>I</div>
+        <div><Locker lat={33.642083} lng={73.099089}></Locker></div>
     )
 }
 
