@@ -33,6 +33,9 @@ function Index({ data, Item }) {
         dispatch(addToBasket(product));
         router.push("/cart");
     };
+
+    console.log(data)
+
     useEffect(() => {
         dispatch(getCategory());
     }, []);

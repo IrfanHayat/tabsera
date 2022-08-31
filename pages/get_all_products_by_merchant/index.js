@@ -13,7 +13,7 @@ function Index({ data, Item }) {
     let [groupProduct, setGroupedProduct] = useState();
     let router = useRouter();
     let dispatch = useDispatch();
-
+    console.log(data)
     const viewProduct = (item) => {
         router.push({
             pathname: "/product_detail",

@@ -40,7 +40,7 @@ function Index({ data, showProduct, showAllCategoryPro, showAllMerchantPro, filt
                     ""
                 )}
                 {showAllCategoryPro}
-                {showProduct && showAllCategoryPro == false && data.length > 0 ? (
+                {showProduct && showAllCategoryPro == false && data?.length > 0 ? (
                     <ViewAllProducts
                         viewProduct={viewProduct}
                         data={data && data}

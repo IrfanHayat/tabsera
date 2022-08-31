@@ -20,6 +20,7 @@ export default function ShopProductSort({ data, setFilterData, setShowFilterData
     const [open, setOpen] = useState(null);
     const [selectedValue, setSelectedValue] = useState();
 
+    console.log(data)
 
     const sortData = (type) => {
         setSelectedValue(type)
@@ -28,7 +29,7 @@ export default function ShopProductSort({ data, setFilterData, setShowFilterData
         switch (type) {
             case "price_desc":
                 {
-                    f_data = data.slice().sort(function (a, b) {
+                    f_data = data?.slice().sort(function (a, b) {
                         if (a.productCost && b.productCost) {
                             return parseFloat(b.productCost) - parseFloat(a.productCost);
                         } else {
@@ -41,7 +42,7 @@ export default function ShopProductSort({ data, setFilterData, setShowFilterData
 
                 break;
             case "price_asc":
-                f_data = data.slice().sort(function (a, b) {
+                f_data = data?.slice().sort(function (a, b) {
                     if (a.productCost && b.productCost) {
                         return parseFloat(a.productCost) - parseFloat(b.productCost);
                     } else {
@@ -51,14 +52,14 @@ export default function ShopProductSort({ data, setFilterData, setShowFilterData
                 console.log(f_data);
                 setFilterData(f_data);
             case "rating_asc":
-                f_data = data.slice().sort(function (a, b) {
+                f_data = data?.slice().sort(function (a, b) {
                     return parseFloat(b.averageRating) - parseFloat(a.averageRating);
                 });
                 console.log(f_data);
                 setFilterData(f_data);
                 break;
             case "rating_desc":
-                f_data = data.slice().sort(function (a, b) {
+                f_data = data?.slice().sort(function (a, b) {
                     return parseFloat(a.averageRating) - parseFloat(b.averageRating);
                 });
                 setFilterData(f_data);
