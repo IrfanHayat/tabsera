@@ -754,7 +754,7 @@ export default function PersistentDrawerLeft() {
               )
             }
 
-            {/* {btnKey == 2 && radioKey == 3 ? (
+            {btnKey == 2 && radioKey == 3 ? (
               <ProductGetByMerchant
                 data={filterData ? freeShippingData : freeShippingData}
                 // data={filterData ? filterData : data?.response}
@@ -767,14 +767,16 @@ export default function PersistentDrawerLeft() {
                 Item={Item}
               ></ProductGetByMerchant>
             ) : btnKey == 2 && radioKey == 1 ? (
-              <ProductGetByMerchant
-                data={filterData ? dealsData : dealsData}
-                // data={filterData ? filterData : data?.response}
-                Item={Item}
-              ></ProductGetByMerchant>
+              <DealsAndPromotions
+                data={filterData?.length > 0 ? filterData : dealsData}
+                showProduct={showProduct}
+                showAllCategoryPro={showAllCategoryPro}
+                showAllMerchantPro={showAllMerchantPro}
+                filterData={filterData}
+              ></DealsAndPromotions>
             ) : (
               ""
-            )} */}
+            )}
 
             {btnKey == 3 && radioKey == 3 ? (
               <ProductGetByCategory
@@ -789,11 +791,18 @@ export default function PersistentDrawerLeft() {
               ></ProductGetByCategory>
             ) : btnKey == 3 && radioKey == 1 ? (
               <>
-                <ProductGetByCategory
+                <DealsAndPromotions
+                  data={filterData?.length > 0 ? filterData : dealsData}
+                  showProduct={showProduct}
+                  showAllCategoryPro={showAllCategoryPro}
+                  showAllMerchantPro={showAllMerchantPro}
+                  filterData={filterData}
+                ></DealsAndPromotions>
+                {/* <ProductGetByCategory
                   // data={filterData?.length > 0 ? filterData : discountData}
                   data={filterData ? dealsData : dealsData}
                   Item={Item}
-                ></ProductGetByCategory>
+                ></ProductGetByCategory> */}
               </>
             ) : (
               ""
