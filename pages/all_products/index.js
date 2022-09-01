@@ -173,6 +173,7 @@ const Index = ({ Item, data }) => {
       /> */}
       <Grid
         container
+        margin="auto"
         // justifyContent="center"
         // alignItems="center"
         sx={{ display: "flex" }}
