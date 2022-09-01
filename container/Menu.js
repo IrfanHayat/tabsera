@@ -6,8 +6,8 @@ import Grid from "@mui/material/Grid";
 import Paper from "@mui/material/Paper";
 import Image from "next/image";
 import { useSelector, useDispatch } from "react-redux";
-import { getFreeShipping } from "../slice/freeShippingSlice";
-import { getDeals } from "../slice/dealsPromotionsSlice";
+// import { getFreeShipping } from "../slice/freeShippingSlice";
+// import { getDeals } from "../slice/dealsPromotionsSlice";
 import { useRouter } from "next/router";
 import {
   addToBasket,
@@ -35,7 +35,7 @@ import {
 import WidgetsIcon from "@mui/icons-material/Widgets";
 import IconButton from "@mui/material/IconButton";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
-import { getDiscounts } from "../slice/discountsSlice";
+// import { getDiscounts } from "../slice/discountsSlice";
 import Button from "@mui/material/Button";
 import NavSelect from "./Navbar/Components/NavSelect";
 import MenuItem from "@mui/material/MenuItem";
@@ -134,62 +134,7 @@ export default function PersistentDrawerLeft() {
   let router = useRouter();
   let dispatch = useDispatch();
 
-  const handleChange = async (event) => {
-    console.log("Handle Change");
-    console.log(event.target.value);
-    console.log("---------------------------");
-    if (event.target.value == "deals") {
-      let deals = await dispatch(getDeals());
-      console.log(deals);
-      setDealsData(deals.payload);
-      setShowProduct(false);
-      setShowDeals(true);
 
-      setShowAllCategoryPro(false);
-      setShowAllMerchantPro(false);
-      setShowDiscounts(false);
-      setShowFreeShipping(false);
-      setFilterData([]);
-    }
-    if (event.target.value == "discounts") {
-      let discounts = await dispatch(getDiscounts());
-      console.log(discounts.payload);
-      setDiscountData(discounts.payload);
-      setShowProduct(false);
-      setShowDiscounts(true);
-
-      setShowAllCategoryPro(false);
-      setShowAllMerchantPro(false);
-      setShowDeals(false);
-      setShowFreeShipping(false);
-      setFilterData([]);
-    }
-    console.log(event.target.value, showDiscounts, showProduct);
-
-    if (event.target.value == "freeShipping") {
-      let freeShipping = await dispatch(getFreeShipping());
-      console.log(freeShipping.payload);
-      setFreeShippingData(freeShipping.payload);
-      setShowProduct(true);
-      setShowDiscounts(false);
-      setShowFreeShipping(true);
-      setShowAllCategoryPro(false);
-      setShowAllMerchantPro(false);
-      setShowDeals(false);
-
-      setFilterData([]);
-    } else if (
-      event.target.value == "freeShipping" &&
-      showDiscounts &&
-      showProduct
-    ) {
-      setShowDiscounts(false);
-    }
-
-    // if (event.target.name == 'freeShipping') {
-    //   router.push('/is_free_shipping')
-    // }
-  };
 
   /////////
   const viewCategory = (item) => {
@@ -239,9 +184,9 @@ export default function PersistentDrawerLeft() {
 
   useEffect(() => {
     dispatch(getFeatureProduct());
-    dispatch(getDiscounts());
-    dispatch(getFreeShipping());
-    dispatch(getDeals());
+    // dispatch(getDiscounts());
+    // dispatch(getFreeShipping());
+    // dispatch(getDeals());
   }, []);
 
   useEffect(() => { }, [featureProduct]);
@@ -753,7 +698,17 @@ export default function PersistentDrawerLeft() {
               <Box>
                 <PageFilter
                   value={value}
-                  handleChange={handleChange}
+                  setDealsData={setDealsData}
+                  setShowDeals={setShowDeals}
+                  setDiscountData={setDiscountData}
+                  showDiscounts={showDiscounts}
+                  setShowDiscounts={setShowDiscounts}
+                  setFreeShippingData={setFreeShippingData}
+                  setShowFreeShipping={setShowFreeShipping}
+                  setShowProduct={setShowProduct}
+                  setShowAllCategoryPro={setShowAllCategoryPro}
+                  setShowAllMerchantPro={setShowAllCategoryPro}
+                  setFilterData={setFilterData}
                 ></PageFilter>
               </Box>
               <Box>
@@ -879,44 +834,44 @@ export default function PersistentDrawerLeft() {
               showAllMerchantPro == false &&
               showDeals == false &&
               showDiscounts == false &&
-              showFreeShipping == false &&
-              showFilter == false ? (
-              <ViewAllProducts
-                Item={Item}
-                data={filterData ? filterData : data?.response}
-              ></ViewAllProducts>
-            ) : (
-              <>
-                {showProduct &&
-                  showDiscounts == false &&
-                  showAllCategoryPro == false &&
-                  showAllMerchantPro == false &&
-                  showDeals == false &&
-                  showFreeShipping == false ? (
-                  <ViewAllProducts
-                    Item={Item}
-                    data={filterData ? filterData : data?.response}
-                  ></ViewAllProducts>
-                ) : (
-                  <>
-                    {showProduct &&
-                      showDiscounts == false &&
-                      showAllCategoryPro == false &&
-                      showAllMerchantPro == false &&
-                      showDeals == false &&
-                      showFreeShipping == false &&
-                      sortFilter == true ? (
-                      <ViewAllProducts
-                        Item={Item}
-                        data={filterData ? filterData : data?.response}
-                      ></ViewAllProducts>
-                    ) : (
-                      <></>
-                    )}
-                  </>
-                )}
-              </>
-            )}
+              showFreeShipping == false
+              ? (
+                <ViewAllProducts
+                  Item={Item}
+                  data={filterData ? filterData : data?.response}
+                ></ViewAllProducts>
+              ) : (
+                <>
+                  {showProduct &&
+                    showDiscounts == false &&
+                    showAllCategoryPro == false &&
+                    showAllMerchantPro == false &&
+                    showDeals == false &&
+                    showFreeShipping == false ? (
+                    <ViewAllProducts
+                      Item={Item}
+                      data={filterData ? filterData : data?.response}
+                    ></ViewAllProducts>
+                  ) : (
+                    <>
+                      {showProduct &&
+                        showDiscounts == false &&
+                        showAllCategoryPro == false &&
+                        showAllMerchantPro == false &&
+                        showDeals == false &&
+                        showFreeShipping == false &&
+                        sortFilter == true ? (
+                        <ViewAllProducts
+                          Item={Item}
+                          data={filterData ? filterData : data?.response}
+                        ></ViewAllProducts>
+                      ) : (
+                        <></>
+                      )}
+                    </>
+                  )}
+                </>
+              )}
 
             {console.log(dealsData)}
 
