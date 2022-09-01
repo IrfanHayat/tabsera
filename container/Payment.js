@@ -42,7 +42,11 @@ export default function Payment({
   return (
     <Grid container>
       <CheckoutWizard activeStep={3}></CheckoutWizard>
-      <Grid item sx={{ margin: 5 }}>
+      <Grid
+        item
+        xs={12}
+        sx={{ bgcolor: "background.paper", mt: 4, p: 1, display: "flex" }}
+      >
         <form>
           <Typography variant="h6" style={{ fontWeight: "bold" }}>
             Payment Method
@@ -54,7 +58,7 @@ export default function Payment({
                   // row
                   aria-labelledby="demo-row-radio-buttons-group-label"
                   name="row-radio-buttons-group"
-                // value={labelValue}
+                  // value={labelValue}
                 >
                   {/* <FormControlLabel
             value="female"
@@ -135,7 +139,6 @@ export default function Payment({
             {status?.message}
           </Alert>
         </Snackbar>
-
       ) : (
         <Snackbar
           open={openBar}

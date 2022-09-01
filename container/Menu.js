@@ -186,9 +186,9 @@ export default function PersistentDrawerLeft() {
       setShowDiscounts(false);
     }
 
-    // if (event.target.name == 'freeShipping') {
-    //   router.push('/is_free_shipping')
-    // }
+    if (event.target.value == "clear") {
+      // router.push("/");
+    }
   };
 
   /////////
@@ -378,8 +378,8 @@ export default function PersistentDrawerLeft() {
               sx={{
                 // m: 0.5,
                 width: {
-                  md: "20%",
-                  sm: "40%",
+                  md: "15%",
+                  sm: "30%",
                   xs: "40%",
                   // display: "flex",
                   // direction: "column",
@@ -434,6 +434,8 @@ export default function PersistentDrawerLeft() {
                         sx={{
                           ":hover": {
                             // border: 1,
+                            lineHeight: "40px",
+                            fontSize: "12px",
                             // boxShadow: 1, // theme.shadows[20]
                             transform: "scale(1.05)",
                             // opacity: 0.5,
@@ -513,8 +515,8 @@ export default function PersistentDrawerLeft() {
                 // m: 0.5,
 
                 width: {
-                  md: "80%",
-                  sm: "60%",
+                  md: "85%",
+                  sm: "70%",
                   xs: "60%",
                 },
               }}
@@ -632,7 +634,7 @@ export default function PersistentDrawerLeft() {
                                 // pl: 2,
                                 justifyContent: "space-between",
                                 p: 1,
-                                bgcolor: "background.default",
+                                // bgcolor: "background.default",
                               }}
                             >
                               <Typography

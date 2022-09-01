@@ -46,83 +46,82 @@ function ShippingMethods({
 
   return (
     <>
-      <Grid container mt={5} justifyContent={"center"}>
-        <Grid item md={12} xs={12}>
-          <Card className={classes.section}>
-            <Box sx={{ borderBottom: 1, borderColor: "divider", p: 2 }}>
-              <Typography variant="h6" style={{ fontWeight: "bold" }}>
-                Shipping Information
-              </Typography>
+      <Grid container mt={1} justifyContent={"center"}>
+        <Grid item md={12} xs={12} sx={{ bgcolor: "background.paper" }}>
+          <Box sx={{ borderBottom: 1, borderColor: "divider", p: 2 }}>
+            <Typography variant="h6" style={{ fontWeight: "bold" }}>
+              Shipping Information
+            </Typography>
 
-              {/* {productDetail?.merchant_name} */}
-              <List>
-                <ListItem>
-                  <ListItemIcon>
-                    <AccountCircleIcon />
-                    {/* {userData.first_name} {userData.last_name} */}
-                  </ListItemIcon>
+            {/* {productDetail?.merchant_name} */}
+            <List>
+              <ListItem>
+                <ListItemIcon>
+                  <AccountCircleIcon />
+                  {/* {userData.first_name} {userData.last_name} */}
+                </ListItemIcon>
+                <ListItemText>
+                  {/* <AccountCircleIcon /> */}
+                  {userData.first_name} {userData.last_name}
+                </ListItemText>
+              </ListItem>
+              {/* </List> */}
+
+              {/* <List> */}
+              <ListItem>
+                <ListItemIcon>
+                  <PhoneIcon />
+                </ListItemIcon>
+                {localStorage.getItem("mobileNumber") ? (
                   <ListItemText>
-                    {/* <AccountCircleIcon /> */}
-                    {userData.first_name} {userData.last_name}
+                    {localStorage.getItem("mobileNumber")}
                   </ListItemText>
-                </ListItem>
-                {/* </List> */}
-
-                {/* <List> */}
-                <ListItem>
-                  <ListItemIcon>
-                    <PhoneIcon />
-                  </ListItemIcon>
-                  {localStorage.getItem("mobileNumber") ? (
-                    <ListItemText>
-                      {localStorage.getItem("mobileNumber")}
-                    </ListItemText>
-                  ) : (
-                    <ListItemText>{"3215890184"}</ListItemText>
-                  )}
-                </ListItem>
-                {/* </List> */}
-                {userData.email ? (
-                  // <List>
-                  <ListItem>
-                    <ListItemIcon>
-                      <EmailIcon />
-                    </ListItemIcon>
-                    <ListItemText>{userData.email}</ListItemText>
-                  </ListItem>
                 ) : (
-                  // </List>
-                  // <List>
-                  <ListItem>
-                    <ListItemIcon>
-                      <EmailIcon />
-                    </ListItemIcon>
-                    <ListItemText>{"test@gmail.com"}</ListItemText>
-                  </ListItem>
-                  // </List>
+                  <ListItemText>{"3215890184"}</ListItemText>
                 )}
-
-                {/* <List> */}
+              </ListItem>
+              {/* </List> */}
+              {userData.email ? (
+                // <List>
                 <ListItem>
                   <ListItemIcon>
-                    <DomainAddOutlinedIcon />
+                    <EmailIcon />
                   </ListItemIcon>
-                  {console.log(shippementLockerData)}
-                  {shippementLockerData ? (
-                    <ListItemText>
-                      {shippementLockerData?.locker_address}{" "}
-                    </ListItemText>
-                  ) : (
-                    <ListItemText>
-                      {shippementData?.address_label_name}{" "}
-                      {shippementData?.address}," ",{shippementData?.city},
-                      {shippementData?.state},{shippementData?.country}
-                    </ListItemText>
-                  )}
+                  <ListItemText>{userData.email}</ListItemText>
                 </ListItem>
-                {/* </List> */}
-                {/* <List> */}
-                {/* <ListItem>
+              ) : (
+                // </List>
+                // <List>
+                <ListItem>
+                  <ListItemIcon>
+                    <EmailIcon />
+                  </ListItemIcon>
+                  <ListItemText>{"test@gmail.com"}</ListItemText>
+                </ListItem>
+                // </List>
+              )}
+
+              {/* <List> */}
+              <ListItem>
+                <ListItemIcon>
+                  <DomainAddOutlinedIcon />
+                </ListItemIcon>
+                {console.log(shippementLockerData)}
+                {shippementLockerData ? (
+                  <ListItemText>
+                    {shippementLockerData?.locker_address}{" "}
+                  </ListItemText>
+                ) : (
+                  <ListItemText>
+                    {shippementData?.address_label_name}{" "}
+                    {shippementData?.address}," ",{shippementData?.city},
+                    {shippementData?.state},{shippementData?.country}
+                  </ListItemText>
+                )}
+              </ListItem>
+              {/* </List> */}
+              {/* <List> */}
+              {/* <ListItem>
                   <ListItemIcon>
                     <AddLocationAltOutlinedIcon />
                   </ListItemIcon>
@@ -130,136 +129,131 @@ function ShippingMethods({
                     
                   </ListItemText>
                 </ListItem> */}
-              </List>
-            </Box>
-            {/* <TabPanel value={value} index={2}>
+            </List>
+          </Box>
+          {/* <TabPanel value={value} index={2}>
               {merchantDetail?.city}
             </TabPanel> */}
-          </Card>
         </Grid>
 
-        <Grid item md={12} xs={12}>
-          <Card className={classes.section}>
-            <Box sx={{ borderBottom: 1, borderColor: "divider", p: 2 }}>
-              <FormControl>
-                <Typography variant="h6" style={{ fontWeight: "bold" }}>
-                  Shipping Methods
-                </Typography>
+        <Grid item md={12} xs={12} sx={{ bgcolor: "background.paper", mt: 1 }}>
+          <Box sx={{ borderBottom: 1, borderColor: "divider", p: 2 }}>
+            <FormControl>
+              <Typography variant="h6" style={{ fontWeight: "bold" }}>
+                Shipping Methods
+              </Typography>
 
-                <List>
-                  <ListItem sx={{ display: "flex" }}>
-                    <RadioGroup
-                      // row
-                      aria-labelledby="demo-row-radio-buttons-group-label"
-                      name="row-radio-buttons-group"
-                      // value={labelValue}
-                    >
-                      {shipmentMethodData &&
-                        shipmentMethodData.map((result) => (
-                          <FormControlLabel
-                            key={result.shipping_method_id}
-                            value={result.shipping_method_id}
-                            control={
-                              <Radio onChange={() => handleChange(result)} />
-                            }
-                            label={
-                              <Box
+              <List>
+                <ListItem sx={{ display: "flex" }}>
+                  <RadioGroup
+                    // row
+                    aria-labelledby="demo-row-radio-buttons-group-label"
+                    name="row-radio-buttons-group"
+                    // value={labelValue}
+                  >
+                    {shipmentMethodData &&
+                      shipmentMethodData.map((result) => (
+                        <FormControlLabel
+                          key={result.shipping_method_id}
+                          value={result.shipping_method_id}
+                          control={
+                            <Radio onChange={() => handleChange(result)} />
+                          }
+                          label={
+                            <Box
+                              sx={{
+                                display: "flex",
+                                alignItems: "center",
+                              }}
+                            >
+                              <Image
+                                // className={cx(styles.media, mediaStyles.root)}
+                                src={result.shipping_method_icon_url}
+                                // onClick={(e) => viewCategory(product.category_id)}
+                                alt={"locker"}
+                                width={45}
+                                height={20}
+                              ></Image>
+                              <Typography
                                 sx={{
-                                  display: "flex",
-                                  alignItems: "center",
+                                  p: 1,
                                 }}
                               >
-                                <Image
-                                  // className={cx(styles.media, mediaStyles.root)}
-                                  src={result.shipping_method_icon_url}
-                                  // onClick={(e) => viewCategory(product.category_id)}
-                                  alt={"locker"}
-                                  width={45}
-                                  height={20}
-                                ></Image>
-                                <Typography
-                                  sx={{
-                                    p: 1,
-                                  }}
-                                >
-                                  {result.shipping_method_name}
-                                </Typography>
-                              </Box>
-                            }
-                            onClick={() => setRadioCheck(true)}
-                            sx={{ ml: 1 }}
-                          />
-                        ))}
-                    </RadioGroup>
-                  </ListItem>
-                </List>
-              </FormControl>
-            </Box>
-          </Card>
+                                {result.shipping_method_name}
+                              </Typography>
+                            </Box>
+                          }
+                          onClick={() => setRadioCheck(true)}
+                          sx={{ ml: 1 }}
+                        />
+                      ))}
+                  </RadioGroup>
+                </ListItem>
+              </List>
+            </FormControl>
+          </Box>
         </Grid>
 
-        <Grid item md={12} xs={12}>
-          <Card className={classes.section}>
-            <Box sx={{ borderBottom: 1, borderColor: "divider", p: 2 }}>
-              <Typography variant="h6" style={{ fontWeight: "bold" }}>
-                Shipping Charges
-              </Typography>
-              {/* <Box sx={{ display: "inline", margin: 5 }}> */}
-              <Grid container>
-                <ListItem>
-                  <Grid item xs={3}>
-                    Subtotal
-                  </Grid>
-                  <Grid item xs={3}>
-                    {productPrice &&
-                      productPrice.reduce((a, c) => a + c.qty * c.price, 0)}
-                  </Grid>
-                  <Grid item xs={6}></Grid>
-                  {/* <ListItemText>$ 0.0</ListItemText> */}
-                </ListItem>
-                <ListItem>
-                  <Grid item xs={3}>
-                    Shipping Cost
-                  </Grid>
-                  <Grid item xs={3}>
-                    {shippingCharges ? shippingCharges : 0}
-                  </Grid>
-                  <Grid item xs={6}></Grid>
-                </ListItem>
-                <ListItem>
-                  <Grid item xs={3}>
-                    Total Cost{" "}
-                  </Grid>
-                  <Grid item xs={3}>
-                    {productPrice && shippingCharges
-                      ? productPrice?.reduce((a, c) => a + c.qty * c.price, 0) +
-                        shippingCharges
-                      : productPrice?.reduce((a, c) => a + c.qty * c.price, 0)}
-                  </Grid>
-                  <Grid item xs={6}></Grid>
-                </ListItem>
-              </Grid>
-              <Stack direction="row" spacing={2}>
-                <Button
-                  onClick={checkoutHandler}
-                  variant="contained"
-                  color="primary"
-                  disabled={radioCheck ? "" : "disabled"}
-                  // startIcon={<AddIcon />}
-                >
-                  Review Order
-                </Button>
-                <Button
-                  // fullWidth
-                  variant="contained"
-                  color="error"
-                  onClick={() => router.push("/cart")}
-                >
-                  Back
-                </Button>
-              </Stack>
-            </Box>
-          </Card>
+        <Grid item md={12} xs={12} sx={{ bgcolor: "background.paper", mt: 1 }}>
+          <Box sx={{ borderBottom: 1, borderColor: "divider", p: 2 }}>
+            <Typography variant="h6" style={{ fontWeight: "bold" }}>
+              Shipping Charges
+            </Typography>
+            {/* <Box sx={{ display: "inline", margin: 5 }}> */}
+            <Grid container>
+              <ListItem>
+                <Grid item xs={3}>
+                  Subtotal
+                </Grid>
+                <Grid item xs={3}>
+                  {productPrice &&
+                    productPrice.reduce((a, c) => a + c.qty * c.price, 0)}
+                </Grid>
+                <Grid item xs={6}></Grid>
+                {/* <ListItemText>$ 0.0</ListItemText> */}
+              </ListItem>
+              <ListItem>
+                <Grid item xs={3}>
+                  Shipping Cost
+                </Grid>
+                <Grid item xs={3}>
+                  {shippingCharges ? shippingCharges : 0}
+                </Grid>
+                <Grid item xs={6}></Grid>
+              </ListItem>
+              <ListItem>
+                <Grid item xs={3}>
+                  Total Cost{" "}
+                </Grid>
+                <Grid item xs={3}>
+                  {productPrice && shippingCharges
+                    ? productPrice?.reduce((a, c) => a + c.qty * c.price, 0) +
+                      shippingCharges
+                    : productPrice?.reduce((a, c) => a + c.qty * c.price, 0)}
+                </Grid>
+                <Grid item xs={6}></Grid>
+              </ListItem>
+            </Grid>
+            <Stack direction="row" spacing={2}>
+              <Button
+                onClick={checkoutHandler}
+                variant="contained"
+                color="primary"
+                disabled={radioCheck ? "" : "disabled"}
+                // startIcon={<AddIcon />}
+              >
+                Review Order
+              </Button>
+              <Button
+                // fullWidth
+                variant="contained"
+                color="error"
+                onClick={() => router.push("/cart")}
+              >
+                Back
+              </Button>
+            </Stack>
+          </Box>
         </Grid>
       </Grid>
     </>

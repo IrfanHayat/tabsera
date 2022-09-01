@@ -12,12 +12,13 @@ import KeyboardDoubleArrowLeftIcon from "@mui/icons-material/KeyboardDoubleArrow
 
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-// const breakPoints = [
-//   { width: 1, itemsToShow: 1 },
-//   { width: 550, itemsToShow: 2 },
-//   { width: 768, itemsToShow: 5 },
-//   { width: 1200, itemsToShow: 5 },
-// ];
+const breakPoints = [
+  { width: 1, itemsToShow: 1 },
+  { width: 400, itemsToShow: 2 },
+  { width: 550, itemsToShow: 3 },
+  { width: 768, itemsToShow: 6 },
+  { width: 1200, itemsToShow: 6 },
+];
 
 export default function CarouselApp({
   product,
@@ -94,7 +95,7 @@ export default function CarouselApp({
             // my: 2,
           }}
         >
-          <Button
+          {/* <Button
             // dir="rtl"
             variant="text"
             href="/all_products"
@@ -106,12 +107,12 @@ export default function CarouselApp({
             // endIcon={<DoubleArrowIcon />}
           >
             View All {">>"}
-          </Button>
+          </Button> */}
         </Box>
       </Box>
 
       <Carousel
-        //breakPoints={breakPoints}
+        breakPoints={breakPoints}
         // disableArrowsOnEnd={false}
         // showArrows={false}
         pagination={false}
@@ -123,12 +124,13 @@ export default function CarouselApp({
         // enableMouseSwipe={true}
         // enableAutoPlay={true}
         // autoPlaySpeed={3000}
-        itemsToShow={4}
+        // itemsToShow={4}
       >
         {/* <div className="slider__conatiner"> */}
         {/* <Slider {...settings}> */}
         {product?.map((item, index) => (
           <ActionAreaCard
+            sx={{ width: "400px" }}
             key={index}
             product={item}
             viewProduct={viewProduct}

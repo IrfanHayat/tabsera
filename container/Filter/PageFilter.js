@@ -35,6 +35,13 @@ function PageFilter({ value, handleChange }) {
             label="freeShipping"
           />
         </motion.div>
+        <motion.div className="animatable" whileTap={{ scale: 0.9 }}>
+          <FormControlLabel
+            value="clear"
+            control={<Radio onChange={(e) => handleChange(e)} />}
+            label="Clear All Filterss"
+          />
+        </motion.div>
       </RadioGroup>
     </FormControl>
   );

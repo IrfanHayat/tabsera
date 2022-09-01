@@ -76,7 +76,7 @@ function ShippingInformation({
   // }, [buttonKey]);
   return (
     <>
-      <Grid container mt={5} sx={{ bgcolor: "background.paper" }}>
+      <Grid container mt={5} sx={{ bgcolor: "background.paper", pl: 1 }}>
         {/* <Grid item md={2}></Grid> */}
         <Grid
           md={12}
