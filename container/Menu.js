@@ -66,7 +66,7 @@ import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import CardMedia from "@mui/material/CardMedia";
 import Rating from "@mui/material/Rating";
-const Item = styled(Paper)(({ theme }) => ({
+const Item = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
   padding: theme.spacing(1),
@@ -376,7 +376,7 @@ export default function PersistentDrawerLeft() {
           >
             <Item
               sx={{
-                m: 0.5,
+                // m: 0.5,
                 width: {
                   md: "20%",
                   sm: "40%",
@@ -448,13 +448,13 @@ export default function PersistentDrawerLeft() {
                           />
                         }
                       >
-                        <ListItemIcon>
+                        {/* <ListItemIcon>
                           <Image
                             src={result.category_image}
                             width={50}
                             height={30}
                           ></Image>
-                        </ListItemIcon>
+                        </ListItemIcon> */}
                         <ListItemText
                           onClick={(e) => viewCategory(result.category_id)}
                         >
@@ -488,13 +488,13 @@ export default function PersistentDrawerLeft() {
                         }
                       >
                         {/* <ListItemButton> */}
-                        <ListItemIcon>
+                        {/* <ListItemIcon>
                           <Image
                             src={result.imageURL}
                             width={50}
                             height={30}
                           ></Image>
-                        </ListItemIcon>
+                        </ListItemIcon> */}
                         <ListItemText>{result.campaignName}</ListItemText>
                         {/* </ListItemButton> */}
                         {/* <Divider /> */}
@@ -510,7 +510,7 @@ export default function PersistentDrawerLeft() {
 
             <Item
               sx={{
-                m: 0.5,
+                // m: 0.5,
 
                 width: {
                   md: "80%",
@@ -733,7 +733,7 @@ export default function PersistentDrawerLeft() {
                 display: "flex",
                 flexDirection: "row",
                 bgcolor: "background.paper",
-                m: 0.5,
+                my: 0.5,
                 p: 1,
                 justifyContent: "space-between",
                 alignItems: "center",
@@ -917,9 +917,7 @@ export default function PersistentDrawerLeft() {
                 )}
               </>
             )}
-
             {console.log(dealsData)}
-
             <>
               {showProduct &&
               showAllCategoryPro == false &&
@@ -984,7 +982,6 @@ export default function PersistentDrawerLeft() {
                 </>
               )}
             </>
-
             <>
               {showProduct &&
               showAllCategoryPro == false &&
@@ -1049,7 +1046,6 @@ export default function PersistentDrawerLeft() {
                 </>
               )}
             </>
-
             <>
               {showProduct &&
               showDiscounts == false &&
@@ -1118,7 +1114,6 @@ export default function PersistentDrawerLeft() {
                 </>
               )}
             </>
-
             {/* <Grid sx={{ display: "flex", flexDirection: "column" }}> */}
             {showAllCategoryPro &&
             showDiscounts == false &&
@@ -1133,9 +1128,7 @@ export default function PersistentDrawerLeft() {
             ) : (
               <></>
             )}
-
             {/* {console.log(filterData)} */}
-
             {showAllMerchantPro && showFilter == false ? (
               <>
                 <ProductGetByMerchant

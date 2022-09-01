@@ -6,19 +6,20 @@ function pxToRem(value) {
 
 function responsiveFontSizes({ sm, md, lg }) {
   return {
-    '@media (min-width:600px)': {
+    "@media (min-width:600px)": {
       fontSize: pxToRem(sm),
     },
-    '@media (min-width:900px)': {
+    "@media (min-width:900px)": {
       fontSize: pxToRem(md),
     },
-    '@media (min-width:1200px)': {
+    "@media (min-width:1200px)": {
       fontSize: pxToRem(lg),
     },
   };
 }
 
-const FONT_PRIMARY = 'Public Sans, sans-serif';
+const FONT_PRIMARY =
+  "Roboto-Regular,'Helvetica Neue',Helvetica,Tahoma,Arial,Sans-serif";
 
 const typography = {
   fontFamily: FONT_PRIMARY,
@@ -56,15 +57,16 @@ const typography = {
     ...responsiveFontSizes({ sm: 19, md: 20, lg: 20 }),
   },
   h6: {
-    fontWeight: 700,
+    fontWeight: 500,
+    textTransform: "capitalize",
     lineHeight: 28 / 18,
-    fontSize: pxToRem(17),
+    fontSize: pxToRem(16),
     ...responsiveFontSizes({ sm: 18, md: 18, lg: 18 }),
   },
   subtitle1: {
-    fontWeight: 600,
+    fontWeight: 500,
     lineHeight: 1.5,
-    fontSize: pxToRem(16),
+    fontSize: "18px",
   },
   subtitle2: {
     fontWeight: 600,
@@ -72,8 +74,9 @@ const typography = {
     fontSize: pxToRem(14),
   },
   body1: {
+    textTransform: "capitalize",
     lineHeight: 1.5,
-    fontSize: pxToRem(16),
+    fontSize: "14px",
   },
   body2: {
     lineHeight: 22 / 14,
@@ -88,13 +91,13 @@ const typography = {
     lineHeight: 1.5,
     fontSize: pxToRem(12),
     letterSpacing: 1.1,
-    textTransform: 'uppercase',
+    textTransform: "uppercase",
   },
   button: {
     fontWeight: 700,
     lineHeight: 24 / 14,
     fontSize: pxToRem(14),
-    textTransform: 'capitalize',
+    textTransform: "capitalize",
   },
 };
 

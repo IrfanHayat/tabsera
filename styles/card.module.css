@@ -1,41 +1,112 @@
 .box {
   width: 100%;
 }
-
-.column {
-  /* background-color: blue; */
-  margin: 1;
-  width: 18.5%;
+.card {
+  margin-right: 12px;
+  margin-bottom: 14px;
+  display: display;
+  box-shadow: 0;
+  border-radius: 0;
+  background-color: "background.paper";
 }
 
-/* Clear floats after the columns */
+.card:hover {
+  border: 1;
+  border-color: #9e9e9e;
+  box-shadow: 1;
+  box-shadow: 1px;
+  transform: scale(1.03);
+}
+
+.cargImg {
+  top: 0;
+  width: 100%;
+  height: 188px;
+  object-fit: cover;
+}
+.cardContent {
+  margin: 4px, 9px, 0;
+  display: block;
+  padding-left: 3px;
+  /* component:"div"; */
+}
+.prodName {
+  height: 36px;
+  line-height: 18px;
+}
+
+.prodCost {
+  height: 22px;
+  display: block;
+  margin-top: 4px;
+  color: #f57224;
+}
+
+.prodDiscountCost {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 4px;
+  height: 10px;
+  color: #9e9e9e;
+}
+
+.prodRating {
+  display: block;
+  margin-top: 8px;
+  height: 14px;
+  clear: both;
+}
+
+.btnBox {
+  display: block;
+  width: 100%;
+  position: absolute;
+  bottom: 9px;
+  text-align: center;
+}
+
+.btnAddCart {
+  border: 1px solid #f57224;
+  color: #f57224;
+  border-radius: 2px;
+  height: 28px;
+  margin: 0 auto;
+  font-size: 12px;
+  padding: 0 12;
+  background-color: #fff;
+  text-align: center;
+}
+/* 
+.card {
+  margin: 1;
+  width: 18%;
+}
+
 .row:after {
   content: "";
   display: table;
   clear: both;
 }
 
-/* On screens that are 992px wide or less, go from four columns to two columns */
 @media screen and (max-width: 1024px) {
-  .column {
+  .card {
     width: 23%;
   }
 }
 @media screen and (max-width: 992px) {
-  .column {
+  .card {
     width: 31%;
   }
 }
 
-/* On screens that are 600px wide or less, make the columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 600px) {
-  .column {
+  .card {
     width: 45%;
   }
 }
 
 @media screen and (max-width: 300px) {
-  .column {
+  .card {
     width: 100%;
   }
-}
+} */

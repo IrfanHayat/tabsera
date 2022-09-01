@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import "../styles/globals.css";
 import { SessionProvider } from "next-auth/react";
 import { jssPreset, StylesProvider } from "@mui/styles";
-import { CssBaseline } from '@mui/material';
+import { CssBaseline } from "@mui/material";
 // import { ThemeProvider as MUIThemeProvider } from '@mui/material/styles';
 import Head from "next/head";
 import ThemeProvider from "../Theme/theme";
@@ -35,20 +35,20 @@ const MyApp = ({ Component, pageProps }) => {
 
     <Provider store={store}>
       <StylesProvider jss={jss}>
-        <ThemeProvider >
+        <ThemeProvider>
           {/* <CookiesProvider> */}
           <Head>
             <link rel="icon" href="/favicon.png" />
           </Head>
           <NavBar />
 
-          {/* <Container maxWidth="xl" sx={{ minHeight: "80vh" }}> */}
-          <Box sx={{ minHeight: "80vh" }}>
-            {/* <RouteGuard> */}
-            <Component {...pageProps} />
-            {/* </RouteGuard> */}
-          </Box>
-          {/* </Container> */}
+          <Container maxWidth="xl" sx={{ minHeight: "80vh" }}>
+            <Box sx={{ minHeight: "80vh" }}>
+              {/* <RouteGuard> */}
+              <Component {...pageProps} />
+              {/* </RouteGuard> */}
+            </Box>
+          </Container>
           <Footer />
           {/* </CookiesProvider> */}
         </ThemeProvider>

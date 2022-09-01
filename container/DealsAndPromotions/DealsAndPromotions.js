@@ -19,6 +19,7 @@ import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 import IconButton from "@mui/material/IconButton";
 import LoyaltyIcon from "@mui/icons-material/Loyalty";
+import styles from "../../styles/card.module.css";
 const DealsAndPromotions = ({ dealsData, viewProduct }) => {
   console.log("Data Deals New", dealsData);
   return (
@@ -26,54 +27,24 @@ const DealsAndPromotions = ({ dealsData, viewProduct }) => {
       {/* <ActionAreaCard /> */}
       {dealsData.map((result) => (
         <Card
+          className={styles.card}
           sx={{
-            m: 0.7,
-            // display: "flex",
-            // mx: 0.4,
-            // my: 2,
-            // marginTop: 1,
-            // marginBottom: 1,
-            boxShadow: 0,
-            borderRadius: 0,
-            // border: 1,
-            // borderColor: "#9E9E9E ",
-            bgcolor: "background.paper",
-            padding: 0.5,
-            width: 212,
+            width: "188px",
             // maxWidth: 280,
-            height: 285,
-            ":hover": {
-              border: 1,
-              borderColor: "#9E9E9E ",
-              boxShadow: 1, // theme.shadows[20]
-              transform: "scale(1)",
-              // opacity: 0.5,
-
-              cursor: "pointer",
-            },
+            height: "345px",
           }}
-        // className={cx(styles.root)}
+          // className={cx(styles.root)}
         >
           {result?.bundleImage && (
             <>
               <ImageListItem key={result.bundleImage}>
                 <CardMedia
-                  // component="img"
                   data-aos="fade-up"
                   component="img"
-                  // height="194"
+                  className={styles.cargImg}
                   onClick={(e) => viewProduct(result)}
                   image={result?.bundleImage}
                   alt={result?.bundleName}
-                  sx={{
-                    top: 0,
-                    width: "100%",
-                    height: 170,
-                    objectFit: "cover",
-                    // position: "absolute",
-                    // maxHeight: { xs: 233, md: 167 },
-                    // maxWidth: { xs: 350, md: 250 },
-                  }}
                 ></CardMedia>
                 {result?.bundleImage ? (
                   <ImageListItemBar
@@ -141,44 +112,36 @@ const DealsAndPromotions = ({ dealsData, viewProduct }) => {
             ></Image>
           )} */}
 
-          <Box sx={{ mx: 1 }}>
+          <Box className={styles.cardContent} component="div">
             {/* <Typography variant="h5">{result?.categoryName}</Typography> */}
             {/* {result?.category_name && (
               <Typography variant="body">{result?.category_name}</Typography>
             )} */}
             {/* <Box sx={{ height: 85 }}>  */}
-            <Typography
-              fontSize="0.9rem"
-              variant="h5"
-              fontWeight={600}
-              // display="inline"
-              noWrap
-            >
-              {result?.bundleName}
-            </Typography>
+            <Box component="div" className={styles.prodName}>
+              <Typography variant="body1">{result?.bundleName}</Typography>
+            </Box>
+            <Box component="div" className={styles.prodCost}>
+              <Typography variant="subtitle1">
+                Rs.{result?.bundleCost}
+              </Typography>
+            </Box>
 
-            <Typography
-              fontSize="1rem"
-              variant="h5"
-              fontWeight={600}
-              sx={{ color: "warning.dark" }}
-            >
-              {" "}
-              RS. {result?.bundleCost}
-            </Typography>
             {result.discountPercent ? (
-              <>
+              <Grid className={styles.prodDiscountCost}>
                 <Typography
-                  fontSize="0.7rem"
+                  variant="overline"
+                  component="div"
+                  display="inline"
                   style={{ textDecorationLine: "line-through" }}
                 >
                   Rs {result.originalPrice}
                 </Typography>
                 {"   "}
-                <Typography fontSize="0.7rem">
-                  - {result.discountPercent} %
+                <Typography variant="overline">
+                  -{result.discountPercent}%
                 </Typography>
-              </>
+              </Grid>
             ) : (
               <></>
             )}
@@ -194,7 +157,7 @@ const DealsAndPromotions = ({ dealsData, viewProduct }) => {
             }}
           > */}
             {/* <Grid md={3}> */}
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Box component="div" className={styles.prodRating}>
               <Rating
                 name="size-small"
                 defaultValue={result?.averageRating}
@@ -203,21 +166,17 @@ const DealsAndPromotions = ({ dealsData, viewProduct }) => {
                 readOnly
               />
               {/* </Grid> */}
-              {/* </Box> */}
+            </Box>
+            <Box className={styles.btnBox}>
               {result.bundleName ? (
                 <Button
-                  variant="contained"
-                  sx={{
-                    background:
-                      "linear-gradient(90deg, #020024 0%, #090979 35%, #00d4ff 100%)",
-                  }}
-                  size="small"
+                  className={styles.btnAddCart}
+                  variant="outlined"
                   key={result.id}
                   onClick={() => addToCartHandler(result)}
-                  endIcon={<AddShoppingCartOutlinedIcon fontSize="small" />}
+                  // endIcon={<AddShoppingCartOutlinedIcon fontSize="small" />}
                 >
-                  {" "}
-                  {/* Add To Cart */}
+                  Add To Cart
                 </Button>
               ) : (
                 ""

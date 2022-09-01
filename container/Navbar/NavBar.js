@@ -39,6 +39,7 @@ import FormControl from "@mui/material/FormControl";
 import TextField from "@mui/material/TextField";
 import Cookies from "js-cookie";
 import LogoutIcon from "@mui/icons-material/Logout";
+import { Container } from "@mui/system";
 // import { logOutCustomer } from "../../slice/authSlice";
 const NavLink = styled("a")(() => ({
   wrap: "noWrap",
@@ -295,8 +296,6 @@ export default function NavBar() {
       <CssBaseline />
       {currentHost != "137.74.4.23" && header != true ? (
         <>
-          {/* <TopNav /> */}
-
           <AppBar
             style={{ height: "80px" }}
             sx={{
@@ -310,59 +309,60 @@ export default function NavBar() {
             }}
             position="static"
           >
-            <Toolbar sx={{ flexWrap: "wrap" }}>
-              <Link
-                sx={{
-                  ":hover": {
-                    // boxShadow: 20, // theme.shadows[20]
-                    // transform: "scale(1.1)",
-                    // color: "yellow",
-                    // transformOrigin: "bottomleft",
-                    // opacity: 0.5,
-                    cursor: "pointer",
-                  },
-                }}
-              >
-                <Image
-                  src="/logo.png"
-                  height={45}
-                  width={100}
-                  // onMouseOver={cu}
+            <Container maxWidth="xl">
+              <Toolbar sx={{ flexWrap: "wrap" }}>
+                <Link
+                  sx={{
+                    ":hover": {
+                      // boxShadow: 20, // theme.shadows[20]
+                      // transform: "scale(1.1)",
+                      // color: "yellow",
+                      // transformOrigin: "bottomleft",
+                      // opacity: 0.5,
+                      cursor: "pointer",
+                    },
+                  }}
+                >
+                  <Image
+                    src="/logo.png"
+                    height={45}
+                    width={100}
+                    // onMouseOver={cu}
 
+                    onClick={() => router.push("/")}
+                  ></Image>
+                </Link>
+                <NavLink
+                  sx={{ color: "white", ml: 3 }}
                   onClick={() => router.push("/")}
-                ></Image>
-              </Link>
-              <NavLink
-                sx={{ color: "white", ml: 3 }}
-                onClick={() => router.push("/")}
-              >
-                Home
-              </NavLink>
-              <NavLink
-                sx={{ color: "white", ml: 3 }}
-                onClick={() => router.push("/about")}
-              >
-                {t("About Us")}
-              </NavLink>
-              {/* <NavLink
+                >
+                  Home
+                </NavLink>
+                <NavLink
+                  sx={{ color: "white", ml: 3 }}
+                  onClick={() => router.push("/about")}
+                >
+                  {t("About Us")}
+                </NavLink>
+                {/* <NavLink
                 sx={{ color: "white", ml: 3 }}
                 onClick={() => router.push("/about")}
               >
                 {t("About Us")}
               </NavLink> */}
 
-              <Box component="div" sx={{ flexGrow: 1 }} />
-              <Box
-                sx={{
-                  display: {
-                    xs: "none",
-                    md: "block",
-                    justifyContent: "center",
-                    flexWrap: "wrap",
-                  },
-                }}
-              >
-                {/* <NavLink
+                <Box component="div" sx={{ flexGrow: 1 }} />
+                <Box
+                  sx={{
+                    display: {
+                      xs: "none",
+                      md: "block",
+                      justifyContent: "center",
+                      flexWrap: "wrap",
+                    },
+                  }}
+                >
+                  {/* <NavLink
                   variant="button"
                   color="text.primary"
                   href="/contact_us"
@@ -378,7 +378,7 @@ export default function NavBar() {
                 >
                   {t("About Us")}
                 </NavLink> */}
-                {/* <FormControl sx={{ minWidth: 80, color: "black" }}>
+                  {/* <FormControl sx={{ minWidth: 80, color: "black" }}>
                   <TextField
                     select
                     // value={age}
@@ -394,35 +394,44 @@ export default function NavBar() {
                     {myAccount}
                   </TextField>
                 </FormControl> */}
-                {/* <NavSelect Title="Account" Data={myAccount} color="white" /> */}
-                <NavSelect Title="Currency" Data={currencyData} color="white" />
-                <NavSelect Title="Language" Data={languageData} color="white" />
-              </Box>
-              {/* <Button href="#" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
+                  {/* <NavSelect Title="Account" Data={myAccount} color="white" /> */}
+                  <NavSelect
+                    Title="Currency"
+                    Data={currencyData}
+                    color="white"
+                  />
+                  <NavSelect
+                    Title="Language"
+                    Data={languageData}
+                    color="white"
+                  />
+                </Box>
+                {/* <Button href="#" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
                 Login
               </Button> */}
-              <SignInModal
-                isLoggedIn={isLoggedIn}
-                setIsLoggedIn={setIsLoggedIn}
-                show={showLogin}
-                logOut={logOut}
-                close={() => setShowLogin(false)}
-              />
-              {/* </Toolbar> */}
+                <SignInModal
+                  isLoggedIn={isLoggedIn}
+                  setIsLoggedIn={setIsLoggedIn}
+                  show={showLogin}
+                  logOut={logOut}
+                  close={() => setShowLogin(false)}
+                />
+                {/* </Toolbar> */}
 
-              <Box sx={{ display: { xs: "flex", md: "none" } }}>
-                <IconButton
-                  size="large"
-                  aria-label="show more"
-                  aria-controls={mobileMenuId}
-                  aria-haspopup="true"
-                  onClick={handleMobileMenuOpen}
-                  color="inherit"
-                >
-                  <MoreIcon />
-                </IconButton>
-              </Box>
-            </Toolbar>
+                <Box sx={{ display: { xs: "flex", md: "none" } }}>
+                  <IconButton
+                    size="large"
+                    aria-label="show more"
+                    aria-controls={mobileMenuId}
+                    aria-haspopup="true"
+                    onClick={handleMobileMenuOpen}
+                    color="inherit"
+                  >
+                    <MoreIcon />
+                  </IconButton>
+                </Box>
+              </Toolbar>
+            </Container>
           </AppBar>
           {renderMobileMenu}
           {renderMenu}

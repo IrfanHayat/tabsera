@@ -45,70 +45,39 @@ export default function ActionAreaCard({
   let displayDesc =
     styledCard?.flexDirection == "row"
       ? {
-        display: "flex",
-        flexDirection: "column",
-        // alignItems: "center",
-        m: 1,
+          display: "flex",
+          flexDirection: "column",
+          // alignItems: "center",
+          m: 1,
 
-        // justifyContent: "space-between",
-        // justifyContent: "space-arounf",
-      }
+          // justifyContent: "space-between",
+          // justifyContent: "space-arounf",
+        }
       : { height: 85 };
-  let width = styledCard?.flexDirection == "row" ? "100%" : 212;
-  let height = styledCard?.flexDirection == "row" ? "100%" : 285;
+  let width = styledCard?.flexDirection == "row" ? "100%" : "188px";
+  let height = styledCard?.flexDirection == "row" ? "100%" : "345px";
 
   return (
     <>
       <Card
-        //className={styledCard?.flexDirection == "row" ? "" : styles.column}
+        // className={styledCard?.flexDirection == "row" ? "" : styles.column}
+        className={styles.card}
         sx={{
-          m: 0.7,
           display: display,
-          // mx: 0.4,
-          // my: 2,
-          // marginTop: 1,
-          // marginBottom: 1,
-          boxShadow: 0,
-          borderRadius: 0,
-          // border: 1,
-          // borderColor: "#9E9E9E ",
-          bgcolor: "background.paper",
-          padding: 0.5,
           width: width,
-          // maxWidth: 280,
           height: height,
-          ":hover": {
-            border: 1,
-            borderColor: "#9E9E9E ",
-            boxShadow: 1, // theme.shadows[20]
-            transform: "scale(1)",
-            // opacity: 0.5,
-
-            cursor: "pointer",
-          },
         }}
-      // className={cx(styles.root)}
       >
         {product?.bundleImage && (
           <>
             <ImageListItem key={product.bundleImage}>
               <CardMedia
-                // component="img"
                 data-aos="fade-up"
                 component="img"
-                // height="194"
+                className={styles.cargImg}
                 onClick={(e) => viewProduct(product)}
                 image={product?.bundleImage}
                 alt={product?.bundleName}
-                sx={{
-                  top: 0,
-                  width: "100%",
-                  height: 170,
-                  objectFit: "cover",
-                  // position: "absolute",
-                  // maxHeight: { xs: 233, md: 167 },
-                  // maxWidth: { xs: 350, md: 250 },
-                }}
               ></CardMedia>
               {/* <Image
               data-aos="fade-up"
@@ -148,22 +117,12 @@ export default function ActionAreaCard({
           <>
             <ImageListItem key={product.productImage}>
               <CardMedia
-                // component="img"
                 data-aos="fade-up"
                 component="img"
-                // height="194"
                 onClick={(e) => viewProduct(product)}
                 image={product?.productImage}
                 alt={product?.productName}
-                sx={{
-                  top: 0,
-                  width: "100%",
-                  height: 170,
-                  objectFit: "cover",
-                  // position: "absolute",
-                  // maxHeight: { xs: 233, md: 167 },
-                  // maxWidth: { xs: 350, md: 250 },
-                }}
+                className={styles.cargImg}
               ></CardMedia>
               {/* <Image
               data-aos="fade-up"
@@ -207,47 +166,37 @@ export default function ActionAreaCard({
             alt="shirt"
             width={245}
             height={200}
-          // loading="eager"
+            // loading="eager"
           ></Image>
         )}
 
-        <Box sx={{ mx: 1 }}>
+        <Box className={styles.cardContent} component="div">
           {/* <Typography variant="h5">{product?.categoryName}</Typography> */}
           <Box sx={{ ...displayDesc }}>
             {product?.category_name && (
-              <Typography variant="body">{product?.category_name}</Typography>
+              <Typography variant="body1">{product?.category_name}</Typography>
             )}
-            <Typography
-              fontSize="0.9rem"
-              variant="h5"
-              fontWeight={600}
-              // display="inline"
-              noWrap
-            >
-              {product?.productName ? product?.productName : product?.bundleName}
-            </Typography>
-
-            <Typography
-              fontSize="1rem"
-              variant="h5"
-              fontWeight={600}
-              sx={{ color: "warning.dark" }}
-            >
-              {" "}
-              RS. {product?.productCost ? product?.productCost : product?.bundleCost}
-            </Typography>
+            <Box component="div" className={styles.prodName}>
+              <Typography variant="body1">
+                {product?.productName
+                  ? product?.productName
+                  : product?.bundleName}
+              </Typography>
+            </Box>
+            <Box component="div" className={styles.prodCost}>
+              <Typography variant="subtitle1">
+                Rs.
+                {product?.productCost
+                  ? product?.productCost
+                  : product?.bundleCost}
+              </Typography>
+            </Box>
             {product.discountPercent ? (
-              <Grid
-                sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
-                  my: -1,
-                }}
-              >
+              <Grid className={styles.prodDiscountCost}>
                 <Typography
-                  fontSize="0.7rem"
-                  gutterBottom
-                  style={{ textDecorationLine: "line-through" }}
+                  style={{
+                    textDecorationLine: "line-through",
+                  }}
                   variant="overline"
                   component="div"
                   display="inline"
@@ -255,38 +204,28 @@ export default function ActionAreaCard({
                   Rs {product.originalPrice}
                 </Typography>
                 {"   "}
-                {/* <Typography gutterBottom variant="overline">
-              {product.discountPercent} %
-            </Typography> */}
+                <Typography variant="overline">
+                  -{product.discountPercent}%
+                </Typography>
                 {/* <Badge
               badgeContent={`-${product.discountPercent}%`}
               color="primary"
               noWrap
             ></Badge> */}
-                <Chip
+                {/* <Chip
                   // sx={{ color: "yellow" }}
                   // icon={<LocalShippingIcon />}
                   label={`-${product.discountPercent}%`}
                   // size="small"
                   // color="warning"
                   sx={{ bgcolor: "yellow", height: 15, width: 55 }}
-                />
+                /> */}
               </Grid>
             ) : (
               <></>
             )}
-            {/* <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            // p: 1,
-            // m: 1,
-            alignContent: "center",
-            bgcolor: "background.paper",
-            borderRadius: 1,
-          }}
-        > */}
-            <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+
+            <Box component="div" className={styles.prodRating}>
               <Rating
                 name="size-small"
                 defaultValue={product?.averageRating}
@@ -294,20 +233,17 @@ export default function ActionAreaCard({
                 // fontSize={24}
                 readOnly
               />
+            </Box>
+            <Box className={styles.btnBox}>
               {product.productName ? (
                 <Button
-                  variant="contained"
-                  sx={{
-                    background:
-                      "linear-gradient(90deg, #020024 0%, #090979 35%, #00d4ff 100%)",
-                  }}
-                  size="small"
+                  className={styles.btnAddCart}
+                  variant="outlined"
                   key={product.id}
                   onClick={() => addToCartHandler(product)}
-                  endIcon={<AddShoppingCartOutlinedIcon fontSize="small" />}
+                  // endIcon={<AddShoppingCartOutlinedIcon fontSize="small" />}
                 >
-                  {" "}
-                  {/* Add To Cart */}
+                  Add To Cart
                 </Button>
               ) : (
                 ""
