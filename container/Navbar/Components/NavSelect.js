@@ -86,7 +86,7 @@ export default function NavSelect({ Title, Data, clr, startIcon, color }) {
         PaperProps={{
           // elevation: 0,
           sx: {
-            overflow: "visible",
+            // overflow: "visible",
 
             // width: 202,
             // filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",

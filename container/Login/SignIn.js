@@ -22,7 +22,7 @@ import GppGoodOutlinedIcon from "@mui/icons-material/GppGoodOutlined";
 import HelpOutlineOutlinedIcon from "@mui/icons-material/HelpOutlineOutlined";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
-
+import Menu from "@mui/material/Menu";
 import { loginUser, logoutUser, logOutCustomer } from "../../slice/authSlice";
 import Cookies from "js-cookie";
 import LogoutIcon from "@mui/icons-material/Logout";
@@ -35,7 +35,14 @@ export default function SignIn({ isLoggedIn, setIsLoggedIn }) {
   let router = useRouter();
   const [open, setOpen] = React.useState(false);
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+  const [anchorEl, setAnchorEl] = React.useState(null);
+  const open1 = Boolean(anchorEl);
+  const handleClick1 = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose1 = () => {
+    setAnchorEl(null);
+  };
   console.log(isLoggedIn);
 
   const handleModalOpen = () => {
@@ -136,12 +143,33 @@ export default function SignIn({ isLoggedIn, setIsLoggedIn }) {
     <>
       {localStorage.getItem("login") == "true" ? (
         <>
-          <NavSelect
-            Title={<Avatar sx={{ bgcolor: "green" }}>O</Avatar>}
+          {/* <NavSelect
+            // Title={<Avatar sx={{ bgcolor: "green" }}>O</Avatar>}
+            Title="My Account"
             Data={myAccount}
             color="white"
-          />
-
+          /> */}
+          <Button
+            sx={{ color: "white" }}
+            id="basic-button"
+            aria-controls={open1 ? "basic-menu" : undefined}
+            aria-haspopup="true"
+            aria-expanded={open1 ? "true" : undefined}
+            onClick={handleClick1}
+          >
+            My Account
+          </Button>
+          <Menu
+            id="basic-menu"
+            anchorEl={anchorEl}
+            open={open1}
+            onClose={handleClose1}
+            MenuListProps={{
+              "aria-labelledby": "basic-button",
+            }}
+          >
+            {myAccount}
+          </Menu>
           {/* <Button onClick={logOut} sx={{ color: "white" }}>
             Logout
           </Button> */}
