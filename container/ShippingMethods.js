@@ -205,31 +205,40 @@ function ShippingMethods({
                 Shipping Charges
               </Typography>
               {/* <Box sx={{ display: "inline", margin: 5 }}> */}
-              <List>
+              <Grid container>
                 <ListItem>
-                  <ListItemText>Subtotal</ListItemText>
-                  <ListItemText>
+                  <Grid item xs={3}>
+                    Subtotal
+                  </Grid>
+                  <Grid item xs={3}>
                     {productPrice &&
                       productPrice.reduce((a, c) => a + c.qty * c.price, 0)}
-                  </ListItemText>
+                  </Grid>
+                  <Grid item xs={6}></Grid>
                   {/* <ListItemText>$ 0.0</ListItemText> */}
                 </ListItem>
                 <ListItem>
-                  <ListItemText>Shipping Cost</ListItemText>
-                  <ListItemText>
+                  <Grid item xs={3}>
+                    Shipping Cost
+                  </Grid>
+                  <Grid item xs={3}>
                     {shippingCharges ? shippingCharges : 0}
-                  </ListItemText>
+                  </Grid>
+                  <Grid item xs={6}></Grid>
                 </ListItem>
                 <ListItem>
-                  <ListItemText>Total Cost </ListItemText>
-                  <ListItemText>
+                  <Grid item xs={3}>
+                    Total Cost{" "}
+                  </Grid>
+                  <Grid item xs={3}>
                     {productPrice && shippingCharges
                       ? productPrice?.reduce((a, c) => a + c.qty * c.price, 0) +
                         shippingCharges
                       : productPrice?.reduce((a, c) => a + c.qty * c.price, 0)}
-                  </ListItemText>
+                  </Grid>
+                  <Grid item xs={6}></Grid>
                 </ListItem>
-              </List>
+              </Grid>
               <Stack direction="row" spacing={2}>
                 <Button
                   onClick={checkoutHandler}

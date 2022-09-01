@@ -14,11 +14,10 @@ import ActionAreaCard from "../../container/Card";
 const Index = ({ data, showProduct }) => {
   const { dealsData } = useSelector((state) => state.deals);
 
-  console.log(data)
+  console.log(data);
 
   let dispatch = useDispatch();
   const router = useRouter();
-
 
   const viewProduct = (item) => {
     router.push({
@@ -32,41 +31,21 @@ const Index = ({ data, showProduct }) => {
     // dispatch(couponsData());
   }, []);
 
-  useEffect(() => { }, [dealsData]);
+  useEffect(() => {}, [dealsData]);
 
   return (
-    <Grid container >
+    <Grid sx={{ display: "flex" }}>
+      {data && showProduct == false ? (
+        <DealAndPromotions dealsData={data} viewProduct={viewProduct} />
+      ) : (
+        <></>
+      )}
 
-
-
-      {
-        data && showProduct == false ?
-          <DealAndPromotions
-
-            dealsData={data}
-            viewProduct={viewProduct}
-          />
-
-          : <></>
-
-
-      }
-
-      {
-        data && showProduct == true ?
-          <DealAndPromotions
-
-            dealsData={data && data}
-            viewProduct={viewProduct}
-          />
-
-          : <></>
-
-
-      }
-
-
-
+      {data && showProduct == true ? (
+        <DealAndPromotions dealsData={data && data} viewProduct={viewProduct} />
+      ) : (
+        <></>
+      )}
     </Grid>
   );
 };

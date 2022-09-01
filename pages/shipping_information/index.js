@@ -33,6 +33,7 @@ const Index = () => {
   const { shippingAddressData } = useSelector((state) => state.shipments);
   let [shippingAddres, setShippingAddess] = useState();
   let [shippingLockerAddres, setShippingLockerAddess] = useState();
+  const [show, setShow] = useState(false);
 
   let dispatch = useDispatch();
 
@@ -44,7 +45,6 @@ const Index = () => {
   }, []);
   const checkoutHandler = () => {
     dispatch(getCountry());
-
   };
   const checkoutHandler1 = () => {
     dispatch(getCountry());
@@ -148,6 +148,8 @@ const Index = () => {
   return (
     <div>
       <ShippingInformation
+        show={show}
+        setShow={setShow}
         handleChange={handleChange}
         shippementAddress={shippingAddressData}
         checkoutHandler={checkoutHandler}

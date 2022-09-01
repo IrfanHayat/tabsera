@@ -43,10 +43,13 @@ function ShippingInformation({
   lockersAddressData,
   checkoutHandlerLocker,
   handleChangeLocker,
+  show,
+  setShow,
 }) {
   const [buttonKey, setButtonKey] = React.useState(1);
   let router = useRouter();
   let buttonText;
+  console.log(show);
   const {
     handleSubmit,
     control,
@@ -308,7 +311,10 @@ function ShippingInformation({
                                 </Box>
                               }
                               // label={`${result.address_label_name},${result.address},"",${result.city},${result.state},${result.country}`}
-                              onClick={() => setRadioCheck(true)}
+                              onClick={() => {
+                                setRadioCheck(true);
+                                setShow(true);
+                              }}
                             />
                           ) : (
                             ""
