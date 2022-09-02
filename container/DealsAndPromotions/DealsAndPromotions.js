@@ -29,9 +29,9 @@ const DealsAndPromotions = ({ dealsData, viewProduct }) => {
         <Card
           className={styles.card}
           sx={{
-            width: "188px",
+            width: "205px",
             // maxWidth: 280,
-            height: "345px",
+            height: "310px",
           }}
           // className={cx(styles.root)}
         >
@@ -159,6 +159,7 @@ const DealsAndPromotions = ({ dealsData, viewProduct }) => {
             {/* <Grid md={3}> */}
             <Box component="div" className={styles.prodRating}>
               <Rating
+                className={styles.Rating}
                 name="size-small"
                 defaultValue={result?.averageRating}
                 size="small"
@@ -166,8 +167,8 @@ const DealsAndPromotions = ({ dealsData, viewProduct }) => {
                 readOnly
               />
               {/* </Grid> */}
-            </Box>
-            <Box className={styles.btnBox}>
+              {/* </Box> */}
+              {/* <Box className={styles.btnBox}> */}
               {result.bundleName ? (
                 <Button
                   className={styles.btnAddCart}
@@ -176,7 +177,7 @@ const DealsAndPromotions = ({ dealsData, viewProduct }) => {
                   onClick={() => addToCartHandler(result)}
                   // endIcon={<AddShoppingCartOutlinedIcon fontSize="small" />}
                 >
-                  Add To Cart
+                  <AddShoppingCartOutlinedIcon />
                 </Button>
               ) : (
                 ""

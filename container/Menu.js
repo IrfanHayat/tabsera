@@ -376,7 +376,7 @@ export default function PersistentDrawerLeft() {
           >
             <Item
               sx={{
-                // m: 0.5,
+                m: 0.5,
                 width: {
                   md: "15%",
                   sm: "30%",
@@ -512,7 +512,7 @@ export default function PersistentDrawerLeft() {
 
             <Item
               sx={{
-                // m: 0.5,
+                m: 0.5,
 
                 width: {
                   md: "85%",
@@ -521,194 +521,92 @@ export default function PersistentDrawerLeft() {
                 },
               }}
             >
-              {compaigns && compaigns.length > 0 ? (
-                <Carousel
-                  // sx={{ height: "270px", my: 1 }}
-                  animation="slide"
-                  swipe
-                  navButtonsAlwaysVisible={true}
-                  interval={1000}
-                  NextIcon={<ArrowRightIcon />}
-                  PrevIcon={<ArrowLeftIcon />}
-                  height={300}
-                  // navButtonsAlwaysVisible={true}
-                >
-                  {compaigns?.map((result) => (
-                    <>
-                      <CardMedia
-                        // component="img"
-                        component="img"
-                        // height="194"
-                        onClick={(e) => viewProduct(result.campaignId)}
-                        image={result?.imageURL}
-                        alt="featured Product"
-                        sx={{
-                          top: 0,
-                          width: "100%",
-                          height: 290,
-                          objectFit: "cover",
-                        }}
-                      ></CardMedia>
-
-                      <Box
-                        // square
-                        // elevation={0}
-                        sx={{
-                          display: "flex",
-                          alignItems: "center",
-                          height: 50,
-                          // pl: 2,
-                          justifyContent: "space-between",
-                          p: 1,
-                          bgcolor: "background.default",
-                        }}
-                      >
-                        <Typography
-                          fontSize="0.9rem"
-                          variant="h5"
-                          fontWeight={600}
-                          // display="inline"
-                          noWrap
-                        >
-                          {result?.campaignName}
-                        </Typography>
-
-                        <Typography
-                          fontSize="0.9rem"
-                          variant="h5"
-                          fontWeight={600}
-                          sx={{ color: "warning.dark", p: 1 }}
-                        >
-                          Minimum Discount Rs. {result?.minDiscount}
-                        </Typography>
-                      </Box>
-                    </>
-                  ))}
-                </Carousel>
-              ) : (
-                ""
-              )}
-
               <Box>
-                {/* <Box sx={{ width: "20%" }}> */}
-                {/* <Typography>Featured Products</Typography> */}
-                {/* <Typography>Featured Products</Typography> */}
-                {/* </Box> */}
-                {/* <Box sx={{ width: "80%" }}> */}
-                {featureProductCarousel ? (
-                  <>
-                    {featureProduct != "" ? (
-                      <Carousel
-                        animation="slide"
-                        swipe
-                        interval={1000}
-                        NextIcon={<ArrowRightIcon />}
-                        PrevIcon={<ArrowLeftIcon />}
-                        height={300}
-                        navButtonsAlwaysVisible={true}
-                      >
-                        {featureProduct?.map((result) => (
-                          <>
-                            <CardMedia
-                              // component="img"
-                              component="img"
-                              // height="194"
-                              onClick={(e) => viewProduct(result.productId)}
-                              image={result?.productImage}
-                              alt="featured Product"
-                              sx={{
-                                top: 0,
-                                width: "100%",
-                                height: 290,
-                                objectFit: "cover",
-                              }}
-                            ></CardMedia>
+                {featureProduct != "" ? (
+                  <Carousel
+                    animation="slide"
+                    swipe
+                    interval={1000}
+                    NextIcon={<ArrowRightIcon />}
+                    PrevIcon={<ArrowLeftIcon />}
+                    height={300}
+                    navButtonsAlwaysVisible={true}
+                  >
+                    {featureProduct?.map((result) => (
+                      <>
+                        <CardMedia
+                          // component="img"
+                          component="img"
+                          // height="194"
+                          onClick={(e) => viewProduct(result.productId)}
+                          image={result?.productImage}
+                          alt="featured Product"
+                          sx={{
+                            top: 0,
+                            width: "100%",
+                            height: 290,
+                            objectFit: "cover",
+                          }}
+                        ></CardMedia>
 
-                            <Box
-                              // square
-                              // elevation={0}
-                              sx={{
-                                display: "flex",
-                                alignItems: "center",
-                                height: 50,
-                                // pl: 2,
-                                justifyContent: "space-between",
-                                p: 1,
-                                // bgcolor: "background.default",
-                              }}
+                        <Box
+                          // square
+                          // elevation={0}
+                          sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            height: 50,
+                            // pl: 2,
+                            justifyContent: "space-between",
+                            p: 1,
+                            // bgcolor: "background.default",
+                          }}
+                        >
+                          <Typography
+                            fontSize="0.9rem"
+                            variant="h5"
+                            fontWeight={600}
+                            // display="inline"
+                            noWrap
+                          >
+                            {result?.productName}
+                          </Typography>
+
+                          <Rating
+                            name="size-small"
+                            defaultValue={result?.averageRating}
+                            size="small"
+                            // fontSize={24}
+                            readOnly
+                          />
+                          <Typography
+                            fontSize="0.9rem"
+                            variant="h5"
+                            fontWeight={600}
+                            sx={{ color: "warning.dark", p: 1 }}
+                          >
+                            Rs. {result?.productCost}
+                          </Typography>
+                          {result.productName ? (
+                            <IconButton
+                              key={result.id}
+                              onClick={() => addToCartHandler(result)}
+                              color="primary"
+                              aria-label="add to shopping cart"
                             >
-                              <Typography
-                                fontSize="0.9rem"
-                                variant="h5"
-                                fontWeight={600}
-                                // display="inline"
-                                noWrap
-                              >
-                                {result?.productName}
-                              </Typography>
-
-                              <Rating
-                                name="size-small"
-                                defaultValue={result?.averageRating}
-                                size="small"
-                                // fontSize={24}
-                                readOnly
-                              />
-                              <Typography
-                                fontSize="0.9rem"
-                                variant="h5"
-                                fontWeight={600}
-                                sx={{ color: "warning.dark", p: 1 }}
-                              >
-                                Rs. {result?.productCost}
-                              </Typography>
-                              {result.productName ? (
-                                <IconButton
-                                  key={result.id}
-                                  onClick={() => addToCartHandler(result)}
-                                  color="primary"
-                                  aria-label="add to shopping cart"
-                                >
-                                  <AddShoppingCartOutlinedIcon fontSize="small" />
-                                </IconButton>
-                              ) : (
-                                ""
-                              )}
-                            </Box>
-                          </>
-                        ))}
-                      </Carousel>
-                    ) : (
-                      // <NewCarousel
-                      //   product={featureProduct}
-                      //   // sx={{ height: "250px", my: 1 }}
-                      //   // animation="slide"
-                      //   // swipe
-                      //   // navButtonsAlwaysVisible={true}
-                      //   // interval={1000}
-                      //   // NextIcon={<ArrowRightIcon />}
-                      //   // PrevIcon={<ArrowLeftIcon />}
-                      //   // height={300}
-                      //   // navButtonsAlwaysVisible={true}
-                      // ></NewCarousel>
-                      ""
-                    )}
-                  </>
+                              <AddShoppingCartOutlinedIcon fontSize="small" />
+                            </IconButton>
+                          ) : (
+                            ""
+                          )}
+                        </Box>
+                      </>
+                    ))}
+                  </Carousel>
                 ) : (
-                  <NewCarousel
-                    product={featureProduct}
-                    // sx={{ height: "250px", my: 1 }}
-                    // animation="slide"
-                    // swipe
-                    // navButtonsAlwaysVisible={true}
-                    // interval={1000}
-                    // NextIcon={<ArrowRightIcon />}
-                    // PrevIcon={<ArrowLeftIcon />}
-                    // height={300}
-                    // navButtonsAlwaysVisible={true}
-                  ></NewCarousel>
+                  ""
                 )}
-                {/* </Box> */}
+                {/* <NewCarousel product={featureProduct}></NewCarousel> */}
               </Box>
             </Item>
           </Grid>

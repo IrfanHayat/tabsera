@@ -54,8 +54,8 @@ export default function ActionAreaCard({
           // justifyContent: "space-arounf",
         }
       : { height: 85 };
-  let width = styledCard?.flexDirection == "row" ? "100%" : "188px";
-  let height = styledCard?.flexDirection == "row" ? "100%" : "345px";
+  let width = styledCard?.flexDirection == "row" ? "100%" : "205px";
+  let height = styledCard?.flexDirection == "row" ? "100%" : "310px";
 
   return (
     <>
@@ -227,14 +227,15 @@ export default function ActionAreaCard({
 
             <Box component="div" className={styles.prodRating}>
               <Rating
+                className={styles.Rating}
                 name="size-small"
                 defaultValue={product?.averageRating}
                 size="small"
                 // fontSize={24}
                 readOnly
               />
-            </Box>
-            <Box className={styles.btnBox}>
+              {/* </Box> */}
+              {/* <Box className={styles.btnBox}> */}
               {product.productName ? (
                 <Button
                   className={styles.btnAddCart}
@@ -243,7 +244,7 @@ export default function ActionAreaCard({
                   onClick={() => addToCartHandler(product)}
                   // endIcon={<AddShoppingCartOutlinedIcon fontSize="small" />}
                 >
-                  Add To Cart
+                  <AddShoppingCartOutlinedIcon />
                 </Button>
               ) : (
                 ""
