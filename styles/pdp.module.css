@@ -1,0 +1,21 @@
+.buyNowbtn {
+  display: flex;
+  height: 44px;
+  width: 225px;
+  font-size: 16px;
+  color: #fff;
+  border: 1px solid #2abbe8;
+  border-radius: 2px;
+  background-color: #2abbe8;
+}
+
+.addToCartbtn {
+  display: flex;
+  height: 44px;
+  width: 225px;
+  font-size: 16px;
+  color: #fff;
+  border: 1px solid #f57224;
+  border-radius: 2px;
+  background-color: #f57224;
+}

@@ -39,6 +39,7 @@ import SettingsBackupRestoreIcon from "@mui/icons-material/SettingsBackupRestore
 import NotInterestedIcon from "@mui/icons-material/NotInterested";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShareIcon from "@mui/icons-material/Share";
+import styles from "../styles/pdp.module.css";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
@@ -165,7 +166,7 @@ function Details({
       <Box
         role="presentation"
         onClick={handleClick}
-        sx={{ display: "flex", p: 2, bgcolor: "#fafafa" }}
+        sx={{ display: "flex", p: 2 }}
         direction="row"
       >
         <Breadcrumbs aria-label="breadcrumb">
@@ -200,7 +201,7 @@ function Details({
         container
         spacing={1}
         maxWidth="xl"
-        sx={{ backgroundColor: "#fafafa", pt: 1 }}
+        sx={{ backgroundColor: "#fafafa" }}
         // justifyContent="center"
       >
         <Grid item md={4} xs={12} sx={{ bgcolor: "white" }}>
@@ -521,17 +522,8 @@ function Details({
           >
             <Grid item md={6} sm={6}>
               <Button
-                fullWidth
-                width="300px"
-                variant="contained"
-                color="info"
                 type="submit"
-                size="large"
-                sx={{
-                  background:
-                    "linear-gradient(90deg, #020024 0%, #090979 35%, #00d4ff 100%)",
-                }}
-                // href="/shipping_information"
+                className={styles.buyNowbtn}
                 onClick={() => {
                   skusProduct
                     ? BuyHandler(productDetail, skusProduct)
@@ -543,18 +535,12 @@ function Details({
             </Grid>
             <Grid item md={6} sm={6}>
               <Button
-                fullWidth
-                variant="contained"
-                sx={{
-                  background: "linear-gradient(45deg, red 10%, yellow 100%)",
-                }}
-                color="warning"
+                className={styles.addToCartbtn}
                 onClick={() => {
                   skusProduct
                     ? addToCartHandler(productDetail, skusProduct)
                     : addToCartHandler(productDetail);
                 }}
-                size="large"
               >
                 Add to cart
               </Button>

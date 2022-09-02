@@ -69,6 +69,16 @@ function PageFilter({ value, setDealsData, setShowDeals, setDiscountData, showDi
       setShowDiscounts(false);
     }
 
+    if (event.target.value == "clear") {
+      setShowProduct(false);
+      setShowDeals(false);
+
+      setShowAllCategoryPro(false);
+      setShowAllMerchantPro(false);
+      setShowDiscounts(false);
+      setShowFreeShipping(false);
+      setFilterData([]);
+    }
     // if (event.target.name == 'freeShipping') {
     //   router.push('/is_free_shipping')
     // }
@@ -102,6 +112,13 @@ function PageFilter({ value, setDealsData, setShowDeals, setDiscountData, showDi
             value="freeShipping"
             control={<Radio onChange={(e) => handleChange(e)} />}
             label="freeShipping"
+          />
+        </motion.div>
+        <motion.div className="animatable" whileTap={{ scale: 0.9 }}>
+          <FormControlLabel
+            value="clear"
+            control={<Radio onChange={(e) => handleChange(e)} />}
+            label="Clear All Filterss"
           />
         </motion.div>
       </RadioGroup>

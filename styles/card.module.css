@@ -76,10 +76,10 @@
   background-color: #fff;
   text-align: center;
 }
-/* 
-.card {
+
+.card1 {
   margin: 1;
-  width: 18%;
+  width: 19% !important;
 }
 
 .row:after {
@@ -89,24 +89,24 @@
 }
 
 @media screen and (max-width: 1024px) {
-  .card {
-    width: 23%;
+  .card1 {
+    width: 23% !important;
   }
 }
 @media screen and (max-width: 992px) {
-  .card {
-    width: 31%;
+  .card1 {
+    width: 31% !important;
   }
 }
 
 @media screen and (max-width: 600px) {
-  .card {
-    width: 45%;
+  .card1 {
+    width: 45% !important;
   }
 }
 
 @media screen and (max-width: 300px) {
-  .card {
-    width: 100%;
+  .card1 {
+    width: 100% !important;
   }
-} */
+}
