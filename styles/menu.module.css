@@ -1,0 +1,97 @@
+.categoryBox {
+  width: 278px;
+  height: 366px;
+  border: 8px;
+  /* position: absolute; */
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 16px rgba(43, 52, 69, 0.1);
+  border-radius: 8px;
+}
+.categoriesButton {
+  /* position: absolute; */
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+  bottom: 0%;
+  border-radius: 1px;
+  width: 278px;
+  height: 40px;
+  background-color: #f4f7fb;
+}
+
+.categoriesIcon {
+  left: 2.19px;
+  top: 2.19px;
+  height: 15.63px;
+  width: 15.63px;
+  position: absolute;
+  left: 10.94%;
+  right: 10.94%;
+  top: 10.94%;
+  bottom: 10.94%;
+}
+
+.categoriesTitle {
+  height: 19px;
+  width: 75px;
+  left: 42px;
+  top: 10px;
+  border-radius: nullpx;
+
+  position: absolute;
+  left: 63.5%;
+  right: 90.25%;
+  top: 40%;
+  bottom: 27.5%;
+
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 19px;
+}
+
+.categoriesEndIcon {
+  /* height: 3.5999999046325715px; */
+  /* width: 7.5px; */
+  /* left: 1.20001220703125px; */
+  /* top: 8.75px; */
+  border-radius: 0px;
+  position: absolute;
+  left: 360%;
+  right: 1%;
+  top: 20%;
+  /* bottom: -105.83%; */
+
+  /* Primary/500 Main */
+
+  /* border: 1.2px solid #d23f57;
+  transform: rotate(-90deg); */
+}
+
+.dropDown {
+  width: 258px;
+  border-radius: 2px;
+}
+
+.carouselBox {
+  width: 100%;
+  margin-left: 1px;
+
+  /* width: 278px; */
+  height: 366px;
+  border: 8px;
+  /* position: absolute; */
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 16px rgba(43, 52, 69, 0.1);
+  border-radius: 1px;
+}

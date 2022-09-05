@@ -1,0 +1,39 @@
+.shipTo {
+  padding: 1vh;
+  margin: 1px;
+  height: 10vh;
+  display: flex;
+  align-items: center;
+  background-color: #fff;
+}
+
+.shipAddress {
+  display: flex;
+  align-items: center;
+  /* background-color: #fff; */
+  margin: 1px;
+  padding: 1vh;
+  justify-content: space-between;
+}
+
+.select {
+  width: 5%;
+}
+.name {
+  width: 10%;
+}
+.addLabel {
+  width: 12%;
+}
+.fullAdd {
+  width: 30%;
+}
+.phone {
+  width: 15%;
+}
+.email {
+  width: 20%;
+}
+.edit {
+  width: 8%;
+}

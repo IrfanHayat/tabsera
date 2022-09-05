@@ -40,6 +40,7 @@ import TextField from "@mui/material/TextField";
 import Cookies from "js-cookie";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Container } from "@mui/system";
+import NewSelect from "./Components/NewSelect";
 // import { logOutCustomer } from "../../slice/authSlice";
 const NavLink = styled("a")(() => ({
   wrap: "noWrap",
@@ -395,16 +396,18 @@ export default function NavBar() {
                   </TextField>
                 </FormControl> */}
                   {/* <NavSelect Title="Account" Data={myAccount} color="white" /> */}
-                  <NavSelect
+                  {/* <NavSelect
                     Title="Currency"
                     Data={currencyData}
                     color="white"
-                  />
-                  <NavSelect
+                  /> */}
+                  <NewSelect Title="Language" Data={languageData} />
+                  {/* <NavSelect
+                    width="120px"
                     Title="Language"
                     Data={languageData}
                     color="white"
-                  />
+                  /> */}
                 </Box>
                 {/* <Button href="#" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
                 Login

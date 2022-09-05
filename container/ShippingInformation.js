@@ -7,7 +7,13 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
 import AddIcon from "@mui/icons-material/Add";
 import { Box } from "@mui/system";
 import Radio from "@mui/material/Radio";
@@ -29,6 +35,12 @@ import { TextField } from "@mui/material";
 import Chip from "@mui/material/Chip";
 import Image from "next/image";
 //import Divider from "@mui/material";
+import styles from "../styles/shippingInfo.module.css";
+import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
+import localStorage from "localStorage";
+import Shipping1 from "../pages/shipping/index";
+import Modal from "./Modal/Modal";
+
 function ShippingInformation({
   checkoutHandler,
   shippementAddress,
@@ -45,11 +57,12 @@ function ShippingInformation({
   handleChangeLocker,
   show,
   setShow,
+  userData,
 }) {
   const [buttonKey, setButtonKey] = React.useState(1);
+  const [userInfo, setUserInfo] = useState();
   let router = useRouter();
   let buttonText;
-  console.log(show);
   const {
     handleSubmit,
     control,
@@ -57,41 +70,17 @@ function ShippingInformation({
     setError,
     formState: { errors },
   } = useForm();
-  // if (buttonKey === 1) {
-  //   buttonText = "Add Address";
-  // } else {
-  //   buttonText = "Add Locker";
-  //   buttonText = "Add Locker";
-  // }
 
-  const [radioCheckLocker, setRadioCheckLocker] = useState(false);
+  console.log("shippementAddress", shippementAddress);
+
+  const [radioCheckLocker, setRadioCheckLocker] = useState(true);
   const [radioCheck, setRadioCheck] = useState(false);
   const [radioCheck1, setRadioCheck1] = useState(false);
-  // const handleChange = (event) => {
-  //   setButtonKey(event.target.value);
-  // };
 
-  // React.useEffect(() => {
-  //   // setButtonKey(buttonKey);
-  // }, [buttonKey]);
   return (
     <>
-      <Grid container mt={5} sx={{ bgcolor: "background.paper", pl: 1 }}>
-        {/* <Grid item md={2}></Grid> */}
-        <Grid
-          md={12}
-          sm={12}
-          display="flex"
-          alignItems="center"
-          // justifyContent="space-between"
-          style={{ minHeight: "10vh" }}
-          // ml={10}
-          // border={1}
-          borderColor="primary.main"
-          item
-          // justifyContent="center"
-          // sx={{ p: 1 }}
-        >
+      <Grid container mt={5}>
+        <Grid md={12} sm={12} className={styles.shipTo} item>
           <FormLabel style={{ fontWeight: "bold", color: "black" }}>
             Purchase For :{" "}
           </FormLabel>
@@ -117,7 +106,7 @@ function ShippingInformation({
                 value={10}
                 // onClick={() => handleChangeCategoryAndCampaigns(1)}
               >
-                Student 1
+                Self
               </MenuItem>
               <Divider />
               <MenuItem
@@ -130,157 +119,193 @@ function ShippingInformation({
             </TextField>
           </FormControl>
         </Grid>
-        <Grid
-          md={12}
-          sm={12}
-          display="flex"
-          alignItems="center"
-          justifyContent="space-between"
-          style={{ minHeight: "10vh" }}
-          // ml={10}
-          // border={1}
-          borderColor="primary.main"
-          item
-          // justifyContent="center"
-          sx={{ p: 1 }}
-        >
+        <Grid md={12} sm={12} item className={styles.shipTo}>
           <FormLabel style={{ fontWeight: "bold", color: "black" }}>
-            {/* {buttonKey === 1 ? "Select Address" : "Select Lockers"} */}
             Ship To :
           </FormLabel>
+          <Box flexGrow={0.05}></Box>
           <FormControl>
             <RadioGroup
               row
               aria-labelledby="demo-row-radio-buttons-group-label"
               name="row-radio-buttons-group"
+              defaultValue="address"
             >
-              <FormControlLabel
-                onClick={() => {
-                  setButtonKey(3);
-                  setRadioCheckLocker(true);
-                }}
-                value="school"
-                // buttonKey={1}
-                // onChange={handleChange}
-                control={<Radio />}
-                label="School"
-              />
-              <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
               <FormControlLabel
                 onClick={() => {
                   setButtonKey(1);
                   setRadioCheckLocker(true);
                 }}
                 value="address"
-                // buttonKey={1}
-                // onChange={handleChange}
                 control={<Radio />}
                 label="Address"
               />
               <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
               <FormControlLabel
-                // buttonKey={2}
                 onClick={() => {
                   setButtonKey(2);
                   setRadioCheckLocker(true);
                 }}
-                // onClick={setButtonKey(2)}
                 value="lockers"
-                // onChange={handleChange}
                 control={<Radio />}
                 label="Locker"
               />
+              <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
+
+              <FormControlLabel
+                onClick={() => {
+                  setButtonKey(3);
+                  setRadioCheckLocker(true);
+                }}
+                value="school"
+                control={<Radio />}
+                label="School"
+              />
             </RadioGroup>
           </FormControl>
-          <Button
-            onClick={() => {
-              buttonKey === 1 ? checkoutHandler1() : null;
-            }}
-            variant="contained"
-            color="primary"
-            disabled={radioCheckLocker ? "" : "disabled"}
-            // buttonKey={buttonKey}
-            // href="/shipping"
-            startIcon={<AddIcon />}
-            // label=" Add Addresss"
-          >
-            {buttonKey === 1
-              ? "Add Address"
-              : buttonKey === 2
-              ? "Add Locker"
-              : "Add School Address"}
-          </Button>
         </Grid>
-        {/* <Box>Locker Info here</Box> */}
 
-        {/* <Grid container>
-
-          <Grid item md={12} sm={12} xs={12} mt={4}>
-            <List
-              sx={{
-                display: "flex",
-                // p: 1,
-                // m: 1,
-                bgcolor: "background.paper",
-                justifyContent: "space-around",
-              }}
-            >
-              <ListItem>
-                <FormLabel style={{ fontWeight: "bold" }}>
-                  {buttonKey === 1 ? " Addresses" : "Lockers"}
-                </FormLabel>
-              </ListItem>
-              <ListItem>
-                <Button
-                  onClick={() => {
-                    buttonKey === 1 ? checkoutHandler1() : null;
-                  }}
-                  variant="contained"
-                  color="primary"
-                  disabled={radioCheckLocker ? "" : "disabled"}
-                  startIcon={<AddIcon />}
-                >
-                  {buttonKey === 1 ? "Add Address" : "Add Locker"}
-                </Button>
-              </ListItem>
-            </List>
-          </Grid>
-        </Grid> */}
         {buttonKey === 1 ? (
-          <Grid container sx={{ bgcolor: "background.paper" }}>
-            {/* <Grid item md={1}></Grid> */}
-            <Grid item md={6} m={1} justifyContent="center">
-              <FormControl>
-                {/* <List sx={{ display: "flex", p: 1, m: 1 }}>
-                  <ListItem>
-                    <FormLabel style={{ fontWeight: "bold" }}>
-                      {buttonKey === 1 ? " Addresses" : "Lockers"}
-                    </FormLabel>
-                  </ListItem>
-                  <ListItem>
-                    <Button
-                      onClick={() => {
-                        buttonKey === 1 ? checkoutHandler1() : null;
-                      }}
-                      variant="contained"
-                      color="primary"
-                      disabled={radioCheckLocker ? "" : "disabled"}
-                      // buttonKey={buttonKey}
-                      // href="/shipping"
-                      startIcon={<AddIcon />}
-                      // label=" Add Addresss"
-                    >
-                      {buttonKey === 1 ? "Add Address" : "Add Locker"}
-                    </Button>
-                  </ListItem>
-                </List> */}
+          <Grid container sx={{ bgcolor: "#fff" }}>
+            <Grid item md={12} className={styles.shipAddress}>
+              <Typography style={{ fontWeight: "bold", color: "black" }}>
+                Shipping Address :
+              </Typography>
+              {/* <Shipping /> */}
+              <Modal
+                buttonTitle=" Add  Address"
+                heading=" Add Shipping Address"
+                dialogContentText={<Shipping1 />}
+              />
+              <Button
+                onClick={() => {
+                  buttonKey === 1 ? checkoutHandler1() : null;
+                }}
+                variant="contained"
+                color="primary"
+                disabled={radioCheckLocker ? "" : "disabled"}
+                startIcon={<AddIcon />}
+                // label=" Add Addresss"
+              >
+                {buttonKey === 1
+                  ? "Add Address"
+                  : buttonKey === 2
+                  ? "Add Locker"
+                  : "Add School Address"}
+              </Button>
+            </Grid>
+
+            <Grid item md={12} m={1} justifyContent="center">
+              <TableContainer component={Paper}>
+                <Table
+                  sx={{ minWidth: 650 }}
+                  size="small"
+                  aria-label="a dense table"
+                >
+                  {/* {console.log(shippementAddress[0])} */}
+                  <RadioGroup
+                    aria-labelledby="demo-row-radio-buttons-group-label"
+                    name="row-radio-buttons-group"
+                    defaultValue={shippementAddress[0]?.address_id}
+                    onChange={handleChange}
+                  >
+                    <TableHead>
+                      <TableRow>
+                        <TableCell className={styles.select}>Select</TableCell>
+                        <TableCell className={styles.name}>Full Name</TableCell>
+                        <TableCell className={styles.addLabel}>
+                          Address Label
+                        </TableCell>
+                        <TableCell className={styles.fullAdd}>
+                          Full Address
+                        </TableCell>
+                        <TableCell className={styles.phone}>Phone</TableCell>
+                        <TableCell className={styles.email}>Email</TableCell>
+                        <TableCell className={styles.edit}>Change</TableCell>
+                      </TableRow>
+                    </TableHead>
+
+                    {shippementAddress &&
+                      shippementAddress.map((result, index) =>
+                        result.address_default_billing === false ? (
+                          <TableBody>
+                            {/* {rows.map((row) => ( */}
+                            <TableRow
+                              // key={row.name}
+                              ind
+                              sx={{
+                                "&:last-child td, &:last-child th": {
+                                  border: 0,
+                                },
+                              }}
+                            >
+                              <TableCell
+                                component="th"
+                                scope="row"
+                                className={styles.select}
+                              >
+                                <FormControlLabel
+                                  value={result.address_id}
+                                  checked={result.address_id == 655}
+                                  control={<Radio />}
+                                  label={<></>}
+                                  onClick={() => {
+                                    setRadioCheck(true);
+                                    // setShow(true);
+                                  }}
+                                />
+                              </TableCell>
+                              <TableCell className={styles.name}>
+                                {" "}
+                                {userData.first_name} {userData.last_name}
+                              </TableCell>
+                              <TableCell className={styles.addLabel}>
+                                {" "}
+                                <Chip
+                                  label={result.address_label_name}
+                                  color={
+                                    result.address_label_name === "Home"
+                                      ? "primary"
+                                      : "error"
+                                  }
+                                  size="small"
+                                  sx={{ mx: 1 }}
+                                />
+                              </TableCell>
+                              <TableCell className={styles.fullAdd}>
+                                {" "}
+                                <Typography>
+                                  {result.address} {result.city} {result.state}{" "}
+                                  {result.country}
+                                </Typography>
+                              </TableCell>
+                              <TableCell className={styles.phone}>
+                                {"3215890184"}
+                              </TableCell>
+                              <TableCell className={styles.email}>
+                                {userData.email}
+                              </TableCell>{" "}
+                              <TableCell className={styles.edit}>
+                                <ModeEditOutlineIcon color="success" />
+                              </TableCell>
+                            </TableRow>
+                            <Divider />
+                            {/* // ))} */}
+                          </TableBody>
+                        ) : (
+                          ""
+                        )
+                      )}
+                  </RadioGroup>
+                </Table>
+              </TableContainer>
+
+              {/* <FormControl>
                 <List sx={{ display: "flex" }}>
                   <ListItem>
                     <RadioGroup
-                      // row
                       aria-labelledby="demo-row-radio-buttons-group-label"
                       name="row-radio-buttons-group"
-                      // value={labelValue}
                       onChange={handleChange}
                     >
                       {shippementAddress &&
@@ -301,16 +326,12 @@ function ShippingInformation({
                                     size="small"
                                     sx={{ mx: 1 }}
                                   />
-                                  {/* {result.address_label_name} */}
                                   <Typography>
                                     {result.address} {result.city}{" "}
                                     {result.state} {result.country}
                                   </Typography>
-
-                                  {/* </Typography> */}
                                 </Box>
                               }
-                              // label={`${result.address_label_name},${result.address},"",${result.city},${result.state},${result.country}`}
                               onClick={() => {
                                 setRadioCheck(true);
                                 setShow(true);
@@ -323,28 +344,7 @@ function ShippingInformation({
                     </RadioGroup>
                   </ListItem>
                 </List>
-                {/* <Stack direction="row" spacing={2}>
-                  <Button
-                    onClick={checkoutHandler}
-                    variant="contained"
-                    color="primary"
-                    disabled={radioCheck ? "" : "disabled"}
-                  // href="/shipping_methods"
-                  // startIcon={<AddIcon />}
-                  >
-                    Continue
-                  </Button>
-
-                  <Button
-                    // fullWidth
-                    variant="contained"
-                    color="error"
-                    onClick={() => router.push(`/cart`)}
-                  >
-                    Back
-                  </Button>
-                </Stack> */}
-              </FormControl>
+              </FormControl> */}
             </Grid>
           </Grid>
         ) : buttonKey === 2 ? (
@@ -357,28 +357,12 @@ function ShippingInformation({
 
             // maxWidth="xl"
           >
-            {/* <Grid item md={4}></Grid> */}
-            {/* <Grid container> */}
-            {/* <Grid item md={1}></Grid> */}
-
-            {/* <Grid item md={6} mt={4} justifyContent="center"></Grid> */}
             <Grid item mt={4} md={12} sm={12}>
-              {/* <Accordion>
-                <AccordionSummary
-                  expandIcon={<ExpandMoreIcon />}
-                  aria-controls="panel1a-content"
-                  id="panel1a-header"
-                > */}
-              {/* <Typography>Hide Details</Typography> */}
-              {/* </AccordionSummary> */}
-              {/* <AccordionDetails> */}
               <form
                 onSubmit={handleSubmit(submitHandler)}
                 // className={classes.form}
               >
                 <List>
-                  {/* <Stack direction="row" spacing={2}></Stack> */}
-
                   <ListItem>
                     <Controller
                       control={control}
@@ -417,9 +401,7 @@ function ShippingInformation({
                         />
                       )}
                     />
-                    {/* </ListItem> */}
 
-                    {/* <ListItem> */}
                     <Controller
                       control={control}
                       name="states"
@@ -455,9 +437,7 @@ function ShippingInformation({
                         />
                       )}
                     />
-                    {/* </ListItem> */}
 
-                    {/* <ListItem> */}
                     <Controller
                       control={control}
                       name="city"
@@ -506,22 +486,6 @@ function ShippingInformation({
                     </Button>
                   </ListItem>
                 </List>
-
-                {/* <List>
-                  <ListItem>
-                    <Stack direction="row" spacing={2}>
-                    
-                      <Button
-                        variant="contained"
-                        type="submit"
-                      
-                        color="primary"
-                      >
-                        Find Locker
-                      </Button>
-                    </Stack>
-                  </ListItem>
-                </List> */}
               </form>
               <Grid container>
                 <ListItem>
@@ -566,30 +530,8 @@ function ShippingInformation({
                       ))}
                   </RadioGroup>
                 </ListItem>
-
-                {/* {lockersAddressData.length > 0 ? (
-                  <ListItem>
-                    <Stack direction="row" spacing={2}>
-                      <Button
-                        onClick={(e) => checkoutHandlerLocker(e)}
-                        variant="contained"
-                        color="primary"
-                        disabled={radioCheck1 ? "" : "disabled"}
-                      // href="/shipping_methods"
-                      // startIcon={<AddIcon />}
-                      >
-                        Continue
-                      </Button>
-                    </Stack>
-                  </ListItem>
-                ) : (
-                  ""
-                )} */}
               </Grid>
-              {/* </AccordionDetails>
-              </Accordion> */}
             </Grid>
-            {/* <Grid item md={2}></Grid> */}
           </Grid>
         ) : buttonKey === 3 ? (
           <Box>School</Box>

@@ -71,8 +71,8 @@ export default function Shipping({
 
   return (
     <>
-      <CheckoutWizard activeStep={1} />
-      <Grid container p={2}>
+      {/* <CheckoutWizard activeStep={1} /> */}
+      {/* <Grid container p={2}>
         <Grid item md={2}></Grid>
 
         <Grid
@@ -90,7 +90,7 @@ export default function Shipping({
           </Typography>
         </Grid>
         <Grid item md={2}></Grid>
-      </Grid>
+      </Grid> */}
 
       <Grid container>
         {/* <Grid item md={2}></Grid> */}
@@ -359,13 +359,17 @@ export default function Shipping({
                   row
                   aria-labelledby="demo-row-radio-buttons-group-label"
                   name="row-radio-buttons-group"
-                // value={labelValue}
-                // onChange={handleChange}
+                  // value={labelValue}
+                  // onChange={handleChange}
                 >
                   {labels.map((result) => (
                     <FormControlLabel
                       value={result.address_label_id}
-                      control={<Radio onChange={() => handleChange(result.address_label_id)} />}
+                      control={
+                        <Radio
+                          onChange={() => handleChange(result.address_label_id)}
+                        />
+                      }
                       label={result.address_label_name}
                       onClick={() => setRadioCheck(true)}
                     />

@@ -41,6 +41,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import ShareIcon from "@mui/icons-material/Share";
 import styles from "../styles/pdp.module.css";
 import FavoriteIcon from "@mui/icons-material/Favorite";
+import SquareIcon from "@mui/icons-material/Square";
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
   { width: 550, itemsToShow: 2 },
@@ -133,26 +134,37 @@ function Details({
   let [variantOneProduct, setVariantOneProduct] = useState();
   //let [productDetailOne,setProductDetailOne]=useState();
   let [multiProductImage, setMultiProductImage] = useState();
-
+  const [isActiveImg, setisActiveImg] = useState(false);
   const viewVariantsProduct = (result) => {
     console.log(result);
     setSkusProduct(result);
     setSkusFlag(true);
   };
 
-  const theme = useTheme();
-  const [value, setValue] = useState(0);
+  // const theme = useTheme();
+  // const [value, setValue] = useState(0);
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-  const handleChangeIndex = (index) => {
-    setValue(index);
-  };
+  // const handleChange = (event, newValue) => {
+  //   setValue(newValue);
+  // };
+  // const handleChangeIndex = (index) => {
+  //   setValue(index);
+  // };
   let router = useRouter();
   console.log("productDetail", productDetail);
 
+  // useEffect(() => {
+  //   productDetail.skus?.map((results, index) => {
+  //     console.log(results.skus);
+  //     // setMultiProductImage(results.media_images);
+  //   });
+  // }, [productDetail]);
+
   useEffect(() => {
+    productDetail.skus?.map((results, index) => {
+      console.log(results.skus);
+      //     // setMultiProductImage(results.media_images);
+    });
     productDetail.product_images?.map((results, index) => {
       console.log(results.media_images);
       setMultiProductImage(results.media_images);
@@ -210,12 +222,12 @@ function Details({
               <Carousel
                 // breakPoints={breakPoints}
                 //  disableArrowsOnEnd={false}
-                // showArrows={false}
+                showArrows={false}
                 // pagination={true}
                 pagination={false}
                 showEmptySlots={true}
                 // itemsToShow={2}
-                showArrows={false}
+                // showArrows={false}
               >
                 {Object.keys(productDetail).length > 0 && skusFlag == false
                   ? productDetail.product_images[0].media_images.map(
@@ -294,7 +306,7 @@ function Details({
               <Carousel
                 // breakPoints={breakPoints}
                 disableArrowsOnEnd={true}
-                // showArrows={false}
+                showArrows={false}
                 renderArrow={myArrow}
                 pagination={false}
                 showEmptySlots={true}
@@ -302,16 +314,25 @@ function Details({
               >
                 {multiProductImage &&
                   multiProductImage?.map((results, index) => (
-                    <Image
-                      onClick={() => {
-                        setSkusFlag(false);
-                      }}
-                      key={index}
-                      src={results}
-                      alt="shirt"
-                      width={100}
-                      height={80}
-                    ></Image>
+                    <Box
+                      // sx={{ border: }}
+                      className={styles.selectimg}
+                      // border={isActiveImg ? "1px solid blue" : " "}
+                    >
+                      <Image
+                        onClick={() => {
+                          setSkusFlag(false);
+                          setisActiveImg(true);
+                        }}
+                        // objectFit="cover"
+                        // style={{borderColor:"red", border:"5px"}}
+                        key={index}
+                        src={results}
+                        alt="shirt"
+                        width={60}
+                        height={60}
+                      ></Image>
+                    </Box>
                   ))}
               </Carousel>
             </ListItem>
@@ -330,6 +351,7 @@ function Details({
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
+              mt: 1,
             }}
           >
             <Typography
@@ -357,6 +379,26 @@ function Details({
               <FavoriteBorderIcon color="error" />
             </Stack>
           </Box>
+          <Divider fullWidth />
+
+          <Box sx={{ py: 1 }}>
+            <Box
+              color="warning.main"
+              style={{ display: "block", fontSize: 36 }}
+            >
+              {skusProduct ? <>Rs. {skusProduct.cost} </> : <>Rs. {price}</>}
+            </Box>
+
+            <Box
+              color="neutral"
+              style={{ display: "block", textDecoration: "line-through" }}
+            >
+              {skusProduct ? <>PKR.{skusProduct.original_price}</> : <></>}
+            </Box>
+          </Box>
+
+          <Divider />
+
           <Box sx={{ display: "flex", flexDirection: "column" }}>
             {skusFlag && skusProduct
               ? skusProduct.attributes.map((result, index) => (
@@ -368,7 +410,7 @@ function Details({
                         </Grid>
                         <Grid item md={3}>
                           <ListItemIcon>
-                            <Brightness1Icon
+                            <SquareIcon
                               sx={{
                                 // position: "relative",
                                 // top: 6,
@@ -399,7 +441,7 @@ function Details({
                         </Grid>
                         <Grid item md={3}>
                           <ListItemIcon>
-                            <Brightness1Icon sx={{ color: result.value }} />
+                            <SquareIcon sx={{ color: result.value }} />
                           </ListItemIcon>
                         </Grid>
                       </>
@@ -413,38 +455,15 @@ function Details({
                   </Grid>
                 ))}
           </Box>
-          <Divider fullWidth />
-          <Divider />
-          <Box sx={{ py: 1 }}>
-            <Box
-              color="warning.main"
-              style={{ display: "block", fontSize: 36 }}
-            >
-              {skusProduct ? <>PKR.{skusProduct.cost} </> : <>PKR:{price}</>}
-            </Box>
-
-            <Box
-              color="neutral"
-              style={{ display: "block", textDecoration: "line-through" }}
-            >
-              {skusProduct ? (
-                <>
-                  PKR.{skusProduct.original_price} <Divider />
-                </>
-              ) : (
-                <></>
-              )}
-            </Box>
-          </Box>
-
           <Grid md={12}>
-            <Typography variant="h5">Skus</Typography>
+            <Divider />
+            <Typography variant="subtitle2">Variants :</Typography>
 
             <Box md={6} sx={{ display: "flex", m: 1 }}>
               <Carousel
                 // breakPoints={breakPoints}
                 disableArrowsOnEnd={true}
-                // showArrows={false}
+                showArrows={false}
                 renderArrow={myArrow}
                 pagination={false}
                 showEmptySlots={true}
@@ -452,17 +471,23 @@ function Details({
               >
                 {productDetail &&
                   productDetail.skus?.map((results, index) => (
-                    <Image
-                      //  className={cx(styles.media, mediaStyles.root)}
-                      onClick={() => {
-                        viewVariantsProduct(results);
-                      }}
-                      key={index}
-                      src={results.sku_images[0]}
-                      alt="shirt"
-                      width={100}
-                      height={80}
-                    ></Image>
+                    <Box
+                      className={styles.selectimg}
+                      // border={isActiveImg ? "1px solid blue" : " "}
+                    >
+                      <Image
+                        //  className={cx(styles.media, mediaStyles.root)}
+                        onClick={() => {
+                          viewVariantsProduct(results);
+                        }}
+                        objectFit="cover"
+                        key={index}
+                        src={results.sku_images[0]}
+                        alt="shirt"
+                        width={60}
+                        height={60}
+                      ></Image>
+                    </Box>
                   ))}
               </Carousel>
             </Box>

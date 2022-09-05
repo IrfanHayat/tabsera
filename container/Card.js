@@ -237,16 +237,22 @@ export default function ActionAreaCard({
               {/* </Box> */}
               {/* <Box className={styles.btnBox}> */}
               {product.productName ? (
-                <Button
+                // <Button
+                //   // size="small"
+                //   className={styles.btnAddCart}
+                //   variant="outlined"
+                //   key={product.id}
+                //   onClick={() => addToCartHandler(product)}
+                //   // endIcon={<AddShoppingCartOutlinedIcon fontSize="small" />}
+                // >
+                <AddShoppingCartOutlinedIcon
+                  // fontSize="small"
                   className={styles.btnAddCart}
-                  variant="outlined"
-                  key={product.id}
-                  onClick={() => addToCartHandler(product)}
-                  // endIcon={<AddShoppingCartOutlinedIcon fontSize="small" />}
-                >
-                  <AddShoppingCartOutlinedIcon />
-                </Button>
+                  // fontSize="large"
+                  // style={{ backgroundColor: "blue" }}
+                />
               ) : (
+                // </Button>
                 ""
               )}
             </Box>
