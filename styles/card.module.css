@@ -53,8 +53,9 @@
 .prodRating {
   display: flex;
   justify-content: space-between;
-  margin-top: 8px;
-  height: 14px;
+  /* align-items: flex-end; */
+  margin-top: 12px;
+  height: 12px;
   clear: both;
 }
 
@@ -69,18 +70,22 @@
 .Rating {
   /* position: absolute; */
   /* bottom: 0; */
-  margin-top: 10px;
+  margin-top: 8px;
 }
 .btnAddCart {
-  border: 1px solid blue;
-  color: blue;
+  border: 1px solid#3d7cff;
+  color: #3d7cff;
   border-radius: 2px;
-  height: 28px;
-  margin: 0 auto;
-  font-size: 12px;
-  padding: 0 12;
-  background-color: #fff;
-  text-align: center;
+  height: 24px;
+  width: 24px;
+  /* margin: 0 auto; */
+  /* font-size: 8px; */
+  /* padding: 0 12; */
+  /* background-color: #3d7cff; */
+  /* text-align: center; */
+  padding: 1px;
+  margin-right: 8px;
+  /* margin-bottom: -200px; */
 }
 
 .card1 {

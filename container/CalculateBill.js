@@ -24,7 +24,7 @@ import { RouteGuard } from "../RouterGuard";
 function CalculateBill({ productPrice, checkoutHandler }) {
   console.log(productPrice);
   return (
-    <Card item md={12} xs={12}>
+    <Grid sx={{ bgcolor: "background.paper" }} item md={12} xs={12}>
       {/* <Card> */}
       <CardContent>
         <Typography
@@ -119,7 +119,7 @@ function CalculateBill({ productPrice, checkoutHandler }) {
         </RouteGuard>
       </CardActions>
       {/* </Card> */}
-    </Card>
+    </Grid>
   );
 }
 

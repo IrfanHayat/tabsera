@@ -19,3 +19,21 @@
   border-radius: 2px;
   background-color: #f57224;
 }
+.selectimg {
+  border: 1px solid #fff;
+}
+/* .selectimg :active {
+  border-color: red;
+  border: 3px solid red;
+} */
+
+.selectimg:active {
+  border: 1px solid hsl(209, 94%, 39%);
+}
+.selectimg:hover {
+  border: 1px solid hsl(209, 94%, 39%);
+}
+
+/* .selectimg::selection {
+  border: 1px solid hsl(209, 94%, 39%);
+} */

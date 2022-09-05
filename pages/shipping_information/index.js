@@ -23,6 +23,7 @@ import { ContactPageSharp, Login } from "@mui/icons-material";
 
 const Index = () => {
   let router = useRouter();
+
   const {
     lockersAddressData,
     lockerLabels,
@@ -30,7 +31,10 @@ const Index = () => {
     lockerStatesData,
     lockerCityData,
   } = useSelector((state) => state.lockers);
-  const { shippingAddressData } = useSelector((state) => state.shipments);
+  const { shippingAddressData, userData } = useSelector(
+    (state) => state.shipments
+  );
+
   let [shippingAddres, setShippingAddess] = useState();
   let [shippingLockerAddres, setShippingLockerAddess] = useState();
   let [shipLocker, setShipLocker] = useState()
@@ -151,8 +155,9 @@ const Index = () => {
   return (
     <div>
       <ShippingInformation
-        show={show}
-        setShow={setShow}
+        // show={show}
+        userData={userData}
+        // setShow={setShow}
         handleChange={handleChange}
         shippementAddress={shippingAddressData}
         checkoutHandler={checkoutHandler}

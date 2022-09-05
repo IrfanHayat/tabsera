@@ -2,16 +2,26 @@ import * as React from "react";
 import Button from "@mui/material/Button";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-
+import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import { Box } from "@mui/material";
 // import { ListItemIcon, ContentCopy, ListItemText } from "@mui/material";
-import { Link, Typography } from "@mui/material";
+import { IconButton, Link } from "@mui/material";
 import { ListItemIcon } from "@mui/material";
 import { ListItemText } from "@mui/material";
 import ContentCopy from "@mui/icons-material/ContentCopy";
-export default function Categories({ Title, Data, clr, startIcon }) {
+import Typography from "@mui/material/Typography";
+import styles from "../../../styles/menu.module.css";
+
+export default function Categories({
+  Title,
+  Data,
+  clr,
+  startIcon,
+  color,
+  width,
+}) {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [isActive, setIsActive] = React.useState(false);
 
@@ -31,6 +41,7 @@ export default function Categories({ Title, Data, clr, startIcon }) {
     <>
       {/* <Link></Link> */}
       <Button
+        className={styles.categories}
         // component="link"
         id="basic-button"
         aria-controls={open ? "basic-menu" : undefined}
@@ -38,35 +49,35 @@ export default function Categories({ Title, Data, clr, startIcon }) {
         aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
         variant="text"
-        // underline="hover"
-        sx={{
-          wrap: "noWrap",
-          color: "black",
-          textDecoration: "none",
-          textTransform: "capitalize",
-          m: 1,
-          p: 1,
-          ":hover": {
-            // boxShadow: 20, // theme.shadows[20]
-            transform: "scale(1.1)",
-            // color: "white",
-            transformOrigin: "bottomleft",
-            // opacity: 0.5,
-            cursor: "pointer",
-          },
-        }}
-        startIcon={startIcon}
-        endIcon={
-          isActive ? (
-            <KeyboardArrowUpIcon />
-          ) : (
-            <KeyboardArrowDownIcon fontSize="small" />
-          )
-        }
+        // sx={{
+        //   display: "flex",
+        //   justifyContent: "space-between",
+        //   width: { width },
+        //   // wrap: "noWrap",
+        //   fontFamily: "monospace",
+        //   fontWeight: 300,
+        //   color: { color },
+        //   textDecoration: "none",
+        //   textTransform: "capitalize",
+        //   ":hover": {
+        //     cursor: "pointer",
+        //   },
+        // }}
+        // startIcon={startIcon}
+        // endIcon={isActive ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
       >
         {/* <KeyboardArrowRightIcon /> */}
-        <Typography> {Title}</Typography>
+        <Box sx={{ display: "flex" }}>
+          <Box display="inline" sx={{ mr: 1 }}>
+            {startIcon}
+          </Box>
+          <Typography display="inline"> {Title} </Typography>
+        </Box>
+        <Box>
+          {isActive ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}
+        </Box>
       </Button>
+
       <Menu
         // sx={{ width: 320, maxWidth: "100%" }}
         id="basic-menu"
@@ -80,8 +91,17 @@ export default function Categories({ Title, Data, clr, startIcon }) {
         PaperProps={{
           // elevation: 0,
           sx: {
-            overflow: "visible",
+            // overflow: "visible",
 
+            // width: 202,
+            // filter: "drop-shadow(0px 2px 8px rgba(0,0,0,0.32))",
+            // mt: 1.5,
+            // "& .MuiAvatar-root": {
+            //   width: 52,
+            //   height: 32,
+            //   ml: -0.5,
+            //   mr: 1,
+            // },
             "&:before": {
               content: '""',
               display: "block",
@@ -99,7 +119,15 @@ export default function Categories({ Title, Data, clr, startIcon }) {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <Typography> {Data}</Typography>
+        {/* <MenuItem onClick={handleClose}> */}
+        {/* <ListItemIcon>
+            <ContentCopy fontSize="small" />
+          </ListItemIcon>
+          <ListItemText>Copy</ListItemText> */}
+        <Typography> {Data} </Typography>
+        {/* </MenuItem> */}
+        {/* <MenuItem onClick={handleClose}>My account</MenuItem>
+        <MenuItem onClick={handleClose}>Logout</MenuItem> */}
       </Menu>
     </>
   );
