@@ -63,8 +63,10 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.primary,
 }));
 
-function SubCategory() {
-  const { productDataWithCategoryId } = useSelector((state) => state.category);
+function SubCategory({ catId }) {
+  //const { productDataWithCategoryId } = useSelector((state) => state.category);
+  const [productDataWithCategoryId, setProductDataWithCategoryId] = useState([])
+
   const router = useRouter();
   const dispatch = useDispatch();
   const [checked, setChecked] = React.useState([true, false]);
@@ -89,6 +91,10 @@ function SubCategory() {
   const [openBar, setOpenBar] = React.useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [categoryProductFilter, setCategoryProductFilter] = useState(false);
+
+  //parent and child products Combine
+  const [parentProducts, setParentProducts] = useState()
+  const [childProducts, setChildProducts] = useState()
 
 
   const viewProduct = (item) => {
@@ -115,17 +121,19 @@ function SubCategory() {
   //       query: { sub_category: item },
   //     });
   //   };
-  const getData = (id) => {
-    dispatch(getProductWithCategoryId(id));
+  const getParentData = async (id) => {
+    let result = await dispatch(getProductWithCategoryId(id));
+    setProductDataWithCategoryId(result.payload);
   };
 
   useEffect(async () => {
     let result = await dispatch(getCategoryBrand());
     let results = result?.payload.filter(
-      (result) => result.category_id == router?.query?.sub_category
+      (result) => result.category_id == catId
     );
     console.log(results);
     results.map((category) => {
+      console.log(category)
       setBrands(category.brands);
     });
   }, []);
@@ -133,16 +141,18 @@ function SubCategory() {
   useEffect(async () => {
     let result = await dispatch(getCategory());
     let results = result?.payload.filter(
-      (result) => result.category_id == router?.query?.sub_category
+      (result) => result.category_id == catId
     );
-    console.log(results);
+
     results?.map((category) => {
       setParentCategories(category.category_name);
+
       setSubCategories(category.child);
     });
   }, []);
 
   useEffect(() => { }, [subCategories]);
+  useEffect(() => { }, [catId]);
 
   function categoryProduct(name) {
     console.log(name)
@@ -156,11 +166,14 @@ function SubCategory() {
     return (
 
       <Box sx={{ display: "flex", flexDirection: "column", ml: 2 }}>
-        {subCategories.map((result, index) => (
-          <List onClick={() => categoryProduct(result.category_name)} key={index}>
-            <ListItem>{result.category_name}</ListItem>
-          </List>
-        ))}
+        <Grid>
+
+          {subCategories.map((result, index) => (
+            <List onClick={() => categoryProduct(result.category_name)} key={index}>
+              {result.category_name}
+            </List>
+          ))}
+        </Grid>
         {/* {
           subCategories?.map(result => {
             <List>
@@ -174,9 +187,9 @@ function SubCategory() {
       </Box>
     );
   };
-  useMemo(() => {
-    let id = router?.query?.sub_category;
-    getData(id);
+  useEffect(() => {
+    let id = catId;
+    getParentData(id);
   }, []);
 
   const addToCartHandler = async (product) => {
@@ -252,16 +265,21 @@ function SubCategory() {
       )}
       <Grid
         container
-        // xs={12}
-        sx={{ background: "white" }}
+
+        // justifyContent="center"
+        // alignItems="center"
+        sx={{ display: "flex", margin: "auto" }}
+
+      // xs={12}
+      // sx={{ background: "white" }}
       // spacing={2}
       >
 
-        <SideBarFilter categoryProduct={categoryProduct} parentCategories={parentCategories} childrenCategory={children} subCategories={subCategories} brands={brands}></SideBarFilter>
+        <SideBarFilter MinInput={MinInput} MaxInput={MaxInput} priceFilter={priceFilter} categoryProduct={categoryProduct} parentCategories={parentCategories} childrenCategory={children} subCategories={subCategories} brands={brands}></SideBarFilter>
 
         {/* ---------------------------------------------------- */}
-        <Grid item xs={8} md={10}>
-          <Box
+
+        {/* <Box
             role="presentation"
 
             sx={{ display: "flex", p: 1, bgcolor: "#fafafa" }}
@@ -315,23 +333,30 @@ function SubCategory() {
           >
             <ListFilter />
             <Box flexGrow={1} />
-            {/* 
-            <SortFilter
-              data={productDataWithCategoryId}
-              setFilterData={setFilterData}
-            /> */}
+           
             <ShopProductSort data={productDataWithCategoryId}
               setFilterData={setFilterData}></ShopProductSort>
             <Box flexGrow={0.1} />
             <ViewFilter handleView={handleView} />
-          </Grid>
-          <Grid item xs={12} sx={styled}>
-            {console.log(filterProduct?.length)}
+          </Grid> */}
 
-            {productDataWithCategoryId &&
-              filterProduct?.length < 1 &&
-              flag == false
-              ? productDataWithCategoryId?.map((item) => (
+        {console.log(filterProduct?.length)}
+        <Grid sx={{ ml: 1 }}>
+          {productDataWithCategoryId.length > 0 &&
+            filterProduct?.length < 1 &&
+            flag == false
+            ? productDataWithCategoryId?.map((item) => (
+              <ActionAreaCard
+                key={item}
+                product={item}
+                viewProduct={viewProduct}
+                addToCartHandler={addToCartHandler}
+                // viewCategory={viewCategory}
+                styledCard={styled}
+              ></ActionAreaCard>
+            ))
+            : filterProduct.length > 0
+              ? filterProduct?.map((item) => (
                 <ActionAreaCard
                   key={item}
                   product={item}
@@ -341,21 +366,11 @@ function SubCategory() {
                   styledCard={styled}
                 ></ActionAreaCard>
               ))
-              : filterProduct.length > 0
-                ? filterProduct?.map((item) => (
-                  <ActionAreaCard
-                    key={item}
-                    product={item}
-                    viewProduct={viewProduct}
-                    addToCartHandler={addToCartHandler}
-                    // viewCategory={viewCategory}
-                    styledCard={styled}
-                  ></ActionAreaCard>
-                ))
-                : "Product Not Found"}
-          </Grid>
+              : "Product Not Found"}
         </Grid>
       </Grid>
+
+
     </>
   );
 }

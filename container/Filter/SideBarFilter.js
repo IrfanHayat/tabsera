@@ -7,12 +7,17 @@ import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import CheckBox from "../../container/Section/CheckBox";
+import PriceFilter from "./PriceFilter";
 function SideBarFilter({
   categoryProduct,
   parentCategories,
   childrenCategory,
   subCategories,
   brands,
+  MinInput,
+  MaxInput,
+  priceFilter
+
 }) {
   const [Filters, setFilters] = useState({
     brands: [],
@@ -43,14 +48,16 @@ function SideBarFilter({
   return (
     <Grid
       item
-      xs={4}
-      md={2}
+
       sx={{
-        bgcolor: "#fafafa",
-        p: 1,
+        width: '278px',
+        height: '1368px',
         display: "flex",
+        borderRadius: '8px',
+        backgroundColor: "#FFFFFF",
+        boxShadow: "0px 1px 3px rgba(3, 0, 71, 0.09)",
         flexWrap: "wrap",
-        overflow: "hidden",
+
       }}
     >
       <List dense>
@@ -70,6 +77,7 @@ function SideBarFilter({
         {/* </List> */}
         {/* <List dense> */}
         <Divider />
+
         {/* <ListItem> */}
         <ListItem>Brands</ListItem>
         {/* </ListItem> */}
@@ -89,6 +97,10 @@ function SideBarFilter({
             />
           </ListItemText>
         </ListItem>
+        <Divider />
+        <PriceFilter MinInput={MinInput}
+          MaxInput={MaxInput}
+          priceFilter={priceFilter}></PriceFilter>
         <Divider />
         {/* <ListItem>
                     <FormControlLabel
