@@ -28,6 +28,7 @@ import { Controller, useForm } from "react-hook-form";
 import { TextField } from "@mui/material";
 import Chip from "@mui/material/Chip";
 import Image from "next/image";
+import LockerDetails from "./Locker/LockeDetails";
 //import Divider from "@mui/material";
 function ShippingInformation({
   checkoutHandler,
@@ -45,6 +46,7 @@ function ShippingInformation({
   handleChangeLocker,
   show,
   setShow,
+  shipLocker
 }) {
   const [buttonKey, setButtonKey] = React.useState(1);
   let router = useRouter();
@@ -67,6 +69,9 @@ function ShippingInformation({
   const [radioCheckLocker, setRadioCheckLocker] = useState(false);
   const [radioCheck, setRadioCheck] = useState(false);
   const [radioCheck1, setRadioCheck1] = useState(false);
+  const [showMapView, setShowMapView] = useState(false);
+  const [showTableView, setShowTableView] = useState(false)
+
   // const handleChange = (event) => {
   //   setButtonKey(event.target.value);
   // };
@@ -74,6 +79,19 @@ function ShippingInformation({
   // React.useEffect(() => {
   //   // setButtonKey(buttonKey);
   // }, [buttonKey]);
+
+  function mapView() {
+    setShowMapView(true)
+    setShowTableView(false)
+  }
+
+  function tableView() {
+    setShowMapView(false)
+    setShowTableView(true)
+  }
+
+
+
   return (
     <>
       <Grid container mt={5} sx={{ bgcolor: "background.paper", pl: 1 }}>
@@ -89,8 +107,8 @@ function ShippingInformation({
           // border={1}
           borderColor="primary.main"
           item
-          // justifyContent="center"
-          // sx={{ p: 1 }}
+        // justifyContent="center"
+        // sx={{ p: 1 }}
         >
           <FormLabel style={{ fontWeight: "bold", color: "black" }}>
             Purchase For :{" "}
@@ -115,14 +133,14 @@ function ShippingInformation({
             >
               <MenuItem
                 value={10}
-                // onClick={() => handleChangeCategoryAndCampaigns(1)}
+              // onClick={() => handleChangeCategoryAndCampaigns(1)}
               >
                 Student 1
               </MenuItem>
               <Divider />
               <MenuItem
                 value={20}
-                // onClick={() => handleChangeCategoryAndCampaigns(2)}
+              // onClick={() => handleChangeCategoryAndCampaigns(2)}
               >
                 Student 2
               </MenuItem>
@@ -202,13 +220,13 @@ function ShippingInformation({
             // buttonKey={buttonKey}
             // href="/shipping"
             startIcon={<AddIcon />}
-            // label=" Add Addresss"
+          // label=" Add Addresss"
           >
             {buttonKey === 1
               ? "Add Address"
               : buttonKey === 2
-              ? "Add Locker"
-              : "Add School Address"}
+                ? "Add Locker"
+                : "Add School Address"}
           </Button>
         </Grid>
         {/* <Box>Locker Info here</Box> */}
@@ -355,7 +373,7 @@ function ShippingInformation({
             // alignItems="center"
             justifyContent="center"
 
-            // maxWidth="xl"
+          // maxWidth="xl"
           >
             {/* <Grid item md={4}></Grid> */}
             {/* <Grid container> */}
@@ -374,7 +392,7 @@ function ShippingInformation({
               {/* <AccordionDetails> */}
               <form
                 onSubmit={handleSubmit(submitHandler)}
-                // className={classes.form}
+              // className={classes.form}
               >
                 <List>
                   {/* <Stack direction="row" spacing={2}></Stack> */}
@@ -533,37 +551,50 @@ function ShippingInformation({
                     onChange={handleChangeLocker}
                   >
                     {lockersAddressData.length > 0 &&
-                      lockersAddressData?.map((result) => (
-                        <FormControlLabel
-                          value={result.locker_id}
-                          control={<Radio />}
-                          label={
-                            <Box
-                              sx={{
-                                display: "flex",
-                                alignItems: "center",
-                              }}
-                            >
-                              <Image // className={cx(styles.media, mediaStyles.root)}
-                                src={"/locker_pic.jpg"}
-                                // onClick={(e) => viewCategory(product.category_id)}
-                                alt={"locker"}
-                                width={45}
-                                height={45}
-                              ></Image>
-                              <Typography
+                      <>
+                        <Grid sx={{ display: "flex" }}>
+                          <Typography onClick={() => mapView()}>MapView</Typography>
+                          <Typography>|</Typography>
+                          <Typography onClick={() => tableView()}>TableView</Typography>
+                        </Grid>
+
+                        {showTableView ? lockersAddressData?.map((result) => (
+                          <FormControlLabel
+                            value={result.locker_id}
+                            control={<Radio />}
+                            label={
+                              <Box
                                 sx={{
-                                  p: 1,
+                                  display: "flex",
+                                  alignItems: "center",
                                 }}
                               >
-                                {result.locker_name}
-                              </Typography>
-                              <Typography>{result.locker_address}</Typography>
-                            </Box>
-                          }
-                          onClick={() => setRadioCheck1(true)}
-                        />
-                      ))}
+                                <Image // className={cx(styles.media, mediaStyles.root)}
+                                  src={"/locker_pic.jpg"}
+                                  // onClick={(e) => viewCategory(product.category_id)}
+                                  alt={"locker"}
+                                  width={45}
+                                  height={45}
+                                ></Image>
+                                <Typography
+                                  sx={{
+                                    p: 1,
+                                  }}
+                                >
+                                  {result.locker_name}
+                                </Typography>
+                                <Typography>{result.locker_address}</Typography>
+                              </Box>
+                            }
+                            onClick={() => setRadioCheck1(true)}
+                          />
+                        )) : ''}
+                        {
+                          showMapView ? <LockerDetails lockerData={shipLocker}></LockerDetails> : ''
+                        }
+
+                      </>
+                    }
                   </RadioGroup>
                 </ListItem>
 

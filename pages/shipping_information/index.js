@@ -33,6 +33,7 @@ const Index = () => {
   const { shippingAddressData } = useSelector((state) => state.shipments);
   let [shippingAddres, setShippingAddess] = useState();
   let [shippingLockerAddres, setShippingLockerAddess] = useState();
+  let [shipLocker, setShipLocker] = useState()
   const [show, setShow] = useState(false);
 
   let dispatch = useDispatch();
@@ -100,7 +101,9 @@ const Index = () => {
     };
     console.log(obj);
 
-    dispatch(addShipmentLockers(obj));
+    let shippementLocker = await dispatch(addShipmentLockers(obj))
+    console.log(shippementLocker.payload)
+    setShipLocker(shippementLocker.payload)
   };
 
   const getStates = (value) => {
@@ -163,6 +166,7 @@ const Index = () => {
         lockersAddressData={lockersAddressData}
         checkoutHandlerLocker={checkoutHandlerLocker}
         handleChangeLocker={handleChangeLocker}
+        shipLocker={shipLocker}
       />
     </div>
   );
