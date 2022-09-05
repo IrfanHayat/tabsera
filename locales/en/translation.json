@@ -1,15 +1,59 @@
 {
-  "About Us": "About Us",
-  "Home":"Home",
-  "Account":"Account",
-  "My Profile":"My Profile",
-  "My Orders":"My Orders",
-  "My Coupons":"My Coupons",
-  "My Bill Payments":"My Bill Payments",
-  "My Topups":"My Topups",
-  "Security":"Security",
-  "About":"Help",
-  "Logout":"Logout"
+    "Menu": {
+        "Headers": {
+            "About": "About",
+            "Home": "Home",
+            "Account":{
+                "My Account":"My Account",
+                "My Profile":"My Profile",
+                 "About":"About",
+                "Help":"Help",
+                "Logout":"Logout"
+
+            },
+            "Currency":{
+                "Currency":"Currency",
+                "Rupees":"Rupees",
+                "Dollar":"Dollar",
+                "Ponds":"Ponds"
+            },
+            "Language":{
+                "Language":"Language",
+                "EN":"EN",
+                "RS":"RS",
+                "SM":"SM",
+                "TU":"TU"
+            }
+        }
+
+    },
+    "Footer":{
+       "rights_and_reserved":"© 2022 Tabsera. All Rights Reserved",
+       "countryRegion":{
+          "heading":"Country and Regions",
+          "countryName":["Turkey","France","Pakistan","Indonesia","Poland","Chille","Malaysia","Bangladesh"]
+       } 
+    },
+    "Filter":{
+       "ListFilter":{
+          "All Products":"All Products",
+          "Sellers":"Sellers",
+          "Categories":"Categories"
+       },
+       "SortFilter":{
+         "Price: High-Low":"Price: High-Low",
+         "Price: Low-High":"Price: Low-High",
+         "Rating: High-Low":"Rating: High-Low",
+         "Rating: Low-High":"Rating: Low-High",
+         "Order: High-Low":"Order: High-Low",
+         "Order: Low-High":"Order: Low-High"
+       },
+       "PageFilter":{
+         "Bundles":"Bundles",
+         "Discounts":"Discounts",
+         "Free Shipping":"Free Shipping"
+       }
+
+    }
 
 }
-
