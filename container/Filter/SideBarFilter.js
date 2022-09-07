@@ -8,6 +8,7 @@ import Typography from "@mui/material/Typography";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import CheckBox from "../../container/Section/CheckBox";
 import PriceFilter from "./PriceFilter";
+import PageFilter from "./PageFilter";
 function SideBarFilter({
   categoryProduct,
   parentCategories,
@@ -16,7 +17,19 @@ function SideBarFilter({
   brands,
   MinInput,
   MaxInput,
-  priceFilter
+  priceFilter,
+  value,
+  setDealsData,
+  setShowDeals,
+  setDiscountData,
+  showDiscounts,
+  setShowDiscounts,
+  setFreeShippingData,
+  setShowFreeShipping,
+  setShowProduct,
+  setShowAllCategoryPro,
+  setShowAllMerchantPro,
+  setFilterData1
 
 }) {
   const [Filters, setFilters] = useState({
@@ -101,6 +114,21 @@ function SideBarFilter({
         <PriceFilter MinInput={MinInput}
           MaxInput={MaxInput}
           priceFilter={priceFilter}></PriceFilter>
+        <Divider />
+        <PageFilter
+          value={value}
+          setDealsData={setDealsData}
+          setShowDeals={setShowDeals}
+          setDiscountData={setDiscountData}
+          showDiscounts={showDiscounts}
+          setShowDiscounts={setShowDiscounts}
+          setFreeShippingData={setFreeShippingData}
+          setShowFreeShipping={setShowFreeShipping}
+          setShowProduct={setShowProduct}
+          setShowAllCategoryPro={setShowAllCategoryPro}
+          setShowAllMerchantPro={setShowAllCategoryPro}
+          setFilterData={setFilterData1}
+        ></PageFilter>
         <Divider />
         {/* <ListItem>
                     <FormControlLabel

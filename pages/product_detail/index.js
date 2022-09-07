@@ -50,10 +50,10 @@ function Product_detail(props) {
   };
 
   console.log(addBuyItem);
-  const viewStore = (merchantId) => {
+  const viewStore = (categoryId, merchantId) => {
     router.push({
       pathname: "/merchant_store",
-      query: { merchantId: merchantId },
+      query: { categoryId: categoryId, merchantId: merchantId },
     });
   };
 

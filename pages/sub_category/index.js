@@ -2,6 +2,13 @@ import React, { useState, useMemo, useRef, useEffect } from "react";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
 import ActionAreaCard from "../../container/Card";
+import ViewAllProducts from "../../pages/all_products";
+import DealsAndPromotions from "../../pages/deals_and_promotions";
+import ProductGetByCategory from "../../pages/get_all_products_by_category";
+import ProductGetByMerchant from "../../pages/get_all_products_by_merchant";
+import Discounts from "../../pages/discounts";
+import FreeShipping from "../../pages/is_free_shipping";
+
 import {
   getProductWithCategoryId,
   getCategoryBrand,
@@ -63,7 +70,30 @@ const Item = styled(Paper)(({ theme }) => ({
   color: theme.palette.text.primary,
 }));
 
-function SubCategory({ catId }) {
+function SubCategory({ catId, value,
+  setDealsData,
+  setShowDeals,
+  setDiscountData,
+  showDiscounts,
+  showFreeShipping,
+  setShowDiscounts,
+  discountData,
+  setFreeShippingData,
+  setShowFreeShipping,
+  setShowProduct,
+  showAllCategoryPro,
+  showAllMerchantPro,
+  setShowAllCategoryPro,
+  freeShippingData,
+  setShowAllMerchantPro,
+  showProduct,
+
+  showDeals,
+  dealsData,
+  setShowFilterData,
+  setFilterData1,
+  filterData1
+}) {
   //const { productDataWithCategoryId } = useSelector((state) => state.category);
   const [productDataWithCategoryId, setProductDataWithCategoryId] = useState([])
 
@@ -275,7 +305,18 @@ function SubCategory({ catId }) {
       // spacing={2}
       >
 
-        <SideBarFilter MinInput={MinInput} MaxInput={MaxInput} priceFilter={priceFilter} categoryProduct={categoryProduct} parentCategories={parentCategories} childrenCategory={children} subCategories={subCategories} brands={brands}></SideBarFilter>
+        <SideBarFilter value={value}
+          setDealsData={setDealsData}
+          setShowDeals={setShowDeals}
+          setDiscountData={setDiscountData}
+          showDiscounts={showDiscounts}
+          setShowDiscounts={setShowDiscounts}
+          setFreeShippingData={setFreeShippingData}
+          setShowFreeShipping={setShowFreeShipping}
+          setShowProduct={setShowProduct}
+          setShowAllCategoryPro={setShowAllCategoryPro}
+          setShowAllMerchantPro={setShowAllCategoryPro}
+          setFilterData={setFilterData} MinInput={MinInput} MaxInput={MaxInput} priceFilter={priceFilter} categoryProduct={categoryProduct} parentCategories={parentCategories} childrenCategory={children} subCategories={subCategories} brands={brands}></SideBarFilter>
 
         {/* ---------------------------------------------------- */}
 
@@ -342,19 +383,24 @@ function SubCategory({ catId }) {
 
         {console.log(filterProduct?.length)}
         <Grid sx={{ ml: 1 }}>
-          {productDataWithCategoryId.length > 0 &&
+          {/* {productDataWithCategoryId.length > 0 &&
             filterProduct?.length < 1 &&
             flag == false
-            ? productDataWithCategoryId?.map((item) => (
-              <ActionAreaCard
-                key={item}
-                product={item}
-                viewProduct={viewProduct}
-                addToCartHandler={addToCartHandler}
-                // viewCategory={viewCategory}
-                styledCard={styled}
-              ></ActionAreaCard>
-            ))
+            ?
+            //  productDataWithCategoryId?.map((item) => (
+            // <ActionAreaCard
+            //   key={item}
+            //   product={item}
+            //   viewProduct={viewProduct}
+            //   addToCartHandler={addToCartHandler}
+            //   // viewCategory={viewCategory}
+            //   styledCard={styled}
+            // ></ActionAreaCard>
+            <ViewAllProducts
+              Item={Item}
+              data={productDataWithCategoryId}
+            ></ViewAllProducts>
+            // ))
             : filterProduct.length > 0
               ? filterProduct?.map((item) => (
                 <ActionAreaCard
@@ -366,7 +412,250 @@ function SubCategory({ catId }) {
                   styledCard={styled}
                 ></ActionAreaCard>
               ))
-              : "Product Not Found"}
+              : "Product Not Found"} */}
+          {showProduct == false &&
+            showAllCategoryPro == false &&
+            showAllMerchantPro == false &&
+            showDeals == false &&
+            showDiscounts == false
+            //showFreeShipping == false
+            ? (
+              <ViewAllProducts
+                Item={Item}
+                data={productDataWithCategoryId}
+              ></ViewAllProducts>
+            ) : (
+              <>
+                {showProduct &&
+                  showDiscounts == false &&
+                  showAllCategoryPro == false &&
+                  showAllMerchantPro == false &&
+                  showDeals == false &&
+                  showFreeShipping == false ? (
+                  <ViewAllProducts
+                    Item={Item}
+                    data={productDataWithCategoryId}
+                  ></ViewAllProducts>
+                ) : (
+                  <>
+                    {showProduct &&
+                      showDiscounts == false &&
+                      showAllCategoryPro == false &&
+                      showAllMerchantPro == false &&
+                      showDeals == false &&
+                      showFreeShipping == false &&
+                      sortFilter == true ? (
+                      <ViewAllProducts
+                        Item={Item}
+                        data={productDataWithCategoryId}
+                      ></ViewAllProducts>
+                    ) : (
+                      <></>
+                    )}
+                  </>
+                )}
+              </>
+            )}
+
+
+          {showProduct &&
+            showAllCategoryPro == false &&
+            showAllMerchantPro == false &&
+            showDiscounts == false &&
+            showFreeShipping == false &&
+            dealsData?.length > 0 ? (
+            <DealsAndPromotions
+              data={filterData?.length > 0 ? filterData : dealsData}
+              showProduct={showProduct}
+              showAllCategoryPro={showAllCategoryPro}
+              showAllMerchantPro={showAllMerchantPro}
+              filterData={filterData}
+            ></DealsAndPromotions>
+          ) : (
+            <>
+              {" "}
+              {showProduct == false &&
+                showAllCategoryPro == true &&
+                showAllMerchantPro == false &&
+                showDiscounts == false &&
+                showFreeShipping == false &&
+                dealsData?.length > 0 ? (
+                <ProductGetByCategory
+                  data={filterData?.length > 0 ? filterData : dealsData}
+                  Item={Item}
+                ></ProductGetByCategory>
+              ) : (
+                <>
+                  {showProduct == false &&
+                    showAllCategoryPro == false &&
+                    showAllMerchantPro == true &&
+                    showDiscounts == false &&
+                    showFreeShipping == false &&
+                    dealsData?.length > 0 ? (
+                    <ProductGetByMerchant
+                      data={filterData?.length > 0 ? filterData : dealsData}
+                      Item={Item}
+                    ></ProductGetByMerchant>
+                  ) : (
+                    <Grid>
+                      {showDeals &&
+                        showDiscounts == false &&
+                        // showFreeShipping == false &&
+                        showProduct == false ? (
+                        <DealsAndPromotions
+                          data={
+                            filterData?.length > 0 ? filterData : dealsData
+                          }
+                          showProduct={showProduct}
+                          showAllCategoryPro={showAllCategoryPro}
+                          showAllMerchantPro={showAllMerchantPro}
+                          filterData={filterData}
+                        ></DealsAndPromotions>
+                      ) : (
+                        <></>
+                      )}
+                    </Grid>
+                  )}
+                </>
+              )}
+            </>
+          )}
+
+          <>
+            {showProduct &&
+              showAllCategoryPro == false &&
+              showAllMerchantPro == false &&
+              showDeals == false &&
+              showFreeShipping == false &&
+              discountData?.length > 0 ? (
+              <ViewAllProducts
+                Item={Item}
+                data={filterData?.length > 0 ? filterData : discountData}
+              ></ViewAllProducts>
+            ) : (
+              <>
+                {" "}
+                {showProduct == false &&
+                  showAllCategoryPro == true &&
+                  showAllMerchantPro == false &&
+                  showDeals == false &&
+                  //  showFreeShipping == false &&
+                  discountData?.length > 0 ? (
+                  <ProductGetByCategory
+                    data={filterData?.length > 0 ? filterData : discountData}
+                    Item={Item}
+                  ></ProductGetByCategory>
+                ) : (
+                  <>
+                    {showProduct == false &&
+                      showAllCategoryPro == false &&
+                      showAllMerchantPro == true &&
+                      showDeals == false &&
+                      //       showFreeShipping == false &&
+                      discountData?.length > 0 ? (
+                      <ProductGetByMerchant
+                        data={
+                          filterData?.length > 0 ? filterData : discountData
+                        }
+                        Item={Item}
+                      ></ProductGetByMerchant>
+                    ) : (
+                      <>
+                        {showDiscounts &&
+                          //     showFreeShipping == false &&
+                          showProduct == false ? (
+                          <Discounts
+                            data={
+                              filterData?.length > 0
+                                ? filterData
+                                : discountData
+                            }
+                            showProduct={showProduct}
+                            showAllCategoryPro={showAllCategoryPro}
+                            showAllMerchantPro={showAllMerchantPro}
+                            filterData={filterData}
+                          ></Discounts>
+                        ) : (
+                          <></>
+                        )}
+                      </>
+                    )}
+                  </>
+                )}
+              </>
+            )}
+          </>
+          <>
+            {showProduct &&
+              showDiscounts == false &&
+              showAllCategoryPro == false &&
+              showAllMerchantPro == false &&
+              showDeals == false &&
+              freeShippingData?.length > 0 ? (
+              <ViewAllProducts
+                Item={Item}
+                data={filterData?.length > 0 ? filterData : freeShippingData}
+              ></ViewAllProducts>
+            ) : (
+              <>
+                {" "}
+                {showProduct == false &&
+                  showDiscounts == false &&
+                  showAllCategoryPro == true &&
+                  showAllMerchantPro == false &&
+                  showDeals == false &&
+                  freeShippingData?.length > 0 ? (
+                  <ProductGetByCategory
+                    data={
+                      filterData?.length > 0 ? filterData : freeShippingData
+                    }
+                    Item={Item}
+                  ></ProductGetByCategory>
+                ) : (
+                  <>
+                    {showProduct == false &&
+                      showDiscounts == false &&
+                      showAllCategoryPro == false &&
+                      showAllMerchantPro == true &&
+                      showDeals == false &&
+                      freeShippingData?.length > 0 ? (
+                      <ProductGetByMerchant
+                        data={
+                          filterData?.length > 0
+                            ? filterData
+                            : freeShippingData
+                        }
+                        Item={Item}
+                      ></ProductGetByMerchant>
+                    ) : (
+                      <>
+                        {showFreeShipping &&
+                          showDiscounts == false &&
+                          showProduct == false ? (
+                          <FreeShipping
+                            data={
+                              filterData?.length > 0
+                                ? filterData
+                                : freeShippingData
+                            }
+                            showProduct={showProduct}
+                            showAllCategoryPro={showAllCategoryPro}
+                            showAllMerchantPro={showAllMerchantPro}
+                            filterData={filterData}
+                          ></FreeShipping>
+                        ) : (
+                          <></>
+                        )}
+                      </>
+                    )}
+                  </>
+                )}
+              </>
+            )}
+          </>
+
+
+
         </Grid>
       </Grid>
 

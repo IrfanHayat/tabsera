@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Grid from "@mui/material/Grid";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -27,6 +27,8 @@ import {
 import { useRouter } from "next/router";
 import ActionAreaCard from "./Card";
 import { result } from "lodash";
+import MerchantSideBarFilter from './Filter/MerchantSideBarFilter'
+
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
   { width: 550, itemsToShow: 2 },
@@ -42,11 +44,96 @@ function a11yProps(index) {
 }
 function MerchantStore({ merchantStoreDetail }) {
   const { merchantData } = useSelector((state) => state.merchant);
+
+  const MaxInput = useRef(null);
+  const MinInput = useRef(null);
+  const [parentCategories, setParentCategories] = useState([]);
+  const [subCategories, setSubCategories] = useState([]);
+  const [brands, setBrands] = useState([]);
+  const [catId, setCatId] = useState()
   // const [merchant, setmerchant] = useState();
   // console.log(merchantStoreDetail);
   // useEffect(() => {
   //   setmerchant(merchantData);
   // }, [input]);
+
+
+  const children = (subCategories) => {
+    return (
+
+      <Box sx={{ display: "flex", flexDirection: "column", ml: 2 }}>
+        <Grid>
+
+          {subCategories.map((result, index) => (
+            <List onClick={() => categoryProduct(result.category_name)} key={index}>
+              {result.category_name}
+            </List>
+          ))}
+        </Grid>
+        {/* {
+          subCategories?.map(result => {
+            <List>
+              <ListItem>
+                {"Hello"}
+              </ListItem>
+            </List>
+          })
+
+        } */}
+      </Box>
+    );
+  };
+
+
+
+
+  // useEffect(async () => {
+  //   let result = await dispatch(getCategory());
+  //   let results = result?.payload.filter(
+  //     (result) => result.category_id == catId
+  //   );
+
+  //   results?.map((category) => {
+  //     setParentCategories(category.category_name);
+
+  //     setSubCategories(category.child);
+  //   });
+  // }, []);
+
+  // useEffect(async () => {
+  //   let result = await dispatch(getCategoryBrand());
+  //   let results = result?.payload.filter(
+  //     (result) => result.category_id == catId
+  //   );
+  //   console.log(results);
+  //   results.map((category) => {
+  //     console.log(category)
+  //     setBrands(category.brands);
+  //   });
+  // }, []);
+
+  const priceFilter = () => {
+    let max = MaxInput.current.value;
+    let min = MinInput.current.value;
+    console.log(typeof max);
+    console.log(typeof min);
+    let result = productDataWithCategoryId.filter(
+      (result) =>
+        parseInt(result.productCost) >= parseInt(min) &&
+        parseInt(result.productCost) <= parseInt(max)
+    );
+    setFilterProduct(result);
+    setFlag(true);
+  };
+
+  function categoryProduct(name) {
+    console.log(name)
+    let result = productDataWithCategoryId.filter(category => category.categoryName == name)
+    console.log(result)
+    setFilterProduct(result)
+  }
+
+
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
 
@@ -92,7 +179,7 @@ function MerchantStore({ merchantStoreDetail }) {
         container
         spacing={1}
         sx={{ paddingTop: 2 }}
-        // justifyContent="center"
+      // justifyContent="center"
       >
         <Grid item md={12} xs={12} ml={1} sx={{ backgroundColor: "orange" }}>
           <Card display="flex" sx={{ width: "40%", m: 0.5, p: 1 }}>
@@ -169,14 +256,18 @@ function MerchantStore({ merchantStoreDetail }) {
               </Grid>
             </TabPanel>
             <TabPanel value={value} index={1}>
-              All Products
-              {merchantStoreDetail &&
-                merchantStoreDetail?.map((result) => (
-                  <ActionAreaCard
-                    product={result}
-                    viewProduct={viewProduct}
-                  ></ActionAreaCard>
-                ))}
+
+              <Grid sx={{ display: 'flex' }}>
+                <><MerchantSideBarFilter MinInput={MinInput} MaxInput={MaxInput} priceFilter={priceFilter} categoryProduct={categoryProduct} parentCategories={parentCategories} childrenCategory={children} subCategories={subCategories} brands={brands}></MerchantSideBarFilter></>
+                <> {merchantStoreDetail &&
+                  merchantStoreDetail?.map((result) => (
+                    <ActionAreaCard
+                      product={result}
+                      viewProduct={viewProduct}
+                    ></ActionAreaCard>
+                  ))}</>
+              </Grid>
+
             </TabPanel>
             <TabPanel value={value} index={2}>
               Profile
