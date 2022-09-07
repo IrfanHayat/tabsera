@@ -46,7 +46,7 @@ function ShippingMethods({
 
   return (
     <>
-      <Grid container mt={1} justifyContent={"center"}>
+      <Grid container justifyContent={"center"}>
         <Grid item md={12} xs={12} sx={{ bgcolor: "background.paper" }}>
           <Box sx={{ borderBottom: 1, borderColor: "divider", p: 2 }}>
             <Typography variant="h6" style={{ fontWeight: "bold" }}>
@@ -136,7 +136,7 @@ function ShippingMethods({
             </TabPanel> */}
         </Grid>
 
-        <Grid item md={12} xs={12} sx={{ bgcolor: "background.paper", mt: 1 }}>
+        <Grid item md={12} xs={12} sx={{ bgcolor: "background.paper" }}>
           <Box sx={{ borderBottom: 1, borderColor: "divider", p: 2 }}>
             <FormControl>
               <Typography variant="h6" style={{ fontWeight: "bold" }}>
@@ -194,7 +194,7 @@ function ShippingMethods({
           </Box>
         </Grid>
 
-        <Grid item md={12} xs={12} sx={{ bgcolor: "background.paper", mt: 1 }}>
+        <Grid item md={12} xs={12} sx={{ bgcolor: "background.paper" }}>
           <Box sx={{ borderBottom: 1, borderColor: "divider", p: 2 }}>
             <Typography variant="h6" style={{ fontWeight: "bold" }}>
               Shipping Charges

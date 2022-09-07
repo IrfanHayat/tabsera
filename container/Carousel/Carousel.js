@@ -3,6 +3,7 @@ import Carousel, { consts } from "react-elastic-carousel";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import ActionAreaCard from "../Card";
+import CarouselCard from "../CarouselCard";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
 import Link from "@mui/material/Link";
@@ -62,7 +63,7 @@ export default function CarouselApp({
           display: "flex",
           justifyContent: "space-between",
           flexWrap: "wrap",
-          // p: 1,
+          pt: 1,
           m: 1,
           // flexWrap: "wrap",
           // bgcolor: "background.paper",
@@ -129,7 +130,7 @@ export default function CarouselApp({
         {/* <div className="slider__conatiner"> */}
         {/* <Slider {...settings}> */}
         {product?.map((item, index) => (
-          <ActionAreaCard
+          <CarouselCard
             sx={{ width: "400px" }}
             key={index}
             product={item}
@@ -139,7 +140,7 @@ export default function CarouselApp({
             productView={productView}
             categoryView={categoryView}
             cartView={cartView}
-          ></ActionAreaCard>
+          ></CarouselCard>
         ))}
         {/* </Slider> */}
         {/* </div> */}

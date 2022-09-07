@@ -67,6 +67,7 @@ function CartScreen({
                 image={item.image_URL}
                 alt={item.name}
                 sx={{
+                  objectFit: "contain",
                   width: 171,
                   m: "auto",
                   maxHeight: { xs: 233, md: 167 },

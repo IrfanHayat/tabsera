@@ -54,14 +54,15 @@ export default function ActionAreaCard({
           // justifyContent: "space-arounf",
         }
       : { height: 85 };
-  let width = styledCard?.flexDirection == "row" ? "100%" : "205px";
+  let width = styledCard?.flexDirection == "row" ? "100%" : "206px";
   let height = styledCard?.flexDirection == "row" ? "100%" : "310px";
 
   return (
     <>
       <Card
         // className={styledCard?.flexDirection == "row" ? "" : styles.column}
-        className={styles.card}
+        className={styles.card1}
+        // className={styles.card}
         sx={{
           display: display,
           width: width,

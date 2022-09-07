@@ -15,6 +15,7 @@ import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import Image from "next/image";
 import Carousel from "react-elastic-carousel";
+import styles from "../styles/merchantStore.module.css";
 import { useSelector } from "react-redux";
 import {
   AppBar,
@@ -110,15 +111,7 @@ function MerchantStore({ merchantStoreDetail }) {
                 >
                   From: {merchantData.city}
                 </Typography>
-                {/* <Typography
-                  variant="subtitle1"
-                  color="text.secondary"
-                  component="div"
-                >
-                  {merchantData.city}
-                </Typography> */}
               </CardContent>
-              {/* <CardContent>Follow</CardContent> */}
             </Box>
           </Card>
         </Grid>

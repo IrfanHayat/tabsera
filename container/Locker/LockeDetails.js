@@ -2,7 +2,7 @@ import { width } from "@mui/system";
 import React, { useEffect, useState } from "react";
 import { styled } from "@mui/material/styles";
 import MapGL, { Marker } from "react-map-gl";
-import RoomIcon from '@mui/icons-material/Room';
+import RoomIcon from "@mui/icons-material/Room";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -13,10 +13,11 @@ import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Box, Grid } from "@mui/material";
-
+import styles from "../../styles/locker.module.css";
+import AssistantDirectionOutlinedIcon from "@mui/icons-material/AssistantDirectionOutlined";
+import AssistantDirectionIcon from "@mui/icons-material/AssistantDirection";
 const TOKEN =
-  'pk.eyJ1IjoiaHVjaGVuc2NiIiwiYSI6ImNqdHpnbGZ5ejFneXEzeW81a3B3anJkZGoifQ.RjMCIQBbS0dlzTl85EogQw';
-
+  "pk.eyJ1IjoiaHVjaGVuc2NiIiwiYSI6ImNqdHpnbGZ5ejFneXEzeW81a3B3anJkZGoifQ.RjMCIQBbS0dlzTl85EogQw";
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -64,31 +65,82 @@ const LockerDetails = ({ lockerData }) => {
     zoom: 12,
   });
   useEffect(() => {
-    lockerData?.map(result => {
+    lockerData?.map((result) => {
       setViewPort({
         latitude: result.latitude,
         longitude: result.longitude,
-        zoom: 5
-      })
-    })
-  }, [])
+        zoom: 5,
+      });
+    });
+  }, []);
 
   console.log("my lockerData => ", lockerData);
   return (
     <>
-      <Grid container>
-        <Grid item xs={12} md={4} sx={{ overflowY: "scroll", height: 300 }}>
+      <Grid container className={styles.lockerMain}>
+        <Grid
+          item
+          md={3}
+          className={styles.lockerDetails}
+          // sx={{ overflowY: "scroll", height: 300 }}
+        >
           {lockerData?.map((locker, i) => (
-            <Card sx={{ maxWidth: 345, padding: "0px" }}>
-              <CardContent sx={{ padding: "0px 20px" }}>
-                {/* <Typography gutterBottom variant="h5" component="div">
+            <>
+              {/* <CardContent sx={{ padding: "0px 20px" }}> */}
+              {/* <Typography gutterBottom variant="h5" component="div">
                   {locker.business_name}
                 </Typography> */}
+              <Box className={styles.lockerDetailsBox}>
+                <Typography variant="subtitle2">
+                  {locker.locker_name} Locker
+                </Typography>
+                <Typography variant="body2">
+                  Loation : {locker.locker_address}
+                </Typography>
+                <>
+                  <Button size="small" onClick={() => handleExpandClick(i)}>
+                    View Charge Plans
+                    <ExpandMore
+                      expand={expanded}
+                      aria-expanded={expanded}
+                      aria-label="show more"
+                    >
+                      <ExpandMoreIcon />
+                    </ExpandMore>
+                  </Button>
+                  <Divider fullWidth />
+                  {locker.isSubscribed ? (
+                    <Button variant="contained" disabled={true}>
+                      Subscribed
+                    </Button>
+                  ) : (
+                    <></>
+                    // <Button
+                    //   color="secondary"
+                    //   variant="contained"
+                    //   onClick={() => onSubscribeButton(lockerData.user_id)}
+                    // >
+                    //   Subscribe
+                    // </Button>
+                  )}
+                </>
+                <Collapse in={expanded === i} timeout="auto" unmountOnExit>
+                  <CardContent>
+                    {locker.charges.map((plans, i) => (
+                      <Typography paragraph className={styles.charges}>
+                        {plans.slot_size}
+                      </Typography>
+                    ))}
 
-                <Typography variant="body2">Loation : {locker.locker_address}</Typography>
-
-                <Typography variant="body2">No of Lockers : {locker.locker_name}</Typography>
-                {/* <Typography variant="body2">
+                    {/* <Typography paragraph>charge plans here</Typography> */}
+                  </CardContent>
+                </Collapse>
+              </Box>
+              <AssistantDirectionOutlinedIcon
+                color="primary"
+                fontSize="large"
+              />
+              {/* <Typography variant="body2">
                   Available Slots of Lockers: {locker.noOfLockerAvailableSlots}
                 </Typography>
                 <Typography variant="body2">
@@ -97,51 +149,20 @@ const LockerDetails = ({ lockerData }) => {
                 <Typography variant="body2">
                   Available Slots in Vending Machines: {locker.noOfVendingMachineAvailableSlots}
                 </Typography> */}
-              </CardContent>
-              <CardActions>
-                <Button size="small" onClick={() => handleExpandClick(i)}>
-                  View Charge Plans
-                  <ExpandMore expand={expanded} aria-expanded={expanded} aria-label="show more">
-                    <ExpandMoreIcon />
-                  </ExpandMore>
-                </Button>
-                {locker.isSubscribed ? (
-                  <Button variant="contained" disabled={true}>
-                    Subscribed
-                  </Button>
-                ) : (
-                  <></>
-                  // <Button
-                  //   color="secondary"
-                  //   variant="contained"
-                  //   onClick={() => onSubscribeButton(lockerData.user_id)}
-                  // >
-                  //   Subscribe
-                  // </Button>
-                )}
-              </CardActions>
-              <Collapse in={expanded === i} timeout="auto" unmountOnExit>
-                <CardContent>
-                  {locker.charges.map((plans, i) => (
-                    <Typography paragraph>{plans.slot_size}</Typography>
-                  ))}
-
-                  {/* <Typography paragraph>charge plans here</Typography> */}
-                </CardContent>
-              </Collapse>
-              <Divider />
-            </Card>
+              {/* </CardContent> */}
+            </>
           ))}
         </Grid>
-        <Grid item xs={8}>
+        <Grid item md={9}>
+          {/* hello */}
           <Box
             sx={{
-              width: 800,
-              height: 300,
-              padding: "0px",
+              // width: 800,
+              height: "100%",
+              // m: 1,
+              // padding: "0px",
             }}
           >
-
             <MapGL
               mapStyle="mapbox://styles/mapbox/streets-v11"
               {...viewport}
@@ -150,8 +171,8 @@ const LockerDetails = ({ lockerData }) => {
               onViewportChange={(viewport) => setViewPort(viewport)}
               mapboxApiAccessToken={TOKEN}
             >
-              <Marker {...viewport} anchor="bottom" >
-                <RoomIcon style={{ color: 'red' }}></RoomIcon>
+              <Marker {...viewport} anchor="bottom">
+                <RoomIcon style={{ color: "red" }}></RoomIcon>
               </Marker>
             </MapGL>
             {/* <MapGL

@@ -173,7 +173,8 @@ const Index = ({ Item, data }) => {
       /> */}
       <Grid
         container
-        margin="auto"
+        // margin="auto"
+        // style={{ paddingLeft: "0px", paddingRight: "0px" }}
         // justifyContent="center"
         // alignItems="center"
         sx={{ display: "flex" }}
