@@ -184,14 +184,14 @@ function Details({
         <Breadcrumbs aria-label="breadcrumb">
           <Link
             underline="hover"
-            color="inherit"
+            // color="inherit"
             onClick={() => router.push("/")}
           >
             Home
           </Link>
           <Link
             underline="hover"
-            color="inherit"
+            // color="inherit"
             // onClick={() =>
             //   router.push(`/product_detail?productId=${productIdRoute}`)
             // }
@@ -200,7 +200,7 @@ function Details({
           </Link>
           <Typography
             underline="hover"
-            color="text.primary"
+            // color="text.primary"
             href="/material-ui/react-breadcrumbs/"
             aria-current="page"
           >
@@ -211,15 +211,15 @@ function Details({
 
       <Grid
         container
-        spacing={1}
+        // spacing={1}
         maxWidth="xl"
         sx={{ backgroundColor: "#fafafa" }}
         // justifyContent="center"
       >
         <Grid item md={4} xs={12} sx={{ bgcolor: "white" }}>
           <List>
-            <ListItem sx={{ m: 1 }}>
-              <Carousel
+            <ListItem>
+              {/* <Carousel
                 // breakPoints={breakPoints}
                 //  disableArrowsOnEnd={false}
                 showArrows={false}
@@ -228,17 +228,24 @@ function Details({
                 showEmptySlots={true}
                 // itemsToShow={2}
                 // showArrows={false}
-              >
-                {Object.keys(productDetail).length > 0 && skusFlag == false
-                  ? productDetail.product_images[0].media_images.map(
-                      (result, index) => (
+              > */}
+              {Object.keys(productDetail).length > 0 && skusFlag == false
+                ? productDetail.product_images[0].media_images.map(
+                    (result, index) => (
+                      <Box
+                        sx={{
+                          width: "100%",
+                          height: "330px",
+                          // border: "1px solid black",
+                        }}
+                      >
                         <ReactImageMagnify
                           {...{
                             smallImage: {
                               alt: "Wristwatch by Ted Baker London",
                               // isFluidWidth: true,
-                              width: 450,
-                              height: 400,
+                              width: 400,
+                              height: 327,
                               src: result,
                               // sizes:
                               //   "(min-width: 800px) 33.5vw, (min-width: 415px) 50vw, 100vw",
@@ -263,15 +270,25 @@ function Details({
                             },
                           }}
                         />
-                      )
+                      </Box>
                     )
-                  : skusProduct &&
-                    skusProduct.sku_images.map((result) => (
+                  )
+                : skusProduct &&
+                  skusProduct.sku_images.map((result) => (
+                    <Box
+                      sx={{
+                        width: "100%",
+                        height: "330px",
+                        // border: "1px solid black",
+                      }}
+                    >
                       <ReactImageMagnify
                         {...{
                           smallImage: {
                             alt: "Wristwatch by Ted Baker London",
-                            isFluidWidth: true,
+                            // isFluidWidth: true,
+                            width: 400,
+                            height: 327,
                             // width: 100,
                             // height: 200,
                             src: result,
@@ -298,9 +315,11 @@ function Details({
                           },
                         }}
                       />
-                    ))}
-              </Carousel>
+                    </Box>
+                  ))}
+              {/* </Carousel> */}
             </ListItem>
+            <Divider />
             {console.log(multiProductImage)}
             <ListItem>
               <Carousel
@@ -310,7 +329,7 @@ function Details({
                 renderArrow={myArrow}
                 pagination={false}
                 showEmptySlots={true}
-                itemsToShow={4}
+                itemsToShow={6}
               >
                 {multiProductImage &&
                   multiProductImage?.map((results, index) => (
@@ -324,7 +343,7 @@ function Details({
                           setSkusFlag(false);
                           setisActiveImg(true);
                         }}
-                        // objectFit="cover"
+                        objectFit="contain"
                         // style={{borderColor:"red", border:"5px"}}
                         key={index}
                         src={results}
@@ -467,7 +486,7 @@ function Details({
                 renderArrow={myArrow}
                 pagination={false}
                 showEmptySlots={true}
-                itemsToShow={4}
+                itemsToShow={6}
               >
                 {productDetail &&
                   productDetail.skus?.map((results, index) => (
@@ -480,7 +499,7 @@ function Details({
                         onClick={() => {
                           viewVariantsProduct(results);
                         }}
-                        objectFit="cover"
+                        objectFit="contain"
                         key={index}
                         src={results.sku_images[0]}
                         alt="shirt"
@@ -539,7 +558,7 @@ function Details({
                 alignItems: "center",
                 flexWrap: "wrap",
                 boxShadow: 0,
-                bgcolor: "#f6f9fc",
+                // bgcolor: "#f6f9fc",
                 // sx={{  }}
                 // borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
               },
@@ -547,7 +566,8 @@ function Details({
           >
             <Grid item md={6} sm={6}>
               <Button
-                type="submit"
+                // type="submit"
+                variant="contained"
                 className={styles.buyNowbtn}
                 onClick={() => {
                   skusProduct
@@ -560,6 +580,8 @@ function Details({
             </Grid>
             <Grid item md={6} sm={6}>
               <Button
+                color="warning"
+                variant="contained"
                 className={styles.addToCartbtn}
                 onClick={() => {
                   skusProduct
@@ -646,33 +668,42 @@ function Details({
           <Divider />
         </Grid>
 
-        <Grid container sx={{ p: 1 }}>
-          <Grid item md={9} xs={9} sx={{ background: "white", p: 1 }}>
+        <Grid container>
+          <Grid item md={9} xs={9}>
             <Grid>
-              <Typography sx={{ fontSize: "1rem", fontWeight: "bold" }}>
-                Descritpion
-              </Typography>
-              <Typography> {productDetail?.product_desc}</Typography>
+              <Typography className={styles.ratings}>Descritpion</Typography>
+              <List className={styles.ratingsDesc}>
+                <ListItem>
+                  <Typography> {productDetail?.product_desc}</Typography>
+                </ListItem>
+              </List>
             </Grid>
             {/* <Grid item md={9} xs={9}>
               <Typography style={{ fontWeight: "bold" }}>Rating :</Typography>
             </Grid> */}
           </Grid>
 
-          <Grid item md={3} xs={12}>
+          <Grid item md={3} xs={12} pl={3}>
             <Typography style={{ fontWeight: "bold" }}>
               {" "}
               Similar Products :
             </Typography>
           </Grid>
         </Grid>
-        <Grid container sx={{ p: 1 }}>
-          <Grid item md={9} xs={9} sx={{ background: "white", p: 1 }}>
+        <Grid container>
+          <Grid item md={9} xs={9}>
             <Grid>
-              <Typography sx={{ fontSize: "1rem", fontWeight: "bold" }}>
+              <Typography
+                className={styles.ratings}
+                // sx={{ fontSize: "1rem", fontWeight: "bold" }}
+              >
                 Ratings And Reviews
               </Typography>
-              <Typography> rating and reviews</Typography>
+              <List className={styles.ratingsDesc}>
+                <ListItem>
+                  <Typography> rating and reviews</Typography>
+                </ListItem>
+              </List>
             </Grid>
             {/* <Grid item md={9} xs={9}>
               <Typography style={{ fontWeight: "bold" }}>Rating :</Typography>
@@ -708,11 +739,12 @@ function Details({
                 color="info"
                 type="submit"
                 size="large"
-                sx={{
-                  background:
-                    "linear-gradient(90deg, #020024 0%, #090979 35%, #00d4ff 100%)",
-                }}
+                // sx={{
+                //   background:
+                //     "linear-gradient(90deg, #020024 0%, #090979 35%, #00d4ff 100%)",
+                // }}
                 // href="/shipping_information"
+                className={styles.buyNowbtnSM}
                 onClick={() => {
                   skusProduct
                     ? BuyHandler(productDetail, skusProduct)
@@ -723,10 +755,11 @@ function Details({
               </Button>
               <Button
                 // fullWidth
+                className={styles.addToCartbtnSM}
                 variant="contained"
-                sx={{
-                  background: "linear-gradient(45deg, red 10%, yellow 100%)",
-                }}
+                // sx={{
+                //   background: "linear-gradient(45deg, red 10%, yellow 100%)",
+                // }}
                 color="warning"
                 onClick={() => {
                   skusProduct

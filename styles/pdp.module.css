@@ -4,11 +4,15 @@
   width: 225px;
   font-size: 16px;
   color: #fff;
-  border: 1px solid #2abbe8;
+  border: 1px solid #3d7cff;
   border-radius: 2px;
-  background-color: #2abbe8;
+  background-color: #3d7cff;
 }
-
+/* .buyNowbtn :hover {
+  color: #3d7cff;
+  border: 1px solid #3d7cff;
+  background-color: #fff;
+} */
 .addToCartbtn {
   display: flex;
   height: 44px;
@@ -19,6 +23,33 @@
   border-radius: 2px;
   background-color: #f57224;
 }
+
+.buyNowbtnSM {
+  display: flex;
+  height: 38px;
+  width: 150px;
+  font-size: 14px;
+  color: #fff;
+  border: 1px solid #3d7cff;
+  border-radius: 2px;
+  background-color: #3d7cff;
+}
+/* .buyNowbtn :hover {
+  color: #3d7cff;
+  border: 1px solid #3d7cff;
+  background-color: #fff;
+} */
+.addToCartbtnSM {
+  display: flex;
+  height: 38px;
+  width: 150px;
+  font-size: 14px;
+  color: #fff;
+  border: 1px solid #f57224;
+  border-radius: 2px;
+  background-color: #f57224;
+}
+
 .selectimg {
   border: 1px solid #fff;
 }
@@ -37,3 +68,18 @@
 /* .selectimg::selection {
   border: 1px solid hsl(209, 94%, 39%);
 } */
+
+.ratings {
+  display: flex;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 2px;
+  /* background-color: white; */
+}
+
+.ratingsDesc {
+  /* display: flex; */
+  /* font-size: 1rem; */
+  /* font-weight: bold; */
+  background-color: white;
+}

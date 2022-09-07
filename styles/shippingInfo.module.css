@@ -16,6 +16,19 @@
   justify-content: space-between;
 }
 
+.table {
+  overflow-x: auto;
+  margin-right: auto;
+  margin-left: auto;
+  /* margin-top: 50px; */
+  padding: 10px;
+  margin: 10px;
+}
+
+.thead {
+  height: 40px !important;
+}
+
 .select {
   width: 5%;
 }
@@ -36,4 +49,71 @@
 }
 .edit {
   width: 8%;
+}
+
+.chip {
+  text-align: center;
+  height: 20px;
+  border: 8px;
+  border-radius: 2px;
+  justify-content: center;
+  padding-top: 3px;
+  font-size: 12px;
+
+  /* border-radius: 8px;
+    color: #fff;
+    font-size: 9px;
+    display: inline-block;
+    height: 15px;
+    text-align: center;
+    vertical-align: text-bottom;
+    line-height: 15px;
+    margin-right: 5px;
+    padding: 0 7px; */
+}
+
+.editIcon {
+  color: green;
+}
+
+.findLocker {
+  padding: 1vh;
+  margin: 1px;
+
+  /* height: 10vh; */
+  /* display: flex; */
+  /* align-items: center; */
+  background-color: #fff;
+}
+
+.findLockerButton {
+  margin-top: 10px;
+  display: flex;
+  height: 44px;
+  width: 200px;
+  font-size: 16px;
+  color: #fff;
+  border: 1px solid #3d7cff;
+  border-radius: 2px;
+  background-color: #3d7cff;
+}
+
+.mapTableView {
+  display: flex;
+  /* font-size: 100px; */
+  /* font-weight: bold; */
+  background-color: #fff;
+
+  padding: 1vh;
+  margin: 1px;
+}
+.mapTableViewText {
+  font-size: 14px;
+  font-weight: bold;
+}
+.mapTableViewText :active {
+  font-size: 14px;
+  color: #3d7cff;
+  font-weight: bold;
+  cursor: pointer;
 }

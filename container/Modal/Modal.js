@@ -8,6 +8,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { Divider } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
+import AddIcon from "@mui/icons-material/Add";
 
 export default function Modal({
   heading,
@@ -16,6 +17,7 @@ export default function Modal({
   buttonCancel,
   show,
   close,
+  startIcon,
   buttonTitle,
 }) {
   const [open, setOpen] = React.useState(false);
@@ -32,7 +34,13 @@ export default function Modal({
 
   return (
     <div>
-      <Button onClick={handleModalOpen}>{buttonTitle}</Button>
+      <Button
+        variant="contained"
+        startIcon={startIcon}
+        onClick={handleModalOpen}
+      >
+        {buttonTitle}
+      </Button>
       <Dialog
         fullScreen={fullScreen}
         open={open}
