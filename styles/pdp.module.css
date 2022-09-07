@@ -1,3 +1,6 @@
+.breadcrumbs {
+  background-color: #fafafa;
+}
 .buyNowbtn {
   display: flex;
   height: 44px;
@@ -73,11 +76,13 @@
   display: flex;
   font-size: 1rem;
   font-weight: bold;
-  padding: 2px;
+  padding-left: 20px;
   /* background-color: white; */
 }
 
 .ratingsDesc {
+  padding-left: 20px;
+
   /* display: flex; */
   /* font-size: 1rem; */
   /* font-weight: bold; */

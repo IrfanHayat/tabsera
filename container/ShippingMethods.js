@@ -47,7 +47,12 @@ function ShippingMethods({
   return (
     <>
       <Grid container justifyContent={"center"}>
-        <Grid item md={12} xs={12} sx={{ bgcolor: "background.paper" }}>
+        <Grid
+          item
+          md={12}
+          xs={12}
+          sx={{ bgcolor: "background.paper", mt: 0.2 }}
+        >
           <Box sx={{ borderBottom: 1, borderColor: "divider", p: 2 }}>
             <Typography variant="h6" style={{ fontWeight: "bold" }}>
               Shipping Information
@@ -137,123 +142,129 @@ function ShippingMethods({
         </Grid>
 
         <Grid item md={12} xs={12} sx={{ bgcolor: "background.paper" }}>
-          <Box sx={{ borderBottom: 1, borderColor: "divider", p: 2 }}>
-            <FormControl>
-              <Typography variant="h6" style={{ fontWeight: "bold" }}>
-                Shipping Methods
-              </Typography>
-
-              <List>
-                <ListItem sx={{ display: "flex" }}>
-                  <RadioGroup
-                    // row
-                    aria-labelledby="demo-row-radio-buttons-group-label"
-                    name="row-radio-buttons-group"
-                    // value={labelValue}
-                  >
-                    {shipmentMethodData &&
-                      shipmentMethodData.map((result) => (
-                        <FormControlLabel
-                          key={result.shipping_method_id}
-                          value={result.shipping_method_id}
-                          control={
-                            <Radio onChange={() => handleChange(result)} />
-                          }
-                          label={
-                            <Box
+          <Box sx={{ p: 2 }}>
+            <Typography variant="h6" style={{ fontWeight: "bold" }}>
+              Shipping Methods
+            </Typography>
+          </Box>
+          <FormControl>
+            <List>
+              <ListItem sx={{ display: "flex" }}>
+                <RadioGroup
+                  // row
+                  aria-labelledby="demo-row-radio-buttons-group-label"
+                  name="row-radio-buttons-group"
+                  // value={labelValue}
+                >
+                  {shipmentMethodData &&
+                    shipmentMethodData.map((result) => (
+                      <FormControlLabel
+                        key={result.shipping_method_id}
+                        value={result.shipping_method_id}
+                        control={
+                          <Radio onChange={() => handleChange(result)} />
+                        }
+                        label={
+                          <Box
+                            sx={{
+                              display: "flex",
+                              alignItems: "center",
+                            }}
+                          >
+                            <Image
+                              // className={cx(styles.media, mediaStyles.root)}
+                              src={result.shipping_method_icon_url}
+                              // onClick={(e) => viewCategory(product.category_id)}
+                              alt={"Shipping"}
+                              width={50}
+                              height={30}
+                              objectFit="contain"
+                            ></Image>
+                            <Typography
                               sx={{
-                                display: "flex",
-                                alignItems: "center",
+                                p: 1,
                               }}
                             >
-                              <Image
-                                // className={cx(styles.media, mediaStyles.root)}
-                                src={result.shipping_method_icon_url}
-                                // onClick={(e) => viewCategory(product.category_id)}
-                                alt={"locker"}
-                                width={45}
-                                height={20}
-                              ></Image>
-                              <Typography
-                                sx={{
-                                  p: 1,
-                                }}
-                              >
-                                {result.shipping_method_name}
-                              </Typography>
-                            </Box>
-                          }
-                          onClick={() => setRadioCheck(true)}
-                          sx={{ ml: 1 }}
-                        />
-                      ))}
-                  </RadioGroup>
-                </ListItem>
-              </List>
-            </FormControl>
-          </Box>
+                              {result.shipping_method_name}
+                            </Typography>
+                          </Box>
+                        }
+                        onClick={() => setRadioCheck(true)}
+                        sx={{ ml: 1 }}
+                      />
+                    ))}
+                </RadioGroup>
+              </ListItem>
+            </List>
+          </FormControl>
         </Grid>
 
-        <Grid item md={12} xs={12} sx={{ bgcolor: "background.paper" }}>
-          <Box sx={{ borderBottom: 1, borderColor: "divider", p: 2 }}>
+        <Grid
+          item
+          md={12}
+          xs={12}
+          sx={{ bgcolor: "background.paper", mt: 0.2 }}
+        >
+          <Box sx={{ p: 2 }}>
             <Typography variant="h6" style={{ fontWeight: "bold" }}>
               Shipping Charges
             </Typography>
-            {/* <Box sx={{ display: "inline", margin: 5 }}> */}
-            <Grid container>
-              <ListItem>
-                <Grid item xs={3}>
-                  Subtotal
-                </Grid>
-                <Grid item xs={3}>
-                  {productPrice &&
-                    productPrice.reduce((a, c) => a + c.qty * c.price, 0)}
-                </Grid>
-                <Grid item xs={6}></Grid>
-                {/* <ListItemText>$ 0.0</ListItemText> */}
-              </ListItem>
-              <ListItem>
-                <Grid item xs={3}>
-                  Shipping Cost
-                </Grid>
-                <Grid item xs={3}>
-                  {shippingCharges ? shippingCharges : 0}
-                </Grid>
-                <Grid item xs={6}></Grid>
-              </ListItem>
-              <ListItem>
-                <Grid item xs={3}>
-                  Total Cost{" "}
-                </Grid>
-                <Grid item xs={3}>
-                  {productPrice && shippingCharges
-                    ? productPrice?.reduce((a, c) => a + c.qty * c.price, 0) +
-                      shippingCharges
-                    : productPrice?.reduce((a, c) => a + c.qty * c.price, 0)}
-                </Grid>
-                <Grid item xs={6}></Grid>
-              </ListItem>
-            </Grid>
-            <Stack direction="row" spacing={2}>
-              <Button
-                onClick={checkoutHandler}
-                variant="contained"
-                color="primary"
-                disabled={radioCheck ? "" : "disabled"}
-                // startIcon={<AddIcon />}
-              >
-                Review Order
-              </Button>
-              <Button
+          </Box>
+
+          {/* <Box sx={{ display: "inline", margin: 5 }}> */}
+          <Grid container sx={{ pl: 2 }}>
+            <ListItem>
+              <Grid item xs={3}>
+                Subtotal
+              </Grid>
+              <Grid item xs={3}>
+                {productPrice &&
+                  productPrice.reduce((a, c) => a + c.qty * c.price, 0)}
+              </Grid>
+              <Grid item xs={6}></Grid>
+              {/* <ListItemText>$ 0.0</ListItemText> */}
+            </ListItem>
+            <ListItem>
+              <Grid item xs={3}>
+                Shipping Cost
+              </Grid>
+              <Grid item xs={3}>
+                {shippingCharges ? shippingCharges : 0}
+              </Grid>
+              <Grid item xs={6}></Grid>
+            </ListItem>
+            <ListItem>
+              <Grid item xs={3}>
+                Total Cost{" "}
+              </Grid>
+              <Grid item xs={3}>
+                {productPrice && shippingCharges
+                  ? productPrice?.reduce((a, c) => a + c.qty * c.price, 0) +
+                    shippingCharges
+                  : productPrice?.reduce((a, c) => a + c.qty * c.price, 0)}
+              </Grid>
+              <Grid item xs={6}></Grid>
+            </ListItem>
+          </Grid>
+          <ListItem>
+            <Button
+              onClick={checkoutHandler}
+              variant="contained"
+              color="primary"
+              disabled={radioCheck ? "" : "disabled"}
+              // startIcon={<AddIcon />}
+            >
+              Review Order
+            </Button>
+          </ListItem>
+          {/* <Button
                 // fullWidth
                 variant="contained"
                 color="error"
                 onClick={() => router.push("/cart")}
               >
                 Back
-              </Button>
-            </Stack>
-          </Box>
+              </Button> */}
         </Grid>
       </Grid>
     </>

@@ -6,7 +6,6 @@ import ModalData from "./ModalData";
 import { useDispatch } from "react-redux";
 import localStorage from "localStorage";
 // import MuiPhoneNumber from "material-ui-phone-number-2";
-import Avatar from "@mui/material/Avatar";
 import NavSelect from "../Navbar/Components/NavSelect";
 
 import locales from "../../i18n.json";
@@ -26,6 +25,9 @@ import Menu from "@mui/material/Menu";
 import { loginUser, logoutUser, logOutCustomer } from "../../slice/authSlice";
 import Cookies from "js-cookie";
 import LogoutIcon from "@mui/icons-material/Logout";
+import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import Avatar from "@mui/material/Avatar";
+import styles from "../../styles/signIn.module.css";
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -149,16 +151,31 @@ export default function SignIn({ isLoggedIn, setIsLoggedIn }) {
             Data={myAccount}
             color="white"
           /> */}
-          <Button
-            sx={{ color: "white" }}
+          {/* <Button
+            // sx={{ color: "white" }}
             id="basic-button"
             aria-controls={open1 ? "basic-menu" : undefined}
             aria-haspopup="true"
             aria-expanded={open1 ? "true" : undefined}
             onClick={handleClick1}
-          >
-            My Account
-          </Button>
+          > */}
+          {/* <Avatar
+            aria-controls={open1 ? "basic-menu" : undefined}
+            aria-haspopup="true"
+            aria-expanded={open1 ? "true" : undefined}
+            onClick={handleClick1}
+          > */}
+          <AccountCircleIcon
+            aria-controls={open1 ? "basic-menu" : undefined}
+            aria-haspopup="true"
+            aria-expanded={open1 ? "true" : undefined}
+            onClick={handleClick1}
+            color="primary"
+            // fontSize="large"
+            className={styles.avatar}
+          />
+          {/* </Avatar> */}
+          {/* </Button> */}
           <Menu
             id="basic-menu"
             anchorEl={anchorEl}

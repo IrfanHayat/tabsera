@@ -1,0 +1,38 @@
+.cart {
+  background-color: #fff;
+  padding: 20px;
+}
+
+.cartCard {
+  display: flex;
+  margin-top: 20px;
+  overflow: hidden;
+  /* flex-direction: ; */
+}
+
+.cartCardImg {
+  width: 171px;
+  object-fit: contain;
+  margin: auto;
+}
+.cartItemName {
+  color: #3d7cff;
+  display: flex;
+  font-size: 18px;
+  font-weight: 600;
+  align-items: center;
+}
+
+.cartItemQuantity {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.cartItemPrice {
+  display: flex;
+  align-items: center;
+}
+
+.cartItemPriceValue {
+  font-weight: bold;
+}

@@ -40,18 +40,16 @@ function Placeorder() {
     if (reason === "clickaway") {
       return;
     }
-    setOpenBar(false);
+    // setOpenBar(false);
   };
 
   const {
     cart: { cartItems },
   } = useSelector((state) => state.basket);
 
-  console.log(cartItems)
+  console.log(cartItems);
 
-  useEffect(() => {
-
-  }, [shippingCharges])
+  useEffect(() => {}, [shippingCharges]);
 
   useEffect(() => {
     //dispatch(getCartItems())
@@ -74,7 +72,6 @@ function Placeorder() {
     dispatch(getTotals());
   }, []);
   useEffect(() => {
-
     if (router.query.addressId) {
       let result1 = shippingAddressData.filter((result) =>
         result.address_id == router.query.addressId ? result : ""
@@ -92,7 +89,6 @@ function Placeorder() {
 
       dispatch(getCustomer());
     }
-
   }, [router, shippementData, shippingAddressData, shippementLockerData]);
 
   useEffect(() => {
@@ -101,10 +97,7 @@ function Placeorder() {
 
   console.log(cartItems);
 
-
-
   const placeOrderHandler = async (shippementData, userData) => {
-
     // let newCartItems=cartItems.map(result=>{
     //     let newObj={
     //         merchantId:result.merchant_id,
@@ -113,7 +106,6 @@ function Placeorder() {
     //     }
     //     return newObj
     // })
-
 
     //    let obj={
     //     "isBuyNow": true,
@@ -159,35 +151,29 @@ function Placeorder() {
     //     "origOrderAmount": 3.0
     // }
 
-
-
-
-
-
-
     if (router.query.addressId) {
-      console.log(localStorage.getItem('buyCartItems'))
-      if (localStorage.getItem('buyCartItems')) {
-        let newCartItems = cartItems.map(result => {
+      console.log(localStorage.getItem("buyCartItems"));
+      if (localStorage.getItem("buyCartItems")) {
+        let newCartItems = cartItems.map((result) => {
           let obj = {};
           obj.discount = 0;
-          obj.merchantId = result.merchant_id
-          obj.origPrice = result.price
-          obj.price = result.price
-          obj.quantity = result.qty
-          obj.sku = result.sku
-          return obj
-        })
+          obj.merchantId = result.merchant_id;
+          obj.origPrice = result.price;
+          obj.price = result.price;
+          obj.quantity = result.qty;
+          obj.sku = result.sku;
+          return obj;
+        });
         let obj = {
-          "isBuyNow": true,
-          "orderAmount": cartItems.reduce((a, c) => a + c.qty * c.price, 0),
-          "cartItems": newCartItems,
-          "coupons": [],
-          "orderDiscount": 0.0,
-          "discounts": [],
-          "paymentInfo": {
-            "paymentAmount": cartItems.reduce((a, c) => a + c.qty * c.price, 0),
-            "paymentCurreny": "PKR"
+          isBuyNow: true,
+          orderAmount: cartItems.reduce((a, c) => a + c.qty * c.price, 0),
+          cartItems: newCartItems,
+          coupons: [],
+          orderDiscount: 0.0,
+          discounts: [],
+          paymentInfo: {
+            paymentAmount: cartItems.reduce((a, c) => a + c.qty * c.price, 0),
+            paymentCurreny: "PKR",
           },
           rewards: [],
           shippingInfo: {
@@ -210,39 +196,38 @@ function Placeorder() {
             shippingMethodId: router.query.shipId,
             shipment_method_type: "address",
           },
-          "origOrderAmount": cartItems.reduce((a, c) => a + c.qty * c.price, 0)
-        }
-        console.log(obj)
-        let result = await dispatch(addOrder(obj))
+          origOrderAmount: cartItems.reduce((a, c) => a + c.qty * c.price, 0),
+        };
+        console.log(obj);
+        let result = await dispatch(addOrder(obj));
 
         if (result.payload.customerOrderNo != null) {
-          setOpenBar(true);
+          // setOpenBar(true);
           setTimeout(() => {
-            router.push('/payment')
-          }, 1000)
-
+            router.push("/payment");
+          }, 1000);
         }
       } else {
-        let newCartItems = cartItems.map(result => {
+        let newCartItems = cartItems.map((result) => {
           let obj = {};
           obj.discount = 0;
-          obj.merchantId = result.merchant_id
-          obj.origPrice = result.price
-          obj.price = result.price
-          obj.quantity = result.qty
-          obj.sku = result.sku
-          return obj
-        })
+          obj.merchantId = result.merchant_id;
+          obj.origPrice = result.price;
+          obj.price = result.price;
+          obj.quantity = result.qty;
+          obj.sku = result.sku;
+          return obj;
+        });
         let obj = {
-          "isBuyNow": false,
-          "orderAmount": cartItems.reduce((a, c) => a + c.qty * c.price, 0),
-          "cartItems": newCartItems,
-          "coupons": [],
-          "orderDiscount": 0.0,
-          "discounts": [],
-          "paymentInfo": {
-            "paymentAmount": cartItems.reduce((a, c) => a + c.qty * c.price, 0),
-            "paymentCurreny": "PKR"
+          isBuyNow: false,
+          orderAmount: cartItems.reduce((a, c) => a + c.qty * c.price, 0),
+          cartItems: newCartItems,
+          coupons: [],
+          orderDiscount: 0.0,
+          discounts: [],
+          paymentInfo: {
+            paymentAmount: cartItems.reduce((a, c) => a + c.qty * c.price, 0),
+            paymentCurreny: "PKR",
           },
           rewards: [],
           shippingInfo: {
@@ -265,87 +250,77 @@ function Placeorder() {
             shippingMethodId: router.query.shipId,
             shipment_method_type: "address",
           },
-          "origOrderAmount": cartItems.reduce((a, c) => a + c.qty * c.price, 0)
-        }
-        let result = await dispatch(addOrder(obj))
+          origOrderAmount: cartItems.reduce((a, c) => a + c.qty * c.price, 0),
+        };
+        let result = await dispatch(addOrder(obj));
 
         if (result.payload.customerOrderNo != null) {
-          setOpenBar(true);
+          // setOpenBar(true);
           setTimeout(() => {
-            router.push('/payment')
-          }, 1000)
-
+            router.push("/payment");
+          }, 1000);
         }
       }
-
-
     } else {
-      console.log(shippementLockerData)
-      let newCartItems = cartItems.map(result => {
+      console.log(shippementLockerData);
+      let newCartItems = cartItems.map((result) => {
         let obj = {};
         obj.discount = 0;
-        obj.merchantId = result.merchant_id
-        obj.origPrice = result.price
-        obj.price = result.price
-        obj.quantity = result.qty
-        obj.sku = result.sku
-        return obj
-      })
+        obj.merchantId = result.merchant_id;
+        obj.origPrice = result.price;
+        obj.price = result.price;
+        obj.quantity = result.qty;
+        obj.sku = result.sku;
+        return obj;
+      });
       let obj = {
-        "isBuyNow": false,
-        "orderAmount": cartItems.reduce((a, c) => a + c.qty * c.price, 0),
-        "cartItems": newCartItems,
-        "coupons": [],
-        "orderDiscount": "0.0",
-        "discounts": [],
-        "paymentInfo": {
-          "paymentAmount": cartItems.reduce((a, c) => a + c.qty * c.price, 0),
-          "paymentCurreny": "PKR"
+        isBuyNow: false,
+        orderAmount: cartItems.reduce((a, c) => a + c.qty * c.price, 0),
+        cartItems: newCartItems,
+        coupons: [],
+        orderDiscount: "0.0",
+        discounts: [],
+        paymentInfo: {
+          paymentAmount: cartItems.reduce((a, c) => a + c.qty * c.price, 0),
+          paymentCurreny: "PKR",
         },
-        "rewards": [],
-        "shippingInfo": {
-          "contactInfo": {
-            "address": "Islamabad",
-            "addressId": shippementLockerData.locker_id,
-            "cityId": 11,
-            "cityName": "",
-            "countryId": 1,
-            "countryName": "Pakistan",
-            "email": "",
-            "firstName": userData.first_name,
-            "lastName": userData.last_name,
-            "mobileNumber": "",
-            "stateId": 2724,
-            "stateName": "Pakistan"
+        rewards: [],
+        shippingInfo: {
+          contactInfo: {
+            address: "Islamabad",
+            addressId: shippementLockerData.locker_id,
+            cityId: 11,
+            cityName: "",
+            countryId: 1,
+            countryName: "Pakistan",
+            email: "",
+            firstName: userData.first_name,
+            lastName: userData.last_name,
+            mobileNumber: "",
+            stateId: 2724,
+            stateName: "Pakistan",
           },
-          "origShippingCharges": shippementCharges ? shippementCharges : 0,
-          "shipmentMethodType": "locker",
-          "shippingCharges": shippementCharges ? shippementCharges : 0,
-          "shippingDiscount": "0",
-          "shippingMethodId": router.query.shipId
+          origShippingCharges: shippementCharges ? shippementCharges : 0,
+          shipmentMethodType: "locker",
+          shippingCharges: shippementCharges ? shippementCharges : 0,
+          shippingDiscount: "0",
+          shippingMethodId: router.query.shipId,
         },
-        "origOrderAmount": cartItems.reduce((a, c) => a + c.qty * c.price, 0)
-      }
+        origOrderAmount: cartItems.reduce((a, c) => a + c.qty * c.price, 0),
+      };
 
+      console.log(obj);
 
-
-
-      console.log(obj)
-
-      let result = await dispatch(addOrder(obj))
-      console.log(result)
+      let result = await dispatch(addOrder(obj));
+      console.log(result);
       if (Object.keys(result.payload).length > 0) {
-        setOpenBar(true);
+        // setOpenBar(true);
         setTimeout(() => {
-          router.push('/payment')
-        }, 1000)
-
+          router.push("/payment");
+        }, 1000);
       }
-
     }
-
-  }
-
+  };
 
   return (
     <>
@@ -366,7 +341,7 @@ function Placeorder() {
         shippingCharges={shippementCharges}
         shippmentName={router.query.shipName}
         handleCloseBar={handleCloseBar}
-        openBar={openBar}
+        // openBar={openBar}
         shippementLockerData={shippementLockerData}
       ></PlaceOrder1>
     </>

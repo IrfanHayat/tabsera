@@ -28,7 +28,7 @@ import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
 import IndeterminateCheckBoxOutlinedIcon from "@mui/icons-material/IndeterminateCheckBoxOutlined";
-
+import styles from "../styles/cart.module.css";
 function CartScreen({
   heading,
   productCartData,
@@ -40,9 +40,9 @@ function CartScreen({
 }) {
   console.log(productCartData);
   return (
-    <Box sx={{ bgcolor: "background.paper", p: 2 }}>
+    <Box className={styles.cart}>
       <Typography
-        style={{ fontWeight: "bold", m: 3 }}
+        // style={{ fontWeight: "bold", m: 3 }}
         component="h5"
         variant="h5"
       >
@@ -51,11 +51,8 @@ function CartScreen({
       {productCartData &&
         productCartData.map((item) => (
           <Card
+            className={styles.cartCard}
             sx={{
-              display: "flex",
-              my: 2,
-              overflow: "hidden",
-
               flexDirection: { xs: "column", md: "row" },
             }}
           >
@@ -66,10 +63,8 @@ function CartScreen({
                 // height="194"
                 image={item.image_URL}
                 alt={item.name}
+                className={styles.cartCardImg}
                 sx={{
-                  objectFit: "contain",
-                  width: 171,
-                  m: "auto",
                   maxHeight: { xs: 233, md: 167 },
                   maxWidth: { xs: 350, md: 250 },
                 }}
@@ -77,17 +72,7 @@ function CartScreen({
             )}
 
             <CardContent sx={{ flex: "1 0 auto" }}>
-              <Typography
-                variant="body"
-                sx={{
-                  // textDecoration: "none ",
-                  color: "primary.main",
-                  fontSize: 18,
-                  fontWeight: 600,
-                }}
-                display="flex"
-                alignItems="center"
-              >
+              <Typography className={styles.cartItemName}>
                 {item.name}
               </Typography>
               <Divider />
@@ -98,8 +83,7 @@ function CartScreen({
                   sm={9}
                   md={9}
                   lg={9}
-                  display="flex"
-                  alignItems="center"
+                  className={styles.cartItemPrice}
                 >
                   <Typography variant="body1" component="div">
                     {" "}
@@ -112,9 +96,7 @@ function CartScreen({
                   sm={3}
                   md={3}
                   lg={3}
-                  display="flex"
-                  justifyContent="center"
-                  alignItems="center"
+                  className={styles.cartItemQuantity}
                 >
                   <IconButton
                     onClick={() => handleDecreaseCart(item)}
@@ -149,8 +131,7 @@ function CartScreen({
                   sm={9}
                   md={9}
                   lg={9}
-                  display="flex"
-                  alignItems="center"
+                  className={styles.cartItemPrice}
                 >
                   <Typography variant="body1" component="div">
                     Price
@@ -173,8 +154,8 @@ function CartScreen({
                     variant="h5"
                     // m={1}
                     sx={{ color: "warning.main" }}
-                    style={{ fontWeight: "bold" }}
                     // align="center"
+                    className={styles.cartItemPriceValue}
                   >
                     Rs. {item.price}
                   </Typography>
@@ -186,8 +167,7 @@ function CartScreen({
                   sm={9}
                   md={9}
                   lg={9}
-                  display="flex"
-                  alignItems="center"
+                  className={styles.cartItemPrice}
                 >
                   <Typography variant="body1" component="div">
                     Delete

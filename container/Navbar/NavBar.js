@@ -41,6 +41,7 @@ import Cookies from "js-cookie";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { Container } from "@mui/system";
 import NewSelect from "./Components/NewSelect";
+import styles from "../../styles/navbar.module.css";
 // import { logOutCustomer } from "../../slice/authSlice";
 const NavLink = styled("a")(() => ({
   wrap: "noWrap",
@@ -298,21 +299,14 @@ export default function NavBar() {
       {currentHost != "137.74.4.23" && header != true ? (
         <>
           <AppBar
-            style={{ height: "80px" }}
-            sx={{
-              color: "inherit",
-              // bgcolor: "#bdbdbd",
-              // height: "95%",
-              // bgcolor: "#0277bd",
-              justifyContent: "center",
-              // alignItems: "center",
-              padding: "5px",
-            }}
+            className={styles.topNav}
+            // style={{ height: "80px" }}
+
             position="static"
           >
             <Container maxWidth="xl">
               <Toolbar sx={{ flexWrap: "wrap" }}>
-                <Link
+                {/* <Link
                   sx={{
                     ":hover": {
                       // boxShadow: 20, // theme.shadows[20]
@@ -332,7 +326,7 @@ export default function NavBar() {
 
                     onClick={() => router.push("/")}
                   ></Image>
-                </Link>
+                </Link> */}
                 <NavLink
                   sx={{ color: "white", ml: 3 }}
                   onClick={() => router.push("/")}
@@ -412,13 +406,13 @@ export default function NavBar() {
                 {/* <Button href="#" variant="outlined" sx={{ my: 1, mx: 1.5 }}>
                 Login
               </Button> */}
-                <SignInModal
+                {/* <SignInModal
                   isLoggedIn={isLoggedIn}
                   setIsLoggedIn={setIsLoggedIn}
                   show={showLogin}
                   logOut={logOut}
                   close={() => setShowLogin(false)}
-                />
+                /> */}
                 {/* </Toolbar> */}
 
                 <Box sx={{ display: { xs: "flex", md: "none" } }}>

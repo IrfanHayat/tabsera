@@ -59,9 +59,9 @@ function PlaceOrder({
   cartItems,
   itemsPrice,
   handleCloseBar,
-  openBar,
+  // openBar,
 }) {
-  // const [openBar, setOpenBar] = React.useState(false);
+  const [openBar, setOpenBar] = React.useState(false);
   // const [loginSccess, setLginSccess] = React.useState(false);
   const router = useRouter();
   // const handleClickBar = () => {
@@ -157,16 +157,16 @@ function PlaceOrder({
               borderBottom: 1,
               borderColor: "divider",
               p: 2,
-              mt: 1,
+
               bgcolor: "background.paper",
             }}
           >
+            {/* <ListItem> */}
+            <Typography variant="h6" style={{ fontWeight: "bold" }}>
+              Your Shipping Method
+            </Typography>
+            {/* </ListItem> */}
             <List>
-              <ListItem>
-                <Typography variant="h6" style={{ fontWeight: "bold" }}>
-                  Your Shipping Method
-                </Typography>
-              </ListItem>
               <ListItem>{shippmentName}</ListItem>
             </List>
           </Box>
@@ -176,28 +176,29 @@ function PlaceOrder({
               borderBottom: 1,
               borderColor: "divider",
               p: 2,
-              mt: 1,
+
               bgcolor: "background.paper",
             }}
           >
+            {/* <ListItem> */}
+            <Typography variant="h6" style={{ fontWeight: "bold" }}>
+              Ordered Items
+            </Typography>
+            {/* </ListItem> */}
             <List>
-              <ListItem>
-                <Typography variant="h6" style={{ fontWeight: "bold" }}>
-                  Order Items
-                </Typography>
-              </ListItem>
               <ListItem>
                 <TableContainer>
                   <Table>
                     {productCartData &&
                       Object.keys(productCartData).map((key) => (
                         <>
-                          <TableHead>
+                          <TableHead sx={{ fontWeight: "bold" }}>
                             {
                               productCartData[key].map(
                                 (result) => result.merchant_name
                               )[0]
                             }
+                            :
                           </TableHead>
 
                           <TableBody>
@@ -232,7 +233,7 @@ function PlaceOrder({
             </List>
           </Box>
         </Grid>
-        <Grid item md={12} xs={12} sx={{ bgcolor: "background.paper", mt: 1 }}>
+        <Grid item md={12} xs={12} sx={{ bgcolor: "background.paper" }}>
           <Box sx={{ borderBottom: 1, borderColor: "divider", p: 2 }}>
             <Typography variant="h6" style={{ fontWeight: "bold" }}>
               Order Summary
@@ -352,7 +353,7 @@ function PlaceOrder({
           </Box>
 
           <Snackbar
-            open={openBar}
+            // open={openBar}
             autoHideDuration={2000}
             onClose={handleCloseBar}
             anchorOrigin={{

@@ -42,83 +42,101 @@ export default function Payment({
   return (
     <Grid container>
       <CheckoutWizard activeStep={3}></CheckoutWizard>
-      <Grid
-        item
-        xs={12}
-        sx={{ bgcolor: "background.paper", mt: 4, p: 1, display: "flex" }}
-      >
-        <form>
-          <Typography variant="h6" style={{ fontWeight: "bold" }}>
+      <Grid item xs={12} sx={{ bgcolor: "background.paper", mt: 5 }}>
+        <Box
+          sx={{
+            // borderBottom: 1,
+            // borderColor: "divider",
+            p: 2,
+            bgcolor: "background.paper",
+          }}
+        >
+          <Typography
+            variant="h6"
+            style={{ fontWeight: "bold", display: "flex" }}
+          >
             Payment Method
           </Typography>
-          <List>
-            <ListItem>
-              <FormControl component="fieldset">
-                <RadioGroup
-                  // row
-                  aria-labelledby="demo-row-radio-buttons-group-label"
-                  name="row-radio-buttons-group"
-                  // value={labelValue}
-                >
-                  {/* <FormControlLabel
+        </Box>
+        {/* <List> */}
+        <ListItem>
+          <form>
+            <FormControl component="fieldset">
+              <RadioGroup
+                // row
+                aria-labelledby="demo-row-radio-buttons-group-label"
+                name="row-radio-buttons-group"
+                // value={labelValue}
+              >
+                {/* <FormControlLabel
             value="female"
             control={<Radio />}
             label="Female"
           >
             <BusinessIcon/>
             <FormControlLabel/> */}
-                  {/* <BusinessIcon /> */}
+                {/* <BusinessIcon /> */}
 
-                  {paymentMethod &&
-                    paymentMethod.map((result) => (
-                      <Box sx={{ display: "flex", p: 2 }}>
-                        <Image
-                          // className={cx(styles.media, mediaStyles.root)}
-                          src={result?.payment_method_icon}
-                          onClick={(e) => viewCategory(product.category_id)}
-                          alt="shirt"
-                          width={45}
-                          height={20}
-                        ></Image>
-                        <FormControlLabel
-                          key={result.payment_method_id}
-                          value={result.payment_method_id}
-                          control={
-                            <Radio
-                              onChange={() => handleChange(result)}
-                            ></Radio>
-                          }
-                          label={result.parent_payment_method}
-                          sx={{ ml: 1 }}
-                          onClick={() => setRadioCheck(true)}
-                        />
-                      </Box>
-                    ))}
-                </RadioGroup>
-              </FormControl>
-            </ListItem>
-          </List>
-          <List>
+                {paymentMethod &&
+                  paymentMethod.map((result) => (
+                    <FormControlLabel
+                      key={result.payment_method_id}
+                      value={result.payment_method_id}
+                      control={
+                        <Radio onChange={() => handleChange(result)}></Radio>
+                      }
+                      label={
+                        <Box
+                          sx={{
+                            display: "flex",
+                            alignItems: "center",
+                          }}
+                        >
+                          <Image
+                            // className={cx(styles.media, mediaStyles.root)}
+                            src={result?.payment_method_icon}
+                            onClick={(e) => viewCategory(product.category_id)}
+                            alt="shirt"
+                            width={50}
+                            height={30}
+                            objectFit="contain"
+                          ></Image>
+                          <Typography sx={{ ml: 2 }}>
+                            {result.parent_payment_method}{" "}
+                          </Typography>
+                        </Box>
+                      }
+                      sx={{ ml: 1 }}
+                      onClick={() => setRadioCheck(true)}
+                    />
+                  ))}
+              </RadioGroup>
+            </FormControl>
+            {/* </ListItem> */}
+            {/* </List> */}
+            {/* <List> */}
             <ListItem>
-              <Stack direction="row" spacing={2}>
-                {/* <ListItem> */}
-                <Button
-                  // fullWidth
-                  type="button"
-                  variant="contained"
-                  color="primary"
-                  onClick={() => submitHandler(cartTotalAmount)}
-                  disabled={radioCheck ? "" : "disabled"}
-                >
-                  Continue
-                </Button>
-                {/* </ListItem>/ */}
-                {/* <ListItem> */}
-              </Stack>
+              {/* <Stack direction="row" spacing={2}> */}
+              {/* <ListItem> */}
+              <Button
+                // fullWidth
+                type="button"
+                variant="contained"
+                color="primary"
+                onClick={() => submitHandler(cartTotalAmount)}
+                disabled={radioCheck ? "" : "disabled"}
+              >
+                Continue
+              </Button>
+              {/* </ListItem>/ */}
+              {/* <ListItem> */}
+              {/* </Stack> */}
             </ListItem>
-          </List>
-          {/* </ListItem> */}
-        </form>
+            {/*  */}
+            {/* </ListItem> */}
+          </form>
+        </ListItem>
+        {/* </List> */}
       </Grid>
       {console.log(status)}
       {status?.resultCode === 2000 ? (

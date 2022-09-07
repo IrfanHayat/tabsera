@@ -2,6 +2,7 @@
   width: 278px;
   height: 366px;
   border: 8px;
+  /* margin-top: 10px; */
   /* position: absolute; */
   left: 0%;
   right: 0%;
@@ -9,7 +10,23 @@
   bottom: 0%;
   background-color: #ffffff;
   box-shadow: 0px 4px 16px rgba(43, 52, 69, 0.1);
-  /* border-radius: 8px; */
+  border-radius: 1px;
+}
+.carouselBox {
+  width: 100%;
+  margin-left: 1px;
+
+  /* width: 278px; */
+  height: 366px;
+  border: 8px;
+  /* position: absolute; */
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+  background-color: #ffffff;
+  box-shadow: 0px 4px 16px rgba(43, 52, 69, 0.1);
+  border-radius: 1px;
 }
 .categoriesButton {
   /* position: absolute; */
@@ -21,7 +38,9 @@
   border-radius: 1px;
   width: 278px;
   height: 40px;
-  background-color: #f4f7fb;
+  background-color: #fafafa;
+  /* border: 1px solid #fff; */
+  /* box-shadow: 3px 3px 5px 6px #ccc; */
 }
 
 .categoriesIcon {
@@ -77,23 +96,6 @@
 .dropDown {
   width: 258px;
   border-radius: 2px;
-}
-
-.carouselBox {
-  width: 100%;
-  margin-left: 1px;
-
-  /* width: 278px; */
-  height: 366px;
-  border: 8px;
-  /* position: absolute; */
-  left: 0%;
-  right: 0%;
-  top: 0%;
-  bottom: 0%;
-  background-color: #ffffff;
-  box-shadow: 0px 4px 16px rgba(43, 52, 69, 0.1);
-  border-radius: 1px;
 }
 
 .carouselImage {

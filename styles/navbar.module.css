@@ -1,0 +1,61 @@
+.topNav {
+  height: 40px;
+  /* width: 1920px; */
+  left: 0px;
+  top: 0px;
+  border-radius: 0px;
+  /* position: absolute; */
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+  justify-content: center;
+}
+
+.navDown {
+  height: 80px;
+  /* position: absolute; */
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+  background: #ffffff;
+  border: 1px solid #d8e0e9;
+  box-shadow: none;
+  /* box-shadow: 0px 4px 16px rgba(43, 52, 69, 0.1); */
+}
+
+.searchBar {
+  box-sizing: border-box;
+  margin-top: 15px;
+  margin-bottom: 21px;
+  /* position: absolute; */
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+  height: 44px;
+  width: 670px;
+  left: 0px;
+  top: 0px;
+
+  /* Gray/300 - border light */
+  justify-content: center;
+  padding-left: 10px;
+  padding-right: 10px;
+  border: 1px solid #d8e0e9;
+  border-radius: 37px;
+}
+
+.cartIcon {
+  height: 38px;
+  width: 38px;
+  /* position: absolute; */
+  /* margin-top: 18px; */
+  /* margin-bottom: 18px; */
+  /* margin-right: 10px; */
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+}

@@ -1,0 +1,12 @@
+.avatar {
+  height: 38px;
+  width: 38px;
+  /* position: absolute; */
+  margin-top: 18px;
+  margin-bottom: 18px;
+  margin-right: 18px;
+  left: 0%;
+  right: 0%;
+  top: 0%;
+  bottom: 0%;
+}

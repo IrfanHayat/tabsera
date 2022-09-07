@@ -51,14 +51,8 @@ import WidgetsOutlinedIcon from "@mui/icons-material/WidgetsOutlined";
 import Categories from "../Components/Categories";
 import { makeStyles } from "@mui/styles";
 import localStorage from "localStorage";
-
-const styles = (theme) => ({
-  root: {
-    position: "-webkit-sticky",
-    position: "sticky",
-    zIndex: 5,
-  },
-});
+import Link from "@mui/material/Link";
+import styles from "../../../styles/navbar.module.css";
 
 // const useStyles = makeStyles({
 //   root: {
@@ -92,7 +86,17 @@ export default function NavDown(props) {
   const [camapaigns, setCamapaigns] = React.useState(false);
   const [key, setKey] = useState(1);
   console.log("campaignsData,", campaignsData);
-
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
+  const logOut = async () => {
+    let result = await dispatch(logOutCustomer());
+    setIsLoggedIn(false);
+    localStorage.setItem("login", "false");
+    Cookies.remove("item");
+    // Cookies.remove("connect.sid");
+    router.push("/");
+    console.log(result);
+  };
   useEffect(() => {
     //dispatch(getTotalCartQuantity());
     dispatch(getCategory());
@@ -226,28 +230,30 @@ export default function NavDown(props) {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar
-        // className={classes.root}
-        sx={{
-          color: "secondary",
-          boxShadow: 0,
-          bgcolor: "white",
-          // sx={{  }}
-          borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
-          // bgcolor: "background.paper",
-
-          // height: "95%",
-          // bgcolor: "#0277bd",
-          justifyContent: "center",
-          //   position: "fixed",
-          // padding: "5px",
-
-          //   transform: "translateY(100%)",
-          //   top: "0%",
-        }}
-        position="sticky"
-      >
+      <AppBar className={styles.navDown} position="sticky">
         <Toolbar>
+          <Link
+            sx={{
+              ":hover": {
+                // boxShadow: 20, // theme.shadows[20]
+                // transform: "scale(1.1)",
+                // color: "yellow",
+                // transformOrigin: "bottomleft",
+                // opacity: 0.5,
+                cursor: "pointer",
+              },
+            }}
+          >
+            <Image
+              src="/bigLogo.png"
+              alt="/bigLogo.png"
+              height="100px"
+              width="200px"
+              // onMouseOver={cu}
+
+              onClick={() => router.push("/")}
+            ></Image>
+          </Link>
           {/* <FormControl sx={{ m: 1, minWidth: 80 }}>
             <TextField
               select
@@ -292,21 +298,7 @@ export default function NavDown(props) {
           ></Box>
           <Box sx={{ flexGrow: 1 }} />
 
-          <Stack
-            spacing={2}
-            sx={{
-              px: "10px",
-              // pl: "20px",
-              width: "60%",
-              bgcolor: "white",
-              height: "40px",
-              justifyContent: "center",
-              borderRadius: 24,
-              border: 0.1,
-              // border: "none",
-              borderColor: "primary.main",
-            }}
-          >
+          <Stack spacing={2} className={styles.searchBar}>
             <Autocomplete
               freeSolo
               id="free-solo-2-demo"
@@ -342,6 +334,13 @@ export default function NavDown(props) {
           </Stack>
           <Box sx={{ flexGrow: 1 }} />
 
+          <SignInModal
+            isLoggedIn={isLoggedIn}
+            setIsLoggedIn={setIsLoggedIn}
+            show={showLogin}
+            logOut={logOut}
+            close={() => setShowLogin(false)}
+          />
           <div>
             <IconButton
               aria-describedby={id}
@@ -349,8 +348,8 @@ export default function NavDown(props) {
               onClick={handleClick}
               color="primary"
 
-            // onMouseEnter={handleClick}
-            // onMouseLeave={handleClick}
+              // onMouseEnter={handleClick}
+              // onMouseLeave={handleClick}
             >
               {console.log(localStorage.getItem("login"))}
               {console.log(cartTotalQuantity)}
@@ -359,14 +358,15 @@ export default function NavDown(props) {
                   color="error"
                   badgeContent={
                     cartTotalQuantity != undefined ||
-                      cartTotalQuantity != 0 ||
-                      cartTotalQuantity
+                    cartTotalQuantity != 0 ||
+                    cartTotalQuantity
                       ? cartTotalQuantity
                       : 1
                   }
                   max={99}
+                  className={styles.cartbadge}
                 >
-                  <ShoppingCartOutlinedIcon />
+                  <ShoppingCartOutlinedIcon className={styles.cartIcon} />
                 </Badge>
               ) : (
                 <ShoppingCartOutlinedIcon />
@@ -387,11 +387,11 @@ export default function NavDown(props) {
                 vertical: "top",
                 horizontal: "center",
               }}
-            //keepMounted={true}
-            // anchorOrigin={{
-            //   vertical: "bottom",
-            //   horizontal: "left"62
-            // }}
+              //keepMounted={true}
+              // anchorOrigin={{
+              //   vertical: "bottom",
+              //   horizontal: "left"62
+              // }}
             >
               {cartTotalQuantity > 0 ? (
                 // <div>
