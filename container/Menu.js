@@ -748,7 +748,29 @@ export default function PersistentDrawerLeft() {
 
             {console.log(catId)}
             {
-              catId ? <SubCategory catId={catId}></SubCategory> : <>
+              catId ? <SubCategory
+                value={value}
+                dealsData={dealsData}
+                showDeals={showDeals}
+                setDealsData={setDealsData}
+                setShowDeals={setShowDeals}
+                setDiscountData={setDiscountData}
+                showDiscounts={showDiscounts}
+                discountData={discountData}
+                showFreeShipping={showFreeShipping}
+                freeShippingData={freeShippingData}
+                setShowDiscounts={setShowDiscounts}
+                setFreeShippingData={setFreeShippingData}
+                setShowFreeShipping={setShowFreeShipping}
+                setShowProduct={setShowProduct}
+                setShowAllCategoryPro={setShowAllCategoryPro}
+                setShowAllMerchantPro={setShowAllCategoryPro}
+                setShowFilterData={setShowFilterData}
+                showProduct={showProduct}
+                showAllCategoryPro={showAllCategoryPro}
+                showAllMerchantPro={showAllMerchantPro}
+                setFilterData1={setFilterData} catId={catId}
+                filterData1={filterData} ></SubCategory> : <>
                 {showProduct == false &&
                   showAllCategoryPro == false &&
                   showAllMerchantPro == false &&

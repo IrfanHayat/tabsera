@@ -32,7 +32,7 @@ function PageFilter({ value, setDealsData, setShowDeals, setDiscountData, showDi
       setShowAllMerchantPro(false);
       setShowDiscounts(false);
       setShowFreeShipping(false);
-      setFilterData([]);
+      // setFilterData([]);
     }
     if (event.target.value == "discounts") {
       let discounts = await dispatch(getDiscounts());
@@ -45,7 +45,7 @@ function PageFilter({ value, setDealsData, setShowDeals, setDiscountData, showDi
       setShowAllMerchantPro(false);
       setShowDeals(false);
       setShowFreeShipping(false);
-      setFilterData([]);
+      //setFilterData([]);
     }
 
 
@@ -60,7 +60,7 @@ function PageFilter({ value, setDealsData, setShowDeals, setDiscountData, showDi
       setShowAllMerchantPro(false);
       setShowDeals(false);
 
-      setFilterData([]);
+      //setFilterData([]);
     } else if (
       event.target.value == "freeShipping" &&
       showDiscounts &&
@@ -77,7 +77,7 @@ function PageFilter({ value, setDealsData, setShowDeals, setDiscountData, showDi
       setShowAllMerchantPro(false);
       setShowDiscounts(false);
       setShowFreeShipping(false);
-      setFilterData([]);
+      //setFilterData([]);
     }
     // if (event.target.name == 'freeShipping') {
     //   router.push('/is_free_shipping')
