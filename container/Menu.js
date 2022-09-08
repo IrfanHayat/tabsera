@@ -36,7 +36,7 @@ import WidgetsIcon from "@mui/icons-material/Widgets";
 import IconButton from "@mui/material/IconButton";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
 // import { getDiscounts } from "../slice/discountsSlice";
-import Button from "@mui/material/Button";
+
 import NavSelect from "./Navbar/Components/NavSelect";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemText from "@mui/material/ListItemText";
