@@ -335,7 +335,7 @@ export default function NavBar() {
                   sx={{ color: "white", ml: 3 }}
                   onClick={() => router.push("/")}
                 >
-                  Home
+                  {t('common.Headers.Home')}
                 </NavLink>
                 <NavLink
                   sx={{ color: "white", ml: 3 }}

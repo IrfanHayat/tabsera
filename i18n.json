@@ -1,7 +1,15 @@
 {
-  "locales": ["en",  "ar", "sm"],
+  "locales": [
+    "en",
+    "ar",
+    "so",
+    "tr",
+    "ru"
+  ],
   "defaultLocale": "en",
   "pages": {
-    "*": ["common"]
+    "*": [
+      "common"
+    ]
   }
 }
