@@ -106,33 +106,42 @@
 .card1 {
   margin: 1;
   width: 15.8%;
-  margin-right: 11px;
-  margin-bottom: 14px;
+ 
 }
 @media screen and (max-width: 1280px) {
   .card1 {
     width: 15.7%;
+    margin-right: 11px;
+    margin-bottom: 14px;
   }
 }
 @media screen and (max-width: 1024px) {
   .card1 {
     width: 18.85%;
+    margin-right: 11px;
+    margin-bottom: 14px;
   }
 }
 @media screen and (max-width: 992px) {
   .card1 {
     width: 31.5%;
+    margin-right: 11px;
+    margin-bottom: 14px;
   }
 }
 
 @media screen and (max-width: 600px) {
   .card1 {
     width: 46.5%;
+    margin-right: 11px;
+    margin-bottom: 14px;
   }
 }
 
 @media screen and (max-width: 300px) {
   .card1 {
     width: 100%;
+    margin-right: 11px;
+    margin-bottom: 14px;
   }
 }
