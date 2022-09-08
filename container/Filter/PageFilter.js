@@ -8,7 +8,21 @@ import { motion } from "framer-motion";
 import { getFreeShipping } from "../../slice/freeShippingSlice";
 import { getDeals } from "../../slice/dealsPromotionsSlice";
 import { getDiscounts } from "../../slice/discountsSlice";
-function PageFilter({ value, setDealsData, setShowDeals, setDiscountData, showDiscounts, setShowDiscounts, setFreeShippingData, setShowFreeShipping, setShowProduct, setShowAllCategoryPro, setShowAllMerchantPro, setFilterData }) {
+import styles from "../../styles/pagefilters.module.css";
+function PageFilter({
+  value,
+  setDealsData,
+  setShowDeals,
+  setDiscountData,
+  showDiscounts,
+  setShowDiscounts,
+  setFreeShippingData,
+  setShowFreeShipping,
+  setShowProduct,
+  setShowAllCategoryPro,
+  setShowAllMerchantPro,
+  setFilterData,
+}) {
   let dispatch = useDispatch();
 
   useEffect(() => {
@@ -48,7 +62,6 @@ function PageFilter({ value, setDealsData, setShowDeals, setDiscountData, showDi
       //setFilterData([]);
     }
 
-
     if (event.target.value == "freeShipping") {
       let freeShipping = await dispatch(getFreeShipping());
       console.log(freeShipping.payload);
@@ -84,43 +97,43 @@ function PageFilter({ value, setDealsData, setShowDeals, setDiscountData, showDi
     // }
   };
 
-
   return (
     <FormControl>
       <RadioGroup
-        row
+        // row
+        className={styles.pageFilters}
         aria-labelledby="demo-controlled-radio-buttons-group"
         name="controlled-radio-buttons-group"
         value={value}
       >
-        <motion.div className="animatable" whileTap={{ scale: 0.9 }}>
-          <FormControlLabel
-            value="deals"
-            control={<Radio onChange={(e) => handleChange(e)} />}
-            label="Bundles"
-          />
-        </motion.div>
-        <motion.div className="animatable" whileTap={{ scale: 0.9 }}>
-          <FormControlLabel
-            value="discounts"
-            control={<Radio onChange={(e) => handleChange(e)} />}
-            label="Discounts"
-          />
-        </motion.div>
-        <motion.div className="animatable" whileTap={{ scale: 0.9 }}>
-          <FormControlLabel
-            value="freeShipping"
-            control={<Radio onChange={(e) => handleChange(e)} />}
-            label="freeShipping"
-          />
-        </motion.div>
-        <motion.div className="animatable" whileTap={{ scale: 0.9 }}>
-          <FormControlLabel
-            value="clear"
-            control={<Radio onChange={(e) => handleChange(e)} />}
-            label="Clear All Filterss"
-          />
-        </motion.div>
+        {/* <motion.div className="animatable" whileTap={{ scale: 0.9 }}> */}
+        <FormControlLabel
+          value="deals"
+          control={<Radio onChange={(e) => handleChange(e)} />}
+          label="Bundles"
+        />
+        {/* </motion.div> */}
+        {/* <motion.div className="animatable" whileTap={{ scale: 0.9 }}> */}
+        <FormControlLabel
+          value="discounts"
+          control={<Radio onChange={(e) => handleChange(e)} />}
+          label="Discounts"
+        />
+        {/* </motion.div> */}
+        {/* <motion.div className="animatable" whileTap={{ scale: 0.9 }}> */}
+        <FormControlLabel
+          value="freeShipping"
+          control={<Radio onChange={(e) => handleChange(e)} />}
+          label="freeShipping"
+        />
+        {/* </motion.div> */}
+        {/* <motion.div className="animatable" whileTap={{ scale: 0.9 }}> */}
+        <FormControlLabel
+          value="clear"
+          control={<Radio onChange={(e) => handleChange(e)} />}
+          label="Clear All Filters"
+        />
+        {/* </motion.div> */}
       </RadioGroup>
     </FormControl>
   );

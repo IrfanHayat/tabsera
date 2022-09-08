@@ -160,15 +160,25 @@ export default function ActionAreaCard({
           </>
         )}
         {product?.category_image && (
-          <Image
-            // className={cx(styles.media, mediaStyles.root)}
-            src={product?.category_image}
-            onClick={(e) => viewCategory(product.category_id)}
-            alt="shirt"
-            width={245}
-            height={200}
-            // loading="eager"
-          ></Image>
+          <ImageListItem key={product.category_image}>
+            <CardMedia
+              data-aos="fade-up"
+              component="img"
+              className={styles.cargImg}
+              onClick={(e) => viewProduct(product)}
+              image={product?.category_image}
+              alt={product?.bundleName}
+            ></CardMedia>
+            {/* <Image
+              // className={cx(styles.media, mediaStyles.root)}
+              src={product?.category_image}
+              onClick={(e) => viewCategory(product.category_id)}
+              alt="shirt"
+              width={245}
+              height={200}
+              // loading="eager"
+            ></Image> */}
+          </ImageListItem>
         )}
 
         <Box className={styles.cardContent} component="div">
