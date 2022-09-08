@@ -52,7 +52,7 @@ export default function CarouselApp({
 
       // style={{ width: "100%" }}
       sx={{
-        bgcolor: "#F6F9FC",
+        bgcolor: "background.paper",
         // m: 1,
         // p: 1,
         // height: "500px",
@@ -64,15 +64,16 @@ export default function CarouselApp({
           justifyContent: "space-between",
           flexWrap: "wrap",
           pt: 1,
-          m: 1,
+          // mt: 1,
+          m: 0.5,
           // flexWrap: "wrap",
-          // bgcolor: "background.paper",
+
           borderRadius: 1,
         }}
       >
         <Box
           sx={{
-            mx: 5,
+            pl: 4,
             color: (theme) =>
               theme.palette.mode === "dark" ? "grey.300" : "grey.800",
             borderColor: (theme) =>

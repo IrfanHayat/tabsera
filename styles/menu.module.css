@@ -103,3 +103,29 @@
   height: 320;
   object-fit: contain;
 }
+
+.filtersBar {
+  display: flex;
+  flex-direction: row;
+  background-color: #fff;
+  margin-top: 2px;
+  margin-bottom: 2px;
+  padding-left: 30px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  /* sx={{
+                display: "flex",
+                flexDirection: "row",
+                bgcolor: "background.paper",
+                my: 0.5,
+                pl: 3,
+                py: 0.5,
+                justifyContent: "space-between",
+                alignItems: "center",
+                flexWrap: "wrap",
+              }}
+} */
+}
