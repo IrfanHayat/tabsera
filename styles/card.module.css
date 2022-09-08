@@ -56,7 +56,7 @@
   /* align-items: flex-end; */
   margin-top: 12px;
   height: 12px;
-  clear: both;
+  /* clear: both; */
 }
 
 /* .btnBox {
@@ -88,11 +88,11 @@
   /* margin-bottom: -200px; */
 }
 
-.row:after {
+/* .row:after {
   content: "";
   display: table;
   clear: both;
-}
+} */
 
 .card1 {
   /* margin: auto; */
