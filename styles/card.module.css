@@ -104,8 +104,10 @@
   background-color: #fff;
 }
 .card1 {
-  margin: 1;
+  margin-top: 1px;
   width: 15.8%;
+  margin-right: 11px;
+  margin-bottom: 14px;
  
 }
 @media screen and (max-width: 1280px) {
