@@ -4,13 +4,13 @@
 .card {
   margin-right: 11px;
   margin-bottom: 14px;
-  display: display;
+  /* display: display; */
   box-shadow: 0;
   border-radius: 0;
-  background-color: "background.paper";
+  background-color: #fff;
 }
 
-.card:hover {
+.card1:hover {
   border: 1;
   border-color: #9e9e9e;
   box-shadow: 1;
@@ -97,12 +97,11 @@
 .card1 {
   /* margin: auto; */
   margin-right: 11px;
-  /* margin-left: 5.5; */
   margin-bottom: 14px;
-  display: display;
+  /* display: display; */
   box-shadow: 0;
   border-radius: 0;
-  background-color: "background.paper";
+  background-color: #fff;
 }
 .card1 {
   margin: 1;
