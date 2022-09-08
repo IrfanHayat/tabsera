@@ -42,7 +42,11 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import { Container } from "@mui/system";
 import NewSelect from "./Components/NewSelect";
 import styles from "../../styles/navbar.module.css";
+
+
 // import { logOutCustomer } from "../../slice/authSlice";
+
+
 const NavLink = styled("a")(() => ({
   wrap: "noWrap",
   component: "a",
@@ -337,7 +341,7 @@ export default function NavBar() {
                   sx={{ color: "white", ml: 3 }}
                   onClick={() => router.push("/about")}
                 >
-                  {t("About Us")}
+                  {t('common.Headers.About')}
                 </NavLink>
                 {/* <NavLink
                 sx={{ color: "white", ml: 3 }}

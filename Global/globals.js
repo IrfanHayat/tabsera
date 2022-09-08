@@ -1,5 +1,5 @@
 // import i18n from "./locales/i18n";
-import i18n from "../locales/i18n";
+import i18n from "../i18n";
 import { cssMain } from "./config";
 
 

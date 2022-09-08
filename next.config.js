@@ -30,6 +30,7 @@ module.exports = {
     SECRET_KEY: process.env.SECRET_KEY,
     BackEndUrl: process.env.BackEndUrl,
   },
+
   // reactStrictMode: true,
   // images: { domains: ["res.cloudinary.com", "b.zmtcdn.com"] },
 };

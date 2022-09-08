@@ -1,5 +1,5 @@
 import { alpha } from "@mui/material/styles";
-import i18n from "../locales/i18n";
+import i18n from "../i18n";
 // ----------------------------------------------------------------------
 
 function createGradient(color1, color2) {

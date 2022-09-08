@@ -12,7 +12,7 @@ import { CookiesProvider } from "react-cookie";
 import NavBar from "../container/Navbar/NavBar";
 import Footer from "../container/Footer/Footer";
 import { Box } from "@mui/material";
-import "../locales/i18n";
+import "../i18n";
 import rtl from "jss-rtl";
 import { create } from "jss";
 import { Container } from "@mui/material";
