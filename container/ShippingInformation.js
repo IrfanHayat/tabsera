@@ -568,6 +568,7 @@ function ShippingInformation({
                                   // onClick={(e) => viewCategory(product.category_id)}
                                   alt={"locker"}
                                   width={45}
+                                  objectFit="contain"
                                   height={45}
                                 ></Image>
                                 <Typography

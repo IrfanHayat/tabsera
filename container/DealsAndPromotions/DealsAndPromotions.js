@@ -27,7 +27,7 @@ const DealsAndPromotions = ({ dealsData, viewProduct }) => {
       {/* <ActionAreaCard /> */}
       {dealsData.map((result) => (
         <Card
-          className={styles.card}
+          className={styles.card1}
           sx={{
             width: "205px",
             // maxWidth: 280,

@@ -1,0 +1,12 @@
+.pageFilters {
+  display: flex;
+  margin-top: 10px;
+  margin-left: 29px;
+  flex-direction: row;
+}
+
+@media screen and (max-width: 300px) {
+  .pageFilters {
+    flex-direction: column;
+  }
+}

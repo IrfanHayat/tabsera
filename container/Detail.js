@@ -192,10 +192,10 @@ function Details({
           </Link>
           <Link
             underline="hover"
-          // color="inherit"
-          // onClick={() =>
-          //   router.push(`/product_detail?productId=${productIdRoute}`)
-          // }
+            // color="inherit"
+            // onClick={() =>
+            //   router.push(`/product_detail?productId=${productIdRoute}`)
+            // }
           >
             {productDetail?.category_name}
           </Link>
@@ -215,7 +215,7 @@ function Details({
         // spacing={1}
         maxWidth="xl"
         sx={{ backgroundColor: "#fafafa" }}
-      // justifyContent="center"
+        // justifyContent="center"
       >
         <Grid item md={4} xs={12} sx={{ bgcolor: "white" }}>
           <List>
@@ -227,12 +227,55 @@ function Details({
                 // pagination={true}
                 pagination={false}
                 showEmptySlots={true}
-              // itemsToShow={2}
-              // showArrows={false}
+                // itemsToShow={2}
+                // showArrows={false}
               >
                 {Object.keys(productDetail).length > 0 && skusFlag == false
                   ? productDetail.product_images[0].media_images.map(
-                    (result, index) => (
+                      (result, index) => (
+                        <Box
+                          sx={{
+                            width: "100%",
+                            height: "330px",
+                            // border: "1px solid black",
+                          }}
+                        >
+                          <ReactImageMagnify
+                            {...{
+                              smallImage: {
+                                alt: "Wristwatch by Ted Baker London",
+                                // isFluidWidth: true,
+                                width: 400,
+                                height: 327,
+                                src: result,
+                                // sizes:
+                                //   "(min-width: 800px) 33.5vw, (min-width: 415px) 50vw, 100vw",
+                              },
+                              largeImage: {
+                                src: result,
+                                width: 640,
+                                height: 480,
+                              },
+
+                              enlargedImagePosition: "over",
+                              // enlargedImageContainerDimensions: {
+                              //   width: "150%",
+                              //   height: "150%",
+                              // },
+                              // enlargedImageContainerStyle: {
+                              //   zIndex: "1500",
+                              // },
+                              // enlargedImageContainerDimensions: {
+                              //   width: "50%",
+                              //   height: "100%",
+                              // },
+                            }}
+                          />
+                        </Box>
+                      )
+                    )
+                  : skusProduct &&
+                    skusProduct.sku_images.map((result) => (
                       <Box
                         sx={{
                           width: "100%",
@@ -244,9 +287,11 @@ function Details({
                           {...{
                             smallImage: {
                               alt: "Wristwatch by Ted Baker London",
-                              // isFluidWidth: true,
-                              width: 400,
-                              height: 327,
+                              isFluidWidth: true,
+                              // width: 400,
+                              // height: 327,
+                              // width: 100,
+                              // height: 200,
                               src: result,
                               // sizes:
                               //   "(min-width: 800px) 33.5vw, (min-width: 415px) 50vw, 100vw",
@@ -262,62 +307,17 @@ function Details({
                             //   width: "150%",
                             //   height: "150%",
                             // },
-                            // enlargedImageContainerStyle: {
-                            //   zIndex: "1500",
-                            // },
-                            // enlargedImageContainerDimensions: {
-                            //   width: "50%",
-                            //   height: "100%",
-                            // },
+                            enlargedImageContainerStyle: {
+                              zIndex: "1500",
+                            },
+                            enlargedImageContainerDimensions: {
+                              width: "50%",
+                              height: "100%",
+                            },
                           }}
                         />
                       </Box>
-                    )
-                  )
-                  : skusProduct &&
-                  skusProduct.sku_images.map((result) => (
-                    <Box
-                      sx={{
-                        width: "100%",
-                        height: "330px",
-                        // border: "1px solid black",
-                      }}
-                    >
-                      <ReactImageMagnify
-                        {...{
-                          smallImage: {
-                            alt: "Wristwatch by Ted Baker London",
-                            isFluidWidth: true,
-                            // width: 400,
-                            // height: 327,
-                            // width: 100,
-                            // height: 200,
-                            src: result,
-                            // sizes:
-                            //   "(min-width: 800px) 33.5vw, (min-width: 415px) 50vw, 100vw",
-                          },
-                          largeImage: {
-                            src: result,
-                            width: 640,
-                            height: 480,
-                          },
-
-                          enlargedImagePosition: "over",
-                          // enlargedImageContainerDimensions: {
-                          //   width: "150%",
-                          //   height: "150%",
-                          // },
-                          enlargedImageContainerStyle: {
-                            zIndex: "1500",
-                          },
-                          enlargedImageContainerDimensions: {
-                            width: "50%",
-                            height: "100%",
-                          },
-                        }}
-                      />
-                    </Box>
-                  ))}
+                    ))}
               </Carousel>
             </ListItem>
             <Divider />
@@ -337,7 +337,7 @@ function Details({
                     <Box
                       // sx={{ border: }}
                       className={styles.selectimg}
-                    // border={isActiveImg ? "1px solid blue" : " "}
+                      // border={isActiveImg ? "1px solid blue" : " "}
                     >
                       <Image
                         onClick={() => {
@@ -422,58 +422,58 @@ function Details({
           <Box sx={{ display: "flex", flexDirection: "column" }}>
             {skusFlag && skusProduct
               ? skusProduct.attributes.map((result, index) => (
-                <Grid container key={index}>
-                  {result.attribute_name == "Color" ? (
-                    <>
-                      <Grid item xs={2}>
-                        {result.attribute_name}:
-                      </Grid>
-                      <Grid item md={3}>
-                        <ListItemIcon>
-                          <SquareIcon
-                            sx={{
-                              // position: "relative",
-                              // top: 6,
-                              // left: 5,
-                              color: result.value,
-                            }}
-                          />
-                        </ListItemIcon>
-                      </Grid>
-                    </>
-                  ) : (
-                    <Typography style={{ fontWeight: "bold" }}>
-                      {result.attribute_name}: {result.value}{" "}
-                    </Typography>
-                  )}
-                </Grid>
-              ))
+                  <Grid container key={index}>
+                    {result.attribute_name == "Color" ? (
+                      <>
+                        <Grid item xs={2}>
+                          {result.attribute_name}:
+                        </Grid>
+                        <Grid item md={3}>
+                          <ListItemIcon>
+                            <SquareIcon
+                              sx={{
+                                // position: "relative",
+                                // top: 6,
+                                // left: 5,
+                                color: result.value,
+                              }}
+                            />
+                          </ListItemIcon>
+                        </Grid>
+                      </>
+                    ) : (
+                      <Typography style={{ fontWeight: "bold" }}>
+                        {result.attribute_name}: {result.value}{" "}
+                      </Typography>
+                    )}
+                  </Grid>
+                ))
               : productAttributes.map((result, index) => (
-                <Grid
-                  container
-                  // sx={{ display: "flex", flexDirection: "column" }}
-                  key={index}
-                >
-                  {result.attribute_name == "Color" ? (
-                    <>
-                      <Grid item xs={2}>
-                        <Typography> {result.attribute_name}: </Typography>
-                      </Grid>
-                      <Grid item md={3}>
-                        <ListItemIcon>
-                          <SquareIcon sx={{ color: result.value }} />
-                        </ListItemIcon>
-                      </Grid>
-                    </>
-                  ) : (
-                    // <Box display="flex">
-                    <Typography>
-                      {result.attribute_name}: {result.value}{" "}
-                    </Typography>
-                    // </Box>
-                  )}
-                </Grid>
-              ))}
+                  <Grid
+                    container
+                    // sx={{ display: "flex", flexDirection: "column" }}
+                    key={index}
+                  >
+                    {result.attribute_name == "Color" ? (
+                      <>
+                        <Grid item xs={2}>
+                          <Typography> {result.attribute_name}: </Typography>
+                        </Grid>
+                        <Grid item md={3}>
+                          <ListItemIcon>
+                            <SquareIcon sx={{ color: result.value }} />
+                          </ListItemIcon>
+                        </Grid>
+                      </>
+                    ) : (
+                      // <Box display="flex">
+                      <Typography>
+                        {result.attribute_name}: {result.value}{" "}
+                      </Typography>
+                      // </Box>
+                    )}
+                  </Grid>
+                ))}
           </Box>
           <Grid md={12}>
             <Divider />
@@ -493,7 +493,7 @@ function Details({
                   productDetail.skus?.map((results, index) => (
                     <Box
                       className={styles.selectimg}
-                    // border={isActiveImg ? "1px solid blue" : " "}
+                      // border={isActiveImg ? "1px solid blue" : " "}
                     >
                       <Image
                         //  className={cx(styles.media, mediaStyles.root)}
@@ -658,8 +658,13 @@ function Details({
               <ListItem>
                 <Button
                   variant="text"
-                  onClick={() => viewStore(productDetail?.category_id, merchantDetail?.merchant_id)}
-                // onClick={viewStore}
+                  onClick={() =>
+                    viewStore(
+                      productDetail?.category_id,
+                      merchantDetail?.merchant_id
+                    )
+                  }
+                  // onClick={viewStore}
                 >
                   Visit Store
                 </Button>
@@ -696,7 +701,7 @@ function Details({
             <Grid>
               <Typography
                 className={styles.ratings}
-              // sx={{ fontSize: "1rem", fontWeight: "bold" }}
+                // sx={{ fontSize: "1rem", fontWeight: "bold" }}
               >
                 Ratings And Reviews
               </Typography>

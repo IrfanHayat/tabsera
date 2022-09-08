@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Grid } from "@mui/material";
+import { Grid, Box } from "@mui/material";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import Divider from "@mui/material/Divider";
@@ -9,6 +9,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import CheckBox from "../../container/Section/CheckBox";
 import PriceFilter from "./PriceFilter";
 import PageFilter from "./PageFilter";
+import styles from "../../styles/sidebarFilters.module.css";
 function SideBarFilter({
   categoryProduct,
   parentCategories,
@@ -29,8 +30,7 @@ function SideBarFilter({
   setShowProduct,
   setShowAllCategoryPro,
   setShowAllMerchantPro,
-  setFilterData1
-
+  setFilterData1,
 }) {
   const [Filters, setFilters] = useState({
     brands: [],
@@ -48,8 +48,6 @@ function SideBarFilter({
 
     // }
 
-    console.log(newFilters);
-
     let result = brands.filter(
       (result) => result.brand_id == newFilters.brands[0]
     );
@@ -57,87 +55,72 @@ function SideBarFilter({
     //showFilteredResults(newFilters)
     setFilters(newFilters);
   };
+  console.log(Filters);
 
   return (
-    <Grid
-      item
-
-      sx={{
-        width: '278px',
-        height: '1368px',
-        display: "flex",
-        borderRadius: '8px',
-        backgroundColor: "#FFFFFF",
-        boxShadow: "0px 1px 3px rgba(3, 0, 71, 0.09)",
-        flexWrap: "wrap",
-
-      }}
-    >
-      <List dense>
+    <Grid item className={styles.sideBarFilter}>
+      {/* <List dense> */}
+      <Typography className={styles.categoryHeading}>
         Related Category
-        <ListItem
-        // spacing={2}
-        // sx={{ p: 1 }}
-        // alignItems="flex-start"
+      </Typography>
+      <Box className={styles.categories}>
+        <Typography
+          className={styles.categoryParent}
+          onClick={() => categoryProduct(parentCategories)}
         >
-          <ListItemText>
-            <Typography onClick={() => categoryProduct(parentCategories)}>
-              {parentCategories}
-            </Typography>
-            {subCategories.length > 0 ? childrenCategory(subCategories) : ""}
-          </ListItemText>
-        </ListItem>
-        {/* </List> */}
-        {/* <List dense> */}
-        <Divider />
+          {parentCategories}
+        </Typography>
+        <Typography className={styles.categoryChild}>
+          {subCategories.length > 0 ? childrenCategory(subCategories) : ""}
+        </Typography>
+      </Box>
 
-        {/* <ListItem> */}
-        <ListItem>Brands</ListItem>
-        {/* </ListItem> */}
-        <ListItem>
-          {/* {brands?.map((result, index) => (
-                        <FormControlLabel
-                            key={index}
-                            control={<Checkbox defaultChecked size="small" />}
-                            label={result.brand_name}
-                        />
-                    ))} */}
-          <ListItemText sx={{ ml: 1 }}>
-            <CheckBox
-              size="small"
-              list={brands}
-              handleFilters={(filters) => handleFilters(filters, "brands")}
-            />
-          </ListItemText>
-        </ListItem>
-        <Divider />
-        <PriceFilter MinInput={MinInput}
-          MaxInput={MaxInput}
-          priceFilter={priceFilter}></PriceFilter>
-        <Divider />
-        <PageFilter
-          value={value}
-          setDealsData={setDealsData}
-          setShowDeals={setShowDeals}
-          setDiscountData={setDiscountData}
-          showDiscounts={showDiscounts}
-          setShowDiscounts={setShowDiscounts}
-          setFreeShippingData={setFreeShippingData}
-          setShowFreeShipping={setShowFreeShipping}
-          setShowProduct={setShowProduct}
-          setShowAllCategoryPro={setShowAllCategoryPro}
-          setShowAllMerchantPro={setShowAllCategoryPro}
-          setFilterData={setFilterData1}
-        ></PageFilter>
-        <Divider />
-        {/* <ListItem>
+      <Divider />
+
+      {/* <Box> */}
+      <Typography className={styles.categoryHeading}>Brands</Typography>
+
+      {console.log(brands)}
+      <Box className={styles.brandsList}>
+        <CheckBox
+          // className={styles.brandsList}
+          size="small"
+          list={brands}
+          handleFilters={(filters) => handleFilters(filters, "brands")}
+        />
+        {/* </Box> */}
+      </Box>
+      <Divider />
+      <PriceFilter
+        MinInput={MinInput}
+        MaxInput={MaxInput}
+        priceFilter={priceFilter}
+      ></PriceFilter>
+      <Divider />
+      <Typography className={styles.categoryHeading}>Other Filters</Typography>
+      <PageFilter
+        value={value}
+        setDealsData={setDealsData}
+        setShowDeals={setShowDeals}
+        setDiscountData={setDiscountData}
+        showDiscounts={showDiscounts}
+        setShowDiscounts={setShowDiscounts}
+        setFreeShippingData={setFreeShippingData}
+        setShowFreeShipping={setShowFreeShipping}
+        setShowProduct={setShowProduct}
+        setShowAllCategoryPro={setShowAllCategoryPro}
+        setShowAllMerchantPro={setShowAllCategoryPro}
+        setFilterData={setFilterData1}
+      ></PageFilter>
+      <Divider />
+      {/* <ListItem>
                     <FormControlLabel
                         control={<Checkbox defaultChecked size="small" />}
                         label="Colors"
                     />
                 </ListItem>
                 <Divider /> */}
-        {/* <ListItem>
+      {/* <ListItem>
                     <FormControlLabel
                         control={<Checkbox defaultChecked size="small" />}
                         label="Size"
@@ -150,7 +133,7 @@ function SideBarFilter({
                         label="Materials"
                     />
                 </ListItem> */}
-      </List>
+      {/* </List> */}
     </Grid>
   );
 }
