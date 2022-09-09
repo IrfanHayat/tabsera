@@ -74,7 +74,7 @@ export default function NavSelect({
           <Box display="inline" sx={{ mr: 1 }}>
             {startIcon}
           </Box>
-          <Typography display="inline" sx={{ pt: 0.3 }}>
+          <Typography display="inline" sx={{ pt: 0.3, fontWeight: "bold" }}>
             {" "}
             {Title}{" "}
           </Typography>

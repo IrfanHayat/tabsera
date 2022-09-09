@@ -192,9 +192,7 @@ export default function SignIn({ isLoggedIn, setIsLoggedIn }) {
           </Button> */}
         </>
       ) : (
-        <Button onClick={handleModalOpen} sx={{ color: "white" }}>
-          Sign In
-        </Button>
+        <Button onClick={handleModalOpen}>Sign In</Button>
       )}
       <ModalData
         isLoggedIn={isLoggedIn}

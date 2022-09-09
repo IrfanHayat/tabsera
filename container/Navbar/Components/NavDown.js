@@ -248,7 +248,8 @@ export default function NavDown(props) {
               src="/bigLogo.png"
               alt="/bigLogo.png"
               height="100px"
-              width="200px"
+              width="220px"
+              objectFit="contain"
               // onMouseOver={cu}
 
               onClick={() => router.push("/")}
