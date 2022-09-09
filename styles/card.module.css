@@ -123,8 +123,10 @@
 @media screen and (max-width: 1024px) {
   .card1 {
     width: 18.85%;
-    margin-right: 11px;
+    margin-right: 10px;
     margin-bottom: 14px;
+    background-color: #FFFFFF;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   }
 }
 @media screen and (max-width: 992px) {
