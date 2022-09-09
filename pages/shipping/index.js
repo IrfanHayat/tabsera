@@ -15,7 +15,8 @@ import { useRouter, withRouter } from "next/router";
 
 import { Controller, useForm } from "react-hook-form";
 
-function Shipping1() {
+function Shipping1({ key }) {
+  console.log("keyy", key);
   const {
     userInfo,
     cart: { shippingAddress },
@@ -37,12 +38,12 @@ function Shipping1() {
     getValues,
   } = useForm();
 
-  console.log(labels)
-  console.log(countryData)
+  console.log(labels);
+  console.log(countryData);
   // const { location } = shippingAddress;
 
   const handleChange = (value) => {
-    console.log(value)
+    console.log(value);
     setLabelValue({ value });
   };
   useEffect(() => {
@@ -52,7 +53,7 @@ function Shipping1() {
   const classes = useStyles();
 
   const submitHandler = async (value) => {
-    console.log(labelValue.value)
+    console.log(labelValue.value);
     let obj = {
       addresses: [
         {
@@ -78,13 +79,11 @@ function Shipping1() {
       ],
     };
 
-
     let result = await dispatch(addShipmentAddress(obj));
     if (result.payload) {
       //  localStorage.setItem("shippingAddress", JSON.stringify(value));
       router.push("/shipping_information");
     }
-
   };
 
   const getStates = (value) => {
@@ -116,6 +115,7 @@ function Shipping1() {
 
   return (
     <Shipping
+      key={key}
       submitHandler={submitHandler}
       // chooseLocationHandler={chooseLocationHandler}
       classes={classes}

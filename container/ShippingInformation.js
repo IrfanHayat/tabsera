@@ -89,7 +89,8 @@ function ShippingInformation({
   const [radioCheck1, setRadioCheck1] = useState(false);
   const [showMapView, setShowMapView] = useState(false);
   const [showTableView, setShowTableView] = useState(false);
-
+  const [key, setkey] = useState(1);
+  console.log("keyI", key);
   // const handleChange = (event) => {
   //   setButtonKey(event.target.value);
   // };
@@ -204,6 +205,7 @@ function ShippingInformation({
               </Typography>
               {/* <Shipping /> */}
               <Modal
+                variant="contained"
                 startIcon={<AddIcon />}
                 buttonTitle={t('shippingInfo.ShippingAdress.button.addAddress')}
                 heading=" Add Shipping Address"
@@ -320,8 +322,16 @@ function ShippingInformation({
                                 {userData.email}
                               </TableCell>{" "}
                               <TableCell className={styles.edit}>
-                                <ModeEditOutlineIcon
-                                  className={styles.editIcon}
+                                <Modal
+                                  // variant=""
+                                  // startIcon={<AddIcon />}
+                                  buttonTitle={
+                                    <ModeEditOutlineIcon
+                                      className={styles.editIcon}
+                                    />
+                                  }
+                                  heading=" Edit Shipping Address"
+                                  dialogContentText={<Shipping1 />}
                                 />
                               </TableCell>
                             </TableRow>
