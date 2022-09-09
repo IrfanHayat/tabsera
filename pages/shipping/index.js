@@ -6,7 +6,8 @@ import {
   getLabels,
   getCountry,
   getCity,
-  getState,
+  getState
+
 } from "../../slice/shipmentSlice";
 import localStorage from "localStorage";
 import useStyles from "../../utils/styles";
@@ -15,7 +16,7 @@ import { useRouter, withRouter } from "next/router";
 
 import { Controller, useForm } from "react-hook-form";
 
-function Shipping1({ key }) {
+function Shipping1({ key, data }) {
   console.log("keyy", key);
   const {
     userInfo,
@@ -118,6 +119,7 @@ function Shipping1({ key }) {
       key={key}
       submitHandler={submitHandler}
       // chooseLocationHandler={chooseLocationHandler}
+      data={data ? data : ""}
       classes={classes}
       Controller={Controller}
       control={control}

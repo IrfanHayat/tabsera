@@ -331,7 +331,7 @@ function ShippingInformation({
                                     />
                                   }
                                   heading=" Edit Shipping Address"
-                                  dialogContentText={<Shipping1 />}
+                                  dialogContentText={<Shipping1 data={result} />}
                                 />
                               </TableCell>
                             </TableRow>

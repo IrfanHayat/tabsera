@@ -38,6 +38,7 @@ export default function Shipping({
   getCities,
   cityData,
   labelValue,
+  data
 }) {
   const [countryList, setCountryList] = useState([]);
   const [stateList, setStateList] = useState([]);
@@ -146,6 +147,7 @@ export default function Shipping({
                     onChange(item);
                     getStates(item);
                   }}
+                  defaultValue={data.country}
                   value={value || null}
                   sx={{ width: "100%" }}
                   options={countryData}
@@ -340,8 +342,8 @@ export default function Shipping({
                 row
                 aria-labelledby="demo-row-radio-buttons-group-label"
                 name="row-radio-buttons-group"
-                // value={labelValue}
-                // onChange={handleChange}
+              // value={labelValue}
+              // onChange={handleChange}
               >
                 {labels.map((result) => (
                   <FormControlLabel
