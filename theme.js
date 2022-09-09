@@ -7,7 +7,7 @@ export const theme = createTheme({
   direction: i18n.dir(),
   palette: {
     primary: {
-      main: "#3d7cff",
+      main: "#ff4747",
     },
     background: {
       default: "#757575",

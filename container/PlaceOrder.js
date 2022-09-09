@@ -210,6 +210,7 @@ function PlaceOrder({
                                     alt="shirt"
                                     width={50}
                                     height={50}
+                                    objectFit="contain"
                                   ></Image>
                                 </TableCell>
 

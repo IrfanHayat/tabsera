@@ -403,10 +403,10 @@ function Details({
 
           <Box sx={{ py: 1 }}>
             <Box
-              color="warning.main"
-              style={{ display: "block", fontSize: 36 }}
+              // color="warning.main"
+              style={{ display: "block", fontSize: 36, color: "#ff4747" }}
             >
-              {skusProduct ? <>Rs. {skusProduct.cost} </> : <>Rs. {price}</>}
+              {skusProduct ? <>Rs.{skusProduct.cost} </> : <>Rs.{price}</>}
             </Box>
 
             <Box

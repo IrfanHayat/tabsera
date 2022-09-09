@@ -245,9 +245,9 @@ export default function NavDown(props) {
             }}
           >
             <Image
-              src="/bigLogo.png"
+              src="/danneyah.png"
               alt="/bigLogo.png"
-              height="100px"
+              height="60px"
               width="200px"
               // onMouseOver={cu}
 

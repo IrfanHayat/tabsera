@@ -64,7 +64,7 @@ export default function SignIn({ isLoggedIn, setIsLoggedIn }) {
   };
   const myAccount = (
     <div>
-      <MenuItem value={10}>
+      <MenuItem value={10} className={styles.menuItems}>
         <ListItemIcon>
           <AccountBoxIcon fontSize="small" />
         </ListItemIcon>
@@ -73,7 +73,7 @@ export default function SignIn({ isLoggedIn, setIsLoggedIn }) {
         </ListItemText>
       </MenuItem>
 
-      <MenuItem>
+      <MenuItem className={styles.menuItems}>
         <ListItemIcon>
           <FormatListBulletedIcon fontSize="small" />
         </ListItemIcon>
@@ -82,7 +82,7 @@ export default function SignIn({ isLoggedIn, setIsLoggedIn }) {
         </ListItemText>
       </MenuItem>
 
-      <MenuItem>
+      {/* <MenuItem>
         <ListItemIcon>
           <FormatListBulletedIcon fontSize="small" />
         </ListItemIcon>
@@ -116,23 +116,23 @@ export default function SignIn({ isLoggedIn, setIsLoggedIn }) {
         <ListItemText onClick={() => router.push("/security")}>
           Security
         </ListItemText>
-      </MenuItem>
+      </MenuItem> */}
 
-      <MenuItem>
+      <MenuItem className={styles.menuItems}>
         <ListItemIcon>
           <InfoOutlinedIcon fontSize="small" />
         </ListItemIcon>
         <ListItemText onClick={() => router.push("/about")}>About</ListItemText>
       </MenuItem>
 
-      <MenuItem>
+      <MenuItem className={styles.menuItems}>
         <ListItemIcon>
           <HelpOutlineOutlinedIcon fontSize="small" />
         </ListItemIcon>
         <ListItemText onClick={() => router.push("/help")}>Help</ListItemText>
       </MenuItem>
       <Divider />
-      <MenuItem onClick={logOut} alignText="center">
+      <MenuItem onClick={logOut} className={styles.menuItems}>
         <ListItemIcon>
           <LogoutIcon />
         </ListItemIcon>

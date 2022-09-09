@@ -202,7 +202,7 @@ function ShippingInformation({
               {/* <Shipping /> */}
               <Modal
                 startIcon={<AddIcon />}
-                buttonTitle=" Add  Address"
+                buttonTitle="Add Address"
                 heading=" Add Shipping Address"
                 dialogContentText={<Shipping1 />}
               />
@@ -296,7 +296,7 @@ function ShippingInformation({
                                   label={result.address_label_name}
                                   color={
                                     result.address_label_name === "Home"
-                                      ? "primary"
+                                      ? "success"
                                       : "error"
                                   }
                                   size="small"

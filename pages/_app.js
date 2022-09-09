@@ -18,7 +18,7 @@ import { create } from "jss";
 import { Container } from "@mui/material";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import 'mapbox-gl/dist/mapbox-gl.css';
+import "mapbox-gl/dist/mapbox-gl.css";
 import { RouteGuard } from "../RouterGuard";
 
 const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
@@ -39,7 +39,7 @@ const MyApp = ({ Component, pageProps }) => {
         <ThemeProvider>
           {/* <CookiesProvider> */}
           <Head>
-            <link rel="icon" href="/favicon.png" />
+            <link rel="icon" href="/dania.png" />
           </Head>
           <NavBar />
 

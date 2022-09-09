@@ -330,8 +330,9 @@ export default function PersistentDrawerLeft() {
             <Box className={styles.categoryBox}>
               <NavSelect
                 // className={styles.categories}
+                color={"grey"}
                 width="100%"
-                startIcon={<WidgetsIcon color="primary" />}
+                startIcon={<WidgetsIcon />}
                 Title={key == 1 ? "Categories" : key == 2 ? "Campaigns" : ""}
                 Data={
                   <Box className={styles.dropDown}>
@@ -385,26 +386,11 @@ export default function PersistentDrawerLeft() {
                   </MenuItem>
                 </TextField>
               </FormControl> */}
-              <List dense sx={{ pl: 2 }}>
+              <List dense className={styles.categoryLsit}>
                 {key == 1 && category?.length > 0 ? (
                   <>
                     {category?.map((result) => (
                       <ListItem
-                        // spacing={2}
-                        // sx={{ p: 1 }}
-                        // alignItems="flex-start"
-                        sx={{
-                          ":hover": {
-                            // border: 1,
-                            lineHeight: "40px",
-                            fontSize: "12px",
-                            // boxShadow: 1, // theme.shadows[20]
-                            transform: "scale(1.05)",
-                            // opacity: 0.5,
-                            color: "primary.main",
-                            cursor: "pointer",
-                          },
-                        }}
                         secondaryAction={
                           <ArrowForwardIosIcon
                             sx={{ fontSize: 12 }}
