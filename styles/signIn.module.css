@@ -10,3 +10,7 @@
   top: 0%;
   bottom: 0%;
 }
+
+.menuItems:hover {
+  color: rgb(210, 63, 87);
+}

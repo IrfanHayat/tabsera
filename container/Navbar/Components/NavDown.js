@@ -245,12 +245,12 @@ export default function NavDown(props) {
             }}
           >
             <Image
-              src="/bigLogo.png"
+              src="/tijariLogo.png"
               alt="/bigLogo.png"
-              height="100px"
+              height="60px"
               width="200px"
               // onMouseOver={cu}
-
+              objectFit="contain"
               onClick={() => router.push("/")}
             ></Image>
           </Link>
@@ -314,9 +314,9 @@ export default function NavDown(props) {
                   {...params}
                   placeholder="Search Product and Brand ...."
                   variant="standard"
-                  sx={{ borderColor: "primary.main" }}
+                  // sx={{ &:"hover": borderColor: "primary.main" }}
                   // color="primary"
-                  color="primary"
+                  // color="primary"
                   focused
                   InputProps={{
                     ...params.InputProps,
@@ -355,6 +355,7 @@ export default function NavDown(props) {
               {console.log(cartTotalQuantity)}
               {localStorage.getItem("login") == "true" ? (
                 <Badge
+                  // className={styles.badge}
                   color="error"
                   badgeContent={
                     cartTotalQuantity != undefined ||
@@ -364,7 +365,7 @@ export default function NavDown(props) {
                       : 1
                   }
                   max={99}
-                  className={styles.cartbadge}
+                  // className={styles.cartbadge}
                 >
                   <ShoppingCartOutlinedIcon className={styles.cartIcon} />
                 </Badge>

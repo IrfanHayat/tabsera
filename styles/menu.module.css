@@ -12,6 +12,12 @@
   box-shadow: 0px 4px 16px rgba(43, 52, 69, 0.1);
   border-radius: 1px;
 }
+.categoryList {
+  padding-left: 16px;
+}
+.categoryList :hover {
+  color: rgb(210, 63, 87);
+}
 .carouselBox {
   width: 100%;
   margin-left: 1px;
@@ -96,6 +102,9 @@
 .dropDown {
   width: 258px;
   border-radius: 2px;
+}
+.dropDown :hover {
+  color: rgb(210, 63, 87);
 }
 
 .carouselImage {

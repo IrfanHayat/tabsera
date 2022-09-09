@@ -16,7 +16,7 @@
   margin: auto;
 }
 .cartItemName {
-  color: #3d7cff;
+  color: #0a3446;
   display: flex;
   font-size: 18px;
   font-weight: 600;
@@ -34,5 +34,6 @@
 }
 
 .cartItemPriceValue {
+  color: rgb(210, 63, 87);
   font-weight: bold;
 }

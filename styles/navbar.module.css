@@ -4,6 +4,7 @@
   left: 0px;
   top: 0px;
   border-radius: 0px;
+  /* background-color: #0a3446; */
   /* position: absolute; */
   left: 0%;
   right: 0%;
@@ -45,6 +46,7 @@
   padding-right: 10px;
   border: 1px solid #d8e0e9;
   border-radius: 37px;
+  /* color: rgb(210, 63, 87); */
 }
 
 .cartIcon {
@@ -58,4 +60,9 @@
   right: 0%;
   top: 0%;
   bottom: 0%;
+}
+
+.badge {
+  /* background-color: red; */
+  color: rgb(210, 63, 87);
 }

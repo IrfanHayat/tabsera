@@ -39,7 +39,7 @@
   height: 22px;
   display: block;
   margin-top: 4px;
-  color: #f57224;
+  color: rgb(210, 63, 87);
 }
 
 .prodDiscountCost {
@@ -73,8 +73,8 @@
   margin-top: 8px;
 }
 .btnAddCart {
-  border: 1px solid#3d7cff;
-  color: #3d7cff;
+  border: 1px solid rgb(210, 63, 87);
+  color: rgb(210, 63, 87);
   border-radius: 2px;
   height: 24px;
   width: 24px;
@@ -108,7 +108,6 @@
   width: 15.8%;
   margin-right: 11px;
   margin-bottom: 14px;
- 
 }
 @media screen and (max-width: 1280px) {
   .card1 {

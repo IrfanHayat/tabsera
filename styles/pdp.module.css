@@ -7,9 +7,9 @@
   width: 225px;
   font-size: 16px;
   color: #fff;
-  border: 1px solid #3d7cff;
+  border: 1px solid rgb(210, 63, 87);
   border-radius: 2px;
-  background-color: #3d7cff;
+  background-color: rgb(210, 63, 87);
 }
 /* .buyNowbtn :hover {
   color: #3d7cff;
@@ -21,10 +21,10 @@
   height: 44px;
   width: 225px;
   font-size: 16px;
-  color: #fff;
-  border: 1px solid #f57224;
+  color: rgb(210, 63, 87);
+  border: 1px solid rgb(210, 63, 87);
   border-radius: 2px;
-  background-color: #f57224;
+  background-color: #fff;
 }
 
 .buyNowbtnSM {
@@ -62,10 +62,10 @@
 } */
 
 .selectimg:active {
-  border: 1px solid hsl(209, 94%, 39%);
+  border: 1px solid rgb(210, 63, 87);
 }
 .selectimg:hover {
-  border: 1px solid hsl(209, 94%, 39%);
+  border: 1px solid rgb(210, 63, 87);
 }
 
 /* .selectimg::selection {

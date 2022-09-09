@@ -403,8 +403,12 @@ function Details({
 
           <Box sx={{ py: 1 }}>
             <Box
-              color="warning.main"
-              style={{ display: "block", fontSize: 36 }}
+              // color="warning.main"
+              style={{
+                color: "rgb(210, 63, 87)",
+                display: "block",
+                fontSize: 36,
+              }}
             >
               {skusProduct ? <>Rs. {skusProduct.cost} </> : <>Rs. {price}</>}
             </Box>
