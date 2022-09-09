@@ -1,201 +1,178 @@
 {
-    "common": {
-        
-            "Headers": {
-              "About": "Около",
-              "Home": "Дом",
-              "Account": {
-                "My Account": "Мой аккаунт",
-                "My Profile": "Мой профиль",
-                "About": "Около",
-                "Help": "Справка",
-                "Logout": "Выход"
-              },
-              "Currency": {
-                "Currency": "Валюта",
-                "Rupees": "Рупий",
-                "Dollar": "Доллар",
-                "Ponds": "Прудов"
-              },
-              "Language": {
-                "Language": "Язык",
-                "EN": "В",
-                "RS": "РС",
-                "SM": "СМ",
-                "TU": "Ты"
-              }
-            }
-          
-
+  "common": {
+    "Headers": {
+      "About": "Около",
+      "Home": "Дом",
+      "Account": {
+        "My Account": "Мой аккаунт",
+        "My Profile": "Мой профиль",
+        "About": "Около",
+        "Help": "Справка",
+        "Logout": "Выход",
+        "SignIn": "Войти"
+      },
+      "Currency": {
+        "Currency": "Валюта",
+        "Rupees": "Рупий",
+        "Dollar": "Доллар",
+        "Ponds": "Прудов"
+      },
+      "Language": {
+        "Language": "Язык",
+        "EN": "В",
+        "RS": "РС",
+        "SM": "СМ",
+        "TU": "Ты"
+      }
     },
-    
-        "Footer": {
-          "rights_and_reserved": "© 2022 Табсера. Все права защищены",
-          "countryRegion": {
-            "heading": "Страна и регионы",
-            "countryName": [
-              "Турция",
-              "Франция",
-              "Пакистан",
-              "Индонезийский",
-              "Польша",
-              "Озноб",
-              "Малайзия",
-              "Бангладеш"
-            ]
-          }
-        }
-      ,
-    "Filter":{
-        
-            "ListFilter": {
-              "All Products": "Все продукты",
-              "Sellers": "Продавцов",
-              "Categories": "Категории"
-            }
-          ,
-          
-            "SortFilter": {
-              "Price: High-Low": "Цена: Высокая-Низкая",
-              "Price: Low-High": "Цена: Низкая-Высокая",
-              "Rating: High-Low": "Рейтинг: Высокий-Низкий",
-              "Rating: Low-High": "Рейтинг: Низкий-Высокий",
-              "Order: High-Low": "Порядок: Высокий-Низкий",
-              "Order: Low-High": "Порядок: Низкий-Высокий"
-            }
-          ,
-          
-            "PageFilter": {
-              "Bundles": "Пакеты",
-              "Discounts": "Скидки",
-              "Free Shipping": "Бесплатная доставка"
-            }
-          ,
-          
-            "Search": {
-              "placeHolder": "Поиск продукта и бренда"
-            },
-            "DropDown": {
-              "categories": "Категории",
-              "campaigns": "Кампании"
-            }
-          ,
-          
-            "PDP": {
-              "buttons": {
-                "cart": "Добавить в корзину",
-                "buyNow": "Купить сейчас"
-              },
-              "labels": {
-                "des": "Описания",
-                "rating": "Рейтинги и отзывы",
-                "similar": "Похожие продукты",
-                "soldBy": "Продано:",
-                "service": "Служба",
-                "brand": "Клеймо",
-                "color": "Цвет",
-                "materials": "Материалы",
-                "variants": "Варианты"
-              }
-            },
-            "Merchants": {
-              "Tabs": {
-                "Home": "Главная страница",
-                "All Products": "Все продукты",
-                "Profile": "Профиль"
-              }
-            }
-          ,
-          
-            "checkoutCart": {
-              "labels": {
-                "Shopping Cart": "Корзину",
-                "Order Summary": "Резюме заказа",
-                "Total Items": "Всего товаров",
-                "Total Price": "Общая стоимость",
-                "Quantity": "Количество",
-                "Price": "Цена",
-                "Delete": "Удалить"
-              },
-              "buttons": {
-                "checkout": "Перейти к оформлению заказа"
-              }
-            },
-            "shippingInfo": {
-              "labels": {
-                "purchaseFor": "Купить для",
-                "ship": {
-                  "shipTo": "Отправить в",
-                  "address": "Адрес",
-                  "locker": "Шкафчик",
-                  "school": "школа"
-                }
-              },
-              
-                "ShippingAdress": {
-                  "table": {
-                    "select": "Выбирать",
-                    "fullName": "Полное имя",
-                    "addressLabel": "Адресная наклейка",
-                    "fullAdress": "Полный адрес",
-                    "phone": "Телефон",
-                    "email": "Отправить по электронной почте",
-                    "edit": "Редактировать"
-                  },
-                  "button": {
-                    "addAddress": "Добавить адрес"
-                  },
-                  "label": {
-                    "shippingAddress": "Адрес доставки",
-                    "shippingInformation": "Информация о доставке",
-                    "shippingMethods": "Способы доставки",
-                    "charges": {
-                      "shippingCharges": "Стоимость доставки",
-                      "subTotal": "Промежуточная сумма",
-                      "shippingcost": "Стоимость доставки",
-                      "totalCost": "Общая стоимость"
-                    }
-                  }
-                },
-                
-                    "Review Order": {
-                      "labels": {
-                        "shippingInformation": "Информация о доставке",
-                        "shippingMethod": "Ваш способ доставки",
-                        "orderItems": "Заказать товары",
-                        "orderSummary": "Резюме заказа",
-                        "items": "Элементы",
-                        "shipping": "Судоходство",
-                        "total": "Итог"
-                      },
-                      "button": {
-                        "pay": "ПродолжитьОПлатить"
-                      }
-                    }
-                  
-              },
-              
-                "payment": {
-                  "Payment Method": "Способ оплаты"
-                },
-                "order Complete": {
-                  "message": {
-                    "congrats": "Поздравляю...!!",
-                    "ordersuccess": "Ваш заказ успешно размещен"
-                  }
-                },
-                "stepper": {
-                  "checkout": "Контроль",
-                  "shippingInfo": "Информация о доставке",
-                  "reviewOrder": "Порядок рецензирования",
-                  "pay": "Платить",
-                  "orderComplete": "Заказ завершен"
-                }
-              
-            
-       
-
-
+    "DropDown": {
+      "categories": "Категории",
+      "campaigns": "Кампании"
+    },
+    "Search": {
+      "placeHolder": "Поиск продукта и бренда"
     }
-
+  },
+  "Footer": {
+    "rights_and_reserved": "© 2022 Табсера. Все права защищены",
+    "countryRegion": {
+      "heading": "Страна и регионы",
+      "countryName": [
+        "Турция",
+        "Франция",
+        "Пакистан",
+        "Индонезийский",
+        "Польша",
+        "Озноб",
+        "Малайзия",
+        "Бангладеш"
+      ]
+    }
+  },
+  "Filter": {
+    "ListFilter": {
+      "title": "Список по",
+      "All Products": "Все продукты",
+      "Sellers": "Продавцов",
+      "Categories": "Категории"
+    },
+    "SortFilter": {
+      "title": "Сортировать по",
+      "price_desc": "Цена: Высокая-Низкая",
+      "price_asc": "Цена: Низкая-Высокая",
+      "rating_desc": "Рейтинг: Высокий-Низкий",
+      "rating_asc": "Рейтинг: Низкий-Высокий",
+      "order_desc": "Порядок: Высокий-Низкий",
+      "order_asc": "Порядок: Низкий-Высокий"
+    },
+    "PageFilter": {
+      "Bundles": "Пакеты",
+      "Discounts": "Скидки",
+      "Free Shipping": "Бесплатная доставка",
+      "clear": "Очистить все фильтры"
+    }
+  },
+  "Merchants": {
+    "Tabs": {
+      "Home": "Главная страница",
+      "All Products": "Все продукты",
+      "Profile": "Профиль"
+    }
+  },
+  "checkoutCart": {
+    "labels": {
+      "Shopping Cart": "Корзину",
+      "Order Summary": "Резюме заказа",
+      "Total Items": "Всего товаров",
+      "Total Price": "Общая стоимость",
+      "Quantity": "Количество",
+      "Price": "Цена",
+      "Delete": "Удалить"
+    },
+    "buttons": {
+      "checkout": "Перейти к оформлению заказа"
+    }
+  },
+  "shippingInfo": {
+    "labels": {
+      "purchaseFor": "Купить для",
+      "ship": {
+        "shipTo": "Отправить в",
+        "address": "Адрес",
+        "locker": "Шкафчик",
+        "school": "школа"
+      }
+    },
+    "ShippingAdress": {
+      "table": {
+        "select": "Выбирать",
+        "fullName": "Полное имя",
+        "addressLabel": "Адресная наклейка",
+        "fullAdress": "Полный адрес",
+        "phone": "Телефон",
+        "email": "Отправить по электронной почте",
+        "edit": "Редактировать"
+      },
+      "button": {
+        "addAddress": "Добавить адрес",
+        "reviewOrder": "Просмотреть заказ"
+      },
+      "label": {
+        "shippingAddress": "Адрес доставки",
+        "shippingInformation": "Информация о доставке",
+        "shippingMethods": "Способы доставки",
+        "charges": {
+          "shippingCharges": "Стоимость доставки",
+          "subTotal": "Промежуточная сумма",
+          "shippingcost": "Стоимость доставки",
+          "totalCost": "Общая стоимость"
+        }
+      }
+    },
+    "Review Order": {
+      "labels": {
+        "shippingInformation": "Информация о доставке",
+        "shippingMethod": "Ваш способ доставки",
+        "orderItems": "Заказать товары",
+        "orderSummary": "Резюме заказа",
+        "items": "Элементы",
+        "shipping": "Судоходство",
+        "total": "Итог"
+      },
+      "button": {
+        "pay": "ПродолжитьОПлатить"
+      }
+    }
+  },
+  "payment": {
+    "Payment Method": "Способ оплаты"
+  },
+  "order Complete": {
+    "message": {
+      "congrats": "Поздравляю...!!",
+      "ordersuccess": "Ваш заказ успешно размещен"
+    }
+  },
+  "stepper": {
+    "checkout": "Контроль",
+    "shippingInfo": "Информация о доставке",
+    "reviewOrder": "Порядок рецензирования",
+    "pay": "Платить",
+    "orderComplete": "Заказ завершен"
+  },
+  "PDP": {
+    "buttons": {
+      "cart": "Добавить в корзину",
+      "buyNow": "Купить сейчас"
+    },
+    "labels": {
+      "des": "Описания",
+      "rating": "Рейтинги и отзывы",
+      "similar": "Похожие продукты",
+      "soldBy": "Продано:",
+      "service": "Служба",
+      "variants": "Варианты",
+      "store": "Mağazayı ziyaret et"
+    }
+  }
 }

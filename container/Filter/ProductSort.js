@@ -3,23 +3,25 @@ import { useState } from 'react';
 import { Menu, Button, MenuItem, Typography } from '@mui/material';
 // component
 import Iconify from '../../components/Iconify';
-
+import { useTranslation } from "react-i18next";
 // ----------------------------------------------------------------------
 
-const SORT_BY_OPTIONS = [
-    { value: 'price_desc', label: 'Price: High-Low' },
-    { value: 'price_asc', label: 'Price: Low-High' },
-    { value: 'rating_asc', label: 'Rating: High-Low' },
-    { value: 'rating_desc', label: 'Rating: Low-High' },
-    { value: 'order_desc', label: 'Order: Low-High' },
-    { value: 'order_asc', label: 'Rating: High-Low' }
 
-];
 
 export default function ShopProductSort({ data, setFilterData, setShowFilterData }) {
     const [open, setOpen] = useState(null);
     const [selectedValue, setSelectedValue] = useState();
+    let { t, i18n } = useTranslation();
 
+    const SORT_BY_OPTIONS = [
+        { value: t('Filter.SortFilter.price_desc'), label: t('Filter.SortFilter.price_desc') },
+        { value: t('Filter.SortFilter.price_asc'), label: t('Filter.SortFilter.price_asc') },
+        { value: t('Filter.SortFilter.rating_asc'), label: t('Filter.SortFilter.rating_asc') },
+        { value: t('Filter.SortFilter.rating_desc'), label: t('Filter.SortFilter.rating_desc') },
+        { value: t('Filter.SortFilter.order_desc'), label: t('Filter.SortFilter.order_desc') },
+        { value: t('Filter.SortFilter.order_asc'), label: t('Filter.SortFilter.order_asc') }
+
+    ];
     console.log(data)
 
     const sortData = (type) => {
@@ -96,9 +98,9 @@ export default function ShopProductSort({ data, setFilterData, setShowFilterData
                 onClick={handleOpen}
                 endIcon={<Iconify icon={open ? 'eva:chevron-up-fill' : 'eva:chevron-down-fill'} />}
             >
-                Sort By:&nbsp;
+                {t('Filter.SortFilter.title')}:&nbsp;
                 <Typography component="span" variant="subtitle2" sx={{ color: 'text.secondary' }}>
-                    {selectedValue ? selectedValue : 'price_desc'}
+                    {selectedValue ? selectedValue : t('Filter.SortFilter.price_desc')}
                 </Typography>
             </Button>
             <Menu

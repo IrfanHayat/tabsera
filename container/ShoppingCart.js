@@ -1,6 +1,8 @@
 import React, { useContext, useEffect } from "react";
 import NextLink from "next/link";
 import Image from "next/image";
+import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 import {
   Grid,
   TableContainer,
@@ -39,6 +41,7 @@ function CartScreen({
   productPrice,
 }) {
   console.log(productCartData);
+  let { t, i18n } = useTranslation();
   return (
     <Box className={styles.cart}>
       <Typography
@@ -87,7 +90,7 @@ function CartScreen({
                 >
                   <Typography variant="body1" component="div">
                     {" "}
-                    Quantity
+                    {t('checkoutCart.labels.Quantity')}
                   </Typography>
                 </Grid>
                 <Grid
@@ -104,7 +107,7 @@ function CartScreen({
                     size="large"
                     variant="contained"
                     color="error"
-                    // sx={{ color:  "text.secondary" }}
+                  // sx={{ color:  "text.secondary" }}
                   >
                     <IndeterminateCheckBoxOutlinedIcon />
                   </IconButton>
@@ -134,7 +137,7 @@ function CartScreen({
                   className={styles.cartItemPrice}
                 >
                   <Typography variant="body1" component="div">
-                    Price
+                    {t('checkoutCart.labels.Price')}
                   </Typography>
                 </Grid>
 
@@ -170,7 +173,7 @@ function CartScreen({
                   className={styles.cartItemPrice}
                 >
                   <Typography variant="body1" component="div">
-                    Delete
+                    {t('checkoutCart.labels.Delete')}
                   </Typography>
                 </Grid>
                 <Grid

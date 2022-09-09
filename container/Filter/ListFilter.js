@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Box, Typography, Button } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 function ListFilter({
   setBtnKey,
@@ -8,9 +9,12 @@ function ListFilter({
   showAllMerchantsProduct,
   showAllCategoriesProduct,
 }) {
+  let { t, i18n } = useTranslation();
+
   return (
+
     <Box>
-      <Typography sx={{ display: "inline" }}>List By : </Typography>
+      <Typography sx={{ display: "inline" }}> {t('Filter.ListFilter.title')} : </Typography>
       <Button
         // variant={currentButtonVariant}
         // onClick={() => {
@@ -21,7 +25,7 @@ function ListFilter({
           setBtnKey(1), showAllProducts();
         }}
       >
-        All Products
+        {t('Filter.ListFilter.All Products')}
       </Button>
       <Button
         variant={btnKey == 2 ? "outlined" : "text"}
@@ -29,7 +33,7 @@ function ListFilter({
           setBtnKey(2), showAllMerchantsProduct();
         }}
       >
-        Sellers
+        {t('Filter.ListFilter.Sellers')}
       </Button>
       <Button
         variant={btnKey == 3 ? "outlined" : "text"}
@@ -37,7 +41,7 @@ function ListFilter({
           setBtnKey(3), showAllCategoriesProduct();
         }}
       >
-        Categories
+        {t('Filter.ListFilter.Categories')}
       </Button>
     </Box>
   );

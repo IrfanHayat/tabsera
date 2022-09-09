@@ -9,6 +9,7 @@ import { getFreeShipping } from "../../slice/freeShippingSlice";
 import { getDeals } from "../../slice/dealsPromotionsSlice";
 import { getDiscounts } from "../../slice/discountsSlice";
 import styles from "../../styles/pagefilters.module.css";
+import { useTranslation } from "react-i18next";
 function PageFilter({
   value,
   setDealsData,
@@ -24,7 +25,7 @@ function PageFilter({
   setFilterData,
 }) {
   let dispatch = useDispatch();
-
+  let { t, i18n } = useTranslation();
   useEffect(() => {
     //  dispatch(getFeatureProduct());
     dispatch(getDiscounts());
@@ -110,28 +111,28 @@ function PageFilter({
         <FormControlLabel
           value="deals"
           control={<Radio onChange={(e) => handleChange(e)} />}
-          label="Bundles"
+          label={t('Filter.PageFilter.Bundles')}
         />
         {/* </motion.div> */}
         {/* <motion.div className="animatable" whileTap={{ scale: 0.9 }}> */}
         <FormControlLabel
           value="discounts"
           control={<Radio onChange={(e) => handleChange(e)} />}
-          label="Discounts"
+          label={t('Filter.PageFilter.Discounts')}
         />
         {/* </motion.div> */}
         {/* <motion.div className="animatable" whileTap={{ scale: 0.9 }}> */}
         <FormControlLabel
           value="freeShipping"
           control={<Radio onChange={(e) => handleChange(e)} />}
-          label="freeShipping"
+          label={t('Filter.PageFilter.Free Shipping')}
         />
         {/* </motion.div> */}
         {/* <motion.div className="animatable" whileTap={{ scale: 0.9 }}> */}
         <FormControlLabel
           value="clear"
           control={<Radio onChange={(e) => handleChange(e)} />}
-          label="Clear All Filters"
+          label={t('Filter.PageFilter.clear')}
         />
         {/* </motion.div> */}
       </RadioGroup>

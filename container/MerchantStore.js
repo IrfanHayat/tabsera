@@ -28,6 +28,7 @@ import { useRouter } from "next/router";
 import ActionAreaCard from "./Card";
 import { result } from "lodash";
 import MerchantSideBarFilter from './Filter/MerchantSideBarFilter'
+import { useTranslation } from "react-i18next";
 
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
@@ -51,6 +52,7 @@ function MerchantStore({ merchantStoreDetail }) {
   const [subCategories, setSubCategories] = useState([]);
   const [brands, setBrands] = useState([]);
   const [catId, setCatId] = useState()
+  let { t, i18n } = useTranslation();
   // const [merchant, setmerchant] = useState();
   // console.log(merchantStoreDetail);
   // useEffect(() => {
@@ -234,17 +236,17 @@ function MerchantStore({ merchantStoreDetail }) {
             >
               <Tab
                 style={{ fontWeight: "bold" }}
-                label="Home Page"
+                label={t('Merchants.Tabs.Home')}
                 {...a11yProps(0)}
               />
               <Tab
                 style={{ fontWeight: "bold" }}
-                label="All Products"
+                label={t('Merchants.Tabs.All Products')}
                 {...a11yProps(1)}
               />
               <Tab
                 style={{ fontWeight: "bold" }}
-                label="Profile"
+                label={t('Merchants.Tabs.Profile')}
                 {...a11yProps(2)}
               />
               {/* <Box>hi</Box> */}

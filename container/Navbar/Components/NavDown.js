@@ -53,6 +53,7 @@ import { makeStyles } from "@mui/styles";
 import localStorage from "localStorage";
 import Link from "@mui/material/Link";
 import styles from "../../../styles/navbar.module.css";
+import { useTranslation } from "react-i18next";
 
 // const useStyles = makeStyles({
 //   root: {
@@ -76,7 +77,7 @@ export default function NavDown(props) {
   );
 
   const [open, setOpen] = React.useState(false);
-
+  let { t, i18n } = useTranslation();
   let router = useRouter();
   let dispatch = useDispatch();
 
@@ -233,7 +234,9 @@ export default function NavDown(props) {
       <AppBar className={styles.navDown} position="sticky">
         <Toolbar>
           <Link
+
             sx={{
+
               ":hover": {
                 // boxShadow: 20, // theme.shadows[20]
                 // transform: "scale(1.1)",
@@ -248,7 +251,8 @@ export default function NavDown(props) {
               src="/bigLogo.png"
               alt="/bigLogo.png"
               height="100px"
-              width="200px"
+              width="220px"
+              //objectFit="contain"
               // onMouseOver={cu}
 
               onClick={() => router.push("/")}
@@ -312,7 +316,7 @@ export default function NavDown(props) {
                   // InputProps={{ disableUnderline: true }}
 
                   {...params}
-                  placeholder="Search Product and Brand ...."
+                  placeholder={t('common.Search.placeHolder')}
                   variant="standard"
                   sx={{ borderColor: "primary.main" }}
                   // color="primary"
@@ -348,8 +352,8 @@ export default function NavDown(props) {
               onClick={handleClick}
               color="primary"
 
-              // onMouseEnter={handleClick}
-              // onMouseLeave={handleClick}
+            // onMouseEnter={handleClick}
+            // onMouseLeave={handleClick}
             >
               {console.log(localStorage.getItem("login"))}
               {console.log(cartTotalQuantity)}
@@ -358,8 +362,8 @@ export default function NavDown(props) {
                   color="error"
                   badgeContent={
                     cartTotalQuantity != undefined ||
-                    cartTotalQuantity != 0 ||
-                    cartTotalQuantity
+                      cartTotalQuantity != 0 ||
+                      cartTotalQuantity
                       ? cartTotalQuantity
                       : 1
                   }
@@ -387,11 +391,11 @@ export default function NavDown(props) {
                 vertical: "top",
                 horizontal: "center",
               }}
-              //keepMounted={true}
-              // anchorOrigin={{
-              //   vertical: "bottom",
-              //   horizontal: "left"62
-              // }}
+            //keepMounted={true}
+            // anchorOrigin={{
+            //   vertical: "bottom",
+            //   horizontal: "left"62
+            // }}
             >
               {cartTotalQuantity > 0 ? (
                 // <div>

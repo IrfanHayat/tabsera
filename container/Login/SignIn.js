@@ -28,6 +28,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
 import Avatar from "@mui/material/Avatar";
 import styles from "../../styles/signIn.module.css";
+import { useTranslation } from "react-i18next";
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -35,6 +36,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 export default function SignIn({ isLoggedIn, setIsLoggedIn }) {
   let dispatch = useDispatch();
   let router = useRouter();
+  let { t, i18n } = useTranslation();
   const [open, setOpen] = React.useState(false);
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -69,11 +71,11 @@ export default function SignIn({ isLoggedIn, setIsLoggedIn }) {
           <AccountBoxIcon fontSize="small" />
         </ListItemIcon>
         <ListItemText onClick={() => router.push("/profile")}>
-          My Profile
+          {t("common.Headers.Account.My Profile")}
         </ListItemText>
       </MenuItem>
 
-      <MenuItem>
+      {/* <MenuItem>
         <ListItemIcon>
           <FormatListBulletedIcon fontSize="small" />
         </ListItemIcon>
@@ -116,27 +118,27 @@ export default function SignIn({ isLoggedIn, setIsLoggedIn }) {
         <ListItemText onClick={() => router.push("/security")}>
           Security
         </ListItemText>
-      </MenuItem>
+      </MenuItem> */}
 
       <MenuItem>
         <ListItemIcon>
           <InfoOutlinedIcon fontSize="small" />
         </ListItemIcon>
-        <ListItemText onClick={() => router.push("/about")}>About</ListItemText>
+        <ListItemText onClick={() => router.push("/about")}>{t("common.Headers.Account.About")}</ListItemText>
       </MenuItem>
 
       <MenuItem>
         <ListItemIcon>
           <HelpOutlineOutlinedIcon fontSize="small" />
         </ListItemIcon>
-        <ListItemText onClick={() => router.push("/help")}>Help</ListItemText>
+        <ListItemText onClick={() => router.push("/help")}>{t("common.Headers.Account.Help")}</ListItemText>
       </MenuItem>
       <Divider />
       <MenuItem onClick={logOut} alignText="center">
         <ListItemIcon>
           <LogoutIcon />
         </ListItemIcon>
-        <ListItemText>Logout</ListItemText>
+        <ListItemText>{t("common.Headers.Account.Logout")}</ListItemText>
       </MenuItem>
     </div>
   );
@@ -192,8 +194,8 @@ export default function SignIn({ isLoggedIn, setIsLoggedIn }) {
           </Button> */}
         </>
       ) : (
-        <Button onClick={handleModalOpen} sx={{ color: "white" }}>
-          Sign In
+        <Button onClick={handleModalOpen} >
+          {t("common.Headers.Account.SignIn")}
         </Button>
       )}
       <ModalData

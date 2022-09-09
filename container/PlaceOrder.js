@@ -33,6 +33,7 @@ import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
 import { Stack } from "@mui/material";
 import { RouteGuard } from "../RouterGuard";
+import { useTranslation } from "react-i18next";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -64,6 +65,7 @@ function PlaceOrder({
   const [openBar, setOpenBar] = React.useState(false);
   // const [loginSccess, setLginSccess] = React.useState(false);
   const router = useRouter();
+  let { t, i18n } = useTranslation();
   // const handleClickBar = () => {
   //   setOpenBar(true);
   // };
@@ -90,7 +92,7 @@ function PlaceOrder({
             }}
           >
             <Typography variant="h6" style={{ fontWeight: "bold" }}>
-              Shipping Information
+              {t('shippingInfo.Review Order.labels.shippingInformation')}
             </Typography>
 
             {/* {productDetail?.merchant_name} */}
@@ -163,7 +165,7 @@ function PlaceOrder({
           >
             {/* <ListItem> */}
             <Typography variant="h6" style={{ fontWeight: "bold" }}>
-              Your Shipping Method
+              {t('shippingInfo.Review Order.labels.shippingMethod')}
             </Typography>
             {/* </ListItem> */}
             <List>
@@ -182,7 +184,7 @@ function PlaceOrder({
           >
             {/* <ListItem> */}
             <Typography variant="h6" style={{ fontWeight: "bold" }}>
-              Ordered Items
+              {t('shippingInfo.Review Order.labels.orderItems')}
             </Typography>
             {/* </ListItem> */}
             <List>
@@ -236,12 +238,12 @@ function PlaceOrder({
         <Grid item md={12} xs={12} sx={{ bgcolor: "background.paper" }}>
           <Box sx={{ borderBottom: 1, borderColor: "divider", p: 2 }}>
             <Typography variant="h6" style={{ fontWeight: "bold" }}>
-              Order Summary
+              {t('shippingInfo.Review Order.labels.orderSummary')}
             </Typography>
             <Grid container>
               <ListItem>
                 <Grid item xs={3}>
-                  <Typography>Items:</Typography>
+                  <Typography> {t('shippingInfo.Review Order.labels.items')}:</Typography>
                 </Grid>
                 <Grid item xs={3}>
                   <Typography>
@@ -265,7 +267,7 @@ function PlaceOrder({
               <ListItem>
                 <Grid container>
                   <Grid item xs={3}>
-                    <Typography>Shipping:</Typography>
+                    <Typography> {t('shippingInfo.Review Order.labels.shipping')}:</Typography>
                   </Grid>
                   <Grid item xs={3}>
                     <Typography>
@@ -278,7 +280,7 @@ function PlaceOrder({
                 <Grid container>
                   <Grid item xs={3}>
                     <Typography>
-                      <strong>Total:</strong>
+                      <strong> {t('shippingInfo.Review Order.labels.total')}:</strong>
                     </Typography>
                   </Grid>
                   <Grid item xs={3}>
@@ -286,13 +288,13 @@ function PlaceOrder({
                       <strong>
                         {productPrice && shippingCharges
                           ? productPrice.reduce(
-                              (a, c) => a + c.qty * c.price,
-                              0
-                            ) + shippingCharges
+                            (a, c) => a + c.qty * c.price,
+                            0
+                          ) + shippingCharges
                           : productPrice.reduce(
-                              (a, c) => a + c.qty * c.price,
-                              0
-                            )}
+                            (a, c) => a + c.qty * c.price,
+                            0
+                          )}
                       </strong>
                     </Typography>
                   </Grid>
@@ -331,9 +333,9 @@ function PlaceOrder({
                 }
                 variant="contained"
                 color="primary"
-                // fullWidth
+              // fullWidth
               >
-                Proceed to Pay
+                {t('shippingInfo.Review Order.button.pay')}
               </Button>
               {/* <Button
                   // fullWidth

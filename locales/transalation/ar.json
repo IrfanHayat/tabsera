@@ -8,7 +8,8 @@
         "My Profile": "ملفي الشخصي",
         "About": "عن",
         "Help": "تعليمات",
-        "Logout": "الخروج"
+        "Logout": "الخروج",
+        "SignIn": "تسجيل الدخول"
       },
       "Currency": {
         "Currency": "عملة",
@@ -23,160 +24,155 @@
         "SM": "ن خ",
         "TU": "أنت"
       }
-    }
-  },
-  "Footer": {
-    "rights_and_reserved": "© 2022 تابسيرا. جميع الحقوق محفوظة",
-    "countryRegion": {
-          "heading": "البلد والمناطق",
-          "countryName": [
-            "تركيا",
-            "فرنسا",
-            "باكستان",
-            "الإندونيسية",
-            "بولندا",
-            "الفلفل الحار",
-            "ماليزيا",
-            "بنغلاديش"
-          ]
-        }
-      
-  },
-  "Filter": {
-    "ListFilter": {
-      "All Products": "جميع المنتجات",
-      "Sellers": "البائعين",
-      "Categories": "فئات"
-    },
-    "SortFilter": {
-      "Price: High-Low": "السعر: عالي-منخفض",
-      "Price: Low-High": "السعر: منخفض-مرتفع",
-      "Rating: High-Low": "التصنيف: عالي-منخفض",
-      "Rating: Low-High": "التصنيف: منخفض-مرتفع",
-      "Order: High-Low": "الترتيب: عالي-منخفض",
-      "Order: Low-High": "الترتيب: منخفض-مرتفع"
-    },
-    "PageFilter": {
-      "Bundles": "حزم",
-      "Discounts": "خصومات",
-      "Free Shipping": "شحن مجاني"
-    },
-    "Search": {
-      "placeHolder": "البحث عن المنتج والعلامة التجارية"
     },
     "DropDown": {
       "categories": "فئات",
       "campaigns": "الحملات"
     },
-    "PDP": {
-      "buttons": {
-        "cart": "اضف الى سلة التسوق",
-        "buyNow": "اشتري الان"
+    "Search": {
+      "placeHolder": "البحث عن المنتج والعلامة التجارية"
+    }
+  },
+  "Footer": {
+    "rights_and_reserved": "© 2022 تابسيرا. جميع الحقوق محفوظة",
+    "countryRegion": {
+      "heading": "البلد والمناطق",
+      "countryName": [
+        "تركيا",
+        "فرنسا",
+        "باكستان",
+        "الإندونيسية",
+        "بولندا",
+        "الفلفل الحار",
+        "ماليزيا",
+        "بنغلاديش"
+      ]
+    }
+  },
+  "Filter": {
+    "ListFilter": {
+      "title": "قائمة حسب",
+      "All Products": "جميع المنتجات",
+      "Sellers": "البائعين",
+      "Categories": "فئات"
+    },
+    "SortFilter": {
+      "title": "ترتيب حسب",
+      "price_desc": "السعر: عالي-منخفض",
+      "price_asc": "السعر: منخفض-مرتفع",
+      "rating_desc": "التصنيف: عالي-منخفض",
+      "rating_asc": "التصنيف: منخفض-مرتفع",
+      "order_desc": "الترتيب: عالي-منخفض",
+      "order_asc": "الترتيب: منخفض-مرتفع"
+    },
+    "PageFilter": {
+      "Bundles": "حزم",
+      "Discounts": "خصومات",
+      "Free Shipping": "شحن مجاني",
+      "clear": "مسح جميع الفلاتر"
+    }
+  },
+  "Merchants": {
+    "Tabs": {
+      "Home": "صفحة رئيسية",
+      "All Products": "جميع المنتجات",
+      "Profile": "ملف تعريف"
+    }
+  },
+  "checkoutCart": {
+    "labels": {
+      "Shopping Cart": "سلة التسوق",
+      "Order Summary": "ملخص الطلب",
+      "Total Items": "مجموع العناصر",
+      "Total Price": "السعر الإجمالي",
+      "Quantity": "كم",
+      "Price": "ثمن",
+      "Delete": "حذف"
+    },
+    "buttons": {
+      "checkout": "المتابعة للتحقق من"
+    }
+  },
+  "shippingInfo": {
+    "labels": {
+      "purchaseFor": "شراء ل",
+      "ship": {
+        "shipTo": "اشحن إلى",
+        "address": "عنوان",
+        "locker": "خزانه",
+        "school": "مدرسة"
       }
     },
-    
-      "labels": {
-        "des": "اوصاف",
-        "rating": "التقييمات والمراجعات",
-        "similar": "منتجات مماثلة",
-        "soldBy": "يباع بواسطة:",
-        "service": "خدمة",
-        "brand": "وسم",
-        "color": "لون",
-        "materials": "المواد",
-        "variants": "المتغيرات"
+    "ShippingAdress": {
+      "table": {
+        "select": "اختار",
+        "fullName": "الاسم الكامل",
+        "addressLabel": "تسمية العنوان",
+        "fullAdress": "العنوان الكامل",
+        "phone": "الهاتف",
+        "email": "البريد الإلكتروني",
+        "edit": "حرر"
       },
-      "Merchants": {
-        "Tabs": {
-          "Home": "صفحة رئيسية",
-          "All Products": "جميع المنتجات",
-          "Profile": "ملف تعريف"
+      "button": {
+        "addAddress": "إضافة عنوان",
+        "reviewOrder": "مراجعة الطلب"
+      },
+      "label": {
+        "shippingAddress": "عنوان الشحن",
+        "shippingInformation": "معلومات الشحن",
+        "shippingMethods": "طرق الشحن",
+        "charges": {
+          "shippingCharges": "رسوم الشحن",
+          "subTotal": "المجموع الفرعي",
+          "shippingcost": "تكلفة الشحن",
+          "totalCost": "التكلفة الإجمالية"
         }
-      }
-    ,
-    "checkoutCart": {
-      "labels": {
-        "Shopping Cart": "سلة التسوق",
-        "Order Summary": "ملخص الطلب",
-        "Total Items": "مجموع العناصر",
-        "Total Price": "السعر الإجمالي",
-        "Quantity": "كم",
-        "Price": "ثمن",
-        "Delete": "حذف"
-      },
-      "buttons": {
-        "checkout": "المتابعة للتحقق من"
       }
     },
-    "shippingInfo": {
+    "Review Order": {
       "labels": {
-        "purchaseFor": "شراء ل",
-        "ship": {
-          "shipTo": "اشحن إلى",
-          "address": "عنوان",
-          "locker": "خزانه",
-          "school": "مدرسة"
-        }
+        "shippingInformation": "معلومات الشحن",
+        "shippingMethod": "طريقة الشحن الخاصة بك",
+        "orderItems": "عناصر الطلب",
+        "orderSummary": "ملخص الطلب",
+        "items": "العناصر",
+        "shipping": "شحن",
+        "total": "مجموع"
       },
-      "ShippingAdress": {
-        "table": {
-          "select": "اختار",
-          "fullName": "الاسم الكامل",
-          "addressLabel": "تسمية العنوان",
-          "fullAdress": "العنوان الكامل",
-          "phone": "الهاتف",
-          "email": "البريد الإلكتروني",
-          "edit": "حرر"
-        },
-        "button": {
-          "addAddress": "إضافة عنوان"
-        },
-        "label": {
-          "shippingAddress": "عنوان الشحن",
-          "shippingInformation": "معلومات الشحن",
-          "shippingMethods": "طرق الشحن",
-          "charges": {
-            "shippingCharges": "رسوم الشحن",
-            "subTotal": "المجموع الفرعي",
-            "shippingcost": "تكلفة الشحن",
-            "totalCost": "التكلفة الإجمالية"
-          }
-        }
-      },
-      
-        "Review Order": {
-          "labels": {
-            "shippingInformation": "معلومات الشحن",
-            "shippingMethod": "طريقة الشحن الخاصة بك",
-            "orderItems": "عناصر الطلب",
-            "orderSummary": "ملخص الطلب",
-            "items": "العناصر",
-            "shipping": "شحن",
-            "total": "مجموع"
-          },
-          "button": {
-            "pay": "المضي قدما في الدفع"
-          }
-        }
-      ,
-      
-        "payment": {
-          "Payment Method": "طريقة الدفع"
-        },
-        "order Complete": {
-          "message": {
-            "congrats": "مبروك...!!",
-            "ordersuccess": "تم تقديم طلبك بنجاح"
-          }
-        }
-      ,
-      "stepper": {
-        "checkout": "الخروج",
-        "shippingInfo": "معلومات الشحن",
-        "reviewOrder": "مراجعة الطلب",
-        "pay": "دفع",
-        "orderComplete": "الطلب مكتمل"
+      "button": {
+        "pay": "المضي قدما في الدفع"
+      }
+    },
+    "payment": {
+      "Payment Method": "طريقة الدفع"
+    },
+    "order Complete": {
+      "message": {
+        "congrats": "مبروك...!!",
+        "ordersuccess": "تم تقديم طلبك بنجاح"
       }
     }
+  },
+  "PDP": {
+    "buttons": {
+      "cart": "اضف الى سلة التسوق",
+      "buyNow": "اشتري الان"
+    },
+    "labels": {
+      "des": "اوصاف",
+      "rating": "التقييمات والمراجعات",
+      "similar": "منتجات مماثلة",
+      "soldBy": "يباع بواسطة:",
+      "service": "خدمة",
+      "variants": "المتغيرات",
+      "store": "قم بزيارة المعرض او المتجر"
+    }
+  },
+  "stepper": {
+    "checkout": "الخروج",
+    "shippingInfo": "معلومات الشحن",
+    "reviewOrder": "مراجعة الطلب",
+    "pay": "دفع",
+    "orderComplete": "الطلب مكتمل"
   }
 }

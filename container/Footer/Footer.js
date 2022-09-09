@@ -7,8 +7,10 @@ import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import PublicOutlinedIcon from "@mui/icons-material/PublicOutlined";
 import { header, footer } from "../../helper/config/config";
 import Divider from "@mui/material/Divider";
+import { useTranslation } from "react-i18next";
 export default function Footer() {
   const [currentHost, setCurrentHost] = useState();
+  let { t, i18n } = useTranslation();
   useEffect(() => {
     if (
       typeof window !== "undefined" &&
@@ -44,10 +46,11 @@ export default function Footer() {
               <Box
                 textAlign="center"
                 sx={{ m: 1, p: 1 }}
-                // pt={{ xs: 2, sm: 5 }}
-                // pb={{ xs: 2, sm: 0 }}
+              // pt={{ xs: 2, sm: 5 }}
+              // pb={{ xs: 2, sm: 0 }}
               >
-                © {new Date().getFullYear()} Tabsera. All Rights Reserved
+                {t('Footer.rights_and_reserved')}
+                {/* © {new Date().getFullYear()} Tabsera. All Rights Reserved */}
               </Box>
             </Grid>
 
@@ -64,58 +67,58 @@ export default function Footer() {
                 // textAlign="center"
                 sx={{ display: "flex", flexWrap: "wrap" }}
                 justifyContent="center"
-                // pt={{ xs: 2, sm: 5 }}
-                // pb={{ xs: 2, sm: 0 }}
+              // pt={{ xs: 2, sm: 5 }}
+              // pb={{ xs: 2, sm: 0 }}
               >
-                <Typography>Country & Region : Somalia</Typography>
+                <Typography> {t('Footer.countryRegion.heading')}</Typography>
                 <Divider
                   sx={{ height: 28, mx: 2 }}
                   orientation="vertical"
                   color="grey"
                 />
-                <Typography>Turkey</Typography>
+                <Typography>{t('Footer.countryRegion.heading')}</Typography>
                 <Divider
                   sx={{ height: 28, mx: 2 }}
                   orientation="vertical"
                   color="grey"
                 />
-                <Typography>France</Typography>
+                <Typography>{t('Footer.countryRegion.countryName.0')}</Typography>
                 <Divider
                   sx={{ height: 28, mx: 2 }}
                   orientation="vertical"
                   color="grey"
                 />
-                <Typography>Pakistan</Typography>
+                <Typography>{t('Footer.countryRegion.countryName.1')}</Typography>
                 <Divider
                   sx={{ height: 28, mx: 2 }}
                   orientation="vertical"
                   color="grey"
                 />
-                <Typography>Indonesia</Typography>
+                <Typography>{t('Footer.countryRegion.countryName.2')}</Typography>
                 <Divider
                   sx={{ height: 28, mx: 2 }}
                   orientation="vertical"
                   color="grey"
                 />
-                <Typography>Poland</Typography>{" "}
+                <Typography>{t('Footer.countryRegion.countryName.3')}</Typography>{" "}
                 <Divider
                   sx={{ height: 28, mx: 2 }}
                   orientation="vertical"
                   color="grey"
                 />
-                <Typography>Chille</Typography>{" "}
+                <Typography>{t('Footer.countryRegion.countryName.5')}</Typography>{" "}
                 <Divider
                   sx={{ height: 28, mx: 2 }}
                   orientation="vertical"
                   color="grey"
                 />
-                <Typography>Malaysia</Typography>{" "}
+                <Typography>{t('Footer.countryRegion.countryName.6')}</Typography>{" "}
                 <Divider
                   sx={{ height: 28, mx: 2 }}
                   orientation="vertical"
                   color="grey"
                 />
-                <Typography>Bangladesh</Typography>
+                <Typography>{t('Footer.countryRegion.countryName.7')}</Typography>
               </Box>
             </Grid>
           </Grid>
