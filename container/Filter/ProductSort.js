@@ -14,12 +14,12 @@ export default function ShopProductSort({ data, setFilterData, setShowFilterData
     let { t, i18n } = useTranslation();
 
     const SORT_BY_OPTIONS = [
-        { value: t('Filter.SortFilter.price_desc'), label: t('Filter.SortFilter.price_desc') },
-        { value: t('Filter.SortFilter.price_asc'), label: t('Filter.SortFilter.price_asc') },
-        { value: t('Filter.SortFilter.rating_asc'), label: t('Filter.SortFilter.rating_asc') },
-        { value: t('Filter.SortFilter.rating_desc'), label: t('Filter.SortFilter.rating_desc') },
-        { value: t('Filter.SortFilter.order_desc'), label: t('Filter.SortFilter.order_desc') },
-        { value: t('Filter.SortFilter.order_asc'), label: t('Filter.SortFilter.order_asc') }
+        { value: 'price_desc', label: t('Filter.SortFilter.price_desc') },
+        { value: 'price_asc', label: t('Filter.SortFilter.price_asc') },
+        { value: 'rating_asc', label: t('Filter.SortFilter.rating_asc') },
+        { value: 'rating_desc', label: t('Filter.SortFilter.rating_desc') },
+        { value: 'order_desc', label: t('Filter.SortFilter.order_desc') },
+        { value: 'order_asc', label: t('Filter.SortFilter.order_asc') }
 
     ];
     console.log(data)
