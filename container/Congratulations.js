@@ -4,7 +4,7 @@ import { Box } from "@mui/system";
 import { Grid, Typography } from "@mui/material";
 import Stack from "@mui/material/Stack";
 import styles from "../styles/congratulations.module.css";
-const Congratulations = () => {
+const Congratulations = ({ orderNo }) => {
   return (
     <>
       <CheckoutWizard activeStep={4} />
@@ -46,7 +46,7 @@ const Congratulations = () => {
           </Box> */}
 
           <Box sx={{ color: "text.primary" }}>
-            Your Order Number is 98980989089
+            Your Order Number is {orderNo}
           </Box>
 
           <Box sx={{ color: "text.primary" }}>

@@ -104,7 +104,11 @@ function Payement() {
         setStatus(result1.payload)
         setOpenBar(true);
         setTimeout(() => {
-          router.push('/congratulations')
+          // router.push('/congratulations')
+          router.push({
+            pathname: "/congratulations",
+            query: { orderNo: router.query?.orderNo },
+          });
         }, 1000)
 
       } else {
@@ -134,7 +138,10 @@ function Payement() {
       if (result.payload.resultCode == 2000) {
 
         setTimeout(() => {
-          router.push('/congratulations')
+          router.push({
+            pathname: "/congratulations",
+            query: { orderNo: router.query?.orderNo },
+          });
         }, 1000)
       }
 

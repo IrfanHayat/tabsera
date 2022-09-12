@@ -49,7 +49,7 @@ function Placeorder() {
 
   console.log(cartItems);
 
-  useEffect(() => {}, [shippingCharges]);
+  useEffect(() => { }, [shippingCharges]);
 
   useEffect(() => {
     //dispatch(getCartItems())
@@ -204,7 +204,10 @@ function Placeorder() {
         if (result.payload.customerOrderNo != null) {
           // setOpenBar(true);
           setTimeout(() => {
-            router.push("/payment");
+            router.push({
+              pathname: "/payment",
+              query: { orderNo: result.payload.customerOrderNo },
+            });
           }, 1000);
         }
       } else {
@@ -257,7 +260,11 @@ function Placeorder() {
         if (result.payload.customerOrderNo != null) {
           // setOpenBar(true);
           setTimeout(() => {
-            router.push("/payment");
+            // router.push("/payment");
+            router.push({
+              pathname: "/payment",
+              query: { orderNo: result.payload.customerOrderNo },
+            });
           }, 1000);
         }
       }
