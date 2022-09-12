@@ -46,12 +46,12 @@
   /* margin-top: 151px; */
 }
 .merchantImg {
-  /* height: 120px; */
-  /* width: 120px; */
+  height: 120px;
+  width: 120px;
   margin-top: -190px;
   margin-left: 67px;
-  /* object-fit: contain; */
-  /* background-color: grey; */
+  object-fit: contain;
+  background-color: grey;
   border-radius: 50%;
   border: 4px solid #fff;
   /* background: url("../public/bigLogo.png"); */
