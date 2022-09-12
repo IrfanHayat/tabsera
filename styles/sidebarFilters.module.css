@@ -1,24 +1,9 @@
 .sideBarFilter {
-  height: 1368px;
   width: 278px;
   left: 0px;
   top: 0px;
   background: #ffffff;
-
   box-shadow: 0px 1px 3px rgba(3, 0, 71, 0.09);
-  /* left: 0%;
-  right: 0%;
-  top: 0%;
-  bottom: 0%; */
-  /* sx={{
-        width: "278px",
-        height: "1368px",
-        display: "flex",
-        borderRadius: "8px",
-        backgroundColor: "#FFFFFF",
-        boxShadow: "0px 1px 3px rgba(3, 0, 71, 0.09)",
-        flexWrap: "wrap",
-      }} */
 }
 
 .categoryHeading {
@@ -31,12 +16,13 @@
   text-align: left;
 }
 .categories {
-  /* display: flex; */
-  /* flex-direction: column; */
+  display: flex;
+  flex-direction: column;
+  /* align-items: flex-start; */
   /* flex-wrap: wrap; */
   /* direction: c; */
-  min-height: 100px;
-  margin-bottom: 100px;
+  /* min-height: 100px; */
+  margin-bottom: 10px;
 }
 .categoryParent {
   height: 19px;
@@ -45,23 +31,25 @@
   top: 36px;
   border-radius: nullpx;
   margin-top: 16px;
-  margin-left: 29px;
+  margin-left: 35px;
 }
 .categoryChild {
-  height: 19px;
-  width: 81px;
+  /* height: 19px; */
+  width: 150px;
   margin-top: 11px;
   margin-left: 49px;
 }
 
 .brandsList {
   /* min-height: 100px; */
-  margin-bottom: 100px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
 
   text-align: left;
   font-weight: 500;
   font-size: 16px;
-  line-height: 22px;
   margin-top: 16px;
   margin-left: 29px;
+  /* line-height: 22px; */
 }

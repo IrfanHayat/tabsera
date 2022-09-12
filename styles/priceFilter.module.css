@@ -10,9 +10,11 @@
 
 .pricefilter {
   /* min-height: 100px; */
-  margin-bottom: 100px;
+  margin-bottom: 20px;
 }
-
+.otherFiltersDiv {
+  margin-bottom: 20px;
+}
 .categoryHeading {
   margin-top: 18px;
   margin-left: 27px;
