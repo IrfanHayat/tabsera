@@ -12,5 +12,6 @@
 }
 
 .menuItems:hover {
+  font-weight: bold;
   color: rgb(210, 63, 87);
 }

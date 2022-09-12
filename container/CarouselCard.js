@@ -54,8 +54,8 @@ export default function CarouselCard({
           // justifyContent: "space-arounf",
         }
       : { height: 85 };
-  let width = styledCard?.flexDirection == "row" ? "100%" : "205px";
-  let height = styledCard?.flexDirection == "row" ? "100%" : "310px";
+  let width = styledCard?.flexDirection == "row" ? "100%" : "277px";
+  let height = styledCard?.flexDirection == "row" ? "100%" : "393px";
 
   return (
     <>

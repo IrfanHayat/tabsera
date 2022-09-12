@@ -1,29 +1,32 @@
 .categoryBox {
   width: 278px;
-  height: 366px;
-  border: 8px;
-  /* margin-top: 10px; */
+  height: 398px;
+  /* border: 10px; */
+  margin-top: 31px;
   /* position: absolute; */
   left: 0%;
   right: 0%;
   top: 0%;
   bottom: 0%;
   background-color: #ffffff;
-  box-shadow: 0px 4px 16px rgba(43, 52, 69, 0.1);
-  border-radius: 1px;
+  box-shadow: rgb(3 0 71 / 9%) 0px 1px 3px;
+  border-radius: 10px;
 }
+
 .categoryList {
   padding-left: 16px;
 }
 .categoryList :hover {
+  font-weight: bold;
   color: rgb(210, 63, 87);
 }
 .carouselBox {
   width: 100%;
-  margin-left: 1px;
-
+  margin-top: 31px;
+  margin-left: 14px;
+  border-radius: 10px;
   /* width: 278px; */
-  height: 366px;
+  height: 398px;
   border: 8px;
   /* position: absolute; */
   left: 0%;
@@ -31,9 +34,29 @@
   top: 0%;
   bottom: 0%;
   background-color: #ffffff;
-  box-shadow: 0px 4px 16px rgba(43, 52, 69, 0.1);
-  border-radius: 1px;
+  box-shadow: rgb(3 0 71 / 9%) 0px 1px 3px;
 }
+.carouselImage {
+  top: 0px;
+  width: 100%;
+  height: 355px;
+  object-fit: contain;
+}
+.carouselDesc {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 50px;
+  padding-left: 5px;
+}
+
+/* .carouselName {
+} */
+
+.carouselproductCost {
+  color: rgb(210, 63, 87);
+}
+
 .categoriesButton {
   /* position: absolute; */
   left: 0%;
@@ -41,11 +64,13 @@
   top: 0%;
   bottom: 0%;
   bottom: 0%;
-  border-radius: 1px;
+  /* border-top: 10px; */
+  /* border-top-left-radius: 10px; */
+  border-radius: 10px;
   width: 278px;
   height: 40px;
   background-color: #fafafa;
-  /* border: 1px solid #fff; */
+  border: 1px solid #fff;
   /* box-shadow: 3px 3px 5px 6px #ccc; */
 }
 
@@ -105,6 +130,7 @@
 }
 .dropDown :hover {
   color: rgb(210, 63, 87);
+  font-weight: bold;
 }
 
 .carouselImage {
@@ -114,27 +140,18 @@
 }
 
 .filtersBar {
+  border-radius: 10px;
+  height: 70px;
   display: flex;
   flex-direction: row;
   background-color: #fff;
-  margin-top: 2px;
-  margin-bottom: 2px;
+  margin-top: 31px;
+  /* margin-bottom: 2px; */
   padding-left: 30px;
   align-items: center;
   flex-wrap: wrap;
   justify-content: space-between;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  /* sx={{
-                display: "flex",
-                flexDirection: "row",
-                bgcolor: "background.paper",
-                my: 0.5,
-                pl: 3,
-                py: 0.5,
-                justifyContent: "space-between",
-                alignItems: "center",
-                flexWrap: "wrap",
-              }}
-} */
+  /* padding-top: 5px;
+  padding-bottom: 5px; */
+  box-shadow: rgb(3 0 71 / 9%) 0px 1px 3px;
 }

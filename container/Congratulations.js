@@ -9,22 +9,7 @@ const Congratulations = () => {
     <>
       <CheckoutWizard activeStep={4} />
       <Box className={styles.congratsMain}>
-        <Box
-          className={styles.congrats}
-          // direction="column"
-          sx={
-            {
-              // display: "flex",
-              // width: "100%",
-              // maxWidth: 500,
-              // m: "auto",
-              // //   height: "100vh",
-              // minHeight: "50vh",
-              // justifyContent: "center",
-              // alignItems: "center",
-            }
-          }
-        >
+        <Box className={styles.congrats}>
           <Stack
             direction="column"
             justifyContent="center"
@@ -39,7 +24,7 @@ const Congratulations = () => {
                 color: "primary.main",
               }}
             >
-              Thank You for Your Purchase
+              Thank You for Your Purchase..
             </Box>
 
             {/* <Box sx={{ color: "text.primary" }}>

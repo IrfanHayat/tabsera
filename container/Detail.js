@@ -364,14 +364,14 @@ function Details({
           md={5}
           sm={12}
           xs={12}
-          sx={{ px: 2, py: 4, bgcolor: "white" }}
+          sx={{ px: 2, py: 1, bgcolor: "white" }}
         >
           <Box
             sx={{
               display: "flex",
               justifyContent: "space-between",
               alignItems: "center",
-              mt: 1,
+              // mt: 1,
             }}
           >
             <Typography
@@ -585,7 +585,7 @@ function Details({
             </Grid>
             <Grid item md={6} sm={6}>
               <Button
-                color="warning"
+                // color="warning"
                 variant="contained"
                 className={styles.addToCartbtn}
                 onClick={() => {
@@ -603,7 +603,7 @@ function Details({
           {" "}
           <Box
             sx={{
-              p: 1,
+              pl: 1,
               display: "flex",
               // justifyContent: "center",
               // justifyContent: "flex-end",
@@ -614,7 +614,9 @@ function Details({
             }}
           >
             <List>
-              <Typography display="inline-block">Service :</Typography>
+              <Typography variant="subtitle2" display="inline-block">
+                Service :
+              </Typography>
               <ListItem>
                 <ListItemIcon>
                   <SettingsBackupRestoreIcon fontSize="small" />
@@ -649,7 +651,9 @@ function Details({
               flexDirection: "column",
             }}
           >
-            <Typography display="inline-block">Sold By:</Typography>
+            <Typography variant="subtitle2" display="inline-block">
+              Sold By:
+            </Typography>
             <List>
               <ListItem>
                 <Typography
@@ -661,6 +665,7 @@ function Details({
               </ListItem>
               <ListItem>
                 <Button
+                  className={styles.visitStorebtn}
                   variant="text"
                   onClick={() =>
                     viewStore(

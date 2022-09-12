@@ -34,7 +34,7 @@ const Index = ({ data, showProduct }) => {
   useEffect(() => {}, [dealsData]);
 
   return (
-    <Grid sx={{ display: "flex" }}>
+    <Grid sx={{ display: "flex", flexWrap: "wrap" }}>
       {data && showProduct == false ? (
         <DealAndPromotions dealsData={data} viewProduct={viewProduct} />
       ) : (

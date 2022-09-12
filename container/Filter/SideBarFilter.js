@@ -83,7 +83,7 @@ function SideBarFilter({
       {console.log(brands)}
       <Box className={styles.brandsList}>
         <CheckBox
-          // className={styles.brandsList}
+          className={styles.brands}
           size="small"
           list={brands}
           handleFilters={(filters) => handleFilters(filters, "brands")}
