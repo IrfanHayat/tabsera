@@ -113,17 +113,15 @@ function ShippingMethods({
                 <ListItemIcon>
                   <DomainAddOutlinedIcon />
                 </ListItemIcon>
-                {console.log(shippementLockerData)}
-                {shippementLockerData ? (
-                  <ListItemText>
-                    {shippementLockerData?.locker_address}{" "}
-                  </ListItemText>
-                ) : (
+
+                {shippementData ? (
                   <ListItemText>
                     {shippementData?.address_label_name}{" "}
                     {shippementData?.address}," ",{shippementData?.city},
                     {shippementData?.state},{shippementData?.country}
                   </ListItemText>
+                ) : (
+                  <></>
                 )}
               </ListItem>
               {/* </List> */}

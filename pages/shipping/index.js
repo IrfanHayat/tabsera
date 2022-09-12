@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import Shipping from "../../container/Shipping";
+import EditShipping from "../../container/EditShipping";
 import { useSelector, useDispatch } from "react-redux";
 import {
   addShipmentAddress,
+  updateShipmentAddress,
   getLabels,
   getCountry,
   getCity,
@@ -87,6 +89,40 @@ function Shipping1({ key, data }) {
     }
   };
 
+  const editSubmitHandler = async (value) => {
+    console.log(labelValue.value);
+    let obj = {
+      addresses: [
+        {
+          add_type_id: 1,
+          address: value.address,
+          address_default_billing: true,
+          address_id: 0,
+          city_id: value.city.city_id,
+          country_id: value.country.country_id,
+          label_id: labelValue.value,
+          state_id: value.states.state_id,
+        },
+        {
+          add_type_id: 2,
+          address: value.address,
+          address_default_billing: false,
+          address_id: 0,
+          city_id: value.city.city_id,
+          country_id: value.country.country_id,
+          label_id: labelValue.value,
+          state_id: value.states.state_id,
+        },
+      ],
+    };
+
+    let result = await dispatch(updateShipmentAddress(obj));
+    if (result.payload) {
+      //  localStorage.setItem("shippingAddress", JSON.stringify(value));
+      router.push("/shipping_information");
+    }
+  };
+
   const getStates = (value) => {
     dispatch(getState(value.country_id));
   };
@@ -115,25 +151,47 @@ function Shipping1({ key, data }) {
   // };
 
   return (
-    <Shipping
-      key={key}
-      submitHandler={submitHandler}
-      // chooseLocationHandler={chooseLocationHandler}
-      data={data ? data : ""}
-      classes={classes}
-      Controller={Controller}
-      control={control}
-      handleSubmit={handleSubmit}
-      labels={labels && labels}
-      errors={errors}
-      countryData={countryData && countryData}
-      getStates={getStates}
-      states={states}
-      getCities={getCities}
-      cityData={cityData}
-      handleChange={handleChange}
-      labelValue={labelValue}
-    ></Shipping>
+    <>
+      {!data ?
+        <Shipping
+          key={key}
+          submitHandler={submitHandler}
+          // chooseLocationHandler={chooseLocationHandler}
+
+          classes={classes}
+          Controller={Controller}
+          control={control}
+          handleSubmit={handleSubmit}
+          labels={labels && labels}
+          errors={errors}
+          countryData={countryData && countryData}
+          getStates={getStates}
+          states={states}
+          getCities={getCities}
+          cityData={cityData}
+          handleChange={handleChange}
+          labelValue={labelValue}
+        ></Shipping> :
+        <EditShipping
+          key={key}
+          editSubmitHandler={editSubmitHandler}
+          // chooseLocationHandler={chooseLocationHandler}
+          data={data}
+          classes={classes}
+          Controller={Controller}
+          control={control}
+          handleSubmit={handleSubmit}
+          labels={labels && labels}
+          errors={errors}
+          countryData={countryData && countryData}
+          getStates={getStates}
+          states={states}
+          getCities={getCities}
+          cityData={cityData}
+          handleChange={handleChange}
+          labelValue={labelValue}
+        ></EditShipping>}
+    </>
   );
 }
 

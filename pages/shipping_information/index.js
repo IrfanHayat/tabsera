@@ -21,7 +21,7 @@ import {
 import { getTotals } from "../../slice/basketSlice";
 import { ContactPageSharp, Login } from "@mui/icons-material";
 
-const Index = () => {
+const Index = ({ setLockerShippingMethod, setAddressShippingMethod, setShowShippingMethod }) => {
   let router = useRouter();
 
   const {
@@ -38,7 +38,7 @@ const Index = () => {
   let [shippingAddres, setShippingAddess] = useState();
   let [shippingLockerAddres, setShippingLockerAddess] = useState();
   let [shipLocker, setShipLocker] = useState()
-  const [show, setShow] = useState(false);
+
 
   let dispatch = useDispatch();
 
@@ -57,6 +57,11 @@ const Index = () => {
   };
 
   const handleChange = (event, value) => {
+
+    console.log("Handle Change" + event.target.value)
+
+    console.log(value)
+
     let result = shippingAddressData.filter((result) =>
       result.address_id == value ? result : ""
     )[0];
@@ -74,7 +79,7 @@ const Index = () => {
     };
 
     dispatch(getShipmentsMethods(obj));
-
+    setShowShippingMethod(true)
     router.push({
       pathname: "/shipping_details",
       query: { addressId: result.address_id },
@@ -159,15 +164,18 @@ const Index = () => {
         userData={userData}
         // setShow={setShow}
         handleChange={handleChange}
+        setLockerShippingMethod={setLockerShippingMethod}
         shippementAddress={shippingAddressData}
         checkoutHandler={checkoutHandler}
         checkoutHandler1={checkoutHandler1}
+        setAddressShippingMethod={setAddressShippingMethod}
         lockerCountryData={lockerCountryData}
         lockerStatesData={lockerStatesData}
         lockerCityData={lockerCityData}
         getStates={getStates}
         getCities={getCities}
         submitHandler={submitHandler}
+        setShowShippingMethod={setShowShippingMethod}
         lockersAddressData={lockersAddressData}
         checkoutHandlerLocker={checkoutHandlerLocker}
         handleChangeLocker={handleChangeLocker}

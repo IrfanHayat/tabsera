@@ -47,6 +47,9 @@ import { useTranslation } from "react-i18next";
 function ShippingInformation({
   checkoutHandler,
   shippementAddress,
+  setAddressShippingMethod,
+  setLockerShippingMethod,
+  setShowShippingMethod,
   handleChange,
   checkoutHandler1,
   lockerCountryData,
@@ -167,6 +170,9 @@ function ShippingInformation({
                 onClick={() => {
                   setButtonKey(1);
                   setRadioCheckLocker(true);
+                  setAddressShippingMethod(true)
+                  setLockerShippingMethod(false)
+                  setShowShippingMethod(true)
                 }}
                 value="address"
                 control={<Radio />}
@@ -177,6 +183,9 @@ function ShippingInformation({
                 onClick={() => {
                   setButtonKey(2);
                   setRadioCheckLocker(true);
+                  setLockerShippingMethod(true)
+                  setAddressShippingMethod(false)
+                  setShowShippingMethod(false)
                 }}
                 value="lockers"
                 control={<Radio />}
@@ -242,6 +251,7 @@ function ShippingInformation({
                     aria-labelledby="demo-row-radio-buttons-group-label"
                     name="row-radio-buttons-group"
                     defaultValue={shippementAddress[0]?.address_id}
+
                     onChange={handleChange}
                   >
                     <TableHead className={styles.thead}>
@@ -281,7 +291,8 @@ function ShippingInformation({
                               >
                                 <FormControlLabel
                                   value={result.address_id}
-                                  // checked={result.address_id == 655}
+                                  //checked={result.address_id == 655}
+
                                   control={<Radio />}
                                   label={<></>}
                                   onClick={() => {

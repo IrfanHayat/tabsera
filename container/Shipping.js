@@ -147,7 +147,7 @@ export default function Shipping({
                     onChange(item);
                     getStates(item);
                   }}
-                  defaultValue={data.country}
+
                   value={value || null}
                   sx={{ width: "100%" }}
                   options={countryData}
