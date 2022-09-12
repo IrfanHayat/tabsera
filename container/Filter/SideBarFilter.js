@@ -58,7 +58,7 @@ function SideBarFilter({
   console.log(Filters);
 
   return (
-    <Grid item className={styles.sideBarFilter}>
+    <Box component="div" className={styles.sideBarFilter}>
       {/* <List dense> */}
       <Typography className={styles.categoryHeading}>
         Related Category
@@ -70,9 +70,23 @@ function SideBarFilter({
         >
           {parentCategories}
         </Typography>
+        {/* <Box
+          // className={styles.categories}
+          sx={{
+            display: "flex",
+            alignItems: "flex-start",
+            flexDirection: "column",
+            p: 1,
+            m: 1,
+            bgcolor: "background.paper",
+            borderRadius: 1,
+            border: "1px solid black",
+          }}
+        > */}
         <Typography className={styles.categoryChild}>
           {subCategories.length > 0 ? childrenCategory(subCategories) : ""}
         </Typography>
+        {/* </Box> */}
       </Box>
 
       <Divider />
@@ -83,7 +97,7 @@ function SideBarFilter({
       {console.log(brands)}
       <Box className={styles.brandsList}>
         <CheckBox
-          // className={styles.brandsList}
+          // className={styles.categories}
           size="small"
           list={brands}
           handleFilters={(filters) => handleFilters(filters, "brands")}
@@ -134,7 +148,7 @@ function SideBarFilter({
                     />
                 </ListItem> */}
       {/* </List> */}
-    </Grid>
+    </Box>
   );
 }
 
