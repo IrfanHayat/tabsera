@@ -1,0 +1,64 @@
+.merchantBanner {
+  height: 332px;
+  /* position: a; */
+  border: 1px solid black;
+  background-color: #fff;
+}
+
+.merchantBannerImg {
+  height: 202px;
+  /* width: 100%; */
+  background: url("../public/banner.jpg");
+  object-fit: contain;
+}
+
+.merchantBannerInfo {
+  height: 120px;
+  padding: 14px;
+  padding-left: 214px;
+  /* background-color: ; */
+}
+.merchantBannerInfoDesc {
+  display: flex;
+  margin-top: -5px;
+  /* font-family: Open Sans; */
+  font-size: 14px;
+  font-weight: 400;
+  /* line-height: 19px; */
+  letter-spacing: 0em;
+  text-align: left;
+  color: #7d879c;
+}
+.merchantName {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 5px 10px;
+  border-radius: 4px;
+  color: #fff;
+  height: 36px;
+  width: 183px;
+
+  background: #4d5565;
+  margin-top: -175px;
+  margin-left: 54px;
+  /* margin-top: 151px; */
+}
+.merchantImg {
+  /* height: 120px; */
+  /* width: 120px; */
+  margin-top: -190px;
+  margin-left: 67px;
+  /* object-fit: contain; */
+  /* background-color: grey; */
+  border-radius: 50%;
+  border: 4px solid #fff;
+  /* background: url("../public/bigLogo.png"); */
+
+  /* position: absolute; */
+  /* left: 2.25%; */
+  /* right: 87.75%; */
+  /* top: 42.17%; */
+  /* bottom: 21.69%; */
+}

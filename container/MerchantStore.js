@@ -4,7 +4,7 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Typography from "@mui/material/Typography";
-import { Card } from "@mui/material";
+import { Card, ListItemIcon } from "@mui/material";
 import Button from "@mui/material/Button";
 import styled from "@mui/styles/styled";
 import Paper from "@mui/material/Paper";
@@ -16,6 +16,8 @@ import Box from "@mui/material/Box";
 import Image from "next/image";
 import Carousel from "react-elastic-carousel";
 import styles from "../styles/merchantStore.module.css";
+import LoyaltyIcon from "@mui/icons-material/Loyalty";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { useSelector } from "react-redux";
 import {
   AppBar,
@@ -27,9 +29,11 @@ import {
 import { useRouter } from "next/router";
 import ActionAreaCard from "./Card";
 import { result } from "lodash";
-import MerchantSideBarFilter from './Filter/MerchantSideBarFilter'
+import MerchantSideBarFilter from "./Filter/MerchantSideBarFilter";
 import { useTranslation } from "react-i18next";
-
+import banner from "../public/banner.jpg";
+import Rating from "@mui/material/Rating";
+import Avatar from "@mui/material/Avatar";
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
   { width: 550, itemsToShow: 2 },
@@ -45,13 +49,13 @@ function a11yProps(index) {
 }
 function MerchantStore({ merchantStoreDetail }) {
   const { merchantData } = useSelector((state) => state.merchant);
-
+  console.log("MD-------------->", merchantStoreDetail);
   const MaxInput = useRef(null);
   const MinInput = useRef(null);
   const [parentCategories, setParentCategories] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
   const [brands, setBrands] = useState([]);
-  const [catId, setCatId] = useState()
+  const [catId, setCatId] = useState();
   let { t, i18n } = useTranslation();
   // const [merchant, setmerchant] = useState();
   // console.log(merchantStoreDetail);
@@ -59,15 +63,15 @@ function MerchantStore({ merchantStoreDetail }) {
   //   setmerchant(merchantData);
   // }, [input]);
 
-
   const children = (subCategories) => {
     return (
-
       <Box sx={{ display: "flex", flexDirection: "column", ml: 2 }}>
         <Grid>
-
           {subCategories.map((result, index) => (
-            <List onClick={() => categoryProduct(result.category_name)} key={index}>
+            <List
+              onClick={() => categoryProduct(result.category_name)}
+              key={index}
+            >
               {result.category_name}
             </List>
           ))}
@@ -85,9 +89,6 @@ function MerchantStore({ merchantStoreDetail }) {
       </Box>
     );
   };
-
-
-
 
   // useEffect(async () => {
   //   let result = await dispatch(getCategory());
@@ -129,12 +130,13 @@ function MerchantStore({ merchantStoreDetail }) {
   };
 
   function categoryProduct(name) {
-    console.log(name)
-    let result = productDataWithCategoryId.filter(category => category.categoryName == name)
-    console.log(result)
-    setFilterProduct(result)
+    console.log(name);
+    let result = productDataWithCategoryId.filter(
+      (category) => category.categoryName == name
+    );
+    console.log(result);
+    setFilterProduct(result);
   }
-
 
   function TabPanel(props) {
     const { children, value, index, ...other } = props;
@@ -179,31 +181,88 @@ function MerchantStore({ merchantStoreDetail }) {
     <>
       <Grid
         container
-        spacing={1}
-        sx={{ paddingTop: 2 }}
-      // justifyContent="center"
+        // spacing={1}
+        // sx={{ paddingTop: 2 }}
+        // justifyContent="center"
       >
-        <Grid item md={12} xs={12} ml={1} sx={{ backgroundColor: "orange" }}>
-          <Card display="flex" sx={{ width: "40%", m: 0.5, p: 1 }}>
-            <CardMedia component="img" sx={{ width: 251 }} alt=" Logo here" />
-            <Box sx={{ display: "flex", flexDirection: "column" }}>
-              <CardContent
-              // sx={{ display: "flex", justifyContent: "space-between" }}
-              >
-                <Typography component="div" variant="h5">
-                  Name: {merchantData.merchant_name}
-                </Typography>
-                <Typography
-                  variant="subtitle1"
-                  color="text.secondary"
-                  component="div"
-                >
-                  From: {merchantData.city}
-                </Typography>
-              </CardContent>
-            </Box>
-          </Card>
+        <Grid item md={12} xs={12} ml={1} className={styles.merchantBanner}>
+          <Box
+            className={styles.merchantBannerImg}
+            sx={{ backgroundColor: "orange" }}
+          >
+            {/* <Typography sx={{ bgcolor: "red" }}>
+              {" "}
+              Name: {merchantData.merchant_name}
+            </Typography> */}
+            {/* <CardMedia
+              className={styles.merchantImg}
+              component="img"
+              image="../public/banner.jpg"
+              // sx={{ width: 251, height: 251, bgcolor: "red  " }}
+              alt=" Logo here"
+            /> */}
+          </Box>
+          {/* <Typography className={styles.merchantName}>
+            {" "}
+            Name: {merchantData.merchant_name}
+          </Typography> */}
+          <Box className={styles.merchantBannerInfo}>
+            {" "}
+            {/* <Typography className={styles.merchantName}>
+              Name : {merchantData.merchant_name}
+            </Typography> */}
+            <List dense>
+              <ListItem className={styles.merchantBannerInfoDesc}>
+                <Rating
+                  name="read-only"
+                  value={4.5}
+                  precision={0.5}
+                  readOnly
+                  size="small"
+                  sx={{ ml: 1 }}
+                />
+              </ListItem>
+              {/* <Typography className={styles.merchantBannerInfoDesc}> */}
+              <ListItem className={styles.merchantBannerInfoDesc}>
+                {/* <ListItemIcon> */}
+                <LocationOnIcon fontSize="small" />
+                {/* </ListItemIcon> */}
+                <ListItemText sx={{ ml: 1 }}>
+                  Merchant City : {merchantData.city}
+                </ListItemText>
+              </ListItem>
+              <ListItem className={styles.merchantBannerInfoDesc}>
+                {" "}
+                <LoyaltyIcon fontSize="small" />
+                <ListItemText sx={{ ml: 1 }}>
+                  Member Since : {merchantData?.created_date}
+                </ListItemText>
+              </ListItem>
+            </List>
+          </Box>
         </Grid>
+        <CardMedia
+          className={styles.merchantImg}
+          component="img"
+          image="../public/banner.jpg"
+          // sx={{ width: 251, height: 251, bgcolor: "red  " }}
+          alt=" Logo here"
+        />
+        {/* <Box className={styles.merchantImg}>
+          <Image
+            src="/banner.jpg"
+            onClick={(e) => viewProduct(product)}
+            // alt={product?.productName}
+            width={"100%"}
+            height={"100%"}
+            style={{ borderRadius: "50%" }}
+            objectFit="contain"
+          ></Image>
+        </Box> */}
+        <Typography className={styles.merchantName}>
+          {" "}
+          {merchantData.merchant_name}
+        </Typography>
         {/* <Grid item md={12} xs={12}>
           <Box>
             {" "}
@@ -236,17 +295,17 @@ function MerchantStore({ merchantStoreDetail }) {
             >
               <Tab
                 style={{ fontWeight: "bold" }}
-                label={t('Merchants.Tabs.Home')}
+                label={t("Merchants.Tabs.Home")}
                 {...a11yProps(0)}
               />
               <Tab
                 style={{ fontWeight: "bold" }}
-                label={t('Merchants.Tabs.All Products')}
+                label={t("Merchants.Tabs.All Products")}
                 {...a11yProps(1)}
               />
               <Tab
                 style={{ fontWeight: "bold" }}
-                label={t('Merchants.Tabs.Profile')}
+                label={t("Merchants.Tabs.Profile")}
                 {...a11yProps(2)}
               />
               {/* <Box>hi</Box> */}
@@ -258,18 +317,30 @@ function MerchantStore({ merchantStoreDetail }) {
               </Grid>
             </TabPanel>
             <TabPanel value={value} index={1}>
-
-              <Grid sx={{ display: 'flex' }}>
-                <><MerchantSideBarFilter MinInput={MinInput} MaxInput={MaxInput} priceFilter={priceFilter} categoryProduct={categoryProduct} parentCategories={parentCategories} childrenCategory={children} subCategories={subCategories} brands={brands}></MerchantSideBarFilter></>
-                <> {merchantStoreDetail &&
-                  merchantStoreDetail?.map((result) => (
-                    <ActionAreaCard
-                      product={result}
-                      viewProduct={viewProduct}
-                    ></ActionAreaCard>
-                  ))}</>
+              <Grid sx={{ display: "flex" }}>
+                <>
+                  <MerchantSideBarFilter
+                    MinInput={MinInput}
+                    MaxInput={MaxInput}
+                    priceFilter={priceFilter}
+                    categoryProduct={categoryProduct}
+                    parentCategories={parentCategories}
+                    childrenCategory={children}
+                    subCategories={subCategories}
+                    brands={brands}
+                  ></MerchantSideBarFilter>
+                </>
+                <>
+                  {" "}
+                  {merchantStoreDetail &&
+                    merchantStoreDetail?.map((result) => (
+                      <ActionAreaCard
+                        product={result}
+                        viewProduct={viewProduct}
+                      ></ActionAreaCard>
+                    ))}
+                </>
               </Grid>
-
             </TabPanel>
             <TabPanel value={value} index={2}>
               Profile
