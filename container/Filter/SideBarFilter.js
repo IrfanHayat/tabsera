@@ -10,6 +10,10 @@ import CheckBox from "../../container/Section/CheckBox";
 import PriceFilter from "./PriceFilter";
 import PageFilter from "./PageFilter";
 import styles from "../../styles/sidebarFilters.module.css";
+import Checkbox from "@mui/material/Checkbox";
+
+import FormGroup from "@mui/material/FormGroup";
+
 function SideBarFilter({
   categoryProduct,
   parentCategories,
@@ -19,6 +23,7 @@ function SideBarFilter({
   MinInput,
   MaxInput,
   priceFilter,
+  handleFilters,
   value,
   setDealsData,
   setShowDeals,
@@ -37,28 +42,27 @@ function SideBarFilter({
     //   price: []
   });
 
-  const handleFilters = (filters, category) => {
-    const newFilters = { ...Filters };
+  // const handleFilters = (filters, category) => {
+  //   const newFilters = { ...Filters };
 
-    newFilters[category] = filters;
+  //   newFilters[category] = filters;
 
-    // if (category === "price") {
-    //     let priceValues = handlePrice(filters)
-    //     newFilters[category] = priceValues
+  //   // if (category === "price") {
+  //   //     let priceValues = handlePrice(filters)
+  //   //     newFilters[category] = priceValues
 
-    // }
+  //   // }
 
-    let result = brands.filter(
-      (result) => result.brand_id == newFilters.brands[0]
-    );
-    console.log(result);
-    //showFilteredResults(newFilters)
-    setFilters(newFilters);
-  };
-  console.log(Filters);
+  //   let result = brands.filter(
+  //     (result) => result.brand_id == newFilters.brands[0]
+  //   );
+  //   console.log(result[0]);
+  //   //showFilteredResults(newFilters)
+  //   setFilters(newFilters);
+  // };
 
   return (
-    <Grid item className={styles.sideBarFilter}>
+    <Box component="div" className={styles.sideBarFilter}>
       {/* <List dense> */}
       <Typography className={styles.categoryHeading}>
         Related Category
@@ -70,9 +74,23 @@ function SideBarFilter({
         >
           {parentCategories}
         </Typography>
+        {/* <Box
+          // className={styles.categories}
+          sx={{
+            display: "flex",
+            alignItems: "flex-start",
+            flexDirection: "column",
+            p: 1,
+            m: 1,
+            bgcolor: "background.paper",
+            borderRadius: 1,
+            border: "1px solid black",
+          }}
+        > */}
         <Typography className={styles.categoryChild}>
           {subCategories.length > 0 ? childrenCategory(subCategories) : ""}
         </Typography>
+        {/* </Box> */}
       </Box>
 
       <Divider />
@@ -82,12 +100,26 @@ function SideBarFilter({
 
       {console.log(brands)}
       <Box className={styles.brandsList}>
-        <CheckBox
-          className={styles.brands}
+        {/* <CheckBox
+          // className={styles.categories}
           size="small"
           list={brands}
           handleFilters={(filters) => handleFilters(filters, "brands")}
-        />
+        /> */}
+        {brands.map((brand) => (
+          //Store the the student id in the value of each check box
+
+          <div>
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Checkbox onChange={handleFilters} name={brand.brand_name} />
+                }
+                label={brand.brand_name}
+              />
+            </FormGroup>
+          </div>
+        ))}
         {/* </Box> */}
       </Box>
       <Divider />
@@ -134,7 +166,7 @@ function SideBarFilter({
                     />
                 </ListItem> */}
       {/* </List> */}
-    </Grid>
+    </Box>
   );
 }
 

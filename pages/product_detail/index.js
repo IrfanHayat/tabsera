@@ -16,7 +16,7 @@ import { getMerchantWithId } from "../../slice/merchantSlice";
 import ModalData from "../../container/Login/ModalData";
 import Cookies from "js-cookie";
 import localStorage from "localStorage";
-
+import { useTranslation } from "react-i18next";
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });

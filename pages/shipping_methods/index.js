@@ -16,18 +16,12 @@ const Index = () => {
     state => state.shipments
   );
   const [shippementData, setShippementData] = useState();
-  const [shippementLockerData, setShippementLockerData] = useState();
+  //const [shippementLockerData, setShippementLockerData] = useState();
   const classes = useStyles();
   const { cartItems, cartId, buyCartItems } = useSelector(state => state.basket.cart);
   const [shippementCharges, setShippementCharges] = useState()
   const [shippingMethodId, setShippingMethodId] = useState()
-  const {
-    lockersAddressData,
-    lockerLabels,
-    lockerCountryData,
-    lockerStatesData,
-    lockerCityData,
-  } = useSelector((state) => state.lockers);
+
   let router = useRouter();
   let dispatch = useDispatch();
 
@@ -91,56 +85,6 @@ const Index = () => {
 
 
 
-      // let obj = {
-      //   address: result.address,
-      //   bundle_id: null,
-      //   cart_id: 611,
-      //   city_id: result.city_id,
-      //   country_id: result.country_id,
-      //   shipment_method_type: "address",
-      //   sku_id: null,
-      //   state_id: result.state_id,
-      // };
-      let result2 = await dispatch(getShipmentsCharges(obj));
-
-      setShippementCharges(result2.payload.charges)
-    } else {
-      let result = lockersAddressData.filter(result => {
-        if (result.locker_id == router.query.lockerId) return result;
-      })[0];
-
-
-
-      let obj
-      if (buyCartItems && localStorage.getItem("buyCartItems")) {
-        obj = {
-          cartId: cartId,
-          shipmentMethodId: value.shipping_method_id,
-          shipmentMethodType: "locker",
-          shippingAddress: {
-            address: result.address,
-            addressId: result.locker_id,
-            cityId: result.city_id,
-            countryId: result.country_id,
-            stateId: result.state_id,
-          },
-        };
-      } else {
-        obj = {
-          cartId: cartId,
-          shipmentMethodId: value.shipping_method_id,
-          shipmentMethodType: "locker",
-          shippingAddress: {
-            address: result.address,
-            addressId: result.locker_id,
-            cityId: result.city_id,
-            countryId: result.country_id,
-            stateId: result.state_id,
-          },
-        };
-      }
-
-
 
       let result2 = await dispatch(getShipmentsCharges(obj));
 
@@ -178,32 +122,9 @@ const Index = () => {
       dispatch(getShipmentsMethods(obj));
       dispatch(getCustomer());
       dispatch(getCartItems());
-    } else {
-      console.log(lockersAddressData)
-      let result1 = lockersAddressData.filter(result =>
-        result.locker_id == router.query.lockerId ? result : ""
-      );
-
-      console.log(result1[0])
-      setShippementLockerData(result1[0]);
-
-      let obj = {
-        address: result1[0]?.address,
-        bundle_id: null,
-        cart_id: cartId ? cartId : '',
-        city_id: result1[0]?.city_id,
-        country_id: result1[0]?.country_id,
-        shipment_method_type: "locker",
-        sku_id: null,
-        state_id: result1[0]?.state_id,
-      };
-
-      dispatch(getShipmentsMethods(obj));
-      dispatch(getCustomer());
-      dispatch(getCartItems());
     }
 
-  }, [router, shippementData, shippementLockerData]);
+  }, [router, shippementData]);
 
   return (
     <div>
@@ -216,7 +137,7 @@ const Index = () => {
         checkoutHandler={checkoutHandler}
         classes={classes}
         shippingCharges={shippementCharges}
-        shippementLockerData={shippementLockerData}
+
       />
     </div>
   );

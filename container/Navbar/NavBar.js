@@ -135,13 +135,13 @@ export default function NavBar() {
   const currencyData = (
     <div>
       <MenuItem>
-        <ListItemText>Rupees</ListItemText>
+        <ListItemText>{t("common.Headers.Currency.Rupees")}</ListItemText>
       </MenuItem>
       <MenuItem>
-        <ListItemText>Dollar</ListItemText>
+        <ListItemText>{t("common.Headers.Currency.Dollar")}</ListItemText>
       </MenuItem>
       <MenuItem>
-        <ListItemText>Ponds</ListItemText>
+        <ListItemText>{t("common.Headers.Currency.Ponds")}</ListItemText>
       </MenuItem>
     </div>
   );
@@ -169,74 +169,74 @@ export default function NavBar() {
           <AccountBoxIcon fontSize="small" />
         </ListItemIcon>
         <ListItemText onClick={() => router.push("/profile")}>
-          My Profile
+          {t("common.Headers.Account.My Profile")}
         </ListItemText>
       </MenuItem>
 
-      <MenuItem>
+      {/* <MenuItem>
         <ListItemIcon>
           <FormatListBulletedIcon fontSize="small" />
         </ListItemIcon>
         <ListItemText onClick={() => router.push("/orders")}>
           My Orders
         </ListItemText>
-      </MenuItem>
+      </MenuItem> */}
 
-      <MenuItem>
+      {/* <MenuItem>
         <ListItemIcon>
           <FormatListBulletedIcon fontSize="small" />
         </ListItemIcon>
         <ListItemText onClick={() => router.push("/coupons")}>
           My Coupons
         </ListItemText>
-      </MenuItem>
+      </MenuItem> */}
 
-      <MenuItem>
+      {/* <MenuItem>
         <ListItemIcon>
           <ReceiptIcon fontSize="small" />
         </ListItemIcon>
         <ListItemText onClick={() => router.push("/bills")}>
           My Bill Payments
         </ListItemText>
-      </MenuItem>
+      </MenuItem> */}
 
-      <MenuItem>
+      {/* <MenuItem>
         <ListItemIcon>
           <AdUnitsIcon fontSize="small" />
         </ListItemIcon>
         <ListItemText onClick={() => router.push("/topUps")}>
           My Topups
         </ListItemText>
-      </MenuItem>
+      </MenuItem> */}
 
-      <MenuItem>
+      {/* <MenuItem>
         <ListItemIcon>
           <GppGoodOutlinedIcon fontSize="small" />
         </ListItemIcon>
         <ListItemText onClick={() => router.push("/security")}>
           Security
         </ListItemText>
-      </MenuItem>
+      </MenuItem> */}
 
       <MenuItem>
         <ListItemIcon>
           <InfoOutlinedIcon fontSize="small" />
         </ListItemIcon>
-        <ListItemText onClick={() => router.push("/about")}>About</ListItemText>
+        <ListItemText onClick={() => router.push("/about")}> {t("common.Headers.Account.About")}</ListItemText>
       </MenuItem>
 
       <MenuItem>
         <ListItemIcon>
           <HelpOutlineOutlinedIcon fontSize="small" />
         </ListItemIcon>
-        <ListItemText onClick={() => router.push("/help")}>Help</ListItemText>
+        <ListItemText onClick={() => router.push("/help")}>{t("common.Headers.Account.Help")}</ListItemText>
       </MenuItem>
       <Divider />
       <MenuItem onClick={() => logOut()} alignText="center">
         <ListItemIcon>
           <LogoutIcon />
         </ListItemIcon>
-        <ListItemText>Logout</ListItemText>
+        <ListItemText>{t("common.Headers.Account.Logout")}</ListItemText>
       </MenuItem>
     </div>
   );
@@ -284,13 +284,13 @@ export default function NavBar() {
       onClose={handleMobileMenuClose}
     >
       <MenuItem>
-        <NavSelect Title="Account" Data={myAccount} color="black" />
+        <NavSelect Title={t("common.Headers.Account.Account")} Data={myAccount} color="black" />
       </MenuItem>
       <MenuItem>
-        <NavSelect Title="Currency" Data={currencyData} color="black" />
+        <NavSelect Title={t("common.Headers.Currency.Currency")} Data={currencyData} color="black" />
       </MenuItem>
       <MenuItem>
-        <NavSelect Title="Language" Data={languageData} color="black" />
+        <NavSelect Title={t("common.Headers.Language.Language")} Data={languageData} color="black" />
       </MenuItem>
     </Menu>
   );
@@ -399,7 +399,7 @@ export default function NavBar() {
                     Data={currencyData}
                     color="white"
                   /> */}
-                  <NewSelect Title="Language" Data={languageData} />
+                  <NewSelect Title={t("common.Headers.Language.Language")} Data={languageData} />
                   {/* <NavSelect
                     width="120px"
                     Title="Language"

@@ -53,6 +53,7 @@ import { makeStyles } from "@mui/styles";
 import localStorage from "localStorage";
 import Link from "@mui/material/Link";
 import styles from "../../../styles/navbar.module.css";
+import { useTranslation } from "react-i18next";
 
 // const useStyles = makeStyles({
 //   root: {
@@ -76,7 +77,7 @@ export default function NavDown(props) {
   );
 
   const [open, setOpen] = React.useState(false);
-
+  let { t, i18n } = useTranslation();
   let router = useRouter();
   let dispatch = useDispatch();
 
@@ -312,7 +313,7 @@ export default function NavDown(props) {
                   // InputProps={{ disableUnderline: true }}
 
                   {...params}
-                  placeholder="Search Product and Brand ...."
+                  placeholder={t("common.Search.placeHolder")}
                   variant="standard"
                   // sx={{ &:"hover": borderColor: "primary.main" }}
                   // color="primary"

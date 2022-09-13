@@ -124,6 +124,13 @@
   transform: rotate(-90deg); */
 }
 
+.categoryList {
+  padding-left: 16px;
+}
+.categoryList :hover {
+  font-weight: bold;
+  color: rgb(210, 63, 87);
+}
 .dropDown {
   width: 258px;
   border-radius: 2px;

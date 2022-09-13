@@ -42,6 +42,7 @@ import ShareIcon from "@mui/icons-material/Share";
 import styles from "../styles/pdp.module.css";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import SquareIcon from "@mui/icons-material/Square";
+import { useTranslation } from "react-i18next";
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
   { width: 550, itemsToShow: 2 },
@@ -111,6 +112,7 @@ function Details({
   handleDecreaseCart,
   productIdRoute,
 }) {
+  let { t, i18n } = useTranslation();
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
     ...theme.typography.body2,
@@ -481,7 +483,10 @@ function Details({
           </Box>
           <Grid md={12}>
             <Divider />
-            <Typography variant="subtitle2">Variants :</Typography>
+            <Typography variant="subtitle2">
+              {" "}
+              {t("PDP.labels.variants")} :
+            </Typography>
 
             <Box md={6} sx={{ display: "flex", m: 1 }}>
               <Carousel
@@ -580,7 +585,7 @@ function Details({
                     : BuyHandler(productDetail);
                 }}
               >
-                Buy Now
+                {t("PDP.buttons.buyNow")}
               </Button>
             </Grid>
             <Grid item md={6} sm={6}>
@@ -594,7 +599,7 @@ function Details({
                     : addToCartHandler(productDetail);
                 }}
               >
-                Add to cart
+                {t("PDP.buttons.cart")}
               </Button>
             </Grid>
           </Grid>
@@ -675,7 +680,7 @@ function Details({
                   }
                   // onClick={viewStore}
                 >
-                  Visit Store
+                  {t("PDP.labels.store")}
                 </Button>
               </ListItem>
             </List>
@@ -686,7 +691,9 @@ function Details({
         <Grid container>
           <Grid item md={9} xs={9}>
             <Grid>
-              <Typography className={styles.ratings}>Descritpion</Typography>
+              <Typography className={styles.ratings}>
+                {t("PDP.labels.des")}
+              </Typography>
               <List className={styles.ratingsDesc}>
                 <ListItem>
                   <Typography> {productDetail?.product_desc}</Typography>
@@ -701,7 +708,7 @@ function Details({
           <Grid item md={3} xs={12} pl={3}>
             <Typography style={{ fontWeight: "bold" }}>
               {" "}
-              Similar Products :
+              {t("PDP.labels.similar")} :
             </Typography>
           </Grid>
         </Grid>
@@ -712,7 +719,7 @@ function Details({
                 className={styles.ratings}
                 // sx={{ fontSize: "1rem", fontWeight: "bold" }}
               >
-                Ratings And Reviews
+                {t("PDP.labels.similar")}
               </Typography>
               <List className={styles.ratingsDesc}>
                 <ListItem>

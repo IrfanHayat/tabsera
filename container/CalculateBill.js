@@ -1,4 +1,5 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 import {
   Grid,
   TableContainer,
@@ -23,6 +24,7 @@ import {
 import { RouteGuard } from "../RouterGuard";
 function CalculateBill({ productPrice, checkoutHandler }) {
   console.log(productPrice);
+  let { t, i18n } = useTranslation();
   return (
     <Grid sx={{ bgcolor: "background.paper" }} item md={12} xs={12}>
       {/* <Card> */}
@@ -32,11 +34,11 @@ function CalculateBill({ productPrice, checkoutHandler }) {
           variant="h6"
           // m={1}
           p={1}
-          // style={{ fontWeight: "bold" }}
-          // align="center"
+        // style={{ fontWeight: "bold" }}
+        // align="center"
         >
           {" "}
-          Shopping Cart
+          {t('checkoutCart.labels.Shopping Cart')}
         </Typography>
         <Typography
           component="h5"
@@ -44,10 +46,10 @@ function CalculateBill({ productPrice, checkoutHandler }) {
           // m={1}
           p={1}
           style={{ fontWeight: "bold" }}
-          // align="center"
+        // align="center"
         >
           {" "}
-          Order Summary
+          {t('checkoutCart.labels.Order Summary')}
         </Typography>
         <Divider />
         <Grid container>
@@ -63,7 +65,7 @@ function CalculateBill({ productPrice, checkoutHandler }) {
         </ListItem> */}
 
           <ListItem>
-            <ListItemText>Total Items</ListItemText>
+            <ListItemText>{t('checkoutCart.labels.Total Items')}</ListItemText>
 
             <ListItemText>
               <Typography
@@ -71,7 +73,7 @@ function CalculateBill({ productPrice, checkoutHandler }) {
                 variant="h5"
                 // m={1}
                 style={{ fontWeight: "bold" }}
-                // align="center"
+              // align="center"
               >
                 {productPrice ? (
                   productPrice?.reduce((a, c) => a + c.qty, 0)
@@ -83,7 +85,7 @@ function CalculateBill({ productPrice, checkoutHandler }) {
           </ListItem>
 
           <ListItem>
-            <ListItemText> Total Price </ListItemText>
+            <ListItemText> {t('checkoutCart.labels.Total Price')} </ListItemText>
             <ListItemText>
               {" "}
               <Typography
@@ -92,7 +94,7 @@ function CalculateBill({ productPrice, checkoutHandler }) {
                 // m={1}
                 sx={{ color: "warning.main" }}
                 style={{ fontWeight: "bold" }}
-                // align="center"
+              // align="center"
               >
                 Rs.
                 {productPrice ? (
@@ -114,7 +116,7 @@ function CalculateBill({ productPrice, checkoutHandler }) {
             color="primary"
             fullWidth
           >
-            Proceed To Check Out
+            {t('checkoutCart.buttons.checkout')}
           </Button>
         </RouteGuard>
       </CardActions>

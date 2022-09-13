@@ -19,7 +19,10 @@ export default function Modal({
   close,
   startIcon,
   buttonTitle,
+  variant,
+  key,
 }) {
+  console.log("keyM", key);
   const [open, setOpen] = React.useState(false);
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
@@ -34,11 +37,7 @@ export default function Modal({
 
   return (
     <div>
-      <Button
-        variant="contained"
-        startIcon={startIcon}
-        onClick={handleModalOpen}
-      >
+      <Button variant={variant} startIcon={startIcon} onClick={handleModalOpen}>
         {buttonTitle}
       </Button>
       <Dialog

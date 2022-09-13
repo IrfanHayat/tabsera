@@ -8,7 +8,8 @@
         "My Profile": "Profilekayga",
         "About": "Ku saabsan",
         "Help": "Caawimaadda",
-        "Logout": "Ka Bixinta"
+        "Logout": "Ka Bixinta",
+        "SignIn": "Soo gal"
       },
       "Currency": {
         "Currency": "Lacagta",
@@ -23,6 +24,13 @@
         "SM": "SM",
         "TU": "Guri0"
       }
+    },
+    "DropDown": {
+      "categories": "Qaybaha",
+      "campaigns": "Ololaha"
+    },
+    "Search": {
+      "placeHolder": "Alaabtii Raadinta iyo Summada"
     }
   },
   "Footer": {
@@ -43,133 +51,127 @@
   },
   "Filter": {
     "ListFilter": {
+      "title": "Liiska qoray",
       "All Products": "Dhammaan Alaabooyinka",
       "Sellers": "Iibiyayaasha",
       "Categories": "Qaybaha"
     },
     "SortFilter": {
-      "Price: High-Low": "Qiimaha: Sare-hoose",
-      "Price: Low-High": "Qiimaha: Hoos-sare",
-      "Rating: High-Low": "Qiimeyn: Sare-sare",
-      "Rating: Low-High": "Qiimeyn: Hoose-sare",
-      "Order: High-Low": "Due2385AE_4",
-      "Order: Low-High": "Due2385AE_5"
+      "title": "Kala saar",
+      "price_desc": "Qiimaha: Sare-hoose",
+      "price_asc": "Qiimaha: Hoos-sare",
+      "rating_desc": "Qiimeyn: Sare-sare",
+      "rating_asc": "Qiimeyn: Hoose-sare",
+      "order_desc": "Dalab: Sare-hoose",
+      "order_asc": "Dalab: Hoose-sare"
     },
     "PageFilter": {
       "Bundles": "Xirmooyinka",
       "Discounts": "Qiim-dhimista",
       "Free Shipping": "Diitaan bilaash ah"
+    }
+  },
+  "Merchants": {
+    "Tabs": {
+      "Home": "Immika Iibso1",
+      "All Products": "Immika Iibso2",
+      "Profile": "Immika Iibso3"
+    }
+  },
+  "checkoutCart": {
+    "labels": {
+      "Shopping Cart": "Gaarida Wax-ka-iibsiga",
+      "Order Summary": "Kobitaanka Dalabka",
+      "Total Items": "Waxyaabaha Isugeynta",
+      "Total Price": "Qiimaha Guud",
+      "Quantity": "Tirada",
+      "Price": "Qiimaha",
+      "Delete": "Tirtir"
     },
-    "Search": {
-      "placeHolder": "Alaabtii Raadinta iyo Summada"
-    },
-    "DropDown": {
-      "categories": "Qaybaha",
-      "campaigns": "Ololaha"
-    },
-    "PDP": {
-      "buttons": {
-        "cart": "Ku dar Cart",
-        "buyNow": "Immika Iibso"
-      },
-      "labels": {
-        "des": "Sharaxaad",
-        "rating": "Qiimeyn iyo faallooyin",
-        "similar": "Alaab la mid ah",
-        "soldBy": "Waxa iibiyaa:",
-        "service": "Adeegga",
-        "brand": "Brand",
-        "color": "Midabka",
-        "materials": "Qalabka",
-        "variants": "Immika Iibso0"
+    "buttons": {
+      "checkout": "U wad si aad u hubiso"
+    }
+  },
+  "shippingInfo": {
+    "labels": {
+      "purchaseFor": "Iibka",
+      "ship": {
+        "shipTo": "Markab ku socda",
+        "address": "Cinwaanka",
+        "locker": "Locker",
+        "school": "dugsiga"
       }
     },
-    "Merchants": {
-      "Tabs": {
-        "Home": "Immika Iibso1",
-        "All Products": "Immika Iibso2",
-        "Profile": "Immika Iibso3"
+    "ShippingAdress": {
+      "table": {
+        "select": "Dooro",
+        "fullName": "Magaca oo buuxa",
+        "addressLabel": "Cinwaanka Ciwaanka",
+        "fullAdress": "Cinwaanka buuxa",
+        "phone": "Telefoonka",
+        "email": "Email",
+        "edit": "wax ka beddel"
+      },
+      "button": {
+        "addAddress": "Cinwaanka ku dar",
+        "reviewOrder": "Amar dib u eegis"
+      },
+      "label": {
+        "shippingAddress": "Cinwaanka dhoofinta",
+        "shippingInformation": "Macluumaad ku saabsan dhoofinta",
+        "shippingMethods": "Magaca oo buuxa0",
+        "charges": {
+          "shippingCharges": "Magaca oo buuxa1",
+          "subTotal": "Magaca oo buuxa2",
+          "shippingcost": "Magaca oo buuxa3",
+          "totalCost": "Magaca oo buuxa4"
+        }
       }
     },
-    "checkoutCart": {
+    "Review Order": {
       "labels": {
-        "Shopping Cart": "Gaarida Wax-ka-iibsiga",
-        "Order Summary": "Kobitaanka Dalabka",
-        "Total Items": "Waxyaabaha Isugeynta",
-        "Total Price": "Qiimaha Guud",
-        "Quantity": "Tirada",
-        "Price": "Qiimaha",
-        "Delete": "Tirtir"
+        "shippingInformation": "Macluumaad Dhoofinta",
+        "shippingMethod": "Qaabka Raristaada",
+        "orderItems": "Alaabta Dalbashada",
+        "orderSummary": "Alaabta Dalbashada",
+        "items": "Alaabta",
+        "shipping": "Rarista",
+        "total": "Guud ahaan"
       },
-      "buttons": {
-        "checkout": "U wad si aad u hubiso"
+      "button": {
+        "pay": "U wad Bixinta"
       }
     },
-    "shippingInfo": {
-      "labels": {
-        "purchaseFor": "Iibka",
-        "ship": {
-          "shipTo": "Markab ku socda",
-          "address": "Cinwaanka",
-          "locker": "Locker",
-          "school": "dugsiga"
-        }
-      },
-      "ShippingAdress": {
-        "table": {
-          "select": "Dooro",
-          "fullName": "Magaca oo buuxa",
-          "addressLabel": "Cinwaanka Ciwaanka",
-          "fullAdress": "Cinwaanka buuxa",
-          "phone": "Telefoonka",
-          "email": "Email",
-          "edit": "wax ka beddel"
-        },
-        "button": {
-          "addAddress": "Cinwaanka ku dar"
-        },
-        "label": {
-          "shippingAddress": "Cinwaanka dhoofinta",
-          "shippingInformation": "Macluumaad ku saabsan dhoofinta",
-          "shippingMethods": "Magaca oo buuxa0",
-          "charges": {
-            "shippingCharges": "Magaca oo buuxa1",
-            "subTotal": "Magaca oo buuxa2",
-            "shippingcost": "Magaca oo buuxa3",
-            "totalCost": "Magaca oo buuxa4"
-          }
-        }
-      },
-      "Review Order": {
-        "labels": {
-          "shippingInformation": "Macluumaad Dhoofinta",
-          "shippingMethod": "Qaabka Raristaada",
-          "orderItems": "Alaabta Dalbashada",
-          "orderSummary": "Alaabta Dalbashada",
-          "items": "Alaabta",
-          "shipping": "Rarista",
-          "total": "Guud ahaan"
-        },
-        "button": {
-          "pay": "U wad Bixinta"
-        }
-      },
-      "payment": {
-        "Payment Method": "Qaabka lacag bixinta"
-      },
-      "order Complete": {
-        "message": {
-          "congrats": "Hambalyo...!!",
-          "ordersuccess": "Due2385AE_2"
-        }
-      },
-      "stepper": {
-        "checkout": "Checkout",
-        "shippingInfo": "Macluumaadka rarida",
-        "reviewOrder": "Dalab dib u eegis",
-        "pay": "Pay",
-        "orderComplete": "Dalab dhameystiran"
+    "payment": {
+      "Payment Method": "Qaabka lacag bixinta"
+    },
+    "order Complete": {
+      "message": {
+        "congrats": "Hambalyo...!!",
+        "ordersuccess": "Due2385AE_2"
       }
     }
+  },
+  "PDP": {
+    "buttons": {
+      "cart": "Ku dar Cart",
+      "buyNow": "Immika Iibso"
+    },
+    "labels": {
+      "des": "Sharaxaad",
+      "rating": "Qiimeyn iyo faallooyin",
+      "similar": "Alaab la mid ah",
+      "soldBy": "Waxa iibiyaa:",
+      "service": "Adeegga",
+      "variants": "Immika Iibso0",
+      "store": "Booqo Bakhaar"
+    }
+  },
+  "stepper": {
+    "checkout": "baadhid",
+    "shippingInfo": "Macluumaadka rarida",
+    "reviewOrder": "Dalab dib u eegis",
+    "pay": "Bixi",
+    "orderComplete": "Dalab dhameystiran"
   }
 }

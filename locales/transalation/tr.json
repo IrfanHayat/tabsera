@@ -1,5 +1,5 @@
 {
-    "common": {
+  "common": {
     "Headers": {
       "About": "Hakkında",
       "Home": "Ev",
@@ -8,7 +8,8 @@
         "My Profile": "Profilim",
         "About": "Hakkında",
         "Help": "Yardım",
-        "Logout": "Oturum kapatma"
+        "Logout": "Oturum kapatma",
+        "SignIn": "Kayıt olmak"
       },
       "Currency": {
         "Currency": "Para birimi",
@@ -24,152 +25,154 @@
         "TU": "Sen"
       }
     },
-    "Footer": {
-        "rights_and_reserved": "© 2022 Tabsera. Tüm Hakları Saklıdır",
-        "countryRegion": {
-          "heading": "Ülke ve Bölgeler",
-          "countryName": [
-            "Türkiye",
-            "Fransa",
-            "Pakistan",
-            "Endonezya dili",
-            "Polonya",
-            "Üşüme",
-            "Malezya",
-            "Bangladeş"
-          ]
-        }
+    "DropDown": {
+      "categories": "Kategori",
+      "campaigns": "Kampanya"
+    },
+    "Search": {
+      "placeHolder": "Ürün ve Marka Ara"
+    }
+  },
+  "Footer": {
+    "rights_and_reserved": "© 2022 Tabsera. Tüm Hakları Saklıdır",
+    "countryRegion": {
+      "heading": "Ülke ve Bölgeler",
+      "countryName": [
+        "Türkiye",
+        "Fransa",
+        "Pakistan",
+        "Endonezya dili",
+        "Polonya",
+        "Üşüme",
+        "Malezya",
+        "Bangladeş"
+      ]
+    }
+  },
+  "Filter": {
+    "ListFilter": {
+      "title": "Sıralama Ölçütü",
+      "All Products": "Tüm Ürünler",
+      "Sellers": "Satıcı",
+      "Categories": "Kategori"
+    },
+    "SortFilter": {
+      "title": "Sıralama Ölçütü",
+      "price_desc": "Fiyat: Yüksek-Düşük",
+      "price_asc": "Fiyat: Düşük-Yüksek",
+      "rating_desc": "Değerlendirme: Yüksek-Düşük",
+      "rating_asc": "Değerlendirme: Düşük-Yüksek",
+      "order_desc": "Sipariş: Yüksek-Düşük",
+      "order_asc": "Sipariş: Düşük-Yüksek"
+    },
+    "PageFilter": {
+      "Bundles": "Paketler",
+      "Discounts": "Indirimler",
+      "Free Shipping": "Ücretsiz Kargo",
+      "clear": "Tüm Filtreleri Temizle"
+    }
+  },
+  "Merchants": {
+    "Tabs": {
+      "Home": "Ana sayfa",
+      "All Products": "Tüm Ürünler",
+      "Profile": "Profil"
+    }
+  },
+  "checkoutCart": {
+    "labels": {
+      "Shopping Cart": "Alışveriş Sepeti",
+      "Order Summary": "Sipariş Özeti",
+      "Total Items": "Toplam Öğe Sayısı",
+      "Total Price": "Toplam Fiyat",
+      "Quantity": "Miktar",
+      "Price": "Fiyat",
+      "Delete": "Silmek"
+    },
+    "buttons": {
+      "checkout": "Çıkış Yapmaya Devam Et"
+    }
+  },
+  "shippingInfo": {
+    "labels": {
+      "purchaseFor": "Satın Al",
+      "ship": {
+        "shipTo": "Sevkiyat Yeri",
+        "address": "Adres",
+        "locker": "Dolap",
+        "school": "okul"
+      }
+    },
+    "ShippingAdress": {
+      "table": {
+        "select": "Seçmek",
+        "fullName": "Tam İsim",
+        "addressLabel": "Adres Etiketi",
+        "fullAdress": "Açık Adres",
+        "phone": "Telefon",
+        "email": "E-posta",
+        "edit": "Düzenlemek"
       },
-      "Filter": {
-        "ListFilter": {
-            "All Products": "Tüm Ürünler",
-            "Sellers": "Satıcı",
-            "Categories": "Kategori"
-          },
-          "SortFilter": {
-            "Price: High-Low": "Fiyat: Yüksek-Düşük",
-            "Price: Low-High": "Fiyat: Düşük-Yüksek",
-            "Rating: High-Low": "Değerlendirme: Yüksek-Düşük",
-            "Rating: Low-High": "Değerlendirme: Düşük-Yüksek",
-            "Order: High-Low": "Sipariş: Yüksek-Düşük",
-            "Order: Low-High": "Sipariş: Düşük-Yüksek"
-          },
-          "PageFilter": {
-            "Bundles": "Paketler",
-            "Discounts": "Indirimler",
-            "Free Shipping": "Ücretsiz Kargo"
-          },
-          "Search": {
-            "placeHolder": "Ürün ve Marka Ara"
-          },
-          "DropDown": {
-            "categories": "Kategori",
-            "campaigns": "Kampanya"
-          },
-          "PDP": {
-            "buttons": {
-              "cart": "Sepete Ekle",
-              "buyNow": "Şimdi Satın Al"
-            }
-        },
-        "Merchants": {
-            "Tabs": {
-              "Home": "Ana sayfa",
-              "All Products": "Tüm Ürünler",
-              "Profile": "Profil"
-            }
-          },
-          "checkoutCart": {
-            "labels": {
-              "Shopping Cart": "Alışveriş Sepeti",
-              "Order Summary": "Sipariş Özeti",
-              "Total Items": "Toplam Öğe Sayısı",
-              "Total Price": "Toplam Fiyat",
-              "Quantity": "Miktar",
-              "Price": "Fiyat",
-              "Delete": "Silmek"
-            },
-            "buttons": {
-              "checkout": "Çıkış Yapmaya Devam Et"
-            }
-          
-        },
-        
-          "shippingInfo": {
-            "labels": {
-              "purchaseFor": "Satın Al",
-              "ship": {
-                "shipTo": "Sevkiyat Yeri",
-                "address": "Adres",
-                "locker": "Dolap",
-                "school": "okul"
-              }
-            },
-            "ShippingAdress": {
-              "table": {
-                "select": "Seçmek",
-                "fullName": "Tam İsim",
-                "addressLabel": "Adres Etiketi",
-                "fullAdress": "Açık Adres",
-                "phone": "Telefon",
-                "email": "E-posta",
-                "edit": "Düzenlemek"
-              },
-              "button": {
-                "addAddress": "Adres Ekle"
-              },
-              "label": {
-                "shippingAddress": "Gönderi Adresi",
-                "shippingInformation": "Gönderi Bilgileri",
-                "shippingMethods": "Nakliye Yöntemleri",
-                
-                    "charges": {
-                      "shippingCharges": "Kargo Ücretleri",
-                      "subTotal": "Ara toplam",
-                      "shippingcost": "Kargo Ücreti",
-                      "totalCost": "Toplam Maliyet"
-                    }
-                  
-              }
-            },
-            
-              "Review Order": {
-                "labels": {
-                  "shippingInformation": "Gönderi Bilgileri",
-                  "shippingMethod": "Gönderim Yönteminiz",
-                  "orderItems": "Ürün Sipariş Et",
-                  "orderSummary": "Sipariş Özeti",
-                  "items": "Eşya",
-                  "shipping": "Nakliye",
-                  "total": "Toplam"
-                },
-                "button":{
-                    "pay": "Ödemeye Devam Et"
-                  }
-              },
-              "payment": {
-                "Payment Method": "Ödeme Yöntemi"
-              }
-            ,
-            
-              "order Complete": {
-                "message": {
-                  "congrats": "Tebrikler...!!",
-                  "ordersuccess": "Siparişiniz Başarıyla Verildi"
-                }
-              },
-              "stepper": {
-                "checkout": "Kasa",
-                "shippingInfo": "Gönderi Bilgileri",
-                "reviewOrder": "Siparişi İncele",
-                "pay": "Ödemek",
-                "orderComplete": "Sipariş Tamamlandı"
-              }
-            
-          
+      "button": {
+        "addAddress": "Adres Ekle",
+        "reviewOrder": "Siparişi İncele"
+      },
+      "label": {
+        "shippingAddress": "Gönderi Adresi",
+        "shippingInformation": "Gönderi Bilgileri",
+        "shippingMethods": "Nakliye Yöntemleri",
+        "charges": {
+          "shippingCharges": "Kargo Ücretleri",
+          "subTotal": "Ara toplam",
+          "shippingcost": "Kargo Ücreti",
+          "totalCost": "Toplam Maliyet"
         }
-  
-} 
-    
-   }
+      }
+    },
+    "Review Order": {
+      "labels": {
+        "shippingInformation": "Gönderi Bilgileri",
+        "shippingMethod": "Gönderim Yönteminiz",
+        "orderItems": "Ürün Sipariş Et",
+        "orderSummary": "Sipariş Özeti",
+        "items": "Eşya",
+        "shipping": "Nakliye",
+        "total": "Toplam"
+      },
+      "button": {
+        "pay": "Ödemeye Devam Et"
+      }
+    },
+    "payment": {
+      "Payment Method": "Ödeme Yöntemi"
+    },
+    "order Complete": {
+      "message": {
+        "congrats": "Tebrikler...!!",
+        "ordersuccess": "Siparişiniz Başarıyla Verildi"
+      }
+    }
+  },
+  "PDP": {
+    "buttons": {
+      "cart": "Sepete Ekle",
+      "buyNow": "Şimdi Satın Al"
+    },
+    "labels": {
+      "des": "Açıklamalar",
+      "rating": "Derecelendirmeler ve İncelemeler",
+      "similar": "Benzer Ürünler",
+      "soldBy": "Satılan:",
+      "service": "Servis",
+      "variants": "Çeşitleri",
+      "store": "Mağazayı ziyaret et"
+    }
+  },
+  "stepper": {
+    "checkout": "Kasa",
+    "shippingInfo": "Gönderi Bilgileri",
+    "reviewOrder": "Siparişi İncele",
+    "pay": "Ödemek",
+    "orderComplete": "Sipariş Tamamlandı"
+  }
 }

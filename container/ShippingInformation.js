@@ -42,9 +42,14 @@ import localStorage from "localStorage";
 import Shipping1 from "../pages/shipping/index";
 import Modal from "./Modal/Modal";
 import { Link } from "@mui/material";
+import { useTranslation } from "react-i18next";
+
 function ShippingInformation({
   checkoutHandler,
   shippementAddress,
+  setAddressShippingMethod,
+  setLockerShippingMethod,
+  setShowShippingMethod,
   handleChange,
   checkoutHandler1,
   lockerCountryData,
@@ -65,6 +70,7 @@ function ShippingInformation({
   const [userInfo, setUserInfo] = useState();
   let router = useRouter();
   let buttonText;
+  let { t, i18n } = useTranslation();
   const {
     handleSubmit,
     control,
@@ -86,7 +92,8 @@ function ShippingInformation({
   const [radioCheck1, setRadioCheck1] = useState(false);
   const [showMapView, setShowMapView] = useState(false);
   const [showTableView, setShowTableView] = useState(false);
-
+  const [key, setkey] = useState(1);
+  console.log("keyI", key);
   // const handleChange = (event) => {
   //   setButtonKey(event.target.value);
   // };
@@ -110,7 +117,7 @@ function ShippingInformation({
       <Grid container mt={5}>
         <Grid md={12} sm={12} className={styles.shipTo} item>
           <FormLabel style={{ fontWeight: "bold", color: "black" }}>
-            Purchase For :{" "}
+            {t('shippingInfo.labels.purchaseFor')} :{" "}
           </FormLabel>
 
           <FormControl sx={{ m: 1, minWidth: 80 }}>
@@ -132,14 +139,14 @@ function ShippingInformation({
             >
               <MenuItem
                 value={10}
-                // onClick={() => handleChangeCategoryAndCampaigns(1)}
+              // onClick={() => handleChangeCategoryAndCampaigns(1)}
               >
                 Self
               </MenuItem>
               <Divider />
               <MenuItem
                 value={20}
-                // onClick={() => handleChangeCategoryAndCampaigns(2)}
+              // onClick={() => handleChangeCategoryAndCampaigns(2)}
               >
                 Student 2
               </MenuItem>
@@ -149,7 +156,7 @@ function ShippingInformation({
         </Grid>
         <Grid md={12} sm={12} item className={styles.shipTo}>
           <FormLabel style={{ fontWeight: "bold", color: "black" }}>
-            Ship To :
+            {t('shippingInfo.labels.ship.shipTo')} :
           </FormLabel>
           <Box flexGrow={0.01}></Box>
           <FormControl>
@@ -163,20 +170,26 @@ function ShippingInformation({
                 onClick={() => {
                   setButtonKey(1);
                   setRadioCheckLocker(true);
+                  setAddressShippingMethod(true)
+                  setLockerShippingMethod(false)
+                  setShowShippingMethod(true)
                 }}
                 value="address"
                 control={<Radio />}
-                label="Address"
+                label={t('shippingInfo.labels.ship.address')}
               />
               <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
               <FormControlLabel
                 onClick={() => {
                   setButtonKey(2);
                   setRadioCheckLocker(true);
+                  setLockerShippingMethod(true)
+                  setAddressShippingMethod(false)
+                  setShowShippingMethod(false)
                 }}
                 value="lockers"
                 control={<Radio />}
-                label="Locker"
+                label={t('shippingInfo.labels.ship.locker')}
               />
               <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
 
@@ -187,7 +200,7 @@ function ShippingInformation({
                 }}
                 value="school"
                 control={<Radio />}
-                label="School"
+                label={t('shippingInfo.labels.ship.school')}
               />
             </RadioGroup>
           </FormControl>
@@ -197,12 +210,13 @@ function ShippingInformation({
           <Grid container sx={{ bgcolor: "#fff" }}>
             <Grid item md={12} className={styles.shipAddress}>
               <Typography style={{ fontWeight: "bold", color: "black" }}>
-                Shipping Addresses :
+                {t('shippingInfo.ShippingAdress.label.shippingAddress')} :
               </Typography>
               {/* <Shipping /> */}
               <Modal
+                variant="contained"
                 startIcon={<AddIcon />}
-                buttonTitle=" Add  Address"
+                buttonTitle={t('shippingInfo.ShippingAdress.button.addAddress')}
                 heading=" Add Shipping Address"
                 dialogContentText={<Shipping1 />}
               />
@@ -237,21 +251,22 @@ function ShippingInformation({
                     aria-labelledby="demo-row-radio-buttons-group-label"
                     name="row-radio-buttons-group"
                     defaultValue={shippementAddress[0]?.address_id}
+
                     onChange={handleChange}
                   >
                     <TableHead className={styles.thead}>
                       <TableRow className={styles.thead}>
-                        <TableCell className={styles.select}>Select</TableCell>
-                        <TableCell className={styles.name}>Full Name</TableCell>
+                        <TableCell className={styles.select}>{t('shippingInfo.ShippingAdress.table.select')}</TableCell>
+                        <TableCell className={styles.name}>{t('shippingInfo.ShippingAdress.table.fullName')}</TableCell>
                         <TableCell className={styles.addLabel}>
-                          Address Label
+                          {t('shippingInfo.ShippingAdress.table.addressLabel')}
                         </TableCell>
                         <TableCell className={styles.fullAdd}>
-                          Full Address
+                          {t('shippingInfo.ShippingAdress.table.fullAdress')}
                         </TableCell>
-                        <TableCell className={styles.phone}>Phone</TableCell>
-                        <TableCell className={styles.email}>Email</TableCell>
-                        <TableCell className={styles.edit}>Edit</TableCell>
+                        <TableCell className={styles.phone}> {t('shippingInfo.ShippingAdress.table.phone')}</TableCell>
+                        <TableCell className={styles.email}>  {t('shippingInfo.ShippingAdress.table.email')}</TableCell>
+                        <TableCell className={styles.edit}>{t('shippingInfo.ShippingAdress.table.edit')}</TableCell>
                       </TableRow>
                     </TableHead>
 
@@ -276,7 +291,8 @@ function ShippingInformation({
                               >
                                 <FormControlLabel
                                   value={result.address_id}
-                                  // checked={result.address_id == 655}
+                                  //checked={result.address_id == 655}
+
                                   control={<Radio />}
                                   label={<></>}
                                   onClick={() => {
@@ -317,8 +333,16 @@ function ShippingInformation({
                                 {userData.email}
                               </TableCell>{" "}
                               <TableCell className={styles.edit}>
-                                <ModeEditOutlineIcon
-                                  className={styles.editIcon}
+                                <Modal
+                                  // variant=""
+                                  // startIcon={<AddIcon />}
+                                  buttonTitle={
+                                    <ModeEditOutlineIcon
+                                      className={styles.editIcon}
+                                    />
+                                  }
+                                  heading=" Edit Shipping Address"
+                                  dialogContentText={<Shipping1 data={result} />}
                                 />
                               </TableCell>
                             </TableRow>
@@ -385,15 +409,15 @@ function ShippingInformation({
             container
             // spacing={0}
             direction="row"
-            // alignItems="center"
-            // className={styles.findLocker}
+          // alignItems="center"
+          // className={styles.findLocker}
 
-            // maxWidth="xl"
+          // maxWidth="xl"
           >
             <Grid item md={12} sm={12} className={styles.findLocker}>
               <form
                 onSubmit={handleSubmit(submitHandler)}
-                // className={classes.form}
+              // className={classes.form}
               >
                 <List>
                   <ListItem>
@@ -553,37 +577,37 @@ function ShippingInformation({
 
                     {showTableView
                       ? lockersAddressData?.map((result) => (
-                          <FormControlLabel
-                            value={result.locker_id}
-                            control={<Radio />}
-                            label={
-                              <Box
+                        <FormControlLabel
+                          value={result.locker_id}
+                          control={<Radio />}
+                          label={
+                            <Box
+                              sx={{
+                                display: "flex",
+                                alignItems: "center",
+                              }}
+                            >
+                              <Image // className={cx(styles.media, mediaStyles.root)}
+                                src={"/locker_pic.jpg"}
+                                // onClick={(e) => viewCategory(product.category_id)}
+                                alt={"locker"}
+                                width={45}
+                                objectFit="contain"
+                                height={45}
+                              ></Image>
+                              <Typography
                                 sx={{
-                                  display: "flex",
-                                  alignItems: "center",
+                                  p: 1,
                                 }}
                               >
-                                <Image // className={cx(styles.media, mediaStyles.root)}
-                                  src={"/locker_pic.jpg"}
-                                  // onClick={(e) => viewCategory(product.category_id)}
-                                  alt={"locker"}
-                                  width={45}
-                                  objectFit="contain"
-                                  height={45}
-                                ></Image>
-                                <Typography
-                                  sx={{
-                                    p: 1,
-                                  }}
-                                >
-                                  {result.locker_name}
-                                </Typography>
-                                <Typography>{result.locker_address}</Typography>
-                              </Box>
-                            }
-                            onClick={() => setRadioCheck1(true)}
-                          />
-                        ))
+                                {result.locker_name}
+                              </Typography>
+                              <Typography>{result.locker_address}</Typography>
+                            </Box>
+                          }
+                          onClick={() => setRadioCheck1(true)}
+                        />
+                      ))
                       : ""}
                   </>
                 )}
