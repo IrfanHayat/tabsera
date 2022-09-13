@@ -71,7 +71,7 @@ export default function ActionAreaCard({
         }}
       >
         {product?.bundleImage && (
-          <>
+          <center className={styles.cargImgBox}>
             <ImageListItem key={product.bundleImage}>
               <CardMedia
                 data-aos="fade-up"
@@ -113,10 +113,10 @@ export default function ActionAreaCard({
                 ""
               )} */}
             </ImageListItem>
-          </>
+          </center>
         )}
         {product?.productImage && (
-          <>
+          <center className={styles.cargImgBox}>
             <ImageListItem key={product.productImage}>
               <CardMedia
                 data-aos="fade-up"
@@ -158,19 +158,21 @@ export default function ActionAreaCard({
                 ""
               )}
             </ImageListItem>
-          </>
+          </center>
         )}
         {product?.category_image && (
-          <ImageListItem key={product.category_image}>
-            <CardMedia
-              data-aos="fade-up"
-              component="img"
-              className={styles.cargImg}
-              onClick={(e) => viewProduct(product)}
-              image={product?.category_image}
-              alt={product?.bundleName}
-            ></CardMedia>
-            {/* <Image
+          <center className={styles.cargImgBox}>
+            <ImageListItem key={product.category_image}>
+              <CardMedia
+                data-aos="fade-up"
+                component="img"
+                className={styles.cargImg}
+                onClick={(e) => viewProduct(product)}
+                image={product?.category_image}
+                alt={product?.bundleName}
+              ></CardMedia>
+
+              {/* <Image
               // className={cx(styles.media, mediaStyles.root)}
               src={product?.category_image}
               onClick={(e) => viewCategory(product.category_id)}
@@ -179,7 +181,8 @@ export default function ActionAreaCard({
               height={200}
               // loading="eager"
             ></Image> */}
-          </ImageListItem>
+            </ImageListItem>
+          </center>
         )}
 
         <Box className={styles.cardContent} component="div">
