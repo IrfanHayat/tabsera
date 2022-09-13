@@ -461,11 +461,12 @@ export default function PersistentDrawerLeft() {
                           aria-owns={anchorEl ? "simple-menu" : undefined}
                           aria-haspopup="true"
                           // onClick={handleClick}
-                          onMouseOver={(e) => handleClick(e, result.category_id)}
+
                           // onMouseLeave={handleCloseHover}
                           secondaryAction={
                             <ArrowForwardIosIcon
                               sx={{ fontSize: 12 }}
+                              onMouseOver={(e) => handleClick(e, result.category_id)}
                             // fontSize="small"
                             />
                           }
