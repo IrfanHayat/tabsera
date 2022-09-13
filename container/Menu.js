@@ -741,11 +741,13 @@ export default function PersistentDrawerLeft() {
                       setFilterData={setFilterData}
                     ></ShopProductSort>
                   ) : (
-                    <ShopProductSort
+
+                    cartId == null ? <ShopProductSort
                       data={data?.response}
                       setShowFilterData={setShowFilterData}
                       setFilterData={setFilterData}
-                    ></ShopProductSort>
+                    ></ShopProductSort> : <></>
+
                   )
                 ) : (
                   <></>
