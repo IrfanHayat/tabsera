@@ -465,7 +465,7 @@ export default function PersistentDrawerLeft() {
                           </ListItemText>
                         </ListItem>
 
-                        {/* <Menu
+                        <Menu
                           id="simple-menu"
                           anchorEl={anchorEl}
                           open={Boolean(anchorEl)}
@@ -492,7 +492,7 @@ export default function PersistentDrawerLeft() {
                               {subcategory.category_name}
                             </MenuItem>
                           ))}
-                        </Menu> */}
+                        </Menu>
                       </>
                     ))}
                   </>
