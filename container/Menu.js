@@ -146,10 +146,22 @@ export default function PersistentDrawerLeft() {
 
   const [anchorEl, setAnchorEl] = React.useState(null);
 
-  function handleClick(event) {
+  const [sideBarCat, setSideBarCat] = useState([]);
+
+  function handleClick(event, categoryId) {
+    console.log(categoryId)
     if (anchorEl !== event.currentTarget) {
       setAnchorEl(event.currentTarget);
     }
+    console.log(category)
+    let subCategory = category?.filter((result) =>
+      result.category_id == categoryId
+    )[0]
+
+
+    setSideBarCat(subCategory)
+
+
   }
 
   function handleHover() {
@@ -446,10 +458,10 @@ export default function PersistentDrawerLeft() {
                     {category?.map((result) => (
                       <>
                         <ListItem
-                          // aria-owns={anchorEl ? "simple-menu" : undefined}
-                          // aria-haspopup="true"
+                          aria-owns={anchorEl ? "simple-menu" : undefined}
+                          aria-haspopup="true"
                           // onClick={handleClick}
-                          // onMouseOver={handleClick}
+                          onMouseOver={(e) => handleClick(e, result.category_id)}
                           // onMouseLeave={handleCloseHover}
                           secondaryAction={
                             <ArrowForwardIosIcon
@@ -459,40 +471,44 @@ export default function PersistentDrawerLeft() {
                           }
                         >
                           <ListItemText
+
                             onClick={(e) => viewCategory(result.category_id)}
                           >
                             {result.category_name}
                           </ListItemText>
                         </ListItem>
 
-                        <Menu
-                          id="simple-menu"
-                          anchorEl={anchorEl}
-                          open={Boolean(anchorEl)}
-                          onClose={handleClose}
-                          MenuListProps={{
-                            onMouseEnter: handleHover,
-                            onMouseLeave: handleCloseHover,
-                            style: { pointerEvents: "auto" },
-                          }}
-                          getContentAnchorEl={null}
-                          anchorOrigin={{
-                            horizontal: "right",
-                            vertical: "top",
-                          }}
-                          PopoverClasses={{
-                            root: styles.popOverRoot,
-                          }}
-                        >
-                          {result.child?.map((subcategory) => (
-                            <MenuItem
-                              key={subcategory.category_id}
-                              onClick={handleClose}
-                            >
-                              {subcategory.category_name}
-                            </MenuItem>
-                          ))}
-                        </Menu>
+                        {
+                          <Menu
+                            id="simple-menu"
+                            anchorEl={anchorEl}
+                            open={Boolean(anchorEl)}
+                            onClose={handleClose}
+                            MenuListProps={{
+                              onMouseEnter: handleHover,
+                              onMouseLeave: handleCloseHover,
+                              style: { pointerEvents: "auto" },
+                            }}
+                            getContentAnchorEl={null}
+                            anchorOrigin={{
+                              horizontal: "right",
+                              vertical: "top",
+                            }}
+                            PopoverClasses={{
+                              root: styles.popOverRoot,
+                            }}
+                          >
+                            {sideBarCat?.child?.map((subcategory) => (
+                              <MenuItem
+                                key={subcategory.category_id}
+                                onClick={handleClose}
+                              >
+                                {subcategory.category_name}
+                              </MenuItem>
+                            ))}
+                          </Menu>
+                        }
+
                       </>
                     ))}
                   </>
