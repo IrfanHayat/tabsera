@@ -34,6 +34,7 @@ import { useTranslation } from "react-i18next";
 import banner from "../public/banner.jpg";
 import Rating from "@mui/material/Rating";
 import Avatar from "@mui/material/Avatar";
+import MerchantProfile from "./MerchantProfile";
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
   { width: 550, itemsToShow: 2 },
@@ -289,7 +290,7 @@ function MerchantStore({ merchantStoreDetail }) {
               onChange={handleChange}
               aria-label="basic tabs example"
               // variant="fullWidth"
-
+              sx={{ pl: 3 }}
               indicatorColor="primary"
               textColor="primary"
             >
@@ -343,7 +344,7 @@ function MerchantStore({ merchantStoreDetail }) {
               </Grid>
             </TabPanel>
             <TabPanel value={value} index={2}>
-              Profile
+              <MerchantProfile />
             </TabPanel>
           </Box>
         </Grid>

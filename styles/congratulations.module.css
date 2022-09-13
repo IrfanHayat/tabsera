@@ -1,10 +1,63 @@
+.main {
+  background-color: #fff;
+  margin-top: 30px;
+  padding-bottom: 31px;
+}
+
 .congrats {
   display: flex;
   flex-direction: column;
   width: 100%;
+  padding-top: 30px;
+
   max-width: 700px;
   min-height: 50vh;
-  align-items: center;
-  justify-content: center;
+  /* align-items: center; */
+  /* justify-content: center; */
   margin: auto;
+  background-color: #fff;
+}
+
+.orderdetails {
+  margin-top: 31px;
+}
+
+.estimateTime {
+  display: flex;
+  border: 1px solid black;
+  min-height: 70px;
+}
+
+.orderSumamry {
+  margin-top: 31px;
+  margin-bottom: 31px;
+  background-color: #efeff5;
+}
+
+.amount {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 11px;
+}
+.total {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  margin-top: 11px;
+}
+
+.continueShoppingbtn {
+  display: flex;
+  height: 44px;
+  width: 225px;
+  font-size: 16px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 31px;
+  margin-bottom: 31px;
+  margin: auto;
+  color: #fff;
+  border: 1px solid #3d7cff;
+  border-radius: 2px;
+  background-color: #3d7cff;
 }
