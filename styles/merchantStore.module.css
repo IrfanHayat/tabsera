@@ -7,9 +7,11 @@
 
 .merchantBannerImg {
   height: 202px;
-  /* width: 100%; */
-  background: url("../public/banner.jpg");
-  object-fit: contain;
+  width: 100%;
+  /* background: url("../public/banner.jpg"); */
+  background-image: url("../public/sales.jpg");
+  background-size: cover;
+  /* object-fit: contain; */
 }
 
 .merchantBannerInfo {

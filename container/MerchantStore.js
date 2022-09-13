@@ -187,22 +187,7 @@ function MerchantStore({ merchantStoreDetail }) {
         // justifyContent="center"
       >
         <Grid item md={12} xs={12} ml={1} className={styles.merchantBanner}>
-          <Box
-            className={styles.merchantBannerImg}
-            sx={{ backgroundColor: "orange" }}
-          >
-            {/* <Typography sx={{ bgcolor: "red" }}>
-              {" "}
-              Name: {merchantData.merchant_name}
-            </Typography> */}
-            {/* <CardMedia
-              className={styles.merchantImg}
-              component="img"
-              image="../public/banner.jpg"
-              // sx={{ width: 251, height: 251, bgcolor: "red  " }}
-              alt=" Logo here"
-            /> */}
-          </Box>
+          <Box className={styles.merchantBannerImg}></Box>
           {/* <Typography className={styles.merchantName}>
             {" "}
             Name: {merchantData.merchant_name}
@@ -245,8 +230,8 @@ function MerchantStore({ merchantStoreDetail }) {
         <CardMedia
           className={styles.merchantImg}
           component="img"
-          image="../public/banner.jpg"
-          // sx={{ width: 251, height: 251, bgcolor: "red  " }}
+          image="/avatar1.jpg"
+          // sx={{ width: 251, height: 251 }}
           alt=" Logo here"
         />
         {/* <Box className={styles.merchantImg}>

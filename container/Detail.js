@@ -655,7 +655,7 @@ function Details({
           >
             <Typography display="inline-block">
               {" "}
-              {t("PDP.labels.soldBy")}:
+              {t("PDP.labels.soldBy")}
             </Typography>
             <List>
               <ListItem>
