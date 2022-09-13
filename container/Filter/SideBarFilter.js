@@ -10,6 +10,10 @@ import CheckBox from "../../container/Section/CheckBox";
 import PriceFilter from "./PriceFilter";
 import PageFilter from "./PageFilter";
 import styles from "../../styles/sidebarFilters.module.css";
+import Checkbox from '@mui/material/Checkbox';
+
+import FormGroup from '@mui/material/FormGroup';
+
 function SideBarFilter({
   categoryProduct,
   parentCategories,
@@ -19,6 +23,7 @@ function SideBarFilter({
   MinInput,
   MaxInput,
   priceFilter,
+  handleFilters,
   value,
   setDealsData,
   setShowDeals,
@@ -37,25 +42,27 @@ function SideBarFilter({
     //   price: []
   });
 
-  const handleFilters = (filters, category) => {
-    const newFilters = { ...Filters };
+  // const handleFilters = (filters, category) => {
+  //   const newFilters = { ...Filters };
 
-    newFilters[category] = filters;
+  //   newFilters[category] = filters;
 
-    // if (category === "price") {
-    //     let priceValues = handlePrice(filters)
-    //     newFilters[category] = priceValues
+  //   // if (category === "price") {
+  //   //     let priceValues = handlePrice(filters)
+  //   //     newFilters[category] = priceValues
 
-    // }
+  //   // }
 
-    let result = brands.filter(
-      (result) => result.brand_id == newFilters.brands[0]
-    );
-    console.log(result);
-    //showFilteredResults(newFilters)
-    setFilters(newFilters);
-  };
-  console.log(Filters);
+  //   let result = brands.filter(
+  //     (result) => result.brand_id == newFilters.brands[0]
+  //   );
+  //   console.log(result[0]);
+  //   //showFilteredResults(newFilters)
+  //   setFilters(newFilters);
+  // };
+
+
+
 
   return (
     <Box component="div" className={styles.sideBarFilter}>
@@ -96,12 +103,24 @@ function SideBarFilter({
 
       {console.log(brands)}
       <Box className={styles.brandsList}>
-        <CheckBox
+        {/* <CheckBox
           // className={styles.categories}
           size="small"
           list={brands}
           handleFilters={(filters) => handleFilters(filters, "brands")}
-        />
+        /> */}
+        {
+          brands.map((brand) =>
+            //Store the the student id in the value of each check box
+
+            <div>
+              <FormGroup>
+                <FormControlLabel control={<Checkbox onChange={handleFilters} name={brand.brand_name} />} label={brand.brand_name} />
+
+              </FormGroup>
+            </div>
+          )
+        }
         {/* </Box> */}
       </Box>
       <Divider />

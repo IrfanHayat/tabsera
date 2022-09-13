@@ -42,7 +42,7 @@ function PriceFilter({ MinInput, MaxInput, priceFilter }) {
         <Button
           className={styles.button}
           variant="contained"
-          onClick={priceFilter}
+          onClick={() => priceFilter()}
         >
           OK
         </Button>
