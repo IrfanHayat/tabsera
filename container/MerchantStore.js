@@ -34,6 +34,7 @@ import { useTranslation } from "react-i18next";
 import banner from "../public/banner.jpg";
 import Rating from "@mui/material/Rating";
 import Avatar from "@mui/material/Avatar";
+import MerchantProfile from "./MerchantProfile";
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
   { width: 550, itemsToShow: 2 },
@@ -186,22 +187,7 @@ function MerchantStore({ merchantStoreDetail }) {
         // justifyContent="center"
       >
         <Grid item md={12} xs={12} ml={1} className={styles.merchantBanner}>
-          <Box
-            className={styles.merchantBannerImg}
-            sx={{ backgroundColor: "orange" }}
-          >
-            {/* <Typography sx={{ bgcolor: "red" }}>
-              {" "}
-              Name: {merchantData.merchant_name}
-            </Typography> */}
-            {/* <CardMedia
-              className={styles.merchantImg}
-              component="img"
-              image="../public/banner.jpg"
-              // sx={{ width: 251, height: 251, bgcolor: "red  " }}
-              alt=" Logo here"
-            /> */}
-          </Box>
+          <Box className={styles.merchantBannerImg}></Box>
           {/* <Typography className={styles.merchantName}>
             {" "}
             Name: {merchantData.merchant_name}
@@ -244,8 +230,8 @@ function MerchantStore({ merchantStoreDetail }) {
         <CardMedia
           className={styles.merchantImg}
           component="img"
-          image="../public/banner.jpg"
-          // sx={{ width: 251, height: 251, bgcolor: "red  " }}
+          image="/avatar1.jpg"
+          // sx={{ width: 251, height: 251 }}
           alt=" Logo here"
         />
         {/* <Box className={styles.merchantImg}>
@@ -289,7 +275,7 @@ function MerchantStore({ merchantStoreDetail }) {
               onChange={handleChange}
               aria-label="basic tabs example"
               // variant="fullWidth"
-
+              sx={{ pl: 3 }}
               indicatorColor="primary"
               textColor="primary"
             >
@@ -343,7 +329,7 @@ function MerchantStore({ merchantStoreDetail }) {
               </Grid>
             </TabPanel>
             <TabPanel value={value} index={2}>
-              Profile
+              <MerchantProfile />
             </TabPanel>
           </Box>
         </Grid>
