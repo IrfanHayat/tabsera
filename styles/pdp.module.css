@@ -64,6 +64,12 @@
   background-color: #f57224;
 }
 
+.carouelImage {
+  width: 336px;
+  height: 330px;
+  margin-top: 100px;
+  /* margin-left: 576px; */
+}
 .selectimg {
   border: 1px solid #fff;
 }
@@ -98,4 +104,11 @@
   /* font-size: 1rem; */
   /* font-weight: bold; */
   background-color: white;
+}
+/* ................................................................................. */
+.prodDetails {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 100px;
 }

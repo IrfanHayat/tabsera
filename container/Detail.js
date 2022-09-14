@@ -177,7 +177,7 @@ function Details({
 
   return (
     <>
-      <Box
+      {/* <Box
         role="presentation"
         onClick={handleClick}
         sx={{ display: "flex", p: 2 }}
@@ -192,15 +192,7 @@ function Details({
           >
             Home
           </Link>
-          <Link
-            underline="hover"
-            // color="inherit"
-            // onClick={() =>
-            //   router.push(`/product_detail?productId=${productIdRoute}`)
-            // }
-          >
-            {productDetail?.category_name}
-          </Link>
+          <Link underline="hover">{productDetail?.category_name}</Link>
           <Typography
             underline="hover"
             // color="text.primary"
@@ -210,16 +202,21 @@ function Details({
             {productDetail?.product_name}
           </Typography>
         </Breadcrumbs>
-      </Box>
+      </Box> */}
 
       <Grid
         container
         // spacing={1}
         maxWidth="xl"
-        sx={{ backgroundColor: "#fafafa" }}
+        // sx={{ backgroundColor: "#fafafa" }}
         // justifyContent="center"
       >
-        <Grid item md={4} xs={12} sx={{ bgcolor: "white" }}>
+        <Grid
+          item
+          md={6}
+          xs={12}
+          // sx={{ bgcolor: "white" }}
+        >
           <List>
             <ListItem>
               <Carousel
@@ -235,13 +232,7 @@ function Details({
                 {Object.keys(productDetail).length > 0 && skusFlag == false
                   ? productDetail.product_images[0].media_images.map(
                       (result, index) => (
-                        <Box
-                          sx={{
-                            width: "100%",
-                            height: "330px",
-                            // border: "1px solid black",
-                          }}
-                        >
+                        <Box className={styles.carouelImage}>
                           <ReactImageMagnify
                             {...{
                               smallImage: {
@@ -278,13 +269,7 @@ function Details({
                     )
                   : skusProduct &&
                     skusProduct.sku_images.map((result) => (
-                      <Box
-                        sx={{
-                          width: "100%",
-                          height: "330px",
-                          // border: "1px solid black",
-                        }}
-                      >
+                      <Box className={styles.carouelImage}>
                         <ReactImageMagnify
                           {...{
                             smallImage: {
@@ -361,21 +346,8 @@ function Details({
           </List>
         </Grid>
 
-        <Grid
-          item
-          md={5}
-          sm={12}
-          xs={12}
-          sx={{ px: 2, py: 1, bgcolor: "white" }}
-        >
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center",
-              // mt: 1,
-            }}
-          >
+        <Grid item md={4} sm={12} xs={12} className={styles.prodDetailsDiv}>
+          <Box className={styles.prodDetails}>
             <Typography
               sx={{
                 fontWeight: "bold",
@@ -384,7 +356,7 @@ function Details({
             >
               {productDetail?.product_name}
             </Typography>
-            <Typography
+            {/* <Typography
               sx={{
                 fontWeight: "bold",
                 // display: "inline",
@@ -392,16 +364,18 @@ function Details({
               }}
             >
               In Stock
-            </Typography>
+            </Typography> */}
           </Box>
-          <Box sx={{ display: "flex", justifyContent: "space-between", my: 1 }}>
+          <Box sx={{ display: "flex", my: 1 }}>
+            <Typography> Rated :</Typography>
+
             <Rating name="size-small" defaultValue={3} size="small" readOnly />
-            <Stack spacing={2} direction="row">
+            {/* <Stack spacing={2} direction="row">
               <ShareIcon />
               <FavoriteBorderIcon color="error" />
-            </Stack>
+            </Stack> */}
           </Box>
-          <Divider fullWidth />
+          {/* <Divider fullWidth /> */}
 
           <Box sx={{ py: 1 }}>
             <Box
@@ -604,7 +578,7 @@ function Details({
             </Grid>
           </Grid>
         </Grid>
-        <Grid sx={{ bgcolor: "#fafafa" }} item md={3} sm={12} xs={12}>
+        <Grid sx={{ bgcolor: "#fafafa" }} item md={6} sm={12} xs={12}>
           {" "}
           <Box
             sx={{
