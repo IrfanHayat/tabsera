@@ -73,26 +73,15 @@ const Item = styled(Paper)(({ theme }) => ({
 function SubCategory({
   catId,
   value,
-  setDealsData,
-  setShowDeals,
-  setDiscountData,
-  showDiscounts,
-  showFreeShipping,
-  setShowDiscounts,
-  discountData,
-  setFreeShippingData,
-  setShowFreeShipping,
   setShowProduct,
   showAllCategoryPro,
   showAllMerchantPro,
   setShowAllCategoryPro,
-  freeShippingData,
   setShowAllMerchantPro,
   showProduct,
 
-  showDeals,
-  dealsData,
-  setShowFilterData,
+
+
   setFilterData1,
   filterData1,
 }) {
@@ -101,6 +90,19 @@ function SubCategory({
     []
   );
 
+  let [dealsData, setDealsData] = useState();
+  let [showDeals, setShowDeals] = useState(false);
+
+  //discounts
+  let [discountData, setDiscountData] = useState();
+  let [showDiscounts, setShowDiscounts] = useState(false);
+
+  //freeShipping
+  let [freeShippingData, setFreeShippingData] = useState();
+  let [showFreeShipping, setShowFreeShipping] = useState(false);
+
+  //filter
+  let [showFilter, setShowFilterData] = useState(false);
   const router = useRouter();
   const dispatch = useDispatch();
   const [checked, setChecked] = React.useState([true, false]);
