@@ -81,6 +81,7 @@ import PageFilter from "./Filter/PageFilter";
 import ActionAreaCard from "./Card";
 import ShopProductSort from "./Filter/ProductSort";
 import SubCategory from "../pages/sub_category";
+import { useCallback } from "react";
 export default function PersistentDrawerLeft() {
   const { data, isLoading, isFetching, isError } = useGetAllProductsQuery();
   const { categoryData } = useSelector((state) => state.category);
@@ -255,7 +256,7 @@ export default function PersistentDrawerLeft() {
       setShowDeals(false);
       setShowDiscounts(false);
       setShowFreeShipping(true);
-      setCatId(null);
+      //setCatId(null);
     } else if (showDiscounts) {
       setShowProduct(true);
       setShowAllCategoryPro(false);
@@ -263,7 +264,7 @@ export default function PersistentDrawerLeft() {
       setShowDeals(false);
       setShowDiscounts(true);
       setShowFreeShipping(false);
-      setCatId(null);
+      //setCatId(null);
     } else if (showDeals) {
       setShowProduct(true);
       setShowAllCategoryPro(false);
@@ -271,7 +272,7 @@ export default function PersistentDrawerLeft() {
       setShowDeals(true);
       setShowDiscounts(false);
       setShowFreeShipping(false);
-      setCatId(null);
+      //setCatId(null);
     } else {
       setShowProduct(true);
       setShowAllCategoryPro(false);
@@ -279,7 +280,7 @@ export default function PersistentDrawerLeft() {
       setShowDeals(false);
       setShowDiscounts(false);
       setShowFreeShipping(false);
-      setCatId(null);
+      //setCatId(null);
     }
   };
 
@@ -293,7 +294,7 @@ export default function PersistentDrawerLeft() {
       setShowAllMerchantPro(false);
       setShowDeals(false);
       setShowDiscounts(false);
-      setCatId(null);
+      //setCatId(null);
     } else if (showDiscounts) {
       setShowProduct(false);
       setShowAllCategoryPro(true);
@@ -301,7 +302,7 @@ export default function PersistentDrawerLeft() {
       setShowDeals(false);
       setShowDiscounts(true);
       setShowFreeShipping(false);
-      setCatId(null);
+      //setCatId(null);
     } else if (showDeals) {
       setShowProduct(false);
       setShowAllCategoryPro(true);
@@ -309,7 +310,7 @@ export default function PersistentDrawerLeft() {
       setShowDeals(true);
       setShowDiscounts(false);
       setShowFreeShipping(false);
-      setCatId(null);
+      //setCatId(null);
     } else {
       setShowAllCategoryPro(true);
       setShowProduct(false);
@@ -317,7 +318,7 @@ export default function PersistentDrawerLeft() {
       setShowDeals(false);
       setShowDiscounts(false);
       setShowFreeShipping(false);
-      setCatId(null);
+      //setCatId(null);
     }
   };
   const showAllMerchantsProduct = () => {
@@ -329,7 +330,7 @@ export default function PersistentDrawerLeft() {
       setShowDeals(false);
       setShowDiscounts(false);
       setShowFreeShipping(true);
-      setCatId(null);
+      //setCatId(null);
     } else if (showDiscounts) {
       setShowProduct(false);
       setShowAllCategoryPro(false);
@@ -337,7 +338,7 @@ export default function PersistentDrawerLeft() {
       setShowDeals(false);
       setShowDiscounts(true);
       setShowFreeShipping(false);
-      setCatId(null);
+      //setCatId(null);
     } else if (showDeals) {
       setShowProduct(false);
       setShowAllCategoryPro(false);
@@ -345,18 +346,21 @@ export default function PersistentDrawerLeft() {
       setShowDeals(true);
       setShowDiscounts(false);
       setShowFreeShipping(false);
-      setCatId(null);
+      //setCatId(null);
     } else {
       setShowAllMerchantPro(true);
       setShowProduct(false);
       setShowAllCategoryPro(false);
       setShowDeals(false);
       setShowDiscounts(false);
-      setCatId(null);
+      //setCatId(null);
     }
   };
   // ----------------------------------------------------------------------------------
-
+  const handleCat = useCallback(async (subCatId) => {
+    await setCatId(null);
+    await setCatId(subCatId)
+  }, [catId])
   console.log(discountData);
 
   return (
@@ -502,7 +506,7 @@ export default function PersistentDrawerLeft() {
                             {sideBarCat?.child?.map((subcategory) => (
                               <MenuItem
                                 key={subcategory.category_id}
-                                onClick={handleClose}
+                                onClick={() => handleCat(subcategory.category_id)}
                               >
                                 {subcategory.category_name}
                               </MenuItem>
