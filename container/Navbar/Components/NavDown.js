@@ -246,10 +246,10 @@ export default function NavDown(props) {
             }}
           >
             <Image
-              src="/tijariLogo.png"
+              src="/bigLogo.png"
               alt="/bigLogo.png"
-              height="60px"
-              width="200px"
+              height="150px"
+              width="250px"
               // onMouseOver={cu}
               objectFit="contain"
               onClick={() => router.push("/")}
@@ -349,8 +349,8 @@ export default function NavDown(props) {
               onClick={handleClick}
               color="primary"
 
-              // onMouseEnter={handleClick}
-              // onMouseLeave={handleClick}
+            // onMouseEnter={handleClick}
+            // onMouseLeave={handleClick}
             >
               {console.log(localStorage.getItem("login"))}
               {console.log(cartTotalQuantity)}
@@ -360,13 +360,13 @@ export default function NavDown(props) {
                   color="error"
                   badgeContent={
                     cartTotalQuantity != undefined ||
-                    cartTotalQuantity != 0 ||
-                    cartTotalQuantity
+                      cartTotalQuantity != 0 ||
+                      cartTotalQuantity
                       ? cartTotalQuantity
                       : 1
                   }
                   max={99}
-                  // className={styles.cartbadge}
+                // className={styles.cartbadge}
                 >
                   <ShoppingCartOutlinedIcon className={styles.cartIcon} />
                 </Badge>
@@ -389,11 +389,11 @@ export default function NavDown(props) {
                 vertical: "top",
                 horizontal: "center",
               }}
-              //keepMounted={true}
-              // anchorOrigin={{
-              //   vertical: "bottom",
-              //   horizontal: "left"62
-              // }}
+            //keepMounted={true}
+            // anchorOrigin={{
+            //   vertical: "bottom",
+            //   horizontal: "left"62
+            // }}
             >
               {cartTotalQuantity > 0 ? (
                 // <div>
