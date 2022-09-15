@@ -130,7 +130,14 @@ function Details({
       </Button>
     );
   }
+  // handling tabs for reviews and description
+  const [value, setValue] = React.useState(0);
 
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  // ---------------------------------------------------------/
   let [skusProduct, setSkusProduct] = useState();
   let [skusFlag, setSkusFlag] = useState(false);
   let [variantOneProduct, setVariantOneProduct] = useState();
@@ -215,145 +222,139 @@ function Details({
           item
           md={6}
           xs={12}
+          className={styles.produtctImagesBox}
           // sx={{ bgcolor: "white" }}
         >
-          <List>
-            <ListItem>
-              <Carousel
-                // breakPoints={breakPoints}
-                //  disableArrowsOnEnd={false}
-                showArrows={false}
-                // pagination={true}
-                pagination={false}
-                showEmptySlots={true}
-                // itemsToShow={2}
-                // showArrows={false}
-              >
-                {Object.keys(productDetail).length > 0 && skusFlag == false
-                  ? productDetail.product_images[0].media_images.map(
-                      (result, index) => (
-                        <Box className={styles.carouelImage}>
-                          <ReactImageMagnify
-                            {...{
-                              smallImage: {
-                                alt: "Wristwatch by Ted Baker London",
-                                // isFluidWidth: true,
-                                width: 400,
-                                height: 327,
-                                src: result,
-                                // sizes:
-                                //   "(min-width: 800px) 33.5vw, (min-width: 415px) 50vw, 100vw",
-                              },
-                              largeImage: {
-                                src: result,
-                                width: 640,
-                                height: 480,
-                              },
+          <Carousel
+            // breakPoints={breakPoints}
+            //  disableArrowsOnEnd={false}
+            showArrows={false}
+            // pagination={true}
+            pagination={false}
+            showEmptySlots={true}
+            // itemsToShow={2}
+            // showArrows={false}
+          >
+            {Object.keys(productDetail).length > 0 && skusFlag == false
+              ? productDetail.product_images[0].media_images.map(
+                  (result, index) => (
+                    <Box className={styles.carouelImage}>
+                      <ReactImageMagnify
+                        {...{
+                          smallImage: {
+                            alt: "Wristwatch by Ted Baker London",
+                            // isFluidWidth: true,
+                            width: " 336px",
+                            height: "330px",
+                            src: result,
+                            // sizes:
+                            //   "(min-width: 800px) 33.5vw, (min-width: 415px) 50vw, 100vw",
+                          },
+                          largeImage: {
+                            src: result,
+                            width: 640,
+                            height: 480,
+                          },
 
-                              enlargedImagePosition: "over",
-                              // enlargedImageContainerDimensions: {
-                              //   width: "150%",
-                              //   height: "150%",
-                              // },
-                              // enlargedImageContainerStyle: {
-                              //   zIndex: "1500",
-                              // },
-                              // enlargedImageContainerDimensions: {
-                              //   width: "50%",
-                              //   height: "100%",
-                              // },
-                            }}
-                          />
-                        </Box>
-                      )
-                    )
-                  : skusProduct &&
-                    skusProduct.sku_images.map((result) => (
-                      <Box className={styles.carouelImage}>
-                        <ReactImageMagnify
-                          {...{
-                            smallImage: {
-                              alt: "Wristwatch by Ted Baker London",
-                              isFluidWidth: true,
-                              // width: 400,
-                              // height: 327,
-                              // width: 100,
-                              // height: 200,
-                              src: result,
-                              // sizes:
-                              //   "(min-width: 800px) 33.5vw, (min-width: 415px) 50vw, 100vw",
-                            },
-                            largeImage: {
-                              src: result,
-                              width: 640,
-                              height: 480,
-                            },
-
-                            enlargedImagePosition: "over",
-                            // enlargedImageContainerDimensions: {
-                            //   width: "150%",
-                            //   height: "150%",
-                            // },
-                            enlargedImageContainerStyle: {
-                              zIndex: "1500",
-                            },
-                            enlargedImageContainerDimensions: {
-                              width: "50%",
-                              height: "100%",
-                            },
-                          }}
-                        />
-                      </Box>
-                    ))}
-              </Carousel>
-            </ListItem>
-            <Divider />
-            {console.log(multiProductImage)}
-            <ListItem>
-              <Carousel
-                // breakPoints={breakPoints}
-                disableArrowsOnEnd={true}
-                showArrows={false}
-                renderArrow={myArrow}
-                pagination={false}
-                showEmptySlots={true}
-                itemsToShow={6}
-              >
-                {multiProductImage &&
-                  multiProductImage?.map((results, index) => (
-                    <Box
-                      // sx={{ border: }}
-                      className={styles.selectimg}
-                      // border={isActiveImg ? "1px solid blue" : " "}
-                    >
-                      <Image
-                        onClick={() => {
-                          setSkusFlag(false);
-                          setisActiveImg(true);
+                          enlargedImagePosition: "over",
+                          // enlargedImageContainerDimensions: {
+                          //   width: "150%",
+                          //   height: "150%",
+                          // },
+                          // enlargedImageContainerStyle: {
+                          //   zIndex: "1500",
+                          // },
+                          // enlargedImageContainerDimensions: {
+                          //   width: "50%",
+                          //   height: "100%",
+                          // },
                         }}
-                        objectFit="contain"
-                        // style={{borderColor:"red", border:"5px"}}
-                        key={index}
-                        src={results}
-                        alt="shirt"
-                        width={60}
-                        height={60}
-                      ></Image>
+                      />
                     </Box>
-                  ))}
-              </Carousel>
-            </ListItem>
-          </List>
+                  )
+                )
+              : skusProduct &&
+                skusProduct.sku_images.map((result) => (
+                  <Box className={styles.carouelImage}>
+                    <ReactImageMagnify
+                      {...{
+                        smallImage: {
+                          alt: "Wristwatch by Ted Baker London",
+                          // isFluidWidth: true,
+                          width: " 336px",
+                          height: "330px",
+                          // width: 100,
+                          // height: 200,
+                          src: result,
+                          // sizes:
+                          //   "(min-width: 800px) 33.5vw, (min-width: 415px) 50vw, 100vw",
+                        },
+                        largeImage: {
+                          src: result,
+                          width: 640,
+                          height: 480,
+                        },
+
+                        enlargedImagePosition: "over",
+                        // enlargedImageContainerDimensions: {
+                        //   width: "150%",
+                        //   height: "150%",
+                        // },
+                        // enlargedImageContainerStyle: {
+                        //   zIndex: "1500",
+                        // },
+                        // enlargedImageContainerDimensions: {
+                        //   width: "50%",
+                        //   height: "100%",
+                        // },
+                      }}
+                    />
+                  </Box>
+                ))}
+          </Carousel>
+          {/* </ListItem> */}
+          {/* <Divider /> */}
+          {console.log(multiProductImage)}
+          <Box className={styles.produtctImages}>
+            <Carousel
+              // breakPoints={breakPoints}
+              disableArrowsOnEnd={true}
+              showArrows={false}
+              renderArrow={myArrow}
+              pagination={false}
+              showEmptySlots={true}
+              itemsToShow={6}
+            >
+              {multiProductImage &&
+                multiProductImage?.map((results, index) => (
+                  <Box
+                    // sx={{ border: }}
+                    className={styles.selectimg}
+                    // border={isActiveImg ? "1px solid blue" : " "}
+                  >
+                    <Image
+                      onClick={() => {
+                        setSkusFlag(false);
+                        setisActiveImg(true);
+                      }}
+                      objectFit="contain"
+                      // style={{borderColor:"red", border:"5px"}}
+                      key={index}
+                      src={results}
+                      alt="shirt"
+                      width={"70px"}
+                      height={"70px"}
+                    ></Image>
+                  </Box>
+                ))}
+            </Carousel>
+          </Box>
+          {/* </List> */}
         </Grid>
 
-        <Grid item md={4} sm={12} xs={12} className={styles.prodDetailsDiv}>
+        <Grid item md={6} sm={12} xs={12} className={styles.prodDetailsDiv}>
           <Box className={styles.prodDetails}>
-            <Typography
-              sx={{
-                fontWeight: "bold",
-                fontSize: 28,
-              }}
-            >
+            <Typography className={styles.prodName}>
               {productDetail?.product_name}
             </Typography>
             {/* <Typography
@@ -377,15 +378,8 @@ function Details({
           </Box>
           {/* <Divider fullWidth /> */}
 
-          <Box sx={{ py: 1 }}>
-            <Box
-              // color="warning.main"
-              style={{
-                color: "rgb(210, 63, 87)",
-                display: "block",
-                fontSize: 36,
-              }}
-            >
+          <Box>
+            <Box className={styles.prodCost}>
               {skusProduct ? <>Rs. {skusProduct.cost} </> : <>Rs. {price}</>}
             </Box>
 
@@ -397,7 +391,7 @@ function Details({
             </Box>
           </Box>
 
-          <Divider />
+          {/* <Divider /> */}
 
           <Box sx={{ display: "flex", flexDirection: "column" }}>
             {skusFlag && skusProduct
@@ -456,7 +450,7 @@ function Details({
                 ))}
           </Box>
           <Grid md={12}>
-            <Divider />
+            {/* <Divider /> */}
             <Typography variant="subtitle2">
               {" "}
               {t("PDP.labels.variants")} :
@@ -487,8 +481,8 @@ function Details({
                         key={index}
                         src={results.sku_images[0]}
                         alt="shirt"
-                        width={60}
-                        height={60}
+                        width={"70px"}
+                        height={"70px"}
                       ></Image>
                     </Box>
                   ))}
@@ -530,64 +524,81 @@ function Details({
 
             </Grid>
           </Box> */}
-          <Grid
-            container
+          <Box
+            // container
             spacing={1}
             sx={{
               mt: 2,
               display: {
                 xs: "none",
                 md: "flex",
-                justifyContent: "center",
+                // justifyContent: "center",
                 alignItems: "center",
-                flexWrap: "wrap",
-                boxShadow: 0,
+                // flexWrap: "wrap",
+                // boxShadow: 0,
                 // bgcolor: "#f6f9fc",
                 // sx={{  }}
                 // borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
               },
             }}
           >
-            <Grid item md={6} sm={6}>
-              <Button
-                // type="submit"
-                variant="contained"
-                className={styles.buyNowbtn}
-                onClick={() => {
-                  skusProduct
-                    ? BuyHandler(productDetail, skusProduct)
-                    : BuyHandler(productDetail);
-                }}
-              >
-                {t("PDP.buttons.buyNow")}
-              </Button>
-            </Grid>
-            <Grid item md={6} sm={6}>
-              <Button
-                // color="warning"
-                variant="contained"
-                className={styles.addToCartbtn}
-                onClick={() => {
-                  skusProduct
-                    ? addToCartHandler(productDetail, skusProduct)
-                    : addToCartHandler(productDetail);
-                }}
-              >
-                {t("PDP.buttons.cart")}
-              </Button>
-            </Grid>
-          </Grid>
+            {/* <Grid item md={6} sm={6}> */}
+            <Button
+              // type="submit"
+              variant="contained"
+              className={styles.buyNowbtn}
+              onClick={() => {
+                skusProduct
+                  ? BuyHandler(productDetail, skusProduct)
+                  : BuyHandler(productDetail);
+              }}
+            >
+              {t("PDP.buttons.buyNow")}
+            </Button>
+            {/* </Grid> */}
+            {/* <Grid item md={6} sm={6}> */}
+            <Button
+              // color="warning"
+              variant="contained"
+              className={styles.addToCartbtn}
+              onClick={() => {
+                skusProduct
+                  ? addToCartHandler(productDetail, skusProduct)
+                  : addToCartHandler(productDetail);
+              }}
+            >
+              {t("PDP.buttons.cart")}
+            </Button>
+            {/* </Grid> */}
+          </Box>
+
+          {/* <Typography variant="subtitle2" display="inline-block">
+            Sold By:
+          </Typography> */}
+          <Box className={styles.merchantName}>
+            <Typography variant="subtitle2">Sold By: </Typography> {"  "}
+            <Typography variant="subtitle2" style={{ fontSize: 18, ml: 5 }}>
+              {" "}
+              {productDetail?.merchant_name}
+            </Typography>
+          </Box>
+          <Button
+            className={styles.visitStorebtn}
+            variant="text"
+            onClick={() =>
+              viewStore(productDetail?.category_id, merchantDetail?.merchant_id)
+            }
+            // onClick={viewStore}
+          >
+            {t("PDP.labels.store")}
+          </Button>
         </Grid>
-        <Grid sx={{ bgcolor: "#fafafa" }} item md={6} sm={12} xs={12}>
-          {" "}
+        {/* <Grid sx={{ bgcolor: "#fafafa" }} item md={2} sm={12} xs={12}>
           <Box
             sx={{
               pl: 1,
               display: "flex",
-              // justifyContent: "center",
-              // justifyContent: "flex-end",
-              // paddingRight: "10%",
-              // flexWrap: "noWrap",
+
               alignItems: "flex-start",
               flexDirection: "column",
             }}
@@ -609,13 +620,6 @@ function Details({
                 <ListItemText>Warranty Not Available</ListItemText>
               </ListItem>
             </List>
-            {/* <Button
-              variant="text"
-              onClick={() => viewStore(merchantDetail?.merchant_id)}
-              // onClick={viewStore}
-            >
-              Visit Store
-            </Button> */}
           </Box>
           <Divider />
           <Box
@@ -660,10 +664,40 @@ function Details({
             </List>
           </Box>
           <Divider />
-        </Grid>
+        </Grid> */}
 
         <Grid container>
-          <Grid item md={9} xs={9}>
+          <Box className={styles.tabsMain}>
+            <Box className={styles.tabs}>
+              <Tabs
+                // textColor="warning.dark"
+                textColor="inherit"
+                // indicatorColor="inherit"
+                value={value}
+                onChange={handleChange}
+                aria-label="basic tabs example"
+              >
+                <Tab
+                  className={styles.tabsName}
+                  label={t("PDP.labels.des")}
+                  {...a11yProps(0)}
+                />
+                <Tab
+                  className={styles.tabsName}
+                  label="Review"
+                  {...a11yProps(1)}
+                />
+              </Tabs>
+            </Box>
+            <TabPanel value={value} index={0}>
+              <Typography>desc {productDetail?.product_desc}</Typography>
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+              <Typography> rating and reviews</Typography>
+            </TabPanel>
+          </Box>
+
+          {/* <Grid item md={9} xs={9}>
             <Grid>
               <Typography className={styles.ratings}>
                 {t("PDP.labels.des")}
@@ -673,39 +707,34 @@ function Details({
                   <Typography> {productDetail?.product_desc}</Typography>
                 </ListItem>
               </List>
-            </Grid>
-            {/* <Grid item md={9} xs={9}>
-              <Typography style={{ fontWeight: "bold" }}>Rating :</Typography>
-            </Grid> */}
-          </Grid>
+            </Grid> 
 
-          <Grid item md={3} xs={12} pl={3}>
-            <Typography style={{ fontWeight: "bold" }}>
+           </Grid> */}
+
+          <Grid
+            item
+            md={12}
+            xs={12}
+            pl={3}
+            style={{ display: "flex", bgcolor: "red" }}
+          >
+            <Typography style={{ fontWeight: "bold", bgcolor: "red" }}>
               {" "}
               {t("PDP.labels.similar")} :
             </Typography>
           </Grid>
         </Grid>
-        <Grid container>
-          <Grid item md={9} xs={9}>
-            <Grid>
-              <Typography
-                className={styles.ratings}
-                // sx={{ fontSize: "1rem", fontWeight: "bold" }}
-              >
-                {t("PDP.labels.similar")}
-              </Typography>
-              <List className={styles.ratingsDesc}>
-                <ListItem>
-                  <Typography> rating and reviews</Typography>
-                </ListItem>
-              </List>
-            </Grid>
-            {/* <Grid item md={9} xs={9}>
-              <Typography style={{ fontWeight: "bold" }}>Rating :</Typography>
-            </Grid> */}
-          </Grid>
-        </Grid>
+        {/* <Grid container>
+          <Typography className={styles.ratings}>
+            Rating
+            {t("PDP.labels.similar")}
+          </Typography>
+          <List className={styles.ratingsDesc}>
+            <ListItem>
+              <Typography> rating and reviews</Typography>
+            </ListItem>
+          </List>
+        </Grid> */}
         <AppBar
           position="fixed"
           color="inherit"

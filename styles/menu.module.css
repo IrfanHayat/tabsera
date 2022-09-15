@@ -18,7 +18,7 @@
 }
 .categoryList :hover {
   font-weight: bold;
-  color: rgb(210, 63, 87);
+  color: #f34f2f;
 }
 .carouselBox {
   width: 100%;
@@ -54,7 +54,7 @@
 } */
 
 .carouselproductCost {
-  color: rgb(210, 63, 87);
+  color: #f34f2f;
 }
 
 .categoriesButton {
@@ -129,14 +129,14 @@
 }
 .categoryList :hover {
   font-weight: bold;
-  color: rgb(210, 63, 87);
+  color: #f34f2f;
 }
 .dropDown {
   width: 258px;
   border-radius: 2px;
 }
 .dropDown :hover {
-  color: rgb(210, 63, 87);
+  color: #f34f2f;
   font-weight: bold;
 }
 

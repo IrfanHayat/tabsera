@@ -1,0 +1,88 @@
+.profileMain {
+  /* background-color: #fff; */
+  display: flex;
+  margin-top: 31px;
+  /* height: 460px; */
+  /* width: 926px; */
+  left: 0px;
+  top: 0px;
+  /* border-radius: 10px; */
+}
+
+.dashboardSidebar {
+  display: flex;
+  background-color: #fff;
+  height: 662px;
+  width: 240px;
+  left: 0px;
+  top: 0px;
+  margin-top: 9px;
+
+  border-radius: 8px;
+}
+
+.myAccount {
+  margin-top: 16px;
+  margin-left: 20px;
+}
+.ListItem {
+  margin-top: 16px;
+  margin-left: 23px;
+  /* border-left: 3px solid #f34f2f; */
+}
+/* .ListItem :hover {
+  border-left: 3px solid #f34f2f;
+} */
+.ListItemLabel {
+  margin-left: 10px;
+}
+.editProfileIcon {
+  color: #f34f2f;
+  font-size: 36px;
+}
+.editProfile {
+  display: flex;
+  /* width: 138px; */
+  height: 34px;
+  margin-left: 35px;
+  margin-top: 11px;
+}
+.editProfileHeading {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 25px;
+  line-height: 34px;
+  margin-left: 5px;
+  margin-top: 3px;
+}
+
+.editProfileForm {
+  background-color: #fff;
+  min-height: 300px;
+  /* height: 340px; */
+  width: 926px;
+  left: 0px;
+  top: 0px;
+  border-radius: 10px;
+  margin-top: 33px;
+  margin-left: 30px;
+  padding: 10px;
+}
+.editFormInput {
+  width: 416px;
+  height: 34px;
+  margin-left: 32px;
+  margin-top: 45px;
+}
+
+.btn {
+  display: flex;
+  height: 44px;
+  width: 154px;
+  margin-left: 32px;
+  margin-top: 43px;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: #f34f2f;
+}

@@ -1,6 +1,7 @@
 .congratsMain {
   background-color: #fff;
   margin-top: 30px;
+  border-radius: 10px;
 }
 .main {
   background-color: #fff;
@@ -28,14 +29,16 @@
 
 .estimateTime {
   display: flex;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   min-height: 70px;
+  border-radius: 10px;
+  background-color: #f6f9fc;
 }
 
 .orderSumamry {
   margin-top: 31px;
   margin-bottom: 31px;
-  background-color: #efeff5;
+  background-color: #f6f9fc;
 }
 
 .amount {

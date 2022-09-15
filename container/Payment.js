@@ -18,7 +18,7 @@ import {
   Typography,
 } from "@mui/material";
 import Image from "next/image";
-
+import styles from "../styles/payment.module.css";
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -42,18 +42,11 @@ export default function Payment({
   return (
     <Grid container>
       <CheckoutWizard activeStep={3}></CheckoutWizard>
-      <Grid item xs={12} sx={{ bgcolor: "background.paper", mt: 5 }}>
-        <Box
-          sx={{
-            // borderBottom: 1,
-            // borderColor: "divider",
-            p: 2,
-            bgcolor: "background.paper",
-          }}
-        >
+      <Grid item xs={12} className={styles.payment}>
+        <Box className={styles.paymentHeading}>
           <Typography
-            variant="h6"
-            style={{ fontWeight: "bold", display: "flex" }}
+            // variant="h6"
+            style={{ fontWeight: "bold" }}
           >
             Payment Method
           </Typography>

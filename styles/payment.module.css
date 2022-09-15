@@ -1,0 +1,15 @@
+.payment {
+  background-color: #fff;
+  border-radius: 10px;
+  margin-top: 31px;
+  box-shadow: rgb(3 0 71 / 9%) 0px 1px 3px;
+  padding-left: 30px;
+}
+
+.paymentHeading {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  /* display: flex; */
+}
