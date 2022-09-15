@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import * as React from "react";
 import CardContent from "@mui/material/CardContent";
 import Image from "next/image";
 import Card from "@mui/material/Card";
@@ -26,7 +26,6 @@ import { result } from "lodash";
 import styles from "../styles/card.module.css";
 import AddIcon from "@mui/icons-material/Add";
 import Currency from '../container/Currency/currency'
-
 export default function ActionAreaCard({
   product,
   viewProduct,
@@ -37,8 +36,6 @@ export default function ActionAreaCard({
   categoryView,
   cartView,
 }) {
-
-  let [countryCurrency, setCountryCurrency] = useState(null)
   const props = useSpring({
     opacity: 1,
     from: { opacity: 0 },
@@ -193,56 +190,7 @@ export default function ActionAreaCard({
           {/* <Typography variant="h5">{product?.categoryName}</Typography> */}
           <Box sx={{ ...displayDesc }}>
             {product?.category_name && (
-              <Typography variant="body1">{product?.category_name}</Typography>
-            )}
-            <Box component="div" className={styles.prodName}>
-              <Typography variant="body1">
-                {product?.productName
-                  ? product?.productName
-                  : product?.bundleName}
-              </Typography>
-            </Box>
-            <Box component="div" className={styles.prodCost}>
-              <Typography sx={{ display: 'flex' }} variant="subtitle1">
-
-                <Currency amount={product?.productCost
-                  ? product?.productCost
-                  : product?.bundleCost}></Currency>
-
-              </Typography>
-            </Box>
-            {product.discountPercent ? (
-              <Grid className={styles.prodDiscountCost}>
-                <Typography
-                  style={{
-                    textDecorationLine: "line-through",
-                  }}
-                  variant="overline"
-                  component="div"
-                  display="inline"
-                >
-                  Rs {product.originalPrice}
-                </Typography>
-                {"   "}
-                <Typography variant="overline">
-                  -{product.discountPercent}%
-                </Typography>
-                {/* <Badge
-              badgeContent={`-${product.discountPercent}%`}
-              color="primary"
-              noWrap
-            ></Badge> */}
-                {/* <Chip
-                  // sx={{ color: "yellow" }}
-                  // icon={<LocalShippingIcon />}
-                  label={`-${product.discountPercent}%`}
-                  // size="small"
-                  // color="warning"
-                  sx={{ bgcolor: "yellow", height: 15, width: 55 }}
-                /> */}
-              </Grid>
-            ) : (
-              <></>
+              <Typography variant="h5">{product?.category_name}</Typography>
             )}
 
             <Typography className={styles.prodName}>
@@ -268,78 +216,39 @@ export default function ActionAreaCard({
             </Box>
 
             <Box component="div" className={styles.prodCost}>
-              <Typography sx={{ display: 'flex' }} variant="subtitle1">
+              <Box display="flex">
+                <Typography className={styles.prodCostValue}>
+                  <Currency amount={product?.productCost
+                    ? product?.productCost
+                    : product?.bundleCost}></Currency>
 
-                <Currency amount={product?.productCost
-                  ? product?.productCost
-                  : product?.bundleCost}></Currency>
-
-              </Typography>
-            </Box>
-            {product.discountPercent ? (
-              <Grid className={styles.prodDiscountCost}>
-                <Typography
-                  style={{
-                    textDecorationLine: "line-through",
-                  }}
-                  variant="overline"
-                  component="div"
-                  display="inline"
-                >
-                  Rs {product.originalPrice}
                 </Typography>
-                {"   "}
-                <Typography variant="overline">
-                  -{product.discountPercent}%
-                </Typography>
-                {/* <Badge
-              badgeContent={`-${product.discountPercent}%`}
-              color="primary"
-              noWrap
-            ></Badge> */}
-                {/* <Chip
-                  // sx={{ color: "yellow" }}
-                  // icon={<LocalShippingIcon />}
-                  label={`-${product.discountPercent}%`}
-                  // size="small"
-                  // color="warning"
-                  sx={{ bgcolor: "yellow", height: 15, width: 55 }}
-                /> */}
-              </Grid>
-            ) : (
-              <></>
-            )}
-
-            <Box component="div" className={styles.prodRating}>
-              <Rating
-                className={styles.Rating}
-                name="size-small"
-                defaultValue={product?.averageRating}
-                size="small"
-                // fontSize={24}
-                readOnly
-              />
-              {/* </Box> */}
-              {/* <Box className={styles.btnBox}> */}
-              {product.productName ? (
-                // <Button
-                //   // size="small"
-                //   className={styles.btnAddCart}
-                //   variant="outlined"
-                //   key={product.id}
-                //   onClick={() => addToCartHandler(product)}
-                //   // endIcon={<AddShoppingCartOutlinedIcon fontSize="small" />}
-                // >
-                <AddShoppingCartOutlinedIcon
-                  // fontSize="small"
-                  className={styles.btnAddCart}
-                // fontSize="large"
-                // style={{ backgroundColor: "blue" }}
-                />
-              ) : (
-                // </Button>
-                ""
-              )}
+                {product.discountPercent ? (
+                  <Typography
+                    className={styles.prodDiscountCost}
+                    style={{
+                      textDecorationLine: "line-through",
+                    }}
+                    variant="overline"
+                    // component="div"
+                    display="inline"
+                  >
+                    Rs {product.originalPrice}
+                  </Typography>
+                ) : (
+                  <></>
+                )}
+              </Box>
+              <>
+                {product.productName ? (
+                  <AddIcon
+                    className={styles.btnAddCart}
+                    onClick={() => addToCartHandler(product)}
+                  />
+                ) : (
+                  ""
+                )}
+              </>
             </Box>
           </Box>
           {/* <Box sx={{ mb: 3, display: "flex", alignItems: "center" }}>
