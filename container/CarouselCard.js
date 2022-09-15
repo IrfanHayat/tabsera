@@ -24,6 +24,7 @@ import { CardMedia, Button, Grid, AppBar } from "@mui/material";
 import Badge from "@mui/material/Badge";
 import { result } from "lodash";
 import styles from "../styles/card.module.css";
+import Currency from "./Currency/currency";
 export default function CarouselCard({
   product,
   viewProduct,
@@ -45,14 +46,14 @@ export default function CarouselCard({
   let displayDesc =
     styledCard?.flexDirection == "row"
       ? {
-          display: "flex",
-          flexDirection: "column",
-          // alignItems: "center",
-          m: 1,
+        display: "flex",
+        flexDirection: "column",
+        // alignItems: "center",
+        m: 1,
 
-          // justifyContent: "space-between",
-          // justifyContent: "space-arounf",
-        }
+        // justifyContent: "space-between",
+        // justifyContent: "space-arounf",
+      }
       : { height: 85 };
   let width = styledCard?.flexDirection == "row" ? "100%" : "205px";
   let height = styledCard?.flexDirection == "row" ? "100%" : "310px";
@@ -166,7 +167,7 @@ export default function CarouselCard({
             alt="shirt"
             width={245}
             height={200}
-            // loading="eager"
+          // loading="eager"
           ></Image>
         )}
 
@@ -184,11 +185,11 @@ export default function CarouselCard({
               </Typography>
             </Box>
             <Box component="div" className={styles.prodCost}>
-              <Typography variant="subtitle1">
-                Rs.
-                {product?.productCost
+              <Typography sx={{ display: "flex" }} variant="subtitle1">
+                <Currency amount={product?.productCost
                   ? product?.productCost
-                  : product?.bundleCost}
+                  : product?.bundleCost}></Currency>
+
               </Typography>
             </Box>
             {product.discountPercent ? (
@@ -248,8 +249,8 @@ export default function CarouselCard({
                 <AddShoppingCartOutlinedIcon
                   // fontSize="small"
                   className={styles.btnAddCart}
-                  // fontSize="large"
-                  // style={{ backgroundColor: "blue" }}
+                // fontSize="large"
+                // style={{ backgroundColor: "blue" }}
                 />
               ) : (
                 // </Button>

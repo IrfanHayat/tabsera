@@ -34,6 +34,7 @@ import MuiAlert from "@mui/material/Alert";
 import { Stack } from "@mui/material";
 import { RouteGuard } from "../RouterGuard";
 import { useTranslation } from "react-i18next";
+import Currency from "./Currency/currency";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -222,7 +223,7 @@ function PlaceOrder({
                                   <Typography>{item.qty}</Typography>
                                 </TableCell>
                                 <TableCell align="right">
-                                  <Typography>RS.{item.price}</Typography>
+                                  <Typography><Currency amount={item.price}></Currency></Typography>
                                 </TableCell>
                               </TableRow>
                             ))}
@@ -248,8 +249,8 @@ function PlaceOrder({
                 <Grid item xs={3}>
                   <Typography>
                     {" "}
-                    {productPrice &&
-                      productPrice.reduce((a, c) => a + c.qty * c.price, 0)}
+                    <Currency amount={productPrice &&
+                      productPrice.reduce((a, c) => a + c.qty * c.price, 0)}></Currency>
                   </Typography>
                 </Grid>
                 <Grid item xs={6}></Grid>
@@ -271,7 +272,7 @@ function PlaceOrder({
                   </Grid>
                   <Grid item xs={3}>
                     <Typography>
-                      {shippingCharges ? shippingCharges : 0}
+                      {shippingCharges ? <Currency amount={shippingCharges}></Currency> : <Currency amount={0}></Currency>}
                     </Typography>
                   </Grid>
                 </Grid>
@@ -286,7 +287,7 @@ function PlaceOrder({
                   <Grid item xs={3}>
                     <Typography>
                       <strong>
-                        {productPrice && shippingCharges
+                        <Currency amount={productPrice && shippingCharges
                           ? productPrice.reduce(
                             (a, c) => a + c.qty * c.price,
                             0
@@ -294,7 +295,7 @@ function PlaceOrder({
                           : productPrice.reduce(
                             (a, c) => a + c.qty * c.price,
                             0
-                          )}
+                          )}></Currency>
                       </strong>
                     </Typography>
                   </Grid>

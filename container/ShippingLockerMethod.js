@@ -30,6 +30,7 @@ import { useRouter } from "next/router";
 import { RouteGuard } from "../RouterGuard";
 import localStorage from "localStorage";
 import { useTranslation } from "react-i18next";
+import Currency from "./Currency/currency";
 
 function ShippingMethods({
     classes,
@@ -214,8 +215,8 @@ function ShippingMethods({
                                 {t('shippingInfo.ShippingAdress.label.charges.subTotal')}
                             </Grid>
                             <Grid item xs={3}>
-                                {productPrice &&
-                                    productPrice.reduce((a, c) => a + c.qty * c.price, 0)}
+                                <Currency amount={productPrice &&
+                                    productPrice.reduce((a, c) => a + c.qty * c.price, 0)}></Currency>
                             </Grid>
                             <Grid item xs={6}></Grid>
                             {/* <ListItemText>$ 0.0</ListItemText> */}
@@ -225,7 +226,7 @@ function ShippingMethods({
                                 {t('shippingInfo.ShippingAdress.label.charges.shippingcost')}
                             </Grid>
                             <Grid item xs={3}>
-                                {shippingCharges ? shippingCharges : 0}
+                                {shippingCharges ? <Currency amount={shippingCharges}></Currency> : <Currency amount={0}></Currency>}
                             </Grid>
                             <Grid item xs={6}></Grid>
                         </ListItem>
@@ -234,10 +235,10 @@ function ShippingMethods({
                                 {t('shippingInfo.ShippingAdress.label.charges.totalCost')}{" "}
                             </Grid>
                             <Grid item xs={3}>
-                                {productPrice && shippingCharges
+                                <Currency amount={productPrice && shippingCharges
                                     ? productPrice?.reduce((a, c) => a + c.qty * c.price, 0) +
                                     shippingCharges
-                                    : productPrice?.reduce((a, c) => a + c.qty * c.price, 0)}
+                                    : productPrice?.reduce((a, c) => a + c.qty * c.price, 0)}></Currency>
                             </Grid>
                             <Grid item xs={6}></Grid>
                         </ListItem>

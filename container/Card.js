@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import CardContent from "@mui/material/CardContent";
 import Image from "next/image";
 import Card from "@mui/material/Card";
@@ -24,6 +24,8 @@ import { CardMedia, Button, Grid, AppBar } from "@mui/material";
 import Badge from "@mui/material/Badge";
 import { result } from "lodash";
 import styles from "../styles/card.module.css";
+import Currency from '../container/Currency/currency'
+
 export default function ActionAreaCard({
   product,
   viewProduct,
@@ -34,6 +36,8 @@ export default function ActionAreaCard({
   categoryView,
   cartView,
 }) {
+
+  let [countryCurrency, setCountryCurrency] = useState(null)
   const props = useSpring({
     opacity: 1,
     from: { opacity: 0 },
@@ -45,17 +49,19 @@ export default function ActionAreaCard({
   let displayDesc =
     styledCard?.flexDirection == "row"
       ? {
-          display: "flex",
-          flexDirection: "column",
-          // alignItems: "center",
-          m: 1,
+        display: "flex",
+        flexDirection: "column",
+        // alignItems: "center",
+        m: 1,
 
-          // justifyContent: "space-between",
-          // justifyContent: "space-arounf",
-        }
+        // justifyContent: "space-between",
+        // justifyContent: "space-arounf",
+      }
       : { height: 85 };
   let width = styledCard?.flexDirection == "row" ? "100%" : "206px";
   let height = styledCard?.flexDirection == "row" ? "100%" : "310px";
+
+
 
   return (
     <>
@@ -195,11 +201,12 @@ export default function ActionAreaCard({
               </Typography>
             </Box>
             <Box component="div" className={styles.prodCost}>
-              <Typography variant="subtitle1">
-                Rs.
-                {product?.productCost
+              <Typography sx={{ display: 'flex' }} variant="subtitle1">
+
+                <Currency amount={product?.productCost
                   ? product?.productCost
-                  : product?.bundleCost}
+                  : product?.bundleCost}></Currency>
+
               </Typography>
             </Box>
             {product.discountPercent ? (
@@ -259,8 +266,8 @@ export default function ActionAreaCard({
                 <AddShoppingCartOutlinedIcon
                   // fontSize="small"
                   className={styles.btnAddCart}
-                  // fontSize="large"
-                  // style={{ backgroundColor: "blue" }}
+                // fontSize="large"
+                // style={{ backgroundColor: "blue" }}
                 />
               ) : (
                 // </Button>

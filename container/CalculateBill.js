@@ -22,6 +22,7 @@ import {
   Divider,
 } from "@mui/material";
 import { RouteGuard } from "../RouterGuard";
+import Currency from "./Currency/currency";
 function CalculateBill({ productPrice, checkoutHandler }) {
   console.log(productPrice);
   let { t, i18n } = useTranslation();
@@ -96,12 +97,12 @@ function CalculateBill({ productPrice, checkoutHandler }) {
                 style={{ fontWeight: "bold" }}
               // align="center"
               >
-                Rs.
-                {productPrice ? (
+                <Currency amount={productPrice ? (
                   productPrice.reduce((a, c) => a + c.qty * c.price, 0)
                 ) : (
                   <></>
-                )}
+                )}></Currency>
+
               </Typography>
             </ListItemText>
           </ListItem>

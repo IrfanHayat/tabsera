@@ -10,6 +10,7 @@ import Stack from "@mui/material/Stack";
 import styles from "../styles/congratulations.module.css";
 import { useRouter } from "next/router";
 import { Button } from "antd";
+import Currency from "./Currency/currency";
 const Congratulations = ({ orderNo }) => {
   let router = useRouter();
   return (
@@ -62,7 +63,7 @@ const Congratulations = ({ orderNo }) => {
                 color: "primary.main",
               }}
             >
-              Rs. 1000
+              <Currency amount={1000}></Currency>
             </Box>
           </Stack>
           <Box className={styles.orderdetails}>

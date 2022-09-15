@@ -31,6 +31,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
 import IndeterminateCheckBoxOutlinedIcon from "@mui/icons-material/IndeterminateCheckBoxOutlined";
 import styles from "../styles/cart.module.css";
+import Currency from "./Currency/currency";
 function CartScreen({
   heading,
   productCartData,
@@ -160,7 +161,7 @@ function CartScreen({
                     // align="center"
                     className={styles.cartItemPriceValue}
                   >
-                    Rs. {item.price}
+                    <Currency amount={item.price}></Currency>
                   </Typography>
                 </Grid>
 
