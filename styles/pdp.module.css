@@ -1,32 +1,134 @@
+.carouelImage {
+  width: 336px;
+  height: 330px;
+  overflow: hidden;
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+  /* margin-top: 100px; */
+  /* margin-left: 576px; */
+}
+
+/* .................................................... */
+
+/* Product Images box Carousel */
+.produtctImagesBox {
+  margin-top: 100px;
+  /* display: flex; */
+  /* justify-content: center; */
+  /* align-items: center; */
+}
+.produtctImages {
+  display: flex;
+  align-items: center;
+  margin-top: 32px;
+  margin-right: 8px;
+  margin-left: 133px;
+}
+/* Skus Images */
+.selectimg {
+  border: 1px solid #d8e0e9;
+  width: 70px;
+  height: 70px;
+  margin-left: 20px;
+  overflow: hidden;
+  border-radius: 10px;
+}
+/* .selectimg :active {
+  border-color: red;
+  border: 3px solid red;
+} */
+
+.selectimg:active {
+  border: 1px solid #f34f2f;
+}
+.selectimg:hover {
+  border: 1px solid #f34f2f;
+}
+
 .breadcrumbs {
   background-color: #fafafa;
 }
+/* ------------------------------------------------------------------------- */
+/* Details Section  */
+.prodDetails {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 100px;
+}
+
+.prodName {
+  font-family: Open Sans;
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 34px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #2b3445;
+}
+
+.prodCost {
+  /* position: absolute; */
+  width: 120px;
+  height: 34px;
+  left: 961px;
+  top: 444px;
+
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 700;
+  font-size: 25px;
+  line-height: 34px;
+  /* identical to box height */
+
+  /* Primary/500 Main */
+
+  color: #f34f2f;
+}
 .buyNowbtn {
   display: flex;
-  height: 44px;
-  width: 225px;
+  height: 40px;
+  width: 147px;
   font-size: 16px;
   color: #fff;
-  border: 1px solid #3d7cff;
-  border-radius: 2px;
-  background-color: #3d7cff;
+  border: 1px solid #f34f2f;
+  border-radius: 4px;
+  background-color: #f34f2f;
 }
-/* .buyNowbtn :hover {
+.addToCartbtn {
+  display: flex;
+  margin-left: 10px;
+  height: 40px;
+  width: 147px;
+  font-size: 16px;
+  color: #f34f2f;
+  border: 1px solid #f34f2f;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+.addToCartbtn :hover {
   color: #3d7cff;
   border: 1px solid #3d7cff;
   background-color: #fff;
-} */
-.addToCartbtn {
-  display: flex;
-  height: 44px;
-  width: 225px;
-  font-size: 16px;
-  color: #fff;
-  border: 1px solid #f57224;
-  border-radius: 2px;
-  background-color: #f57224;
 }
 
+.merchantName {
+  display: flex;
+  margin-top: 34px;
+  align-items: center;
+  /* justify-content: space-between; */
+}
+
+.visitStorebtn {
+  margin-top: 11px;
+  display: flex;
+  height: 24px;
+  border-radius: 8px;
+  border: 1px solid black;
+}
+/* ---------------------------------------------------------------------------- */
 .buyNowbtnSM {
   display: flex;
   height: 38px;
@@ -53,21 +155,6 @@
   background-color: #f57224;
 }
 
-.selectimg {
-  border: 1px solid #fff;
-}
-/* .selectimg :active {
-  border-color: red;
-  border: 3px solid red;
-} */
-
-.selectimg:active {
-  border: 1px solid hsl(209, 94%, 39%);
-}
-.selectimg:hover {
-  border: 1px solid hsl(209, 94%, 39%);
-}
-
 /* .selectimg::selection {
   border: 1px solid hsl(209, 94%, 39%);
 } */
@@ -87,4 +174,21 @@
   /* font-size: 1rem; */
   /* font-weight: bold; */
   background-color: white;
+}
+/* ................................................................................. */
+
+/* ............................................................................ */
+.tabsMain {
+  width: 100%;
+  margin-left: 40px;
+}
+.tabs {
+  display: flex;
+  margin-top: 80px;
+  margin-bottom: 24px;
+  overflow: hidden;
+  border-bottom: 1px solid rgb(218, 225, 231);
+}
+.tabsName {
+  color: #f34f2f;
 }

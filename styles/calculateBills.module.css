@@ -1,0 +1,15 @@
+.calculateBill {
+  border-radius: 10px;
+  background-color: #fff;
+  margin-top: 70px;
+  /* width: 300px;   */
+  box-shadow: rgb(3 0 71 / 9%) 0px 1px 3px;
+}
+
+.orderSummaryBtn {
+  width: 100%;
+  border-radius: 8px;
+  margin-top: 18px;
+  background-color: #f34f2f;
+  color: #fff;
+}

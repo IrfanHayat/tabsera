@@ -3,12 +3,11 @@ import { styled, useTheme, alpha } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 
 import Grid from "@mui/material/Grid";
-import Paper from "@mui/material/Paper";
-import Image from "next/image";
+
 import { useSelector, useDispatch } from "react-redux";
-import { useTranslation } from "react-i18next";
 // import { getFreeShipping } from "../slice/freeShippingSlice";
 // import { getDeals } from "../slice/dealsPromotionsSlice";
+import Menu from "@material-ui/core/Menu";
 import { useRouter } from "next/router";
 import {
   addToBasket,
@@ -17,13 +16,8 @@ import {
   getTotalCartQuantity,
 } from "../slice/basketSlice";
 import { getProduct, getFeatureProduct } from "../slice/productSlice";
-import { getCategory } from "../slice/categorySlice";
-import { getCampaigns } from "../slice/campaignsSlice";
-import NewCarousel from "./Carousel/NewCarousel";
-import CarouselApp from "./Carousel/Carousel";
+
 import { useGetAllProductsQuery } from "../RTK/productApi";
-import MenuCard from "./DealsAndPromotions/MenuCards";
-import RadioGroup from "@mui/material/RadioGroup";
 
 import {
   CircularProgress,
@@ -39,7 +33,6 @@ import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutl
 // import { getDiscounts } from "../slice/discountsSlice";
 
 import NavSelect from "./Navbar/Components/NavSelect";
-import Menu from "@material-ui/core/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import ListItemText from "@mui/material/ListItemText";
 import ViewAllProducts from "../pages/all_products";
@@ -47,28 +40,22 @@ import ProductGetByCategory from "../pages/get_all_products_by_category";
 import ProductGetByMerchant from "../pages/get_all_products_by_merchant";
 import _, { result } from "lodash";
 import Divider from "@mui/material/Divider";
-import Radio from "@mui/material/Radio";
-import Checkbox from "@mui/material/Checkbox";
-import FormLabel from "@mui/material/FormLabel";
-import FormControl from "@mui/material/FormControl";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import FormHelperText from "@mui/material/FormHelperText";
+
 import { List, Stack } from "@mui/material";
-import SortFilter from "./Filter/SortFilter";
-import { motion } from "framer-motion";
+
 import DealsAndPromotions from "../pages/deals_and_promotions";
 import Discounts from "../pages/discounts";
 import FreeShipping from "../pages/is_free_shipping";
-import Snackbar from "@mui/material/Snackbar";
-import Alert from "@mui/material/Alert";
+
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import Carousel from "react-material-ui-carousel";
-import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
-import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+
 import CardMedia from "@mui/material/CardMedia";
 import Rating from "@mui/material/Rating";
 import styles from "../styles/menu.module.css";
+// import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 const Item = styled("div")(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
@@ -138,7 +125,7 @@ export default function PersistentDrawerLeft() {
 
   console.log(showProduct, showFreeShipping);
 
-  let { t, i18n } = useTranslation();
+
 
   // Handling side dropdown (subcatogories)
   // ---------------------------------------------------------------
@@ -387,7 +374,7 @@ export default function PersistentDrawerLeft() {
               // p: 1,
               // m: 1,
               // bgcolor: "background.paper",
-              // borderRadius: 1,
+              // borderRadius: "10px",
             }}
           // data-aos="fade-up"
           >
@@ -396,13 +383,7 @@ export default function PersistentDrawerLeft() {
                 // className={styles.categories}
                 width="100%"
                 startIcon={<WidgetsIcon color="primary" />}
-                Title={
-                  key == 1
-                    ? t(`common.DropDown.categories`)
-                    : key == 2
-                      ? t(`common.DropDown.campaigns`)
-                      : ""
-                }
+                Title={key == 1 ? "Categories" : key == 2 ? "Campaigns" : ""}
                 Data={
                   <Box className={styles.dropDown}>
                     {" "}
@@ -412,11 +393,11 @@ export default function PersistentDrawerLeft() {
                         setfeatureProductCarousel(false), setKey(2);
                       }}
                     >
-                      {t(`common.DropDown.campaigns`)}
+                      Campaigns
                     </MenuItem>
                     <Divider />
                     <MenuItem value={20} onClick={() => setKey(1)}>
-                      {t(`common.DropDown.categories`)}
+                      Categories
                     </MenuItem>
                   </Box>
                 }
@@ -455,7 +436,6 @@ export default function PersistentDrawerLeft() {
                   </MenuItem>
                 </TextField>
               </FormControl> */}
-              {console.log(category)}
               <List dense className={styles.categoryList}>
                 {key == 1 && category?.length > 0 ? (
                   <>
@@ -475,6 +455,14 @@ export default function PersistentDrawerLeft() {
                             />
                           }
                         >
+                          {/* <ListItemIcon>
+                          <Image
+                            src={result.category_image}
+                            width={50}
+                            height={30}
+                          ></Image>
+                        </ListItemIcon> */}
+
                           <ListItemText
 
                             onClick={(e) => viewCategory(result.category_id)}
@@ -521,6 +509,19 @@ export default function PersistentDrawerLeft() {
                   <>
                     {compaigns?.map((result) => (
                       <ListItem
+                        // spacing={2}
+                        // sx={{ p: 1 }}
+                        // alignItems="flex-start"
+                        sx={{
+                          ":hover": {
+                            // border: 1,
+                            // boxShadow: 1, // theme.shadows[20]
+                            transform: "scale(1.05)",
+                            // opacity: 0.5,
+                            color: "primary.main",
+                            cursor: "pointer",
+                          },
+                        }}
                         secondaryAction={
                           <ArrowForwardIosIcon
                             sx={{ fontSize: 12 }}
@@ -552,12 +553,22 @@ export default function PersistentDrawerLeft() {
             <Box className={styles.carouselBox}>
               {featureProduct != "" ? (
                 <Carousel
+                  // IndicatorIcon={<Arrow}
+                  navButtonsProps={{
+                    // Change the colors and radius of the actual buttons. THIS STYLES BOTH BUTTONS
+                    style: {
+                      backgroundColor: "transparent",
+                      borderRadius: 0,
+                    },
+                  }}
                   animation="slide"
                   swipe
                   interval={2000}
-                  NextIcon={<ArrowRightIcon />}
-                  PrevIcon={<ArrowLeftIcon />}
-                  height={300}
+                  NextIcon={<ChevronRightIcon sx={{ color: "#0a3446" }} />}
+                  PrevIcon={<ChevronLeftIcon sx={{ color: "#0a3446" }} />}
+                  // height={"567px"}
+                  indicators={false}
+                  fullHeightHover={true}
                   navButtonsAlwaysVisible={true}
                 >
                   {featureProduct?.map((result) => (
@@ -569,33 +580,13 @@ export default function PersistentDrawerLeft() {
                         onClick={(e) => viewProduct(result.productId)}
                         image={result?.productImage}
                         alt="featured Product"
-                        sx={{
-                          top: 0,
-                          width: "100%",
-                          height: 290,
-                          objectFit: "contain",
-                        }}
+                        className={styles.carouselImage}
                       ></CardMedia>
 
-                      <Box
-                        // square
-                        // elevation={0}
-                        sx={{
-                          display: "flex",
-                          alignItems: "center",
-                          height: 50,
-                          // pl: 2,
-                          justifyContent: "space-between",
-                          p: 1,
-                          // bgcolor: "background.default",
-                        }}
-                      >
+                      <Box className={styles.carouselDesc}>
                         <Typography
-                          fontSize="0.9rem"
                           variant="h5"
-                          fontWeight={600}
-                          // display="inline"
-                          noWrap
+                          className={styles.carouselName}
                         >
                           {result?.productName}
                         </Typography>
@@ -608,10 +599,8 @@ export default function PersistentDrawerLeft() {
                           readOnly
                         />
                         <Typography
-                          fontSize="0.9rem"
                           variant="h5"
-                          fontWeight={600}
-                          sx={{ color: "warning.dark", p: 1 }}
+                          className={styles.carouselproductCost}
                         >
                           Rs. {result?.productCost}
                         </Typography>
@@ -637,21 +626,7 @@ export default function PersistentDrawerLeft() {
             </Box>
           </Grid>
 
-          <Grid
-            container
-            // maxWidth="xl"
-            sx={
-              {
-                // display: "flex",
-                // justifyContent: "space-between",
-                // p: 1,
-                // m: 1,
-                // bgcolor: "background.paper",
-                // borderRadius: 1,
-              }
-            }
-          // data-aos="fade-up"
-          >
+          <Grid container>
             <Grid item xs={12} className={styles.filtersBar}>
               {/* <Box sx={{ flexGrow: 1 }} /> */}
               <Box>
@@ -664,23 +639,20 @@ export default function PersistentDrawerLeft() {
                 ></ListFilter>
               </Box>
               <Box>
-                {
-                  catId == null ? <PageFilter
-                    value={value}
-                    setDealsData={setDealsData}
-                    setShowDeals={setShowDeals}
-                    setDiscountData={setDiscountData}
-                    showDiscounts={showDiscounts}
-                    setShowDiscounts={setShowDiscounts}
-                    setFreeShippingData={setFreeShippingData}
-                    setShowFreeShipping={setShowFreeShipping}
-                    setShowProduct={setShowProduct}
-                    setShowAllCategoryPro={setShowAllCategoryPro}
-                    setShowAllMerchantPro={setShowAllCategoryPro}
-                    setFilterData={setFilterData}
-                  ></PageFilter> : ""
-                }
-
+                <PageFilter
+                  value={value}
+                  setDealsData={setDealsData}
+                  setShowDeals={setShowDeals}
+                  setDiscountData={setDiscountData}
+                  showDiscounts={showDiscounts}
+                  setShowDiscounts={setShowDiscounts}
+                  setFreeShippingData={setFreeShippingData}
+                  setShowFreeShipping={setShowFreeShipping}
+                  setShowProduct={setShowProduct}
+                  setShowAllCategoryPro={setShowAllCategoryPro}
+                  setShowAllMerchantPro={setShowAllCategoryPro}
+                  setFilterData={setFilterData}
+                ></PageFilter>
               </Box>
               <Box>
                 {/* <SortFilter
@@ -774,13 +746,11 @@ export default function PersistentDrawerLeft() {
                       setFilterData={setFilterData}
                     ></ShopProductSort>
                   ) : (
-
-                    cartId == null ? <ShopProductSort
+                    <ShopProductSort
                       data={data?.response}
                       setShowFilterData={setShowFilterData}
                       setFilterData={setFilterData}
-                    ></ShopProductSort> : <></>
-
+                    ></ShopProductSort>
                   )
                 ) : (
                   <></>
@@ -788,7 +758,7 @@ export default function PersistentDrawerLeft() {
 
                 {showFreeShipping == false &&
                   showDeals == false &&
-                  showDiscounts == false && catId == null ? (
+                  showDiscounts == false ? (
                   <ShopProductSort
                     data={data?.response}
                     setShowFilterData={setShowFilterData}

@@ -234,9 +234,7 @@ export default function NavDown(props) {
       <AppBar className={styles.navDown} position="sticky">
         <Toolbar>
           <Link
-
             sx={{
-
               ":hover": {
                 // boxShadow: 20, // theme.shadows[20]
                 // transform: "scale(1.1)",
@@ -248,13 +246,12 @@ export default function NavDown(props) {
             }}
           >
             <Image
-              src="/bigLogo.png"
+              src="/tijariLogo.png"
               alt="/bigLogo.png"
-              height="100px"
-              width="220px"
-              //objectFit="contain"
+              height="60px"
+              width="200px"
               // onMouseOver={cu}
-
+              objectFit="contain"
               onClick={() => router.push("/")}
             ></Image>
           </Link>
@@ -316,11 +313,11 @@ export default function NavDown(props) {
                   // InputProps={{ disableUnderline: true }}
 
                   {...params}
-                  placeholder={t('common.Search.placeHolder')}
+                  placeholder={t("common.Search.placeHolder")}
                   variant="standard"
-                  sx={{ borderColor: "primary.main" }}
+                  // sx={{ &:"hover": borderColor: "primary.main" }}
                   // color="primary"
-                  color="primary"
+                  // color="primary"
                   focused
                   InputProps={{
                     ...params.InputProps,
@@ -352,23 +349,24 @@ export default function NavDown(props) {
               onClick={handleClick}
               color="primary"
 
-            // onMouseEnter={handleClick}
-            // onMouseLeave={handleClick}
+              // onMouseEnter={handleClick}
+              // onMouseLeave={handleClick}
             >
               {console.log(localStorage.getItem("login"))}
               {console.log(cartTotalQuantity)}
               {localStorage.getItem("login") == "true" ? (
                 <Badge
+                  // className={styles.badge}
                   color="error"
                   badgeContent={
                     cartTotalQuantity != undefined ||
-                      cartTotalQuantity != 0 ||
-                      cartTotalQuantity
+                    cartTotalQuantity != 0 ||
+                    cartTotalQuantity
                       ? cartTotalQuantity
                       : 1
                   }
                   max={99}
-                  className={styles.cartbadge}
+                  // className={styles.cartbadge}
                 >
                   <ShoppingCartOutlinedIcon className={styles.cartIcon} />
                 </Badge>
@@ -391,11 +389,11 @@ export default function NavDown(props) {
                 vertical: "top",
                 horizontal: "center",
               }}
-            //keepMounted={true}
-            // anchorOrigin={{
-            //   vertical: "bottom",
-            //   horizontal: "left"62
-            // }}
+              //keepMounted={true}
+              // anchorOrigin={{
+              //   vertical: "bottom",
+              //   horizontal: "left"62
+              // }}
             >
               {cartTotalQuantity > 0 ? (
                 // <div>

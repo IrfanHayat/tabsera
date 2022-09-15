@@ -31,7 +31,8 @@ import { RouteGuard } from "../RouterGuard";
 import localStorage from "localStorage";
 import { useTranslation } from "react-i18next";
 import Currency from "./Currency/currency";
-
+import styles from "../styles/shippingMethods.module.css";
+import InfoIcon from "@mui/icons-material/Info";
 function ShippingMethods({
   classes,
   shipmentMethodData,
@@ -50,15 +51,15 @@ function ShippingMethods({
   return (
     <>
       <Grid container justifyContent={"center"}>
-        <Grid
-          item
-          md={12}
-          xs={12}
-          sx={{ bgcolor: "background.paper", mt: 0.2 }}
-        >
-          <Box sx={{ borderBottom: 1, borderColor: "divider", p: 2 }}>
-            <Typography variant="h6" style={{ fontWeight: "bold" }}>
-              {t('shippingInfo.ShippingAdress.label.shippingInformation')}
+        <Grid item md={12} xs={12}>
+          <Box className={styles.shippingMethods}>
+            {/* <InfoIcon sx={{ color: "red" }} /> */}
+            <Typography
+              className={styles.shippingHeading}
+              // variant="h6"
+              style={{ fontWeight: "bold" }}
+            >
+              {t("shippingInfo.ShippingAdress.label.shippingInformation")}
             </Typography>
 
             {/* {productDetail?.merchant_name} */}
@@ -142,10 +143,10 @@ function ShippingMethods({
             </TabPanel> */}
         </Grid>
 
-        <Grid item md={12} xs={12} sx={{ bgcolor: "background.paper" }}>
-          <Box sx={{ p: 2 }}>
-            <Typography variant="h6" style={{ fontWeight: "bold" }}>
-              {t('shippingInfo.ShippingAdress.label.shippingMethods')}
+        <Grid item md={12} xs={12} className={styles.shippingMethods}>
+          <Box className={styles.shippingHeading}>
+            <Typography style={{ fontWeight: "bold" }}>
+              {t("shippingInfo.ShippingAdress.label.shippingMethods")}
             </Typography>
           </Box>
           <FormControl>
@@ -200,15 +201,10 @@ function ShippingMethods({
           </FormControl>
         </Grid>
 
-        <Grid
-          item
-          md={12}
-          xs={12}
-          sx={{ bgcolor: "background.paper", mt: 0.2 }}
-        >
-          <Box sx={{ p: 2 }}>
-            <Typography variant="h6" style={{ fontWeight: "bold" }}>
-              {t('shippingInfo.ShippingAdress.label.charges.shippingCharges')}
+        <Grid item md={12} xs={12} className={styles.shippingMethods}>
+          <Box className={styles.shippingHeading}>
+            <Typography style={{ fontWeight: "bold" }}>
+              {t("shippingInfo.ShippingAdress.label.charges.shippingCharges")}
             </Typography>
           </Box>
 
@@ -216,7 +212,7 @@ function ShippingMethods({
           <Grid container sx={{ pl: 2 }}>
             <ListItem>
               <Grid item xs={3}>
-                {t('shippingInfo.ShippingAdress.label.charges.subTotal')}
+                {t("shippingInfo.ShippingAdress.label.charges.subTotal")}
               </Grid>
               <Grid item xs={3}>
                 <Currency amount={productPrice &&
@@ -227,7 +223,7 @@ function ShippingMethods({
             </ListItem>
             <ListItem>
               <Grid item xs={3}>
-                {t('shippingInfo.ShippingAdress.label.charges.shippingcost')}
+                {t("shippingInfo.ShippingAdress.label.charges.shippingcost")}
               </Grid>
               <Grid item xs={3}>
                 {shippingCharges ? <Currency amount={shippingCharges}></Currency> : <Currency amount={0}></Currency>}
@@ -236,7 +232,7 @@ function ShippingMethods({
             </ListItem>
             <ListItem>
               <Grid item xs={3}>
-                {t('shippingInfo.ShippingAdress.label.charges.totalCost')}{" "}
+                {t("shippingInfo.ShippingAdress.label.charges.totalCost")}{" "}
               </Grid>
               <Grid item xs={3}>
                 <Currency amount={productPrice && shippingCharges
@@ -255,7 +251,7 @@ function ShippingMethods({
               disabled={radioCheck ? "" : "disabled"}
             // startIcon={<AddIcon />}
             >
-              {t('shippingInfo.ShippingAdress.button.reviewOrder')}
+              {t("shippingInfo.ShippingAdress.button.reviewOrder")}
             </Button>
           </ListItem>
           {/* <Button

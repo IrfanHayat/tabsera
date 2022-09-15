@@ -31,6 +31,7 @@ export default function Footer() {
           sx={{
             p: 1,
             // mt: "auto",
+            marginTop: "31px",
             m: 1,
             display: "flex",
             justifyContent: "center",

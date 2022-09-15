@@ -23,23 +23,24 @@ import {
 } from "@mui/material";
 import { RouteGuard } from "../RouterGuard";
 import Currency from "./Currency/currency";
+import styles from "../styles/calculateBills.module.css";
 function CalculateBill({ productPrice, checkoutHandler }) {
   console.log(productPrice);
   let { t, i18n } = useTranslation();
   return (
-    <Grid sx={{ bgcolor: "background.paper" }} item md={12} xs={12}>
+    <Grid item md={12} xs={12}>
       {/* <Card> */}
-      <CardContent>
+      <CardContent className={styles.calculateBill}>
         <Typography
           component="h6"
-          variant="h6"
-          // m={1}
-          p={1}
+          variant="subtitle1"
+        // m={1}
+        // p={1}
         // style={{ fontWeight: "bold" }}
         // align="center"
         >
           {" "}
-          {t('checkoutCart.labels.Shopping Cart')}
+          {t("checkoutCart.labels.Shopping Cart")}
         </Typography>
         <Typography
           component="h5"
@@ -50,7 +51,7 @@ function CalculateBill({ productPrice, checkoutHandler }) {
         // align="center"
         >
           {" "}
-          {t('checkoutCart.labels.Order Summary')}
+          {t("checkoutCart.labels.Order Summary")}
         </Typography>
         <Divider />
         <Grid container>
@@ -66,7 +67,7 @@ function CalculateBill({ productPrice, checkoutHandler }) {
         </ListItem> */}
 
           <ListItem>
-            <ListItemText>{t('checkoutCart.labels.Total Items')}</ListItemText>
+            <ListItemText>{t("checkoutCart.labels.Total Items")}</ListItemText>
 
             <ListItemText>
               <Typography
@@ -86,14 +87,17 @@ function CalculateBill({ productPrice, checkoutHandler }) {
           </ListItem>
 
           <ListItem>
-            <ListItemText> {t('checkoutCart.labels.Total Price')} </ListItemText>
+            <ListItemText>
+              {" "}
+              {t("checkoutCart.labels.Total Price")}{" "}
+            </ListItemText>
             <ListItemText>
               {" "}
               <Typography
                 component="h5"
                 variant="h5"
                 // m={1}
-                sx={{ color: "warning.main" }}
+                sx={{ color: "#f34f2f" }}
                 style={{ fontWeight: "bold" }}
               // align="center"
               >
@@ -107,20 +111,17 @@ function CalculateBill({ productPrice, checkoutHandler }) {
             </ListItemText>
           </ListItem>
         </Grid>
+        <Button
+          className={styles.orderSummaryBtn}
+          onClick={checkoutHandler}
+          variant="contained"
+          color="primary"
+          fullWidth
+        >
+          {t("checkoutCart.buttons.checkout")}
+        </Button>
       </CardContent>
-      <CardActions>
-        {" "}
-        <RouteGuard>
-          <Button
-            onClick={checkoutHandler}
-            variant="contained"
-            color="primary"
-            fullWidth
-          >
-            {t('checkoutCart.buttons.checkout')}
-          </Button>
-        </RouteGuard>
-      </CardActions>
+
       {/* </Card> */}
     </Grid>
   );

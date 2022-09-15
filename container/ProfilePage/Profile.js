@@ -21,7 +21,8 @@ import {
   ListItemIcon,
   ListItemText,
 } from "@mui/material";
-
+import styles from "../../styles/profile.module.css";
+import PersonIcon from "@mui/icons-material/Person";
 const options = ["A", "B", "C", "D"];
 const objOptions = [
   { value: 65, label: "A" },
@@ -59,76 +60,77 @@ export default function Profile() {
   const addNewMemeber = () => appendMemberRow({ email: "", role: "user" });
 
   return (
-    <Grid container sx={{ p: 1, bgcolor: "white" }}>
+    <Box className={styles.profileMain}>
       {/* <Box component="form" onSubmit={handleSubmit(handleOnSubmit)}> */}
-      <Grid item xs={3} sx={{ p: 1 }}>
+      <Box className={styles.dashboardSidebar}>
         <List>
-          <Typography sx={{ fontWeight: "bold", mb: 1 }}>
+          <Typography className={styles.myAccount}>
             {" "}
             Manage My Account
           </Typography>
-          <ListItem onClick={() => setKey(1)}>
-            <ListItemIcon>
-              <AccountBoxIcon color={key == 1 ? "primary" : ""} />
-            </ListItemIcon>
-            <ListItemText>
-              <Typography color={key == 1 ? "primary" : ""}>
-                {" "}
-                Personal Information
-              </Typography>
-            </ListItemText>
+          <ListItem onClick={() => setKey(1)} className={styles.ListItem}>
+            {/* <ListItemIcon> */}
+            <AccountBoxIcon color={key == 1 ? "warning" : ""} />
+            {/* </ListItemIcon> */}
+            {/* <ListItemText> */}
+            <Typography
+              className={styles.ListItemLabel}
+              color={key == 1 ? "#f34f2f" : ""}
+            >
+              {" "}
+              Personal Information
+            </Typography>
+            {/* </ListItemText> */}
           </ListItem>
-          <ListItem onClick={() => setKey(2)}>
-            <ListItemIcon>
-              <LocationOnIcon color={key == 1 ? "" : "primary"} />
-            </ListItemIcon>
-            <ListItemText>
-              <Typography color={key == 1 ? "" : "primary"}>
-                {" "}
-                Address Information
-              </Typography>
-            </ListItemText>
+          <ListItem onClick={() => setKey(2)} className={styles.ListItem}>
+            <LocationOnIcon color={key == 1 ? "" : "warning"} />
+            <Typography
+              className={styles.ListItemLabel}
+              color={key == 1 ? "" : "#f34f2f"}
+            >
+              {" "}
+              Address Information
+            </Typography>
           </ListItem>
-          {/* <ListItem>
-                <ListItemIcon>BA</ListItemIcon>
-                <ListItemText>
-                  <Typography onClick={() => setKey(3)}>
-                    {" "}
-                    Billing Address
-                  </Typography>
-                </ListItemText>
-              </ListItem> */}
         </List>
-      </Grid>
+      </Box>
 
-      <Grid item xs={9} sx={{ p: 1 }}>
+      <Box>
         {key == 1 ? (
-          <Grid container spacing={2} sx={{ p: 1 }}>
-            <Grid xs={12} sx={{ p: 1 }}>
-              <Typography sx={{ fontWeight: "bold" }}> My Profile</Typography>
-            </Grid>
-            <Grid item xs={6}>
+          <>
+            <Box className={styles.editProfile}>
+              <PersonIcon className={styles.editProfileIcon} />
+              <Typography className={styles.editProfileHeading}>
+                {" "}
+                My Profile
+              </Typography>
+            </Box>
+            <Grid className={styles.editProfileForm}>
+              {/* <Grid item xs={5}> */}
               <Controller
                 control={control}
                 name="First Name"
                 defaultValue=""
                 render={({ field }) => (
                   <TextField
+                    className={styles.editFormInput}
                     {...field}
-                    fullWidth
+                    // fullWidth
+                    // size="small"
                     // variant="filled"
                     label="First Name"
                   />
                 )}
               />
-            </Grid>
-            <Grid item xs={6}>
+              {/* </Grid> */}
+
               <Controller
                 control={control}
                 name="Last Name"
                 defaultValue=""
                 render={({ field }) => (
                   <TextField
+                    className={styles.editFormInput}
                     {...field}
                     fullWidth
                     // variant="filled"
@@ -136,8 +138,7 @@ export default function Profile() {
                   />
                 )}
               />
-            </Grid>
-            <Grid item xs={6}>
+
               <Controller
                 control={control}
                 name="email"
@@ -148,6 +149,7 @@ export default function Profile() {
                 }}
                 render={({ field, fieldState: { error } }) => (
                   <TextField
+                    className={styles.editFormInput}
                     {...field}
                     type="email"
                     fullWidth
@@ -157,14 +159,14 @@ export default function Profile() {
                   />
                 )}
               />
-            </Grid>
-            <Grid item xs={6}>
+
               <Controller
                 control={control}
                 name="DOB"
                 defaultValue=""
                 render={({ field, fieldState: { error } }) => (
                   <TextField
+                    className={styles.editFormInput}
                     {...field}
                     type="date"
                     fullWidth
@@ -174,8 +176,7 @@ export default function Profile() {
                   />
                 )}
               />
-            </Grid>
-            <Grid item xs={6}>
+
               <Controller
                 name="level"
                 id="level"
@@ -183,6 +184,7 @@ export default function Profile() {
                 control={control}
                 render={({ field }) => (
                   <TextField
+                    className={styles.editFormInput}
                     select
                     fullWidth
                     defaultValue=""
@@ -197,29 +199,30 @@ export default function Profile() {
                   </TextField>
                 )}
               />
-            </Grid>
 
-            <Grid item xs={12}>
-              <Button type="submit" variant="contained">
+              <Button className={styles.btn} type="submit" variant="contained">
                 Submit
               </Button>
             </Grid>
-          </Grid>
+          </>
         ) : (
-          <Grid container spacing={2} sx={{ p: 1 }}>
-            <Grid item xs={12}>
-              <Typography sx={{ fontWeight: "bold" }}>
+          <>
+            <Box className={styles.editProfile}>
+              {/* <PersonIcon className={styles.editProfileIcon} /> */}
+              <Typography className={styles.editProfileHeading}>
+                {" "}
                 Shipping Address
               </Typography>
-            </Grid>
+            </Box>
 
-            <Grid item xs={6}>
+            <Box className={styles.editProfileForm}>
               <Controller
                 control={control}
                 name="address"
                 defaultValue=""
                 render={({ field, fieldState: { error } }) => (
                   <TextField
+                    className={styles.editFormInput}
                     {...field}
                     type="text"
                     fullWidth
@@ -229,8 +232,6 @@ export default function Profile() {
                   />
                 )}
               />
-            </Grid>
-            <Grid item xs={6}>
               <Controller
                 name="level"
                 id="level"
@@ -238,6 +239,7 @@ export default function Profile() {
                 control={control}
                 render={({ field }) => (
                   <TextField
+                    className={styles.editFormInput}
                     select
                     fullWidth
                     defaultValue=""
@@ -252,8 +254,7 @@ export default function Profile() {
                   </TextField>
                 )}
               />
-            </Grid>
-            <Grid item xs={6}>
+
               <Controller
                 name="level"
                 id="level"
@@ -265,6 +266,7 @@ export default function Profile() {
                     fullWidth
                     defaultValue=""
                     label="State"
+                    className={styles.editFormInput}
                     //   inputProps={register("currency", {
                     //     required: "Please enter currency",
                     //   })}
@@ -275,8 +277,7 @@ export default function Profile() {
                   </TextField>
                 )}
               />
-            </Grid>
-            <Grid item xs={6}>
+
               <Controller
                 name="level"
                 id="level"
@@ -288,6 +289,7 @@ export default function Profile() {
                     fullWidth
                     defaultValue=""
                     label="City"
+                    className={styles.editFormInput}
                     //   inputProps={register("currency", {
                     //     required: "Please enter currency",
                     //   })}
@@ -298,18 +300,18 @@ export default function Profile() {
                   </TextField>
                 )}
               />
-            </Grid>
-            <Grid item xs={12}>
-              <Button type="submit" variant="contained">
+
+              <Button className={styles.btn} type="submit" variant="contained">
                 Submit
               </Button>
-            </Grid>
-            <Grid xs={12} sx={{ pt: 1, pl: 1, ml: 1, mt: 1 }}>
+            </Box>
+
+            <Grid xs={12} sx={{ mt: 3, ml: 5 }}>
               <Typography sx={{ fontWeight: "bold" }}>
                 Billing Address
               </Typography>
-            </Grid>
-            <Grid item xs={12} sx={{ p: 1 }}>
+              {/* </Grid> */}
+              {/* <Grid item xs={12} sx={{ p: 1 }}> */}
               <Controller
                 control={control}
                 name="check-box"
@@ -333,104 +335,104 @@ export default function Profile() {
               ""
             ) : (
               <>
-                <Grid container spacing={2} sx={{ p: 1 }}>
-                  <Grid item xs={6}>
-                    <Controller
-                      control={control}
-                      name="address"
-                      defaultValue=""
-                      render={({ field, fieldState: { error } }) => (
-                        <TextField
-                          {...field}
-                          type="text"
-                          fullWidth
-                          label="Address"
-                          error={error !== undefined}
-                          helperText={error ? myHelper.email[error.type] : ""}
-                        />
-                      )}
-                    />
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Controller
-                      name="level"
-                      id="level"
-                      //   defaultValue={0}
-                      control={control}
-                      render={({ field }) => (
-                        <TextField
-                          select
-                          fullWidth
-                          defaultValue=""
-                          label="Country"
-                          //   inputProps={register("currency", {
-                          //     required: "Please enter currency",
-                          //   })}
-                          //   error={errors.currency}
-                          //   helperText={errors.currency?.message}
-                        >
-                          <MenuItem>Pakistani</MenuItem>
-                        </TextField>
-                      )}
-                    />
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Controller
-                      name="level"
-                      id="level"
-                      //   defaultValue={0}
-                      control={control}
-                      render={({ field }) => (
-                        <TextField
-                          select
-                          fullWidth
-                          defaultValue=""
-                          label="State"
-                          //   inputProps={register("currency", {
-                          //     required: "Please enter currency",
-                          //   })}
-                          //   error={errors.currency}
-                          //   helperText={errors.currency?.message}
-                        >
-                          <MenuItem>Pakistani</MenuItem>
-                        </TextField>
-                      )}
-                    />
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Controller
-                      name="level"
-                      id="level"
-                      //   defaultValue={0}
-                      control={control}
-                      render={({ field }) => (
-                        <TextField
-                          select
-                          fullWidth
-                          defaultValue=""
-                          label="City"
-                          //   inputProps={register("currency", {
-                          //     required: "Please enter currency",
-                          //   })}
-                          //   error={errors.currency}
-                          //   helperText={errors.currency?.message}
-                        >
-                          <MenuItem>Pakistani</MenuItem>
-                        </TextField>
-                      )}
-                    />
-                  </Grid>
-                  <Grid item xs={12}>
-                    <Button type="submit" variant="contained">
-                      Submit
-                    </Button>
-                  </Grid>
-                </Grid>
+                <Box className={styles.editProfileForm}>
+                  <Controller
+                    control={control}
+                    name="address"
+                    defaultValue=""
+                    render={({ field, fieldState: { error } }) => (
+                      <TextField
+                        className={styles.editFormInput}
+                        {...field}
+                        type="text"
+                        fullWidth
+                        label="Address"
+                        error={error !== undefined}
+                        helperText={error ? myHelper.email[error.type] : ""}
+                      />
+                    )}
+                  />
+                  <Controller
+                    name="level"
+                    id="level"
+                    //   defaultValue={0}
+                    control={control}
+                    render={({ field }) => (
+                      <TextField
+                        className={styles.editFormInput}
+                        select
+                        fullWidth
+                        defaultValue=""
+                        label="Country"
+                        //   inputProps={register("currency", {
+                        //     required: "Please enter currency",
+                        //   })}
+                        //   error={errors.currency}
+                        //   helperText={errors.currency?.message}
+                      >
+                        <MenuItem>Pakistani</MenuItem>
+                      </TextField>
+                    )}
+                  />
+
+                  <Controller
+                    name="level"
+                    id="level"
+                    //   defaultValue={0}
+                    control={control}
+                    render={({ field }) => (
+                      <TextField
+                        select
+                        fullWidth
+                        defaultValue=""
+                        label="State"
+                        className={styles.editFormInput}
+                        //   inputProps={register("currency", {
+                        //     required: "Please enter currency",
+                        //   })}
+                        //   error={errors.currency}
+                        //   helperText={errors.currency?.message}
+                      >
+                        <MenuItem>Pakistani</MenuItem>
+                      </TextField>
+                    )}
+                  />
+
+                  <Controller
+                    name="level"
+                    id="level"
+                    //   defaultValue={0}
+                    control={control}
+                    render={({ field }) => (
+                      <TextField
+                        select
+                        fullWidth
+                        defaultValue=""
+                        label="City"
+                        className={styles.editFormInput}
+                        //   inputProps={register("currency", {
+                        //     required: "Please enter currency",
+                        //   })}
+                        //   error={errors.currency}
+                        //   helperText={errors.currency?.message}
+                      >
+                        <MenuItem>Pakistani</MenuItem>
+                      </TextField>
+                    )}
+                  />
+                  <Button
+                    className={styles.btn}
+                    type="submit"
+                    variant="contained"
+                  >
+                    Submit
+                  </Button>
+                </Box>
               </>
             )}
-          </Grid>
+          </>
         )}
-      </Grid>
-    </Grid>
+      </Box>
+    </Box>
   );
 }

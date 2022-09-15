@@ -1,21 +1,49 @@
 .shipTo {
-  padding: 1vh;
-  margin: 1px;
-  height: 10vh;
+  margin-top: 31px;
+  /* margin-bottom: 2px; */
+  padding-left: 30px;
+  align-items: center;
+  flex-wrap: wrap;
+  /* padding-top: 5px;
+  padding-bottom: 5px; */
+  box-shadow: rgb(3 0 71 / 9%) 0px 1px 3px;
+  height: 70px;
   display: flex;
   align-items: center;
   background-color: #fff;
+  border-radius: 10px;
 }
 
 .shipAddress {
-  display: flex;
-  align-items: center;
+  /* display: flex; */
+  /* align-items: center; */
   /* background-color: #fff; */
-  margin: 1px;
-  padding: 1vh;
-  justify-content: space-between;
-}
+  margin-top: 31px;
+  background-color: #fff;
+  width: 100%;
+  /* padding-left: 30px; */
+  border-radius: 10px;
 
+  justify-content: space-between;
+  box-shadow: rgb(3 0 71 / 9%) 0px 1px 3px;
+}
+.addressBox {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 31px;
+  padding-right: 31px;
+  height: 70px;
+}
+.addressHeading {
+  display: flex;
+
+  /* justify-content: space-between; */
+}
+.LocationOnIcon {
+  margin-right: 5px;
+  color: #f34f2f;
+}
 .table {
   overflow-x: auto;
   margin-right: auto;
@@ -23,12 +51,18 @@
   /* margin-top: 50px; */
   padding: 10px;
   margin: 10px;
+  /* background-color: #f6f9fc; */
 }
 
 .thead {
   height: 40px !important;
 }
-
+.tableRow {
+  margin-top: 16px;
+  width: 56px;
+  background: #ffffff;
+  border-radius: 10px;
+}
 .select {
   width: 5%;
 }
@@ -49,13 +83,16 @@
 }
 .edit {
   width: 8%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .chip {
   text-align: center;
   height: 20px;
   border: 8px;
-  border-radius: 2px;
+  border-radius: 4px;
   justify-content: center;
   padding-top: 3px;
   font-size: 12px;
@@ -77,8 +114,8 @@
 }
 
 .findLocker {
-  padding: 1vh;
-  margin: 1px;
+  border-radius: 10px;
+  margin-top: 31px;
 
   /* height: 10vh; */
   /* display: flex; */
@@ -90,12 +127,13 @@
   margin-top: 10px;
   display: flex;
   height: 44px;
+  border-radius: 8px;
+
   width: 200px;
   font-size: 16px;
+  /* border: 1px solid #f34f2f; */
   color: #fff;
-  border: 1px solid #3d7cff;
-  border-radius: 2px;
-  background-color: #3d7cff;
+  /* background-color: #f34f2f; */
 }
 
 .mapTableView {

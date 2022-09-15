@@ -36,6 +36,7 @@ import { RouteGuard } from "../RouterGuard";
 import { useTranslation } from "react-i18next";
 import Currency from "./Currency/currency";
 
+import styles from "../styles/placeOrder.module.css";
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -82,20 +83,14 @@ function PlaceOrder({
     <>
       <CheckoutWizard activeStep={2}></CheckoutWizard>
 
-      <Grid container mt={5} justifyContent={"center"}>
-        <Grid item md={12} xs={12}>
-          <Box
-            sx={{
-              borderBottom: 1,
-              borderColor: "divider",
-              p: 2,
-              bgcolor: "background.paper",
-            }}
-          >
-            <Typography variant="h6" style={{ fontWeight: "bold" }}>
-              {t('shippingInfo.Review Order.labels.shippingInformation')}
+      <Grid container>
+        <Grid item md={12} xs={12} className={styles.placeOrder}>
+          <Box className={styles.placeOrderHeading}>
+            <Typography style={{ fontWeight: "bold" }}>
+              {t("shippingInfo.Review Order.labels.shippingInformation")}
             </Typography>
-
+          </Box>
+          <Box>
             {/* {productDetail?.merchant_name} */}
             <List>
               <ListItem>
@@ -155,38 +150,30 @@ function PlaceOrder({
           {/* <TabPanel value={value} index={2}>
               {merchantDetail?.city}
             </TabPanel> */}
-          <Box
-            sx={{
-              borderBottom: 1,
-              borderColor: "divider",
-              p: 2,
-
-              bgcolor: "background.paper",
-            }}
-          >
+        </Grid>
+        <Grid item md={12} xs={12} className={styles.placeOrder}>
+          <Box className={styles.placeOrderHeading}>
             {/* <ListItem> */}
-            <Typography variant="h6" style={{ fontWeight: "bold" }}>
-              {t('shippingInfo.Review Order.labels.shippingMethod')}
+            <Typography style={{ fontWeight: "bold" }}>
+              {t("shippingInfo.Review Order.labels.shippingMethod")}
             </Typography>
+          </Box>
+          <Box>
             {/* </ListItem> */}
             <List>
               <ListItem>{shippmentName}</ListItem>
             </List>
           </Box>
+        </Grid>
 
-          <Box
-            sx={{
-              borderBottom: 1,
-              borderColor: "divider",
-              p: 2,
-
-              bgcolor: "background.paper",
-            }}
-          >
+        <Grid item md={12} xs={12} className={styles.placeOrder}>
+          <Box className={styles.placeOrderHeading}>
             {/* <ListItem> */}
-            <Typography variant="h6" style={{ fontWeight: "bold" }}>
-              {t('shippingInfo.Review Order.labels.orderItems')}
+            <Typography style={{ fontWeight: "bold" }}>
+              {t("shippingInfo.Review Order.labels.orderItems")}
             </Typography>
+          </Box>
+          <Box>
             {/* </ListItem> */}
             <List>
               <ListItem>
@@ -236,15 +223,20 @@ function PlaceOrder({
             </List>
           </Box>
         </Grid>
-        <Grid item md={12} xs={12} sx={{ bgcolor: "background.paper" }}>
-          <Box sx={{ borderBottom: 1, borderColor: "divider", p: 2 }}>
-            <Typography variant="h6" style={{ fontWeight: "bold" }}>
-              {t('shippingInfo.Review Order.labels.orderSummary')}
+        <Grid item md={12} xs={12} className={styles.placeOrder}>
+          <Box className={styles.placeOrderHeading}>
+            <Typography style={{ fontWeight: "bold" }}>
+              {t("shippingInfo.Review Order.labels.orderSummary")}
             </Typography>
+          </Box>
+          <Box>
             <Grid container>
               <ListItem>
                 <Grid item xs={3}>
-                  <Typography> {t('shippingInfo.Review Order.labels.items')}:</Typography>
+                  <Typography>
+                    {" "}
+                    {t("shippingInfo.Review Order.labels.items")}:
+                  </Typography>
                 </Grid>
                 <Grid item xs={3}>
                   <Typography>
@@ -268,7 +260,10 @@ function PlaceOrder({
               <ListItem>
                 <Grid container>
                   <Grid item xs={3}>
-                    <Typography> {t('shippingInfo.Review Order.labels.shipping')}:</Typography>
+                    <Typography>
+                      {" "}
+                      {t("shippingInfo.Review Order.labels.shipping")}:
+                    </Typography>
                   </Grid>
                   <Grid item xs={3}>
                     <Typography>
@@ -281,7 +276,10 @@ function PlaceOrder({
                 <Grid container>
                   <Grid item xs={3}>
                     <Typography>
-                      <strong> {t('shippingInfo.Review Order.labels.total')}:</strong>
+                      <strong>
+                        {" "}
+                        {t("shippingInfo.Review Order.labels.total")}:
+                      </strong>
                     </Typography>
                   </Grid>
                   <Grid item xs={3}>
@@ -336,7 +334,7 @@ function PlaceOrder({
                 color="primary"
               // fullWidth
               >
-                {t('shippingInfo.Review Order.button.pay')}
+                {t("shippingInfo.Review Order.button.pay")}
               </Button>
               {/* <Button
                   // fullWidth

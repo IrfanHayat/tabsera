@@ -10,9 +10,9 @@ import CheckBox from "../../container/Section/CheckBox";
 import PriceFilter from "./PriceFilter";
 import PageFilter from "./PageFilter";
 import styles from "../../styles/sidebarFilters.module.css";
-import Checkbox from '@mui/material/Checkbox';
+import Checkbox from "@mui/material/Checkbox";
 
-import FormGroup from '@mui/material/FormGroup';
+import FormGroup from "@mui/material/FormGroup";
 
 function SideBarFilter({
   categoryProduct,
@@ -61,9 +61,6 @@ function SideBarFilter({
   //   setFilters(newFilters);
   // };
 
-
-
-
   return (
     <Box component="div" className={styles.sideBarFilter}>
       {/* <List dense> */}
@@ -109,18 +106,20 @@ function SideBarFilter({
           list={brands}
           handleFilters={(filters) => handleFilters(filters, "brands")}
         /> */}
-        {
-          brands.map((brand) =>
-            //Store the the student id in the value of each check box
+        {brands.map((brand) => (
+          //Store the the student id in the value of each check box
 
-            <div>
-              <FormGroup>
-                <FormControlLabel control={<Checkbox onChange={handleFilters} name={brand.brand_name} />} label={brand.brand_name} />
-
-              </FormGroup>
-            </div>
-          )
-        }
+          <div>
+            <FormGroup>
+              <FormControlLabel
+                control={
+                  <Checkbox onChange={handleFilters} name={brand.brand_name} />
+                }
+                label={brand.brand_name}
+              />
+            </FormGroup>
+          </div>
+        ))}
         {/* </Box> */}
       </Box>
       <Divider />
