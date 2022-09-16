@@ -76,7 +76,7 @@ function PlaceOrder({
   //   }
   //   setOpenBar(false);
   // };
-
+  console.log(shippmentName);
   return (
     <>
       <CheckoutWizard activeStep={2}></CheckoutWizard>
@@ -90,17 +90,14 @@ function PlaceOrder({
           </Box>
           <Box>
             {/* {productDetail?.merchant_name} */}
-            <List>
-              <ListItem>
-                <ListItemIcon>
-                  <AccountCircleIcon />
-                </ListItemIcon>
-                <ListItemText>
-                  {userData.first_name} {userData.last_name}
-                </ListItemText>
-              </ListItem>
-              {/* </List> */}
-              {/* <List>
+            <Box className={styles.infoList}>
+              <AccountCircleIcon className={styles.infoIcon} />
+              <Typography>
+                {userData.first_name} {userData.last_name}
+              </Typography>
+            </Box>
+            {/* </List> */}
+            {/* <List>
                 <ListItem>
                   <ListItemIcon>
                     <PhoneIcon />
@@ -115,26 +112,23 @@ function PlaceOrder({
                   <ListItemText>{userData.email}</ListItemText>
                 </ListItem>
               </List> */}
-              {/* <List> */}
-              <ListItem>
-                <ListItemIcon>
-                  <DomainAddOutlinedIcon />
-                </ListItemIcon>
-                {shippementLockerData ? (
-                  <ListItemText>
-                    {shippementLockerData?.locker_address}{" "}
-                  </ListItemText>
-                ) : (
-                  <ListItemText>
-                    {shippementData?.address_label_name}{" "}
-                    {shippementData?.address}," ",{shippementData?.city},
-                    {shippementData?.state},{shippementData?.country}
-                  </ListItemText>
-                )}
-              </ListItem>
-              {/* </List>
+            {/* <List> */}
+            <Box className={styles.infoList}>
+              <DomainAddOutlinedIcon className={styles.infoIcon} />
+
+              {shippementLockerData ? (
+                <Typography>{shippementLockerData?.locker_address} </Typography>
+              ) : (
+                <Typography>
+                  {shippementData?.address_label_name} {shippementData?.address}
+                  ," ",{shippementData?.city},{shippementData?.state},
+                  {shippementData?.country}
+                </Typography>
+              )}
+            </Box>
+            {/* </List>
               <List> */}
-              {/* <ListItem>
+            {/* <ListItem>
                   <ListItemIcon>
                     <AddLocationAltOutlinedIcon />
                   </ListItemIcon>
@@ -143,7 +137,7 @@ function PlaceOrder({
                     {shippementData?.country}
                   </ListItemText>
                 </ListItem> */}
-            </List>
+            {/* </List> */}
           </Box>
           {/* <TabPanel value={value} index={2}>
               {merchantDetail?.city}
@@ -156,11 +150,9 @@ function PlaceOrder({
               {t("shippingInfo.Review Order.labels.shippingMethod")}
             </Typography>
           </Box>
-          <Box>
-            {/* </ListItem> */}
-            <List>
-              <ListItem>{shippmentName}</ListItem>
-            </List>
+
+          <Box className={styles.infoList}>
+            <Typography>{shippmentName}</Typography>
           </Box>
         </Grid>
 

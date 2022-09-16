@@ -13,3 +13,12 @@
   border-radius: 10px;
   /* display: flex; */
 }
+.infoList {
+  display: flex;
+  padding-left: 21px;
+  margin-bottom: 10px;
+}
+.infoIcon {
+  margin-right: 15px;
+  /* color: #f34f2f; */
+}

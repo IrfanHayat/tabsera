@@ -51,85 +51,56 @@ export default function Payment({
             Payment Method
           </Typography>
         </Box>
-        {/* <List> */}
-        <ListItem>
-          <form>
-            <FormControl component="fieldset">
-              <RadioGroup
-                // row
-                aria-labelledby="demo-row-radio-buttons-group-label"
-                name="row-radio-buttons-group"
-                // value={labelValue}
-              >
-                {/* <FormControlLabel
-            value="female"
-            control={<Radio />}
-            label="Female"
+        <form>
+          <RadioGroup
+            // row
+            aria-labelledby="demo-row-radio-buttons-group-label"
+            name="row-radio-buttons-group"
+            // value={labelValue}
           >
-            <BusinessIcon/>
-            <FormControlLabel/> */}
-                {/* <BusinessIcon /> */}
+            <Box className={styles.paymentBoxDivMain}>
+              {paymentMethod &&
+                paymentMethod.map((result) => (
+                  <Box className={styles.shippingAddress}>
+                    <Box className={styles.addressLabelDiv}>
+                      <Image
+                        // className={cx(styles.media, mediaStyles.root)}
+                        src={result?.payment_method_icon}
+                        onClick={(e) => viewCategory(product.category_id)}
+                        alt="shirt"
+                        width={70}
+                        height={70}
+                        objectFit="contain"
+                      ></Image>
+                      <FormControlLabel
+                        key={result.payment_method_id}
+                        value={result.payment_method_id}
+                        control={
+                          <Radio onChange={() => handleChange(result)}></Radio>
+                        }
+                        label={<></>}
+                        onClick={() => setRadioCheck(true)}
+                      />
+                    </Box>
+                    <Typography>{result.parent_payment_method} </Typography>
+                  </Box>
+                ))}
+            </Box>
+          </RadioGroup>
 
-                {paymentMethod &&
-                  paymentMethod.map((result) => (
-                    <FormControlLabel
-                      key={result.payment_method_id}
-                      value={result.payment_method_id}
-                      control={
-                        <Radio onChange={() => handleChange(result)}></Radio>
-                      }
-                      label={
-                        <Box
-                          sx={{
-                            display: "flex",
-                            alignItems: "center",
-                          }}
-                        >
-                          <Image
-                            // className={cx(styles.media, mediaStyles.root)}
-                            src={result?.payment_method_icon}
-                            onClick={(e) => viewCategory(product.category_id)}
-                            alt="shirt"
-                            width={50}
-                            height={30}
-                            objectFit="contain"
-                          ></Image>
-                          <Typography sx={{ ml: 2 }}>
-                            {result.parent_payment_method}{" "}
-                          </Typography>
-                        </Box>
-                      }
-                      sx={{ ml: 1 }}
-                      onClick={() => setRadioCheck(true)}
-                    />
-                  ))}
-              </RadioGroup>
-            </FormControl>
-            {/* </ListItem> */}
-            {/* </List> */}
-            {/* <List> */}
-            <ListItem>
-              {/* <Stack direction="row" spacing={2}> */}
-              {/* <ListItem> */}
-              <Button
-                // fullWidth
-                type="button"
-                variant="contained"
-                color="primary"
-                onClick={() => submitHandler(cartTotalAmount)}
-                disabled={radioCheck ? "" : "disabled"}
-              >
-                Continue
-              </Button>
-              {/* </ListItem>/ */}
-              {/* <ListItem> */}
-              {/* </Stack> */}
-            </ListItem>
-            {/*  */}
-            {/* </ListItem> */}
-          </form>
-        </ListItem>
-        {/* </List> */}
+          <ListItem>
+            <Button
+              // fullWidth
+              type="button"
+              variant="contained"
+              color="primary"
+              onClick={() => submitHandler(cartTotalAmount)}
+              disabled={radioCheck ? "" : "disabled"}
+            >
+              Continue
+            </Button>
+          </ListItem>
+        </form>
       </Grid>
       {console.log(status)}
       {status?.resultCode === 2000 ? (

@@ -235,82 +235,68 @@ function Details({
             // itemsToShow={2}
             // showArrows={false}
           >
-            {Object.keys(productDetail).length > 0 && skusFlag == false
-              ? productDetail.product_images[0].media_images.map(
-                  (result, index) => (
-                    <Box className={styles.carouelImage}>
+            <Box className={styles.carouelImage}>
+              {Object.keys(productDetail).length > 0 && skusFlag == false
+                ? productDetail.product_images[0].media_images.map(
+                    (result, index) => (
                       <ReactImageMagnify
                         {...{
                           smallImage: {
-                            alt: "Wristwatch by Ted Baker London",
-                            // isFluidWidth: true,
-                            width: " 336px",
-                            height: "330px",
+                            alt: "Product Image",
+                            isFluidWidth: true,
+                            // width: " 336px",
+                            // height: "330px",
                             src: result,
-                            // sizes:
-                            //   "(min-width: 800px) 33.5vw, (min-width: 415px) 50vw, 100vw",
+                            sizes:
+                              "(max-width: 480px) 100vw, (max-width: 1200px) 30vw, 360px",
+                            // srcSet: this.state.currentImage.fluid.srcSet,
                           },
                           largeImage: {
                             src: result,
-                            width: 640,
-                            height: 480,
+                            // srcSet: this.state.currentImage.fluid.srcSet,
+                            width: 600,
+                            height: 800,
                           },
 
                           enlargedImagePosition: "over",
-                          // enlargedImageContainerDimensions: {
-                          //   width: "150%",
-                          //   height: "150%",
-                          // },
-                          // enlargedImageContainerStyle: {
-                          //   zIndex: "1500",
-                          // },
-                          // enlargedImageContainerDimensions: {
-                          //   width: "50%",
-                          //   height: "100%",
-                          // },
+
+                          isHintEnabled: true,
+                          shouldHideHintAfterFirstActivation: false,
                         }}
                       />
-                    </Box>
+                    )
                   )
-                )
-              : skusProduct &&
-                skusProduct.sku_images.map((result) => (
-                  <Box className={styles.carouelImage}>
+                : skusProduct &&
+                  skusProduct.sku_images.map((result) => (
+                    // <Box className={styles.carouelImage}>
                     <ReactImageMagnify
                       {...{
                         smallImage: {
-                          alt: "Wristwatch by Ted Baker London",
-                          // isFluidWidth: true,
-                          width: " 336px",
-                          height: "330px",
-                          // width: 100,
-                          // height: 200,
+                          alt: "Product Image",
+                          isFluidWidth: true,
                           src: result,
-                          // sizes:
-                          //   "(min-width: 800px) 33.5vw, (min-width: 415px) 50vw, 100vw",
+                          sizes:
+                            "(max-width: 480px) 100vw, (max-width: 1200px) 30vw, 360px",
+                          // srcSet: this.state.currentImage.fluid.srcSet,
                         },
                         largeImage: {
                           src: result,
-                          width: 640,
-                          height: 480,
+                          // srcSet: this.state.currentImage.fluid.srcSet,
+                          width: 600,
+                          height: 800,
                         },
-
+                        // enlargedImageStyle: {
+                        //   objectFit: "contain",
+                        // },
                         enlargedImagePosition: "over",
-                        // enlargedImageContainerDimensions: {
-                        //   width: "150%",
-                        //   height: "150%",
-                        // },
-                        // enlargedImageContainerStyle: {
-                        //   zIndex: "1500",
-                        // },
-                        // enlargedImageContainerDimensions: {
-                        //   width: "50%",
-                        //   height: "100%",
-                        // },
+
+                        isHintEnabled: true,
+                        shouldHideHintAfterFirstActivation: false,
                       }}
                     />
-                  </Box>
-                ))}
+                    // </Box>
+                  ))}
+            </Box>
           </Carousel>
           {/* </ListItem> */}
           {/* <Divider /> */}
