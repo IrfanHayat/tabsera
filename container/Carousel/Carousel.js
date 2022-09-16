@@ -52,7 +52,7 @@ export default function CarouselApp({
 
       // style={{ width: "100%" }}
       sx={{
-        bgcolor: "background.paper",
+        // bgcolor: "background.paper",
         // m: 1,
         // p: 1,
         // height: "500px",
@@ -122,11 +122,11 @@ export default function CarouselApp({
         itemsToScroll={1}
         focusOnSelect={true}
         renderArrow={myArrow}
-        // enableSwipe={true}
-        // enableMouseSwipe={true}
-        // enableAutoPlay={true}
-        // autoPlaySpeed={3000}
-        // itemsToShow={4}
+      // enableSwipe={true}
+      // enableMouseSwipe={true}
+      // enableAutoPlay={true}
+      // autoPlaySpeed={3000}
+      // itemsToShow={4}
       >
         {/* <div className="slider__conatiner"> */}
         {/* <Slider {...settings}> */}
