@@ -102,7 +102,6 @@ export default function Payment({
           </ListItem>
         </form>
       </Grid>
-      {console.log(status)}
       {status?.resultCode === 2000 ? (
         <Snackbar
           open={openBar}
