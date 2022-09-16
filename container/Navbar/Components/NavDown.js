@@ -246,10 +246,10 @@ export default function NavDown(props) {
             }}
           >
             <Image
-              src="/bigLogo.png"
-              alt="/bigLogo.png"
-              height="150px"
-              width="250px"
+              src="/tijariLogo.png"
+              alt="/tijariLogo.png"
+              height="60px"
+              width="200px"
               // onMouseOver={cu}
               objectFit="contain"
               onClick={() => router.push("/")}
