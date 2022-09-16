@@ -34,9 +34,14 @@ import MuiAlert from "@mui/material/Alert";
 import { Stack } from "@mui/material";
 import { RouteGuard } from "../RouterGuard";
 import { useTranslation } from "react-i18next";
-import Currency from "./Currency/currency";
-
 import styles from "../styles/placeOrder.module.css";
+import InfoIcon from "@mui/icons-material/Info";
+import LocalShippingIcon from "@mui/icons-material/LocalShipping";
+import CategoryIcon from "@mui/icons-material/Category";
+import SummarizeIcon from "@mui/icons-material/Summarize";
+import ViewListIcon from "@mui/icons-material/ViewList";
+import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
+import Currency from '../container/Currency/currency'
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -86,19 +91,18 @@ function PlaceOrder({
       <Grid container>
         <Grid item md={12} xs={12} className={styles.placeOrder}>
           <Box className={styles.placeOrderHeading}>
+            <InfoIcon className={styles.Icon} />
             <Typography style={{ fontWeight: "bold" }}>
               {t("shippingInfo.Review Order.labels.shippingInformation")}
             </Typography>
           </Box>
           <Box>
-            {/* {productDetail?.merchant_name} */}
             <Box className={styles.infoList}>
               <AccountCircleIcon className={styles.infoIcon} />
               <Typography>
                 {userData.first_name} {userData.last_name}
               </Typography>
             </Box>
-            {/* </List> */}
             {/* <List>
                 <ListItem>
                   <ListItemIcon>
@@ -114,7 +118,7 @@ function PlaceOrder({
                   <ListItemText>{userData.email}</ListItemText>
                 </ListItem>
               </List> */}
-            {/* <List> */}
+
             <Box className={styles.infoList}>
               <DomainAddOutlinedIcon className={styles.infoIcon} />
 
@@ -139,7 +143,7 @@ function PlaceOrder({
                     {shippementData?.country}
                   </ListItemText>
                 </ListItem> */}
-            {/* </List> */}
+
           </Box>
           {/* <TabPanel value={value} index={2}>
               {merchantDetail?.city}
@@ -147,7 +151,8 @@ function PlaceOrder({
         </Grid>
         <Grid item md={12} xs={12} className={styles.placeOrder}>
           <Box className={styles.placeOrderHeading}>
-            {/* <ListItem> */}
+            <LocalShippingIcon className={styles.Icon} />
+
             <Typography style={{ fontWeight: "bold" }}>
               {t("shippingInfo.Review Order.labels.shippingMethod")}
             </Typography>
@@ -160,13 +165,13 @@ function PlaceOrder({
 
         <Grid item md={12} xs={12} className={styles.placeOrder}>
           <Box className={styles.placeOrderHeading}>
-            {/* <ListItem> */}
+            <ViewListIcon className={styles.Icon} />
+
             <Typography style={{ fontWeight: "bold" }}>
               {t("shippingInfo.Review Order.labels.orderItems")}
             </Typography>
           </Box>
           <Box>
-            {/* </ListItem> */}
             <List>
               <ListItem>
                 <TableContainer>
@@ -217,6 +222,7 @@ function PlaceOrder({
         </Grid>
         <Grid item md={12} xs={12} className={styles.placeOrder}>
           <Box className={styles.placeOrderHeading}>
+            <SummarizeIcon className={styles.Icon} />
             <Typography style={{ fontWeight: "bold" }}>
               {t("shippingInfo.Review Order.labels.orderSummary")}
             </Typography>
@@ -235,20 +241,12 @@ function PlaceOrder({
                     {" "}
                     <Currency amount={productPrice &&
                       productPrice.reduce((a, c) => a + c.qty * c.price, 0)}></Currency>
+
                   </Typography>
                 </Grid>
                 <Grid item xs={6}></Grid>
               </ListItem>
-              {/* <ListItem>
-                <Grid container>
-                  <Grid item xs={6}>
-                    <Typography>Tax:</Typography>
-                  </Grid>
-                  <Grid item xs={6}>
-                    <Typography align="right">${taxPrice}</Typography>
-                  </Grid>
-                </Grid>
-              </ListItem> */}
+
               <ListItem>
                 <Grid container>
                   <Grid item xs={3}>
@@ -292,7 +290,7 @@ function PlaceOrder({
                 </Grid>
               </ListItem>
             </Grid>
-            {/* <ListItem> */}
+
             {/* <Button
                     onClick={
                       () => {

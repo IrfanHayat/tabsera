@@ -11,7 +11,7 @@
   display: flex;
   align-items: center;
   border-radius: 10px;
-  /* display: flex; */
+  /* / display: flex; / */
 }
 .infoList {
   display: flex;
@@ -20,5 +20,9 @@
 }
 .infoIcon {
   margin-right: 15px;
-  /* color: #f34f2f; */
+  /* / color: #f34f2f; / */
+}
+.Icon {
+  margin-right: 5px;
+  color: #f34f2f;
 }
