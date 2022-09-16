@@ -162,8 +162,7 @@ export default function ModalLoginData({
         handleClose();
         setNameLogin(false);
       } else {
-
-        localStorage.setItem('login', "true")
+        localStorage.setItem("login", "true");
         let parseData = Cookies.get("item")
           ? JSON.parse(Cookies.get("item"))
           : "";
@@ -175,7 +174,6 @@ export default function ModalLoginData({
         }, 1000);
         setLginSccess(true);
         handleClickBar();
-
 
         handleClose();
         setNameLogin(false);
@@ -243,7 +241,9 @@ export default function ModalLoginData({
               <CloseIcon />
             </IconButton>
           </DialogTitle>
-          <Avatar sx={{ bgcolor: "secondary.main" }}>
+          <Avatar
+            sx={{ bgcolor: "primary.main", width: "50px", height: "50px" }}
+          >
             <LockOutlinedIcon />
           </Avatar>
           <Box
@@ -340,23 +340,23 @@ export default function ModalLoginData({
                           </InputAdornment>
                         ),
                       }}
-                    // InputProps={{
-                    //   endAdornment: (
-                    //     <InputAdornment position="end">
-                    //       <IconButton
-                    //         aria-label="Toggle password visibility"
-                    //         onClick={handleShowPassword}
-                    //         // onMouseDown={this.handleMouseDownPassword}
-                    //       >
-                    //         {showPassword ? (
-                    //           <VisibilityOffIcon />
-                    //         ) : (
-                    //           <VisibilityIcon />
-                    //         )}
-                    //       </IconButton>
-                    //     </InputAdornment>
-                    //   ),
-                    // }}
+                      // InputProps={{
+                      //   endAdornment: (
+                      //     <InputAdornment position="end">
+                      //       <IconButton
+                      //         aria-label="Toggle password visibility"
+                      //         onClick={handleShowPassword}
+                      //         // onMouseDown={this.handleMouseDownPassword}
+                      //       >
+                      //         {showPassword ? (
+                      //           <VisibilityOffIcon />
+                      //         ) : (
+                      //           <VisibilityIcon />
+                      //         )}
+                      //       </IconButton>
+                      //     </InputAdornment>
+                      //   ),
+                      // }}
                     ></TextField>
                   )}
                 ></Controller>
@@ -402,7 +402,7 @@ export default function ModalLoginData({
                       label="Phone Number"
                       error={Boolean(errors.phone)}
                       {...field}
-                    // disableAreaCodes
+                      // disableAreaCodes
                     />
                     // <PhoneInput
                     //   variant="outlined"
@@ -454,23 +454,23 @@ export default function ModalLoginData({
                           </InputAdornment>
                         ),
                       }}
-                    // InputProps={{
-                    //   endAdornment: (
-                    //     <InputAdornment position="end">
-                    //       <IconButton
-                    //         aria-label="Toggle password visibility"
-                    //         onClick={handleShowPassword}
-                    //         // onMouseDown={this.handleMouseDownPassword}
-                    //       >
-                    //         {showPassword ? (
-                    //           <VisibilityOffIcon />
-                    //         ) : (
-                    //           <VisibilityIcon />
-                    //         )}
-                    //       </IconButton>
-                    //     </InputAdornment>
-                    //   ),
-                    // }}
+                      // InputProps={{
+                      //   endAdornment: (
+                      //     <InputAdornment position="end">
+                      //       <IconButton
+                      //         aria-label="Toggle password visibility"
+                      //         onClick={handleShowPassword}
+                      //         // onMouseDown={this.handleMouseDownPassword}
+                      //       >
+                      //         {showPassword ? (
+                      //           <VisibilityOffIcon />
+                      //         ) : (
+                      //           <VisibilityIcon />
+                      //         )}
+                      //       </IconButton>
+                      //     </InputAdornment>
+                      //   ),
+                      // }}
                     ></TextField>
                   )}
                 ></Controller>

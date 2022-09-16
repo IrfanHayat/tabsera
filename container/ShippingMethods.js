@@ -33,6 +33,8 @@ import { useTranslation } from "react-i18next";
 import Currency from "./Currency/currency";
 import styles from "../styles/shippingMethods.module.css";
 import InfoIcon from "@mui/icons-material/Info";
+import LocalShippingIcon from "@mui/icons-material/LocalShipping";
+import PaymentIcon from "@mui/icons-material/Payment";
 function ShippingMethods({
   classes,
   shipmentMethodData,
@@ -53,156 +55,116 @@ function ShippingMethods({
       <Grid container justifyContent={"center"}>
         <Grid item md={12} xs={12}>
           <Box className={styles.shippingMethods}>
-            {/* <InfoIcon sx={{ color: "red" }} /> */}
-            <Typography
-              className={styles.shippingHeading}
-              // variant="h6"
-              style={{ fontWeight: "bold" }}
-            >
-              {t("shippingInfo.ShippingAdress.label.shippingInformation")}
-            </Typography>
+            <Box className={styles.shippingHeading}>
+              <InfoIcon className={styles.Icon} />
+              <Typography
+                className={styles.shippingHeading}
+                // variant="h6"
+                style={{ fontWeight: "bold" }}
+              >
+                {t("shippingInfo.ShippingAdress.label.shippingInformation")}
+              </Typography>
+            </Box>
 
-            {/* {productDetail?.merchant_name} */}
-            <List>
-              <ListItem>
-                <ListItemIcon>
-                  <AccountCircleIcon />
-                  {/* {userData.first_name} {userData.last_name} */}
-                </ListItemIcon>
-                <ListItemText>
-                  {/* <AccountCircleIcon /> */}
-                  {userData.first_name} {userData.last_name}
-                </ListItemText>
-              </ListItem>
-              {/* </List> */}
+            <Box className={styles.infoList}>
+              <AccountCircleIcon className={styles.infoIcon} />
+              <Typography>
+                {userData.first_name} {userData.last_name}
+              </Typography>
+            </Box>
 
-              {/* <List> */}
-              <ListItem>
-                <ListItemIcon>
-                  <PhoneIcon />
-                </ListItemIcon>
-                {localStorage.getItem("mobileNumber") ? (
-                  <ListItemText>
-                    {localStorage.getItem("mobileNumber")}
-                  </ListItemText>
-                ) : (
-                  <ListItemText>{"3215890184"}</ListItemText>
-                )}
-              </ListItem>
-              {/* </List> */}
-              {userData.email ? (
-                // <List>
-                <ListItem>
-                  <ListItemIcon>
-                    <EmailIcon />
-                  </ListItemIcon>
-                  <ListItemText>{userData.email}</ListItemText>
-                </ListItem>
+            <Box className={styles.infoList}>
+              <PhoneIcon className={styles.infoIcon} />
+
+              {localStorage.getItem("mobileNumber") ? (
+                <Typography>{localStorage.getItem("mobileNumber")}</Typography>
               ) : (
-                // </List>
-                // <List>
-                <ListItem>
-                  <ListItemIcon>
-                    <EmailIcon />
-                  </ListItemIcon>
-                  <ListItemText>{"test@gmail.com"}</ListItemText>
-                </ListItem>
-                // </List>
+                <ListItemText>{"3215890184"}</ListItemText>
               )}
+            </Box>
 
-              {/* <List> */}
-              <ListItem>
-                <ListItemIcon>
-                  <DomainAddOutlinedIcon />
-                </ListItemIcon>
+            {userData.email ? (
+              <Box className={styles.infoList}>
+                <EmailIcon className={styles.infoIcon} />
 
-                {shippementData ? (
-                  <ListItemText>
-                    {shippementData?.address_label_name}{" "}
-                    {shippementData?.address}," ",{shippementData?.city},
-                    {shippementData?.state},{shippementData?.country}
-                  </ListItemText>
-                ) : (
-                  <></>
-                )}
-              </ListItem>
-              {/* </List> */}
-              {/* <List> */}
-              {/* <ListItem>
-                  <ListItemIcon>
-                    <AddLocationAltOutlinedIcon />
-                  </ListItemIcon>
-                  <ListItemText>
-                    
-                  </ListItemText>
-                </ListItem> */}
-            </List>
+                <Typography>{userData.email}</Typography>
+              </Box>
+            ) : (
+              <Box className={styles.infoList}>
+                <EmailIcon className={styles.infoIcon} />
+                <Typography>{"test@gmail.com"}</Typography>
+              </Box>
+            )}
+
+            <Box className={styles.infoList}>
+              <DomainAddOutlinedIcon className={styles.infoIcon} />
+
+              {shippementData ? (
+                <Typography>
+                  {shippementData?.address_label_name} {shippementData?.address}
+                  ," ",{shippementData?.city},{shippementData?.state},
+                  {shippementData?.country}
+                </Typography>
+              ) : (
+                <></>
+              )}
+            </Box>
           </Box>
-          {/* <TabPanel value={value} index={2}>
-              {merchantDetail?.city}
-            </TabPanel> */}
         </Grid>
 
         <Grid item md={12} xs={12} className={styles.shippingMethods}>
           <Box className={styles.shippingHeading}>
+            <LocalShippingIcon className={styles.Icon} />
             <Typography style={{ fontWeight: "bold" }}>
               {t("shippingInfo.ShippingAdress.label.shippingMethods")}
             </Typography>
           </Box>
-          <FormControl>
-            <List>
-              <ListItem sx={{ display: "flex" }}>
-                <RadioGroup
-                  // row
-                  aria-labelledby="demo-row-radio-buttons-group-label"
-                  name="row-radio-buttons-group"
-                // value={labelValue}
-                >
-                  {shipmentMethodData &&
-                    shipmentMethodData.map((result) => (
+
+          <RadioGroup
+            // row
+            aria-labelledby="demo-row-radio-buttons-group-label"
+            name="row-radio-buttons-group"
+          // value={labelValue}
+          >
+            <Box className={styles.shippingBoxDivMain}>
+              {shipmentMethodData &&
+                shipmentMethodData.map((result) => (
+                  <Box className={styles.shippingAddress}>
+                    <Box className={styles.addressLabelDiv}>
+                      <Image
+                        // className={cx(styles.media, mediaStyles.root)}
+                        src={result.shipping_method_icon_url}
+                        // onClick={(e) => viewCategory(product.category_id)}
+                        alt={"Shipping"}
+                        width={70}
+                        height={70}
+                        objectFit="contain"
+                      ></Image>
+
                       <FormControlLabel
                         key={result.shipping_method_id}
                         value={result.shipping_method_id}
                         control={
                           <Radio onChange={() => handleChange(result)} />
                         }
-                        label={
-                          <Box
-                            sx={{
-                              display: "flex",
-                              alignItems: "center",
-                            }}
-                          >
-                            <Image
-                              // className={cx(styles.media, mediaStyles.root)}
-                              src={result.shipping_method_icon_url}
-                              // onClick={(e) => viewCategory(product.category_id)}
-                              alt={"Shipping"}
-                              width={50}
-                              height={30}
-                              objectFit="contain"
-                            ></Image>
-                            <Typography
-                              sx={{
-                                p: 1,
-                              }}
-                            >
-                              {result.shipping_method_name}
-                            </Typography>
-                          </Box>
-                        }
+                        label={<></>}
                         onClick={() => setRadioCheck(true)}
-                        sx={{ ml: 1 }}
                       />
-                    ))}
-                </RadioGroup>
-              </ListItem>
-            </List>
-          </FormControl>
+                    </Box>
+                    <Typography>{result.shipping_method_name}</Typography>
+                  </Box>
+                ))}
+            </Box>
+          </RadioGroup>
+          {/* </Box> */}
+          {/* </ListItem>
+            </List> */}
+          {/* </FormControl> */}
         </Grid>
 
         <Grid item md={12} xs={12} className={styles.shippingMethods}>
           <Box className={styles.shippingHeading}>
+            <PaymentIcon className={styles.Icon} />
             <Typography style={{ fontWeight: "bold" }}>
               {t("shippingInfo.ShippingAdress.label.charges.shippingCharges")}
             </Typography>
