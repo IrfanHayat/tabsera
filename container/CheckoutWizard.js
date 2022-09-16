@@ -1,26 +1,21 @@
 import { Grid, Step, StepLabel, Box, Stepper, Typography } from "@mui/material";
 import React from "react";
-import useStyles from "../utils/styles";
+
 import { useTranslation } from "react-i18next";
 export default function CheckoutWizard({ activeStep = 0 }) {
   let { t, i18n } = useTranslation();
-  const classes = useStyles();
+
   return (
     <Grid
-      container
-      sx={{ alignContent: "center", justifyContent: "center", mt: 5, mx: 5 }}
+
+      sx={{ alignContent: "start", justifyContent: "start", mt: 5 }}
     >
-      <Box sx={{ width: "100%" }}>
+      <Box sx={{ width: "100%", alignContent: "center", justifyContent: "center" }}>
         {/* <Grid item md={12} xs={12} sm={12}> */}
         <Stepper
           activeStep={activeStep}
-        // alternativeLabel
-        // nonLinear
-        // sx={{
-        //   m: 5,
-        //   // maxWidth: "100%",
-        //   // mx: -12,
-        // }}
+        //alternativeLabel
+
         >
           {[
             t('stepper.checkout'),
