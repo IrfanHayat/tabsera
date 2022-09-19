@@ -57,7 +57,7 @@
 .addressBoxDivMain {
   display: flex;
   flex-wrap: wrap;
-  padding-left: 21px;
+  padding-left: 31px;
   /* flex-direction: row; */
 }
 .addressBoxDiv {

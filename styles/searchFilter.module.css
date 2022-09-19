@@ -1,0 +1,34 @@
+.mainBar {
+  display: flex;
+  width: 100%;
+  background-color: #fff;
+  border-radius: 10px;
+  margin-top: 31px;
+  box-shadow: rgb(3 0 71 / 9%) 0px 1px 3px;
+  padding-left: 31px;
+  /* margin-bottom: 55px; */
+  align-items: center;
+  height: 76px;
+}
+.filtersBar {
+  /* border-radius: 10px; */
+  /* height: 70px; */
+  display: flex;
+  /* flex-direction: row; */
+  /* background-color: #fff; */
+  /* margin-top: 31px; */
+  /* margin-bottom: 2px; */
+  /* padding-left: 30px; */
+  /* align-items: center; */
+  flex-wrap: wrap;
+  /* width: 100%; */
+  /* height: 100%; */
+  /* justify-content: space-between; */
+  /* padding-top: 5px;
+  padding-bottom: 5px; */
+  /* box-shadow: rgb(3 0 71 / 9%) 0px 1px 3px; */
+}
+/* .itemBox {
+  display: flex;
+  flex-wrap: wrap;
+} */
