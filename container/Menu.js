@@ -10,9 +10,6 @@ import { useTranslation } from "react-i18next";
 // import { getFreeShipping } from "../slice/freeShippingSlice";
 // import { getDeals } from "../slice/dealsPromotionsSlice";
 import { useRouter } from "next/router";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-
 import {
   addToBasket,
   addToCart,
@@ -27,6 +24,8 @@ import CarouselApp from "./Carousel/Carousel";
 import { useGetAllProductsQuery } from "../RTK/productApi";
 import MenuCard from "./DealsAndPromotions/MenuCards";
 import RadioGroup from "@mui/material/RadioGroup";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 
 import {
   CircularProgress,
@@ -85,6 +84,7 @@ import ActionAreaCard from "./Card";
 import ShopProductSort from "./Filter/ProductSort";
 import SubCategory from "../pages/sub_category";
 import { useCallback } from "react";
+import { use } from "i18next";
 export default function PersistentDrawerLeft() {
   const { data, isLoading, isFetching, isError } = useGetAllProductsQuery();
   const { categoryData } = useSelector((state) => state.category);
@@ -152,18 +152,21 @@ export default function PersistentDrawerLeft() {
 
   const [sideBarCat, setSideBarCat] = useState([]);
 
-  function handleClick(event, categoryId) {
-    console.log(categoryId);
-    if (anchorEl !== event.currentTarget) {
-      setAnchorEl(event.currentTarget);
-    }
-    console.log(category);
-    let subCategory = category?.filter(
-      (result) => result.category_id == categoryId
-    )[0];
+  const handleClick = useCallback(
+    (event, categoryId) => {
+      console.log(categoryId);
+      if (anchorEl !== event.currentTarget) {
+        setAnchorEl(event.currentTarget);
+      }
+      console.log(category);
+      let subCategory = category?.filter(
+        (result) => result.category_id == categoryId
+      )[0];
 
-    setSideBarCat(subCategory);
-  }
+      setSideBarCat(subCategory);
+    },
+    [sideBarCat]
+  );
 
   function handleHover() {
     currentlyHovering = true;
@@ -173,14 +176,14 @@ export default function PersistentDrawerLeft() {
     setAnchorEl(null);
   }
 
-  function handleCloseHover() {
+  const handleCloseHover = useCallback(() => {
     currentlyHovering = false;
     setTimeout(() => {
       if (!currentlyHovering) {
         handleClose();
       }
     }, 50);
-  }
+  }, []);
 
   // ---------------------------------------------------------------
 
@@ -189,30 +192,33 @@ export default function PersistentDrawerLeft() {
   let dispatch = useDispatch();
 
   /////////
-  const viewCategory = async (item) => {
-    console.log(item);
-    await setCatId(null);
+  const viewCategory = useCallback(
+    async (item) => {
+      console.log(item);
+      await setCatId(null);
 
-    await setCatId(item);
+      await setCatId(item);
 
-    // router.push({
-    //   pathname: "/sub_category",
-    //   query: { sub_category: item },
-    // });
-  };
+      // router.push({
+      //   pathname: "/sub_category",
+      //   query: { sub_category: item },
+      // });
+    },
+    [catId]
+  );
 
   const featureProduct = useSelector(
     (state) => state.product.featureProductData
   );
 
-  const viewProduct = (item) => {
+  const viewProduct = useCallback((item) => {
     router.push({
       pathname: "/product_detail",
       query: { productId: item },
     });
-  };
+  }, []);
 
-  const addToCartHandler = async (product) => {
+  const addToCartHandler = useCallback(async (product) => {
     let result = await dispatch(addToCart(product));
     console.log(result);
     if (result?.payload?.resultCode == 4000) {
@@ -227,7 +233,7 @@ export default function PersistentDrawerLeft() {
         router.push("/cart");
       }, 1000);
     }
-  };
+  }, []);
 
   useEffect(() => {
     if (key == 1) {
@@ -248,7 +254,7 @@ export default function PersistentDrawerLeft() {
 
   useEffect(() => {}, [featureProduct]);
 
-  const showAllProducts = () => {
+  const showAllProducts = useCallback(() => {
     if (showFreeShipping) {
       setShowProduct(true);
       setShowAllCategoryPro(false);
@@ -282,9 +288,16 @@ export default function PersistentDrawerLeft() {
       setShowFreeShipping(false);
       //setCatId(null);
     }
-  };
+  }, [
+    showProduct,
+    showAllCategoryPro,
+    showAllMerchantPro,
+    showDeals,
+    showDiscounts,
+    showFreeShipping,
+  ]);
 
-  const showAllCategoriesProduct = () => {
+  const showAllCategoriesProduct = useCallback(() => {
     console.log("ccc");
 
     if (showFreeShipping == true) {
@@ -320,8 +333,15 @@ export default function PersistentDrawerLeft() {
       setShowFreeShipping(false);
       //setCatId(null);
     }
-  };
-  const showAllMerchantsProduct = () => {
+  }, [
+    showProduct,
+    showAllCategoryPro,
+    showAllMerchantPro,
+    showDeals,
+    showDiscounts,
+    showFreeShipping,
+  ]);
+  const showAllMerchantsProduct = useCallback(() => {
     console.log(showFreeShipping);
     if (showFreeShipping) {
       setShowProduct(false);
@@ -355,7 +375,14 @@ export default function PersistentDrawerLeft() {
       setShowDiscounts(false);
       //setCatId(null);
     }
-  };
+  }, [
+    showProduct,
+    showAllCategoryPro,
+    showAllMerchantPro,
+    showDeals,
+    showDiscounts,
+    showFreeShipping,
+  ]);
   // ----------------------------------------------------------------------------------
   const handleCat = useCallback(
     async (subCatId) => {
@@ -509,7 +536,6 @@ export default function PersistentDrawerLeft() {
                           >
                             {sideBarCat?.child?.map((subcategory) => (
                               <MenuItem
-                                // className={styles.categoryList}
                                 key={subcategory.category_id}
                                 onClick={() =>
                                   handleCat(subcategory.category_id)
@@ -631,7 +657,21 @@ export default function PersistentDrawerLeft() {
             </Box>
           </Grid>
 
-          <Grid container>
+          <Grid
+            container
+            // maxWidth="xl"
+            sx={
+              {
+                // display: "flex",
+                // justifyContent: "space-between",
+                // p: 1,
+                // m: 1,
+                // bgcolor: "background.paper",
+                // borderRadius: 1,
+              }
+            }
+            // data-aos="fade-up"
+          >
             <Grid item xs={12} className={styles.filtersBar}>
               {/* <Box sx={{ flexGrow: 1 }} /> */}
               <Box>

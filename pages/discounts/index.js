@@ -11,6 +11,7 @@ import { styled, useTheme, alpha } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import ViewAllProducts from "../../pages/all_products";
 
+
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
   ...theme.typography.body2,
@@ -35,6 +36,23 @@ function Index({
 
   console.log(data);
 
+  const addToCartHandler = async (product) => {
+    let result = await dispatch(addToCart(product));
+    console.log(result);
+    if (result?.payload?.resultCode == 4000) {
+      //setOpenBar(true);
+      setStatus(result?.payload);
+      setOpen(true);
+      Cookies.set("item", JSON.stringify(product));
+    } else {
+      dispatch(getCartItems());
+      dispatch(getTotalCartQuantity());
+      // setTimeout(() => {
+      //   router.push("/cart");
+      // }, 1000);
+    }
+  };
+
   const viewProduct = (item) => {
     router.push({
       pathname: "/product_detail",
@@ -58,6 +76,7 @@ function Index({
             <ViewAllProducts
               viewProduct={viewProduct}
               data={data}
+
             // dealsData={dealsData && dealsData}
             />
 

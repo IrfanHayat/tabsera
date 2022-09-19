@@ -141,14 +141,14 @@ function ShippingInformation({
             >
               <MenuItem
                 value={10}
-                // onClick={() => handleChangeCategoryAndCampaigns(1)}
+              // onClick={() => handleChangeCategoryAndCampaigns(1)}
               >
                 Self
               </MenuItem>
               <Divider />
               <MenuItem
                 value={20}
-                // onClick={() => handleChangeCategoryAndCampaigns(2)}
+              // onClick={() => handleChangeCategoryAndCampaigns(2)}
               >
                 Student 2
               </MenuItem>
@@ -306,7 +306,7 @@ function ShippingInformation({
                                   : "error"
                               }
                               size="small"
-                              // sx={{ mx: 1 }}
+                            // sx={{ mx: 1 }}
                             />
                             <FormControlLabel
                               sx={{ mr: -0.9 }}
@@ -482,15 +482,15 @@ function ShippingInformation({
             container
             // spacing={0}
             direction="row"
-            // alignItems="center"
-            // className={styles.findLocker}
+          // alignItems="center"
+          // className={styles.findLocker}
 
-            // maxWidth="xl"
+          // maxWidth="xl"
           >
             <Grid item md={12} sm={12} className={styles.findLocker}>
               <form
                 onSubmit={handleSubmit(submitHandler)}
-                // className={classes.form}
+              // className={classes.form}
               >
                 <List>
                   <ListItem>
@@ -650,37 +650,37 @@ function ShippingInformation({
 
                     {showTableView
                       ? lockersAddressData?.map((result) => (
-                          <FormControlLabel
-                            value={result.locker_id}
-                            control={<Radio />}
-                            label={
-                              <Box
+                        <FormControlLabel
+                          value={result.locker_id}
+                          control={<Radio />}
+                          label={
+                            <Box
+                              sx={{
+                                display: "flex",
+                                alignItems: "center",
+                              }}
+                            >
+                              <Image // className={cx(styles.media, mediaStyles.root)}
+                                src={"/locker_pic.jpg"}
+                                // onClick={(e) => viewCategory(product.category_id)}
+                                alt={"locker"}
+                                width={45}
+                                objectFit="contain"
+                                height={45}
+                              ></Image>
+                              <Typography
                                 sx={{
-                                  display: "flex",
-                                  alignItems: "center",
+                                  p: 1,
                                 }}
                               >
-                                <Image // className={cx(styles.media, mediaStyles.root)}
-                                  src={"/locker_pic.jpg"}
-                                  // onClick={(e) => viewCategory(product.category_id)}
-                                  alt={"locker"}
-                                  width={45}
-                                  objectFit="contain"
-                                  height={45}
-                                ></Image>
-                                <Typography
-                                  sx={{
-                                    p: 1,
-                                  }}
-                                >
-                                  {result.locker_name}
-                                </Typography>
-                                <Typography>{result.locker_address}</Typography>
-                              </Box>
-                            }
-                            onClick={() => setRadioCheck1(true)}
-                          />
-                        ))
+                                {result.locker_name}
+                              </Typography>
+                              <Typography>{result.locker_address}</Typography>
+                            </Box>
+                          }
+                          onClick={() => setRadioCheck1(true)}
+                        />
+                      ))
                       : ""}
                   </>
                 )}

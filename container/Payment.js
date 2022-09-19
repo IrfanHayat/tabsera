@@ -40,7 +40,7 @@ export default function Payment({
   const [radioCheck, setRadioCheck] = useState(false);
 
   return (
-    <Grid>
+    <Grid >
       <CheckoutWizard activeStep={3}></CheckoutWizard>
       <Grid item xs={12} className={styles.payment}>
         <Box className={styles.paymentHeading}>
@@ -56,7 +56,7 @@ export default function Payment({
             // row
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="row-radio-buttons-group"
-            // value={labelValue}
+          // value={labelValue}
           >
             <Box className={styles.paymentBoxDivMain}>
               {paymentMethod &&

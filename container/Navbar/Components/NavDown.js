@@ -89,6 +89,7 @@ export default function NavDown(props) {
   console.log("campaignsData,", campaignsData);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
+  let [cartQunatity, setCartQunatity] = useState();
   const logOut = async () => {
     let result = await dispatch(logOutCustomer());
     setIsLoggedIn(false);
@@ -110,9 +111,12 @@ export default function NavDown(props) {
     // setQunatityProduct(result.payload)
   }, []);
 
-  useEffect(() => {
-    console.log(cartTotalQuantity);
-  }, cartTotalQuantity);
+
+  // useEffect(() => {
+  //   console.log(cartTotalQuantity);
+
+
+  // }, [cartTotalQuantity])
 
   const categoryData = (categories) => {
     setCategoriesData(categories);

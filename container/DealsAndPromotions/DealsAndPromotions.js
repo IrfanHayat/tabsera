@@ -22,20 +22,20 @@ import Chip from "@mui/material/Chip";
 import IconButton from "@mui/material/IconButton";
 import LoyaltyIcon from "@mui/icons-material/Loyalty";
 import styles from "../../styles/card.module.css";
-const DealsAndPromotions = ({ dealsData, viewProduct, styledCard }) => {
+const DealsAndPromotions = ({ dealsData, viewProduct, styledCard, addToCartHandler }) => {
   console.log("Data Deals New", dealsData);
   let display = styledCard ? styledCard : "";
   let displayDesc =
     styledCard?.flexDirection == "row"
       ? {
-          display: "flex",
-          flexDirection: "column",
-          // alignItems: "center",
-          m: 1,
+        display: "flex",
+        flexDirection: "column",
+        // alignItems: "center",
+        m: 1,
 
-          // justifyContent: "space-between",
-          // justifyContent: "space-arounf",
-        }
+        // justifyContent: "space-between",
+        // justifyContent: "space-arounf",
+      }
       : { height: 85 };
 
   let width = styledCard?.flexDirection == "row" ? "100%" : "277px";
@@ -52,7 +52,7 @@ const DealsAndPromotions = ({ dealsData, viewProduct, styledCard }) => {
             width: width,
             height: height,
           }}
-          // className={cx(styles.root)}
+        // className={cx(styles.root)}
         >
           {result?.bundleImage && (
             <>
