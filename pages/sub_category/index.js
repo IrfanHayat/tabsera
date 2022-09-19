@@ -389,7 +389,7 @@ function SubCategory({
           setShowProduct={setShowProduct}
           setShowAllCategoryPro={setShowAllCategoryPro}
           setShowAllMerchantPro={setShowAllCategoryPro}
-          setFilterData={setFilterData}
+          setFilterData1={setFilterData}
           MinInput={MinInput}
           MaxInput={MaxInput}
           priceFilter={priceFilter}
@@ -399,6 +399,7 @@ function SubCategory({
           childrenCategory={children}
           subCategories={subCategories}
           brands={brands}
+
         ></SideBarFilter>
         {/* </Grid> */}
         {/* ---------------------------------------------------- */}
