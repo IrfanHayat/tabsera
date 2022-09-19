@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import { FormControl } from "@mui/material";
 import RadioGroup from "@mui/material/RadioGroup";
 import Radio from "@mui/material/Radio";
@@ -33,7 +33,7 @@ function PageFilter({
     dispatch(getFreeShipping());
     dispatch(getDeals());
   }, []);
-  const handleChange = async (event) => {
+  const handleChange = useCallback(async (event) => {
     console.log("Handle Change");
     console.log(event.target.value);
     console.log("---------------------------");
@@ -97,7 +97,7 @@ function PageFilter({
     // if (event.target.name == 'freeShipping') {
     //   router.push('/is_free_shipping')
     // }
-  };
+  }, []);
 
   return (
     <Box className={styles.otherFiltersDiv}>

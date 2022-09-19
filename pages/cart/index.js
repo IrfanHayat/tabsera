@@ -42,49 +42,49 @@ function Cart() {
   useEffect(() => {
     dispatch(getCartItems());
   }, []);
-  useEffect(() => {}, [cartItems]);
+  useEffect(() => { }, [cartItems]);
 
   useEffect(() => {
     var groupedCategory = groupArrayOfObjects(cartItems);
     setGroupedProductData(groupedCategory);
   }, [JSON.stringify(cartItems)]);
 
-  function groupArrayOfObjects(list) {
+  const groupArrayOfObjects = useCallback((list) => {
     const grouped = _.groupBy(list, (items) => items.merchant_id);
     return grouped;
-  }
+  }, [])
 
-  const handleAddToCart = async (item) => {
+  const handleAddToCart = useCallback(async (item) => {
     dispatch(addToBasket(item));
 
     setTimeout(() => {
       dispatch(getTotalCartQuantity());
     }, 1000);
-  };
-  const removeItemHandler = (item) => {
+  }, []);
+  const removeItemHandler = useCallback((item) => {
     dispatch(removeFromBasket(item));
     setTimeout(() => {
       dispatch(getTotalCartQuantity());
-    }, 1000);
-  };
+    }, 100);
+  }, []);
 
-  const handleClearCart = () => {
+  const handleClearCart = useCallback(() => {
     dispatch(clearBasket());
     setTimeout(() => {
       dispatch(getTotalCartQuantity());
     }, 1000);
-  };
+  }, []);
 
-  const handleDecreaseCart = (product) => {
+  const handleDecreaseCart = useCallback((product) => {
     dispatch(decreaseBasket(product));
     setTimeout(() => {
       dispatch(getTotalCartQuantity());
     }, 1000);
-  };
+  }, []);
 
-  const checkoutHandler = () => {
+  const checkoutHandler = useCallback(() => {
     router.push("/shipping_details");
-  };
+  }, []);
 
   return (
     // <VariableWidthGrid
@@ -116,22 +116,22 @@ function Cart() {
                 <Grid item xs>
                   {cartItems && groupProductData
                     ? Object.keys(groupProductData).map((key) => (
-                        <ShoppingCart
-                          key={key}
-                          heading={
-                            groupProductData[key].map(
-                              (result) => result.merchant_name
-                            )[0]
-                          }
-                          productCartData={groupProductData[key]}
-                          productPrice={cartItems}
-                          handleAddToCart={handleAddToCart}
-                          handleDecreaseCart={handleDecreaseCart}
-                          handleClearCart={handleClearCart}
-                          removeItemHandler={removeItemHandler}
-                          checkoutHandler={checkoutHandler}
-                        ></ShoppingCart>
-                      ))
+                      <ShoppingCart
+                        key={key}
+                        heading={
+                          groupProductData[key].map(
+                            (result) => result.merchant_name
+                          )[0]
+                        }
+                        productCartData={groupProductData[key]}
+                        productPrice={cartItems}
+                        handleAddToCart={handleAddToCart}
+                        handleDecreaseCart={handleDecreaseCart}
+                        handleClearCart={handleClearCart}
+                        removeItemHandler={removeItemHandler}
+                        checkoutHandler={checkoutHandler}
+                      ></ShoppingCart>
+                    ))
                     : ""}
                 </Grid>
               </Grid>

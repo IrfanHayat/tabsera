@@ -201,7 +201,7 @@ function Placeorder() {
         console.log(obj);
         let result = await dispatch(addOrder(obj));
 
-        if (result.payload.customerOrderNo != null) {
+        if (result.payload?.customerOrderNo != null) {
           // setOpenBar(true);
           setTimeout(() => {
             router.push({

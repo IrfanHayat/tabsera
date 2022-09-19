@@ -82,6 +82,7 @@ import ActionAreaCard from "./Card";
 import ShopProductSort from "./Filter/ProductSort";
 import SubCategory from "../pages/sub_category";
 import { useCallback } from "react";
+import { use } from "i18next";
 export default function PersistentDrawerLeft() {
   const { data, isLoading, isFetching, isError } = useGetAllProductsQuery();
   const { categoryData } = useSelector((state) => state.category);
@@ -149,7 +150,7 @@ export default function PersistentDrawerLeft() {
 
   const [sideBarCat, setSideBarCat] = useState([]);
 
-  function handleClick(event, categoryId) {
+  const handleClick = useCallback((event, categoryId) => {
     console.log(categoryId)
     if (anchorEl !== event.currentTarget) {
       setAnchorEl(event.currentTarget);
@@ -163,7 +164,7 @@ export default function PersistentDrawerLeft() {
     setSideBarCat(subCategory)
 
 
-  }
+  }, [sideBarCat])
 
   function handleHover() {
     currentlyHovering = true;
@@ -173,14 +174,14 @@ export default function PersistentDrawerLeft() {
     setAnchorEl(null);
   }
 
-  function handleCloseHover() {
+  const handleCloseHover = useCallback(() => {
     currentlyHovering = false;
     setTimeout(() => {
       if (!currentlyHovering) {
         handleClose();
       }
     }, 50);
-  }
+  }, [])
 
   // ---------------------------------------------------------------
 
@@ -189,7 +190,7 @@ export default function PersistentDrawerLeft() {
   let dispatch = useDispatch();
 
   /////////
-  const viewCategory = async (item) => {
+  const viewCategory = useCallback(async (item) => {
     console.log(item);
     await setCatId(null);
 
@@ -199,20 +200,20 @@ export default function PersistentDrawerLeft() {
     //   pathname: "/sub_category",
     //   query: { sub_category: item },
     // });
-  };
+  }, [catId]);
 
   const featureProduct = useSelector(
     (state) => state.product.featureProductData
   );
 
-  const viewProduct = (item) => {
+  const viewProduct = useCallback((item) => {
     router.push({
       pathname: "/product_detail",
       query: { productId: item },
     });
-  };
+  }, []);
 
-  const addToCartHandler = async (product) => {
+  const addToCartHandler = useCallback(async (product) => {
     let result = await dispatch(addToCart(product));
     console.log(result);
     if (result?.payload?.resultCode == 4000) {
@@ -227,7 +228,7 @@ export default function PersistentDrawerLeft() {
         router.push("/cart");
       }, 1000);
     }
-  };
+  }, []);
 
   useEffect(() => {
     if (key == 1) {
@@ -248,7 +249,7 @@ export default function PersistentDrawerLeft() {
 
   useEffect(() => { }, [featureProduct]);
 
-  const showAllProducts = () => {
+  const showAllProducts = useCallback(() => {
     if (showFreeShipping) {
       setShowProduct(true);
       setShowAllCategoryPro(false);
@@ -282,9 +283,9 @@ export default function PersistentDrawerLeft() {
       setShowFreeShipping(false);
       //setCatId(null);
     }
-  };
+  }, [showProduct, showAllCategoryPro, showAllMerchantPro, showDeals, showDiscounts, showFreeShipping]);
 
-  const showAllCategoriesProduct = () => {
+  const showAllCategoriesProduct = useCallback(() => {
     console.log("ccc");
 
     if (showFreeShipping == true) {
@@ -320,8 +321,8 @@ export default function PersistentDrawerLeft() {
       setShowFreeShipping(false);
       //setCatId(null);
     }
-  };
-  const showAllMerchantsProduct = () => {
+  }, [showProduct, showAllCategoryPro, showAllMerchantPro, showDeals, showDiscounts, showFreeShipping]);
+  const showAllMerchantsProduct = useCallback(() => {
     console.log(showFreeShipping);
     if (showFreeShipping) {
       setShowProduct(false);
@@ -355,7 +356,7 @@ export default function PersistentDrawerLeft() {
       setShowDiscounts(false);
       //setCatId(null);
     }
-  };
+  }, [showProduct, showAllCategoryPro, showAllMerchantPro, showDeals, showDiscounts, showFreeShipping]);
   // ----------------------------------------------------------------------------------
   const handleCat = useCallback(async (subCatId) => {
     await setCatId(null);

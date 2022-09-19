@@ -68,7 +68,7 @@ export const addToCart = createAsyncThunk("cart/addCart", async (product) => {
         `${url}/ecommerce/carts/items/${result.data.response.items[existingIndex].cart_item_id}`,
         result.data.response.items[existingIndex]
       );
-      return result;
+      return result.data.response.items;
     } else {
       console.log("I am here1")
       let tempProductItem = { ...product, qty: 1 };

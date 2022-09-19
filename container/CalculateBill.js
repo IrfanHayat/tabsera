@@ -76,6 +76,7 @@ function CalculateBill({ productPrice, checkoutHandler }) {
                 style={{ fontWeight: "bold" }}
               // align="center"
               >
+                {console.log(productPrice)}
                 {productPrice ? (
                   productPrice?.reduce((a, c) => a + c.qty, 0)
                 ) : (

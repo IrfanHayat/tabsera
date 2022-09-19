@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect, useCallback } from "react";
 import Details from "../../container/Detail";
 import { useSelector, useDispatch } from "react-redux";
 import Snackbar from "@mui/material/Snackbar";
@@ -50,12 +50,12 @@ function Product_detail(props) {
   };
 
   console.log(addBuyItem);
-  const viewStore = (categoryId, merchantId) => {
+  const viewStore = useCallback((categoryId, merchantId) => {
     router.push({
       pathname: "/merchant_store",
       query: { categoryId: categoryId, merchantId: merchantId },
     });
-  };
+  }, []);
 
   const handleCloseBar = (event, reason) => {
     if (reason === "clickaway") {
@@ -93,7 +93,7 @@ function Product_detail(props) {
     }
   }, [filterProductData.merchant_id]);
 
-  const skuData = (sku) => {
+  const skuData = useCallback((sku) => {
     console.log(sku);
     sku?.map((result) => {
       setProductImage(result.sku_images);
@@ -101,7 +101,7 @@ function Product_detail(props) {
 
       setPrice(result.cost);
     });
-  };
+  }, [productImage, productAttributes, price]);
 
   useEffect(() => {
     setStatus(addCart);
@@ -109,7 +109,7 @@ function Product_detail(props) {
 
   useMemo(() => skuData(filterProductData.skus), [filterProductData.skus]);
 
-  const addToCartHandler = async (item, skus) => {
+  const addToCartHandler = useCallback(async (item, skus) => {
     if (skus) {
       let product = {
         product_id: item.product_id,
@@ -135,9 +135,9 @@ function Product_detail(props) {
       } else {
         dispatch(getCartItems());
         dispatch(getTotalCartQuantity());
-        setTimeout(() => {
-          router.push("/cart");
-        }, 1000);
+
+        router.push("/cart");
+
       }
 
       await dispatch(getTotalCartQuantity());
@@ -154,9 +154,9 @@ function Product_detail(props) {
       } else {
         dispatch(getCartItems());
         dispatch(getTotalCartQuantity());
-        setTimeout(() => {
-          router.push("/cart");
-        }, 1000);
+
+        router.push("/cart");
+
       }
 
       console.log(result);
@@ -174,12 +174,13 @@ function Product_detail(props) {
     //   dispatch(addToBasket(item));
     //   router.push("/cart");
     // }
-  };
+  }, []);
+
   useEffect(() => {
     dispatch(getCartItems());
   }, []);
 
-  const BuyHandler = async (item, skus) => {
+  const BuyHandler = useCallback(async (item, skus) => {
     if (skus) {
       let product = {
         product_id: item.product_id,
@@ -195,7 +196,7 @@ function Product_detail(props) {
 
       let result = await dispatch(BuyNewItem(product));
       console.log(result);
-      console.log("status", status.resultCode);
+      console.log("status", status?.resultCode);
       console.log(status);
 
       // dispatch(addToCart(item));
@@ -215,7 +216,7 @@ function Product_detail(props) {
     } else {
       let result = await dispatch(BuyNewItem(item));
       console.log(result);
-      console.log("status", status.resultCode);
+      console.log("status", status?.resultCode);
       console.log(status);
 
       // dispatch(addToCart(item));
@@ -244,7 +245,7 @@ function Product_detail(props) {
     //   dispatch(addToBasket(item));
     //   router.push("/cart");
     // }
-  };
+  }, []);
 
   useEffect(() => {
     console.log(status);
@@ -257,13 +258,13 @@ function Product_detail(props) {
     router.push("/shipping");
   };
 
-  const handleAddToCart = async (item) => {
+  const handleAddToCart = useCallback(async (item) => {
     dispatch(addToBasket(item));
 
     setTimeout(() => {
       dispatch(getTotalCartQuantity());
     }, 1000);
-  };
+  }, []);
   return (
     <>
       {status?.resultCode === 4000 || buyStatus == true ? (
