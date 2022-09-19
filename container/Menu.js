@@ -24,6 +24,8 @@ import CarouselApp from "./Carousel/Carousel";
 import { useGetAllProductsQuery } from "../RTK/productApi";
 import MenuCard from "./DealsAndPromotions/MenuCards";
 import RadioGroup from "@mui/material/RadioGroup";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 
 import {
   CircularProgress,
@@ -553,12 +555,22 @@ export default function PersistentDrawerLeft() {
             <Box className={styles.carouselBox}>
               {featureProduct != "" ? (
                 <Carousel
+                  // IndicatorIcon={<Arrow}
+                  navButtonsProps={{
+                    // Change the colors and radius of the actual buttons. THIS STYLES BOTH BUTTONS
+                    style: {
+                      backgroundColor: "transparent",
+                      borderRadius: 0,
+                    },
+                  }}
                   animation="slide"
                   swipe
                   interval={2000}
-                  NextIcon={<ArrowRightIcon />}
-                  PrevIcon={<ArrowLeftIcon />}
-                  height={300}
+                  NextIcon={<ChevronRightIcon sx={{ color: "#0a3446" }} />}
+                  PrevIcon={<ChevronLeftIcon sx={{ color: "#0a3446" }} />}
+                  // height={"567px"}
+                  indicators={false}
+                  fullHeightHover={true}
                   navButtonsAlwaysVisible={true}
                 >
                   {featureProduct?.map((result) => (
@@ -570,33 +582,13 @@ export default function PersistentDrawerLeft() {
                         onClick={(e) => viewProduct(result.productId)}
                         image={result?.productImage}
                         alt="featured Product"
-                        sx={{
-                          top: 0,
-                          width: "100%",
-                          height: 290,
-                          objectFit: "contain",
-                        }}
+                        className={styles.carouselImage}
                       ></CardMedia>
 
-                      <Box
-                        // square
-                        // elevation={0}
-                        sx={{
-                          display: "flex",
-                          alignItems: "center",
-                          height: 50,
-                          // pl: 2,
-                          justifyContent: "space-between",
-                          p: 1,
-                          // bgcolor: "background.default",
-                        }}
-                      >
+                      <Box className={styles.carouselDesc}>
                         <Typography
-                          fontSize="0.9rem"
                           variant="h5"
-                          fontWeight={600}
-                          // display="inline"
-                          noWrap
+                          className={styles.carouselName}
                         >
                           {result?.productName}
                         </Typography>
@@ -609,10 +601,8 @@ export default function PersistentDrawerLeft() {
                           readOnly
                         />
                         <Typography
-                          fontSize="0.9rem"
                           variant="h5"
-                          fontWeight={600}
-                          sx={{ color: "warning.dark", p: 1 }}
+                          className={styles.carouselproductCost}
                         >
                           Rs. {result?.productCost}
                         </Typography>
