@@ -40,7 +40,7 @@ export default function Payment({
   const [radioCheck, setRadioCheck] = useState(false);
 
   return (
-    <Grid container>
+    <Grid>
       <CheckoutWizard activeStep={3}></CheckoutWizard>
       <Grid item xs={12} className={styles.payment}>
         <Box className={styles.paymentHeading}>
