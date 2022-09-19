@@ -52,7 +52,7 @@ function ShippingMethods({
 
   return (
     <>
-      <Grid container justifyContent={"center"}>
+      <Grid container>
         <Grid item md={12} xs={12}>
           <Box className={styles.shippingMethods}>
             <Box className={styles.shippingHeading}>
@@ -124,7 +124,7 @@ function ShippingMethods({
             // row
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="row-radio-buttons-group"
-          // value={labelValue}
+            // value={labelValue}
           >
             <Box className={styles.shippingBoxDivMain}>
               {shipmentMethodData &&
@@ -177,8 +177,12 @@ function ShippingMethods({
                 {t("shippingInfo.ShippingAdress.label.charges.subTotal")}
               </Grid>
               <Grid item xs={3}>
-                <Currency amount={productPrice &&
-                  productPrice.reduce((a, c) => a + c.qty * c.price, 0)}></Currency>
+                <Currency
+                  amount={
+                    productPrice &&
+                    productPrice.reduce((a, c) => a + c.qty * c.price, 0)
+                  }
+                ></Currency>
               </Grid>
               <Grid item xs={6}></Grid>
               {/* <ListItemText>$ 0.0</ListItemText> */}
@@ -188,19 +192,33 @@ function ShippingMethods({
                 {t("shippingInfo.ShippingAdress.label.charges.shippingcost")}
               </Grid>
               <Grid item xs={3}>
-                {shippingCharges ? <Currency amount={shippingCharges}></Currency> : <Currency amount={0}></Currency>}
+                {shippingCharges ? (
+                  <Currency amount={shippingCharges}></Currency>
+                ) : (
+                  <Currency amount={0}></Currency>
+                )}
               </Grid>
               <Grid item xs={6}></Grid>
             </ListItem>
             <ListItem>
               <Grid item xs={3}>
-                {t("shippingInfo.ShippingAdress.label.charges.totalCost")}{" "}
+                <strong>
+                  {t("shippingInfo.ShippingAdress.label.charges.totalCost")}{" "}
+                </strong>
               </Grid>
               <Grid item xs={3}>
-                <Currency amount={productPrice && shippingCharges
-                  ? productPrice?.reduce((a, c) => a + c.qty * c.price, 0) +
-                  shippingCharges
-                  : productPrice?.reduce((a, c) => a + c.qty * c.price, 0)}></Currency>
+                <strong>
+                  <Currency
+                    amount={
+                      productPrice && shippingCharges
+                        ? productPrice?.reduce(
+                            (a, c) => a + c.qty * c.price,
+                            0
+                          ) + shippingCharges
+                        : productPrice?.reduce((a, c) => a + c.qty * c.price, 0)
+                    }
+                  ></Currency>
+                </strong>
               </Grid>
               <Grid item xs={6}></Grid>
             </ListItem>
@@ -211,7 +229,7 @@ function ShippingMethods({
               variant="contained"
               color="primary"
               disabled={radioCheck ? "" : "disabled"}
-            // startIcon={<AddIcon />}
+              // startIcon={<AddIcon />}
             >
               {t("shippingInfo.ShippingAdress.button.reviewOrder")}
             </Button>
