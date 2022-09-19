@@ -93,7 +93,6 @@ const Index = ({ Item, data }) => {
   };
 
   const addToCartHandler = async (product) => {
-    console.log(product)
     let result = await dispatch(addToCart(product));
     console.log(result);
     if (result?.payload?.resultCode == 4000) {
