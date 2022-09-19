@@ -10,9 +10,6 @@ import { useTranslation } from "react-i18next";
 // import { getFreeShipping } from "../slice/freeShippingSlice";
 // import { getDeals } from "../slice/dealsPromotionsSlice";
 import { useRouter } from "next/router";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-
 import {
   addToBasket,
   addToCart,
@@ -85,6 +82,7 @@ import ActionAreaCard from "./Card";
 import ShopProductSort from "./Filter/ProductSort";
 import SubCategory from "../pages/sub_category";
 import { useCallback } from "react";
+import { use } from "i18next";
 export default function PersistentDrawerLeft() {
   const { data, isLoading, isFetching, isError } = useGetAllProductsQuery();
   const { categoryData } = useSelector((state) => state.category);
@@ -152,7 +150,7 @@ export default function PersistentDrawerLeft() {
 
   const [sideBarCat, setSideBarCat] = useState([]);
 
-  function handleClick(event, categoryId) {
+  const handleClick = useCallback((event, categoryId) => {
     console.log(categoryId)
     if (anchorEl !== event.currentTarget) {
       setAnchorEl(event.currentTarget);
@@ -166,7 +164,7 @@ export default function PersistentDrawerLeft() {
     setSideBarCat(subCategory)
 
 
-  }
+  }, [sideBarCat])
 
   function handleHover() {
     currentlyHovering = true;
@@ -176,14 +174,14 @@ export default function PersistentDrawerLeft() {
     setAnchorEl(null);
   }
 
-  function handleCloseHover() {
+  const handleCloseHover = useCallback(() => {
     currentlyHovering = false;
     setTimeout(() => {
       if (!currentlyHovering) {
         handleClose();
       }
     }, 50);
-  }
+  }, [])
 
   // ---------------------------------------------------------------
 
@@ -192,7 +190,7 @@ export default function PersistentDrawerLeft() {
   let dispatch = useDispatch();
 
   /////////
-  const viewCategory = async (item) => {
+  const viewCategory = useCallback(async (item) => {
     console.log(item);
     await setCatId(null);
 
@@ -202,20 +200,20 @@ export default function PersistentDrawerLeft() {
     //   pathname: "/sub_category",
     //   query: { sub_category: item },
     // });
-  };
+  }, [catId]);
 
   const featureProduct = useSelector(
     (state) => state.product.featureProductData
   );
 
-  const viewProduct = (item) => {
+  const viewProduct = useCallback((item) => {
     router.push({
       pathname: "/product_detail",
       query: { productId: item },
     });
-  };
+  }, []);
 
-  const addToCartHandler = async (product) => {
+  const addToCartHandler = useCallback(async (product) => {
     let result = await dispatch(addToCart(product));
     console.log(result);
     if (result?.payload?.resultCode == 4000) {
@@ -226,11 +224,11 @@ export default function PersistentDrawerLeft() {
     } else {
       dispatch(getCartItems());
       dispatch(getTotalCartQuantity());
-      // setTimeout(() => {
-      //   router.push("/cart");
-      // }, 1000);
+      setTimeout(() => {
+        router.push("/cart");
+      }, 1000);
     }
-  };
+  }, []);
 
   useEffect(() => {
     if (key == 1) {
@@ -251,7 +249,7 @@ export default function PersistentDrawerLeft() {
 
   useEffect(() => { }, [featureProduct]);
 
-  const showAllProducts = () => {
+  const showAllProducts = useCallback(() => {
     if (showFreeShipping) {
       setShowProduct(true);
       setShowAllCategoryPro(false);
@@ -285,9 +283,9 @@ export default function PersistentDrawerLeft() {
       setShowFreeShipping(false);
       //setCatId(null);
     }
-  };
+  }, [showProduct, showAllCategoryPro, showAllMerchantPro, showDeals, showDiscounts, showFreeShipping]);
 
-  const showAllCategoriesProduct = () => {
+  const showAllCategoriesProduct = useCallback(() => {
     console.log("ccc");
 
     if (showFreeShipping == true) {
@@ -323,8 +321,8 @@ export default function PersistentDrawerLeft() {
       setShowFreeShipping(false);
       //setCatId(null);
     }
-  };
-  const showAllMerchantsProduct = () => {
+  }, [showProduct, showAllCategoryPro, showAllMerchantPro, showDeals, showDiscounts, showFreeShipping]);
+  const showAllMerchantsProduct = useCallback(() => {
     console.log(showFreeShipping);
     if (showFreeShipping) {
       setShowProduct(false);
@@ -358,7 +356,7 @@ export default function PersistentDrawerLeft() {
       setShowDiscounts(false);
       //setCatId(null);
     }
-  };
+  }, [showProduct, showAllCategoryPro, showAllMerchantPro, showDeals, showDiscounts, showFreeShipping]);
   // ----------------------------------------------------------------------------------
   const handleCat = useCallback(async (subCatId) => {
     await setCatId(null);
@@ -555,22 +553,12 @@ export default function PersistentDrawerLeft() {
             <Box className={styles.carouselBox}>
               {featureProduct != "" ? (
                 <Carousel
-                  // IndicatorIcon={<Arrow}
-                  navButtonsProps={{
-                    // Change the colors and radius of the actual buttons. THIS STYLES BOTH BUTTONS
-                    style: {
-                      backgroundColor: "transparent",
-                      borderRadius: 0,
-                    },
-                  }}
                   animation="slide"
                   swipe
                   interval={2000}
-                  NextIcon={<ChevronRightIcon sx={{ color: "#0a3446" }} />}
-                  PrevIcon={<ChevronLeftIcon sx={{ color: "#0a3446" }} />}
-                  // height={"567px"}
-                  indicators={false}
-                  fullHeightHover={true}
+                  NextIcon={<ArrowRightIcon />}
+                  PrevIcon={<ArrowLeftIcon />}
+                  height={300}
                   navButtonsAlwaysVisible={true}
                 >
                   {featureProduct?.map((result) => (
@@ -582,13 +570,33 @@ export default function PersistentDrawerLeft() {
                         onClick={(e) => viewProduct(result.productId)}
                         image={result?.productImage}
                         alt="featured Product"
-                        className={styles.carouselImage}
+                        sx={{
+                          top: 0,
+                          width: "100%",
+                          height: 290,
+                          objectFit: "contain",
+                        }}
                       ></CardMedia>
 
-                      <Box className={styles.carouselDesc}>
+                      <Box
+                        // square
+                        // elevation={0}
+                        sx={{
+                          display: "flex",
+                          alignItems: "center",
+                          height: 50,
+                          // pl: 2,
+                          justifyContent: "space-between",
+                          p: 1,
+                          // bgcolor: "background.default",
+                        }}
+                      >
                         <Typography
+                          fontSize="0.9rem"
                           variant="h5"
-                          className={styles.carouselName}
+                          fontWeight={600}
+                          // display="inline"
+                          noWrap
                         >
                           {result?.productName}
                         </Typography>
@@ -601,8 +609,10 @@ export default function PersistentDrawerLeft() {
                           readOnly
                         />
                         <Typography
+                          fontSize="0.9rem"
                           variant="h5"
-                          className={styles.carouselproductCost}
+                          fontWeight={600}
+                          sx={{ color: "warning.dark", p: 1 }}
                         >
                           Rs. {result?.productCost}
                         </Typography>
