@@ -226,9 +226,9 @@ export default function PersistentDrawerLeft() {
     } else {
       dispatch(getCartItems());
       dispatch(getTotalCartQuantity());
-      setTimeout(() => {
-        router.push("/cart");
-      }, 1000);
+      // setTimeout(() => {
+      //   router.push("/cart");
+      // }, 1000);
     }
   };
 
