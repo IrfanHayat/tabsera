@@ -143,7 +143,7 @@ function SubCategory() {
     let result = await dispatch(getProductSearch(router?.query?.data));
     console.log(result);
     setSearchData(result.payload);
-  }, []);
+  }, [router?.query?.data]);
   useMemo(() => { }, [searchData]);
   const viewProduct = (item) => {
     router.push({
@@ -625,7 +625,24 @@ function SubCategory() {
             flag == false ? (
             //showFreeShipping == false
             <>
-              <ViewAllProducts Item={Item} data={filterProduct.length > 0 ? filterProduct : searchData}></ViewAllProducts>
+              {filterProduct.length > 0 ? filterProduct?.map((item, index) => (
+                <ActionAreaCard
+                  product={item}
+                  viewProduct={viewProduct}
+                  addToCartHandler={addToCartHandler}
+                  key={index}
+                >
+                  {/* {item?.productName}> */}
+                </ActionAreaCard>)) : searchData?.map((item, index) => (
+                  <ActionAreaCard
+                    product={item}
+                    viewProduct={viewProduct}
+                    addToCartHandler={addToCartHandler}
+                    key={index}
+                  >
+                    {/* {item?.productName}> */}
+                  </ActionAreaCard>))}
+
             </>
           ) : (
             <>
