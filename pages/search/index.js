@@ -1,4 +1,10 @@
-import React, { useState, useMemo, useRef, useEffect, useCallback } from "react";
+import React, {
+  useState,
+  useMemo,
+  useRef,
+  useEffect,
+  useCallback,
+} from "react";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
 import ActionAreaCard from "../../container/Card";
@@ -39,7 +45,7 @@ import ListFilter from "../../container/Filter/ListFilter";
 import PageFilter from "../../container/Filter/PageFilter";
 import ViewFilter from "../../container/Filter/ViewFilter";
 import Button from "@mui/material/Button";
-import PriceFilter from "../../container/Filter/PriceFilter";
+// import PriceFilter from "../../container/Filter/PriceFilter";
 import Cookies from "js-cookie";
 import SnackBarTool from "../../container/SnackBar/SnackBar";
 import ModalLoginData from "../../container/Login/ModalData";
@@ -133,14 +139,12 @@ function SubCategory() {
   const [childProducts, setChildProducts] = useState();
   let [searchData, setSearchData] = useState();
 
-
-
-  useEffect(async () => {
+  useMemo(async () => {
     let result = await dispatch(getProductSearch(router?.query?.data));
     console.log(result);
     setSearchData(result.payload);
-  }, []);
-  useEffect(() => { }, [searchData]);
+  }, [router?.query?.data]);
+  useMemo(() => { }, [searchData]);
   const viewProduct = (item) => {
     router.push({
       pathname: "/product_detail",
@@ -158,7 +162,6 @@ function SubCategory() {
   const handleChange3 = (event) => {
     setChecked([checked[0], event.target.checked]);
   };
-
 
   const showAllProducts = useCallback(() => {
     if (showFreeShipping) {
@@ -299,7 +302,7 @@ function SubCategory() {
     dispatch(getProductWithCategoryId(id));
   };
 
-  useEffect(async () => {
+  useMemo(async () => {
     let result = await dispatch(getCategoryBrand());
     let results = result?.payload.filter(
       (result) => result.category_id == router?.query?.sub_category
@@ -403,7 +406,7 @@ function SubCategory() {
     setOpenBar(false);
   };
   const handleFilters = (event) => {
-    console.log(event.target.name)
+    console.log(event.target.name);
     // if (discountData) {
 
     //   let result1 = discountData.filter(
@@ -415,8 +418,7 @@ function SubCategory() {
     //   setFlag(true);
 
     // }
-
-  }
+  };
 
   const handleClose = () => {
     setOpen(false);
@@ -428,6 +430,7 @@ function SubCategory() {
     console.log(typeof max);
     console.log(typeof min);
     console.log(searchData);
+
     let result = searchData.filter(
       (result) =>
         parseInt(result.productCost) >= parseInt(min) &&
@@ -484,46 +487,39 @@ function SubCategory() {
         </Box> */}
       {/* </Grid> */}
       {/* ---------------------------------------------------- */}
-      <Box
-        sx={{
-          display: "flex",
-          flexWrap: "nowrap",
-          // p: 1,
-          // m: 1,
-          // maxWidth: 300,
-          // borderRadius: 1,
-        }}
-      // className={styles.filtersBar}
-      >
-        <Box >
-          {/* <Grid item md={3}> */}
-          <SideBarFilter
-            value={value}
-            setDealsData={setDealsData}
-            setShowDeals={setShowDeals}
-            setDiscountData={setDiscountData}
-            showDiscounts={showDiscounts}
-            setShowDiscounts={setShowDiscounts}
-            setFreeShippingData={setFreeShippingData}
-            setShowFreeShipping={setShowFreeShipping}
-            setShowProduct={setShowProduct}
-            setShowAllCategoryPro={setShowAllCategoryPro}
-            setShowAllMerchantPro={setShowAllCategoryPro}
-            setFilterData1={setFilterData}
-            MinInput={MinInput}
-            MaxInput={MaxInput}
-            priceFilter={priceFilter}
-            handleFilters={handleFilters}
-            categoryProduct={categoryProduct}
-            parentCategories={parentCategories}
-            childrenCategory={children}
-            subCategories={subCategories}
-            brands={brands}
-          ></SideBarFilter>
-          {/* </Grid> */}
-          {/* ---------------------------------------------------- */}
+      <Box className={styles.searchPage}>
+        {/* <Grid item md={3}> */}
+        <SideBarFilter
+          // searchData={searchData}
+          // setSearchData={setSearchData}
+          filterProduct={filterProduct}
+          setFilterProduct={setFilterProduct}
+          value={value}
+          setDealsData={setDealsData}
+          setShowDeals={setShowDeals}
+          setDiscountData={setDiscountData}
+          showDiscounts={showDiscounts}
+          setShowDiscounts={setShowDiscounts}
+          setFreeShippingData={setFreeShippingData}
+          setShowFreeShipping={setShowFreeShipping}
+          setShowProduct={setShowProduct}
+          setShowAllCategoryPro={setShowAllCategoryPro}
+          setShowAllMerchantPro={setShowAllCategoryPro}
+          setFilterData1={setFilterData}
+          MinInput={MinInput}
+          MaxInput={MaxInput}
+          priceFilter={priceFilter}
+          handleFilters={handleFilters}
+          categoryProduct={categoryProduct}
+          parentCategories={parentCategories}
+          childrenCategory={children}
+          subCategories={subCategories}
+          brands={brands}
+        ></SideBarFilter>
+        {/* </Grid> */}
+        {/* ---------------------------------------------------- */}
 
-          {/* <Box
+        {/* <Box
             role="presentation"
 
             sx={{ display: "flex", p: 1, bgcolor: "#fafafa" }}
@@ -584,9 +580,9 @@ function SubCategory() {
             <ViewFilter handleView={handleView} />
           </Grid> */}
 
-          {console.log(filterProduct?.length)}
-          {/* <Grid item md={8} sx={{ bgcolor: "red" }}> */}
-          {/* {productDataWithCategoryId.length > 0 &&
+        {console.log(filterProduct?.length)}
+        {/* <Grid item md={8} sx={{ bgcolor: "red" }}> */}
+        {/* {productDataWithCategoryId.length > 0 &&
             filterProduct?.length < 1 &&
             flag == false
             ?
@@ -617,24 +613,37 @@ function SubCategory() {
               ))
               : "Product Not Found"} */}
 
-          {/* </Grid> */}
-        </Box>
-        {console.log(filterProduct?.length)}
-        <Box  >
+        {/* </Grid> */}
+        {console.log(filterProduct)}
+        <Box className={styles.itemBox}>
           {showProduct == false &&
             showAllCategoryPro == false &&
             showAllMerchantPro == false &&
             showDeals == false &&
-            showDiscounts == false && filterProduct?.length < 1 &&
+            showDiscounts == false ||
+            filterProduct?.length >= 1 &&
             flag == false ? (
             //showFreeShipping == false
-            <Grid >
-              <ViewAllProducts
-                Item={Item}
-                data={searchData}
-              ></ViewAllProducts>
+            <>
+              {filterProduct.length > 0 ? filterProduct?.map((item, index) => (
+                <ActionAreaCard
+                  product={item}
+                  viewProduct={viewProduct}
+                  addToCartHandler={addToCartHandler}
+                  key={index}
+                >
+                  {/* {item?.productName}> */}
+                </ActionAreaCard>)) : searchData?.map((item, index) => (
+                  <ActionAreaCard
+                    product={item}
+                    viewProduct={viewProduct}
+                    addToCartHandler={addToCartHandler}
+                    key={index}
+                  >
+                    {/* {item?.productName}> */}
+                  </ActionAreaCard>))}
 
-            </Grid>
+            </>
           ) : (
             <>
               {showProduct &&
@@ -643,12 +652,12 @@ function SubCategory() {
                 showAllMerchantPro == false &&
                 showDeals == false &&
                 showFreeShipping == false ? (
-                <Box >
+                <>
                   <ViewAllProducts
                     Item={Item}
-                    data={searchData}
+                    data={filterProduct ? filterProduct : searchData}
                   ></ViewAllProducts>
-                </Box>
+                </>
               ) : (
                 <>
                   {showProduct &&
@@ -658,14 +667,12 @@ function SubCategory() {
                     showDeals == false &&
                     showFreeShipping == false &&
                     sortFilter == true ? (
-
                     <ViewAllProducts
                       Item={Item}
                       data={searchData}
                     ></ViewAllProducts>
                   ) : (
                     <></>
-
                   )}
                 </>
               )}
@@ -715,7 +722,8 @@ function SubCategory() {
                       {showDeals &&
                         showDiscounts == false &&
                         // showFreeShipping == false &&
-                        showProduct == false && filterDeal.length < 1 ? (
+                        showProduct == false &&
+                        filterDeal.length < 1 ? (
                         <DealsAndPromotions
                           data={filterData?.length > 0 ? filterData : dealsData}
                           showProduct={showProduct}
@@ -724,20 +732,26 @@ function SubCategory() {
                           filterData={filterData}
                         ></DealsAndPromotions>
                       ) : (
-                        <> {showDeals &&
-                          showDiscounts == false &&
-                          // showFreeShipping == false &&
-                          showProduct == false && filterDeal.length > 0 ? (
-                          <DealsAndPromotions
-                            data={filterDeal?.length > 0 ? filterDeal : dealsData}
-                            showProduct={showProduct}
-                            showAllCategoryPro={showAllCategoryPro}
-                            showAllMerchantPro={showAllMerchantPro}
-                            filterData={filterData}
-                          ></DealsAndPromotions>
-                        ) : (
-                          <></>
-                        )}</>
+                        <>
+                          {" "}
+                          {showDeals &&
+                            showDiscounts == false &&
+                            // showFreeShipping == false &&
+                            showProduct == false &&
+                            filterDeal.length > 0 ? (
+                            <DealsAndPromotions
+                              data={
+                                filterDeal?.length > 0 ? filterDeal : dealsData
+                              }
+                              showProduct={showProduct}
+                              showAllCategoryPro={showAllCategoryPro}
+                              showAllMerchantPro={showAllMerchantPro}
+                              filterData={filterData}
+                            ></DealsAndPromotions>
+                          ) : (
+                            <></>
+                          )}
+                        </>
                       )}
                     </Grid>
                   )}
@@ -788,7 +802,8 @@ function SubCategory() {
                       <>
                         {showDiscounts &&
                           //     showFreeShipping == false &&
-                          showProduct == false && filterDiscount.length < 1 ? (
+                          showProduct == false &&
+                          filterDiscount.length < 1 ? (
                           <Discounts
                             data={
                               filterData?.length > 0 ? filterData : discountData
@@ -799,23 +814,29 @@ function SubCategory() {
                             filterData={filterData}
                           ></Discounts>
                         ) : (
-                          <>  <>
-                            {showDiscounts &&
-                              //     showFreeShipping == false &&
-                              showProduct == false && filterDiscount.length > 0 ? (
-                              <Discounts
-                                data={
-                                  filterDiscount?.length > 0 ? filterDiscount : discountData
-                                }
-                                showProduct={showProduct}
-                                showAllCategoryPro={showAllCategoryPro}
-                                showAllMerchantPro={showAllMerchantPro}
-                                filterData={filterData}
-                              ></Discounts>
-                            ) : (
-                              <></>
-                            )}
-                          </></>
+                          <>
+                            {" "}
+                            <>
+                              {showDiscounts &&
+                                //     showFreeShipping == false &&
+                                showProduct == false &&
+                                filterDiscount.length > 0 ? (
+                                <Discounts
+                                  data={
+                                    filterDiscount?.length > 0
+                                      ? filterDiscount
+                                      : discountData
+                                  }
+                                  showProduct={showProduct}
+                                  showAllCategoryPro={showAllCategoryPro}
+                                  showAllMerchantPro={showAllMerchantPro}
+                                  filterData={filterData}
+                                ></Discounts>
+                              ) : (
+                                <></>
+                              )}
+                            </>
+                          </>
                         )}
                       </>
                     )}
@@ -897,9 +918,7 @@ function SubCategory() {
               showFreeShipping == false &&
               searchData?.length > 0 ? (
               <ProductGetByCategory
-                data={
-                  filterData?.length > 0 ? filterData : searchData
-                }
+                data={filterData?.length > 0 ? filterData : searchData}
                 Item={Item}
               ></ProductGetByCategory>
             ) : (
@@ -911,17 +930,11 @@ function SubCategory() {
                   showFreeShipping == false &&
                   searchData?.length > 0 ? (
                   <ProductGetByMerchant
-                    data={
-                      filterData?.length > 0
-                        ? filterData
-                        : searchData
-                    }
+                    data={filterData?.length > 0 ? filterData : searchData}
                     Item={Item}
                   ></ProductGetByMerchant>
                 ) : (
-                  <>
-
-                  </>
+                  <></>
                 )}
               </>
             )}
