@@ -715,10 +715,10 @@ function Details({
             pl={3}
             style={{ display: "flex", bgcolor: "red" }}
           >
-            <Typography style={{ fontWeight: "bold", bgcolor: "red" }}>
+            {/* <Typography style={{ fontWeight: "bold", bgcolor: "red" }}>
               {" "}
               {t("PDP.labels.similar")} :
-            </Typography>
+            </Typography> */}
           </Grid>
         </Grid>
         <Grid container>
@@ -726,7 +726,7 @@ function Details({
             <Grid>
               <Typography
                 className={styles.ratings}
-              // sx={{ fontSize: "1rem", fontWeight: "bold" }}
+                sx={{ fontSize: "1rem", fontWeight: "bold", marginLeft: "33px" }}
               >
                 {t("PDP.labels.similar")}
               </Typography>
