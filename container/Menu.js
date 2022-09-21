@@ -10,9 +10,6 @@ import { useTranslation } from "react-i18next";
 // import { getFreeShipping } from "../slice/freeShippingSlice";
 // import { getDeals } from "../slice/dealsPromotionsSlice";
 import { useRouter } from "next/router";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-
 import {
   addToBasket,
   addToCart,
@@ -27,6 +24,8 @@ import CarouselApp from "./Carousel/Carousel";
 import { useGetAllProductsQuery } from "../RTK/productApi";
 import MenuCard from "./DealsAndPromotions/MenuCards";
 import RadioGroup from "@mui/material/RadioGroup";
+import ChevronRightIcon from "@mui/icons-material/ChevronRight";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 
 import {
   CircularProgress,
@@ -85,6 +84,7 @@ import ActionAreaCard from "./Card";
 import ShopProductSort from "./Filter/ProductSort";
 import SubCategory from "../pages/sub_category";
 import { useCallback } from "react";
+import { use } from "i18next";
 export default function PersistentDrawerLeft() {
   const { data, isLoading, isFetching, isError } = useGetAllProductsQuery();
   const { categoryData } = useSelector((state) => state.category);
@@ -152,21 +152,21 @@ export default function PersistentDrawerLeft() {
 
   const [sideBarCat, setSideBarCat] = useState([]);
 
-  function handleClick(event, categoryId) {
-    console.log(categoryId)
-    if (anchorEl !== event.currentTarget) {
-      setAnchorEl(event.currentTarget);
-    }
-    console.log(category)
-    let subCategory = category?.filter((result) =>
-      result.category_id == categoryId
-    )[0]
+  const handleClick = useCallback(
+    (event, categoryId) => {
+      console.log(categoryId);
+      if (anchorEl !== event.currentTarget) {
+        setAnchorEl(event.currentTarget);
+      }
+      console.log(category);
+      let subCategory = category?.filter(
+        (result) => result.category_id == categoryId
+      )[0];
 
-
-    setSideBarCat(subCategory)
-
-
-  }
+      setSideBarCat(subCategory);
+    },
+    [sideBarCat]
+  );
 
   function handleHover() {
     currentlyHovering = true;
@@ -176,14 +176,14 @@ export default function PersistentDrawerLeft() {
     setAnchorEl(null);
   }
 
-  function handleCloseHover() {
+  const handleCloseHover = useCallback(() => {
     currentlyHovering = false;
     setTimeout(() => {
       if (!currentlyHovering) {
         handleClose();
       }
     }, 50);
-  }
+  }, []);
 
   // ---------------------------------------------------------------
 
@@ -192,30 +192,33 @@ export default function PersistentDrawerLeft() {
   let dispatch = useDispatch();
 
   /////////
-  const viewCategory = async (item) => {
-    console.log(item);
-    await setCatId(null);
+  const viewCategory = useCallback(
+    async (item) => {
+      console.log(item);
+      await setCatId(null);
 
-    await setCatId(item);
+      await setCatId(item);
 
-    // router.push({
-    //   pathname: "/sub_category",
-    //   query: { sub_category: item },
-    // });
-  };
+      // router.push({
+      //   pathname: "/sub_category",
+      //   query: { sub_category: item },
+      // });
+    },
+    [catId]
+  );
 
   const featureProduct = useSelector(
     (state) => state.product.featureProductData
   );
 
-  const viewProduct = (item) => {
+  const viewProduct = useCallback((item) => {
     router.push({
       pathname: "/product_detail",
       query: { productId: item },
     });
-  };
+  }, []);
 
-  const addToCartHandler = async (product) => {
+  const addToCartHandler = useCallback(async (product) => {
     let result = await dispatch(addToCart(product));
     console.log(result);
     if (result?.payload?.resultCode == 4000) {
@@ -230,7 +233,7 @@ export default function PersistentDrawerLeft() {
         router.push("/cart");
       }, 1000);
     }
-  };
+  }, []);
 
   useEffect(() => {
     if (key == 1) {
@@ -251,7 +254,7 @@ export default function PersistentDrawerLeft() {
 
   useEffect(() => { }, [featureProduct]);
 
-  const showAllProducts = () => {
+  const showAllProducts = useCallback(() => {
     if (showFreeShipping) {
       setShowProduct(true);
       setShowAllCategoryPro(false);
@@ -285,9 +288,16 @@ export default function PersistentDrawerLeft() {
       setShowFreeShipping(false);
       //setCatId(null);
     }
-  };
+  }, [
+    showProduct,
+    showAllCategoryPro,
+    showAllMerchantPro,
+    showDeals,
+    showDiscounts,
+    showFreeShipping,
+  ]);
 
-  const showAllCategoriesProduct = () => {
+  const showAllCategoriesProduct = useCallback(() => {
     console.log("ccc");
 
     if (showFreeShipping == true) {
@@ -323,8 +333,15 @@ export default function PersistentDrawerLeft() {
       setShowFreeShipping(false);
       //setCatId(null);
     }
-  };
-  const showAllMerchantsProduct = () => {
+  }, [
+    showProduct,
+    showAllCategoryPro,
+    showAllMerchantPro,
+    showDeals,
+    showDiscounts,
+    showFreeShipping,
+  ]);
+  const showAllMerchantsProduct = useCallback(() => {
     console.log(showFreeShipping);
     if (showFreeShipping) {
       setShowProduct(false);
@@ -358,12 +375,22 @@ export default function PersistentDrawerLeft() {
       setShowDiscounts(false);
       //setCatId(null);
     }
-  };
+  }, [
+    showProduct,
+    showAllCategoryPro,
+    showAllMerchantPro,
+    showDeals,
+    showDiscounts,
+    showFreeShipping,
+  ]);
   // ----------------------------------------------------------------------------------
-  const handleCat = useCallback(async (subCatId) => {
-    await setCatId(null);
-    await setCatId(subCatId)
-  }, [catId])
+  const handleCat = useCallback(
+    async (subCatId) => {
+      await setCatId(null);
+      await setCatId(subCatId);
+    },
+    [catId]
+  );
   console.log(discountData);
 
   return (
@@ -473,13 +500,14 @@ export default function PersistentDrawerLeft() {
                           secondaryAction={
                             <ArrowForwardIosIcon
                               sx={{ fontSize: 12 }}
-                              onMouseOver={(e) => handleClick(e, result.category_id)}
+                              onMouseOver={(e) =>
+                                handleClick(e, result.category_id)
+                              }
                             // fontSize="small"
                             />
                           }
                         >
                           <ListItemText
-
                             onClick={(e) => viewCategory(result.category_id)}
                           >
                             {result.category_name}
@@ -509,14 +537,15 @@ export default function PersistentDrawerLeft() {
                             {sideBarCat?.child?.map((subcategory) => (
                               <MenuItem
                                 key={subcategory.category_id}
-                                onClick={() => handleCat(subcategory.category_id)}
+                                onClick={() =>
+                                  handleCat(subcategory.category_id)
+                                }
                               >
                                 {subcategory.category_name}
                               </MenuItem>
                             ))}
                           </Menu>
                         }
-
                       </>
                     ))}
                   </>
@@ -655,8 +684,8 @@ export default function PersistentDrawerLeft() {
                 ></ListFilter>
               </Box>
               <Box>
-                {
-                  catId == null ? <PageFilter
+                {catId == null ? (
+                  <PageFilter
                     value={value}
                     setDealsData={setDealsData}
                     setShowDeals={setShowDeals}
@@ -669,9 +698,10 @@ export default function PersistentDrawerLeft() {
                     setShowAllCategoryPro={setShowAllCategoryPro}
                     setShowAllMerchantPro={setShowAllCategoryPro}
                     setFilterData={setFilterData}
-                  ></PageFilter> : ""
-                }
-
+                  ></PageFilter>
+                ) : (
+                  ""
+                )}
               </Box>
               <Box>
                 {/* <SortFilter
@@ -764,14 +794,14 @@ export default function PersistentDrawerLeft() {
                       setShowFilterData={setShowFilterData}
                       setFilterData={setFilterData}
                     ></ShopProductSort>
-                  ) : (
-
-                    cartId == null ? <ShopProductSort
+                  ) : cartId == null ? (
+                    <ShopProductSort
                       data={data?.response}
                       setShowFilterData={setShowFilterData}
                       setFilterData={setFilterData}
-                    ></ShopProductSort> : <></>
-
+                    ></ShopProductSort>
+                  ) : (
+                    <></>
                   )
                 ) : (
                   <></>
@@ -779,7 +809,8 @@ export default function PersistentDrawerLeft() {
 
                 {showFreeShipping == false &&
                   showDeals == false &&
-                  showDiscounts == false && catId == null ? (
+                  showDiscounts == false &&
+                  catId == null ? (
                   <ShopProductSort
                     data={data?.response}
                     setShowFilterData={setShowFilterData}

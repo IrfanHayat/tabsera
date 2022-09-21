@@ -374,10 +374,16 @@ function Details({
           {/* <Divider fullWidth /> */}
 
           <Box sx={{ py: 1 }}>
-            <Box
-              className={styles.prodCost}
-            >
-              {skusProduct ? <><Currency amount={skusProduct.cost}></Currency>  </> : <><Currency amount={price}></Currency></>}
+            <Box className={styles.prodCost}>
+              {skusProduct ? (
+                <>
+                  <Currency amount={skusProduct.cost}></Currency>{" "}
+                </>
+              ) : (
+                <>
+                  <Currency amount={price}></Currency>
+                </>
+              )}
             </Box>
 
             <Box
@@ -525,7 +531,7 @@ function Details({
             // container
             spacing={1}
             sx={{
-              mt: 2,
+              mt: 7,
               display: {
                 xs: "none",
                 md: "flex",
@@ -715,13 +721,13 @@ function Details({
             pl={3}
             style={{ display: "flex", bgcolor: "red" }}
           >
-            {/* <Typography style={{ fontWeight: "bold", bgcolor: "red" }}>
+            <Typography style={{ fontWeight: "bold", bgcolor: "red", marginLeft: "37px" }}>
               {" "}
               {t("PDP.labels.similar")} :
-            </Typography> */}
+            </Typography>
           </Grid>
         </Grid>
-        <Grid container>
+        {/* <Grid container>
           <Grid item md={9} xs={9}>
             <Grid>
               <Typography
@@ -736,11 +742,9 @@ function Details({
                 </ListItem>
               </List>
             </Grid>
-            {/* <Grid item md={9} xs={9}>
-              <Typography style={{ fontWeight: "bold" }}>Rating :</Typography>
-            </Grid> */}
+     
           </Grid>
-        </Grid>
+        </Grid> */}
         <AppBar
           position="fixed"
           color="inherit"
@@ -804,7 +808,7 @@ function Details({
             </Stack>
           </Toolbar>
         </AppBar>
-      </Grid >
+      </Grid>
     </>
   );
 }

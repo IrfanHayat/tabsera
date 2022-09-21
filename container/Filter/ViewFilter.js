@@ -9,16 +9,16 @@ function ViewFilter({ handleView }) {
     <Box sx={{ display: "flex", p: 1 }}>
       <Typography>View :</Typography>
       <GridViewIcon
-        color={color ? "primary" : ""}
+        // color=
+        color={color ? " " : "warning"}
         onClick={() => {
-          setcolor(true), handleView("grid");
+          setcolor(false), handleView("list");
         }}
       ></GridViewIcon>
       <ViewListIcon
-        // color=
-        color={color ? " " : "primary"}
+        color={color ? "warning" : ""}
         onClick={() => {
-          setcolor(false), handleView("list");
+          setcolor(true), handleView("grid");
         }}
       ></ViewListIcon>
     </Box>

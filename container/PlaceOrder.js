@@ -41,7 +41,8 @@ import CategoryIcon from "@mui/icons-material/Category";
 import SummarizeIcon from "@mui/icons-material/Summarize";
 import ViewListIcon from "@mui/icons-material/ViewList";
 import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
-import Currency from '../container/Currency/currency'
+import Currency from "../container/Currency/currency";
+import { Divider } from "@mui/material";
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
@@ -89,21 +90,22 @@ function PlaceOrder({
       <CheckoutWizard activeStep={2}></CheckoutWizard>
 
       <Grid container>
-        <Grid item md={12} xs={12} className={styles.placeOrder}>
-          <Box className={styles.placeOrderHeading}>
-            <InfoIcon className={styles.Icon} />
-            <Typography style={{ fontWeight: "bold" }}>
-              {t("shippingInfo.Review Order.labels.shippingInformation")}
-            </Typography>
-          </Box>
-          <Box>
-            <Box className={styles.infoList}>
-              <AccountCircleIcon className={styles.infoIcon} />
-              <Typography>
-                {userData.first_name} {userData.last_name}
+        <Grid item md={8} xs={12}>
+          <Grid item md={12} xs={12} className={styles.placeOrder}>
+            <Box className={styles.placeOrderHeading}>
+              <InfoIcon className={styles.Icon} />
+              <Typography style={{ fontWeight: "bold" }}>
+                {t("shippingInfo.Review Order.labels.shippingInformation")}
               </Typography>
             </Box>
-            {/* <List>
+            <Box>
+              <Box className={styles.infoList}>
+                <AccountCircleIcon className={styles.infoIcon} />
+                <Typography>
+                  {userData.first_name} {userData.last_name}
+                </Typography>
+              </Box>
+              {/* <List>
                 <ListItem>
                   <ListItemIcon>
                     <PhoneIcon />
@@ -119,22 +121,25 @@ function PlaceOrder({
                 </ListItem>
               </List> */}
 
-            <Box className={styles.infoList}>
-              <DomainAddOutlinedIcon className={styles.infoIcon} />
+              <Box className={styles.infoList}>
+                <DomainAddOutlinedIcon className={styles.infoIcon} />
 
-              {shippementLockerData ? (
-                <Typography>{shippementLockerData?.locker_address} </Typography>
-              ) : (
-                <Typography>
-                  {shippementData?.address_label_name} {shippementData?.address}
-                  ," ",{shippementData?.city},{shippementData?.state},
-                  {shippementData?.country}
-                </Typography>
-              )}
-            </Box>
-            {/* </List>
+                {shippementLockerData ? (
+                  <Typography>
+                    {shippementLockerData?.locker_address}{" "}
+                  </Typography>
+                ) : (
+                  <Typography>
+                    {shippementData?.address_label_name}{" "}
+                    {shippementData?.address}
+                    ," ",{shippementData?.city},{shippementData?.state},
+                    {shippementData?.country}
+                  </Typography>
+                )}
+              </Box>
+              {/* </List>
               <List> */}
-            {/* <ListItem>
+              {/* <ListItem>
                   <ListItemIcon>
                     <AddLocationAltOutlinedIcon />
                   </ListItemIcon>
@@ -143,128 +148,139 @@ function PlaceOrder({
                     {shippementData?.country}
                   </ListItemText>
                 </ListItem> */}
-
-          </Box>
-          {/* <TabPanel value={value} index={2}>
+            </Box>
+            {/* <TabPanel value={value} index={2}>
               {merchantDetail?.city}
             </TabPanel> */}
+          </Grid>
+          <Grid item md={12} xs={12} className={styles.placeOrder}>
+            <Box className={styles.placeOrderHeading}>
+              <LocalShippingIcon className={styles.Icon} />
+
+              <Typography style={{ fontWeight: "bold" }}>
+                {t("shippingInfo.Review Order.labels.shippingMethod")}
+              </Typography>
+            </Box>
+
+            <Box className={styles.infoList}>
+              <Typography>{shippmentName}</Typography>
+            </Box>
+          </Grid>
+
+          <Grid item md={12} xs={12} className={styles.placeOrder}>
+            <Box className={styles.placeOrderHeading}>
+              <ViewListIcon className={styles.Icon} />
+
+              <Typography style={{ fontWeight: "bold" }}>
+                {t("shippingInfo.Review Order.labels.orderItems")}
+              </Typography>
+            </Box>
+            <Box>
+              <List>
+                <ListItem>
+                  <TableContainer>
+                    <Table>
+                      {productCartData &&
+                        Object.keys(productCartData).map((key) => (
+                          <>
+                            <TableHead sx={{ fontWeight: "bold" }}>
+                              {
+                                productCartData[key].map(
+                                  (result) => result.merchant_name
+                                )[0]
+                              }
+                              :
+                            </TableHead>
+
+                            <TableBody>
+                              {productCartData[key].map((item) => (
+                                <TableRow>
+                                  <TableCell>
+                                    <Image
+                                      src={item.image_URL}
+                                      alt="shirt"
+                                      width={50}
+                                      height={50}
+                                    ></Image>
+                                  </TableCell>
+
+                                  <TableCell>
+                                    <Typography>{item.name}</Typography>
+                                  </TableCell>
+                                  <TableCell align="right">
+                                    <Typography>{item.qty}</Typography>
+                                  </TableCell>
+                                  <TableCell align="right">
+                                    <Typography>
+                                      <Currency amount={item.price}></Currency>
+                                    </Typography>
+                                  </TableCell>
+                                </TableRow>
+                              ))}
+                            </TableBody>
+                          </>
+                        ))}
+                    </Table>
+                  </TableContainer>
+                </ListItem>
+              </List>
+            </Box>
+          </Grid>
         </Grid>
-        <Grid item md={12} xs={12} className={styles.placeOrder}>
+
+        <Grid item md={4} xs={12} className={styles.orderSummary}>
           <Box className={styles.placeOrderHeading}>
-            <LocalShippingIcon className={styles.Icon} />
-
-            <Typography style={{ fontWeight: "bold" }}>
-              {t("shippingInfo.Review Order.labels.shippingMethod")}
-            </Typography>
-          </Box>
-
-          <Box className={styles.infoList}>
-            <Typography>{shippmentName}</Typography>
-          </Box>
-        </Grid>
-
-        <Grid item md={12} xs={12} className={styles.placeOrder}>
-          <Box className={styles.placeOrderHeading}>
-            <ViewListIcon className={styles.Icon} />
-
-            <Typography style={{ fontWeight: "bold" }}>
-              {t("shippingInfo.Review Order.labels.orderItems")}
-            </Typography>
-          </Box>
-          <Box>
-            <List>
-              <ListItem>
-                <TableContainer>
-                  <Table>
-                    {productCartData &&
-                      Object.keys(productCartData).map((key) => (
-                        <>
-                          <TableHead sx={{ fontWeight: "bold" }}>
-                            {
-                              productCartData[key].map(
-                                (result) => result.merchant_name
-                              )[0]
-                            }
-                            :
-                          </TableHead>
-
-                          <TableBody>
-                            {productCartData[key].map((item) => (
-                              <TableRow>
-                                <TableCell>
-                                  <Image
-                                    src={item.image_URL}
-                                    alt="shirt"
-                                    width={50}
-                                    height={50}
-                                  ></Image>
-                                </TableCell>
-
-                                <TableCell>
-                                  <Typography>{item.name}</Typography>
-                                </TableCell>
-                                <TableCell align="right">
-                                  <Typography>{item.qty}</Typography>
-                                </TableCell>
-                                <TableCell align="right">
-                                  <Typography><Currency amount={item.price}></Currency></Typography>
-                                </TableCell>
-                              </TableRow>
-                            ))}
-                          </TableBody>
-                        </>
-                      ))}
-                  </Table>
-                </TableContainer>
-              </ListItem>
-            </List>
-          </Box>
-        </Grid>
-        <Grid item md={12} xs={12} className={styles.placeOrder}>
-          <Box className={styles.placeOrderHeading}>
-            <SummarizeIcon className={styles.Icon} />
-            <Typography style={{ fontWeight: "bold" }}>
+            {/* <SummarizeIcon className={styles.Icon} /> */}
+            <Typography sx={{ fontWeight: "bold", ml: 2 }}>
               {t("shippingInfo.Review Order.labels.orderSummary")}
             </Typography>
           </Box>
           <Box>
             <Grid container>
               <ListItem>
-                <Grid item xs={3}>
+                <Grid item xs={8}>
                   <Typography>
                     {" "}
                     {t("shippingInfo.Review Order.labels.items")}:
                   </Typography>
                 </Grid>
-                <Grid item xs={3}>
+                <Grid item xs={4}>
                   <Typography>
                     {" "}
-                    <Currency amount={productPrice &&
-                      productPrice.reduce((a, c) => a + c.qty * c.price, 0)}></Currency>
-
+                    <Currency
+                      amount={
+                        productPrice &&
+                        productPrice.reduce((a, c) => a + c.qty * c.price, 0)
+                      }
+                    ></Currency>
                   </Typography>
                 </Grid>
-                <Grid item xs={6}></Grid>
+                {/* <Grid item xs={6}></Grid> */}
               </ListItem>
 
               <ListItem>
                 <Grid container>
-                  <Grid item xs={3}>
+                  <Grid item xs={8}>
                     <Typography>
                       {" "}
                       {t("shippingInfo.Review Order.labels.shipping")}:
                     </Typography>
                   </Grid>
-                  <Grid item xs={3}>
+                  <Grid item xs={4}>
                     <Typography>
-                      {shippingCharges ? <Currency amount={shippingCharges}></Currency> : <Currency amount={0}></Currency>}
+                      {shippingCharges ? (
+                        <Currency amount={shippingCharges}></Currency>
+                      ) : (
+                        <Currency amount={0}></Currency>
+                      )}
                     </Typography>
                   </Grid>
                 </Grid>
               </ListItem>
+              <Divider fullwidth />
               <ListItem>
                 <Grid container>
-                  <Grid item xs={3}>
+                  <Grid item xs={8}>
                     <Typography>
                       <strong>
                         {" "}
@@ -272,18 +288,22 @@ function PlaceOrder({
                       </strong>
                     </Typography>
                   </Grid>
-                  <Grid item xs={3}>
+                  <Grid item xs={4}>
                     <Typography>
                       <strong>
-                        <Currency amount={productPrice && shippingCharges
-                          ? productPrice.reduce(
-                            (a, c) => a + c.qty * c.price,
-                            0
-                          ) + shippingCharges
-                          : productPrice.reduce(
-                            (a, c) => a + c.qty * c.price,
-                            0
-                          )}></Currency>
+                        <Currency
+                          amount={
+                            productPrice && shippingCharges
+                              ? productPrice.reduce(
+                                  (a, c) => a + c.qty * c.price,
+                                  0
+                                ) + shippingCharges
+                              : productPrice.reduce(
+                                  (a, c) => a + c.qty * c.price,
+                                  0
+                                )
+                          }
+                        ></Currency>
                       </strong>
                     </Typography>
                   </Grid>
@@ -311,22 +331,23 @@ function PlaceOrder({
                   <CircularProgress />
                 </ListItem>
               )} */}
-            <Stack direction="row" spacing={2}>
-              <Button
-                onClick={
-                  () => {
-                    // handleClickBar(),
-                    placeOrderHandler(shippementData, userData);
-                  }
-                  // handleClickBar())
+            {/* <Stack direction="row" spacing={2}> */}
+            <Button
+              onClick={
+                () => {
+                  // handleClickBar(),
+                  placeOrderHandler(shippementData, userData);
                 }
-                variant="contained"
-                color="primary"
-              // fullWidth
-              >
-                {t("shippingInfo.Review Order.button.pay")}
-              </Button>
-              {/* <Button
+                // handleClickBar())
+              }
+              sx={{ mt: "11px" }}
+              variant="contained"
+              color="primary"
+              fullWidth
+            >
+              {t("shippingInfo.Review Order.button.pay")}
+            </Button>
+            {/* <Button
                   // fullWidth
                   variant="contained"
                   color="error"
@@ -340,7 +361,7 @@ function PlaceOrder({
                 >
                   Back
                 </Button> */}
-            </Stack>
+            {/* </Stack> */}
           </Box>
 
           <Snackbar

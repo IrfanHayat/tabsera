@@ -52,7 +52,7 @@ function ShippingMethods({
 
   return (
     <>
-      <Grid container justifyContent={"center"}>
+      <Grid container>
         <Grid item md={12} xs={12}>
           <Box className={styles.shippingMethods}>
             <Box className={styles.shippingHeading}>
@@ -65,49 +65,53 @@ function ShippingMethods({
                 {t("shippingInfo.ShippingAdress.label.shippingInformation")}
               </Typography>
             </Box>
-
-            <Box className={styles.infoList}>
-              <AccountCircleIcon className={styles.infoIcon} />
-              <Typography>
-                {userData.first_name} {userData.last_name}
-              </Typography>
-            </Box>
-
-            <Box className={styles.infoList}>
-              <PhoneIcon className={styles.infoIcon} />
-
-              {localStorage.getItem("mobileNumber") ? (
-                <Typography>{localStorage.getItem("mobileNumber")}</Typography>
-              ) : (
-                <ListItemText>{"3215890184"}</ListItemText>
-              )}
-            </Box>
-
-            {userData.email ? (
+            <Box className={styles.boxInfo}>
               <Box className={styles.infoList}>
-                <EmailIcon className={styles.infoIcon} />
-
-                <Typography>{userData.email}</Typography>
-              </Box>
-            ) : (
-              <Box className={styles.infoList}>
-                <EmailIcon className={styles.infoIcon} />
-                <Typography>{"test@gmail.com"}</Typography>
-              </Box>
-            )}
-
-            <Box className={styles.infoList}>
-              <DomainAddOutlinedIcon className={styles.infoIcon} />
-
-              {shippementData ? (
+                <AccountCircleIcon className={styles.infoIcon} />
                 <Typography>
-                  {shippementData?.address_label_name} {shippementData?.address}
-                  ," ",{shippementData?.city},{shippementData?.state},
-                  {shippementData?.country}
+                  {userData.first_name} {userData.last_name}
                 </Typography>
+              </Box>
+
+              <Box className={styles.infoList}>
+                <PhoneIcon className={styles.infoIcon} />
+
+                {localStorage.getItem("mobileNumber") ? (
+                  <Typography>
+                    {localStorage.getItem("mobileNumber")}
+                  </Typography>
+                ) : (
+                  <ListItemText>{"3215890184"}</ListItemText>
+                )}
+              </Box>
+
+              {userData.email ? (
+                <Box className={styles.infoList}>
+                  <EmailIcon className={styles.infoIcon} />
+
+                  <Typography>{userData.email}</Typography>
+                </Box>
               ) : (
-                <></>
+                <Box className={styles.infoList}>
+                  <EmailIcon className={styles.infoIcon} />
+                  <Typography>{"test@gmail.com"}</Typography>
+                </Box>
               )}
+
+              <Box className={styles.infoList}>
+                <DomainAddOutlinedIcon className={styles.infoIcon} />
+
+                {shippementData ? (
+                  <Typography>
+                    {shippementData?.address_label_name}{" "}
+                    {shippementData?.address}
+                    ," ",{shippementData?.city},{shippementData?.state},
+                    {shippementData?.country}
+                  </Typography>
+                ) : (
+                  <></>
+                )}
+              </Box>
             </Box>
           </Box>
         </Grid>
@@ -124,7 +128,7 @@ function ShippingMethods({
             // row
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="row-radio-buttons-group"
-          // value={labelValue}
+            // value={labelValue}
           >
             <Box className={styles.shippingBoxDivMain}>
               {shipmentMethodData &&
@@ -171,47 +175,63 @@ function ShippingMethods({
           </Box>
 
           {/* <Box sx={{ display: "inline", margin: 5 }}> */}
-          <Grid container sx={{ pl: 2 }}>
-            <ListItem>
-              <Grid item xs={3}>
-                {t("shippingInfo.ShippingAdress.label.charges.subTotal")}
-              </Grid>
-              <Grid item xs={3}>
-                <Currency amount={productPrice &&
-                  productPrice.reduce((a, c) => a + c.qty * c.price, 0)}></Currency>
-              </Grid>
-              <Grid item xs={6}></Grid>
-              {/* <ListItemText>$ 0.0</ListItemText> */}
-            </ListItem>
-            <ListItem>
-              <Grid item xs={3}>
-                {t("shippingInfo.ShippingAdress.label.charges.shippingcost")}
-              </Grid>
-              <Grid item xs={3}>
-                {shippingCharges ? <Currency amount={shippingCharges}></Currency> : <Currency amount={0}></Currency>}
-              </Grid>
-              <Grid item xs={6}></Grid>
-            </ListItem>
-            <ListItem>
-              <Grid item xs={3}>
-                {t("shippingInfo.ShippingAdress.label.charges.totalCost")}{" "}
-              </Grid>
-              <Grid item xs={3}>
-                <Currency amount={productPrice && shippingCharges
-                  ? productPrice?.reduce((a, c) => a + c.qty * c.price, 0) +
-                  shippingCharges
-                  : productPrice?.reduce((a, c) => a + c.qty * c.price, 0)}></Currency>
-              </Grid>
-              <Grid item xs={6}></Grid>
-            </ListItem>
-          </Grid>
+          <Box className={styles.boxInfo}>
+            <Grid container sx={{ pl: 2 }}>
+              <ListItem>
+                <Grid item xs={3}>
+                  {t("shippingInfo.ShippingAdress.label.charges.subTotal")}
+                </Grid>
+                <Grid item xs={3}>
+                  <Currency
+                    amount={
+                      productPrice &&
+                      productPrice.reduce((a, c) => a + c.qty * c.price, 0)
+                    }
+                  ></Currency>
+                </Grid>
+                <Grid item xs={6}></Grid>
+                {/* <ListItemText>$ 0.0</ListItemText> */}
+              </ListItem>
+              <ListItem>
+                <Grid item xs={3}>
+                  {t("shippingInfo.ShippingAdress.label.charges.shippingcost")}
+                </Grid>
+                <Grid item xs={3}>
+                  {shippingCharges ? (
+                    <Currency amount={shippingCharges}></Currency>
+                  ) : (
+                    <Currency amount={0}></Currency>
+                  )}
+                </Grid>
+                <Grid item xs={6}></Grid>
+              </ListItem>
+              <ListItem>
+                <Grid item xs={3}>
+                  {t("shippingInfo.ShippingAdress.label.charges.totalCost")}{" "}
+                </Grid>
+                <Grid item xs={3}>
+                  <Currency
+                    amount={
+                      productPrice && shippingCharges
+                        ? productPrice?.reduce(
+                            (a, c) => a + c.qty * c.price,
+                            0
+                          ) + shippingCharges
+                        : productPrice?.reduce((a, c) => a + c.qty * c.price, 0)
+                    }
+                  ></Currency>
+                </Grid>
+                <Grid item xs={6}></Grid>
+              </ListItem>
+            </Grid>
+          </Box>
           <ListItem>
             <Button
               onClick={checkoutHandler}
               variant="contained"
               color="primary"
               disabled={radioCheck ? "" : "disabled"}
-            // startIcon={<AddIcon />}
+              // startIcon={<AddIcon />}
             >
               {t("shippingInfo.ShippingAdress.button.reviewOrder")}
             </Button>

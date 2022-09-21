@@ -68,7 +68,7 @@ const Index = ({ Item, data }) => {
     setSearchData(result.payload);
   }, []);
 
-  useEffect(() => {}, [searchData]);
+  useEffect(() => { }, [searchData]);
   useEffect(async () => {
     console.log(router.query);
     await dispatch(getProduct());
@@ -103,9 +103,9 @@ const Index = ({ Item, data }) => {
     } else {
       dispatch(getCartItems());
       dispatch(getTotalCartQuantity());
-      setTimeout(() => {
-        router.push("/cart");
-      }, 1000);
+      // setTimeout(() => {
+      //   router.push("/cart");
+      // }, 1000);
     }
   };
   const handleClose = () => {
@@ -178,31 +178,31 @@ const Index = ({ Item, data }) => {
         // justifyContent="center"
         // alignItems="center"
         sx={{ display: "flex" }}
-        // minHeight={500}
+      // minHeight={500}
       >
         {product && data?.length < 1
           ? router.query.data?.map((item, index) => (
-              // <Item key={index}>
-              <ActionAreaCard
-                product={item}
-                viewProduct={viewProduct}
-                addToCartHandler={addToCartHandler}
-                key={index}
-              >
-                {/* {item?.productName}> */}
-              </ActionAreaCard>
-              // </Item>
-            ))
+            // <Item key={index}>
+            <ActionAreaCard
+              product={item}
+              viewProduct={viewProduct}
+              addToCartHandler={addToCartHandler}
+              key={index}
+            >
+              {/* {item?.productName}> */}
+            </ActionAreaCard>
+            // </Item>
+          ))
           : data?.map((item, index) => (
-              <ActionAreaCard
-                product={item}
-                viewProduct={viewProduct}
-                addToCartHandler={addToCartHandler}
-                key={index}
-              >
-                {/* {item?.productName}> */}
-              </ActionAreaCard>
-            ))}
+            <ActionAreaCard
+              product={item}
+              viewProduct={viewProduct}
+              addToCartHandler={addToCartHandler}
+              key={index}
+            >
+              {/* {item?.productName}> */}
+            </ActionAreaCard>
+          ))}
         {searchData?.length > 0 ? (
           searchData?.map((item, index) => (
             <ActionAreaCard

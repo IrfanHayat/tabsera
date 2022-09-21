@@ -25,7 +25,7 @@ import Badge from "@mui/material/Badge";
 import { result } from "lodash";
 import styles from "../styles/card.module.css";
 import AddIcon from "@mui/icons-material/Add";
-import Currency from '../container/Currency/currency'
+import Currency from "../container/Currency/currency";
 export default function ActionAreaCard({
   product,
   viewProduct,
@@ -47,16 +47,16 @@ export default function ActionAreaCard({
   let displayDesc =
     styledCard?.flexDirection == "row"
       ? {
-        display: "flex",
-        flexDirection: "column",
-        // alignItems: "center",
-        m: 1,
+          display: "flex",
+          flexDirection: "column",
+          // alignItems: "center",
+          m: 1,
 
-        // justifyContent: "space-between",
-        // justifyContent: "space-arounf",
-      }
+          // justifyContent: "space-between",
+          // justifyContent: "space-arounf",
+        }
       : { height: 85 };
-  let width = styledCard?.flexDirection == "row" ? "100%" : "277px";
+  let width = styledCard?.flexDirection == "row" ? "400px" : "277px";
   let height = styledCard?.flexDirection == "row" ? "100%" : "393px";
 
   return (
@@ -218,10 +218,13 @@ export default function ActionAreaCard({
             <Box component="div" className={styles.prodCost}>
               <Box display="flex">
                 <Typography className={styles.prodCostValue}>
-                  <Currency amount={product?.productCost
-                    ? product?.productCost
-                    : product?.bundleCost}></Currency>
-
+                  <Currency
+                    amount={
+                      product?.productCost
+                        ? product?.productCost
+                        : product?.bundleCost
+                    }
+                  ></Currency>
                 </Typography>
                 {product.discountPercent ? (
                   <Typography

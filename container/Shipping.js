@@ -47,6 +47,9 @@ export default function Shipping({
 
   let router = useRouter();
 
+  console.log("Shipping")
+  console.log(countryData)
+  console.log("====================")
   // useEffect(() => {
   //   console.log(countryData)
   //   setCountryList(countryData);
@@ -95,7 +98,7 @@ export default function Shipping({
                   size="small"
                   // margin="dense"
                   id="firstName"
-                  label="First Name"
+                  label="First Name1"
                   error={Boolean(errors.email)}
                   helperText={
                     errors.email
@@ -350,8 +353,8 @@ export default function Shipping({
                 row
                 aria-labelledby="demo-row-radio-buttons-group-label"
                 name="row-radio-buttons-group"
-                // value={labelValue}
-                // onChange={handleChange}
+              // value={labelValue}
+              // onChange={handleChange}
               >
                 {labels.map((result) => (
                   <FormControlLabel
