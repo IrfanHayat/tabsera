@@ -224,15 +224,15 @@ function Details({
         container
         // spacing={1}
         maxWidth="xl"
-        // sx={{ backgroundColor: "#fafafa" }}
-        // justifyContent="center"
+      // sx={{ backgroundColor: "#fafafa" }}
+      // justifyContent="center"
       >
         <Grid
           item
           md={6}
           xs={12}
           className={styles.produtctImagesBox}
-          // sx={{ bgcolor: "white" }}
+        // sx={{ bgcolor: "white" }}
         >
           <Carousel
             // breakPoints={breakPoints}
@@ -241,48 +241,20 @@ function Details({
             // pagination={true}
             pagination={false}
             showEmptySlots={true}
-            // itemsToShow={2}
-            // showArrows={false}
+          // itemsToShow={2}
+          // showArrows={false}
           >
             <Box className={styles.carouelImage}>
               {Object.keys(productDetail).length > 0 && skusFlag == false
                 ? productDetail.product_images[0].media_images.map(
-                    (result, index) => (
-                      <ReactImageMagnify
-                        {...{
-                          smallImage: {
-                            alt: "Product Image",
-                            isFluidWidth: true,
-                            // width: " 336px",
-                            // height: "330px",
-                            src: result,
-                            sizes:
-                              "(max-width: 480px) 100vw, (max-width: 1200px) 30vw, 360px",
-                            // srcSet: this.state.currentImage.fluid.srcSet,
-                          },
-                          largeImage: {
-                            src: result,
-                            // srcSet: this.state.currentImage.fluid.srcSet,
-                            width: 600,
-                            height: 800,
-                          },
-
-                          enlargedImagePosition: "over",
-
-                          isHintEnabled: true,
-                          shouldHideHintAfterFirstActivation: false,
-                        }}
-                      />
-                    )
-                  )
-                : skusProduct &&
-                  skusProduct.sku_images.map((result) => (
-                    // <Box className={styles.carouelImage}>
+                  (result, index) => (
                     <ReactImageMagnify
                       {...{
                         smallImage: {
                           alt: "Product Image",
                           isFluidWidth: true,
+                          // width: " 336px",
+                          // height: "330px",
                           src: result,
                           sizes:
                             "(max-width: 480px) 100vw, (max-width: 1200px) 30vw, 360px",
@@ -294,17 +266,45 @@ function Details({
                           width: 600,
                           height: 800,
                         },
-                        // enlargedImageStyle: {
-                        //   objectFit: "contain",
-                        // },
+
                         enlargedImagePosition: "over",
 
                         isHintEnabled: true,
                         shouldHideHintAfterFirstActivation: false,
                       }}
                     />
-                    // </Box>
-                  ))}
+                  )
+                )
+                : skusProduct &&
+                skusProduct.sku_images.map((result) => (
+                  // <Box className={styles.carouelImage}>
+                  <ReactImageMagnify
+                    {...{
+                      smallImage: {
+                        alt: "Product Image",
+                        isFluidWidth: true,
+                        src: result,
+                        sizes:
+                          "(max-width: 480px) 100vw, (max-width: 1200px) 30vw, 360px",
+                        // srcSet: this.state.currentImage.fluid.srcSet,
+                      },
+                      largeImage: {
+                        src: result,
+                        // srcSet: this.state.currentImage.fluid.srcSet,
+                        width: 600,
+                        height: 800,
+                      },
+                      // enlargedImageStyle: {
+                      //   objectFit: "contain",
+                      // },
+                      enlargedImagePosition: "over",
+
+                      isHintEnabled: true,
+                      shouldHideHintAfterFirstActivation: false,
+                    }}
+                  />
+                  // </Box>
+                ))}
             </Box>
           </Carousel>
           {/* </ListItem> */}
@@ -325,7 +325,7 @@ function Details({
                   <Box
                     // sx={{ border: }}
                     className={styles.selectimg}
-                    // border={isActiveImg ? "1px solid blue" : " "}
+                  // border={isActiveImg ? "1px solid blue" : " "}
                   >
                     <Image
                       onClick={() => {
@@ -399,58 +399,58 @@ function Details({
           <Box sx={{ display: "flex", flexDirection: "column" }}>
             {skusFlag && skusProduct
               ? skusProduct.attributes.map((result, index) => (
-                  <Grid container key={index}>
-                    {result.attribute_name == "Color" ? (
-                      <>
-                        <Grid item xs={2}>
-                          {result.attribute_name}:
-                        </Grid>
-                        <Grid item md={3}>
-                          <ListItemIcon>
-                            <SquareIcon
-                              sx={{
-                                // position: "relative",
-                                // top: 6,
-                                // left: 5,
-                                color: result.value,
-                              }}
-                            />
-                          </ListItemIcon>
-                        </Grid>
-                      </>
-                    ) : (
-                      <Typography style={{ fontWeight: "bold" }}>
-                        {result.attribute_name}: {result.value}{" "}
-                      </Typography>
-                    )}
-                  </Grid>
-                ))
+                <Grid container key={index}>
+                  {result.attribute_name == "Color" ? (
+                    <>
+                      <Grid item xs={2}>
+                        {result.attribute_name}:
+                      </Grid>
+                      <Grid item md={3}>
+                        <ListItemIcon>
+                          <SquareIcon
+                            sx={{
+                              // position: "relative",
+                              // top: 6,
+                              // left: 5,
+                              color: result.value,
+                            }}
+                          />
+                        </ListItemIcon>
+                      </Grid>
+                    </>
+                  ) : (
+                    <Typography style={{ fontWeight: "bold" }}>
+                      {result.attribute_name}: {result.value}{" "}
+                    </Typography>
+                  )}
+                </Grid>
+              ))
               : productAttributes.map((result, index) => (
-                  <Grid
-                    container
-                    // sx={{ display: "flex", flexDirection: "column" }}
-                    key={index}
-                  >
-                    {result.attribute_name == "Color" ? (
-                      <>
-                        <Grid item xs={2}>
-                          <Typography> {result.attribute_name}: </Typography>
-                        </Grid>
-                        <Grid item md={3}>
-                          <ListItemIcon>
-                            <SquareIcon sx={{ color: result.value }} />
-                          </ListItemIcon>
-                        </Grid>
-                      </>
-                    ) : (
-                      // <Box display="flex">
-                      <Typography>
-                        {result.attribute_name}: {result.value}{" "}
-                      </Typography>
-                      // </Box>
-                    )}
-                  </Grid>
-                ))}
+                <Grid
+                  container
+                  // sx={{ display: "flex", flexDirection: "column" }}
+                  key={index}
+                >
+                  {result.attribute_name == "Color" ? (
+                    <>
+                      <Grid item xs={2}>
+                        <Typography> {result.attribute_name}: </Typography>
+                      </Grid>
+                      <Grid item md={3}>
+                        <ListItemIcon>
+                          <SquareIcon sx={{ color: result.value }} />
+                        </ListItemIcon>
+                      </Grid>
+                    </>
+                  ) : (
+                    // <Box display="flex">
+                    <Typography>
+                      {result.attribute_name}: {result.value}{" "}
+                    </Typography>
+                    // </Box>
+                  )}
+                </Grid>
+              ))}
           </Box>
           <Grid md={12}>
             {/* <Divider /> */}
@@ -473,7 +473,7 @@ function Details({
                   productDetail.skus?.map((results, index) => (
                     <Box
                       className={styles.selectimg}
-                      // border={isActiveImg ? "1px solid blue" : " "}
+                    // border={isActiveImg ? "1px solid blue" : " "}
                     >
                       <Image
                         //  className={cx(styles.media, mediaStyles.root)}
@@ -531,7 +531,7 @@ function Details({
             // container
             spacing={1}
             sx={{
-              mt: 2,
+              mt: 7,
               display: {
                 xs: "none",
                 md: "flex",
@@ -591,7 +591,7 @@ function Details({
             onClick={() =>
               viewStore(productDetail?.category_id, merchantDetail?.merchant_id)
             }
-            // onClick={viewStore}
+          // onClick={viewStore}
           >
             {t("PDP.labels.store")}
           </Button>
@@ -721,7 +721,7 @@ function Details({
             pl={3}
             style={{ display: "flex", bgcolor: "red" }}
           >
-            <Typography style={{ fontWeight: "bold", bgcolor: "red" }}>
+            <Typography style={{ fontWeight: "bold", bgcolor: "red", marginLeft: "37px" }}>
               {" "}
               {t("PDP.labels.similar")} :
             </Typography>
