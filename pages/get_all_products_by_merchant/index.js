@@ -39,7 +39,7 @@ function Index({ data, Item }) {
     console.log("----------list");
     console.log(list);
     console.log("----------list");
-    const grouped = _.groupBy(list, (items) => items.merchantName);
+    const grouped = _.groupBy(list, (items) => items?.merchantName);
     return grouped;
   }
   useEffect(() => {

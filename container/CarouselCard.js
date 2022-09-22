@@ -209,7 +209,7 @@ export default function CarouselCard({
                     : product?.bundleCost}></Currency>
 
                 </Typography>
-                {product.discountPercent ? (
+                {product?.discountPercent ? (
                   <Typography
                     className={styles.prodDiscountCost}
                     style={{
@@ -226,7 +226,7 @@ export default function CarouselCard({
                 )}
               </Box>
               <>
-                {product.productName ? (
+                {product?.productName ? (
                   <AddIcon
                     className={styles.btnAddCart}
                     onClick={() => addToCartHandler(product)}

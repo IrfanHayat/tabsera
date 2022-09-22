@@ -40,7 +40,7 @@ function Index({ data, Item }) {
 
   function groupArrayOfObjects(list) {
     console.log(list);
-    const grouped = _.groupBy(list, (items) => items.categoryName);
+    const grouped = _.groupBy(list, (items) => items?.categoryName);
     return grouped;
   }
   useEffect(() => {

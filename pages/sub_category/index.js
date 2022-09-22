@@ -181,6 +181,18 @@ function SubCategory({
 
       })
       setProductDataWithCategoryId(arr);
+    } else {
+      let result1 = await dispatch(getCategory());
+      let results = result1?.payload?.filter(
+        (result2) => result2.category_id == catId
+      )[0];
+      console.log(results)
+      results?.child?.map(async subCa => {
+        let result = await dispatch(getProductWithCategoryId(subCa.category_id));
+        result.payload.map(result => arr.push(result))
+
+      })
+      setProductDataWithCategoryId(arr);
     }
   };
 
@@ -215,13 +227,13 @@ function SubCategory({
   function categoryProduct(name) {
     console.log(name);
     let result = productDataWithCategoryId.filter(
-      (category) => category.categoryName == name
+      (category) => category?.categoryName == name
     );
     console.log(result);
     setFilterProduct(result);
     if (productDataWithCategoryId) {
       let result = productDataWithCategoryId.filter(
-        (category) => category.categoryName == name
+        (category) => category?.categoryName == name
       );
       setFilterProduct(result);
       setFlag(true);
@@ -348,8 +360,8 @@ function SubCategory({
     if (productDataWithCategoryId) {
       let result = productDataWithCategoryId.filter(
         (result) =>
-          parseInt(result.productCost) >= parseInt(min) &&
-          parseInt(result.productCost) <= parseInt(max)
+          parseInt(result?.productCost) >= parseInt(min) &&
+          parseInt(result?.productCost) <= parseInt(max)
       );
       setFilterProduct(result);
       setFlag(true);

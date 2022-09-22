@@ -47,14 +47,14 @@ export default function ActionAreaCard({
   let displayDesc =
     styledCard?.flexDirection == "row"
       ? {
-          display: "flex",
-          flexDirection: "column",
-          // alignItems: "center",
-          m: 1,
+        display: "flex",
+        flexDirection: "column",
+        // alignItems: "center",
+        m: 1,
 
-          // justifyContent: "space-between",
-          // justifyContent: "space-arounf",
-        }
+        // justifyContent: "space-between",
+        // justifyContent: "space-arounf",
+      }
       : { height: 85 };
   let width = styledCard?.flexDirection == "row" ? "400px" : "277px";
   let height = styledCard?.flexDirection == "row" ? "100%" : "393px";
@@ -226,7 +226,7 @@ export default function ActionAreaCard({
                     }
                   ></Currency>
                 </Typography>
-                {product.discountPercent ? (
+                {product?.discountPercent ? (
                   <Typography
                     className={styles.prodDiscountCost}
                     style={{
@@ -243,7 +243,7 @@ export default function ActionAreaCard({
                 )}
               </Box>
               <>
-                {product.productName ? (
+                {product?.productName ? (
                   <AddIcon
                     className={styles.btnAddCart}
                     onClick={() => addToCartHandler(product)}
