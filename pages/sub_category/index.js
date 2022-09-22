@@ -163,8 +163,25 @@ function SubCategory({
   //     });
   //   };
   const getParentData = async (id) => {
+    let arr = []
     let result = await dispatch(getProductWithCategoryId(id));
-    setProductDataWithCategoryId(result.payload);
+
+    arr.push(result.payload[0])
+    console.log(result.payload[0])
+    if (result.payload.length > 0) {
+
+      let result1 = await dispatch(getCategory());
+      let results = result1?.payload?.filter(
+        (result2) => result2.category_id == result.payload[0].categoryId
+      )[0];
+      console.log(results)
+      results?.child?.map(async subCa => {
+        let result = await dispatch(getProductWithCategoryId(subCa.category_id));
+        result.payload.map(result => arr.push(result))
+
+      })
+      setProductDataWithCategoryId(arr);
+    }
   };
 
   useEffect(async () => {
@@ -233,17 +250,18 @@ function SubCategory({
 
   const children = (subCategories) => {
     return (
-      <Box sx={{ display: "flex", flexDirection: "column", ml: 2 }}>
-        <Grid>
+      <Box >
+        <List
+
+        >
+
           {subCategories.map((result, index) => (
-            <List
-              onClick={() => categoryProduct(result.category_name)}
-              key={index}
-            >
-              {result.category_name}
-            </List>
+            <Typography onClick={() => categoryProduct(result.category_name)}
+              key={index}>{result.category_name}</Typography>
+
           ))}
-        </Grid>
+        </List>
+
         {/* {
           subCategories?.map(result => {
             <List>
@@ -518,7 +536,7 @@ function SubCategory({
                 showFreeShipping == false ? (
                 <ViewAllProducts
                   Item={Item}
-                  data={productDataWithCategoryId}
+                  data={filterProduct.length > 0 ? filterProduct : productDataWithCategoryId}
                 ></ViewAllProducts>
               ) : (
                 <>
@@ -531,7 +549,7 @@ function SubCategory({
                     sortFilter == true ? (
                     <ViewAllProducts
                       Item={Item}
-                      data={productDataWithCategoryId}
+                      data={filterProduct.length > 0 ? filterProduct : productDataWithCategoryId}
                     ></ViewAllProducts>
                   ) : (
                     showProduct == false &&
@@ -636,7 +654,7 @@ function SubCategory({
               discountData?.length > 0 ? (
               <ViewAllProducts
                 Item={Item}
-                data={filterData?.length > 0 ? filterData : discountData}
+                data={filterProduct?.length > 0 ? filterProduct : discountData}
               ></ViewAllProducts>
             ) : (
               <>

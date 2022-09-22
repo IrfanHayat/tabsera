@@ -143,6 +143,8 @@ export default function PersistentDrawerLeft() {
 
   let { t, i18n } = useTranslation();
 
+  let [featureProduct, setFeatureProduct] = useState([])
+
   // Handling side dropdown (subcatogories)
   // ---------------------------------------------------------------
   let currentlyHovering = false;
@@ -152,21 +154,21 @@ export default function PersistentDrawerLeft() {
 
   const [sideBarCat, setSideBarCat] = useState([]);
 
-  const handleClick = useCallback(
+  const handleClick =
     (event, categoryId) => {
-      console.log(categoryId);
+
       if (anchorEl !== event.currentTarget) {
         setAnchorEl(event.currentTarget);
       }
-      console.log(category);
+
       let subCategory = category?.filter(
         (result) => result.category_id == categoryId
       )[0];
 
       setSideBarCat(subCategory);
-    },
-    [sideBarCat]
-  );
+    }
+
+
 
   function handleHover() {
     currentlyHovering = true;
@@ -207,9 +209,9 @@ export default function PersistentDrawerLeft() {
     [catId]
   );
 
-  const featureProduct = useSelector(
-    (state) => state.product.featureProductData
-  );
+  // const featureProduct = useSelector(
+  //   (state) => state.product.featureProductData
+  // );
 
   const viewProduct = useCallback((item) => {
     router.push({
@@ -235,18 +237,20 @@ export default function PersistentDrawerLeft() {
     }
   }, []);
 
-  useEffect(() => {
+  useEffect(async () => {
     if (key == 1) {
-      // let categoryResult = await dispatch(getCategory());
-      setCategory(categoryData);
+      let categoryResult = await dispatch(getCategory());
+      setCategory(categoryResult.payload);
       // setShowList(false);
     } else {
-      setCompaigns(campaignsData);
+      let categoryResult = await dispatch(getCategory());
+      setCompaigns(categoryResult.payload);
     }
-  }, [key, categoryData, campaignsData]);
+  }, [key]);
 
-  useEffect(() => {
-    dispatch(getFeatureProduct());
+  useEffect(async () => {
+    let result = await dispatch(getFeatureProduct());
+    setFeatureProduct(result.payload)
     // dispatch(getDiscounts());
     // dispatch(getFreeShipping());
     // dispatch(getDeals());

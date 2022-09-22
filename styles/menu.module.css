@@ -19,6 +19,7 @@
 .categoryList :hover {
   font-weight: bold;
   color: #f34f2f;
+  cursor: pointer;
 }
 .carouselBox {
   width: 100%;
