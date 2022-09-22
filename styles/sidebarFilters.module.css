@@ -14,7 +14,7 @@
 }
 
 .categoryHeading {
-  margin-top: 18px;
+ 
   margin-left: 27px;
   font-size: 14px;
   font-weight: 600;
@@ -47,18 +47,29 @@
   height: 19px;
   width: 119px;
   left: 2px;
-  top: 36px;
+ 
   border-radius: nullpx;
-  margin-top: 16px;
+  
   margin-left: 35px;
 }
 /* .categoryParent :hover {
   font-weight: bold;
 } */
+
+.categoryParent :hover {
+  font-weight: bold;
+  color: blue;
+  cursor: pointer;
+}
+.categoryChild :hover {
+  font-weight: bold;
+  color: #f34f2f;
+  cursor: pointer;
+}
 .categoryChild {
   /* height: 19px; */
   width: 150px;
-  margin-top: 11px;
+  /* margin-top: 11px; */
   margin-left: 49px;
 }
 

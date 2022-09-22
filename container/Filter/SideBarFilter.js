@@ -75,10 +75,10 @@ function SideBarFilter({
 
       <Collapse1 name="Category">
         <List component='li' disablePadding>
-          <Typography className={styles.categoryHeading}>
+          <Grid className={styles.categoryHeading}>
             Related Category
-          </Typography>
-          <Box className={styles.categories}>
+          </Grid>
+          <Box >
             <Typography
               className={styles.categoryParent}
               onClick={() => categoryProduct(parentCategories)}
@@ -87,7 +87,7 @@ function SideBarFilter({
             </Typography>
 
             <Typography className={styles.categoryChild}>
-              {subCategories.length > 0 ? childrenCategory(subCategories) : ""}
+              {subCategories.length > 0 ? childrenCategory(subCategories) : <></>}
             </Typography>
 
           </Box>
