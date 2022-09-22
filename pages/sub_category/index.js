@@ -227,15 +227,58 @@ function SubCategory({
   function categoryProduct(name) {
     console.log(name);
     let result = productDataWithCategoryId.filter(
-      (category) => category?.categoryName == name
+      (category) => category.categoryName == name
     );
     console.log(result);
     setFilterProduct(result);
     if (productDataWithCategoryId) {
       let result = productDataWithCategoryId.filter(
-        (category) => category?.categoryName == name
+        (category) => category.categoryName == name
       );
       setFilterProduct(result);
+      setFlag(true);
+    }
+    // if (dealsData) {
+    //   let result1 = dealsData.filter(
+    //     (category) => category.categoryName == name
+    //   );
+
+    //   setFilterDeal(result1);
+    //   setFlag(true);
+
+    // }
+    if (discountData) {
+
+      let result1 = discountData.filter(
+        (category) => category.categoryName == name
+      );
+      console.log(result1)
+      setFilterDiscount(result1);
+      setFlag(true);
+
+    }
+  }
+
+
+  const categoryParentProduct1 = async (name) => {
+
+
+    if (productDataWithCategoryId) {
+      let arr = [];
+      let result = productDataWithCategoryId.filter(
+        (category) => category?.categoryName == name
+      );
+      console.log(result);
+      let result1 = await dispatch(getCategory());
+      let results = result1?.payload?.filter(
+        (result2) => result2.category_name == name
+      )[0];
+      results?.child?.map(async subCa => {
+        let result = await dispatch(getProductWithCategoryId(subCa.category_id));
+        result.payload.map(result => arr.push(result))
+
+      })
+      setFilterProduct(arr);
       setFlag(true);
     }
     // if (dealsData) {
@@ -425,6 +468,7 @@ function SubCategory({
           priceFilter={priceFilter}
           handleFilters={handleFilters}
           categoryProduct={categoryProduct}
+          categoryParentProduct1={categoryParentProduct1}
           parentCategories={parentCategories}
           childrenCategory={children}
           subCategories={subCategories}

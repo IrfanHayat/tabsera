@@ -19,6 +19,7 @@ import { useCallback } from "react";
 function SideBarFilter({
   categoryProduct,
   parentCategories,
+  categoryParentProduct1,
   childrenCategory,
   subCategories,
   brands,
@@ -81,7 +82,7 @@ function SideBarFilter({
           <Box >
             <Typography
               className={styles.categoryParent}
-              onClick={() => categoryProduct(parentCategories)}
+              onClick={() => categoryParentProduct1(parentCategories)}
             >
               {parentCategories}
             </Typography>
