@@ -79,9 +79,7 @@ function SubCategory({
   setShowAllCategoryPro,
   setShowAllMerchantPro,
   showProduct,
-
-
-
+  subCateId,
   setFilterData1,
   filterData1,
 }) {
@@ -210,6 +208,8 @@ function SubCategory({
 
   useEffect(async () => {
     let result = await dispatch(getCategory());
+
+
     let results = result?.payload.filter(
       (result) => result.category_id == catId
     );
