@@ -109,11 +109,11 @@
   background-color: #fff;
 }
 
-/* .addToCartbtn :hover {
+.addToCartbtn :hover {
   color: #f34f2f;
   border: 1px solid #f34f2f;
-  background-color: #fff;
-} */
+  background-color: #f34f2f;
+}
 
 .merchantName {
   display: flex;
@@ -140,11 +140,11 @@
   border-radius: 2px;
   background-color: #3d7cff;
 }
-/* .buyNowbtn :hover {
-  color: #3d7cff;
-  border: 1px solid #3d7cff;
-  background-color: #fff;
-} */
+.buyNowbtn :hover {
+  color: #f34f2f;
+  border: 1px solid #f34f2f;
+  background-color: #f34f2f;
+}
 .addToCartbtnSM {
   display: flex;
   height: 38px;

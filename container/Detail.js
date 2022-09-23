@@ -562,7 +562,7 @@ function Details({
             {/* <Grid item md={6} sm={6}> */}
             <Button
               // color="warning"
-              variant="contained"
+              variant="plain"
               className={styles.addToCartbtn}
               onClick={() => {
                 skusProduct
