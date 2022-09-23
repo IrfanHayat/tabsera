@@ -43,6 +43,8 @@ import Shipping1 from "../pages/shipping/index";
 import Modal from "./Modal/Modal";
 import { Link } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 function ShippingInformation({
   checkoutHandler,
@@ -114,10 +116,10 @@ function ShippingInformation({
 
   return (
     <>
-      <Grid container mt={5}>
+      <Grid container>
         <Grid md={12} sm={12} className={styles.shipTo} item>
           <FormLabel style={{ fontWeight: "bold", color: "black" }}>
-            {t('shippingInfo.labels.purchaseFor')} :{" "}
+            {t("shippingInfo.labels.purchaseFor")} :{" "}
           </FormLabel>
 
           <FormControl sx={{ m: 1, minWidth: 80 }}>
@@ -156,7 +158,7 @@ function ShippingInformation({
         </Grid>
         <Grid md={12} sm={12} item className={styles.shipTo}>
           <FormLabel style={{ fontWeight: "bold", color: "black" }}>
-            {t('shippingInfo.labels.ship.shipTo')} :
+            {t("shippingInfo.labels.ship.shipTo")} :
           </FormLabel>
           <Box flexGrow={0.01}></Box>
           <FormControl>
@@ -170,26 +172,26 @@ function ShippingInformation({
                 onClick={() => {
                   setButtonKey(1);
                   setRadioCheckLocker(true);
-                  setAddressShippingMethod(true)
-                  setLockerShippingMethod(false)
-                  setShowShippingMethod(true)
+                  setAddressShippingMethod(true);
+                  setLockerShippingMethod(false);
+                  setShowShippingMethod(true);
                 }}
                 value="address"
                 control={<Radio />}
-                label={t('shippingInfo.labels.ship.address')}
+                label={t("shippingInfo.labels.ship.address")}
               />
               <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
               <FormControlLabel
                 onClick={() => {
                   setButtonKey(2);
                   setRadioCheckLocker(true);
-                  setLockerShippingMethod(true)
-                  setAddressShippingMethod(false)
-                  setShowShippingMethod(false)
+                  setLockerShippingMethod(true);
+                  setAddressShippingMethod(false);
+                  setShowShippingMethod(false);
                 }}
                 value="lockers"
                 control={<Radio />}
-                label={t('shippingInfo.labels.ship.locker')}
+                label={t("shippingInfo.labels.ship.locker")}
               />
               <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
 
@@ -200,23 +202,30 @@ function ShippingInformation({
                 }}
                 value="school"
                 control={<Radio />}
-                label={t('shippingInfo.labels.ship.school')}
+                label={t("shippingInfo.labels.ship.school")}
               />
             </RadioGroup>
           </FormControl>
         </Grid>
 
         {buttonKey === 1 ? (
-          <Grid container sx={{ bgcolor: "#fff" }}>
-            <Grid item md={12} className={styles.shipAddress}>
-              <Typography style={{ fontWeight: "bold", color: "black" }}>
-                {t('shippingInfo.ShippingAdress.label.shippingAddress')} :
-              </Typography>
+          <Grid className={styles.shipAddress}>
+            <Box className={styles.addressBox}>
+              <Box className={styles.addressHeading}>
+                <LocationOnIcon className={styles.LocationOnIcon} />
+                <Typography
+                  style={{
+                    fontWeight: "bold",
+                  }}
+                >
+                  {t("shippingInfo.ShippingAdress.label.shippingAddress")}
+                </Typography>
+              </Box>
               {/* <Shipping /> */}
               <Modal
                 variant="contained"
                 startIcon={<AddIcon />}
-                buttonTitle={t('shippingInfo.ShippingAdress.button.addAddress')}
+                buttonTitle={t("shippingInfo.ShippingAdress.button.addAddress")}
                 heading=" Add Shipping Address"
                 dialogContentText={<Shipping1 />}
               />
@@ -236,128 +245,193 @@ function ShippingInformation({
                   ? "Add Locker"
                   : "Add School Address"}
               </Button> */}
-            </Grid>
+            </Box>
 
-            <Grid item md={12} justifyContent="center" display="flex">
-              <TableContainer className={styles.table}>
+            {/* <TableContainer className={styles.table}>
                 <Table
                   // m="auto"
                   // sx={{ maxWidth: 1150 }}
                   size="small"
                   aria-label="a dense table"
-                >
-                  {/* {console.log(shippementAddress[0])} */}
-                  <RadioGroup
-                    aria-labelledby="demo-row-radio-buttons-group-label"
-                    name="row-radio-buttons-group"
-                    defaultValue={shippementAddress[0]?.address_id}
-
-                    onChange={handleChange}
-                  >
-                    <TableHead className={styles.thead}>
-                      <TableRow className={styles.thead}>
-                        <TableCell className={styles.select}>{t('shippingInfo.ShippingAdress.table.select')}</TableCell>
-                        <TableCell className={styles.name}>{t('shippingInfo.ShippingAdress.table.fullName')}</TableCell>
+                > */}
+            {/* {console.log(shippementAddress[0])} */}
+            <RadioGroup
+              aria-labelledby="demo-row-radio-buttons-group-label"
+              name="row-radio-buttons-group"
+              defaultValue={shippementAddress[0]?.address_id}
+              onChange={handleChange}
+            >
+              <Box className={styles.addressBoxDivMain}>
+                {/*   <TableHead className={styles.thead}>
+                      <TableRow className={styles.tableRow}>
+                        <TableCell className={styles.select}>
+                          {t("shippingInfo.ShippingAdress.table.select")}
+                        </TableCell>
+                        <TableCell className={styles.name}>
+                          {t("shippingInfo.ShippingAdress.table.fullName")}
+                        </TableCell>
                         <TableCell className={styles.addLabel}>
-                          {t('shippingInfo.ShippingAdress.table.addressLabel')}
+                          {t("shippingInfo.ShippingAdress.table.addressLabel")}
                         </TableCell>
                         <TableCell className={styles.fullAdd}>
-                          {t('shippingInfo.ShippingAdress.table.fullAdress')}
+                          {t("shippingInfo.ShippingAdress.table.fullAdress")}
                         </TableCell>
-                        <TableCell className={styles.phone}> {t('shippingInfo.ShippingAdress.table.phone')}</TableCell>
-                        <TableCell className={styles.email}>  {t('shippingInfo.ShippingAdress.table.email')}</TableCell>
-                        <TableCell className={styles.edit}>{t('shippingInfo.ShippingAdress.table.edit')}</TableCell>
+                        <TableCell className={styles.phone}>
+                          {" "}
+                          {t("shippingInfo.ShippingAdress.table.phone")}
+                        </TableCell>
+                        <TableCell className={styles.email}>
+                          {" "}
+                          {t("shippingInfo.ShippingAdress.table.email")}
+                        </TableCell>
+                        <TableCell className={styles.edit}>
+                          {t("shippingInfo.ShippingAdress.table.edit")}
+                        </TableCell>
                       </TableRow>
-                    </TableHead>
+                    </TableHead> */}
 
-                    {shippementAddress &&
-                      shippementAddress.map((result, index) =>
-                        result.address_default_billing === false ? (
-                          <TableBody>
-                            {/* {rows.map((row) => ( */}
-                            <TableRow
-                              // key={row.name}
-                              ind
-                              sx={{
-                                "&:last-child td, &:last-child th": {
-                                  border: 0,
-                                },
+                {shippementAddress &&
+                  shippementAddress.map((result, index) =>
+                    result.address_default_billing === false ? (
+                      <>
+                        {/* <Box className={styles.addressBoxDivMain}> */}
+                        <Box className={styles.addressBoxDiv}>
+                          <Box className={styles.addressLabelDiv}>
+                            <Chip
+                              className={styles.chip}
+                              label={result.address_label_name}
+                              color={
+                                result.address_label_name === "Home"
+                                  ? "primary"
+                                  : "error"
+                              }
+                              size="small"
+                            // sx={{ mx: 1 }}
+                            />
+                            <FormControlLabel
+                              sx={{ mr: -0.9 }}
+                              value={result.address_id}
+                              control={<Radio />}
+                              label={<></>}
+                              onClick={() => {
+                                setRadioCheck(true);
                               }}
-                            >
-                              <TableCell
-                                component="th"
-                                scope="row"
-                                className={styles.select}
+                            />
+                          </Box>
+                          <Box className={styles.addressLabelDiv}>
+                            <Typography className={styles.text}>
+                              {userData.first_name} {userData.last_name}
+                            </Typography>
+                            <Box className={styles.editDel}>
+                              <Modal
+                                // variant=""
+                                // startIcon={<AddIcon />}
+                                buttonTitle={
+                                  <ModeEditOutlineIcon
+                                    className={styles.editIcon}
+                                  />
+                                }
+                                heading=" Edit Shipping Address"
+                                dialogContentText={<Shipping1 data={result} />}
+                              />
+                              <DeleteIcon color="error" />
+                            </Box>
+                          </Box>
+                          <Typography className={styles.text}>
+                            {result.address} {result.city} {result.state}{" "}
+                            {result.country}
+                          </Typography>
+                          <Typography className={styles.text}>
+                            {" "}
+                            {userData.email}
+                          </Typography>
+                          <Typography className={styles.text}>
+                            {"3215890184"}
+                          </Typography>
+                        </Box>
+
+                        {/* <TableBody>
+                              <TableRow
+                                className={styles.tableRow}
+                                ind
+                                sx={{
+                                  "&:last-child td, &:last-child th": {
+                                    border: 0,
+                                  },
+                                }}
                               >
-                                <FormControlLabel
-                                  value={result.address_id}
-                                  //checked={result.address_id == 655}
+                                <TableCell
+                                  component="th"
+                                  scope="row"
+                                  className={styles.select}
+                                >
+                                  <FormControlLabel
+                                    value={result.address_id}
+                                    control={<Radio />}
+                                    label={<></>}
+                                    onClick={() => {
+                                      setRadioCheck(true);
+                                    }}
+                                  />
+                                </TableCell>
+                                <TableCell className={styles.name}>
+                                  {userData.first_name} {userData.last_name}
+                                </TableCell>
+                                <TableCell className={styles.addLabel}>
+                                  <Chip
+                                    className={styles.chip}
+                                    label={result.address_label_name}
+                                    color={
+                                      result.address_label_name === "Home"
+                                        ? "primary"
+                                        : "error"
+                                    }
+                                    size="small"
+                                    sx={{ mx: 1 }}
+                                  />
+                                </TableCell>
+                                <TableCell className={styles.fullAdd}>
+                                  <Typography>
+                                    {result.address} {result.city}{" "}
+                                    {result.state} {result.country}
+                                  </Typography>
+                                </TableCell>
+                                <TableCell className={styles.phone}>
+                                  {"3215890184"}
+                                </TableCell>
+                                <TableCell className={styles.email}>
+                                  {userData.email}
+                                </TableCell>
+                                <TableCell className={styles.edit}>
+                                  <Modal
+                                    // variant=""
+                                    // startIcon={<AddIcon />}
+                                    buttonTitle={
+                                      <ModeEditOutlineIcon
+                                        className={styles.editIcon}
+                                      />
+                                    }
+                                    heading=" Edit Shipping Address"
+                                    dialogContentText={
+                                      <Shipping1 data={result} />
+                                    }
+                                  />
+                                  <DeleteIcon color="error" />
+                                </TableCell>
+                              </TableRow>
+                              <Divider />
+                            </TableBody> */}
+                      </>
+                    ) : (
+                      ""
+                    )
+                  )}
+              </Box>
+            </RadioGroup>
+            {/* </Table> */}
+            {/*  </TableContainer> */}
 
-                                  control={<Radio />}
-                                  label={<></>}
-                                  onClick={() => {
-                                    setRadioCheck(true);
-                                    // setShow(true);
-                                  }}
-                                />
-                              </TableCell>
-                              <TableCell className={styles.name}>
-                                {" "}
-                                {userData.first_name} {userData.last_name}
-                              </TableCell>
-                              <TableCell className={styles.addLabel}>
-                                {" "}
-                                <Chip
-                                  className={styles.chip}
-                                  label={result.address_label_name}
-                                  color={
-                                    result.address_label_name === "Home"
-                                      ? "primary"
-                                      : "error"
-                                  }
-                                  size="small"
-                                  sx={{ mx: 1 }}
-                                />
-                              </TableCell>
-                              <TableCell className={styles.fullAdd}>
-                                {" "}
-                                <Typography>
-                                  {result.address} {result.city} {result.state}{" "}
-                                  {result.country}
-                                </Typography>
-                              </TableCell>
-                              <TableCell className={styles.phone}>
-                                {"3215890184"}
-                              </TableCell>
-                              <TableCell className={styles.email}>
-                                {userData.email}
-                              </TableCell>{" "}
-                              <TableCell className={styles.edit}>
-                                <Modal
-                                  // variant=""
-                                  // startIcon={<AddIcon />}
-                                  buttonTitle={
-                                    <ModeEditOutlineIcon
-                                      className={styles.editIcon}
-                                    />
-                                  }
-                                  heading=" Edit Shipping Address"
-                                  dialogContentText={<Shipping1 data={result} />}
-                                />
-                              </TableCell>
-                            </TableRow>
-                            <Divider />
-                            {/* // ))} */}
-                          </TableBody>
-                        ) : (
-                          ""
-                        )
-                      )}
-                  </RadioGroup>
-                </Table>
-              </TableContainer>
-
-              {/* <FormControl>
+            {/* <FormControl>
                 <List sx={{ display: "flex" }}>
                   <ListItem>
                     <RadioGroup
@@ -402,7 +476,6 @@ function ShippingInformation({
                   </ListItem>
                 </List>
               </FormControl> */}
-            </Grid>
           </Grid>
         ) : buttonKey === 2 ? (
           <Grid

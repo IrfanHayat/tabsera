@@ -16,7 +16,7 @@ const Congratulations = ({ orderNo }) => {
   return (
     <>
       <CheckoutWizard activeStep={4} />
-      <Box className={styles.main}>
+      <Box className={styles.congratsMain}>
         <Box className={styles.congrats}>
           <Stack
             direction="column"
@@ -32,7 +32,7 @@ const Congratulations = ({ orderNo }) => {
                 color: "primary.main",
               }}
             >
-              Thank You for Your Purchase
+              Thank You for Your Purchase..
             </Box>
 
             {/* <Box sx={{ color: "text.primary" }}>

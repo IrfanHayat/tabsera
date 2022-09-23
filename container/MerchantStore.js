@@ -186,6 +186,10 @@ function MerchantStore({ merchantStoreDetail }) {
         // sx={{ paddingTop: 2 }}
         // justifyContent="center"
       >
+        <Typography className={styles.topHeading}>
+          {" "}
+          {merchantData.merchant_name}
+        </Typography>
         <Grid item md={12} xs={12} ml={1} className={styles.merchantBanner}>
           <Box className={styles.merchantBannerImg}></Box>
           {/* <Typography className={styles.merchantName}>

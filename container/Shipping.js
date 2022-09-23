@@ -38,7 +38,7 @@ export default function Shipping({
   getCities,
   cityData,
   labelValue,
-  data
+  data,
 }) {
   const [countryList, setCountryList] = useState([]);
   const [stateList, setStateList] = useState([]);
@@ -47,6 +47,9 @@ export default function Shipping({
 
   let router = useRouter();
 
+  console.log("Shipping")
+  console.log(countryData)
+  console.log("====================")
   // useEffect(() => {
   //   console.log(countryData)
   //   setCountryList(countryData);
@@ -88,10 +91,14 @@ export default function Shipping({
               }}
               render={({ field }) => (
                 <TextField
+                  // style={{ height: 18 }}
+                  // className={styles.inputField}
                   variant="outlined"
                   fullWidth
+                  size="small"
+                  // margin="dense"
                   id="firstName"
-                  label="First Name"
+                  label="First Name1"
                   error={Boolean(errors.email)}
                   helperText={
                     errors.email
@@ -130,13 +137,14 @@ export default function Shipping({
                       : ""
                   }
                   {...field}
+                  size="small"
                 ></TextField>
               )}
             ></Controller>
           </Grid>
           {console.log(countryData)}
 
-          <Grid item xs={12} md={4}>
+          <Grid item xs={12} md={6}>
             <Controller
               control={control}
               name="country"
@@ -147,9 +155,8 @@ export default function Shipping({
                     onChange(item);
                     getStates(item);
                   }}
-
                   value={value || null}
-                  sx={{ width: "100%" }}
+                  // sx={{ width: "100%" }}
                   options={countryData}
                   getOptionLabel={(item) =>
                     item.country_name ? item.country_name : ""
@@ -159,6 +166,7 @@ export default function Shipping({
                     value === "" ||
                     option.country_id === value.country_id
                   }
+                  size="small"
                   renderInput={(params) => (
                     <TextField
                       {...params}
@@ -175,7 +183,7 @@ export default function Shipping({
             />
           </Grid>
 
-          <Grid item xs={12} md={4}>
+          <Grid item xs={12} md={6}>
             <Controller
               control={control}
               name="states"
@@ -186,7 +194,6 @@ export default function Shipping({
                     onChange(item);
                     getCities(item);
                   }}
-                  sx={{ width: "100%" }}
                   value={value || null}
                   options={states}
                   getOptionLabel={(item) => (item.state ? item.state : "")}
@@ -195,6 +202,7 @@ export default function Shipping({
                     value === "" ||
                     option.state_id === value.state_id
                   }
+                  size="small"
                   renderInput={(params) => (
                     <TextField
                       {...params}
@@ -211,7 +219,7 @@ export default function Shipping({
             />
           </Grid>
 
-          <Grid item xs={12} md={4}>
+          <Grid item xs={12} md={6}>
             <Controller
               control={control}
               name="city"
@@ -221,7 +229,6 @@ export default function Shipping({
                   onChange={(event, item) => {
                     onChange(item);
                   }}
-                  sx={{ width: "100%" }}
                   value={value || null}
                   options={cityData}
                   key={(item) => (item.city ? item.city : "")}
@@ -231,6 +238,7 @@ export default function Shipping({
                     value === "" ||
                     option.city_id === value.city_id
                   }
+                  size="small"
                   renderInput={(params) => (
                     <TextField
                       {...params}
@@ -247,7 +255,7 @@ export default function Shipping({
             />
           </Grid>
 
-          <Grid item xs={12} md={12}>
+          <Grid item xs={12} md={6}>
             <Controller
               name="address"
               control={control}
@@ -270,6 +278,7 @@ export default function Shipping({
                       : ""
                   }
                   {...field}
+                  size="small"
                 ></TextField>
               )}
             ></Controller>
@@ -299,6 +308,7 @@ export default function Shipping({
                       : ""
                   }
                   {...field}
+                  size="small"
                 ></TextField>
               )}
             ></Controller>
@@ -327,6 +337,7 @@ export default function Shipping({
                       : ""
                   }
                   {...field}
+                  size="small"
                 ></TextField>
               )}
             ></Controller>

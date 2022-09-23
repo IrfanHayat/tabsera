@@ -79,9 +79,7 @@ function SubCategory({
   setShowAllCategoryPro,
   setShowAllMerchantPro,
   showProduct,
-
-
-
+  subCateId,
   setFilterData1,
   filterData1,
 }) {
@@ -163,8 +161,37 @@ function SubCategory({
   //     });
   //   };
   const getParentData = async (id) => {
+    let arr = []
     let result = await dispatch(getProductWithCategoryId(id));
-    setProductDataWithCategoryId(result.payload);
+
+    arr.push(result.payload[0])
+    console.log(result.payload[0])
+    if (result.payload.length > 0) {
+
+      let result1 = await dispatch(getCategory());
+      let results = result1?.payload?.filter(
+        (result2) => result2.category_id == result.payload[0].categoryId
+      )[0];
+      console.log(results)
+      results?.child?.map(async subCa => {
+        let result = await dispatch(getProductWithCategoryId(subCa.category_id));
+        result.payload.map(result => arr.push(result))
+
+      })
+      setProductDataWithCategoryId(arr);
+    } else {
+      let result1 = await dispatch(getCategory());
+      let results = result1?.payload?.filter(
+        (result2) => result2.category_id == catId
+      )[0];
+      console.log(results)
+      results?.child?.map(async subCa => {
+        let result = await dispatch(getProductWithCategoryId(subCa.category_id));
+        result.payload.map(result => arr.push(result))
+
+      })
+      setProductDataWithCategoryId(arr);
+    }
   };
 
   useEffect(async () => {
@@ -181,6 +208,8 @@ function SubCategory({
 
   useEffect(async () => {
     let result = await dispatch(getCategory());
+
+
     let results = result?.payload.filter(
       (result) => result.category_id == catId
     );
@@ -229,21 +258,65 @@ function SubCategory({
 
     }
   }
+
+
+  const categoryParentProduct1 = async (name) => {
+
+
+    if (productDataWithCategoryId) {
+      let arr = [];
+      let result = productDataWithCategoryId.filter(
+        (category) => category?.categoryName == name
+      );
+      console.log(result);
+      let result1 = await dispatch(getCategory());
+      let results = result1?.payload?.filter(
+        (result2) => result2.category_name == name
+      )[0];
+      results?.child?.map(async subCa => {
+        let result = await dispatch(getProductWithCategoryId(subCa.category_id));
+        result.payload.map(result => arr.push(result))
+
+      })
+      setFilterProduct(arr);
+      setFlag(true);
+    }
+    // if (dealsData) {
+    //   let result1 = dealsData.filter(
+    //     (category) => category.categoryName == name
+    //   );
+
+    //   setFilterDeal(result1);
+    //   setFlag(true);
+
+    // }
+    if (discountData) {
+
+      let result1 = discountData.filter(
+        (category) => category.categoryName == name
+      );
+      console.log(result1)
+      setFilterDiscount(result1);
+      setFlag(true);
+
+    }
+  }
   console.log(productDataWithCategoryId);
 
   const children = (subCategories) => {
     return (
-      <Box sx={{ display: "flex", flexDirection: "column", ml: 2 }}>
-        <Grid>
+      <Box >
+        <List
+
+        >
+
           {subCategories.map((result, index) => (
-            <List
-              onClick={() => categoryProduct(result.category_name)}
-              key={index}
-            >
-              {result.category_name}
-            </List>
+            <Typography onClick={() => categoryProduct(result.category_name)}
+              key={index}>{result.category_name}</Typography>
+
           ))}
-        </Grid>
+        </List>
+
         {/* {
           subCategories?.map(result => {
             <List>
@@ -330,8 +403,8 @@ function SubCategory({
     if (productDataWithCategoryId) {
       let result = productDataWithCategoryId.filter(
         (result) =>
-          parseInt(result.productCost) >= parseInt(min) &&
-          parseInt(result.productCost) <= parseInt(max)
+          parseInt(result?.productCost) >= parseInt(min) &&
+          parseInt(result?.productCost) <= parseInt(max)
       );
       setFilterProduct(result);
       setFlag(true);
@@ -395,6 +468,7 @@ function SubCategory({
           priceFilter={priceFilter}
           handleFilters={handleFilters}
           categoryProduct={categoryProduct}
+          categoryParentProduct1={categoryParentProduct1}
           parentCategories={parentCategories}
           childrenCategory={children}
           subCategories={subCategories}
@@ -519,7 +593,7 @@ function SubCategory({
                 showFreeShipping == false ? (
                 <ViewAllProducts
                   Item={Item}
-                  data={productDataWithCategoryId}
+                  data={filterProduct.length > 0 ? filterProduct : productDataWithCategoryId}
                 ></ViewAllProducts>
               ) : (
                 <>
@@ -532,7 +606,7 @@ function SubCategory({
                     sortFilter == true ? (
                     <ViewAllProducts
                       Item={Item}
-                      data={productDataWithCategoryId}
+                      data={filterProduct.length > 0 ? filterProduct : productDataWithCategoryId}
                     ></ViewAllProducts>
                   ) : (
                     showProduct == false &&
@@ -637,7 +711,7 @@ function SubCategory({
               discountData?.length > 0 ? (
               <ViewAllProducts
                 Item={Item}
-                data={filterData?.length > 0 ? filterData : discountData}
+                data={filterProduct?.length > 0 ? filterProduct : discountData}
               ></ViewAllProducts>
             ) : (
               <>

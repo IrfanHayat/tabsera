@@ -24,7 +24,7 @@ import {
   Paper,
   CardContent,
 } from "@mui/material";
-
+import CloseIcon from "@mui/icons-material/Close";
 import { withRouter } from "next/router";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -69,19 +69,90 @@ function CartScreen({
                 alt={item.name}
                 className={styles.cartCardImg}
                 sx={{
-                  maxHeight: { xs: 233, md: 167 },
-                  maxWidth: { xs: 350, md: 250 },
+                  maxHeight: { xs: 233, md: "140px" },
+                  maxWidth: { xs: 350, md: "141px" },
                 }}
               ></CardMedia>
             )}
 
             <CardContent sx={{ flex: "1 0 auto" }}>
-              <Typography className={styles.cartItemName}>
-                {item.name}
-              </Typography>
+              <Box
+                className={styles.topLine}
+                // display="flex"
+                // justifyContent={"space-between"}
+              >
+                <Typography className={styles.cartItemName}>
+                  {item.name}
+                </Typography>
+
+                <IconButton
+                  aria-label="delete"
+                  // size="small"
+                  // sx={{ mt: -1 }}
+                  variant="contained"
+                  // color="error"
+                  onClick={() => removeItemHandler(item)}
+                >
+                  <CloseIcon fontSize="inherit" />
+                </IconButton>
+              </Box>
               <Divider />
-              <Grid container>
+              <Box
+                className={styles.bottomLine}
+                // display="flex"
+                // justifyContent={"space-between"}
+              >
+                <Typography
+                  component="h5"
+                  variant="h5"
+                  // m={1}
+                  sx={{ color: "warning.main" }}
+                  // align="center"
+                  className={styles.cartItemPriceValue}
+                >
+                  Rs. {item.price}
+                </Typography>
                 <Grid
+                  // item
+                  // xs={3}
+                  // sm={3}
+                  // md={3}
+                  // lg={3}
+                  className={styles.cartItemQuantity}
+                >
+                  <IconButton
+                    onClick={() => handleDecreaseCart(item)}
+                    aria-label="reduce item"
+                    size="large"
+                    // variant="contained"
+                    // color="error"
+                    // sx={{ color:  "text.secondary" }}
+                  >
+                    <IndeterminateCheckBoxOutlinedIcon
+                      onClick={() => handleDecreaseCart(item)}
+                      className={styles.quantityBtns}
+                    />
+                  </IconButton>
+
+                  <Typography className="count" align="center">
+                    {item.qty}
+                  </Typography>
+
+                  <IconButton
+                    aria-label="increase item"
+                    // size="large"
+                    // variant="contained"
+                    // color="success"
+                    // sx={{ color: "text.secondary" }}
+                    onClick={() => handleAddToCart(item)}
+                  >
+                    <AddBoxOutlinedIcon className={styles.quantityBtns} />
+                  </IconButton>
+                  {/* </Grid> */}
+                </Grid>
+              </Box>
+              {/* <Grid container> */}
+              {/* <Grid
                   item
                   xs={9}
                   sm={9}
@@ -91,10 +162,11 @@ function CartScreen({
                 >
                   <Typography variant="body1" component="div">
                     {" "}
-                    {t('checkoutCart.labels.Quantity')}
+                    {t("checkoutCart.labels.Quantity")}
                   </Typography>
-                </Grid>
-                <Grid
+                </Grid> */}
+
+              {/* <Grid
                   item
                   xs={3}
                   sm={3}
@@ -108,7 +180,6 @@ function CartScreen({
                     size="large"
                     variant="contained"
                     color="error"
-                  // sx={{ color:  "text.secondary" }}
                   >
                     <IndeterminateCheckBoxOutlinedIcon />
                   </IconButton>
@@ -127,9 +198,9 @@ function CartScreen({
                   >
                     <AddBoxOutlinedIcon />
                   </IconButton>
-                  {/* </Grid> */}
-                </Grid>
-                <Grid
+                </Grid> */}
+
+              {/* <Grid
                   item
                   xs={9}
                   sm={9}
@@ -138,7 +209,7 @@ function CartScreen({
                   className={styles.cartItemPrice}
                 >
                   <Typography variant="body1" component="div">
-                    {t('checkoutCart.labels.Price')}
+                    {t("checkoutCart.labels.Price")}
                   </Typography>
                 </Grid>
 
@@ -163,9 +234,9 @@ function CartScreen({
                   >
                     <Currency amount={item.price}></Currency>
                   </Typography>
-                </Grid>
+                </Grid> */}
 
-                <Grid
+              {/* <Grid
                   item
                   xs={9}
                   sm={9}
@@ -174,7 +245,7 @@ function CartScreen({
                   className={styles.cartItemPrice}
                 >
                   <Typography variant="body1" component="div">
-                    {t('checkoutCart.labels.Delete')}
+                    {t("checkoutCart.labels.Delete")}
                   </Typography>
                 </Grid>
                 <Grid
@@ -196,8 +267,8 @@ function CartScreen({
                   >
                     <DeleteIcon fontSize="inherit" />
                   </IconButton>
-                </Grid>
-              </Grid>
+                </Grid> */}
+              {/* </Grid> */}
             </CardContent>
           </Card>
         ))}

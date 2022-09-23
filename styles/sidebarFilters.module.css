@@ -1,13 +1,20 @@
 .sideBarFilter {
+  min-height: 1368px;
   width: 278px;
   left: 0px;
   top: 0px;
+  /* margin-right: -10px; */
   background: #ffffff;
+  margin-top: 31px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  overflow-y: auto;
   box-shadow: 0px 1px 3px rgba(3, 0, 71, 0.09);
 }
 
 .categoryHeading {
-  margin-top: 18px;
+ 
   margin-left: 27px;
   font-size: 14px;
   font-weight: 600;
@@ -17,38 +24,71 @@
 }
 .categories {
   display: flex;
+  /* overflow-y: scroll; */
+  /* flex: 1; */
+  min-height: 250px;
+  /* height: 100%; */
   flex-direction: column;
-  /* align-items: flex-start; */
   /* flex-wrap: wrap; */
   /* direction: c; */
-  /* min-height: 100px; */
-  margin-bottom: 10px;
+  /* overflow-x: hidden; */
+  overflow-y: auto;
+  /* min-height: 100px;   */
+  /* margin-bottom: 100px; */
+  /* min-height: 150px; */
 }
+.categoriesScroll {
+  overflow-y: scroll;
+}
+/* .categories :hover {
+  font-weight: bold;
+} */
 .categoryParent {
   height: 19px;
   width: 119px;
   left: 2px;
-  top: 36px;
+ 
   border-radius: nullpx;
-  margin-top: 16px;
+  
   margin-left: 35px;
+}
+/* .categoryParent :hover {
+  font-weight: bold;
+} */
+
+.categoryParent :hover {
+  font-weight: bold;
+  color: blue;
+  cursor: pointer;
+}
+.categoryChild :hover {
+  font-weight: bold;
+  color: #f34f2f;
+  cursor: pointer;
 }
 .categoryChild {
   /* height: 19px; */
   width: 150px;
-  margin-top: 11px;
+  /* margin-top: 11px; */
   margin-left: 49px;
 }
 
+/* .categoryChild :hover {
+  font-weight: bold;
+} */
+.brands {
+  font-size: 16px;
+  line-height: 22px;
+}
 .brandsList {
   /* min-height: 100px; */
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 10px;
+  /* display: flex; */
+  /* flex-direction: column; */
+  margin-bottom: 100px;
 
   text-align: left;
   font-weight: 500;
-  font-size: 16px;
+
   margin-top: 16px;
   margin-left: 29px;
   /* line-height: 22px; */

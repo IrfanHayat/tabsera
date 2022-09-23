@@ -11,6 +11,8 @@ import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
 import { Grid } from "@mui/material";
+import AddIcon from "@mui/icons-material/Add";
+
 import ImageListItemBar from "@mui/material/ImageListItemBar";
 // import IconButton from "@mui/material/IconButton";
 import Rating from "@mui/material/Rating";
@@ -20,8 +22,25 @@ import Chip from "@mui/material/Chip";
 import IconButton from "@mui/material/IconButton";
 import LoyaltyIcon from "@mui/icons-material/Loyalty";
 import styles from "../../styles/card.module.css";
-const DealsAndPromotions = ({ dealsData, viewProduct }) => {
+const DealsAndPromotions = ({ dealsData, viewProduct, styledCard, addToCartHandler }) => {
   console.log("Data Deals New", dealsData);
+  let display = styledCard ? styledCard : "";
+  let displayDesc =
+    styledCard?.flexDirection == "row"
+      ? {
+        display: "flex",
+        flexDirection: "column",
+        // alignItems: "center",
+        m: 1,
+
+        // justifyContent: "space-between",
+        // justifyContent: "space-arounf",
+      }
+      : { height: 85 };
+
+  let width = styledCard?.flexDirection == "row" ? "100%" : "277px";
+  let height = styledCard?.flexDirection == "row" ? "100%" : "393px";
+
   return (
     <>
       {/* <ActionAreaCard /> */}
@@ -29,11 +48,11 @@ const DealsAndPromotions = ({ dealsData, viewProduct }) => {
         <Card
           className={styles.card1}
           sx={{
-            width: "205px",
-            // maxWidth: 280,
-            height: "310px",
+            display: display,
+            width: width,
+            height: height,
           }}
-          // className={cx(styles.root)}
+        // className={cx(styles.root)}
         >
           {result?.bundleImage && (
             <>
@@ -118,46 +137,84 @@ const DealsAndPromotions = ({ dealsData, viewProduct }) => {
               <Typography variant="body">{result?.category_name}</Typography>
             )} */}
             {/* <Box sx={{ height: 85 }}>  */}
-            <Box component="div" className={styles.prodName}>
-              <Typography variant="body1">{result?.bundleName}</Typography>
-            </Box>
-            <Box component="div" className={styles.prodCost}>
-              <Typography variant="subtitle1">
-                Rs.{result?.bundleCost}
+            <Box sx={{ ...displayDesc }}>
+              <Typography className={styles.prodName}>
+                {result?.bundleName}
               </Typography>
-            </Box>
-
-            {result.discountPercent ? (
-              <Grid className={styles.prodDiscountCost}>
-                <Typography
-                  variant="overline"
-                  component="div"
-                  display="inline"
-                  style={{ textDecorationLine: "line-through" }}
+              <Box component="div" className={styles.prodRating}>
+                <Rating
+                  // className={styles.Rating}
+                  name="size-small"
+                  defaultValue={result?.averageRating}
+                  size="small"
+                  // fontSize={24}
+                  readOnly
+                />
+                {/* </Grid> */}
+                {/* </Box> */}
+                {/* <Box className={styles.btnBox}> */}
+                {/* {result.bundleName ? (
+                <Button
+                  className={styles.btnAddCart}
+                  variant="outlined"
+                  key={result.id}
+                  onClick={() => addToCartHandler(result)}
+                  // endIcon={<AddShoppingCartOutlinedIcon fontSize="small" />}
                 >
-                  Rs {result.originalPrice}
-                </Typography>
-                {"   "}
-                <Typography variant="overline">
-                  -{result.discountPercent}%
-                </Typography>
-              </Grid>
-            ) : (
-              <></>
-            )}
-            {/* <Box
-            sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              // p: 1,
-              // m: 1,
-              alignContent: "center",
-              bgcolor: "background.paper",
-              borderRadius: 1,
-            }}
-          > */}
-            {/* <Grid md={3}> */}
-            <Box component="div" className={styles.prodRating}>
+                  <AddShoppingCartOutlinedIcon />
+                </Button>
+              ) : (
+                ""
+              )} */}
+              </Box>
+              <Box component="div" className={styles.prodCost}>
+                <Box display="flex">
+                  <Typography className={styles.prodCostValue}>
+                    Rs.{result?.bundleCost}
+                  </Typography>
+
+                  {result.discountPercent ? (
+                    <Typography
+                      className={styles.prodDiscountCost}
+                      variant="overline"
+                      component="div"
+                      display="inline"
+                      style={{ textDecorationLine: "line-through" }}
+                    >
+                      Rs {result.originalPrice}
+                    </Typography>
+                  ) : (
+                    // <Typography variant="overline">
+                    //   -{result.discountPercent}%
+                    // </Typography>
+                    <></>
+                  )}
+                </Box>
+                <>
+                  {" "}
+                  <>
+                    {result.bundleName ? (
+                      <AddIcon
+                        className={styles.btnAddCart}
+                        onClick={() => addToCartHandler(result)}
+                      />
+                    ) : (
+                      // <Button
+                      //   className={styles.btnAddCart}
+                      //   variant="outlined"
+                      //   key={result.id}
+                      //   onClick={() => addToCartHandler(result)}
+                      //   // endIcon={<AddShoppingCartOutlinedIcon fontSize="small" />}
+                      // >
+                      //   <AddShoppingCartOutlinedIcon />
+                      // </Button>
+                      ""
+                    )}
+                  </>
+                </>
+              </Box>
+            </Box>
+            {/* <Box component="div" className={styles.prodRating}>
               <Rating
                 className={styles.Rating}
                 name="size-small"
@@ -166,9 +223,7 @@ const DealsAndPromotions = ({ dealsData, viewProduct }) => {
                 // fontSize={24}
                 readOnly
               />
-              {/* </Grid> */}
-              {/* </Box> */}
-              {/* <Box className={styles.btnBox}> */}
+
               {result.bundleName ? (
                 <Button
                   className={styles.btnAddCart}
@@ -182,7 +237,7 @@ const DealsAndPromotions = ({ dealsData, viewProduct }) => {
               ) : (
                 ""
               )}
-            </Box>
+            </Box> */}
 
             {/* {product.productName ? (
               <IconButton

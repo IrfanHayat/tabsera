@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import * as React from "react";
 import CardContent from "@mui/material/CardContent";
 import Image from "next/image";
 import Card from "@mui/material/Card";
@@ -24,8 +24,8 @@ import { CardMedia, Button, Grid, AppBar } from "@mui/material";
 import Badge from "@mui/material/Badge";
 import { result } from "lodash";
 import styles from "../styles/card.module.css";
-import Currency from '../container/Currency/currency'
-
+import AddIcon from "@mui/icons-material/Add";
+import Currency from "../container/Currency/currency";
 export default function ActionAreaCard({
   product,
   viewProduct,
@@ -36,8 +36,6 @@ export default function ActionAreaCard({
   categoryView,
   cartView,
 }) {
-
-  let [countryCurrency, setCountryCurrency] = useState(null)
   const props = useSpring({
     opacity: 1,
     from: { opacity: 0 },
@@ -58,10 +56,8 @@ export default function ActionAreaCard({
         // justifyContent: "space-arounf",
       }
       : { height: 85 };
-  let width = styledCard?.flexDirection == "row" ? "100%" : "206px";
-  let height = styledCard?.flexDirection == "row" ? "100%" : "310px";
-
-
+  let width = styledCard?.flexDirection == "row" ? "400px" : "277px";
+  let height = styledCard?.flexDirection == "row" ? "100%" : "393px";
 
   return (
     <>
@@ -76,7 +72,7 @@ export default function ActionAreaCard({
         }}
       >
         {product?.bundleImage && (
-          <>
+          <center className={styles.cargImgBox}>
             <ImageListItem key={product.bundleImage}>
               <CardMedia
                 data-aos="fade-up"
@@ -118,10 +114,10 @@ export default function ActionAreaCard({
                 ""
               )} */}
             </ImageListItem>
-          </>
+          </center>
         )}
         {product?.productImage && (
-          <>
+          <center className={styles.cargImgBox}>
             <ImageListItem key={product.productImage}>
               <CardMedia
                 data-aos="fade-up"
@@ -163,19 +159,21 @@ export default function ActionAreaCard({
                 ""
               )}
             </ImageListItem>
-          </>
+          </center>
         )}
         {product?.category_image && (
-          <ImageListItem key={product.category_image}>
-            <CardMedia
-              data-aos="fade-up"
-              component="img"
-              className={styles.cargImg}
-              onClick={(e) => viewProduct(product)}
-              image={product?.category_image}
-              alt={product?.bundleName}
-            ></CardMedia>
-            {/* <Image
+          <center className={styles.cargImgBox}>
+            <ImageListItem key={product.category_image}>
+              <CardMedia
+                data-aos="fade-up"
+                component="img"
+                className={styles.cargImg}
+                onClick={(e) => viewProduct(product)}
+                image={product?.category_image}
+                alt={product?.bundleName}
+              ></CardMedia>
+
+              {/* <Image
               // className={cx(styles.media, mediaStyles.root)}
               src={product?.category_image}
               onClick={(e) => viewCategory(product.category_id)}
@@ -184,95 +182,76 @@ export default function ActionAreaCard({
               height={200}
               // loading="eager"
             ></Image> */}
-          </ImageListItem>
+            </ImageListItem>
+          </center>
         )}
 
         <Box className={styles.cardContent} component="div">
           {/* <Typography variant="h5">{product?.categoryName}</Typography> */}
           <Box sx={{ ...displayDesc }}>
             {product?.category_name && (
-              <Typography variant="body1">{product?.category_name}</Typography>
+              <Typography variant="h5">{product?.category_name}</Typography>
             )}
-            <Box component="div" className={styles.prodName}>
-              <Typography variant="body1">
-                {product?.productName
-                  ? product?.productName
-                  : product?.bundleName}
-              </Typography>
-            </Box>
-            <Box component="div" className={styles.prodCost}>
-              <Typography sx={{ display: 'flex' }} variant="subtitle1">
 
-                <Currency amount={product?.productCost
-                  ? product?.productCost
-                  : product?.bundleCost}></Currency>
-
-              </Typography>
-            </Box>
-            {product.discountPercent ? (
-              <Grid className={styles.prodDiscountCost}>
-                <Typography
-                  style={{
-                    textDecorationLine: "line-through",
-                  }}
-                  variant="overline"
-                  component="div"
-                  display="inline"
-                >
-                  Rs {product.originalPrice}
-                </Typography>
-                {"   "}
-                <Typography variant="overline">
-                  -{product.discountPercent}%
-                </Typography>
-                {/* <Badge
-              badgeContent={`-${product.discountPercent}%`}
-              color="primary"
-              noWrap
-            ></Badge> */}
-                {/* <Chip
-                  // sx={{ color: "yellow" }}
-                  // icon={<LocalShippingIcon />}
-                  label={`-${product.discountPercent}%`}
-                  // size="small"
-                  // color="warning"
-                  sx={{ bgcolor: "yellow", height: 15, width: 55 }}
-                /> */}
-              </Grid>
-            ) : (
-              <></>
-            )}
+            <Typography className={styles.prodName}>
+              {product?.productName
+                ? product?.productName
+                : product?.bundleName}
+            </Typography>
 
             <Box component="div" className={styles.prodRating}>
               <Rating
-                className={styles.Rating}
+                // className={styles.Rating}
                 name="size-small"
                 defaultValue={product?.averageRating}
                 size="small"
                 // fontSize={24}
                 readOnly
               />
-              {/* </Box> */}
-              {/* <Box className={styles.btnBox}> */}
-              {product.productName ? (
-                // <Button
-                //   // size="small"
-                //   className={styles.btnAddCart}
-                //   variant="outlined"
-                //   key={product.id}
-                //   onClick={() => addToCartHandler(product)}
-                //   // endIcon={<AddShoppingCartOutlinedIcon fontSize="small" />}
-                // >
-                <AddShoppingCartOutlinedIcon
-                  // fontSize="small"
-                  className={styles.btnAddCart}
-                // fontSize="large"
-                // style={{ backgroundColor: "blue" }}
-                />
+              {/* {product.productName ? (
+                <AddShoppingCartOutlinedIcon className={styles.btnAddCart} />
               ) : (
-                // </Button>
                 ""
-              )}
+              )} */}
+            </Box>
+
+            <Box component="div" className={styles.prodCost}>
+              <Box display="flex">
+                <Typography className={styles.prodCostValue}>
+                  <Currency
+                    amount={
+                      product?.productCost
+                        ? product?.productCost
+                        : product?.bundleCost
+                    }
+                  ></Currency>
+                </Typography>
+                {product?.discountPercent ? (
+                  <Typography
+                    className={styles.prodDiscountCost}
+                    style={{
+                      textDecorationLine: "line-through",
+                    }}
+                    variant="overline"
+                    // component="div"
+                    display="inline"
+                  >
+                    Rs {product.originalPrice}
+                  </Typography>
+                ) : (
+                  <></>
+                )}
+              </Box>
+              <>
+                {product?.productName ? (
+                  <AddIcon
+                    className={styles.btnAddCart}
+                    onClick={() => addToCartHandler(product)}
+                  />
+                ) : (
+                  ""
+                )}
+              </>
             </Box>
           </Box>
           {/* <Box sx={{ mb: 3, display: "flex", alignItems: "center" }}>

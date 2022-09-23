@@ -71,7 +71,7 @@ export default function NavSelect({
       >
         {/* <KeyboardArrowRightIcon /> */}
         <Box sx={{ display: "flex" }}>
-          <Box display="inline" sx={{ mr: 1 }}>
+          <Box display="inline" sx={{ mr: 1 }} color="#4D5565">
             {startIcon}
           </Box>
           <Typography display="inline" sx={{ pt: 0.3, fontWeight: "bold" }}>

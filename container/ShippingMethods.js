@@ -31,7 +31,10 @@ import { RouteGuard } from "../RouterGuard";
 import localStorage from "localStorage";
 import { useTranslation } from "react-i18next";
 import Currency from "./Currency/currency";
-
+import styles from "../styles/shippingMethods.module.css";
+import InfoIcon from "@mui/icons-material/Info";
+import LocalShippingIcon from "@mui/icons-material/LocalShipping";
+import PaymentIcon from "@mui/icons-material/Payment";
 function ShippingMethods({
   classes,
   shipmentMethodData,
@@ -49,213 +52,188 @@ function ShippingMethods({
 
   return (
     <>
-      <Grid container justifyContent={"center"}>
-        <Grid
-          item
-          md={12}
-          xs={12}
-          sx={{ bgcolor: "background.paper", mt: 0.2 }}
-        >
-          <Box sx={{ borderBottom: 1, borderColor: "divider", p: 2 }}>
-            <Typography variant="h6" style={{ fontWeight: "bold" }}>
-              {t('shippingInfo.ShippingAdress.label.shippingInformation')}
-            </Typography>
-
-            {/* {productDetail?.merchant_name} */}
-            <List>
-              <ListItem>
-                <ListItemIcon>
-                  <AccountCircleIcon />
-                  {/* {userData.first_name} {userData.last_name} */}
-                </ListItemIcon>
-                <ListItemText>
-                  {/* <AccountCircleIcon /> */}
+      <Grid container>
+        <Grid item md={12} xs={12}>
+          <Box className={styles.shippingMethods}>
+            <Box className={styles.shippingHeading}>
+              <InfoIcon className={styles.Icon} />
+              <Typography
+                className={styles.shippingHeading}
+                // variant="h6"
+                style={{ fontWeight: "bold" }}
+              >
+                {t("shippingInfo.ShippingAdress.label.shippingInformation")}
+              </Typography>
+            </Box>
+            <Box className={styles.boxInfo}>
+              <Box className={styles.infoList}>
+                <AccountCircleIcon className={styles.infoIcon} />
+                <Typography>
                   {userData.first_name} {userData.last_name}
-                </ListItemText>
-              </ListItem>
-              {/* </List> */}
+                </Typography>
+              </Box>
 
-              {/* <List> */}
-              <ListItem>
-                <ListItemIcon>
-                  <PhoneIcon />
-                </ListItemIcon>
+              <Box className={styles.infoList}>
+                <PhoneIcon className={styles.infoIcon} />
+
                 {localStorage.getItem("mobileNumber") ? (
-                  <ListItemText>
+                  <Typography>
                     {localStorage.getItem("mobileNumber")}
-                  </ListItemText>
+                  </Typography>
                 ) : (
                   <ListItemText>{"3215890184"}</ListItemText>
                 )}
-              </ListItem>
-              {/* </List> */}
+              </Box>
+
               {userData.email ? (
-                // <List>
-                <ListItem>
-                  <ListItemIcon>
-                    <EmailIcon />
-                  </ListItemIcon>
-                  <ListItemText>{userData.email}</ListItemText>
-                </ListItem>
+                <Box className={styles.infoList}>
+                  <EmailIcon className={styles.infoIcon} />
+
+                  <Typography>{userData.email}</Typography>
+                </Box>
               ) : (
-                // </List>
-                // <List>
-                <ListItem>
-                  <ListItemIcon>
-                    <EmailIcon />
-                  </ListItemIcon>
-                  <ListItemText>{"test@gmail.com"}</ListItemText>
-                </ListItem>
-                // </List>
+                <Box className={styles.infoList}>
+                  <EmailIcon className={styles.infoIcon} />
+                  <Typography>{"test@gmail.com"}</Typography>
+                </Box>
               )}
 
-              {/* <List> */}
-              <ListItem>
-                <ListItemIcon>
-                  <DomainAddOutlinedIcon />
-                </ListItemIcon>
+              <Box className={styles.infoList}>
+                <DomainAddOutlinedIcon className={styles.infoIcon} />
 
                 {shippementData ? (
-                  <ListItemText>
+                  <Typography>
                     {shippementData?.address_label_name}{" "}
-                    {shippementData?.address}," ",{shippementData?.city},
-                    {shippementData?.state},{shippementData?.country}
-                  </ListItemText>
+                    {shippementData?.address}
+                    ," ",{shippementData?.city},{shippementData?.state},
+                    {shippementData?.country}
+                  </Typography>
                 ) : (
                   <></>
                 )}
-              </ListItem>
-              {/* </List> */}
-              {/* <List> */}
-              {/* <ListItem>
-                  <ListItemIcon>
-                    <AddLocationAltOutlinedIcon />
-                  </ListItemIcon>
-                  <ListItemText>
-                    
-                  </ListItemText>
-                </ListItem> */}
-            </List>
+              </Box>
+            </Box>
           </Box>
-          {/* <TabPanel value={value} index={2}>
-              {merchantDetail?.city}
-            </TabPanel> */}
         </Grid>
 
-        <Grid item md={12} xs={12} sx={{ bgcolor: "background.paper" }}>
-          <Box sx={{ p: 2 }}>
-            <Typography variant="h6" style={{ fontWeight: "bold" }}>
-              {t('shippingInfo.ShippingAdress.label.shippingMethods')}
+        <Grid item md={12} xs={12} className={styles.shippingMethods}>
+          <Box className={styles.shippingHeading}>
+            <LocalShippingIcon className={styles.Icon} />
+            <Typography style={{ fontWeight: "bold" }}>
+              {t("shippingInfo.ShippingAdress.label.shippingMethods")}
             </Typography>
           </Box>
-          <FormControl>
-            <List>
-              <ListItem sx={{ display: "flex" }}>
-                <RadioGroup
-                  // row
-                  aria-labelledby="demo-row-radio-buttons-group-label"
-                  name="row-radio-buttons-group"
-                // value={labelValue}
-                >
-                  {shipmentMethodData &&
-                    shipmentMethodData.map((result) => (
+
+          <RadioGroup
+            // row
+            aria-labelledby="demo-row-radio-buttons-group-label"
+            name="row-radio-buttons-group"
+            // value={labelValue}
+          >
+            <Box className={styles.shippingBoxDivMain}>
+              {shipmentMethodData &&
+                shipmentMethodData.map((result) => (
+                  <Box className={styles.shippingAddress}>
+                    <Box className={styles.addressLabelDiv}>
+                      <Image
+                        // className={cx(styles.media, mediaStyles.root)}
+                        src={result.shipping_method_icon_url}
+                        // onClick={(e) => viewCategory(product.category_id)}
+                        alt={"Shipping"}
+                        width={70}
+                        height={70}
+                        objectFit="contain"
+                      ></Image>
+
                       <FormControlLabel
                         key={result.shipping_method_id}
                         value={result.shipping_method_id}
                         control={
                           <Radio onChange={() => handleChange(result)} />
                         }
-                        label={
-                          <Box
-                            sx={{
-                              display: "flex",
-                              alignItems: "center",
-                            }}
-                          >
-                            <Image
-                              // className={cx(styles.media, mediaStyles.root)}
-                              src={result.shipping_method_icon_url}
-                              // onClick={(e) => viewCategory(product.category_id)}
-                              alt={"Shipping"}
-                              width={50}
-                              height={30}
-                              objectFit="contain"
-                            ></Image>
-                            <Typography
-                              sx={{
-                                p: 1,
-                              }}
-                            >
-                              {result.shipping_method_name}
-                            </Typography>
-                          </Box>
-                        }
+                        label={<></>}
                         onClick={() => setRadioCheck(true)}
-                        sx={{ ml: 1 }}
                       />
-                    ))}
-                </RadioGroup>
-              </ListItem>
-            </List>
-          </FormControl>
+                    </Box>
+                    <Typography>{result.shipping_method_name}</Typography>
+                  </Box>
+                ))}
+            </Box>
+          </RadioGroup>
+          {/* </Box> */}
+          {/* </ListItem>
+            </List> */}
+          {/* </FormControl> */}
         </Grid>
 
-        <Grid
-          item
-          md={12}
-          xs={12}
-          sx={{ bgcolor: "background.paper", mt: 0.2 }}
-        >
-          <Box sx={{ p: 2 }}>
-            <Typography variant="h6" style={{ fontWeight: "bold" }}>
-              {t('shippingInfo.ShippingAdress.label.charges.shippingCharges')}
+        <Grid item md={12} xs={12} className={styles.shippingMethods}>
+          <Box className={styles.shippingHeading}>
+            <PaymentIcon className={styles.Icon} />
+            <Typography style={{ fontWeight: "bold" }}>
+              {t("shippingInfo.ShippingAdress.label.charges.shippingCharges")}
             </Typography>
           </Box>
 
           {/* <Box sx={{ display: "inline", margin: 5 }}> */}
-          <Grid container sx={{ pl: 2 }}>
-            <ListItem>
-              <Grid item xs={3}>
-                {t('shippingInfo.ShippingAdress.label.charges.subTotal')}
-              </Grid>
-              <Grid item xs={3}>
-                <Currency amount={productPrice &&
-                  productPrice.reduce((a, c) => a + c.qty * c.price, 0)}></Currency>
-              </Grid>
-              <Grid item xs={6}></Grid>
-              {/* <ListItemText>$ 0.0</ListItemText> */}
-            </ListItem>
-            <ListItem>
-              <Grid item xs={3}>
-                {t('shippingInfo.ShippingAdress.label.charges.shippingcost')}
-              </Grid>
-              <Grid item xs={3}>
-                {shippingCharges ? <Currency amount={shippingCharges}></Currency> : <Currency amount={0}></Currency>}
-              </Grid>
-              <Grid item xs={6}></Grid>
-            </ListItem>
-            <ListItem>
-              <Grid item xs={3}>
-                {t('shippingInfo.ShippingAdress.label.charges.totalCost')}{" "}
-              </Grid>
-              <Grid item xs={3}>
-                <Currency amount={productPrice && shippingCharges
-                  ? productPrice?.reduce((a, c) => a + c.qty * c.price, 0) +
-                  shippingCharges
-                  : productPrice?.reduce((a, c) => a + c.qty * c.price, 0)}></Currency>
-              </Grid>
-              <Grid item xs={6}></Grid>
-            </ListItem>
-          </Grid>
+          <Box className={styles.boxInfo}>
+            <Grid container sx={{ pl: 2 }}>
+              <ListItem>
+                <Grid item xs={3}>
+                  {t("shippingInfo.ShippingAdress.label.charges.subTotal")}
+                </Grid>
+                <Grid item xs={3}>
+                  <Currency
+                    amount={
+                      productPrice &&
+                      productPrice.reduce((a, c) => a + c.qty * c.price, 0)
+                    }
+                  ></Currency>
+                </Grid>
+                <Grid item xs={6}></Grid>
+                {/* <ListItemText>$ 0.0</ListItemText> */}
+              </ListItem>
+              <ListItem>
+                <Grid item xs={3}>
+                  {t("shippingInfo.ShippingAdress.label.charges.shippingcost")}
+                </Grid>
+                <Grid item xs={3}>
+                  {shippingCharges ? (
+                    <Currency amount={shippingCharges}></Currency>
+                  ) : (
+                    <Currency amount={0}></Currency>
+                  )}
+                </Grid>
+                <Grid item xs={6}></Grid>
+              </ListItem>
+              <ListItem>
+                <Grid item xs={3}>
+                  {t("shippingInfo.ShippingAdress.label.charges.totalCost")}{" "}
+                </Grid>
+                <Grid item xs={3}>
+                  <Currency
+                    amount={
+                      productPrice && shippingCharges
+                        ? productPrice?.reduce(
+                            (a, c) => a + c.qty * c.price,
+                            0
+                          ) + shippingCharges
+                        : productPrice?.reduce((a, c) => a + c.qty * c.price, 0)
+                    }
+                  ></Currency>
+                </Grid>
+                <Grid item xs={6}></Grid>
+              </ListItem>
+            </Grid>
+          </Box>
           <ListItem>
             <Button
               onClick={checkoutHandler}
               variant="contained"
               color="primary"
               disabled={radioCheck ? "" : "disabled"}
-            // startIcon={<AddIcon />}
+              // startIcon={<AddIcon />}
             >
-              {t('shippingInfo.ShippingAdress.button.reviewOrder')}
+              {t("shippingInfo.ShippingAdress.button.reviewOrder")}
             </Button>
           </ListItem>
           {/* <Button

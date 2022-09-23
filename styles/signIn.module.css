@@ -10,3 +10,8 @@
   top: 0%;
   bottom: 0%;
 }
+
+.menuItems:hover {
+  font-weight: bold;
+  color: #f34f2f;
+}

@@ -29,7 +29,7 @@ function Shipping1({ key, data }) {
     (state) => state.shipments
   );
   let [labelValue, setLabelValue] = useState("");
-
+  let [countryApiData, setCountryApiData] = useState();
   let router = useRouter();
 
   let dispatch = useDispatch();
@@ -51,6 +51,11 @@ function Shipping1({ key, data }) {
   };
   useEffect(() => {
     dispatch(getLabels());
+  }, []);
+
+  useEffect(async () => {
+    let country = await dispatch(getCountry());
+    setCountryApiData(country.payload)
   }, []);
 
   const classes = useStyles();
@@ -152,7 +157,8 @@ function Shipping1({ key, data }) {
 
   return (
     <>
-      {!data ?
+      {console.log(data)}
+      {data == undefined ?
         <Shipping
           key={key}
           submitHandler={submitHandler}
@@ -164,7 +170,7 @@ function Shipping1({ key, data }) {
           handleSubmit={handleSubmit}
           labels={labels && labels}
           errors={errors}
-          countryData={countryData && countryData}
+          countryData={countryApiData && countryApiData}
           getStates={getStates}
           states={states}
           getCities={getCities}

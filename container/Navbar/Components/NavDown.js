@@ -89,6 +89,7 @@ export default function NavDown(props) {
   console.log("campaignsData,", campaignsData);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
+  let [cartQunatity, setCartQunatity] = useState();
   const logOut = async () => {
     let result = await dispatch(logOutCustomer());
     setIsLoggedIn(false);
@@ -110,9 +111,12 @@ export default function NavDown(props) {
     // setQunatityProduct(result.payload)
   }, []);
 
-  useEffect(() => {
-    console.log(cartTotalQuantity);
-  }, cartTotalQuantity);
+
+  // useEffect(() => {
+  //   console.log(cartTotalQuantity);
+
+
+  // }, [cartTotalQuantity])
 
   const categoryData = (categories) => {
     setCategoriesData(categories);
@@ -234,9 +238,7 @@ export default function NavDown(props) {
       <AppBar className={styles.navDown} position="sticky">
         <Toolbar>
           <Link
-
             sx={{
-
               ":hover": {
                 // boxShadow: 20, // theme.shadows[20]
                 // transform: "scale(1.1)",
@@ -252,9 +254,9 @@ export default function NavDown(props) {
               alt="/bigLogo.png"
               height="100px"
               width="220px"
-              //objectFit="contain"
-              // onMouseOver={cu}
 
+              // onMouseOver={cu}
+              // objectFit="contain"
               onClick={() => router.push("/")}
             ></Image>
           </Link>
@@ -316,11 +318,11 @@ export default function NavDown(props) {
                   // InputProps={{ disableUnderline: true }}
 
                   {...params}
-                  placeholder={t('common.Search.placeHolder')}
+                  placeholder={t("common.Search.placeHolder")}
                   variant="standard"
-                  sx={{ borderColor: "primary.main" }}
+                  // sx={{ &:"hover": borderColor: "primary.main" }}
                   // color="primary"
-                  color="primary"
+                  // color="primary"
                   focused
                   InputProps={{
                     ...params.InputProps,
@@ -359,6 +361,7 @@ export default function NavDown(props) {
               {console.log(cartTotalQuantity)}
               {localStorage.getItem("login") == "true" ? (
                 <Badge
+                  // className={styles.badge}
                   color="error"
                   badgeContent={
                     cartTotalQuantity != undefined ||
@@ -368,7 +371,7 @@ export default function NavDown(props) {
                       : 1
                   }
                   max={99}
-                  className={styles.cartbadge}
+                // className={styles.cartbadge}
                 >
                   <ShoppingCartOutlinedIcon className={styles.cartIcon} />
                 </Badge>

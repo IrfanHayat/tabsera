@@ -17,8 +17,8 @@ const breakPoints = [
   { width: 1, itemsToShow: 1 },
   { width: 400, itemsToShow: 2 },
   { width: 550, itemsToShow: 3 },
-  { width: 768, itemsToShow: 6 },
-  { width: 1200, itemsToShow: 6 },
+  { width: 768, itemsToShow: 4 },
+  { width: 1200, itemsToShow: 5 },
 ];
 
 export default function CarouselApp({
@@ -52,10 +52,14 @@ export default function CarouselApp({
 
       // style={{ width: "100%" }}
       sx={{
-        bgcolor: "background.paper",
+        // bgcolor: "background.paper",
         // m: 1,
         // p: 1,
         // height: "500px",
+        mt: "31px",
+        // flexWrap: "wrap",
+
+        borderRadius: "10px",
       }}
     >
       <Box
@@ -65,10 +69,6 @@ export default function CarouselApp({
           flexWrap: "wrap",
           pt: 1,
           // mt: 1,
-          m: 0.5,
-          // flexWrap: "wrap",
-
-          borderRadius: 1,
         }}
       >
         <Box
@@ -122,11 +122,11 @@ export default function CarouselApp({
         itemsToScroll={1}
         focusOnSelect={true}
         renderArrow={myArrow}
-        // enableSwipe={true}
-        // enableMouseSwipe={true}
-        // enableAutoPlay={true}
-        // autoPlaySpeed={3000}
-        // itemsToShow={4}
+      // enableSwipe={true}
+      // enableMouseSwipe={true}
+      // enableAutoPlay={true}
+      // autoPlaySpeed={3000}
+      // itemsToShow={4}
       >
         {/* <div className="slider__conatiner"> */}
         {/* <Slider {...settings}> */}
