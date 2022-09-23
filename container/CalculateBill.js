@@ -97,7 +97,7 @@ function CalculateBill({ productPrice, checkoutHandler }) {
                 component="h5"
                 variant="h5"
                 // m={1}
-                sx={{ color: "#f34f2f" }}
+                sx={{ color: "#3d7cff" }}
                 style={{ fontWeight: "bold" }}
               // align="center"
               >
