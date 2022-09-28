@@ -512,6 +512,7 @@ export default function PersistentDrawerLeft() {
                           }
                         >
                           <ListItemText
+                            style={{ display: "flex", flexWrap: "wrap" }}
                             onClick={(e) => viewCategory(result.category_id)}
                           >
                             {result.category_name}
