@@ -2,6 +2,7 @@
   width: 278px;
   height: 398px;
   /* border: 10px; */
+  overflow-x: hidden;
   margin-top: 31px;
   /* position: absolute; */
   left: 0%;
