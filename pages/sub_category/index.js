@@ -164,8 +164,9 @@ function SubCategory({
     let arr = []
     let result = await dispatch(getProductWithCategoryId(id));
 
-    arr.push(result.payload[0])
-    console.log(result.payload[0])
+    result.payload.map(result => arr.push(result))
+
+
     if (result.payload.length > 0) {
 
       let result1 = await dispatch(getCategory());
