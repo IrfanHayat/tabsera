@@ -390,7 +390,7 @@ function Details({
               color="neutral"
               style={{ display: "block" }}
             >
-              {skusProduct.original_price ? <>PKR.{skusProduct.original_price}</> : <></>}
+              {skusProduct?.original_price ? <>PKR.{skusProduct.original_price}</> : <></>}
             </Box>
           </Box>
 
