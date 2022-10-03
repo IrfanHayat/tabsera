@@ -182,9 +182,9 @@ function MerchantStore({ merchantStoreDetail }) {
     <>
       <Grid
         container
-        // spacing={1}
-        // sx={{ paddingTop: 2 }}
-        // justifyContent="center"
+      // spacing={1}
+      // sx={{ paddingTop: 2 }}
+      // justifyContent="center"
       >
         <Typography className={styles.topHeading}>
           {" "}
@@ -309,7 +309,7 @@ function MerchantStore({ merchantStoreDetail }) {
             <TabPanel value={value} index={1}>
               <Grid sx={{ display: "flex" }}>
                 <>
-                  <MerchantSideBarFilter
+                  {/* <MerchantSideBarFilter
                     MinInput={MinInput}
                     MaxInput={MaxInput}
                     priceFilter={priceFilter}
@@ -318,7 +318,7 @@ function MerchantStore({ merchantStoreDetail }) {
                     childrenCategory={children}
                     subCategories={subCategories}
                     brands={brands}
-                  ></MerchantSideBarFilter>
+                  ></MerchantSideBarFilter> */}
                 </>
                 <>
                   {" "}
