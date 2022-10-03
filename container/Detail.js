@@ -453,7 +453,7 @@ function Details({
               ))}
           </Box>
           <Grid md={12}>
-            {/* <Divider /> */}
+            <Divider />
             <Typography variant="subtitle2">
               {" "}
               {t("PDP.labels.variants")} :
@@ -491,6 +491,7 @@ function Details({
                   ))}
               </Carousel>
             </Box>
+            <Divider />
           </Grid>
           {/* <Box sx={{ display: "flex", p: 1, direction: "column" }}>
             <Grid container>
@@ -531,7 +532,7 @@ function Details({
             // container
             spacing={1}
             sx={{
-              mt: 7,
+              mt: 2,
               display: {
                 xs: "none",
                 md: "flex",
