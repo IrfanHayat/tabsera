@@ -388,9 +388,9 @@ function Details({
 
             <Box
               color="neutral"
-              style={{ display: "block", textDecoration: "line-through" }}
+              style={{ display: "block" }}
             >
-              {skusProduct ? <>PKR.{skusProduct.original_price}</> : <></>}
+              {skusProduct.original_price ? <>PKR.{skusProduct.original_price}</> : <></>}
             </Box>
           </Box>
 
