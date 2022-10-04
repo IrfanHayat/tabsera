@@ -380,7 +380,7 @@ function SubCategory({
     setOpen(false);
   };
 
-
+  // brand Filter
   const handleFilters = (event) => {
     console.log(event.target.name)
     if (productDataWithCategoryId) {
