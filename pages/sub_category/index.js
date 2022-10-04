@@ -383,18 +383,38 @@ function SubCategory({
 
   const handleFilters = (event) => {
     console.log(event.target.name)
+    if (productDataWithCategoryId) {
+      let result = productDataWithCategoryId.filter(
+        (result) => result.brand_name == event.target.name
+      );
+      console.log(result)
+      setFilterProduct(result);
+      setFlag(true);
+    }
+    // if (dealsData) {
+
+    //   let result1 = dealsData.filter(
+    //     (result) =>
+    //       parseInt(result.bundleCost) >= parseInt(min) &&
+    //       parseInt(result.bundleCost) <= parseInt(max)
+    //   );
+    //   console.log(result1)
+    //   setFilterDeal(result1);
+    //   setFlag(true);
+
+    // }
     // if (discountData) {
 
     //   let result1 = discountData.filter(
     //     (result) =>
-    //       result.product ===
+    //       parseInt(result.productCost) >= parseInt(min) &&
+    //       parseInt(result.productCost) <= parseInt(max)
     //   );
     //   console.log(result1)
     //   setFilterDiscount(result1);
     //   setFlag(true);
 
     // }
-
   }
   const priceFilter = () => {
     let max = MaxInput.current.value;
