@@ -45,7 +45,7 @@ const Index = () => {
     console.log(buyCartItems)
   }, [buyCartItems])
   const handleChange = async (value) => {
-
+    console.log("I am here ")
     setShippingMethodId(value)
     if (router.query.addressId) {
       let result = shippingAddressData.filter(result => {

@@ -67,8 +67,10 @@ function ShippingInformation({
   setShow,
   userData,
   shipLocker,
+  setButtonKey,
+  buttonKey
 }) {
-  const [buttonKey, setButtonKey] = React.useState(1);
+
   const [userInfo, setUserInfo] = useState();
   let router = useRouter();
   let buttonText;

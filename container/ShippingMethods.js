@@ -128,7 +128,7 @@ function ShippingMethods({
             // row
             aria-labelledby="demo-row-radio-buttons-group-label"
             name="row-radio-buttons-group"
-            // value={labelValue}
+          // value={labelValue}
           >
             <Box className={styles.shippingBoxDivMain}>
               {shipmentMethodData &&
@@ -214,9 +214,9 @@ function ShippingMethods({
                     amount={
                       productPrice && shippingCharges
                         ? productPrice?.reduce(
-                            (a, c) => a + c.qty * c.price,
-                            0
-                          ) + shippingCharges
+                          (a, c) => a + c.qty * c.price,
+                          0
+                        ) + shippingCharges
                         : productPrice?.reduce((a, c) => a + c.qty * c.price, 0)
                     }
                   ></Currency>
@@ -231,7 +231,7 @@ function ShippingMethods({
               variant="contained"
               color="primary"
               disabled={radioCheck ? "" : "disabled"}
-              // startIcon={<AddIcon />}
+            // startIcon={<AddIcon />}
             >
               {t("shippingInfo.ShippingAdress.button.reviewOrder")}
             </Button>

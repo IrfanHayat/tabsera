@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import ShippingInformation from "../../container/ShippingInformation";
 import { useRouter, withRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
+import ShippingMethods from "../../pages/shipping_methods";
+import LockerShippingMethods from "../../pages/Locker_Shipping_Methods";
 import {
   getShipmentAddress,
   getShipmentsMethods,
@@ -38,8 +40,9 @@ const Index = ({ setLockerShippingMethod, setAddressShippingMethod, setShowShipp
   let [shippingAddres, setShippingAddess] = useState();
   let [shippingLockerAddres, setShippingLockerAddess] = useState();
   let [shipLocker, setShipLocker] = useState()
-
-
+  let [boolShipAddress, setBoolShipAddress] = useState(false)
+  let [boolLockerShipAddress, setBoolLockerShipAddress] = useState(false)
+  const [buttonKey, setButtonKey] = React.useState(1);
   let dispatch = useDispatch();
 
   console.log(lockersAddressData, "lAD");
@@ -65,7 +68,8 @@ const Index = ({ setLockerShippingMethod, setAddressShippingMethod, setShowShipp
     let result = shippingAddressData.filter((result) =>
       result.address_id == value ? result : ""
     )[0];
-
+    setBoolShipAddress(true)
+    setBoolLockerShipAddress(false)
     setShippingAddess(result);
     let obj = {
       address: result.address,
@@ -127,6 +131,8 @@ const Index = ({ setLockerShippingMethod, setAddressShippingMethod, setShowShipp
   };
   const handleChangeLocker = (event, value) => {
     console.log(value);
+    setBoolLockerShipAddress(true)
+    setBoolShipAddress(false)
     let result = lockersAddressData.filter((result) =>
       result.locker_id == value ? result : ""
     )[0];
@@ -180,7 +186,11 @@ const Index = ({ setLockerShippingMethod, setAddressShippingMethod, setShowShipp
         checkoutHandlerLocker={checkoutHandlerLocker}
         handleChangeLocker={handleChangeLocker}
         shipLocker={shipLocker}
+        setButtonKey={setButtonKey}
+        buttonKey={buttonKey}
       />
+      {boolShipAddress == true && buttonKey == 1 ? <ShippingMethods /> : <></>}
+      {boolLockerShipAddress == true && buttonKey == 2 ? <LockerShippingMethods /> : <></>}
     </div>
   );
 };
