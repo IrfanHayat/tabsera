@@ -7,7 +7,7 @@ import { jssPreset, StylesProvider } from "@mui/styles";
 import { CssBaseline } from "@mui/material";
 // import { ThemeProvider as MUIThemeProvider } from '@mui/material/styles';
 import Head from "next/head";
-import ThemeProvider from "../Theme/theme";
+import ThemeProvider from "../theme";
 import { CookiesProvider } from "react-cookie";
 import NavBar from "../container/Navbar/NavBar";
 import Footer from "../container/Footer/Footer";
