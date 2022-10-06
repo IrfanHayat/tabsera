@@ -887,7 +887,7 @@ function SubCategory({
                   showAllCategoryPro == true &&
                   showAllMerchantPro == false &&
                   showDeals == false &&
-                  //  showFreeShipping == false &&
+                  showFreeShipping == false &&
                   discountData?.length > 0 ? (
                   <ProductGetByCategory
                     data={filterData?.length > 0 ? filterData : discountData}
