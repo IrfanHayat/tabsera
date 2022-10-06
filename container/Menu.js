@@ -85,12 +85,17 @@ import ShopProductSort from "./Filter/ProductSort";
 import SubCategory from "../pages/sub_category";
 import { useCallback } from "react";
 import { use } from "i18next";
+import Pagination from "./Pagination/pagination";
 export default function PersistentDrawerLeft() {
   const { data, isLoading, isFetching, isError } = useGetAllProductsQuery();
   const { categoryData } = useSelector((state) => state.category);
   const { campaignsData } = useSelector((state) => state.campaigns);
 
   // console.log("cat DAta", categoryData);
+  //pagination 
+  const [currentPage, setcurrentPage] = useState(1);
+  const [perPage, setperPage] = useState(4);
+  const paginate = pageNumber => setcurrentPage(pageNumber);
   //
   // show all products
   const [showProduct, setShowProduct] = useState(false);
@@ -168,6 +173,14 @@ export default function PersistentDrawerLeft() {
       setSideBarCat(subCategory);
     }
 
+
+
+  useEffect(() => {
+
+  }, [currentPage, perPage])
+
+  const indexOfLastNumber = currentPage * perPage;
+  const indexOfFirstNumber = indexOfLastNumber - perPage;
 
 
   function handleHover() {
@@ -863,10 +876,24 @@ export default function PersistentDrawerLeft() {
                   showDeals == false &&
                   showDiscounts == false &&
                   showFreeShipping == false ? (
-                  <ViewAllProducts
-                    Item={Item}
-                    data={filterData ? filterData : data?.response}
-                  ></ViewAllProducts>
+                  <>
+                    <ViewAllProducts
+                      Item={Item}
+                      data={filterData?.length > 0 ? filterData.slice(indexOfFirstNumber, indexOfLastNumber) : data?.response.slice(indexOfFirstNumber, indexOfLastNumber)}
+                    ></ViewAllProducts>
+                    {filterData?.length > 0 ? <Pagination
+                      perPage={perPage}
+                      totalLength={filterData?.length}
+                      paginate={paginate}>
+
+                    </Pagination> : <Pagination
+                      perPage={perPage}
+                      totalLength={data?.response.length}
+                      paginate={paginate}>
+
+                    </Pagination>}
+
+                  </>
                 ) : (
                   <>
                     {showProduct &&
@@ -875,10 +902,23 @@ export default function PersistentDrawerLeft() {
                       showAllMerchantPro == false &&
                       showDeals == false &&
                       showFreeShipping == false ? (
-                      <ViewAllProducts
-                        Item={Item}
-                        data={filterData ? filterData : data?.response}
-                      ></ViewAllProducts>
+                      <>
+                        <ViewAllProducts
+                          Item={Item}
+                          data={filterData?.length > 0 ? filterData.slice(indexOfFirstNumber, indexOfLastNumber) : data?.response.slice(indexOfFirstNumber, indexOfLastNumber)}
+                        ></ViewAllProducts>
+                        {filterData?.length > 0 ? <Pagination
+                          perPage={perPage}
+                          totalLength={filterData?.length}
+                          paginate={paginate}>
+
+                        </Pagination> : <Pagination
+                          perPage={perPage}
+                          totalLength={data?.response.length}
+                          paginate={paginate}>
+
+                        </Pagination>}
+                      </>
                     ) : (
                       <>
                         {showProduct &&
@@ -890,7 +930,7 @@ export default function PersistentDrawerLeft() {
                           sortFilter == true ? (
                           <ViewAllProducts
                             Item={Item}
-                            data={filterData ? filterData : data?.response}
+                            data={filterData?.length > 0 ? filterData : data?.response}
                           ></ViewAllProducts>
                         ) : (
                           <></>
@@ -904,13 +944,26 @@ export default function PersistentDrawerLeft() {
                         showDiscounts == false &&
                         showFreeShipping == false &&
                         dealsData?.length > 0 ? (
-                        <DealsAndPromotions
-                          data={filterData?.length > 0 ? filterData : dealsData}
-                          showProduct={showProduct}
-                          showAllCategoryPro={showAllCategoryPro}
-                          showAllMerchantPro={showAllMerchantPro}
-                          filterData={filterData}
-                        ></DealsAndPromotions>
+                        <>
+                          <DealsAndPromotions
+                            data={filterData?.length > 0 ? filterData.slice(indexOfFirstNumber, indexOfLastNumber) : dealsData.slice(indexOfFirstNumber, indexOfLastNumber)}
+                            showProduct={showProduct}
+                            showAllCategoryPro={showAllCategoryPro}
+                            showAllMerchantPro={showAllMerchantPro}
+                            filterData={filterData}
+                          ></DealsAndPromotions>
+                          {filterData?.length > 0 ? <Pagination
+                            perPage={perPage}
+                            totalLength={filterData?.length}
+                            paginate={paginate}>
+
+                          </Pagination> : <Pagination
+                            perPage={perPage}
+                            totalLength={data?.response.length}
+                            paginate={paginate}>
+
+                          </Pagination>}
+                        </>
                       ) : (
                         <>
                           {" "}
@@ -948,17 +1001,30 @@ export default function PersistentDrawerLeft() {
                                     showDiscounts == false &&
                                     showFreeShipping == false &&
                                     showProduct == false ? (
-                                    <DealsAndPromotions
-                                      data={
-                                        filterData?.length > 0
-                                          ? filterData
-                                          : dealsData
-                                      }
-                                      showProduct={showProduct}
-                                      showAllCategoryPro={showAllCategoryPro}
-                                      showAllMerchantPro={showAllMerchantPro}
-                                      filterData={filterData}
-                                    ></DealsAndPromotions>
+                                    <>
+                                      <DealsAndPromotions
+                                        data={
+                                          filterData?.length > 0
+                                            ? filterData.slice(indexOfFirstNumber, indexOfLastNumber)
+                                            : dealsData.slice(indexOfFirstNumber, indexOfLastNumber)
+                                        }
+                                        showProduct={showProduct}
+                                        showAllCategoryPro={showAllCategoryPro}
+                                        showAllMerchantPro={showAllMerchantPro}
+                                        filterData={filterData}
+                                      ></DealsAndPromotions>
+                                      {filterData?.length > 0 ? <Pagination
+                                        perPage={perPage}
+                                        totalLength={filterData?.length}
+                                        paginate={paginate}>
+
+                                      </Pagination> : <Pagination
+                                        perPage={perPage}
+                                        totalLength={data?.response.length}
+                                        paginate={paginate}>
+
+                                      </Pagination>}
+                                    </>
                                   ) : (
                                     <></>
                                   )}
@@ -976,12 +1042,25 @@ export default function PersistentDrawerLeft() {
                         showDeals == false &&
                         showFreeShipping == false &&
                         discountData?.length > 0 ? (
-                        <ViewAllProducts
-                          Item={Item}
-                          data={
-                            filterData?.length > 0 ? filterData : discountData
-                          }
-                        ></ViewAllProducts>
+                        <>
+                          <ViewAllProducts
+                            Item={Item}
+                            data={
+                              filterData?.length > 0 ? filterData.slice(indexOfFirstNumber, indexOfLastNumber) : discountData.slice(indexOfFirstNumber, indexOfLastNumber)
+                            }
+                          ></ViewAllProducts>
+                          {filterData?.length > 0 ? <Pagination
+                            perPage={perPage}
+                            totalLength={filterData?.length}
+                            paginate={paginate}>
+
+                          </Pagination> : <Pagination
+                            perPage={perPage}
+                            totalLength={data?.response.length}
+                            paginate={paginate}>
+
+                          </Pagination>}
+                        </>
                       ) : (
                         <>
                           {" "}
@@ -1020,17 +1099,30 @@ export default function PersistentDrawerLeft() {
                                   {showDiscounts &&
                                     showFreeShipping == false &&
                                     showProduct == false ? (
-                                    <Discounts
-                                      data={
-                                        filterData?.length > 0
-                                          ? filterData
-                                          : discountData
-                                      }
-                                      showProduct={showProduct}
-                                      showAllCategoryPro={showAllCategoryPro}
-                                      showAllMerchantPro={showAllMerchantPro}
-                                      filterData={filterData}
-                                    ></Discounts>
+                                    <>
+                                      <Discounts
+                                        data={
+                                          filterData?.length > 0
+                                            ? filterData.slice(indexOfFirstNumber, indexOfLastNumber)
+                                            : discountData.slice(indexOfFirstNumber, indexOfLastNumber)
+                                        }
+                                        showProduct={showProduct}
+                                        showAllCategoryPro={showAllCategoryPro}
+                                        showAllMerchantPro={showAllMerchantPro}
+                                        filterData={filterData}
+                                      ></Discounts>
+                                      {filterData.length > 0 ? <Pagination
+                                        perPage={perPage}
+                                        totalLength={filterData?.length}
+                                        paginate={paginate}>
+
+                                      </Pagination> : <Pagination
+                                        perPage={perPage}
+                                        totalLength={data?.response.length}
+                                        paginate={paginate}>
+
+                                      </Pagination>}
+                                    </>
                                   ) : (
                                     <></>
                                   )}
@@ -1048,14 +1140,27 @@ export default function PersistentDrawerLeft() {
                         showAllMerchantPro == false &&
                         showDeals == false &&
                         freeShippingData?.length > 0 ? (
-                        <ViewAllProducts
-                          Item={Item}
-                          data={
-                            filterData?.length > 0
-                              ? filterData
-                              : freeShippingData
-                          }
-                        ></ViewAllProducts>
+                        <>
+                          <ViewAllProducts
+                            Item={Item}
+                            data={
+                              filterData?.length > 0
+                                ? filterData.slice(indexOfFirstNumber, indexOfLastNumber)
+                                : freeShippingData.slice(indexOfFirstNumber, indexOfLastNumber)
+                            }
+                          ></ViewAllProducts>
+                          {filterData.length > 0 ? <Pagination
+                            perPage={perPage}
+                            totalLength={filterData?.length}
+                            paginate={paginate}>
+
+                          </Pagination> : <Pagination
+                            perPage={perPage}
+                            totalLength={data?.response.length}
+                            paginate={paginate}>
+
+                          </Pagination>}
+                        </>
                       ) : (
                         <>
                           {" "}
@@ -1094,17 +1199,30 @@ export default function PersistentDrawerLeft() {
                                   {showFreeShipping &&
                                     showDiscounts == false &&
                                     showProduct == false ? (
-                                    <FreeShipping
-                                      data={
-                                        filterData?.length > 0
-                                          ? filterData
-                                          : freeShippingData
-                                      }
-                                      showProduct={showProduct}
-                                      showAllCategoryPro={showAllCategoryPro}
-                                      showAllMerchantPro={showAllMerchantPro}
-                                      filterData={filterData}
-                                    ></FreeShipping>
+                                    <>
+                                      <FreeShipping
+                                        data={
+                                          filterData?.length > 0
+                                            ? filterData.slice(indexOfFirstNumber, indexOfLastNumber)
+                                            : freeShippingData.slice(indexOfFirstNumber, indexOfLastNumber)
+                                        }
+                                        showProduct={showProduct}
+                                        showAllCategoryPro={showAllCategoryPro}
+                                        showAllMerchantPro={showAllMerchantPro}
+                                        filterData={filterData}
+                                      ></FreeShipping>
+                                      {filterData.length > 0 ? <Pagination
+                                        perPage={perPage}
+                                        totalLength={filterData?.length}
+                                        paginate={paginate}>
+
+                                      </Pagination> : <Pagination
+                                        perPage={perPage}
+                                        totalLength={data?.response.length}
+                                        paginate={paginate}>
+
+                                      </Pagination>}
+                                    </>
                                   ) : (
                                     <></>
                                   )}
