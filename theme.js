@@ -3,13 +3,16 @@ import { useMemo } from 'react';
 
 // material
 import { CssBaseline } from '@mui/material';
-import { ThemeProvider as MUIThemeProvider, createTheme, StyledEngineProvider } from '@mui/material/styles';
+import { ThemeProvider as MUIThemeProvider, createTheme } from '@mui/material/styles';
 //
+import rtl from "jss-rtl";
+import { create } from "jss";
+import { jssPreset, StylesProvider } from "@mui/styles";
 import palette from './Theme/palette';
 import typography from './Theme/typography';
 import componentsOverride from './Theme/overrides';
 import shadows, { customShadows } from './Theme/shadows';
-
+const jss = create({ plugins: [...jssPreset().plugins, rtl()] });
 // ----------------------------------------------------------------------
 
 ThemeProvider.propTypes = {
@@ -43,11 +46,11 @@ export default function ThemeProvider({ children }) {
   theme.components = componentsOverride(theme);
 
   return (
-    <StyledEngineProvider injectFirst>
+    <StylesProvider jss={jss}>
       <MUIThemeProvider theme={theme}>
         <CssBaseline />
         {children}
       </MUIThemeProvider>
-    </StyledEngineProvider>
+    </StylesProvider>
   );
 }
