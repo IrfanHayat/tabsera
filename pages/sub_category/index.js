@@ -860,6 +860,7 @@ function SubCategory({
               showAllCategoryPro == false &&
               showAllMerchantPro == false &&
               showDeals == false &&
+
               showFreeShipping == false &&
               discountData?.length > 0 ? (
               <>
@@ -898,7 +899,7 @@ function SubCategory({
                       showAllCategoryPro == false &&
                       showAllMerchantPro == true &&
                       showDeals == false &&
-                      //       showFreeShipping == false &&
+                      showFreeShipping == false &&
                       discountData?.length > 0 ? (
                       <ProductGetByMerchant
                         data={
