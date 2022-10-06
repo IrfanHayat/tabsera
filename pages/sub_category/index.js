@@ -8,7 +8,7 @@ import ProductGetByCategory from "../../pages/get_all_products_by_category";
 import ProductGetByMerchant from "../../pages/get_all_products_by_merchant";
 import Discounts from "../../pages/discounts";
 import FreeShipping from "../../pages/is_free_shipping";
-
+import Pagination from "../../container/Pagination/pagination";
 import {
   getProductWithCategoryId,
   getCategoryBrand,
@@ -111,6 +111,11 @@ function SubCategory({
   });
   const [filterData, setFilterData] = useState();
 
+  //pagination 
+  const [currentPage, setcurrentPage] = useState(1);
+  const [perPage, setperPage] = useState(4);
+  const paginate = pageNumber => setcurrentPage(pageNumber);
+
   const classes = useStyles();
   const MaxInput = useRef(null);
   const MinInput = useRef(null);
@@ -154,6 +159,13 @@ function SubCategory({
     setChecked([checked[0], event.target.checked]);
   };
 
+  //Pagination 
+  useEffect(() => {
+
+  }, [currentPage, perPage])
+
+  const indexOfLastNumber = currentPage * perPage;
+  const indexOfFirstNumber = indexOfLastNumber - perPage;
   //   const viewCategory = (item) => {
   //     router.push({
   //       pathname: "/sub_category",
@@ -600,10 +612,52 @@ function SubCategory({
             showDiscounts == false && filterProduct?.length < 1 &&
             flag == false ? (
             //showFreeShipping == false
-            <ViewAllProducts
-              Item={Item}
-              data={productDataWithCategoryId}
-            ></ViewAllProducts>
+            <>
+              {
+                productDataWithCategoryId?.length > 0 ?
+                  <ViewAllProducts
+                    Item={Item}
+                    data={productDataWithCategoryId.slice(indexOfFirstNumber, indexOfLastNumber)}
+                  ></ViewAllProducts> : <Box
+                    sx={{
+                      display: 'flex',
+                      justifyContent: 'center',
+                      alignItems: 'center',
+                      minHeight: '100vh'
+                    }}
+                  >
+                    <Container maxWidth="md">
+                      <Grid container spacing={2}>
+                        <Grid xs={6}>
+                          <Typography variant="h1">
+                            404
+                          </Typography>
+                          <Typography variant="h6">
+                            Product doesn’t exist.
+                          </Typography>
+
+                        </Grid>
+                        <Grid xs={6}>
+                          <img
+                            src="https://cdn.pixabay.com/photo/2017/03/09/12/31/error-2129569__340.jpg"
+                            alt=""
+                            width={500} height={250}
+                          />
+                        </Grid>
+                      </Grid>
+                    </Container>
+                  </Box>
+              }
+              {
+                productDataWithCategoryId?.length > 0 ? <Pagination
+                  perPage={perPage}
+                  totalLength={productDataWithCategoryId?.length}
+                  paginate={paginate}>
+
+                </Pagination> : <></>
+              }
+
+            </>
           ) : (
             <>
               {showProduct &&
@@ -612,10 +666,23 @@ function SubCategory({
                 showAllMerchantPro == false &&
                 showDeals == false &&
                 showFreeShipping == false ? (
-                <ViewAllProducts
-                  Item={Item}
-                  data={filterProduct.length > 0 ? filterProduct : productDataWithCategoryId}
-                ></ViewAllProducts>
+                <>
+                  <ViewAllProducts
+                    Item={Item}
+                    data={filterProduct.length > 0 ? filterProduct.slice(indexOfFirstNumber, indexOfLastNumber) : productDataWithCategoryId.slice(indexOfFirstNumber, indexOfLastNumber)}
+                  ></ViewAllProducts>
+                  {filterData?.length > 0 ? <Pagination
+                    perPage={perPage}
+                    totalLength={filterData?.length}
+                    paginate={paginate}>
+
+                  </Pagination> : <Pagination
+                    perPage={perPage}
+                    totalLength={productDataWithCategoryId?.length}
+                    paginate={paginate}>
+
+                  </Pagination>}
+                </>
               ) : (
                 <>
                   {showProduct &&
@@ -625,10 +692,23 @@ function SubCategory({
                     showDeals == false &&
                     showFreeShipping == false &&
                     sortFilter == true ? (
-                    <ViewAllProducts
-                      Item={Item}
-                      data={filterProduct.length > 0 ? filterProduct : productDataWithCategoryId}
-                    ></ViewAllProducts>
+                    <>
+                      <ViewAllProducts
+                        Item={Item}
+                        data={filterProduct.length > 0 ? filterProduct.slice(indexOfFirstNumber, indexOfLastNumber) : productDataWithCategoryId.slice(indexOfFirstNumber, indexOfLastNumber)}
+                      ></ViewAllProducts>
+                      {filterProduct?.length > 0 ? <Pagination
+                        perPage={perPage}
+                        totalLength={filterProduct?.length}
+                        paginate={paginate}>
+
+                      </Pagination> : <Pagination
+                        perPage={perPage}
+                        totalLength={productDataWithCategoryId?.length}
+                        paginate={paginate}>
+
+                      </Pagination>}
+                    </>
                   ) : (
                     showProduct == false &&
                       showAllCategoryPro == false &&
@@ -638,8 +718,19 @@ function SubCategory({
                       <>
                         <ViewAllProducts
                           Item={Item}
-                          data={filterProduct}
+                          data={filterProduct.slice(indexOfFirstNumber, indexOfLastNumber)}
                         ></ViewAllProducts>
+                        {filterProduct?.length > 0 ? <Pagination
+                          perPage={perPage}
+                          totalLength={filterProduct?.length}
+                          paginate={paginate}>
+
+                        </Pagination> : <Pagination
+                          perPage={perPage}
+                          totalLength={productDataWithCategoryId?.length}
+                          paginate={paginate}>
+
+                        </Pagination>}
                       </> :
                       <></>
 
@@ -655,13 +746,27 @@ function SubCategory({
             showDiscounts == false &&
             showFreeShipping == false &&
             dealsData?.length > 0 ? (
-            <DealsAndPromotions
-              data={filterData?.length > 0 ? filterData : dealsData}
-              showProduct={showProduct}
-              showAllCategoryPro={showAllCategoryPro}
-              showAllMerchantPro={showAllMerchantPro}
-              filterData={filterData}
-            ></DealsAndPromotions>
+            <>
+
+              <DealsAndPromotions
+                data={filterData?.length > 0 ? filterData.slice(indexOfFirstNumber, indexOfLastNumber) : dealsData.slice(indexOfFirstNumber, indexOfLastNumber)}
+                showProduct={showProduct}
+                showAllCategoryPro={showAllCategoryPro}
+                showAllMerchantPro={showAllMerchantPro}
+                filterData={filterData}
+              ></DealsAndPromotions>
+              {filterData?.length > 0 ? <Pagination
+                perPage={perPage}
+                totalLength={filterData?.length}
+                paginate={paginate}>
+
+              </Pagination> : <Pagination
+                perPage={perPage}
+                totalLength={dealsData?.length}
+                paginate={paginate}>
+
+              </Pagination>}
+            </>
           ) : (
             <>
               {" "}
@@ -693,25 +798,51 @@ function SubCategory({
                         showDiscounts == false &&
                         // showFreeShipping == false &&
                         showProduct == false && filterDeal.length < 1 ? (
-                        <DealsAndPromotions
-                          data={filterData?.length > 0 ? filterData : dealsData}
-                          showProduct={showProduct}
-                          showAllCategoryPro={showAllCategoryPro}
-                          showAllMerchantPro={showAllMerchantPro}
-                          filterData={filterData}
-                        ></DealsAndPromotions>
-                      ) : (
-                        <> {showDeals &&
-                          showDiscounts == false &&
-                          // showFreeShipping == false &&
-                          showProduct == false && filterDeal.length > 0 ? (
+                        <>
                           <DealsAndPromotions
-                            data={filterDeal?.length > 0 ? filterDeal : dealsData}
+                            data={filterData?.length > 0 ? filterData.slice(indexOfFirstNumber, indexOfLastNumber) : dealsData.slice(indexOfFirstNumber, indexOfLastNumber)}
                             showProduct={showProduct}
                             showAllCategoryPro={showAllCategoryPro}
                             showAllMerchantPro={showAllMerchantPro}
                             filterData={filterData}
                           ></DealsAndPromotions>
+                          {filterData?.length > 0 ? <Pagination
+                            perPage={perPage}
+                            totalLength={filterData?.length}
+                            paginate={paginate}>
+
+                          </Pagination> : <Pagination
+                            perPage={perPage}
+                            totalLength={dealsData?.length}
+                            paginate={paginate}>
+
+                          </Pagination>}
+                        </>
+                      ) : (
+                        <> {showDeals &&
+                          showDiscounts == false &&
+                          // showFreeShipping == false &&
+                          showProduct == false && filterDeal.length > 0 ? (
+                          <>
+                            <DealsAndPromotions
+                              data={filterDeal?.length > 0 ? filterDeal.slice(indexOfFirstNumber, indexOfLastNumber) : dealsData.slice(indexOfFirstNumber, indexOfLastNumber)}
+                              showProduct={showProduct}
+                              showAllCategoryPro={showAllCategoryPro}
+                              showAllMerchantPro={showAllMerchantPro}
+                              filterData={filterData}
+                            ></DealsAndPromotions>
+                            {filterData?.length > 0 ? <Pagination
+                              perPage={perPage}
+                              totalLength={filterData?.length}
+                              paginate={paginate}>
+
+                            </Pagination> : <Pagination
+                              perPage={perPage}
+                              totalLength={dealsData?.length}
+                              paginate={paginate}>
+
+                            </Pagination>}
+                          </>
                         ) : (
                           <></>
                         )}</>
@@ -730,10 +861,23 @@ function SubCategory({
               showDeals == false &&
               showFreeShipping == false &&
               discountData?.length > 0 ? (
-              <ViewAllProducts
-                Item={Item}
-                data={filterProduct?.length > 0 ? filterProduct : discountData}
-              ></ViewAllProducts>
+              <>
+                <ViewAllProducts
+                  Item={Item}
+                  data={filterProduct?.length > 0 ? filterProduct.slice(indexOfFirstNumber, indexOfLastNumber) : discountData.slice(indexOfFirstNumber, indexOfLastNumber)}
+                ></ViewAllProducts>
+                {filterDiscount?.length > 0 ? <Pagination
+                  perPage={perPage}
+                  totalLength={filterDiscount?.length}
+                  paginate={paginate}>
+
+                </Pagination> : <Pagination
+                  perPage={perPage}
+                  totalLength={discountData?.length}
+                  paginate={paginate}>
+
+                </Pagination>}
+              </>
             ) : (
               <>
                 {" "}
@@ -766,29 +910,55 @@ function SubCategory({
                         {showDiscounts &&
                           //     showFreeShipping == false &&
                           showProduct == false && filterDiscount.length < 1 ? (
-                          <Discounts
-                            data={
-                              filterData?.length > 0 ? filterData : discountData
-                            }
-                            showProduct={showProduct}
-                            showAllCategoryPro={showAllCategoryPro}
-                            showAllMerchantPro={showAllMerchantPro}
-                            filterData={filterData}
-                          ></Discounts>
+                          <>
+                            <Discounts
+                              data={
+                                filterData?.length > 0 ? filterData.slice(indexOfFirstNumber, indexOfLastNumber) : discountData.slice(indexOfFirstNumber, indexOfLastNumber)
+                              }
+                              showProduct={showProduct}
+                              showAllCategoryPro={showAllCategoryPro}
+                              showAllMerchantPro={showAllMerchantPro}
+                              filterData={filterData}
+                            ></Discounts>
+                            {filterData?.length > 0 ? <Pagination
+                              perPage={perPage}
+                              totalLength={filterData?.length}
+                              paginate={paginate}>
+
+                            </Pagination> : <Pagination
+                              perPage={perPage}
+                              totalLength={discountData?.length}
+                              paginate={paginate}>
+
+                            </Pagination>}
+                          </>
                         ) : (
                           <>  <>
                             {showDiscounts &&
                               //     showFreeShipping == false &&
                               showProduct == false && filterDiscount.length > 0 ? (
-                              <Discounts
-                                data={
-                                  filterDiscount?.length > 0 ? filterDiscount : discountData
-                                }
-                                showProduct={showProduct}
-                                showAllCategoryPro={showAllCategoryPro}
-                                showAllMerchantPro={showAllMerchantPro}
-                                filterData={filterData}
-                              ></Discounts>
+                              <>
+                                <Discounts
+                                  data={
+                                    filterDiscount?.length > 0 ? filterDiscount.slice(indexOfFirstNumber, indexOfLastNumber) : discountData.slice(indexOfFirstNumber, indexOfLastNumber)
+                                  }
+                                  showProduct={showProduct}
+                                  showAllCategoryPro={showAllCategoryPro}
+                                  showAllMerchantPro={showAllMerchantPro}
+                                  filterData={filterData}
+                                ></Discounts>
+                                {filterDiscount?.length > 0 ? <Pagination
+                                  perPage={perPage}
+                                  totalLength={filterDiscount?.length}
+                                  paginate={paginate}>
+
+                                </Pagination> : <Pagination
+                                  perPage={perPage}
+                                  totalLength={discountData?.length}
+                                  paginate={paginate}>
+
+                                </Pagination>}
+                              </>
                             ) : (
                               <></>
                             )}
@@ -808,10 +978,23 @@ function SubCategory({
               showAllMerchantPro == false &&
               showDeals == false &&
               freeShippingData?.length > 0 ? (
-              <ViewAllProducts
-                Item={Item}
-                data={filterData?.length > 0 ? filterData : freeShippingData}
-              ></ViewAllProducts>
+              <>
+                <ViewAllProducts
+                  Item={Item}
+                  data={filterData?.length > 0 ? filterData.slice(indexOfFirstNumber, indexOfLastNumber) : freeShippingData.slice(indexOfFirstNumber, indexOfLastNumber)}
+                ></ViewAllProducts>
+                {filterData?.length > 0 ? <Pagination
+                  perPage={perPage}
+                  totalLength={freeShippingData?.length}
+                  paginate={paginate}>
+
+                </Pagination> : <Pagination
+                  perPage={perPage}
+                  totalLength={freeShippingData?.length}
+                  paginate={paginate}>
+
+                </Pagination>}
+              </>
             ) : (
               <>
                 {" "}
@@ -845,18 +1028,34 @@ function SubCategory({
                       <>
                         {showFreeShipping &&
                           showDiscounts == false &&
-                          showProduct == false ? (
-                          <FreeShipping
-                            data={
-                              filterData?.length > 0
-                                ? filterData
-                                : freeShippingData
-                            }
-                            showProduct={showProduct}
-                            showAllCategoryPro={showAllCategoryPro}
-                            showAllMerchantPro={showAllMerchantPro}
-                            filterData={filterData}
-                          ></FreeShipping>
+                          showProduct == false &&
+                          showAllCategoryPro == false &&
+                          showAllMerchantPro == false &&
+                          showDeals == false ? (
+                          <>
+                            <FreeShipping
+                              data={
+                                filterData?.length > 0
+                                  ? filterData.slice(indexOfFirstNumber, indexOfLastNumber)
+                                  : freeShippingData.slice(indexOfFirstNumber, indexOfLastNumber)
+                              }
+                              showProduct={showProduct}
+                              showAllCategoryPro={showAllCategoryPro}
+                              showAllMerchantPro={showAllMerchantPro}
+                              filterData={filterData}
+                            ></FreeShipping>
+                            {filterData?.length > 0 ? <Pagination
+                              perPage={perPage}
+                              totalLength={freeShippingData?.length}
+                              paginate={paginate}>
+
+                            </Pagination> : <Pagination
+                              perPage={perPage}
+                              totalLength={freeShippingData?.length}
+                              paginate={paginate}>
+
+                            </Pagination>}
+                          </>
                         ) : (
                           <></>
                         )}
