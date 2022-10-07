@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useRef, useEffect } from "react";
+import React, { useState, useMemo, useRef, useEffect, useCallback } from "react";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Link from "@mui/material/Link";
 import ActionAreaCard from "../../container/Card";
@@ -141,12 +141,12 @@ function SubCategory({
   const [parentProducts, setParentProducts] = useState();
   const [childProducts, setChildProducts] = useState();
 
-  const viewProduct = (item) => {
+  const viewProduct = useCallback((item) => {
     router.push({
       pathname: "/product_detail",
       query: { productId: item.productId },
     });
-  };
+  }, []);
   const handleChange1 = (event) => {
     setChecked([event.target.checked, event.target.checked]);
   };
@@ -172,7 +172,7 @@ function SubCategory({
   //       query: { sub_category: item },
   //     });
   //   };
-  const getParentData = async (id) => {
+  const getParentData = useCallback(async (id) => {
     let arr = []
     let result = await dispatch(getProductWithCategoryId(id));
 
@@ -205,7 +205,7 @@ function SubCategory({
       })
       setProductDataWithCategoryId(arr);
     }
-  };
+  }, []);
 
   useEffect(async () => {
     let result = await dispatch(getCategoryBrand());
@@ -237,7 +237,8 @@ function SubCategory({
   useEffect(() => { }, [subCategories]);
   useEffect(() => { }, [catId]);
 
-  function categoryProduct(name) {
+
+  const categoryProduct = useCallback((name) => {
     console.log(name);
     let result = productDataWithCategoryId.filter(
       (category) => category.categoryName == name
@@ -251,15 +252,15 @@ function SubCategory({
       setFilterProduct(result);
       setFlag(true);
     }
-    // if (dealsData) {
-    //   let result1 = dealsData.filter(
-    //     (category) => category.categoryName == name
-    //   );
+    if (dealsData) {
+      let result1 = dealsData.filter(
+        (category) => category.categoryName == name
+      );
 
-    //   setFilterDeal(result1);
-    //   setFlag(true);
+      setFilterDeal(result1);
+      setFlag(true);
 
-    // }
+    }
     if (discountData) {
 
       let result1 = discountData.filter(
@@ -270,10 +271,10 @@ function SubCategory({
       setFlag(true);
 
     }
-  }
+  }, [filterDiscount, filterProduct, filterDeal, flag])
 
 
-  const categoryParentProduct1 = async (name) => {
+  const categoryParentProduct1 = useCallback(async (name) => {
 
 
     if (productDataWithCategoryId) {
@@ -313,7 +314,7 @@ function SubCategory({
       setFlag(true);
 
     }
-  }
+  }, [filterDiscount, filterProduct, filterDeal, flag])
   console.log(productDataWithCategoryId);
 
   const children = (subCategories) => {
@@ -613,12 +614,21 @@ function SubCategory({
             flag == false ? (
             //showFreeShipping == false
             <>
+
               {
-                productDataWithCategoryId?.length > 0 ?
-                  <ViewAllProducts
-                    Item={Item}
-                    data={productDataWithCategoryId.slice(indexOfFirstNumber, indexOfLastNumber)}
-                  ></ViewAllProducts> : <Box
+                productDataWithCategoryId?.length >= 1 ?
+                  <>
+                    <ViewAllProducts
+                      Item={Item}
+                      data={productDataWithCategoryId.slice(indexOfFirstNumber, indexOfLastNumber)}
+                    ></ViewAllProducts>
+                    <Pagination
+                      perPage={perPage}
+                      totalLength={productDataWithCategoryId?.length}
+                      paginate={paginate}>
+
+                    </Pagination>
+                  </> : <><Box
                     sx={{
                       display: 'flex',
                       justifyContent: 'center',
@@ -647,15 +657,7 @@ function SubCategory({
                         </Grid>
                       </Grid>
                     </Container>
-                  </Box>
-              }
-              {
-                productDataWithCategoryId?.length > 0 ? <Pagination
-                  perPage={perPage}
-                  totalLength={productDataWithCategoryId?.length}
-                  paginate={paginate}>
-
-                </Pagination> : <></>
+                  </Box></>
               }
 
             </>

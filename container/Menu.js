@@ -159,7 +159,7 @@ export default function PersistentDrawerLeft() {
 
   const [sideBarCat, setSideBarCat] = useState([]);
 
-  const handleClick =
+  const handleClick = useCallback(
     (event, categoryId) => {
 
       if (anchorEl !== event.currentTarget) {
@@ -171,11 +171,11 @@ export default function PersistentDrawerLeft() {
       )[0];
 
       setSideBarCat(subCategory);
-    }
+    }, [sideBarCat])
 
 
 
-  useEffect(() => {
+  useMemo(() => {
 
   }, [currentPage, perPage])
 
@@ -202,7 +202,7 @@ export default function PersistentDrawerLeft() {
 
   // ---------------------------------------------------------------
 
-  useEffect(() => { }, [showFreeShipping]);
+  useMemo(() => { }, [showFreeShipping]);
   let router = useRouter();
   let dispatch = useDispatch();
 
@@ -250,7 +250,7 @@ export default function PersistentDrawerLeft() {
     }
   }, []);
 
-  useEffect(async () => {
+  useMemo(async () => {
     if (key == 1) {
       let categoryResult = await dispatch(getCategory());
       setCategory(categoryResult.payload);
@@ -261,7 +261,7 @@ export default function PersistentDrawerLeft() {
     }
   }, [key]);
 
-  useEffect(async () => {
+  useMemo(async () => {
     let result = await dispatch(getFeatureProduct());
     setFeatureProduct(result.payload)
     // dispatch(getDiscounts());
@@ -269,7 +269,7 @@ export default function PersistentDrawerLeft() {
     // dispatch(getDeals());
   }, []);
 
-  useEffect(() => { }, [featureProduct]);
+  useMemo(() => { }, [featureProduct]);
 
   const showAllProducts = useCallback(() => {
     if (showFreeShipping) {
