@@ -9,6 +9,7 @@ import ProductGetByMerchant from "../../pages/get_all_products_by_merchant";
 import Discounts from "../../pages/discounts";
 import FreeShipping from "../../pages/is_free_shipping";
 import Pagination from "../../container/Pagination/pagination";
+import Stack from '@mui/material/Stack';
 import {
   getProductWithCategoryId,
   getCategoryBrand,
@@ -87,7 +88,7 @@ function SubCategory({
   const [productDataWithCategoryId, setProductDataWithCategoryId] = useState(
     []
   );
-
+  let [catIdParent, setCatIdParent] = useState(catId);
   let [dealsData, setDealsData] = useState();
   let [showDeals, setShowDeals] = useState(false);
 
@@ -137,30 +138,22 @@ function SubCategory({
     //   price: []
   });
 
+  const [loader, setLoader] = useState(true)
+
   //parent and child products Combine
   const [parentProducts, setParentProducts] = useState();
   const [childProducts, setChildProducts] = useState();
 
-  const viewProduct = useCallback((item) => {
-    router.push({
-      pathname: "/product_detail",
-      query: { productId: item.productId },
-    });
-  }, []);
-  const handleChange1 = (event) => {
-    setChecked([event.target.checked, event.target.checked]);
-  };
+  // const viewProduct = useCallback((item) => {
+  //   router.push({
+  //     pathname: "/product_detail",
+  //     query: { productId: item.productId },
+  //   });
+  // }, []);
 
-  const handleChange2 = (event) => {
-    setChecked([event.target.checked, checked[1]]);
-  };
-
-  const handleChange3 = (event) => {
-    setChecked([checked[0], event.target.checked]);
-  };
 
   //Pagination 
-  useEffect(() => {
+  useMemo(() => {
 
   }, [currentPage, perPage])
 
@@ -172,9 +165,41 @@ function SubCategory({
   //       query: { sub_category: item },
   //     });
   //   };
+  useMemo(async () => {
+    let result = await dispatch(getCategoryBrand());
+    let results = result?.payload.filter(
+      (result) => result.category_id == catId
+    );
+    console.log(results);
+    results.map((category) => {
+      console.log(category);
+      setBrands(category.brands);
+    });
+  }, []);
+
+  useMemo(async () => {
+    let result = await dispatch(getCategory());
+
+
+    let results = result?.payload.filter(
+      (result) => result.category_id == catId
+    );
+
+    results?.map((category) => {
+      setParentCategories(category.category_name);
+
+      setSubCategories(category.child);
+    });
+  }, []);
+
+  useMemo(() => { }, [subCategories]);
+  useMemo(() => { }, [catId]);
+
+
   const getParentData = useCallback(async (id) => {
     let arr = []
     let result = await dispatch(getProductWithCategoryId(id));
+
 
     result.payload.map(result => arr.push(result))
 
@@ -192,6 +217,7 @@ function SubCategory({
 
       })
       setProductDataWithCategoryId(arr);
+      setLoader(false)
     } else {
       let result1 = await dispatch(getCategory());
       let results = result1?.payload?.filter(
@@ -204,38 +230,17 @@ function SubCategory({
 
       })
       setProductDataWithCategoryId(arr);
+      setLoader(false)
     }
   }, []);
 
-  useEffect(async () => {
-    let result = await dispatch(getCategoryBrand());
-    let results = result?.payload.filter(
-      (result) => result.category_id == catId
-    );
-    console.log(results);
-    results.map((category) => {
-      console.log(category);
-      setBrands(category.brands);
-    });
-  }, []);
-
-  useEffect(async () => {
-    let result = await dispatch(getCategory());
 
 
-    let results = result?.payload.filter(
-      (result) => result.category_id == catId
-    );
+  useMemo(async () => {
+    getParentData(catIdParent)
+  }, [catIdParent]);
 
-    results?.map((category) => {
-      setParentCategories(category.category_name);
 
-      setSubCategories(category.child);
-    });
-  }, []);
-
-  useEffect(() => { }, [subCategories]);
-  useEffect(() => { }, [catId]);
 
 
   const categoryProduct = useCallback((name) => {
@@ -295,15 +300,15 @@ function SubCategory({
       setFilterProduct(arr);
       setFlag(true);
     }
-    // if (dealsData) {
-    //   let result1 = dealsData.filter(
-    //     (category) => category.categoryName == name
-    //   );
+    if (dealsData) {
+      let result1 = dealsData.filter(
+        (category) => category.categoryName == name
+      );
 
-    //   setFilterDeal(result1);
-    //   setFlag(true);
+      setFilterDeal(result1);
+      setFlag(true);
 
-    // }
+    }
     if (discountData) {
 
       let result1 = discountData.filter(
@@ -315,9 +320,9 @@ function SubCategory({
 
     }
   }, [filterDiscount, filterProduct, filterDeal, flag])
-  console.log(productDataWithCategoryId);
 
-  const children = (subCategories) => {
+
+  const children = useCallback((subCategories) => {
     return (
       <Box >
         <List
@@ -343,51 +348,48 @@ function SubCategory({
         } */}
       </Box>
     );
-  };
-  useEffect(() => {
-    let id = catId;
-    getParentData(id);
   }, []);
 
-  const addToCartHandler = async (product) => {
-    let result = await dispatch(addToCart(product));
-    console.log(result);
-    if (result?.payload?.resultCode == 4000) {
-      //setOpenBar(true);
-      setStatus(result?.payload);
-      setOpen(true);
-      Cookies.set("item", JSON.stringify(product));
-    } else {
-      dispatch(getCartItems());
-      dispatch(getTotalCartQuantity());
-      setTimeout(() => {
-        router.push("/cart");
-      }, 1000);
-    }
-  };
 
-  const handleView = (view) => {
-    let style;
-    let styleCard;
-    if (view == "grid") {
-      style = { display: "flex", flexDirection: "column" };
+  // const addToCartHandler = async (product) => {
+  //   let result = await dispatch(addToCart(product));
+  //   console.log(result);
+  //   if (result?.payload?.resultCode == 4000) {
+  //     //setOpenBar(true);
+  //     setStatus(result?.payload);
+  //     setOpen(true);
+  //     Cookies.set("item", JSON.stringify(product));
+  //   } else {
+  //     dispatch(getCartItems());
+  //     dispatch(getTotalCartQuantity());
+  //     setTimeout(() => {
+  //       router.push("/cart");
+  //     }, 1000);
+  //   }
+  // };
 
-      setStyled(style);
-    } else {
-      style = {
-        display: "flex",
-        flexDirection: "row",
-        justifyContent: "flex-start",
-      };
-      setStyled(style);
-    }
-  };
-  const handleCloseBar = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpenBar(false);
-  };
+  // const handleView = (view) => {
+  //   let style;
+  //   let styleCard;
+  //   if (view == "grid") {
+  //     style = { display: "flex", flexDirection: "column" };
+
+  //     setStyled(style);
+  //   } else {
+  //     style = {
+  //       display: "flex",
+  //       flexDirection: "row",
+  //       justifyContent: "flex-start",
+  //     };
+  //     setStyled(style);
+  //   }
+  // };
+  // const handleCloseBar = (event, reason) => {
+  //   if (reason === "clickaway") {
+  //     return;
+  //   }
+  //   setOpenBar(false);
+  // };
 
   const handleClose = () => {
     setOpen(false);
@@ -404,30 +406,30 @@ function SubCategory({
       setFilterProduct(result);
       setFlag(true);
     }
-    // if (dealsData) {
+    if (dealsData) {
 
-    //   let result1 = dealsData.filter(
-    //     (result) =>
-    //       parseInt(result.bundleCost) >= parseInt(min) &&
-    //       parseInt(result.bundleCost) <= parseInt(max)
-    //   );
-    //   console.log(result1)
-    //   setFilterDeal(result1);
-    //   setFlag(true);
+      let result1 = dealsData.filter(
+        (result) =>
+          parseInt(result.bundleCost) >= parseInt(min) &&
+          parseInt(result.bundleCost) <= parseInt(max)
+      );
+      console.log(result1)
+      setFilterDeal(result1);
+      setFlag(true);
 
-    // }
-    // if (discountData) {
+    }
+    if (discountData) {
 
-    //   let result1 = discountData.filter(
-    //     (result) =>
-    //       parseInt(result.productCost) >= parseInt(min) &&
-    //       parseInt(result.productCost) <= parseInt(max)
-    //   );
-    //   console.log(result1)
-    //   setFilterDiscount(result1);
-    //   setFlag(true);
+      let result1 = discountData.filter(
+        (result) =>
+          parseInt(result.productCost) >= parseInt(min) &&
+          parseInt(result.productCost) <= parseInt(max)
+      );
+      console.log(result1)
+      setFilterDiscount(result1);
+      setFlag(true);
 
-    // }
+    }
   }
   const priceFilter = () => {
     let max = MaxInput.current.value;
@@ -470,6 +472,8 @@ function SubCategory({
 
   };
 
+
+  console.log(productDataWithCategoryId)
   return (
     <>
       {open == true ? (
@@ -616,7 +620,7 @@ function SubCategory({
             <>
 
               {
-                productDataWithCategoryId?.length >= 1 ?
+                loader == false && productDataWithCategoryId.length > 0 ?
                   <>
                     <ViewAllProducts
                       Item={Item}
@@ -628,36 +632,23 @@ function SubCategory({
                       paginate={paginate}>
 
                     </Pagination>
-                  </> : <><Box
-                    sx={{
+                  </> :
+                  <>
+
+
+                    <Stack sx={{
                       display: 'flex',
                       justifyContent: 'center',
                       alignItems: 'center',
                       minHeight: '100vh'
-                    }}
-                  >
-                    <Container maxWidth="md">
-                      <Grid container spacing={2}>
-                        <Grid xs={6}>
-                          <Typography variant="h1">
-                            404
-                          </Typography>
-                          <Typography variant="h6">
-                            Product doesn’t exist.
-                          </Typography>
+                    }} spacing={2} direction="row">
 
-                        </Grid>
-                        <Grid xs={6}>
+                      <CircularProgress color="success" />
 
-                          <img
-                            src="https://cdn.pixabay.com/photo/2017/03/09/12/31/error-2129569__340.jpg"
-                            alt=""
-                            width={500} height={250}
-                          />
-                        </Grid>
-                      </Grid>
-                    </Container>
-                  </Box></>
+                    </Stack>
+
+
+                  </>
               }
 
             </>

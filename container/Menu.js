@@ -401,13 +401,13 @@ export default function PersistentDrawerLeft() {
     showFreeShipping,
   ]);
   // ----------------------------------------------------------------------------------
-  const handleCat = useCallback(
+  const handleCat =
     async (subCatId) => {
       await setCatId(null);
       await setCatId(subCatId);
-    },
-    [catId]
-  );
+    }
+
+    ;
   console.log(discountData);
 
   return (
