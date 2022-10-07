@@ -124,6 +124,7 @@ function SubCategory({
   const [filterProduct, setFilterProduct] = useState([]);
   const [filterDeal, setFilterDeal] = useState([]);
   const [filterDiscount, setFilterDiscount] = useState([]);
+  const [filterShipping, setFilterShipping] = useState([]);
   const [flag, setFlag] = useState(false);
   const [brands, setBrands] = useState([]);
   const [subCategories, setSubCategories] = useState([]);
@@ -319,7 +320,7 @@ function SubCategory({
       setFlag(true);
 
     }
-  }, [filterDiscount, filterProduct, filterDeal, flag])
+  }, [filterDiscount, filterProduct, filterDeal, filterShipping, flag])
 
 
   const children = useCallback((subCategories) => {
@@ -406,12 +407,14 @@ function SubCategory({
       setFilterProduct(result);
       setFlag(true);
     }
+
+
+
     if (dealsData) {
 
       let result1 = dealsData.filter(
-        (result) =>
-          parseInt(result.bundleCost) >= parseInt(min) &&
-          parseInt(result.bundleCost) <= parseInt(max)
+
+        (result) => result.brand_name == event.target.name
       );
       console.log(result1)
       setFilterDeal(result1);
@@ -421,14 +424,75 @@ function SubCategory({
     if (discountData) {
 
       let result1 = discountData.filter(
-        (result) =>
-          parseInt(result.productCost) >= parseInt(min) &&
-          parseInt(result.productCost) <= parseInt(max)
+
+        (result) => result.brand_name == event.target.name
       );
       console.log(result1)
       setFilterDiscount(result1);
       setFlag(true);
 
+    }
+  }
+
+  const handleFiltersBrand = (filters, category) => {
+
+
+    if (discountData) {
+      const newFilters = { ...Filters }
+      newFilters[category] = filters
+      var result1 = discountData.filter(function (o1) {
+        return newFilters.brands.some(function (o2) {
+          return o1.brand_id === o2; // return the ones with equal id
+        });
+      });
+
+      console.log(result1)
+      setFilterDiscount(result1);
+      setFlag(true);
+    }
+
+    if (dealsData) {
+      const newFilters = { ...Filters }
+      newFilters[category] = filters
+      var result1 = dealsData.filter(function (o1) {
+        return newFilters.brands.some(function (o2) {
+          return o1.brand_id === o2; // return the ones with equal id
+        });
+      });
+
+      console.log(result1)
+      setFilterDeal(result1);
+      setFlag(true);
+
+    }
+    if (freeShippingData) {
+      const newFilters = { ...Filters }
+      newFilters[category] = filters
+      var result1 = freeShippingData.filter(function (o1) {
+        return newFilters.brands.some(function (o2) {
+          return o1.brand_id === o2; // return the ones with equal id
+        });
+      });
+
+      console.log(result1)
+      setFilterShipping(result1);
+      setFlag(true);
+    }
+    if (productDataWithCategoryId) {
+
+      const newFilters = { ...Filters }
+      newFilters[category] = filters
+      var result1 = productDataWithCategoryId.filter(function (o1) {
+        return newFilters.brands.some(function (o2) {
+          return o1.brand_id === o2; // return the ones with equal id
+        });
+      });
+
+      console.log(result1)
+      setFilterProduct(result1);
+      setFlag(true);
+
+      //handleFilters(newFilters)
     }
   }
   const priceFilter = () => {
@@ -505,6 +569,7 @@ function SubCategory({
           MaxInput={MaxInput}
           priceFilter={priceFilter}
           handleFilters={handleFilters}
+          handleFiltersBrand={handleFiltersBrand}
           categoryProduct={categoryProduct}
           categoryParentProduct1={categoryParentProduct1}
           parentCategories={parentCategories}
@@ -825,9 +890,9 @@ function SubCategory({
                               showAllMerchantPro={showAllMerchantPro}
                               filterData={filterData}
                             ></DealsAndPromotions>
-                            {filterData?.length > 0 ? <Pagination
+                            {filterDeal?.length > 0 ? <Pagination
                               perPage={perPage}
-                              totalLength={filterData?.length}
+                              totalLength={filterDeal?.length}
                               paginate={paginate}>
 
                             </Pagination> : <Pagination
@@ -1030,18 +1095,18 @@ function SubCategory({
                           <>
                             <FreeShipping
                               data={
-                                filterData?.length > 0
-                                  ? filterData.slice(indexOfFirstNumber, indexOfLastNumber)
+                                filterShipping?.length > 0
+                                  ? filterShipping.slice(indexOfFirstNumber, indexOfLastNumber)
                                   : freeShippingData.slice(indexOfFirstNumber, indexOfLastNumber)
                               }
                               showProduct={showProduct}
                               showAllCategoryPro={showAllCategoryPro}
                               showAllMerchantPro={showAllMerchantPro}
-                              filterData={filterData}
+                              filterData={filterShipping}
                             ></FreeShipping>
-                            {filterData?.length > 0 ? <Pagination
+                            {filterShipping?.length > 0 ? <Pagination
                               perPage={perPage}
-                              totalLength={freeShippingData?.length}
+                              totalLength={filterShipping?.length}
                               paginate={paginate}>
 
                             </Pagination> : <Pagination
@@ -1097,6 +1162,9 @@ function SubCategory({
               </>
             )}
           </>
+
+
+
         </Box>
         {/* </Grid> */}
       </Box>
