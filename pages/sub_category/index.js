@@ -466,6 +466,7 @@ function SubCategory({
 
     }
     if (freeShippingData) {
+      console.log(freeShippingData)
       const newFilters = { ...Filters }
       newFilters[category] = filters
       var result1 = freeShippingData.filter(function (o1) {
@@ -1031,7 +1032,7 @@ function SubCategory({
               </>
             )}
           </>
-          <>
+          {/* <>
             {showProduct &&
               showDiscounts == false &&
               showAllCategoryPro == false &&
@@ -1091,7 +1092,7 @@ function SubCategory({
                           showProduct == false &&
                           showAllCategoryPro == false &&
                           showAllMerchantPro == false &&
-                          showDeals == false ? (
+                          showDeals == false && filterShipping?.length > 0 ? (
                           <>
                             <FreeShipping
                               data={
@@ -1161,9 +1162,127 @@ function SubCategory({
                 )}
               </>
             )}
+          </> */}
+
+
+          <>
+            {showProduct &&
+              showAllCategoryPro == false &&
+              showAllMerchantPro == false &&
+              showDeals == false &&
+
+              showDiscounts == false &&
+              freeShippingData?.length > 0 ? (
+              <>
+                <ViewAllProducts
+                  Item={Item}
+                  data={filterShipping?.length > 0 ? filterShipping.slice(indexOfFirstNumber, indexOfLastNumber) : freeShippingData.slice(indexOfFirstNumber, indexOfLastNumber)}
+                ></ViewAllProducts>
+                {filterShipping?.length > 0 ? <Pagination
+                  perPage={perPage}
+                  totalLength={filterShipping?.length}
+                  paginate={paginate}>
+
+                </Pagination> : <Pagination
+                  perPage={perPage}
+                  totalLength={freeShippingData?.length}
+                  paginate={paginate}>
+
+                </Pagination>}
+              </>
+            ) : (
+              <>
+                {" "}
+                {showProduct == false &&
+                  showAllCategoryPro == true &&
+                  showAllMerchantPro == false &&
+                  showDeals == false &&
+                  showDiscounts == false &&
+                  freeShippingData?.length > 0 ? (
+                  <ProductGetByCategory
+                    data={filterData?.length > 0 ? filterData : freeShippingData}
+                    Item={Item}
+                  ></ProductGetByCategory>
+                ) : (
+                  <>
+                    {showProduct == false &&
+                      showAllCategoryPro == false &&
+                      showAllMerchantPro == true &&
+                      showDeals == false &&
+                      showDiscounts == false &&
+                      freeShippingData?.length > 0 ? (
+                      <ProductGetByMerchant
+                        data={
+                          filterData?.length > 0 ? filterData : freeShippingData
+                        }
+                        Item={Item}
+                      ></ProductGetByMerchant>
+                    ) : (
+                      <>
+                        {showFreeShipping &&
+                          showDiscounts == false &&
+                          showProduct == false && filterShipping.length < 1 ? (
+                          <>
+                            <FreeShipping
+                              data={
+                                filterData?.length > 0 ? filterData.slice(indexOfFirstNumber, indexOfLastNumber) : freeShippingData.slice(indexOfFirstNumber, indexOfLastNumber)
+                              }
+                              showProduct={showProduct}
+                              showAllCategoryPro={showAllCategoryPro}
+                              showAllMerchantPro={showAllMerchantPro}
+                              filterData={filterData}
+                            ></FreeShipping>
+                            {filterData?.length > 0 ? <Pagination
+                              perPage={perPage}
+                              totalLength={filterData?.length}
+                              paginate={paginate}>
+
+                            </Pagination> : <Pagination
+                              perPage={perPage}
+                              totalLength={freeShippingData?.length}
+                              paginate={paginate}>
+
+                            </Pagination>}
+                          </>
+                        ) : (
+                          <>  <>
+                            {showDiscounts == false &&
+                              showFreeShipping == true &&
+                              showProduct == false && filterShipping.length > 0 ? (
+                              <>
+                                <FreeShipping
+                                  data={
+                                    filterShipping?.length > 0 ? filterShipping.slice(indexOfFirstNumber, indexOfLastNumber) : freeShippingData.slice(indexOfFirstNumber, indexOfLastNumber)
+                                  }
+                                  showProduct={showProduct}
+                                  showAllCategoryPro={showAllCategoryPro}
+                                  showAllMerchantPro={showAllMerchantPro}
+                                  filterData={filterData}
+                                ></FreeShipping>
+                                {filterShipping?.length > 0 ? <Pagination
+                                  perPage={perPage}
+                                  totalLength={filterShipping?.length}
+                                  paginate={paginate}>
+
+                                </Pagination> : <Pagination
+                                  perPage={perPage}
+                                  totalLength={freeShippingData?.length}
+                                  paginate={paginate}>
+
+                                </Pagination>}
+                              </>
+                            ) : (
+                              <></>
+                            )}
+                          </></>
+                        )}
+                      </>
+                    )}
+                  </>
+                )}
+              </>
+            )}
           </>
-
-
 
         </Box>
         {/* </Grid> */}
