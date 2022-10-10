@@ -792,7 +792,36 @@ function SubCategory({
 
                         </Pagination>}
                       </> :
-                      <></>
+                      <>
+                        {" "}
+                        {showProduct == false &&
+                          showAllCategoryPro == true &&
+                          showAllMerchantPro == false &&
+                          showDiscounts == false &&
+                          showFreeShipping == false &&
+                          productDataWithCategoryId?.length > 0 ? (
+                          <ProductGetByCategory
+                            data={filterData?.length > 0 ? filterData : productDataWithCategoryId}
+                            Item={Item}
+                          ></ProductGetByCategory>
+                        ) : (
+                          <>
+                            {showProduct == false &&
+                              showAllCategoryPro == false &&
+                              showAllMerchantPro == true &&
+                              showDiscounts == false &&
+                              showFreeShipping == false &&
+                              productDataWithCategoryId?.length > 0 ? (
+                              <ProductGetByMerchant
+                                data={filterData?.length > 0 ? filterData : productDataWithCategoryId}
+                                Item={Item}
+                              ></ProductGetByMerchant>
+                            ) : (
+                              <></>
+                            )}
+                          </>
+                        )}
+                      </>
 
                   )}
                 </>
