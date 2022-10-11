@@ -799,7 +799,7 @@ function SubCategory({
                           showAllMerchantPro == false &&
                           showDiscounts == false &&
                           showFreeShipping == false &&
-                          productDataWithCategoryId?.length > 0 ? (
+                          productDataWithCategoryId?.length > 0 && productDataWithCategoryId.length < 0 ? (
                           <ProductGetByCategory
                             data={filterData?.length > 0 ? filterData : productDataWithCategoryId}
                             Item={Item}
@@ -811,7 +811,7 @@ function SubCategory({
                               showAllMerchantPro == true &&
                               showDiscounts == false &&
                               showFreeShipping == false &&
-                              productDataWithCategoryId?.length > 0 ? (
+                              productDataWithCategoryId?.length > 0 && productDataWithCategoryId.length < 0 ? (
                               <ProductGetByMerchant
                                 data={filterData?.length > 0 ? filterData : productDataWithCategoryId}
                                 Item={Item}
