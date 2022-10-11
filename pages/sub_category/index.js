@@ -522,6 +522,18 @@ function SubCategory({
       setFlag(true);
 
     }
+    if (freeShippingData) {
+      console.log(freeShippingData)
+      let result1 = freeShippingData.filter(
+        (result) =>
+          parseInt(result.productCost) >= parseInt(min) &&
+          parseInt(result.productCost) <= parseInt(max)
+      );
+
+      console.log(result1)
+      setFilterShipping(result1);
+      setFlag(true);
+    }
     if (discountData) {
 
       let result1 = discountData.filter(
