@@ -54,18 +54,18 @@ const DealsAndPromotions = ({ dealsData, viewProduct, styledCard, addToCartHandl
           }}
         // className={cx(styles.root)}
         >
-          {result?.bundleImage && (
+          {result?.product_images[0]?.media_images[0] && (
             <>
-              <ImageListItem key={result.bundleImage}>
+              <ImageListItem key={result?.product_images[0]?.media_images[0]}>
                 <CardMedia
                   data-aos="fade-up"
                   component="img"
                   className={styles.cargImg}
                   onClick={(e) => viewProduct(result)}
-                  image={result?.bundleImage}
+                  image={result?.product_images[0]?.media_images[0]}
                   alt={result?.bundleName}
                 ></CardMedia>
-                {result?.bundleImage ? (
+                {result?.product_images[0]?.media_images[0] ? (
                   <ImageListItemBar
                     sx={{ background: "none" }}
                     position="top"
