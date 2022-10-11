@@ -33,7 +33,7 @@ const Index = ({ data, showProduct }) => {
 
   const viewProduct = (item) => {
     router.push({
-      pathname: "/product_detail",
+      pathname: "/bundles_details",
       query: { productId: item.bundleId },
     });
   };
