@@ -139,7 +139,7 @@ const DealsAndPromotions = ({ dealsData, viewProduct, styledCard, addToCartHandl
             {/* <Box sx={{ height: 85 }}>  */}
             <Box sx={{ ...displayDesc }}>
               <Typography className={styles.prodName}>
-                {result?.bundleName}
+                {result?.product_name}
               </Typography>
               <Box component="div" className={styles.prodRating}>
                 <Rating
@@ -181,7 +181,7 @@ const DealsAndPromotions = ({ dealsData, viewProduct, styledCard, addToCartHandl
                       display="inline"
                       style={{ textDecorationLine: "line-through" }}
                     >
-                      Rs {result.originalPrice}
+                      Rs {result.bundleCost}
                     </Typography>
                   ) : (
                     // <Typography variant="overline">

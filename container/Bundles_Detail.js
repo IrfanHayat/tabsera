@@ -98,7 +98,7 @@ function a11yProps(index) {
     };
 }
 
-function Bundles_Details({
+function Details({
     viewProduct,
     productDetail,
     merchantDetail,
@@ -246,41 +246,71 @@ function Bundles_Details({
                     >
                         <Box className={styles.carouelImage}>
                             {Object.keys(productDetail).length > 0 && skusFlag == false
-                                ?
-                                <ReactImageMagnify
-                                    {...{
-                                        smallImage: {
-                                            alt: "Product Image",
-                                            isFluidWidth: true,
-                                            // width: " 336px",
-                                            // height: "330px",
-                                            src: productDetail?.bundleImage,
-                                            sizes:
-                                                "(max-width: 480px) 100vw, (max-width: 1200px) 30vw, 360px",
-                                            // srcSet: this.state.currentImage.fluid.srcSet,
-                                        },
-                                        largeImage: {
-                                            src: productDetail?.bundleImage,
-                                            // srcSet: this.state.currentImage.fluid.srcSet,
-                                            width: 600,
-                                            height: 800,
-                                        },
+                                ? productDetail.product_images[0].media_images.map(
+                                    (result, index) => (
+                                        <ReactImageMagnify
+                                            {...{
+                                                smallImage: {
+                                                    alt: "Product Image",
+                                                    isFluidWidth: true,
+                                                    // width: " 336px",
+                                                    // height: "330px",
+                                                    src: result,
+                                                    sizes:
+                                                        "(max-width: 480px) 100vw, (max-width: 1200px) 30vw, 360px",
+                                                    // srcSet: this.state.currentImage.fluid.srcSet,
+                                                },
+                                                largeImage: {
+                                                    src: result,
+                                                    // srcSet: this.state.currentImage.fluid.srcSet,
+                                                    width: 600,
+                                                    height: 800,
+                                                },
 
-                                        enlargedImagePosition: "over",
+                                                enlargedImagePosition: "over",
 
-                                        isHintEnabled: true,
-                                        shouldHideHintAfterFirstActivation: false,
-                                    }}
-                                /> : <></>}
+                                                isHintEnabled: true,
+                                                shouldHideHintAfterFirstActivation: false,
+                                            }}
+                                        />
+                                    )
+                                )
+                                : skusProduct &&
+                                skusProduct.sku_images.map((result) => (
+                                    // <Box className={styles.carouelImage}>
+                                    <ReactImageMagnify
+                                        {...{
+                                            smallImage: {
+                                                alt: "Product Image",
+                                                isFluidWidth: true,
+                                                src: result,
+                                                sizes:
+                                                    "(max-width: 480px) 100vw, (max-width: 1200px) 30vw, 360px",
+                                                // srcSet: this.state.currentImage.fluid.srcSet,
+                                            },
+                                            largeImage: {
+                                                src: result,
+                                                // srcSet: this.state.currentImage.fluid.srcSet,
+                                                width: 600,
+                                                height: 800,
+                                            },
+                                            // enlargedImageStyle: {
+                                            //   objectFit: "contain",
+                                            // },
+                                            enlargedImagePosition: "over",
 
-
-
+                                            isHintEnabled: true,
+                                            shouldHideHintAfterFirstActivation: false,
+                                        }}
+                                    />
+                                    // </Box>
+                                ))}
                         </Box>
                     </Carousel>
                     {/* </ListItem> */}
                     {/* <Divider /> */}
                     {console.log(multiProductImage)}
-                    {/* <Box className={styles.produtctImages}>
+                    <Box className={styles.produtctImages}>
                         <Carousel
                             // breakPoints={breakPoints}
                             disableArrowsOnEnd={true}
@@ -313,14 +343,14 @@ function Bundles_Details({
                                     </Box>
                                 ))}
                         </Carousel>
-                    </Box> */}
+                    </Box>
                     {/* </List> */}
                 </Grid>
 
                 <Grid item md={6} sm={12} xs={12} className={styles.prodDetailsDiv}>
                     <Box className={styles.prodDetails}>
                         <Typography className={styles.prodName}>
-                            {productDetail?.bundleName}
+                            {productDetail?.product_name}
                         </Typography>
                         {/* <Typography
               sx={{
@@ -345,24 +375,28 @@ function Bundles_Details({
 
                     <Box sx={{ py: 1 }}>
                         <Box className={styles.prodCost}>
-
-                            <>
-                                <Currency amount={productDetail?.bundleCost}></Currency>
-                            </>
-
+                            {skusProduct ? (
+                                <>
+                                    <Currency amount={skusProduct.cost}></Currency>{" "}
+                                </>
+                            ) : (
+                                <>
+                                    <Currency amount={productDetail.bundleCost}></Currency>
+                                </>
+                            )}
                         </Box>
 
-                        {/* <Box
+                        <Box
                             color="neutral"
                             style={{ display: "block" }}
                         >
                             {skusProduct?.original_price ? <>PKR.{skusProduct.original_price}</> : <></>}
-                        </Box> */}
+                        </Box>
                     </Box>
 
                     {/* <Divider /> */}
 
-                    {/* <Box sx={{ display: "flex", flexDirection: "column" }}>
+                    <Box sx={{ display: "flex", flexDirection: "column" }}>
                         {skusFlag && skusProduct
                             ? skusProduct.attributes.map((result, index) => (
                                 <Grid container key={index}>
@@ -417,8 +451,8 @@ function Bundles_Details({
                                     )}
                                 </Grid>
                             ))}
-                    </Box> */}
-                    {/* <Grid md={12}>
+                    </Box>
+                    <Grid md={12}>
                         <Divider />
                         <Typography variant="subtitle2">
                             {" "}
@@ -458,7 +492,7 @@ function Bundles_Details({
                             </Carousel>
                         </Box>
                         <Divider />
-                    </Grid> */}
+                    </Grid>
                     {/* <Box sx={{ display: "flex", p: 1, direction: "column" }}>
             <Grid container>
               <Grid display="flex" alignItems="center">
@@ -517,7 +551,11 @@ function Bundles_Details({
                             // type="submit"
                             variant="contained"
                             className={styles.buyNowbtn}
-                            onClick={() => BuyHandler(productDetail)}
+                            onClick={() => {
+                                skusProduct
+                                    ? BuyHandler(productDetail, skusProduct)
+                                    : BuyHandler(productDetail);
+                            }}
                         >
                             {t("PDP.buttons.buyNow")}
                         </Button>
@@ -527,7 +565,11 @@ function Bundles_Details({
                             // color="warning"
                             variant="plain"
                             className={styles.addToCartbtn}
-                            onClick={() => addToCartHandler(productDetail)}
+                            onClick={() => {
+                                skusProduct
+                                    ? addToCartHandler(productDetail, skusProduct)
+                                    : addToCartHandler(productDetail);
+                            }}
                         >
                             {t("PDP.buttons.cart")}
                         </Button>
@@ -541,7 +583,7 @@ function Bundles_Details({
                         <Typography variant="subtitle2">Sold By: </Typography> {"  "}
                         <Typography variant="subtitle2" style={{ fontSize: 18, ml: 5 }}>
                             {" "}
-                            {productDetail?.merchantName}
+                            {productDetail?.merchant_name}
                         </Typography>
                     </Box>
                     <Button
@@ -652,7 +694,7 @@ function Bundles_Details({
                             </Tabs>
                         </Box>
                         <TabPanel value={value} index={0}>
-                            <Typography>desc {productDetail?.bundleDesc}</Typography>
+                            <Typography>desc {productDetail?.product_desc}</Typography>
                         </TabPanel>
                         <TabPanel value={value} index={1}>
                             <Typography> rating and reviews</Typography>
@@ -739,8 +781,11 @@ function Bundles_Details({
                                 // }}
                                 // href="/shipping_information"
                                 className={styles.buyNowbtnSM}
-                                onClick={() => BuyHandler(productDetail)
-                                }
+                                onClick={() => {
+                                    skusProduct
+                                        ? BuyHandler(productDetail, skusProduct)
+                                        : BuyHandler(productDetail);
+                                }}
                             >
                                 Buy Now
                             </Button>
@@ -752,7 +797,11 @@ function Bundles_Details({
                                 //   background: "linear-gradient(45deg, red 10%, yellow 100%)",
                                 // }}
                                 color="warning"
-                                onClick={() => addToCartHandler(productDetail)}
+                                onClick={() => {
+                                    skusProduct
+                                        ? addToCartHandler(productDetail, skusProduct)
+                                        : addToCartHandler(productDetail);
+                                }}
                                 size="large"
                             >
                                 Add to cart
@@ -765,4 +814,4 @@ function Bundles_Details({
     );
 }
 
-export default Bundles_Details;
+export default Details;

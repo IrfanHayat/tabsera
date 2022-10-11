@@ -47,7 +47,7 @@ export const getProductWithId = createAsyncThunk(
 export const getBrandWithId = createAsyncThunk(
   "product/getBrandWithId",
   async (id) => {
-    const result = await instance.get(`${url}/ecommerce/bundles/${id}`);
+    const result = await instance.get(`${url}/ecommerce/bundles/id/${id}`);
     return result.data.response;
   }
 );

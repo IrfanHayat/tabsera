@@ -45,8 +45,8 @@ const Index = ({ data, showProduct }) => {
   const addToCartHandler = async (product) => {
     console.log(product)
     let obj = {
-      "productId": product.bundleId,
-      "productName": product.bundleName,
+      "productId": product.product_id,
+      "productName": product.product_name,
       "productImage": product.bundleImage,
 
       "productCost": product.bundleCost,
