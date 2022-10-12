@@ -11,7 +11,7 @@ const Loader = () => {
                 alignItems={"center"}
                 sx={{ width: "100%", minHeight: "550px" }}
             >
-                <HashLoader size={90} color="#03c9d7" />
+                <HashLoader size={90} color="#3d7cff" />
             </Box>
         </Grid>
     );

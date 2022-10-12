@@ -86,6 +86,7 @@ import SubCategory from "../pages/sub_category";
 import { useCallback } from "react";
 import { use } from "i18next";
 import Pagination from "./Pagination/pagination";
+import Loader from "./Loader/Loader";
 export default function PersistentDrawerLeft() {
   const { data, isLoading, isFetching, isError } = useGetAllProductsQuery();
   const { categoryData } = useSelector((state) => state.category);
@@ -421,7 +422,7 @@ export default function PersistentDrawerLeft() {
             alignItems: "center",
           }}
         >
-          <CircularProgress size={140} />
+          <Loader></Loader>
         </Grid>
       ) : (
         <>
