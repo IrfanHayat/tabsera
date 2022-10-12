@@ -49,6 +49,7 @@ import Cookies from "js-cookie";
 import SnackBarTool from "../../container/SnackBar/SnackBar";
 import ModalLoginData from "../../container/Login/ModalData";
 import SideBarFilter from "../../container/Filter/SideBarFilter";
+import Loader from "../../container/Loader/Loader";
 
 const useStyles = makeStyles({
   flexGrow: {
@@ -714,16 +715,7 @@ function SubCategory({
                   <>
 
 
-                    <Stack sx={{
-                      display: 'flex',
-                      justifyContent: 'center',
-                      alignItems: 'center',
-                      minHeight: '100vh'
-                    }} spacing={2} direction="row">
-
-                      <CircularProgress color="success" />
-
-                    </Stack>
+                    <Loader></Loader>
 
 
                   </>
@@ -811,7 +803,8 @@ function SubCategory({
                           showAllMerchantPro == false &&
                           showDiscounts == false &&
                           showFreeShipping == false &&
-                          productDataWithCategoryId?.length > 0 && productDataWithCategoryId.length < 0 ? (
+                          showDeals == false &&
+                          productDataWithCategoryId.length > 0 ? (
                           <ProductGetByCategory
                             data={filterData?.length > 0 ? filterData : productDataWithCategoryId}
                             Item={Item}
@@ -823,7 +816,8 @@ function SubCategory({
                               showAllMerchantPro == true &&
                               showDiscounts == false &&
                               showFreeShipping == false &&
-                              productDataWithCategoryId?.length > 0 && productDataWithCategoryId.length < 0 ? (
+                              showDeals == false &&
+                              productDataWithCategoryId.length > 0 ? (
                               <ProductGetByMerchant
                                 data={filterData?.length > 0 ? filterData : productDataWithCategoryId}
                                 Item={Item}
