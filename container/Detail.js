@@ -20,6 +20,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import { AppBar, Stack, Divider, ListItemIcon } from "@mui/material";
 import { useRouter } from "next/router";
+import { useSelector, useDispatch } from "react-redux";
 import { useTheme } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
@@ -44,6 +45,12 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import SquareIcon from "@mui/icons-material/Square";
 import { useTranslation } from "react-i18next";
 import Currency from "./Currency/currency";
+import { margin } from "@mui/system";
+import ActionAreaCard from "./Card";
+import styles1 from "../styles/card.module.css";
+import ImageListItem from "@mui/material/ImageListItem";
+import ImageListItemBar from "@mui/material/ImageListItemBar";
+import { CardMedia } from "@mui/material";
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
   { width: 550, itemsToShow: 2 },
@@ -112,7 +119,9 @@ function Details({
   handleAddToCart,
   handleDecreaseCart,
   productIdRoute,
+  getRelatedProduct
 }) {
+  let dispatch = useDispatch();
   let { t, i18n } = useTranslation();
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -145,6 +154,8 @@ function Details({
   //let [productDetailOne,setProductDetailOne]=useState();
   let [multiProductImage, setMultiProductImage] = useState();
   const [isActiveImg, setisActiveImg] = useState(false);
+  let [relatedProduct, setRelatedProduct] = useState([]);
+
   const viewVariantsProduct = (result) => {
     console.log(result);
     setSkusProduct(result);
@@ -162,6 +173,12 @@ function Details({
   // };
   let router = useRouter();
   console.log("productDetail", productDetail);
+  useEffect(async () => {
+    console.log(productDetail?.category_id)
+    let related_product = await dispatch(getRelatedProduct(productDetail.category_id))
+    setRelatedProduct(related_product.payload)
+
+  }, [])
 
   // useEffect(() => {
   //   productDetail.skus?.map((results, index) => {
@@ -726,6 +743,146 @@ function Details({
               {" "}
               {t("PDP.labels.similar")} :
             </Typography>
+            {relatedProduct.length > 0 ? relatedProduct?.map(result => (
+              <Box sx={{ display: "flex", margin: 2 }}>
+                <Card
+                  // className={styledCard?.flexDirection == "row" ? "" : styles.column}
+                  className={styles.card1}
+                  // className={styles.card}
+                  sx={{
+
+                    width: "11vw",
+                    height: "100%",
+                  }}
+                >    {result?.productImage && (
+                  <>
+                    <center className={styles1.cargImgBox}>
+                      <ImageListItem key={result.productImage}>
+                        <CardMedia
+                          data-aos="fade-up"
+                          component="img"
+                          onClick={(e) => viewProduct(result)}
+                          image={result?.productImage}
+                          alt={result?.productName}
+                          className={styles1.cargImg}
+                        ></CardMedia>
+                        {/* <Image
+                      data-aos="fade-up"
+                      // className={cx(styles1.media, mediaStyles1.root)}
+                      src={product?.productImage}
+                      onClick={(e) => viewProduct(product)}
+                      alt={product?.productName}
+                      width={245}
+                      height={240}
+                      loading="eager"
+                      priority
+                    ></Image> */}
+
+                      </ImageListItem>
+
+                    </center>
+                    <Box className={styles1.cardContent} component="div">
+                      {/* <Typography variant="h5">{product?.categoryName}</Typography> */}
+                      <Box >
+
+
+                        <Typography className={styles1.prodName}>
+                          {result?.productName}
+                        </Typography>
+
+                        <Box component="div" className={styles1.prodRating}>
+                          <Rating
+                            // className={styles1.Rating}
+                            name="size-small"
+                            // defaultValue={product?.averageRating}
+                            size="small"
+                            // fontSize={24}
+                            readOnly
+                          />
+                          {/* {product.productName ? (
+                <AddShoppingCartOutlinedIcon className={styles1.btnAddCart} />
+              ) : (
+                ""
+              )} */}
+                        </Box>
+
+                        <Box component="div" className={styles1.prodCost}>
+                          <Box display="flex">
+                            <Typography className={styles1.prodCostValue}>
+                              <Currency
+                                amount={
+                                  result?.productCost
+                                }
+                              ></Currency>
+                            </Typography>
+                            {/* {product?.discountPercent ? (
+                              <Typography
+                                className={styles1.prodDiscountCost}
+                                style={{
+                                  textDecorationLine: "line-through",
+                                }}
+                                variant="overline"
+                                // component="div"
+                                display="inline"
+                              >
+                                Rs {product.originalPrice}
+                              </Typography>
+                            ) : (
+                              <></>
+                            )} */}
+                          </Box>
+                          <>
+                            {result?.productName ? (
+                              <AddIcon
+                                className={styles.btnAddCart}
+                                onClick={() => addToCartHandler(result)}
+                              />
+                            ) : (
+                              ""
+                            )}
+                          </>
+                        </Box>
+                      </Box>
+                      {/* <Box sx={{ mb: 3, display: "flex", alignItems: "center" }}>
+            {product.productName ? (
+              <Button
+                variant="contained"
+                sx={{
+                  background:
+                    "linear-gradient(90deg, #020024 0%, #090979 35%, #00d4ff 100%)",
+                }}
+                size="small"
+                key={product.id}
+                onClick={() => addToCartHandler(product)}
+                endIcon={<AddShoppingCartOutlinedIcon fontSize="small" />}
+              >
+                Add To Cart
+              </Button>
+            ) : (
+              ""
+            )}
+          </Box> */}
+                      {/* {product.productName ? (
+            <IconButton
+              key={product.id}
+              onClick={() => addToCartHandler(product)}
+              color="primary"
+              aria-label="add to shopping cart"
+            >
+              <AddShoppingCartOutlinedIcon fontSize="small" />
+            </IconButton>
+          ) : (
+            ""
+          )} */}
+                      {/* </Box> */}
+                    </Box>
+                  </>
+                )}
+                </Card>
+
+
+              </Box>
+            )) : <></>}
           </Grid>
         </Grid>
         {/* <Grid container>

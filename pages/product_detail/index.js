@@ -11,7 +11,7 @@ import {
 } from "../../slice/basketSlice";
 import MuiAlert from "@mui/material/Alert";
 import { useRouter, withRouter } from "next/router";
-import { getProductWithId, getProduct } from "../../slice/productSlice";
+import { getProductWithId, getProduct, getRelatedProduct } from "../../slice/productSlice";
 import { getMerchantWithId } from "../../slice/merchantSlice";
 import ModalData from "../../container/Login/ModalData";
 import Cookies from "js-cookie";
@@ -57,6 +57,14 @@ function Product_detail(props) {
     });
   };
 
+  const viewProduct = (item) => {
+    console.log(item)
+    router.push({
+      pathname: "/product_detail",
+      query: { productId: item.productId },
+    });
+  };
+
   const handleCloseBar = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -68,6 +76,7 @@ function Product_detail(props) {
 
     dispatch(getProductWithId(router?.query?.productId));
   }, [router.query.productId]);
+
 
   useEffect(() => {
     // dispatch(getProduct());
@@ -305,6 +314,8 @@ function Product_detail(props) {
           checkoutHandler={checkoutHandler}
           viewStore={viewStore}
           productIdRoute={router.query.productId}
+          getRelatedProduct={getRelatedProduct}
+          viewProduct={viewProduct}
         ></Details>
       ) : (
         <Details
@@ -319,6 +330,8 @@ function Product_detail(props) {
           checkoutHandler={checkoutHandler}
           viewStore={viewStore}
           productIdRoute={router.query.productId}
+          getRelatedProduct={getRelatedProduct}
+          viewProduct={viewProduct}
         ></Details>
       )}
     </>
