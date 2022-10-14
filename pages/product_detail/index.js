@@ -11,7 +11,7 @@ import {
 } from "../../slice/basketSlice";
 import MuiAlert from "@mui/material/Alert";
 import { useRouter, withRouter } from "next/router";
-import { getProductWithId, getProduct, getRelatedProduct } from "../../slice/productSlice";
+import { getProductWithId, getProduct, getRelatedProduct, getReviewsProduct } from "../../slice/productSlice";
 import { getMerchantWithId } from "../../slice/merchantSlice";
 import ModalData from "../../container/Login/ModalData";
 import Cookies from "js-cookie";
@@ -316,6 +316,8 @@ function Product_detail(props) {
           productIdRoute={router.query.productId}
           getRelatedProduct={getRelatedProduct}
           viewProduct={viewProduct}
+          getReviewsProduct={getReviewsProduct}
+          id={router.query?.productId}
         ></Details>
       ) : (
         <Details
@@ -332,6 +334,8 @@ function Product_detail(props) {
           productIdRoute={router.query.productId}
           getRelatedProduct={getRelatedProduct}
           viewProduct={viewProduct}
+          getReviewsProduct={getReviewsProduct}
+          id={router.query?.productId}
         ></Details>
       )}
     </>

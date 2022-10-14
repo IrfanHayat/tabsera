@@ -80,6 +80,14 @@ export const getRelatedProduct = createAsyncThunk(
 );
 
 
+export const getReviewsProduct = createAsyncThunk(
+  "product/getReviewsProduct",
+  async (id) => {
+    const result = await instance.get(`${url}/ecommerce/reviews/${id}`);
+    return result.data.response;
+  }
+);
+
 
 export const getProductSearch = createAsyncThunk(
   "product/getProductSearch",
@@ -111,7 +119,8 @@ const addProduct = createSlice({
     searchHintData: [],
     searchDetail: [],
     bundlesData: {},
-    relatedData: []
+    relatedData: [],
+    reviewData: []
 
   },
   reducers: {},
@@ -145,6 +154,25 @@ const addProduct = createSlice({
         error: action.payload,
       };
     });
+
+
+    builder.addCase(getReviewsProduct.pending, (state, action) => {
+      return { ...state, loading: true };
+    });
+    builder.addCase(getReviewsProduct.fulfilled, (state, action) => {
+
+      state.reviewData = action.payload;
+      state.loading = false;
+    });
+    builder.addCase(getReviewsProduct.rejected, (state, action) => {
+      return {
+        ...state,
+        loading: "rejected",
+        error: action.payload,
+      };
+    });
+
+
     builder.addCase(getBrandWithId.pending, (state, action) => {
       return { ...state, loading: true };
     });

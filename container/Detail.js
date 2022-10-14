@@ -18,7 +18,7 @@ import Image from "next/image";
 import Carousel, { consts } from "react-elastic-carousel";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import { AppBar, Stack, Divider, ListItemIcon } from "@mui/material";
+import { AppBar, Divider, ListItemIcon } from "@mui/material";
 import { useRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
 import { useTheme } from "@mui/material/styles";
@@ -51,6 +51,8 @@ import styles1 from "../styles/card.module.css";
 import ImageListItem from "@mui/material/ImageListItem";
 import ImageListItemBar from "@mui/material/ImageListItemBar";
 import { CardMedia } from "@mui/material";
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
   { width: 550, itemsToShow: 2 },
@@ -106,6 +108,7 @@ function a11yProps(index) {
 }
 
 function Details({
+  id,
   viewProduct,
   productDetail,
   merchantDetail,
@@ -119,7 +122,8 @@ function Details({
   handleAddToCart,
   handleDecreaseCart,
   productIdRoute,
-  getRelatedProduct
+  getRelatedProduct,
+  getReviewsProduct
 }) {
   let dispatch = useDispatch();
   let { t, i18n } = useTranslation();
@@ -155,7 +159,7 @@ function Details({
   let [multiProductImage, setMultiProductImage] = useState();
   const [isActiveImg, setisActiveImg] = useState(false);
   let [relatedProduct, setRelatedProduct] = useState([]);
-
+  let [ratingProduct, setRatingProduct] = useState([]);
   const viewVariantsProduct = (result) => {
     console.log(result);
     setSkusProduct(result);
@@ -177,6 +181,14 @@ function Details({
     console.log(productDetail?.category_id)
     let related_product = await dispatch(getRelatedProduct(productDetail.category_id))
     setRelatedProduct(related_product.payload)
+
+  }, [])
+
+  useEffect(async () => {
+    console.log(id)
+    let rating_product = await dispatch(getReviewsProduct(id))
+    console.log(rating_product)
+    setRatingProduct(rating_product.payload)
 
   }, [])
 
@@ -711,12 +723,46 @@ function Details({
               </Tabs>
             </Box>
             <TabPanel value={value} index={0}>
-              <Typography>desc {productDetail?.product_desc}</Typography>
+              <Typography>{productDetail?.product_desc}</Typography>
             </TabPanel>
             <TabPanel value={value} index={1}>
-              <Typography> rating and reviews</Typography>
+
+
+              {
+                ratingProduct.length > 0 ? ratingProduct?.map(result => (
+                  <>
+                    <Stack direction="row" sx={{ display: "flex" }} spacing={2}>
+                      <Avatar alt="Rating" src="/static/images/avatar/1.jpg" />
+
+                      <Box><Typography>{result?.customerName}</Typography>
+                        <Box sx={{ display: "flex", justifyContent: 'space-around' }}>
+                          <Typography><Rating
+                            // className={styles.Rating}
+                            name="size-small"
+                            defaultValue={result?.rating}
+                            size="small"
+                            // fontSize={24}
+                            readOnly
+                          /></Typography>
+                          <Typography sx={{ marginLeft: 2 }}> {result.rating} </Typography><Typography sx={{ marginLeft: 2 }}>{result.date}</Typography></Box>
+
+                      </Box>
+
+
+                    </Stack>
+                    <Box sx={{ display: "flex-start", marginTop: "2%", justifyContent: 'center' }}>
+                      {result.review}
+                    </Box>
+
+                    <Divider />
+                  </>
+                )) : <></>
+              }
+
             </TabPanel>
+
           </Box>
+
 
           {/* <Grid item md={9} xs={9}>
             <Grid>
