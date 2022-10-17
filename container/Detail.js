@@ -53,6 +53,8 @@ import ImageListItemBar from "@mui/material/ImageListItemBar";
 import { CardMedia } from "@mui/material";
 import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
+import RelatedProducts from "./RelatedProducts/RelatedProducts";
+import Reviews from "./Reviews/Reviews";
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
   { width: 550, itemsToShow: 2 },
@@ -122,7 +124,7 @@ function Details({
   handleAddToCart,
   handleDecreaseCart,
   productIdRoute,
-  getRelatedProduct,
+
   getReviewsProduct
 }) {
   let dispatch = useDispatch();
@@ -158,7 +160,7 @@ function Details({
   //let [productDetailOne,setProductDetailOne]=useState();
   let [multiProductImage, setMultiProductImage] = useState();
   const [isActiveImg, setisActiveImg] = useState(false);
-  let [relatedProduct, setRelatedProduct] = useState([]);
+
   let [ratingProduct, setRatingProduct] = useState([]);
   const viewVariantsProduct = (result) => {
     console.log(result);
@@ -176,13 +178,8 @@ function Details({
   //   setValue(index);
   // };
   let router = useRouter();
-  console.log("productDetail", productDetail);
-  useEffect(async () => {
-    console.log(productDetail?.category_id)
-    let related_product = await dispatch(getRelatedProduct(productDetail.category_id))
-    setRelatedProduct(related_product.payload)
+  console.log("productDetail", productDetail.category_id);
 
-  }, [])
 
   useEffect(async () => {
     console.log(id)
@@ -208,9 +205,9 @@ function Details({
       console.log(results.media_images);
       setMultiProductImage(results.media_images);
     });
-  }, [productDetail]);
+  }, []);
 
-  console.log(productImage);
+
 
   return (
     <>
@@ -728,36 +725,7 @@ function Details({
             <TabPanel value={value} index={1}>
 
 
-              {
-                ratingProduct.length > 0 ? ratingProduct?.map(result => (
-                  <>
-                    <Stack direction="row" sx={{ display: "flex" }} spacing={2}>
-                      <Avatar alt="Rating" src="/static/images/avatar/1.jpg" />
-
-                      <Box><Typography>{result?.customerName}</Typography>
-                        <Box sx={{ display: "flex", justifyContent: 'space-around' }}>
-                          <Typography><Rating
-                            // className={styles.Rating}
-                            name="size-small"
-                            defaultValue={result?.rating}
-                            size="small"
-                            // fontSize={24}
-                            readOnly
-                          /></Typography>
-                          <Typography sx={{ marginLeft: 2 }}> {result.rating} </Typography><Typography sx={{ marginLeft: 2 }}>{result.date}</Typography></Box>
-
-                      </Box>
-
-
-                    </Stack>
-                    <Box sx={{ display: "flex-start", marginTop: "2%", justifyContent: 'center' }}>
-                      {result.review}
-                    </Box>
-
-                    <Divider />
-                  </>
-                )) : <></>
-              }
+              <Reviews productId={id}></Reviews>
 
             </TabPanel>
 
@@ -789,146 +757,7 @@ function Details({
               {" "}
               {t("PDP.labels.similar")} :
             </Typography>
-            {relatedProduct.length > 0 ? relatedProduct?.map(result => (
-              <Box sx={{ display: "flex", margin: 2 }}>
-                <Card
-                  // className={styledCard?.flexDirection == "row" ? "" : styles.column}
-                  className={styles.card1}
-                  // className={styles.card}
-                  sx={{
-
-                    width: "11vw",
-                    height: "100%",
-                  }}
-                >    {result?.productImage && (
-                  <>
-                    <center className={styles1.cargImgBox}>
-                      <ImageListItem key={result.productImage}>
-                        <CardMedia
-                          data-aos="fade-up"
-                          component="img"
-                          onClick={(e) => viewProduct(result)}
-                          image={result?.productImage}
-                          alt={result?.productName}
-                          className={styles1.cargImg}
-                        ></CardMedia>
-                        {/* <Image
-                      data-aos="fade-up"
-                      // className={cx(styles1.media, mediaStyles1.root)}
-                      src={product?.productImage}
-                      onClick={(e) => viewProduct(product)}
-                      alt={product?.productName}
-                      width={245}
-                      height={240}
-                      loading="eager"
-                      priority
-                    ></Image> */}
-
-                      </ImageListItem>
-
-                    </center>
-                    <Box className={styles1.cardContent} component="div">
-                      {/* <Typography variant="h5">{product?.categoryName}</Typography> */}
-                      <Box >
-
-
-                        <Typography className={styles1.prodName}>
-                          {result?.productName}
-                        </Typography>
-
-                        <Box component="div" className={styles1.prodRating}>
-                          <Rating
-                            // className={styles1.Rating}
-                            name="size-small"
-                            // defaultValue={product?.averageRating}
-                            size="small"
-                            // fontSize={24}
-                            readOnly
-                          />
-                          {/* {product.productName ? (
-                <AddShoppingCartOutlinedIcon className={styles1.btnAddCart} />
-              ) : (
-                ""
-              )} */}
-                        </Box>
-
-                        <Box component="div" className={styles1.prodCost}>
-                          <Box display="flex">
-                            <Typography className={styles1.prodCostValue}>
-                              <Currency
-                                amount={
-                                  result?.productCost
-                                }
-                              ></Currency>
-                            </Typography>
-                            {/* {product?.discountPercent ? (
-                              <Typography
-                                className={styles1.prodDiscountCost}
-                                style={{
-                                  textDecorationLine: "line-through",
-                                }}
-                                variant="overline"
-                                // component="div"
-                                display="inline"
-                              >
-                                Rs {product.originalPrice}
-                              </Typography>
-                            ) : (
-                              <></>
-                            )} */}
-                          </Box>
-                          <>
-                            {result?.productName ? (
-                              <AddIcon
-                                className={styles.btnAddCart}
-                                onClick={() => addToCartHandler(result)}
-                              />
-                            ) : (
-                              ""
-                            )}
-                          </>
-                        </Box>
-                      </Box>
-                      {/* <Box sx={{ mb: 3, display: "flex", alignItems: "center" }}>
-            {product.productName ? (
-              <Button
-                variant="contained"
-                sx={{
-                  background:
-                    "linear-gradient(90deg, #020024 0%, #090979 35%, #00d4ff 100%)",
-                }}
-                size="small"
-                key={product.id}
-                onClick={() => addToCartHandler(product)}
-                endIcon={<AddShoppingCartOutlinedIcon fontSize="small" />}
-              >
-                Add To Cart
-              </Button>
-            ) : (
-              ""
-            )}
-          </Box> */}
-                      {/* {product.productName ? (
-            <IconButton
-              key={product.id}
-              onClick={() => addToCartHandler(product)}
-              color="primary"
-              aria-label="add to shopping cart"
-            >
-              <AddShoppingCartOutlinedIcon fontSize="small" />
-            </IconButton>
-          ) : (
-            ""
-          )} */}
-                      {/* </Box> */}
-                    </Box>
-                  </>
-                )}
-                </Card>
-
-
-              </Box>
-            )) : <></>}
+            <RelatedProducts addToCartHandler={addToCartHandler} categoryId={productDetail?.category_id} viewProduct={viewProduct}></RelatedProducts>
           </Grid>
         </Grid>
         {/* <Grid container>
