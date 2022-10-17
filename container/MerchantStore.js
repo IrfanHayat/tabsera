@@ -19,6 +19,7 @@ import styles from "../styles/merchantStore.module.css";
 import LoyaltyIcon from "@mui/icons-material/Loyalty";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { useSelector } from "react-redux";
+import ViewAllProducts from "../pages/all_products";
 import {
   AppBar,
   CardContent,
@@ -41,6 +42,12 @@ const breakPoints = [
   { width: 768, itemsToShow: 3 },
   { width: 1200, itemsToShow: 4 },
 ];
+const Item = styled("div")(({ theme }) => ({
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  color: theme.palette.text.primary,
+}));
 
 function a11yProps(index) {
   return {
@@ -323,12 +330,15 @@ function MerchantStore({ merchantStoreDetail }) {
                 <>
                   {" "}
                   {merchantStoreDetail &&
-                    merchantStoreDetail?.map((result) => (
-                      <ActionAreaCard
-                        product={result}
-                        viewProduct={viewProduct}
-                      ></ActionAreaCard>
-                    ))}
+
+                    <ViewAllProducts
+                      product={result}
+                      viewProduct={viewProduct}
+                      Item={Item}
+
+                      data={merchantStoreDetail}
+                    ></ViewAllProducts>
+                  }
                 </>
               </Grid>
             </TabPanel>
