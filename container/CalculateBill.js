@@ -102,7 +102,7 @@ function CalculateBill({ productPrice, checkoutHandler }) {
               // align="center"
               >
                 <Currency amount={productPrice ? (
-                  productPrice.reduce((a, c) => a + c.qty * c.price, 0)
+                  productPrice.reduce((a, c) => a + c.qty * c.product_cost, 0)
                 ) : (
                   <></>
                 )}></Currency>
