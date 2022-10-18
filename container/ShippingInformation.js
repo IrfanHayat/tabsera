@@ -652,36 +652,42 @@ function ShippingInformation({
 
                     {showTableView
                       ? lockersAddressData?.map((result) => (
-                        <FormControlLabel
-                          value={result.locker_id}
-                          control={<Radio />}
-                          label={
-                            <Box
-                              sx={{
-                                display: "flex",
-                                alignItems: "center",
-                              }}
-                            >
-                              <Image // className={cx(styles.media, mediaStyles.root)}
-                                src={"/locker_pic.jpg"}
-                                // onClick={(e) => viewCategory(product.category_id)}
-                                alt={"locker"}
-                                width={45}
-                                objectFit="contain"
-                                height={45}
-                              ></Image>
-                              <Typography
+                        <Box className={styles.addressBoxDiv1}>
+
+                          <FormControlLabel
+                            value={result.locker_id}
+                            control={<Radio />}
+                            label={
+                              <Box
                                 sx={{
-                                  p: 1,
+                                  display: "flex",
+                                  alignItems: "center",
                                 }}
                               >
-                                {result.locker_name}
-                              </Typography>
-                              <Typography>{result.locker_address}</Typography>
-                            </Box>
-                          }
-                          onClick={() => setRadioCheck1(true)}
-                        />
+                                <Image // className={cx(styles.media, mediaStyles.root)}
+                                  src={"/locker_pic.jpg"}
+                                  // onClick={(e) => viewCategory(product.category_id)}
+                                  alt={"locker"}
+                                  width={45}
+                                  objectFit="contain"
+                                  height={45}
+                                ></Image>
+                                <Typography
+                                  sx={{
+                                    p: 1,
+                                  }}
+                                >
+                                  {result.locker_name}
+                                </Typography>
+
+
+                              </Box>
+                            }
+                            onClick={() => setRadioCheck1(true)}
+                          />
+                          <Box sx={{ display: "flex", marginLeft: "12%" }}> <Typography>Address:</Typography><Typography sx={{ marginLeft: "2%" }}>{result.locker_address}</Typography></Box>
+                        </Box>
+
                       ))
                       : ""}
                   </>
