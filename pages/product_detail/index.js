@@ -103,8 +103,8 @@ function Product_detail(props) {
 
   useEffect(() => {
     // dispatch(getProduct());
-    if (filterProductData.merchant_id) {
-      dispatch(getMerchantWithId(filterProductData.merchant_id));
+    if (productNewData?.merchant_id) {
+      dispatch(getMerchantWithId(productNewData?.merchant_id));
     }
 
     if (router.query.product_name) {
