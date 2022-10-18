@@ -195,8 +195,8 @@ export default function ActionAreaCard({
 
             <Typography className={styles.prodName}>
               {product?.productName
-                ? product?.productName
-                : product?.bundleName}
+                ? product?.productName.toUpperCase()
+                : product?.bundleName.toUpperCase()}
             </Typography>
 
             <Box component="div" className={styles.prodRating}>

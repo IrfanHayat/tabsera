@@ -139,7 +139,7 @@ const DealsAndPromotions = ({ dealsData, viewProduct, styledCard, addToCartHandl
             {/* <Box sx={{ height: 85 }}>  */}
             <Box sx={{ ...displayDesc }}>
               <Typography className={styles.prodName}>
-                {result?.product_name}
+                {result?.product_name.toUpperCase()}
               </Typography>
               <Box component="div" className={styles.prodRating}>
                 <Rating

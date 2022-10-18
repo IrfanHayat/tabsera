@@ -528,7 +528,7 @@ export default function PersistentDrawerLeft() {
                           <ListItemText
                             onClick={(e) => viewCategory(result.category_id)}
                           >
-                            {result.category_name}
+                            {result.category_name.toLowerCase()}
                           </ListItemText>
                         </ListItem>
 

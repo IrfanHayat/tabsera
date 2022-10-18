@@ -31,6 +31,8 @@ function Product_detail(props) {
 
   let [productImage, setProductImage] = useState();
   let [productAttributes, setProductAttributes] = useState([]);
+  let [productNewData, setProductNewData] = useState();
+  let [productDispatch, setProductDispatch] = useState();
   let [price, setPrice] = useState();
   let [status, setStatus] = useState();
   const [showLogin, setShowLogin] = useState(false);
@@ -49,7 +51,7 @@ function Product_detail(props) {
     setOpen(false);
   };
 
-  console.log(addBuyItem);
+  console.log(filterProductData);
   const viewStore = (categoryId, merchantId) => {
     router.push({
       pathname: "/merchant_store",
@@ -57,12 +59,17 @@ function Product_detail(props) {
     });
   };
 
-  const viewProduct = (item) => {
+  const viewProduct = async (item) => {
     console.log(item)
     router.push({
       pathname: "/product_detail",
       query: { productId: item.productId },
     });
+
+    let data = await dispatch(getProductWithId(item.productId));
+
+    setProductNewData(data.payload)
+
   };
 
   const handleCloseBar = (event, reason) => {
@@ -71,11 +78,27 @@ function Product_detail(props) {
     }
     setOpenBar(false);
   };
-  useEffect(() => {
+  useEffect(async () => {
     localStorage.setItem("productId", router?.query?.productId);
 
-    dispatch(getProductWithId(router?.query?.productId));
-  }, [router.query.productId]);
+    let data = await dispatch(getProductWithId(router?.query?.productId));
+
+    setProductNewData(data.payload)
+
+  }, [router?.query?.productId]);
+
+  useEffect(() => {
+
+
+
+
+
+  }, [productNewData])
+
+
+  useEffect(() => {
+  }, [router.query.productId])
+
 
 
   useEffect(() => {
@@ -100,7 +123,7 @@ function Product_detail(props) {
       });
       setFilterData(productWithName[0]);
     }
-  }, [filterProductData.merchant_id]);
+  }, []);
 
   const skuData = (sku) => {
     console.log(sku);
@@ -111,6 +134,9 @@ function Product_detail(props) {
       setPrice(result.cost);
     });
   };
+
+
+
 
   useEffect(() => {
     setStatus(addCart);
@@ -321,7 +347,7 @@ function Product_detail(props) {
         ></Details>
       ) : (
         <Details
-          productDetail={filterProductData || {}}
+          productDetail={productNewData || {}}
           merchantDetail={merchantData}
           addToCartHandler={addToCartHandler}
           BuyHandler={BuyHandler}
