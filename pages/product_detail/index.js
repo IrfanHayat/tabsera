@@ -84,7 +84,8 @@ function Product_detail(props) {
     let data = await dispatch(getProductWithId(router?.query?.productId));
 
     setProductNewData(data.payload)
-
+    let merchant = await dispatch(getMerchantWithId(data.payload.merchant_id));
+    console.log(merchant.payload)
   }, [router?.query?.productId]);
 
   useEffect(() => {
@@ -101,11 +102,8 @@ function Product_detail(props) {
 
 
 
-  useEffect(() => {
+  useEffect(async () => {
     // dispatch(getProduct());
-    if (productNewData?.merchant_id) {
-      dispatch(getMerchantWithId(productNewData?.merchant_id));
-    }
 
     if (router.query.product_name) {
       const productObj = productData.filter((result) => {
