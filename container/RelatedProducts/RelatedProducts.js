@@ -81,7 +81,7 @@ function RelatedProducts({ categoryId, viewProduct, addToCartHandler }) {
                   <Rating
                     // className={styles1.Rating}
                     name="size-small"
-                    // defaultValue={product?.averageRating}
+                    defaultValue={result?.averageRating}
                     size="small"
                     // fontSize={24}
                     readOnly
