@@ -185,7 +185,7 @@ function ShippingMethods({
                   <Currency
                     amount={
                       productPrice &&
-                      productPrice.reduce((a, c) => a + c.qty * c.price, 0)
+                      productPrice.reduce((a, c) => a + c.qty * c.product_cost, 0)
                     }
                   ></Currency>
                 </Grid>
@@ -214,10 +214,10 @@ function ShippingMethods({
                     amount={
                       productPrice && shippingCharges
                         ? productPrice?.reduce(
-                          (a, c) => a + c.qty * c.price,
+                          (a, c) => a + c.qty * c.product_cost,
                           0
                         ) + shippingCharges
-                        : productPrice?.reduce((a, c) => a + c.qty * c.price, 0)
+                        : productPrice?.reduce((a, c) => a + c.qty * c.product_cost, 0)
                     }
                   ></Currency>
                 </Grid>
