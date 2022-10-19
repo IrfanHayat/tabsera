@@ -166,13 +166,13 @@ function Placeorder() {
         });
         let obj = {
           isBuyNow: true,
-          orderAmount: cartItems.reduce((a, c) => a + c.qty * c.price, 0),
+          orderAmount: cartItems.reduce((a, c) => a + c.qty * c.product_cost, 0),
           cartItems: newCartItems,
           coupons: [],
           orderDiscount: 0.0,
           discounts: [],
           paymentInfo: {
-            paymentAmount: cartItems.reduce((a, c) => a + c.qty * c.price, 0),
+            paymentAmount: cartItems.reduce((a, c) => a + c.qty * c.product_cost, 0),
             paymentCurreny: "PKR",
           },
           rewards: [],
@@ -204,9 +204,10 @@ function Placeorder() {
         if (result.payload.customerOrderNo != null) {
           // setOpenBar(true);
           setTimeout(() => {
+            // router.push("/payment");
             router.push({
               pathname: "/payment",
-              query: { orderNo: result.payload.customerOrderNo },
+              query: { orderNo: result.payload.customerOrderNo, amount: obj.paymentInfo.paymentAmount, shippementCharges: obj.shippingInfo.shippingCharges },
             });
           }, 1000);
         }
@@ -263,7 +264,7 @@ function Placeorder() {
             // router.push("/payment");
             router.push({
               pathname: "/payment",
-              query: { orderNo: result.payload.customerOrderNo },
+              query: { orderNo: result.payload.customerOrderNo, amount: obj.paymentInfo.paymentAmount, shippementCharges: obj.shippingInfo.shippingCharges },
             });
           }, 1000);
         }
