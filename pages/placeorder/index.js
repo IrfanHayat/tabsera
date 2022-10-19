@@ -282,13 +282,13 @@ function Placeorder() {
       });
       let obj = {
         isBuyNow: false,
-        orderAmount: cartItems.reduce((a, c) => a + c.qty * c.price, 0),
+        orderAmount: cartItems.reduce((a, c) => a + c.qty * c.product_cost, 0),
         cartItems: newCartItems,
         coupons: [],
         orderDiscount: "0.0",
         discounts: [],
         paymentInfo: {
-          paymentAmount: cartItems.reduce((a, c) => a + c.qty * c.price, 0),
+          paymentAmount: cartItems.reduce((a, c) => a + c.qty * c.product_cost, 0),
           paymentCurreny: "PKR",
         },
         rewards: [],
@@ -313,7 +313,7 @@ function Placeorder() {
           shippingDiscount: "0",
           shippingMethodId: router.query.shipId,
         },
-        origOrderAmount: cartItems.reduce((a, c) => a + c.qty * c.price, 0),
+        origOrderAmount: cartItems.reduce((a, c) => a + c.qty * c.product_cost, 0),
       };
 
       console.log(obj);
@@ -323,7 +323,11 @@ function Placeorder() {
       if (Object.keys(result.payload).length > 0) {
         // setOpenBar(true);
         setTimeout(() => {
-          router.push("/payment");
+          // router.push("/payment");
+          router.push({
+            pathname: "/payment",
+            query: { orderNo: result.payload.customerOrderNo, amount: obj.paymentInfo.paymentAmount, shippementCharges: obj.shippingInfo.shippingCharges },
+          });
         }, 1000);
       }
     }

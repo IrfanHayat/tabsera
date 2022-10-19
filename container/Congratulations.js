@@ -11,8 +11,9 @@ import styles from "../styles/congratulations.module.css";
 import { useRouter } from "next/router";
 import { Button } from "antd";
 import Currency from "./Currency/currency";
-const Congratulations = ({ orderNo }) => {
+const Congratulations = ({ orderNo, amount, shipCharges }) => {
   let router = useRouter();
+
   return (
     <>
       <CheckoutWizard activeStep={4} />
@@ -63,7 +64,7 @@ const Congratulations = ({ orderNo }) => {
                 color: "primary.main",
               }}
             >
-              <Currency amount={1000}></Currency>
+              <Currency amount={amount}></Currency>
             </Box>
           </Stack>
           <Box className={styles.orderdetails}>
@@ -84,16 +85,16 @@ const Congratulations = ({ orderNo }) => {
             <AccordionDetails>
               <Box className={styles.amount}>
                 <Typography> Subtotal</Typography>
-                <Typography>Lorem</Typography>
+                <Typography>{amount}</Typography>
               </Box>
               <Box className={styles.amount}>
                 <Typography> Shipping Fee</Typography>
-                <Typography>Lorem</Typography>
+                <Typography>{shipCharges}</Typography>
               </Box>
               <Divider />
               <Box className={styles.total}>
                 <Typography variant="subtitle2"> Total</Typography>
-                <Typography>Lorem</Typography>
+                <Typography>{parseInt(amount) + parseInt(shipCharges)}</Typography>
               </Box>
             </AccordionDetails>
           </Accordion>{" "}

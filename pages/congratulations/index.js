@@ -5,7 +5,7 @@ const Index = () => {
   let router = useRouter();
   return (
     <div>
-      <Congratulations orderNo={router.query?.orderNo} />
+      <Congratulations orderNo={router.query?.orderNo} amount={router.query?.amount} shipCharges={router.query?.shipcharges} />
     </div>
   );
 };

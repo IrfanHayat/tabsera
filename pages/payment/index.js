@@ -140,7 +140,7 @@ function Payement() {
         setTimeout(() => {
           router.push({
             pathname: "/congratulations",
-            query: { orderNo: router.query?.orderNo },
+            query: { orderNo: result.payload.response.customerOrderNo, amount: router?.query?.amount, shipcharges: router?.query?.shippementCharges },
           });
         }, 1000)
       }
