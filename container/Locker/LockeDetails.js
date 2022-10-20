@@ -212,9 +212,18 @@ const LockerDetails = ({ handleChangeLocker, setRadioCheck1, lockerData }) => {
               onViewportChange={(viewport) => setViewPort(viewport)}
               mapboxApiAccessToken={TOKEN}
             >
-              <Marker {...viewport} anchor="bottom">
-                <RoomIcon style={{ color: "red" }}></RoomIcon>
-              </Marker>
+              {
+                lockerData?.map((locker, i) => {
+                  console.log("locker ==> ", locker);
+                  return (
+                    <Marker key={i} latitude={locker.latitude} longitude={locker.longitude}
+                      anchor="bottom">
+                      <RoomIcon style={{ color: "red" }}></RoomIcon>
+                    </Marker>
+                  )
+                })
+              }
+
             </MapGL>
             {/* <MapGL
               initialViewState={{
