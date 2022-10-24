@@ -60,7 +60,7 @@ function Payement() {
           //"accountNumber": "923450600666",
           "amount": cartTotalAmount.toString(),
           // "pin":'123456',
-          "orderId": placeOrderData?.orderId,
+          "orderId": placeOrderData?.response.orderId,
           "parentPaymentMethodId": selectPaymentMethod?.parent_payment_method_id,
           "paymentGatewayId": selectPaymentMethod?.payment_gateway_id,
           "paymentMethodId": selectPaymentMethod?.payment_method_id,
@@ -87,7 +87,7 @@ function Payement() {
           "accountNumber": null, //"923450600666",
           "amount": cartTotalAmount.toString(),
           "pin": null,//'123456',
-          "orderId": placeOrderData?.orderId,
+          "orderId": placeOrderData?.response.orderId,
           "parentPaymentMethodId": 0,
           "paymentGatewayId": 4,
           "paymentMethodId": 3,
@@ -120,20 +120,38 @@ function Payement() {
     }
 
     if (selectPaymentMethod?.payment_mode == null) {
+      console.log("Place Order", placeOrderData)
+      let obj
+      if (placeOrderData.response?.orderId) {
+        obj = {
+          "requestBody": {
+            //  "accountNumber": accountDetails.accountNumber, //"923450600666",
+            amount: cartTotalAmount.toString(),
+            //  "pin":accountDetails.pin,//'123456',
+            orderId: placeOrderData?.response.orderId,
+            parentPaymentMethodId: selectPaymentMethod?.parent_payment_method_id,
+            paymentGatewayId: selectPaymentMethod?.payment_gateway_id,
+            paymentMethodId: selectPaymentMethod?.payment_method_id,
+            serviceTypeId: 6,
+            transactionTypeId: 8,
+          },
+        };
+      } else {
 
-      let obj = {
-        "requestBody": {
-          //  "accountNumber": accountDetails.accountNumber, //"923450600666",
-          amount: cartTotalAmount.toString(),
-          //  "pin":accountDetails.pin,//'123456',
-          orderId: placeOrderData?.orderId,
-          parentPaymentMethodId: selectPaymentMethod?.parent_payment_method_id,
-          paymentGatewayId: selectPaymentMethod?.payment_gateway_id,
-          paymentMethodId: selectPaymentMethod?.payment_method_id,
-          serviceTypeId: 6,
-          transactionTypeId: 8,
-        },
-      };
+        obj = {
+          "requestBody": {
+            //  "accountNumber": accountDetails.accountNumber, //"923450600666",
+            amount: cartTotalAmount.toString(),
+            //  "pin":accountDetails.pin,//'123456',
+            orderId: placeOrderData?.orderNo,
+            parentPaymentMethodId: selectPaymentMethod?.parent_payment_method_id,
+            paymentGatewayId: selectPaymentMethod?.payment_gateway_id,
+            paymentMethodId: selectPaymentMethod?.payment_method_id,
+            serviceTypeId: 6,
+            transactionTypeId: 8,
+          },
+        };
+      }
       let result = await dispatch(postPayment(obj));
       if (result.payload.resultCode == 2000) {
 

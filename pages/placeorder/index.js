@@ -200,14 +200,14 @@ function Placeorder() {
         };
         console.log(obj);
         let result = await dispatch(addOrder(obj));
-
-        if (result.payload.customerOrderNo != null) {
+        console.log(result.payload)
+        if (result.payload.response.customerOrderNo != null) {
           // setOpenBar(true);
           setTimeout(() => {
             // router.push("/payment");
             router.push({
               pathname: "/payment",
-              query: { orderNo: result.payload.customerOrderNo, amount: obj.paymentInfo.paymentAmount, shippementCharges: obj.shippingInfo.shippingCharges },
+              query: { orderNo: result.payload.response.customerOrderNo, amount: obj.paymentInfo.paymentAmount, shippementCharges: obj.shippingInfo.shippingCharges },
             });
           }, 1000);
         }
@@ -257,14 +257,14 @@ function Placeorder() {
           origOrderAmount: cartItems.reduce((a, c) => a + c.qty * c.price, 0),
         };
         let result = await dispatch(addOrder(obj));
-
-        if (result.payload.customerOrderNo != null) {
+        console.log(result.payload)
+        if (result.payload.response.customerOrderNo != null) {
           // setOpenBar(true);
           setTimeout(() => {
             // router.push("/payment");
             router.push({
               pathname: "/payment",
-              query: { orderNo: result.payload.customerOrderNo, amount: obj.paymentInfo.paymentAmount, shippementCharges: obj.shippingInfo.shippingCharges },
+              query: { orderNo: result.payload.response.customerOrderNo, amount: obj.paymentInfo.paymentAmount, shippementCharges: obj.shippingInfo.shippingCharges },
             });
           }, 1000);
         }
@@ -320,14 +320,14 @@ function Placeorder() {
       console.log(obj);
 
       let result = await dispatch(addOrder(obj));
-      console.log(result);
+      console.log(result.payload);
       if (Object.keys(result.payload).length > 0) {
         // setOpenBar(true);
         setTimeout(() => {
           // router.push("/payment");
           router.push({
             pathname: "/payment",
-            query: { orderNo: result.payload.customerOrderNo, amount: obj.paymentInfo.paymentAmount, shippementCharges: obj.shippingInfo.shippingCharges },
+            query: { orderNo: result.payload.orderNo, amount: obj.paymentInfo.paymentAmount, shippementCharges: obj.shippingInfo.shippingCharges, shippingCode: result.payload.response.response.data.shipmentCode },
           });
         }, 1000);
       }
