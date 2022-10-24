@@ -95,24 +95,29 @@ const LockerDetails = ({ handleChangeLocker, setRadioCheck1, lockerData }) => {
             // value={labelValue}
             onChange={handleChangeLocker}
           >
-            {lockerData?.map((locker, i) => (
-              <>
-                {/* <CardContent sx={{ padding: "0px 20px" }}> */}
-                {/* <Typography gutterBottom variant="h5" component="div">
+
+            <>
+              {/* <CardContent sx={{ padding: "0px 20px" }}> */}
+              {/* <Typography gutterBottom variant="h5" component="div">
                   {locker.business_name}
                 </Typography> */}
-                <Box className={styles.addressBoxDiv1}>
-                  <FormControlLabel
-                    value={locker.locker_id}
-                    control={<Radio />}
-                    label={
-                      <Box
-                        sx={{
-                          display: "flex",
-                          alignItems: "center",
-                        }}
-                      >
-                        {/* <Image // className={cx(styles.media, mediaStyles.root)}
+              <Box className={styles.addressBoxDiv1}>
+                <>
+
+
+                  {lockerData?.map((locker, i) => (
+                    <>
+                      <FormControlLabel
+                        value={locker.locker_id}
+                        control={<Radio />}
+                        label={
+                          <Box
+                            sx={{
+                              display: "flex",
+                              alignItems: "center",
+                            }}
+                          >
+                            {/* <Image // className={cx(styles.media, mediaStyles.root)}
                         src={"/locker_pic.jpg"}
                         // onClick={(e) => viewCategory(product.category_id)}
                         alt={"locker"}
@@ -120,67 +125,75 @@ const LockerDetails = ({ handleChangeLocker, setRadioCheck1, lockerData }) => {
                         objectFit="contain"
                         height={45}
                       ></Image> */}
-                        <Typography
-                          sx={{
-                            p: 1,
-                          }}
-                        >
-                          {locker.locker_name}
-                        </Typography>
+                            <Typography
+                              sx={{
+                                p: 1,
+                              }}
+                            >
+                              {locker.locker_name}
+                            </Typography>
 
 
-                      </Box>
-                    }
-                    onClick={() => setRadioCheck1(true)}
-                  />
+                          </Box>
+                        }
+                        onClick={() => setRadioCheck1(true)}
+                      />
 
-                  <Typography variant="body2">
-                    Loation : {locker.locker_address}
-                  </Typography>
-                  <>
-                    <Button size="small" onClick={() => handleExpandClick(i)}>
-                      View Charge Plans
-                      <ExpandMore
-                        expand={expanded}
-                        aria-expanded={expanded}
-                        aria-label="show more"
-                      >
-                        <ExpandMoreIcon />
-                      </ExpandMore>
-                    </Button>
-                    <Divider fullWidth />
-                    {locker.isSubscribed ? (
-                      <Button variant="contained" disabled={true}>
-                        Subscribed
-                      </Button>
-                    ) : (
-                      <></>
-                      // <Button
-                      //   color="secondary"
-                      //   variant="contained"
-                      //   onClick={() => onSubscribeButton(lockerData.user_id)}
-                      // >
-                      //   Subscribe
-                      // </Button>
-                    )}
-                  </>
-                  <Collapse in={expanded === i} timeout="auto" unmountOnExit>
-                    <CardContent>
-                      {locker.charges.map((plans, i) => (
-                        <Typography paragraph className={styles.charges}>
-                          {plans.slot_size}
-                        </Typography>
-                      ))}
+                      <Typography variant="body2">
+                        Loation : {locker.locker_address}
+                      </Typography>
+                      <>
+                        <Button size="small" onClick={() => handleExpandClick(i)}>
+                          View Charge Plans
+                          <ExpandMore
+                            expand={expanded}
+                            aria-expanded={expanded}
+                            aria-label="show more"
+                          >
+                            <ExpandMoreIcon />
+                          </ExpandMore>
+                        </Button>
+                        <Divider fullWidth />
+                        {locker.isSubscribed ? (
+                          <Button variant="contained" disabled={true}>
+                            Subscribed
+                          </Button>
+                        ) : (
+                          <></>
+                          // <Button
+                          //   color="secondary"
+                          //   variant="contained"
+                          //   onClick={() => onSubscribeButton(lockerData.user_id)}
+                          // >
+                          //   Subscribe
+                          // </Button>
+                        )}
+                      </>
+                      <Collapse in={expanded === i} timeout="auto" unmountOnExit>
+                        <CardContent>
+                          {locker.charges.map((plans, i) => (
+                            <Typography paragraph className={styles.charges}>
+                              {plans.slot_size}
+                            </Typography>
 
-                      {/* <Typography paragraph>charge plans here</Typography> */}
-                    </CardContent>
-                  </Collapse>
-                </Box>
-                <AssistantDirectionOutlinedIcon
-                  color="primary"
-                  fontSize="large"
-                />
-                {/* <Typography variant="body2">
+                          ))}
+
+                          {/* <Typography paragraph>charge plans here</Typography> */}
+                        </CardContent>
+                      </Collapse>
+                    </>
+                  ))}
+
+
+
+
+                </>
+              </Box>
+              <AssistantDirectionOutlinedIcon
+                color="primary"
+                fontSize="large"
+              />
+              {/* <Typography variant="body2">
                   Available Slots of Lockers: {locker.noOfLockerAvailableSlots}
                 </Typography>
                 <Typography variant="body2">
@@ -189,9 +202,9 @@ const LockerDetails = ({ handleChangeLocker, setRadioCheck1, lockerData }) => {
                 <Typography variant="body2">
                   Available Slots in Vending Machines: {locker.noOfVendingMachineAvailableSlots}
                 </Typography> */}
-                {/* </CardContent> */}
-              </>
-            ))}
+              {/* </CardContent> */}
+            </>
+
           </RadioGroup>
         </Grid>
         <Grid item md={9}>
