@@ -327,7 +327,7 @@ function Placeorder() {
           // router.push("/payment");
           router.push({
             pathname: "/payment",
-            query: { orderNo: result.payload.orderNo, amount: obj.paymentInfo.paymentAmount, shippementCharges: obj.shippingInfo.shippingCharges, shippingCode: result.payload.response.response.data.shipmentCode },
+            query: { orderNo: result.payload.orderNo, amount: obj.paymentInfo.paymentAmount, shippementCharges: obj.shippingInfo.shippingCharges, shippingCode: result.payload.response.response.data.shipmentCode, shippingParcel: result.payload.response.response.data.parcels.map(result => result.parcelCode)[0] },
           });
         }, 1000);
       }

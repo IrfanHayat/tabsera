@@ -158,7 +158,7 @@ function Payement() {
         setTimeout(() => {
           router.push({
             pathname: "/congratulations",
-            query: { orderNo: result.payload.response.customerOrderNo, amount: router?.query?.amount, shipcharges: router?.query?.shippementCharges },
+            query: { orderNo: result.payload.response.customerOrderNo, amount: router?.query?.amount, shipcharges: router?.query?.shippementCharges, shippingCode: router?.query?.shippingCode, shippingParcel: router?.query?.shippingParcel },
           });
         }, 1000)
       }

@@ -11,7 +11,7 @@ import styles from "../styles/congratulations.module.css";
 import { useRouter } from "next/router";
 import { Button } from "antd";
 import Currency from "./Currency/currency";
-const Congratulations = ({ orderNo, amount, shipCharges }) => {
+const Congratulations = ({ orderNo, amount, shipCharges, shipCode, shipParcel }) => {
   let router = useRouter();
 
   return (
@@ -49,7 +49,16 @@ const Congratulations = ({ orderNo, amount, shipCharges }) => {
                   display: "inline",
                 }}
               >
-                {orderNo}
+                <Typography>
+                  {orderNo}
+                </Typography>
+                <Typography>
+                  {shipCode ? <>Shipping Code:{shipCode}</> : <></>}
+                </Typography>
+
+                <Typography>
+                  {shipParcel ? <>Shipping Parcel:{shipParcel}</> : <></>}
+                </Typography>
               </Typography>
             </Box>
 
