@@ -195,7 +195,7 @@ function ShippingInformation({
                 control={<Radio />}
                 label={t("shippingInfo.labels.ship.locker")}
               />
-              <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
+              {/* <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
 
               <FormControlLabel
                 onClick={() => {
@@ -205,7 +205,7 @@ function ShippingInformation({
                 value="school"
                 control={<Radio />}
                 label={t("shippingInfo.labels.ship.school")}
-              />
+              /> */}
             </RadioGroup>
           </FormControl>
         </Grid>
