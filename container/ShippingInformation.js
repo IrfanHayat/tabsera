@@ -91,6 +91,8 @@ function ShippingInformation({
 
   console.log("shippementAddress", shippementAddress);
 
+  const [isMapActive, setIsMapActive] = useState(false);
+  const [isTableActive, setIsTableActive] = useState(false);
   const [radioCheckLocker, setRadioCheckLocker] = useState(true);
   const [radioCheck, setRadioCheck] = useState(false);
   const [radioCheck1, setRadioCheck1] = useState(false);
@@ -107,11 +109,15 @@ function ShippingInformation({
   // }, [buttonKey]);
 
   function mapView() {
+    setIsMapActive(true);
     setShowMapView(true);
+    setIsTableActive(false)
     setShowTableView(false);
   }
 
   function tableView() {
+    setIsTableActive(true)
+    setIsMapActive(false);
     setShowMapView(false);
     setShowTableView(true);
   }
@@ -635,6 +641,7 @@ function ShippingInformation({
                       <Typography
                         onClick={() => mapView()}
                         className={styles.mapTableViewText}
+                        sx={{ color: isMapActive ? 'blue' : '' }}
                       >
                         MapView
                       </Typography>
@@ -645,6 +652,7 @@ function ShippingInformation({
                       <Typography
                         onClick={() => tableView()}
                         className={styles.mapTableViewText}
+                        sx={{ color: isTableActive ? 'blue' : '' }}
                       >
                         TableView
                       </Typography>
