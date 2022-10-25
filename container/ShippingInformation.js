@@ -641,7 +641,7 @@ function ShippingInformation({
                       <Typography
                         onClick={() => mapView()}
                         className={styles.mapTableViewText}
-                        sx={{ color: isMapActive ? 'blue' : '' }}
+                        sx={{ color: isMapActive ? '#3d7cff' : '' }}
                       >
                         MapView
                       </Typography>
@@ -652,7 +652,7 @@ function ShippingInformation({
                       <Typography
                         onClick={() => tableView()}
                         className={styles.mapTableViewText}
-                        sx={{ color: isTableActive ? 'blue' : '' }}
+                        sx={{ color: isTableActive ? '#3d7cff' : '' }}
                       >
                         TableView
                       </Typography>
