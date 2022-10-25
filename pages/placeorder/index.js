@@ -321,15 +321,27 @@ function Placeorder() {
 
       let result = await dispatch(addOrder(obj));
       console.log(result.payload);
-      if (Object.keys(result.payload).length > 0) {
+      if (result.payload.response.customerOrderNo != null) {
         // setOpenBar(true);
-        setTimeout(() => {
-          // router.push("/payment");
-          router.push({
-            pathname: "/payment",
-            query: { orderNo: result.payload.orderNo, amount: obj.paymentInfo.paymentAmount, shippementCharges: obj.shippingInfo.shippingCharges, shippingCode: result.payload.response.response.data.shipmentCode, shippingParcel: result.payload.response.response.data.parcels.map(result => result.parcelCode)[0] },
-          });
-        }, 1000);
+        if (result.payload.response.message == "Your order has been  placed successfully,Error from intelParcer Team") {
+          setTimeout(() => {
+            // router.push("/payment");
+            router.push({
+              pathname: "/payment",
+              query: { orderNo: result.payload.response.orderId, amount: obj.paymentInfo.paymentAmount },
+            });
+          }, 1000);
+        } else {
+          console.log(result.payload)
+          setTimeout(() => {
+            // router.push("/payment");
+            router.push({
+              pathname: "/payment",
+              query: { orderNo: result.payload.response.orderId, amount: obj.paymentInfo.paymentAmount, shippementCharges: obj.shippingInfo.shippingCharges, shippingCode: result.payload.response.data.response.data.shipmentCode, shippingParcel: result.payload.response.data.response.data.parcels.map(result => result.parcelCode)[0] },
+            });
+          }, 1000);
+        }
+
       }
     }
   };
