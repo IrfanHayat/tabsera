@@ -695,7 +695,7 @@ function ShippingInformation({
               </RadioGroup>
             </Grid>
             {showMapView ? (
-              <LockerDetails setRadioCheck1={setRadioCheck1} handleChangeLocker={handleChangeLocker} lockerData={shipLocker}></LockerDetails>
+              <LockerDetails setRadioCheck1={setRadioCheck1} handleChangeLocker={handleChangeLocker} lockerData={lockersAddressData}></LockerDetails>
             ) : (
               ""
             )}
