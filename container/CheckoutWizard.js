@@ -8,6 +8,7 @@ import LocalPostOfficeIcon from '@mui/icons-material/LocalPostOffice';
 import PaymentIcon from '@mui/icons-material/Payment';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import { useTranslation } from "react-i18next";
+import styles from "../styles/checkoutWizards.module.css";
 const useStyles = makeStyles(() => ({
   root: {
     backgroundColor: '#eaeaf0',
@@ -51,10 +52,12 @@ export default function CheckoutWizard({ activeStep = 0 }) {
 
   return (
     <Grid
+      md={12}
+      sm={12}
+      className={styles.grid}
 
-      sx={{ alignContent: "start", justifyContent: "start", mt: 5 }}
     >
-      <Box sx={{ width: "100%", alignContent: "center", justifyContent: "center" }}>
+      <Box className={styles.new_Box}>
         {/* <Grid item md={12} xs={12} sm={12}> */}
         <Stepper
           activeStep={activeStep}
@@ -68,9 +71,7 @@ export default function CheckoutWizard({ activeStep = 0 }) {
           ].map((step) => (
             <Step
               key={step}
-              sx={{
-                width: "100%",
-              }}
+              className={styles.step_style}
             >
               <StepLabel StepIconComponent={CustomStepIcon} >{step}</StepLabel>
             </Step>

@@ -49,16 +49,16 @@ const Congratulations = ({ orderNo, amount, shipCharges, shipCode, shipParcel })
                   display: "inline",
                 }}
               >
-                <Typography>
+                <Typography sx={{ color: "primary.main" }}>
                   {orderNo}
                 </Typography>
                 <Typography>
-                  {shipCode ? <>Shipping Code:{shipCode}</> : <></>}
+                  {shipCode ? <Box>Tracking Number<Typography sx={{ color: "primary.main" }}>{shipCode}</Typography></Box> : <>...........</>}
                 </Typography>
-
+                {/* 
                 <Typography>
                   {shipParcel ? <>Shipping Parcel:{shipParcel}</> : <></>}
-                </Typography>
+                </Typography> */}
               </Typography>
             </Box>
 

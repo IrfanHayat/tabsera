@@ -1,0 +1,13 @@
+.grid{
+    margin-top: 5%;
+}
+
+.new_Box{
+    width:"100vw";
+    align-content: "center"; justify-content: "center"
+
+}
+
+.step_style{
+    width: "100vw",
+}

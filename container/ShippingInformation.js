@@ -34,7 +34,7 @@ import { Controller, useForm } from "react-hook-form";
 import { TextField } from "@mui/material";
 import Chip from "@mui/material/Chip";
 import Image from "next/image";
-import LockerDetails from "./Locker/LockeDetails";
+import LockerDetails1 from "./Locker/LockerDetails1";
 //import Divider from "@mui/material";
 import styles from "../styles/shippingInfo.module.css";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
@@ -703,7 +703,7 @@ function ShippingInformation({
               </RadioGroup>
             </Grid>
             {showMapView ? (
-              <LockerDetails setRadioCheck1={setRadioCheck1} handleChangeLocker={handleChangeLocker} lockerData={lockersAddressData}></LockerDetails>
+              <LockerDetails1 setRadioCheck1={setRadioCheck1} handleChangeLocker={handleChangeLocker} data={lockersAddressData}></LockerDetails1>
             ) : (
               ""
             )}
