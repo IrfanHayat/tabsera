@@ -31,7 +31,7 @@
     "crypto-js": "^4.1.1",
     "dangerously-set-html-content": "^1.0.9",
     "dangerously-set-inner-html": "^2.0.1",
-    "dompurify": "^2.3.8",
+    "dompurify": "^2.4.0",
     "formik": "^2.2.9",
     "framer-motion": "^4.1.17",
     "google-maps-react": "^2.0.6",

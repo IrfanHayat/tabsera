@@ -84,15 +84,15 @@ function Payement() {
 
       let obj = {
         "requestBody": {
-          "accountNumber": null, //"923450600666",
+          "accountNumber": accountDetails.accountNumber, //"923450600666",
           "amount": cartTotalAmount.toString(),
-          "pin": null,//'123456',
+          "pin": accountDetails.pin,//'123456',
           "orderId": placeOrderData?.response.orderId,
-          "parentPaymentMethodId": 0,
-          "paymentGatewayId": 4,
-          "paymentMethodId": 3,
-          "serviceTypeId": 6,
-          "transactionTypeId": 8
+          "parentPaymentMethodId": selectPaymentMethod?.parent_payment_method_id,
+          "paymentGatewayId": selectPaymentMethod?.payment_gateway_id,
+          "paymentMethodId": selectPaymentMethod?.payment_method_id,
+          serviceTypeId: 6,
+          transactionTypeId: 8
         }
       }
       let result1 = await dispatch(postPayment(obj))
