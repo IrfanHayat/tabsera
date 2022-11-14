@@ -121,7 +121,7 @@ function CartScreen({
                   className={styles.cartItemQuantity}
                 >
                   <IconButton
-                    onClick={() => handleDecreaseCart(item)}
+                    // onClick={() => handleDecreaseCart(item)}
                     aria-label="reduce item"
                     size="large"
                   // variant="contained"
