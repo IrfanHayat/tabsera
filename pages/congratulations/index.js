@@ -8,7 +8,7 @@ const Index = () => {
       {router.query?.shippingCode ? <>
         <Congratulations orderNo={router.query?.orderNo} amount={router.query?.amount} shipCharges={router.query?.shipcharges} shipCode={router?.query?.shippingCode} shipParcel={router?.query?.shippingParcel} />
       </> : <>
-        <Congratulations orderNo={router.query?.orderNo} amount={router.query?.amount} shipCharges={router.query?.shipcharges} />
+        <Congratulations orderNo={router.query?.orderNo} amount={router.query?.amount} shipCharges={router.query?.shipcharges} intelParcelMessage={router?.query?.intelParcelMessage} />
       </>}
 
     </div>

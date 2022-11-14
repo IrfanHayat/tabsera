@@ -11,7 +11,7 @@ import styles from "../styles/congratulations.module.css";
 import { useRouter } from "next/router";
 import { Button } from "antd";
 import Currency from "./Currency/currency";
-const Congratulations = ({ orderNo, amount, shipCharges, shipCode, shipParcel }) => {
+const Congratulations = ({ orderNo, amount, shipCharges, shipCode, intelParcelMessage, shipParcel }) => {
   let router = useRouter();
 
   return (
@@ -53,6 +53,7 @@ const Congratulations = ({ orderNo, amount, shipCharges, shipCode, shipParcel })
                   {orderNo}
                 </Typography>
                 <Typography>
+                  {intelParcelMessage ? intelParcelMessage : <></>}
                   {shipCode ? <Box>Tracking Number<Typography sx={{ color: "primary.main" }}>{shipCode}</Typography></Box> : <>...........</>}
                 </Typography>
                 {/* 

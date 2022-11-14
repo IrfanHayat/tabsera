@@ -107,7 +107,7 @@ function Payement() {
           // router.push('/congratulations')
           router.push({
             pathname: "/congratulations",
-            query: { orderNo: router.query?.orderNo },
+            query: { orderNo: result1.payload.response.customerOrderNo, amount: router?.query?.amount, shipcharges: router?.query?.shippementCharges, shippingCode: router?.query?.shippingCode, shippingParcel: router?.query?.shippingParcel },
           });
         }, 1000)
 
@@ -158,7 +158,7 @@ function Payement() {
         setTimeout(() => {
           router.push({
             pathname: "/congratulations",
-            query: { orderNo: result.payload.response.customerOrderNo, amount: router?.query?.amount, shipcharges: router?.query?.shippementCharges, shippingCode: router?.query?.shippingCode, shippingParcel: router?.query?.shippingParcel },
+            query: { orderNo: result.payload.response.customerOrderNo, amount: router?.query?.amount, shipcharges: router?.query?.shippementCharges, shippingCode: router?.query?.shippingCode, shippingParcel: router?.query?.shippingParcel, intelParcelMessage: router?.query?.intelParcelMessage },
           });
         }, 1000)
       }

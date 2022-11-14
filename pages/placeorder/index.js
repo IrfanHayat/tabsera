@@ -328,7 +328,7 @@ function Placeorder() {
             // router.push("/payment");
             router.push({
               pathname: "/payment",
-              query: { orderNo: result.payload.response.orderId, amount: obj.paymentInfo.paymentAmount },
+              query: { orderNo: result.payload.response.orderId, amount: obj.paymentInfo.paymentAmount, intelParcelMessage: result.payload.response.intelParcelRes },
             });
           }, 1000);
         } else {

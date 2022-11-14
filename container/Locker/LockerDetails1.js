@@ -31,6 +31,7 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import isValidCoordinates from 'is-valid-coordinates';
 import Collapse from "@mui/material/Collapse";
 
 
@@ -108,7 +109,7 @@ const LockerDetails1 = ({ handleChangeLocker, setRadioCheck1, data }) => {
 
     return (
         <>
-            <Grid container sx={{ maxHeight: "100vh" }}>
+            <Grid container sx={{ minHeight: "20vh" }}>
 
                 <RadioGroup
                     // row
@@ -186,12 +187,15 @@ const LockerDetails1 = ({ handleChangeLocker, setRadioCheck1, data }) => {
                             >
                                 {
                                     data?.map((locker, i) => {
-                                        console.log("locker ==> ", locker);
+
                                         return (
-                                            <Marker key={i} latitude={locker.latitude == 0 ? 33.7327893 : locker.latitude} longitude={locker.longitude == 0 ? 73.0883404 : locker.longitude}
-                                                anchor="bottom">
-                                                <RoomIcon style={{ color: "red" }}></RoomIcon>
-                                            </Marker>
+                                            isValidCoordinates(locker.longitude, locker.latitude) == true ?
+                                                <>
+                                                    <Marker key={i} latitude={locker.latitude == 0 ? 33.7327893 : locker.latitude} longitude={locker.longitude == 0 ? 73.0883404 : locker.longitude}
+                                                        anchor="bottom">
+                                                        <RoomIcon style={{ color: "red" }}></RoomIcon>
+                                                    </Marker>
+                                                </> : <></>
                                         )
                                     })
                                 }

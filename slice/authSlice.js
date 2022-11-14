@@ -57,7 +57,7 @@ export const loginUser = createAsyncThunk(
           channelId: 1,
           mobileNumber: values?.userName,
           //  otp: "127484",
-          password: values.pwd,
+          password: values?.pwd,
           // registrationToken: ""
         };
       } else {
