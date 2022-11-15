@@ -16,6 +16,7 @@ import discountsReducer from "../slice/discountsSlice";
 import freeShippingReducer from "../slice/freeShippingSlice";
 import couponsReducer from "../slice/couponsSlice";
 import campaignsReducer from "../slice/campaignsSlice";
+import profileReducer from "../slice/profileSlice"
 
 export const store = configureStore({
   reducer: {
@@ -35,6 +36,7 @@ export const store = configureStore({
     freeShipping: freeShippingReducer,
     coupons: couponsReducer,
     campaigns: campaignsReducer,
+    profile: profileReducer,
     [productsApi.reducerPath]: productsApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>

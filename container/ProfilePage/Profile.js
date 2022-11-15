@@ -36,7 +36,7 @@ const myHelper = {
   },
 };
 
-export default function Profile() {
+export default function Profile({ profileData }) {
   const { control, handleSubmit } = useForm({
     reValidateMode: "onBlur",
   });
@@ -118,7 +118,7 @@ export default function Profile() {
                     // fullWidth
                     // size="small"
                     // variant="filled"
-                    label="First Name"
+                    label={profileData?.first_name ? profileData?.first_name : 'First_name'}
                   />
                 )}
               />
@@ -134,7 +134,7 @@ export default function Profile() {
                     {...field}
                     fullWidth
                     // variant="filled"
-                    label="Last Name"
+                    label={profileData?.last_name ? profileData?.last_name : 'Last_Name'}
                   />
                 )}
               />
@@ -153,7 +153,7 @@ export default function Profile() {
                     {...field}
                     type="email"
                     fullWidth
-                    label="Email With Validation"
+                    label={profileData?.email ? profileData?.email : 'Email'}
                     error={error !== undefined}
                     helperText={error ? myHelper.email[error.type] : ""}
                   />
@@ -200,9 +200,9 @@ export default function Profile() {
                 )}
               />
 
-              <Button className={styles.btn} type="submit" variant="contained">
+              {/* <Button className={styles.btn} type="submit" variant="contained">
                 Submit
-              </Button>
+              </Button> */}
             </Grid>
           </>
         ) : (

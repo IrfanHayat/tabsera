@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Profile from "../../container/ProfilePage/Profile";
+import { useSelector, useDispatch } from "react-redux";
+import { getProfileData } from '../../slice/profileSlice'
+
 
 const index = () => {
+  let [profile, setProfile] = useState();
+  let dispatch = useDispatch();
+
+  useEffect(async () => {
+    let profileInfo = await dispatch(getProfileData())
+    setProfile(profileInfo.payload)
+  }, [])
+
   return (
     <div>
-      <Profile />
+      <Profile profileData={profile} />
     </div>
   );
 };
