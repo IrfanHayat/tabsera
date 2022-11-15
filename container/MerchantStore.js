@@ -57,7 +57,7 @@ function a11yProps(index) {
 }
 function MerchantStore({ merchantStoreDetail }) {
   const { merchantData } = useSelector((state) => state.merchant);
-  console.log("MD-------------->", merchantStoreDetail);
+
   const MaxInput = useRef(null);
   const MinInput = useRef(null);
   const [parentCategories, setParentCategories] = useState([]);
@@ -66,7 +66,7 @@ function MerchantStore({ merchantStoreDetail }) {
   const [catId, setCatId] = useState();
   let { t, i18n } = useTranslation();
   // const [merchant, setmerchant] = useState();
-  // console.log(merchantStoreDetail);
+
   // useEffect(() => {
   //   setmerchant(merchantData);
   // }, [input]);
@@ -116,9 +116,9 @@ function MerchantStore({ merchantStoreDetail }) {
   //   let results = result?.payload.filter(
   //     (result) => result.category_id == catId
   //   );
-  //   console.log(results);
+
   //   results.map((category) => {
-  //     console.log(category)
+
   //     setBrands(category.brands);
   //   });
   // }, []);
@@ -126,8 +126,7 @@ function MerchantStore({ merchantStoreDetail }) {
   const priceFilter = () => {
     let max = MaxInput.current.value;
     let min = MinInput.current.value;
-    console.log(typeof max);
-    console.log(typeof min);
+
     let result = productDataWithCategoryId.filter(
       (result) =>
         parseInt(result.productCost) >= parseInt(min) &&
@@ -138,11 +137,11 @@ function MerchantStore({ merchantStoreDetail }) {
   };
 
   function categoryProduct(name) {
-    console.log(name);
+
     let result = productDataWithCategoryId.filter(
       (category) => category.categoryName == name
     );
-    console.log(result);
+
     setFilterProduct(result);
   }
 

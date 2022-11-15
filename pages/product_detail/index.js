@@ -51,7 +51,7 @@ function Product_detail(props) {
     setOpen(false);
   };
 
-  console.log(filterProductData);
+
   const viewStore = (categoryId, merchantId) => {
     router.push({
       pathname: "/merchant_store",
@@ -60,7 +60,6 @@ function Product_detail(props) {
   };
 
   const viewProduct = async (item) => {
-    console.log(item)
     router.push({
       pathname: "/product_detail",
       query: { productId: item.productId },
@@ -85,7 +84,7 @@ function Product_detail(props) {
 
     setProductNewData(data.payload)
     let merchant = await dispatch(getMerchantWithId(data.payload.merchant_id));
-    console.log(merchant.payload)
+
   }, [router?.query?.productId]);
 
   useEffect(() => {
@@ -124,7 +123,7 @@ function Product_detail(props) {
   }, []);
 
   const skuData = (sku) => {
-    console.log(sku);
+
     sku?.map((result) => {
       setProductImage(result.sku_images);
       setProductAttributes(result.attributes);
@@ -192,7 +191,7 @@ function Product_detail(props) {
         }, 1000);
       }
 
-      console.log(result);
+
 
       // router.push("/cart");
     }
@@ -227,9 +226,6 @@ function Product_detail(props) {
       };
 
       let result = await dispatch(BuyNewItem(product));
-      console.log(result);
-      console.log("status", status.resultCode);
-      console.log(status);
 
       // dispatch(addToCart(item));
       if (result?.payload?.resultCode == 4000) {
@@ -247,9 +243,7 @@ function Product_detail(props) {
       //router.push("/shipping_information");
     } else {
       let result = await dispatch(BuyNewItem(item));
-      console.log(result);
-      console.log("status", status.resultCode);
-      console.log(status);
+
 
       // dispatch(addToCart(item));
       if (result?.payload?.resultCode == 4000) {
@@ -280,7 +274,7 @@ function Product_detail(props) {
   };
 
   useEffect(() => {
-    console.log(status);
+
     if (status?.resultCode == 4000) {
       setOpenBar(true);
     }

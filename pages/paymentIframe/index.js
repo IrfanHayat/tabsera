@@ -16,7 +16,7 @@ function Index() {
 
 
   useEffect(() => {
-    console.log(paymentAddData)
+
     if (paymentAddData) {
       document.getElementById("submit").click();
     }

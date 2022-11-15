@@ -119,9 +119,9 @@ export const logOutCustomer = createAsyncThunk(
   "auth/logOutCustomer",
   async () => {
     // try {
-    console.log("i ma herere");
+
     const result = await instance.get(`${url}/customers/logout`);
-    console.log(result);
+
     return result;
     // } catch (error) {
     // return rejectWithValue(error.response.data);

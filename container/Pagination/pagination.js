@@ -15,7 +15,7 @@ const PaginationData = ({ perPage, totalLength, paginate }) => {
         pagenumber.push(i);
     }
     const paginate1 = (event, number) => {
-        console.log(number)
+
         paginate(number)
         setPageNumber(number)
     }
@@ -34,7 +34,7 @@ const PaginationData = ({ perPage, totalLength, paginate }) => {
     //         setPageNumber(number - 1)
     //     }
     // }
-    console.log(pageNumber);
+
     return (
         <>
 

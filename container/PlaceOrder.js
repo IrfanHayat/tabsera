@@ -84,7 +84,7 @@ function PlaceOrder({
   //   }
   //   setOpenBar(false);
   // };
-  console.log(shippmentName);
+
   return (
     <>
       <CheckoutWizard activeStep={2}></CheckoutWizard>

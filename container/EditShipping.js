@@ -48,7 +48,7 @@ export default function EditShipping({
     let router = useRouter();
 
     // useEffect(() => {
-    //   console.log(countryData)
+
     //   setCountryList(countryData);
 
     //   //setValue("item", { id: 3, name: "item3" });
@@ -73,7 +73,6 @@ export default function EditShipping({
     //   //setValue("item", { id: 3, name: "item3" });
     // }, []);
 
-    console.log(data)
 
     return (
         <>
@@ -136,7 +135,7 @@ export default function EditShipping({
                             )}
                         ></Controller>
                     </Grid>
-                    {console.log(countryData)}
+
 
                     <Grid item xs={12} md={4}>
                         <Controller
@@ -340,7 +339,7 @@ export default function EditShipping({
                             <FormLabel id="demo-row-radio-buttons-group-label">
                                 Address Label :
                             </FormLabel>
-                            {console.log(labels)}
+
                             <RadioGroup
                                 row
                                 aria-labelledby="demo-row-radio-buttons-group-label"

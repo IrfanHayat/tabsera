@@ -51,7 +51,7 @@ function Bundle_detail(props) {
         setOpen(false);
     };
 
-    console.log(addBuyItem);
+
     const viewStore = (categoryId, merchantId) => {
         router.push({
             pathname: "/merchant_store",
@@ -97,7 +97,7 @@ function Bundle_detail(props) {
     }, [filterProductData.merchant_id]);
 
     const skuData = (sku) => {
-        console.log(sku);
+
         sku?.map((result) => {
             setProductImage(result.sku_images);
             setProductAttributes(result.attributes);
@@ -114,8 +114,6 @@ function Bundle_detail(props) {
 
     // const addToCartHandler = async (item, skus) => {
 
-    //     console.log("item");
-    //     console.log(item);
     //     let product = {
     //         product_id: item.bundleId,
     //         product_name: item.bundleName,
@@ -207,7 +205,7 @@ function Bundle_detail(props) {
                 }, 1000);
             }
 
-            console.log(result);
+
 
             // router.push("/cart");
         }
@@ -242,9 +240,7 @@ function Bundle_detail(props) {
             };
 
             let result = await dispatch(BuyNewItem(product));
-            console.log(result);
-            console.log("status", status.resultCode);
-            console.log(status);
+
 
             // dispatch(addToCart(item));
             if (result?.payload?.resultCode == 4000) {
@@ -262,9 +258,6 @@ function Bundle_detail(props) {
             //router.push("/shipping_information");
         } else {
             let result = await dispatch(BuyNewItem(item));
-            console.log(result);
-            console.log("status", status.resultCode);
-            console.log(status);
 
             // dispatch(addToCart(item));
             if (result?.payload?.resultCode == 4000) {
@@ -295,7 +288,7 @@ function Bundle_detail(props) {
     };
 
     useEffect(() => {
-        console.log(status);
+
         if (status?.resultCode == 4000) {
             setOpenBar(true);
         }

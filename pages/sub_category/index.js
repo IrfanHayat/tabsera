@@ -172,9 +172,7 @@ function SubCategory({
     let results = result?.payload.filter(
       (result) => result.category_id == catId
     );
-    console.log(results);
     results.map((category) => {
-      console.log(category);
       setBrands(category.brands);
     });
   }, []);
@@ -212,7 +210,6 @@ function SubCategory({
       let results = result1?.payload?.filter(
         (result2) => result2.category_id == result.payload[0].categoryId
       )[0];
-      console.log(results)
       results?.child?.map(async subCa => {
         let result = await dispatch(getProductWithCategoryId(subCa.category_id));
         result.payload.map(result => arr.push(result))
@@ -225,7 +222,6 @@ function SubCategory({
       let results = result1?.payload?.filter(
         (result2) => result2.category_id == catId
       )[0];
-      console.log(results)
       results?.child?.map(async subCa => {
         let result = await dispatch(getProductWithCategoryId(subCa.category_id));
         result.payload.map(result => arr.push(result))
@@ -246,11 +242,10 @@ function SubCategory({
 
 
   const categoryProduct = useCallback((name) => {
-    console.log(name);
+
     let result = productDataWithCategoryId.filter(
       (category) => category.categoryName == name
     );
-    console.log(result);
     setFilterProduct(result);
     if (productDataWithCategoryId) {
       let result = productDataWithCategoryId.filter(
@@ -273,7 +268,6 @@ function SubCategory({
       let result1 = discountData.filter(
         (category) => category.categoryName == name
       );
-      console.log(result1)
       setFilterDiscount(result1);
       setFlag(true);
 
@@ -289,7 +283,7 @@ function SubCategory({
       let result = productDataWithCategoryId.filter(
         (category) => category?.categoryName == name
       );
-      console.log(result);
+
       let result1 = await dispatch(getCategory());
       let results = result1?.payload?.filter(
         (result2) => result2.category_name == name
@@ -316,7 +310,6 @@ function SubCategory({
       let result1 = discountData.filter(
         (category) => category.categoryName == name
       );
-      console.log(result1)
       setFilterDiscount(result1);
       setFlag(true);
 
@@ -399,12 +392,12 @@ function SubCategory({
 
   // brand Filter
   const handleFilters = (event) => {
-    console.log(event.target.name)
+
     if (productDataWithCategoryId) {
       let result = productDataWithCategoryId.filter(
         (result) => result.brand_name == event.target.name
       );
-      console.log(result)
+
       setFilterProduct(result);
       setFlag(true);
     }
@@ -417,7 +410,6 @@ function SubCategory({
 
         (result) => result.brand_name == event.target.name
       );
-      console.log(result1)
       setFilterDeal(result1);
       setFlag(true);
 
@@ -428,7 +420,6 @@ function SubCategory({
 
         (result) => result.brand_name == event.target.name
       );
-      console.log(result1)
       setFilterDiscount(result1);
       setFlag(true);
 
@@ -447,7 +438,6 @@ function SubCategory({
         });
       });
 
-      console.log(result1)
       setFilterDiscount(result1);
       setFlag(true);
     }
@@ -461,13 +451,12 @@ function SubCategory({
         });
       });
 
-      console.log(result1)
       setFilterDeal(result1);
       setFlag(true);
 
     }
     if (freeShippingData) {
-      console.log(freeShippingData)
+
       const newFilters = { ...Filters }
       newFilters[category] = filters
       var result1 = freeShippingData.filter(function (o1) {
@@ -476,7 +465,7 @@ function SubCategory({
         });
       });
 
-      console.log(result1)
+
       setFilterShipping(result1);
       setFlag(true);
     }
@@ -490,7 +479,7 @@ function SubCategory({
         });
       });
 
-      console.log(result1)
+
       setFilterProduct(result1);
       setFlag(true);
 
@@ -500,8 +489,6 @@ function SubCategory({
   const priceFilter = () => {
     let max = MaxInput.current.value;
     let min = MinInput.current.value;
-    console.log(max);
-    console.log(min);
     if (productDataWithCategoryId) {
       let result = productDataWithCategoryId.filter(
         (result) =>
@@ -518,20 +505,19 @@ function SubCategory({
           parseInt(result.bundleCost) >= parseInt(min) &&
           parseInt(result.bundleCost) <= parseInt(max)
       );
-      console.log(result1)
       setFilterDeal(result1);
       setFlag(true);
 
     }
     if (freeShippingData) {
-      console.log(freeShippingData)
+
       let result1 = freeShippingData.filter(
         (result) =>
           parseInt(result.productCost) >= parseInt(min) &&
           parseInt(result.productCost) <= parseInt(max)
       );
 
-      console.log(result1)
+
       setFilterShipping(result1);
       setFlag(true);
     }
@@ -542,7 +528,7 @@ function SubCategory({
           parseInt(result.productCost) >= parseInt(min) &&
           parseInt(result.productCost) <= parseInt(max)
       );
-      console.log(result1)
+
       setFilterDiscount(result1);
       setFlag(true);
 
@@ -551,7 +537,6 @@ function SubCategory({
   };
 
 
-  console.log(productDataWithCategoryId)
   return (
     <>
       {open == true ? (
@@ -656,7 +641,7 @@ function SubCategory({
             <ViewFilter handleView={handleView} />
           </Grid> */}
 
-        {console.log(filterProduct?.length)}
+
         {/* <Grid item md={8} sx={{ bgcolor: "red" }}> */}
         {/* {productDataWithCategoryId.length > 0 &&
             filterProduct?.length < 1 &&

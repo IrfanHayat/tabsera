@@ -52,9 +52,9 @@ export default function Profile() {
   console.count("app rerender");
   const [sameBilling, setsameBilling] = useState(false);
   const [key, setKey] = useState(1);
-  useEffect(() => {}, [sameBilling, key]);
+  useEffect(() => { }, [sameBilling, key]);
   const handleOnSubmit = (evt) => {
-    console.log(evt);
+    // console.log(evt);
   };
 
   const addNewMemeber = () => appendMemberRow({ email: "", role: "user" });
@@ -189,11 +189,11 @@ export default function Profile() {
                     fullWidth
                     defaultValue=""
                     label="Nationality"
-                    //   inputProps={register("currency", {
-                    //     required: "Please enter currency",
-                    //   })}
-                    //   error={errors.currency}
-                    //   helperText={errors.currency?.message}
+                  //   inputProps={register("currency", {
+                  //     required: "Please enter currency",
+                  //   })}
+                  //   error={errors.currency}
+                  //   helperText={errors.currency?.message}
                   >
                     <MenuItem>Pakistani</MenuItem>
                   </TextField>
@@ -244,11 +244,11 @@ export default function Profile() {
                     fullWidth
                     defaultValue=""
                     label="Country"
-                    //   inputProps={register("currency", {
-                    //     required: "Please enter currency",
-                    //   })}
-                    //   error={errors.currency}
-                    //   helperText={errors.currency?.message}
+                  //   inputProps={register("currency", {
+                  //     required: "Please enter currency",
+                  //   })}
+                  //   error={errors.currency}
+                  //   helperText={errors.currency?.message}
                   >
                     <MenuItem>Pakistani</MenuItem>
                   </TextField>
@@ -267,11 +267,11 @@ export default function Profile() {
                     defaultValue=""
                     label="State"
                     className={styles.editFormInput}
-                    //   inputProps={register("currency", {
-                    //     required: "Please enter currency",
-                    //   })}
-                    //   error={errors.currency}
-                    //   helperText={errors.currency?.message}
+                  //   inputProps={register("currency", {
+                  //     required: "Please enter currency",
+                  //   })}
+                  //   error={errors.currency}
+                  //   helperText={errors.currency?.message}
                   >
                     <MenuItem>Pakistani</MenuItem>
                   </TextField>
@@ -290,11 +290,11 @@ export default function Profile() {
                     defaultValue=""
                     label="City"
                     className={styles.editFormInput}
-                    //   inputProps={register("currency", {
-                    //     required: "Please enter currency",
-                    //   })}
-                    //   error={errors.currency}
-                    //   helperText={errors.currency?.message}
+                  //   inputProps={register("currency", {
+                  //     required: "Please enter currency",
+                  //   })}
+                  //   error={errors.currency}
+                  //   helperText={errors.currency?.message}
                   >
                     <MenuItem>Pakistani</MenuItem>
                   </TextField>
@@ -364,11 +364,11 @@ export default function Profile() {
                         fullWidth
                         defaultValue=""
                         label="Country"
-                        //   inputProps={register("currency", {
-                        //     required: "Please enter currency",
-                        //   })}
-                        //   error={errors.currency}
-                        //   helperText={errors.currency?.message}
+                      //   inputProps={register("currency", {
+                      //     required: "Please enter currency",
+                      //   })}
+                      //   error={errors.currency}
+                      //   helperText={errors.currency?.message}
                       >
                         <MenuItem>Pakistani</MenuItem>
                       </TextField>
@@ -387,11 +387,11 @@ export default function Profile() {
                         defaultValue=""
                         label="State"
                         className={styles.editFormInput}
-                        //   inputProps={register("currency", {
-                        //     required: "Please enter currency",
-                        //   })}
-                        //   error={errors.currency}
-                        //   helperText={errors.currency?.message}
+                      //   inputProps={register("currency", {
+                      //     required: "Please enter currency",
+                      //   })}
+                      //   error={errors.currency}
+                      //   helperText={errors.currency?.message}
                       >
                         <MenuItem>Pakistani</MenuItem>
                       </TextField>
@@ -410,11 +410,11 @@ export default function Profile() {
                         defaultValue=""
                         label="City"
                         className={styles.editFormInput}
-                        //   inputProps={register("currency", {
-                        //     required: "Please enter currency",
-                        //   })}
-                        //   error={errors.currency}
-                        //   helperText={errors.currency?.message}
+                      //   inputProps={register("currency", {
+                      //     required: "Please enter currency",
+                      //   })}
+                      //   error={errors.currency}
+                      //   helperText={errors.currency?.message}
                       >
                         <MenuItem>Pakistani</MenuItem>
                       </TextField>

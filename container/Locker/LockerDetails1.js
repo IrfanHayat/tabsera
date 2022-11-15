@@ -105,7 +105,7 @@ const LockerDetails1 = ({ handleChangeLocker, setRadioCheck1, data }) => {
 
     //     setDetails(result.data.response)
     // }
-    console.log("details ==> ", details);
+
 
     return (
         <>
@@ -213,7 +213,7 @@ const LockerDetails1 = ({ handleChangeLocker, setRadioCheck1, data }) => {
 
                                 {
                                     data && data.map((locker, i) => {
-                                        // console.log("locations ==> ", locations);
+                                        
                                         return (
                                             <Marker key={i} longitude={locker.longitude} latitude={locker.latitude}>
                                                 <Image src="/pin.svg" width={30} height={30} />

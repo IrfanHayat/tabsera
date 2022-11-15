@@ -41,7 +41,7 @@ function CartScreen({
   checkoutHandler,
   productPrice,
 }) {
-  console.log(productCartData);
+
   let { t, i18n } = useTranslation();
   return (
     <Box className={styles.cart}>

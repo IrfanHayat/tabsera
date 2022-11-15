@@ -14,7 +14,7 @@ function Index() {
   useEffect(() => { }, [showShippingMethod]);
   return (
     <>
-      {console.log(LockerShippingMethod, addressShippingMethod, showShippingMethod)}
+
       <CheckoutWizard activeStep={1} />
       <ShippingInformation setLockerShippingMethod={setLockerShippingMethod} setAddressShippingMethod={setAddressShippingMethod} setShowShippingMethod={setShowShippingMethod} />
       {/* {addressShippingMethod == false && showShippingMethod && LockerShippingMethod == false ? <ShippingMethods /> : ''} */}

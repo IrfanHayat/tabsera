@@ -26,7 +26,6 @@ const Index = ({ data, showProduct }) => {
   const { dealsData } = useSelector((state) => state.deals);
   const [open, setOpen] = React.useState(false);
   let [status, setStatus] = useState();
-  console.log(data);
 
   let dispatch = useDispatch();
   const router = useRouter();
@@ -43,7 +42,7 @@ const Index = ({ data, showProduct }) => {
     // dispatch(couponsData());
   }, []);
   const addToCartHandler = async (product) => {
-    console.log(product)
+
     let obj = {
       "productId": product.product_id,
       "productName": product.product_name,
@@ -55,7 +54,7 @@ const Index = ({ data, showProduct }) => {
 
     }
     let result = await dispatch(addToCart(obj));
-    console.log(result);
+
     if (result?.payload?.resultCode == 4000) {
       //setOpenBar(true);
       setStatus(result?.payload);

@@ -11,7 +11,7 @@ export const getFreeShipping = createAsyncThunk(
       `${url}/ecommerce/promotions/freeshipping/products`
     );
 
-    console.log(result);
+
     return result.data.response;
   }
 );

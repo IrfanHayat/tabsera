@@ -42,7 +42,7 @@ const LockerDetails = ({ handleChangeLocker, setRadioCheck1, lockerData }) => {
   //       userId: user.user_id,
   //       lockeratorId: id,
   //     });
-  //     console.log("data ==> ", data);
+
   //     if (data.responseCode === 2000) {
   //       toast.success("Successfully Subscribed");
   //       router.push("/merchants/lockeratorList");
@@ -78,7 +78,7 @@ const LockerDetails = ({ handleChangeLocker, setRadioCheck1, lockerData }) => {
     });
   }, []);
 
-  console.log("my lockerData => ", lockerData);
+
   return (
     <>
       <Grid container className={styles.lockerMain}>
@@ -227,7 +227,7 @@ const LockerDetails = ({ handleChangeLocker, setRadioCheck1, lockerData }) => {
             >
               {
                 lockerData?.map((locker, i) => {
-                  console.log("locker ==> ", locker);
+
                   return (
                     <Marker key={i} latitude={locker.latitude} longitude={locker.longitude}
                       anchor="bottom">

@@ -47,8 +47,6 @@ function Placeorder() {
     cart: { cartItems },
   } = useSelector((state) => state.basket);
 
-  console.log(cartItems);
-
   useEffect(() => { }, [shippingCharges]);
 
   useEffect(() => {
@@ -95,7 +93,6 @@ function Placeorder() {
     dispatch(getShipmentAddress());
   }, []);
 
-  console.log(cartItems);
 
   const placeOrderHandler = async (shippementData, userData) => {
     // let newCartItems=cartItems.map(result=>{
@@ -152,7 +149,7 @@ function Placeorder() {
     // }
 
     if (router.query.addressId) {
-      console.log(localStorage.getItem("buyCartItems"));
+
       if (localStorage.getItem("buyCartItems")) {
         let newCartItems = cartItems.map((result) => {
           let obj = {};
@@ -198,9 +195,9 @@ function Placeorder() {
           },
           origOrderAmount: cartItems.reduce((a, c) => a + c.qty * c.price, 0),
         };
-        console.log(obj);
+
         let result = await dispatch(addOrder(obj));
-        console.log(result.payload)
+
         if (result.payload.response.customerOrderNo != null) {
           // setOpenBar(true);
           setTimeout(() => {
@@ -257,7 +254,7 @@ function Placeorder() {
           origOrderAmount: cartItems.reduce((a, c) => a + c.qty * c.price, 0),
         };
         let result = await dispatch(addOrder(obj));
-        console.log(result.payload)
+
         if (result.payload.response.customerOrderNo != null) {
           // setOpenBar(true);
           setTimeout(() => {
@@ -270,7 +267,7 @@ function Placeorder() {
         }
       }
     } else {
-      console.log(shippementLockerData);
+
       let newCartItems = cartItems.map((result) => {
         let obj = {};
         obj.discount = 0;
@@ -317,10 +314,10 @@ function Placeorder() {
         origOrderAmount: cartItems.reduce((a, c) => a + c.qty * c.product_cost, 0),
       };
 
-      console.log(obj);
+
 
       let result = await dispatch(addOrder(obj));
-      console.log(result.payload);
+
       if (result.payload.response.customerOrderNo != null) {
         // setOpenBar(true);
         if (result.payload.response.message == "Your order has been  placed successfully,Error from intelParcer Team") {
@@ -332,7 +329,7 @@ function Placeorder() {
             });
           }, 1000);
         } else {
-          console.log(result.payload)
+
           setTimeout(() => {
             // router.push("/payment");
             router.push({

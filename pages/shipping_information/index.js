@@ -45,7 +45,7 @@ const Index = ({ setLockerShippingMethod, setAddressShippingMethod, setShowShipp
   const [buttonKey, setButtonKey] = React.useState(1);
   let dispatch = useDispatch();
 
-  console.log(lockersAddressData, "lAD");
+
 
   useEffect(() => {
     dispatch(getLockerCountry());
@@ -61,9 +61,6 @@ const Index = ({ setLockerShippingMethod, setAddressShippingMethod, setShowShipp
 
   const handleChange = (event, value) => {
 
-    console.log("Handle Change" + event.target.value)
-
-    console.log(value)
 
     let result = shippingAddressData.filter((result) =>
       result.address_id == value ? result : ""
@@ -102,41 +99,34 @@ const Index = ({ setLockerShippingMethod, setAddressShippingMethod, setShowShipp
   }, []);
 
   useEffect(() => {
-    console.log(lockerCountryData);
+
   }, [lockerCountryData]);
 
   const submitHandler = async (value) => {
-    console.log(value);
     let obj = {
       cityId: value.city.city_id,
       countryId: value.country.country_id,
       stateId: value.states.state_id,
     };
-    console.log(obj);
 
     let shippementLocker = await dispatch(addShipmentLockers(obj))
-    console.log(shippementLocker.payload)
     setShipLocker(shippementLocker.payload)
   };
 
   const getStates = (value) => {
-    console.log(value.country_id);
     dispatch(getLockerState(value.country_id));
-    console.log(lockerStatesData);
   };
 
   const getCities = (value) => {
     dispatch(getLockerCity(value.state_id));
-    console.log(lockerCityData);
+
   };
   const handleChangeLocker = (event, value) => {
-    console.log(value);
     setBoolLockerShipAddress(true)
     setBoolShipAddress(false)
     let result = lockersAddressData.filter((result) =>
       result.locker_id == value ? result : ""
     )[0];
-    console.log(result);
 
     setShippingLockerAddess(result);
     let obj = {
@@ -157,7 +147,6 @@ const Index = ({ setLockerShippingMethod, setAddressShippingMethod, setShowShipp
     });
   };
   const checkoutHandlerLocker = (event) => {
-    console.log(shippingLockerAddres);
     router.push({
       pathname: "/shipping_details",
       query: { lockerId: shippingLockerAddres.locker_id },

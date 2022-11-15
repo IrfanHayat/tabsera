@@ -43,7 +43,7 @@ const Index = ({ Item, data }) => {
   //   items: Array.from({ length: 20 }),
   //   hasMore: true,
   // };
-  console.log(data);
+
 
   const { productData, loading } = useSelector((state) => state.product);
   let product = productData;
@@ -64,13 +64,13 @@ const Index = ({ Item, data }) => {
 
   useEffect(async () => {
     let result = await dispatch(getProductSearch(router?.query?.data));
-    console.log(result);
+
     setSearchData(result.payload);
   }, []);
 
   useEffect(() => { }, [searchData]);
   useEffect(async () => {
-    console.log(router.query);
+
     await dispatch(getProduct());
   }, []);
 
@@ -79,7 +79,7 @@ const Index = ({ Item, data }) => {
   // }, [items, product]);
 
   const viewProduct = (item) => {
-    console.log(item);
+
     router.push({
       pathname: `/product_detail`,
       query: { productId: item.productId },
@@ -94,7 +94,7 @@ const Index = ({ Item, data }) => {
 
   const addToCartHandler = async (product) => {
     let result = await dispatch(addToCart(product));
-    console.log(result);
+
     if (result?.payload?.resultCode == 4000) {
       //setOpenBar(true);
       setStatus(result?.payload);

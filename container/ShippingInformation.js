@@ -89,7 +89,7 @@ function ShippingInformation({
   //   buttonText = "Add Locker";
   // }
 
-  console.log("shippementAddress", shippementAddress);
+
 
   const [isMapActive, setIsMapActive] = useState(false);
   const [isTableActive, setIsTableActive] = useState(false);
@@ -99,7 +99,7 @@ function ShippingInformation({
   const [showMapView, setShowMapView] = useState(false);
   const [showTableView, setShowTableView] = useState(false);
   const [key, setkey] = useState(1);
-  console.log("keyI", key);
+
   // const handleChange = (event) => {
   //   setButtonKey(event.target.value);
   // };
@@ -262,7 +262,7 @@ function ShippingInformation({
                   size="small"
                   aria-label="a dense table"
                 > */}
-            {/* {console.log(shippementAddress[0])} */}
+
             <RadioGroup
               aria-labelledby="demo-row-radio-buttons-group-label"
               name="row-radio-buttons-group"

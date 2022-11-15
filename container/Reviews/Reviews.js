@@ -11,9 +11,9 @@ function Reviews({ productId }) {
     let [ratingProduct, setRatingProduct] = useState([]);
     let dispatch = useDispatch();
     useEffect(async () => {
-        console.log(productId)
+
         let rating_product = await dispatch(getReviewsProduct(productId))
-        console.log(rating_product)
+
         setRatingProduct(rating_product.payload)
 
     }, [])

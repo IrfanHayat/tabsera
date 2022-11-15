@@ -23,7 +23,7 @@ import IconButton from "@mui/material/IconButton";
 import LoyaltyIcon from "@mui/icons-material/Loyalty";
 import styles from "../../styles/card.module.css";
 const DealsAndPromotions = ({ dealsData, viewProduct, styledCard, addToCartHandler }) => {
-  console.log("Data Deals New", dealsData);
+
   let display = styledCard ? styledCard : "";
   let displayDesc =
     styledCard?.flexDirection == "row"

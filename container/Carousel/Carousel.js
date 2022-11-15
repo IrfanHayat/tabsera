@@ -33,7 +33,7 @@ export default function CarouselApp({
   let [categoryView, setCategoryView] = useState(false);
   let [cartView, setCartView] = useState(false);
   const [rtl, setrtl] = useState(false);
-  console.log(product);
+
 
   function myArrow({ type, onClick, isEdge }) {
     const pointer =

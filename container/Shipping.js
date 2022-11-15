@@ -47,11 +47,9 @@ export default function Shipping({
 
   let router = useRouter();
 
-  console.log("Shipping")
-  console.log(countryData)
-  console.log("====================")
+
   // useEffect(() => {
-  //   console.log(countryData)
+
   //   setCountryList(countryData);
 
   //   //setValue("item", { id: 3, name: "item3" });
@@ -142,7 +140,7 @@ export default function Shipping({
               )}
             ></Controller>
           </Grid>
-          {console.log(countryData)}
+
 
           <Grid item xs={12} md={6}>
             <Controller
@@ -348,7 +346,7 @@ export default function Shipping({
               <FormLabel id="demo-row-radio-buttons-group-label">
                 Address Label :
               </FormLabel>
-              {console.log(labels)}
+
               <RadioGroup
                 row
                 aria-labelledby="demo-row-radio-buttons-group-label"

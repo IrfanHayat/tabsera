@@ -69,7 +69,7 @@ function Payement() {
         }
       }
       let result = await dispatch(postPayment(obj))
-      console.log(result.payload.resultCode)
+
       if (result.payload.resultCode == 5000) {
         setStatus(result.payload)
         setOpenBar(true);
@@ -96,7 +96,7 @@ function Payement() {
         }
       }
       let result1 = await dispatch(postPayment(obj))
-      console.log(result1)
+
       if (result1.payload.resultCode == 2000) {
 
 
@@ -120,7 +120,7 @@ function Payement() {
     }
 
     if (selectPaymentMethod?.payment_mode == null) {
-      console.log("Place Order", placeOrderData)
+
       let obj
       if (placeOrderData.response?.orderId) {
         obj = {
@@ -168,7 +168,7 @@ function Payement() {
   }
   const handleChange = (result) => {
     setSelectPaymentMethod(result)
-    console.log(result)
+
     if (result?.payment_mode == "API") {
       setShowModal(true)
       setOpen(true)

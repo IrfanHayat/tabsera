@@ -141,7 +141,7 @@ function SubCategory() {
 
   useMemo(async () => {
     let result = await dispatch(getProductSearch(router?.query?.data));
-    console.log(result);
+
     setSearchData(result.payload);
   }, [router?.query?.data]);
   useMemo(() => { }, [searchData]);
@@ -207,7 +207,7 @@ function SubCategory() {
   ]);
 
   const showAllCategoriesProduct = useCallback(() => {
-    console.log("ccc");
+
 
     if (showFreeShipping == true) {
       setShowAllCategoryPro(true);
@@ -251,7 +251,7 @@ function SubCategory() {
     showFreeShipping,
   ]);
   const showAllMerchantsProduct = useCallback(() => {
-    console.log(showFreeShipping);
+
     if (showFreeShipping) {
       setShowProduct(false);
       setShowAllCategoryPro(false);
@@ -307,7 +307,6 @@ function SubCategory() {
     let results = result?.payload.filter(
       (result) => result.category_id == router?.query?.sub_category
     );
-    console.log(results);
     results.map((category) => {
       setBrands(category.brands);
     });
@@ -318,7 +317,6 @@ function SubCategory() {
     let results = result?.payload.filter(
       (result) => result.category_id == router?.query?.sub_category
     );
-    console.log(results);
     results?.map((category) => {
       setParentCategories(category.category_name);
       setSubCategories(category.child);
@@ -328,14 +326,11 @@ function SubCategory() {
   useEffect(() => { }, [subCategories]);
 
   function categoryProduct(name) {
-    console.log(name);
     let result = productDataWithCategoryId.filter(
       (category) => category.categoryName == name
     );
-    console.log(result);
     setFilterProduct(result);
   }
-  console.log(productDataWithCategoryId);
 
   const children = (subCategories) => {
     return (
@@ -368,7 +363,6 @@ function SubCategory() {
 
   const addToCartHandler = async (product) => {
     let result = await dispatch(addToCart(product));
-    console.log(result);
     if (result?.payload?.resultCode == 4000) {
       //setOpenBar(true);
       setStatus(result?.payload);
@@ -406,7 +400,6 @@ function SubCategory() {
     setOpenBar(false);
   };
   const handleFilters = (event) => {
-    console.log(event.target.name);
     // if (discountData) {
 
     //   let result1 = discountData.filter(
@@ -427,16 +420,12 @@ function SubCategory() {
   const priceFilter = () => {
     let max = MaxInput.current.value;
     let min = MinInput.current.value;
-    console.log(typeof max);
-    console.log(typeof min);
-    console.log(searchData);
 
     let result = searchData.filter(
       (result) =>
         parseInt(result.productCost) >= parseInt(min) &&
         parseInt(result.productCost) <= parseInt(max)
     );
-    console.log(result);
     setFilterProduct(result);
     setFlag(true);
   };
@@ -580,7 +569,6 @@ function SubCategory() {
             <ViewFilter handleView={handleView} />
           </Grid> */}
 
-        {console.log(filterProduct?.length)}
         {/* <Grid item md={8} sx={{ bgcolor: "red" }}> */}
         {/* {productDataWithCategoryId.length > 0 &&
             filterProduct?.length < 1 &&
@@ -614,7 +602,6 @@ function SubCategory() {
               : "Product Not Found"} */}
 
         {/* </Grid> */}
-        {console.log(filterProduct)}
         <Box className={styles.itemBox}>
           {showProduct == false &&
             showAllCategoryPro == false &&

@@ -32,14 +32,14 @@ function Index({ data, Item }) {
     router.push("/cart");
   };
 
-  console.log(data);
+
 
   useEffect(() => {
     dispatch(getCategory());
   }, []);
 
   function groupArrayOfObjects(list) {
-    console.log(list);
+
     const grouped = _.groupBy(list, (items) => items?.categoryName);
     return grouped;
   }

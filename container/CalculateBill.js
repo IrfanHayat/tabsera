@@ -25,7 +25,7 @@ import { RouteGuard } from "../RouterGuard";
 import Currency from "./Currency/currency";
 import styles from "../styles/calculateBills.module.css";
 function CalculateBill({ productPrice, checkoutHandler }) {
-  console.log(productPrice);
+
   let { t, i18n } = useTranslation();
   return (
     <Grid item md={12} xs={12}>

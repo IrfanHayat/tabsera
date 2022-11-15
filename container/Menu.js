@@ -92,7 +92,7 @@ export default function PersistentDrawerLeft() {
   const { categoryData } = useSelector((state) => state.category);
   const { campaignsData } = useSelector((state) => state.campaigns);
 
-  // console.log("cat DAta", categoryData);
+
   //pagination 
   const [currentPage, setcurrentPage] = useState(1);
   const [perPage, setperPage] = useState(4);
@@ -112,7 +112,7 @@ export default function PersistentDrawerLeft() {
   let product = data?.response;
 
   const [compaigns, setCompaigns] = useState();
-  console.log("camp DAta", compaigns);
+
 
   const [category, setCategory] = useState();
   const [value, setValue] = React.useState();
@@ -145,7 +145,7 @@ export default function PersistentDrawerLeft() {
   const [featureProductCarousel, setfeatureProductCarousel] = useState(true);
   const [btnKey, setBtnKey] = useState();
 
-  console.log(showProduct, showFreeShipping);
+
 
   let { t, i18n } = useTranslation();
 
@@ -210,7 +210,7 @@ export default function PersistentDrawerLeft() {
   /////////
   const viewCategory = useCallback(
     async (item) => {
-      console.log(item);
+
       await setCatId(null);
 
       await setCatId(item);
@@ -236,7 +236,7 @@ export default function PersistentDrawerLeft() {
 
   const addToCartHandler = useCallback(async (product) => {
     let result = await dispatch(addToCart(product));
-    console.log(result);
+
     if (result?.payload?.resultCode == 4000) {
       //setOpenBar(true);
       setStatus(result?.payload);
@@ -316,7 +316,7 @@ export default function PersistentDrawerLeft() {
   ]);
 
   const showAllCategoriesProduct = useCallback(() => {
-    console.log("ccc");
+
 
     if (showFreeShipping == true) {
       setShowAllCategoryPro(true);
@@ -360,7 +360,7 @@ export default function PersistentDrawerLeft() {
     showFreeShipping,
   ]);
   const showAllMerchantsProduct = useCallback(() => {
-    console.log(showFreeShipping);
+
     if (showFreeShipping) {
       setShowProduct(false);
       setShowAllCategoryPro(false);
@@ -409,7 +409,7 @@ export default function PersistentDrawerLeft() {
     }
 
     ;
-  console.log(discountData);
+
 
   return (
     <>
@@ -503,7 +503,7 @@ export default function PersistentDrawerLeft() {
                   </MenuItem>
                 </TextField>
               </FormControl> */}
-              {console.log(category)}
+
               <List dense className={styles.categoryList}>
                 {key == 1 && category?.length > 0 ? (
                   <>
@@ -597,7 +597,7 @@ export default function PersistentDrawerLeft() {
                 )}
               </List>
             </Box>
-            {console.log(featureProduct)}
+
 
             <Box className={styles.carouselBox}>
               {featureProduct != "" ? (
@@ -727,14 +727,7 @@ export default function PersistentDrawerLeft() {
                   setFilterData={setFilterData}
                     ></SortFilter> */}
 
-                {console.log(
-                  discountData,
-                  showFreeShipping,
-                  showDiscounts,
-                  showProduct,
-                  showAllCategoryPro,
-                  showAllMerchantPro
-                )}
+
                 {showFreeShipping && catId == null ? (
                   (showFreeShipping && showProduct == false) ||
                     showAllCategoryPro == false ||
@@ -842,7 +835,7 @@ export default function PersistentDrawerLeft() {
           </Grid>
 
           <Grid>
-            {console.log(catId)}
+
             {catId ? (
               <SubCategory
                 value={value}
@@ -1263,7 +1256,7 @@ export default function PersistentDrawerLeft() {
                       <></>
                     )}
 
-                    {/* {console.log(filterData)} */}
+
 
                     {showAllMerchantPro &&
                       showDiscounts == false &&
@@ -1286,7 +1279,7 @@ export default function PersistentDrawerLeft() {
               </>
             )}
 
-            {console.log(dealsData)}
+
           </Grid>
         </>
       )}

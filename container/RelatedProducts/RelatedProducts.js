@@ -15,16 +15,16 @@ function RelatedProducts({ categoryId, viewProduct, addToCartHandler }) {
 
   let [relatedProduct, setRelatedProduct] = useState([]);
   let dispatch = useDispatch();
-  console.log(categoryId)
+
   useEffect(async () => {
-    console.log("1", categoryId)
+
     let related_product = await dispatch(getRelatedProduct(categoryId))
     setRelatedProduct(related_product.payload)
 
   }, [categoryId])
 
   useEffect(() => {
-    console.log("2", categoryId)
+    // console.log("2", categoryId)
 
 
   }, [categoryId])

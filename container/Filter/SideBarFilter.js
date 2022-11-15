@@ -49,7 +49,7 @@ function SideBarFilter({
   const handleCollapse = useCallback(() => {
 
     setOpen(!open);
-    console.log(open)
+
   }, [open])
 
   // const handleFilters = (filters, category) => {
@@ -66,7 +66,7 @@ function SideBarFilter({
   //   let result = brands.filter(
   //     (result) => result.brand_id == newFilters.brands[0]
   //   );
-  //   console.log(result[0]);
+
   //   //showFilteredResults(newFilters)
   //   setFilters(newFilters);
   // };

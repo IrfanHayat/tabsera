@@ -12,12 +12,12 @@ function Product_detail() {
   let router = useRouter();
   const { merchantStoreData } = useSelector((state) => state.merchantStore);
 
-  
-  
+
+
 
   const { reviewsData } = useSelector((state) => state.reviews);
 
-  console.log("reviews Data ", reviewsData);
+
 
   useEffect(() => {
     dispatch(getMerchantStore(router.query.merchantId));

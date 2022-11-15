@@ -146,7 +146,7 @@ function Details({
     let [multiProductImage, setMultiProductImage] = useState();
     const [isActiveImg, setisActiveImg] = useState(false);
     const viewVariantsProduct = (result) => {
-        console.log(result);
+
         setSkusProduct(result);
         setSkusFlag(true);
     };
@@ -161,27 +161,26 @@ function Details({
     //   setValue(index);
     // };
     let router = useRouter();
-    console.log("productDetail", productDetail);
+
 
     // useEffect(() => {
     //   productDetail.skus?.map((results, index) => {
-    //     console.log(results.skus);
+
     //     // setMultiProductImage(results.media_images);
     //   });
     // }, [productDetail]);
 
     useEffect(() => {
-        productDetail.skus?.map((results, index) => {
-            console.log(results.skus);
-            //     // setMultiProductImage(results.media_images);
-        });
+        // productDetail.skus?.map((results, index) => {
+
+        //     //     // setMultiProductImage(results.media_images);
+        // });
         productDetail.product_images?.map((results, index) => {
-            console.log(results.media_images);
+
             setMultiProductImage(results.media_images);
         });
     }, [productDetail]);
 
-    console.log(productImage);
 
     return (
         <>
@@ -309,7 +308,7 @@ function Details({
                     </Carousel>
                     {/* </ListItem> */}
                     {/* <Divider /> */}
-                    {console.log(multiProductImage)}
+
                     <Box className={styles.produtctImages}>
                         <Carousel
                             // breakPoints={breakPoints}
