@@ -188,14 +188,14 @@ export default function Profile({ profileData }) {
                     select
                     fullWidth
                     defaultValue=""
-                    label="Nationality"
+                    label={profileData?.nationality ? profileData?.nationality : 'Nationality'}
                   //   inputProps={register("currency", {
                   //     required: "Please enter currency",
                   //   })}
                   //   error={errors.currency}
                   //   helperText={errors.currency?.message}
                   >
-                    <MenuItem>Pakistani</MenuItem>
+                    <MenuItem>{profileData?.nationality ? profileData?.nationality : 'PAkistan'}</MenuItem>
                   </TextField>
                 )}
               />

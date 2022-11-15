@@ -13,10 +13,21 @@ export const getProfileData = createAsyncThunk(
     }
 );
 
+
+export const getNationalityData = createAsyncThunk(
+    "profile/nationalities",
+    async () => {
+        const result = await instance.get(`${url}/nationalities`);
+
+        return result.data.response;
+    }
+);
+
 const getProfiles = createSlice({
     name: "profiles",
     initialState: {
         profilesData: {},
+        nationalityData: {},
         loading: false,
         error: null,
     },
@@ -30,6 +41,20 @@ const getProfiles = createSlice({
             state.loading = false;
         });
         builder.addCase(getProfileData.rejected, (state, action) => {
+            return {
+                ...state,
+                loading: "rejected",
+                error: action.payload,
+            };
+        });
+        builder.addCase(getNationalityData.pending, (state, action) => {
+            return { ...state, loading: true };
+        });
+        builder.addCase(getNationalityData.fulfilled, (state, action) => {
+            state.profilesData = action.payload;
+            state.loading = false;
+        });
+        builder.addCase(getNationalityData.rejected, (state, action) => {
             return {
                 ...state,
                 loading: "rejected",
