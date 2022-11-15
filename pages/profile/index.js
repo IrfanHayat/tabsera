@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getProfileData } from '../../slice/profileSlice'
 
 
-const index = () => {
+const Index = () => {
   let [profile, setProfile] = useState();
   let dispatch = useDispatch();
 
@@ -20,4 +20,4 @@ const index = () => {
   );
 };
 
-export default index;
+export default Index;
