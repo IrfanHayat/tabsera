@@ -7,19 +7,16 @@ on:
     branches:
       - main
 jobs:
-  lintTest:
-    name: lint
+  build:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
-    - name: Install Dependecies
-      run: |
-          echo "Running Installing Depenedencies..."
-          npm intsall
-    -name: Run Linting
-     run: | 
-          echo "Running Installing Test..." 
-          npm run lint
-     env:
-      CI: true     
+    - name: Use Node.js
+      uses: actions/setup-node@v1
+      with:
+        node-version: '16.x'
+    - name: Run Yarn 
+      run: yarn
+    - name: Run tests
+      run: yarn test
