@@ -2,10 +2,10 @@ name: Tabsera Frontend CI
 on:
   push:
     branches:
-      - main
+      - CI_CDPIPELINE
   pull_request:
     branches:
-      - main
+      - CI_CDPIPELINE
 jobs:
   lintTest:
     name: lint
