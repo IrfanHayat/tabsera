@@ -1,0 +1,25 @@
+name: Tabsera Frontend CI
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+jobs:
+  lintTest:
+    name: lint
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+    - name: Install Dependecies
+      run: |
+          echo "Running Installing Depenedencies..."
+          npm intsall
+    -name: Run Linting
+     run: | 
+          echo "Running Installing Test..." 
+          npm run lint
+     env:
+      CI: true     
