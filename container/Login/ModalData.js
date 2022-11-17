@@ -303,7 +303,7 @@ export default function ModalLoginData({
                   defaultValue=""
                   rules={{
                     required: true,
-                    minLength: 2,
+                    minLength: 7,
                   }}
                   render={({ field }) => (
                     <TextField
@@ -417,7 +417,7 @@ export default function ModalLoginData({
                   defaultValue=""
                   rules={{
                     required: true,
-                    minLength: 2,
+                    minLength: 7,
                   }}
                   render={({ field }) => (
                     <TextField
