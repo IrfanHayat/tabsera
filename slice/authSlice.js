@@ -31,7 +31,9 @@ export const checkUser = createAsyncThunk(
   "auth/check",
   async (values, { rejectWithValue }) => {
     try {
-      const result = await instance.post(`${url}/customers/check`, values);
+      let obj = { "requestBody": `{\"mobileNumber\":\"${values}\"}` }
+
+      const result = await instance.post(`${url}/customers/check`, obj);
       console.log(result)
       return result.data;
     } catch (error) {

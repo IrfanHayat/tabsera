@@ -17,6 +17,9 @@ function Register() {
   const {
     handleSubmit,
     control,
+    getValues,
+    register,
+    watch,
     formState: { errors },
   } = useForm();
   const classes = useStyles();
@@ -26,36 +29,20 @@ function Register() {
     }
   }, []);
 
-  const submitHandler = async ({ name, email, password, confirmPassword }) => {
-    //closeSnackbar();
-    if (password !== confirmPassword) {
-      //enqueueSnackbar("Passwords don't match", { variant: 'error' });
-      return;
-    }
-    try {
-      //   const { data } = await axios.post('/api/users/register', {
-      //     name,
-      //     email,
-      //     password,
-      //   });
 
-      //   dispatch({ type: 'USER_LOGIN', payload: data });
-      //   Cookies.set('userInfo', data);
-      router.push(redirect || "/");
-    } catch (err) {
-      //enqueueSnackbar(getError(err), { variant: 'error' });
-    }
-  };
 
   return (
     <Register1
-      submitHandler={submitHandler}
+
       classes={classes}
       Controller={Controller}
       control={control}
       handleSubmit={handleSubmit}
+      register={register}
       errors={errors}
       redirect={redirect}
+      watch={watch}
+      getValues={getValues}
     ></Register1>
   );
 }

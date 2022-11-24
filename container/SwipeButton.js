@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import style from "../styles/swipeButton.module.css";
-import { checkUser } from '../slice/authSlice'
+
 import {
     List,
     ListItem,
@@ -10,7 +10,7 @@ import {
     Link,
     Card
 } from '@mui/material';
-import { useSelector, useDispatch } from "react-redux";
+
 
 
 
@@ -22,7 +22,7 @@ var isTouchDevice;
 
 export default class CustomButton extends Component {
     state = {};
-    dispatch = useDispatch();
+
 
     componentDidMount() {
 
@@ -105,6 +105,8 @@ export default class CustomButton extends Component {
             unlocked: true
         });
 
+        this.props.valueText(true)
+
     };
 
     getText = () => {
@@ -128,14 +130,14 @@ export default class CustomButton extends Component {
     render() {
         return (
             <>
-                {this.state.unlocked == true ? <> <this.props.Controller
+                {this.props.unLockVerification == true ? <> <this.props.Controller
 
-                    name="name"
+                    name="verification_code"
                     control={this.props.control}
                     defaultValue=""
                     rules={{
                         required: true,
-                        minLength: 2,
+                        minLength: 6,
 
                     }}
                     render={({ field }) => (
@@ -143,15 +145,15 @@ export default class CustomButton extends Component {
                             sx={{ width: "390px" }}
                             variant="outlined"
                             fullWidth
-                            id="name"
+                            id="verification_code"
                             label="Verification Code"
                             inputProps={{ type: 'name' }}
                             error={Boolean(this.props.errors.name)}
                             helperText={
                                 this.props.errors.name
                                     ? this.props.errors.name.type === 'minLength'
-                                        ? 'Name length is more than 1'
-                                        : 'Name is required'
+                                        ? 'Verification Code length is more than 6'
+                                        : 'Verification Code is required'
                                     : ''
                             }
                             {...field}
