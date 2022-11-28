@@ -11,7 +11,7 @@ import PriceFilter from "./PriceFilter";
 import PageFilter from "./PageFilter";
 import styles from "../../styles/sidebarFilters.module.css";
 import Checkbox from "@mui/material/Checkbox";
-
+import CheckBoxFilter from '../../container/Filter/CheckBoxFilter'
 import FormGroup from "@mui/material/FormGroup";
 import Collapse1 from '../Collapse';
 import { useCallback } from "react";
@@ -39,6 +39,7 @@ function SideBarFilter({
   setShowAllCategoryPro,
   setShowAllMerchantPro,
   setFilterData1,
+  handleFiltersBrand
 }) {
   const [Filters, setFilters] = useState({
     brands: [],
@@ -48,7 +49,7 @@ function SideBarFilter({
   const handleCollapse = useCallback(() => {
 
     setOpen(!open);
-    console.log(open)
+
   }, [open])
 
   // const handleFilters = (filters, category) => {
@@ -65,7 +66,7 @@ function SideBarFilter({
   //   let result = brands.filter(
   //     (result) => result.brand_id == newFilters.brands[0]
   //   );
-  //   console.log(result[0]);
+
   //   //showFilteredResults(newFilters)
   //   setFilters(newFilters);
   // };
@@ -98,37 +99,10 @@ function SideBarFilter({
 
       <Divider />
 
-      {/* <Box> */}
-      <Collapse1 name="Brands">
 
-        <Typography className={styles.categoryHeading}>Brands</Typography>
-
-        {console.log(brands)}
-        <Box className={styles.brandsList}>
-          {/* <CheckBox
-          // className={styles.categories}
-          size="small"
-          list={brands}
-          handleFilters={(filters) => handleFilters(filters, "brands")}
-        /> */}
-          {brands.map((brand) => (
-            //Store the the student id in the value of each check box
-
-            <div>
-              <FormGroup>
-                <FormControlLabel
-                  control={
-                    <Checkbox onChange={handleFilters} name={brand.brand_name} />
-                  }
-                  label={brand.brand_name}
-                />
-              </FormGroup>
-            </div>
-          ))}
-          {/* </Box> */}
-        </Box>
-      </Collapse1>
+      <CheckBoxFilter data={brands} handleFilters={filters => handleFiltersBrand(filters, "brands")} />
       <Divider />
+
       <Collapse1 name="Price">
         <PriceFilter
           MinInput={MinInput}

@@ -15,7 +15,7 @@ function SortFilter({ data, setFilterData }) {
           f_data = data.slice().sort(function (a, b) {
             return parseFloat(b.productCost) - parseFloat(a.productCost);
           });
-          console.log(f_data);
+
           setFilterData(f_data);
         }
 
@@ -24,13 +24,13 @@ function SortFilter({ data, setFilterData }) {
         f_data = data.slice().sort(function (a, b) {
           return parseFloat(a.productCost) - parseFloat(b.productCost);
         });
-        console.log(f_data);
+
         setFilterData(f_data);
       case "rating_asc":
         f_data = data.slice().sort(function (a, b) {
           return parseFloat(b.averageRating) - parseFloat(a.averageRating);
         });
-        console.log(f_data);
+
         setFilterData(f_data);
         break;
       case "rating_desc":
@@ -94,7 +94,7 @@ function SortFilter({ data, setFilterData }) {
         // bgcolor: "background.paper",
         // borderRadius: 0,
       }}
-      // data-aos="fade-down"
+    // data-aos="fade-down"
     >
       <NavSelect Title="Sort By" Data={sortingCategories} color="black" />
     </Box>

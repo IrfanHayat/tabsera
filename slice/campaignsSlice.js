@@ -9,7 +9,7 @@ export const getCampaigns = createAsyncThunk(
   async () => {
     const result = await instance.get(`${url}/ecommerce/campaigns`);
 
-    console.log(result);
+
     return result.data.response;
   }
 );

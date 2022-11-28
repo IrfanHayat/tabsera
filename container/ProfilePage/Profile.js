@@ -36,7 +36,7 @@ const myHelper = {
   },
 };
 
-export default function Profile() {
+export default function Profile({ profileData, addressData }) {
   const { control, handleSubmit } = useForm({
     reValidateMode: "onBlur",
   });
@@ -49,12 +49,12 @@ export default function Profile() {
     name: "members",
   });
 
-  console.count("app rerender");
+  console.log(addressData)
   const [sameBilling, setsameBilling] = useState(false);
   const [key, setKey] = useState(1);
-  useEffect(() => {}, [sameBilling, key]);
+  useEffect(() => { }, [sameBilling, key]);
   const handleOnSubmit = (evt) => {
-    console.log(evt);
+    // console.log(evt);
   };
 
   const addNewMemeber = () => appendMemberRow({ email: "", role: "user" });
@@ -118,7 +118,7 @@ export default function Profile() {
                     // fullWidth
                     // size="small"
                     // variant="filled"
-                    label="First Name"
+                    label={profileData?.first_name ? profileData?.first_name : 'First_name'}
                   />
                 )}
               />
@@ -134,7 +134,7 @@ export default function Profile() {
                     {...field}
                     fullWidth
                     // variant="filled"
-                    label="Last Name"
+                    label={profileData?.last_name ? profileData?.last_name : 'Last_Name'}
                   />
                 )}
               />
@@ -153,7 +153,7 @@ export default function Profile() {
                     {...field}
                     type="email"
                     fullWidth
-                    label="Email With Validation"
+                    label={profileData?.email ? profileData?.email : 'Email'}
                     error={error !== undefined}
                     helperText={error ? myHelper.email[error.type] : ""}
                   />
@@ -188,21 +188,21 @@ export default function Profile() {
                     select
                     fullWidth
                     defaultValue=""
-                    label="Nationality"
-                    //   inputProps={register("currency", {
-                    //     required: "Please enter currency",
-                    //   })}
-                    //   error={errors.currency}
-                    //   helperText={errors.currency?.message}
+                    label={profileData?.nationality ? profileData?.nationality : 'Nationality'}
+                  //   inputProps={register("currency", {
+                  //     required: "Please enter currency",
+                  //   })}
+                  //   error={errors.currency}
+                  //   helperText={errors.currency?.message}
                   >
-                    <MenuItem>Pakistani</MenuItem>
+                    <MenuItem>{profileData?.nationality ? profileData?.nationality : 'PAkistan'}</MenuItem>
                   </TextField>
                 )}
               />
 
-              <Button className={styles.btn} type="submit" variant="contained">
+              {/* <Button className={styles.btn} type="submit" variant="contained">
                 Submit
-              </Button>
+              </Button> */}
             </Grid>
           </>
         ) : (
@@ -214,98 +214,98 @@ export default function Profile() {
                 Shipping Address
               </Typography>
             </Box>
+            {addressData.map(result => (
 
-            <Box className={styles.editProfileForm}>
-              <Controller
-                control={control}
-                name="address"
-                defaultValue=""
-                render={({ field, fieldState: { error } }) => (
-                  <TextField
-                    className={styles.editFormInput}
-                    {...field}
-                    type="text"
-                    fullWidth
-                    label="Address"
-                    error={error !== undefined}
-                    helperText={error ? myHelper.email[error.type] : ""}
-                  />
-                )}
-              />
-              <Controller
-                name="level"
-                id="level"
-                //   defaultValue={0}
-                control={control}
-                render={({ field }) => (
-                  <TextField
-                    className={styles.editFormInput}
-                    select
-                    fullWidth
-                    defaultValue=""
-                    label="Country"
+              <Box className={styles.editProfileForm}>
+                <Controller
+                  control={control}
+                  name="address"
+                  defaultValue=""
+                  render={({ field, fieldState: { error } }) => (
+                    <TextField
+                      className={styles.editFormInput}
+                      {...field}
+                      type="text"
+                      fullWidth
+                      label={result?.address ? result?.address : "Address"}
+                      error={error !== undefined}
+                      helperText={error ? myHelper.email[error.type] : ""}
+                    />
+                  )}
+                />
+                <Controller
+                  name="level"
+                  id="level"
+                  //   defaultValue={0}
+                  control={control}
+                  render={({ field }) => (
+                    <TextField
+                      className={styles.editFormInput}
+                      select
+                      fullWidth
+                      defaultValue=""
+                      label={result?.country ? result?.country : "Country"}
                     //   inputProps={register("currency", {
                     //     required: "Please enter currency",
                     //   })}
                     //   error={errors.currency}
                     //   helperText={errors.currency?.message}
-                  >
-                    <MenuItem>Pakistani</MenuItem>
-                  </TextField>
-                )}
-              />
+                    >
+                      <MenuItem>{result?.country ? result?.country : "Country"}</MenuItem>
+                    </TextField>
+                  )}
+                />
 
-              <Controller
-                name="level"
-                id="level"
-                //   defaultValue={0}
-                control={control}
-                render={({ field }) => (
-                  <TextField
-                    select
-                    fullWidth
-                    defaultValue=""
-                    label="State"
-                    className={styles.editFormInput}
+                <Controller
+                  name="level"
+                  id="level"
+                  //   defaultValue={0}
+                  control={control}
+                  render={({ field }) => (
+                    <TextField
+                      select
+                      fullWidth
+                      defaultValue=""
+                      label={result?.state ? result?.state : "State"}
+                      className={styles.editFormInput}
                     //   inputProps={register("currency", {
                     //     required: "Please enter currency",
                     //   })}
                     //   error={errors.currency}
                     //   helperText={errors.currency?.message}
-                  >
-                    <MenuItem>Pakistani</MenuItem>
-                  </TextField>
-                )}
-              />
+                    >
+                      <MenuItem>{result?.state ? result?.state : "State"}</MenuItem>
+                    </TextField>
+                  )}
+                />
 
-              <Controller
-                name="level"
-                id="level"
-                //   defaultValue={0}
-                control={control}
-                render={({ field }) => (
-                  <TextField
-                    select
-                    fullWidth
-                    defaultValue=""
-                    label="City"
-                    className={styles.editFormInput}
+                <Controller
+                  name="level"
+                  id="level"
+                  //   defaultValue={0}
+                  control={control}
+                  render={({ field }) => (
+                    <TextField
+                      select
+                      fullWidth
+                      defaultValue=""
+                      label={result?.city ? result?.city : "City"}
+                      className={styles.editFormInput}
                     //   inputProps={register("currency", {
                     //     required: "Please enter currency",
                     //   })}
                     //   error={errors.currency}
                     //   helperText={errors.currency?.message}
-                  >
-                    <MenuItem>Pakistani</MenuItem>
-                  </TextField>
-                )}
-              />
+                    >
+                      <MenuItem>{result?.city ? result?.city : "City"}</MenuItem>
+                    </TextField>
+                  )}
+                />
 
-              <Button className={styles.btn} type="submit" variant="contained">
-                Submit
-              </Button>
-            </Box>
 
+              </Box>
+            ))
+            }
             <Grid xs={12} sx={{ mt: 3, ml: 5 }}>
               <Typography sx={{ fontWeight: "bold" }}>
                 Billing Address
@@ -364,11 +364,11 @@ export default function Profile() {
                         fullWidth
                         defaultValue=""
                         label="Country"
-                        //   inputProps={register("currency", {
-                        //     required: "Please enter currency",
-                        //   })}
-                        //   error={errors.currency}
-                        //   helperText={errors.currency?.message}
+                      //   inputProps={register("currency", {
+                      //     required: "Please enter currency",
+                      //   })}
+                      //   error={errors.currency}
+                      //   helperText={errors.currency?.message}
                       >
                         <MenuItem>Pakistani</MenuItem>
                       </TextField>
@@ -387,11 +387,11 @@ export default function Profile() {
                         defaultValue=""
                         label="State"
                         className={styles.editFormInput}
-                        //   inputProps={register("currency", {
-                        //     required: "Please enter currency",
-                        //   })}
-                        //   error={errors.currency}
-                        //   helperText={errors.currency?.message}
+                      //   inputProps={register("currency", {
+                      //     required: "Please enter currency",
+                      //   })}
+                      //   error={errors.currency}
+                      //   helperText={errors.currency?.message}
                       >
                         <MenuItem>Pakistani</MenuItem>
                       </TextField>
@@ -410,11 +410,11 @@ export default function Profile() {
                         defaultValue=""
                         label="City"
                         className={styles.editFormInput}
-                        //   inputProps={register("currency", {
-                        //     required: "Please enter currency",
-                        //   })}
-                        //   error={errors.currency}
-                        //   helperText={errors.currency?.message}
+                      //   inputProps={register("currency", {
+                      //     required: "Please enter currency",
+                      //   })}
+                      //   error={errors.currency}
+                      //   helperText={errors.currency?.message}
                       >
                         <MenuItem>Pakistani</MenuItem>
                       </TextField>

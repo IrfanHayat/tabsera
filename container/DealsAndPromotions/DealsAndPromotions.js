@@ -23,7 +23,7 @@ import IconButton from "@mui/material/IconButton";
 import LoyaltyIcon from "@mui/icons-material/Loyalty";
 import styles from "../../styles/card.module.css";
 const DealsAndPromotions = ({ dealsData, viewProduct, styledCard, addToCartHandler }) => {
-  console.log("Data Deals New", dealsData);
+
   let display = styledCard ? styledCard : "";
   let displayDesc =
     styledCard?.flexDirection == "row"
@@ -54,18 +54,18 @@ const DealsAndPromotions = ({ dealsData, viewProduct, styledCard, addToCartHandl
           }}
         // className={cx(styles.root)}
         >
-          {result?.bundleImage && (
+          {result?.product_images[0]?.media_images[0] && (
             <>
-              <ImageListItem key={result.bundleImage}>
+              <ImageListItem key={result?.product_images[0]?.media_images[0]}>
                 <CardMedia
                   data-aos="fade-up"
                   component="img"
                   className={styles.cargImg}
                   onClick={(e) => viewProduct(result)}
-                  image={result?.bundleImage}
+                  image={result?.product_images[0]?.media_images[0]}
                   alt={result?.bundleName}
                 ></CardMedia>
-                {result?.bundleImage ? (
+                {result?.product_images[0]?.media_images[0] ? (
                   <ImageListItemBar
                     sx={{ background: "none" }}
                     position="top"
@@ -139,7 +139,7 @@ const DealsAndPromotions = ({ dealsData, viewProduct, styledCard, addToCartHandl
             {/* <Box sx={{ height: 85 }}>  */}
             <Box sx={{ ...displayDesc }}>
               <Typography className={styles.prodName}>
-                {result?.bundleName}
+                {result?.product_name.toUpperCase()}
               </Typography>
               <Box component="div" className={styles.prodRating}>
                 <Rating
@@ -181,7 +181,7 @@ const DealsAndPromotions = ({ dealsData, viewProduct, styledCard, addToCartHandl
                       display="inline"
                       style={{ textDecorationLine: "line-through" }}
                     >
-                      Rs {result.originalPrice}
+                      Rs {result.bundleCost}
                     </Typography>
                   ) : (
                     // <Typography variant="overline">

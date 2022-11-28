@@ -18,7 +18,7 @@ export default function CategoryProduct({
     let [categoryView, setCategoryView] = useState(false);
     let [cartView, setCartView] = useState(false);
     const [rtl, setrtl] = useState(false);
-    console.log(product);
+
     return (
         <>
 

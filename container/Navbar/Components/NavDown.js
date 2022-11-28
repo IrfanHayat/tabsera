@@ -86,7 +86,7 @@ export default function NavDown(props) {
   const [categoriesData, setCategoriesData] = useState([]);
   const [camapaigns, setCamapaigns] = React.useState(false);
   const [key, setKey] = useState(1);
-  console.log("campaignsData,", campaignsData);
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [showLogin, setShowLogin] = useState(false);
   let [cartQunatity, setCartQunatity] = useState();
@@ -97,7 +97,7 @@ export default function NavDown(props) {
     Cookies.remove("item");
     // Cookies.remove("connect.sid");
     router.push("/");
-    console.log(result);
+
   };
   useEffect(() => {
     //dispatch(getTotalCartQuantity());
@@ -180,7 +180,7 @@ export default function NavDown(props) {
   const open1 = Boolean(anchorEl);
   const id = open ? "simple-popover" : undefined;
 
-  console.log(categoriesData, "categoriesData");
+
   const categories = (
     <List>
       {categoriesData &&
@@ -250,12 +250,13 @@ export default function NavDown(props) {
             }}
           >
             <Image
-              src="/tijariLogo.png"
-              alt="/tijariLogo.png"
-              height="60px"
-              width="200px"
+              src="/bigLogo.png"
+              alt="/bigLogo.png"
+              height="100px"
+              width="220px"
+
               // onMouseOver={cu}
-              objectFit="contain"
+              // objectFit="contain"
               onClick={() => router.push("/")}
             ></Image>
           </Link>
@@ -356,8 +357,7 @@ export default function NavDown(props) {
             // onMouseEnter={handleClick}
             // onMouseLeave={handleClick}
             >
-              {console.log(localStorage.getItem("login"))}
-              {console.log(cartTotalQuantity)}
+
               {localStorage.getItem("login") == "true" ? (
                 <Badge
                   // className={styles.badge}

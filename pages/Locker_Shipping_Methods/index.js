@@ -39,14 +39,14 @@ const Index = () => {
     };
 
 
-    console.log(shipmentMethodData)
+
 
     useEffect(() => {
-        console.log(cartId)
+
     }, [cartId])
 
     useEffect(() => {
-        console.log(buyCartItems)
+
     }, [buyCartItems])
     const handleChange = async (value) => {
 
@@ -104,12 +104,12 @@ const Index = () => {
     useEffect(() => {
         localStorage.setItem("addressId", JSON.stringify(router.query.addressId))
 
-        console.log(lockersAddressData)
+
         let result1 = lockersAddressData.filter(result =>
             result.locker_id == router.query.lockerId ? result : ""
         );
 
-        console.log(result1[0])
+
         setShippementLockerData(result1[0]);
 
         let obj = {

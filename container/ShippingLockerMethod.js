@@ -114,7 +114,7 @@ function ShippingMethods({
                                 <ListItemIcon>
                                     <DomainAddOutlinedIcon />
                                 </ListItemIcon>
-                                {console.log(shippementLockerData)}
+
                                 {shippementLockerData ? (
                                     <ListItemText>
                                         {shippementLockerData?.locker_address}{" "}
@@ -216,7 +216,7 @@ function ShippingMethods({
                             </Grid>
                             <Grid item xs={3}>
                                 <Currency amount={productPrice &&
-                                    productPrice.reduce((a, c) => a + c.qty * c.price, 0)}></Currency>
+                                    productPrice.reduce((a, c) => a + c.qty * c.product_cost, 0)}></Currency>
                             </Grid>
                             <Grid item xs={6}></Grid>
                             {/* <ListItemText>$ 0.0</ListItemText> */}
@@ -236,9 +236,9 @@ function ShippingMethods({
                             </Grid>
                             <Grid item xs={3}>
                                 <Currency amount={productPrice && shippingCharges
-                                    ? productPrice?.reduce((a, c) => a + c.qty * c.price, 0) +
+                                    ? productPrice?.reduce((a, c) => a + c.qty * c.product_cost, 0) +
                                     shippingCharges
-                                    : productPrice?.reduce((a, c) => a + c.qty * c.price, 0)}></Currency>
+                                    : productPrice?.reduce((a, c) => a + c.qty * c.product_cost, 0)}></Currency>
                             </Grid>
                             <Grid item xs={6}></Grid>
                         </ListItem>

@@ -34,11 +34,11 @@ function Index({
 
   //
 
-  console.log(data);
+
 
   const addToCartHandler = async (product) => {
     let result = await dispatch(addToCart(product));
-    console.log(result);
+
     if (result?.payload?.resultCode == 4000) {
       //setOpenBar(true);
       setStatus(result?.payload);
@@ -66,7 +66,7 @@ function Index({
 
   return (
     <>
-      {console.log(data)}
+
       <Grid container justifyContent="center">
         {data?.length > 0 ? (
           <>

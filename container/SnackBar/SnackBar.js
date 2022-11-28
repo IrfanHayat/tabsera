@@ -10,7 +10,7 @@ const Alert = React.forwardRef(function Alert(props, ref) {
 
 
 function SnackBarTool({ status, openBar, handleCloseBar }) {
-    console.log(status)
+
     return (
         <div>{status?.resultCode === 2000 ? (
             <Snackbar

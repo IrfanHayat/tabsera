@@ -18,14 +18,10 @@ export default function MenuCard({
   freeShippingData,
 }) {
 
-  console.log(dealsData);
-  console.log(discountsData);
-  console.log(freeShippingData);
+
   return (
     <>
-      {console.log(discountsData.length)}
-      {console.log(dealsData.length)}
-      {console.log(freeShippingData?.length)}
+
       {
         freeShippingData?.length > 0 || dealsData.length > 0 || discountsData.length > 0 ?
           <div className="carousel-wrapper">

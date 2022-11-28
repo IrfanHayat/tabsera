@@ -58,7 +58,7 @@
 }
 
 .cartItemPriceValue {
-  color: #f34f2f;
+  color: #3d7cff;
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 600;
@@ -68,7 +68,7 @@
 .quantityBtns {
   width: 32px;
   height: 32px;
-  color: #f34f2f;
+  color: #3d7cff;
   border-radius: 4px;
   /* border: 1px solid #f34f2f; */
 }

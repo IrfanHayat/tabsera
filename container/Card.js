@@ -41,7 +41,7 @@ export default function ActionAreaCard({
     from: { opacity: 0 },
   });
   const AnimatedTypography = animated(Typography);
-  // console.log("freee", product);
+
   // let height = product.discountPercent ? 350 : 320;
   let display = styledCard ? styledCard : "";
   let displayDesc =
@@ -195,8 +195,8 @@ export default function ActionAreaCard({
 
             <Typography className={styles.prodName}>
               {product?.productName
-                ? product?.productName
-                : product?.bundleName}
+                ? product?.productName.toUpperCase()
+                : product?.bundleName.toUpperCase()}
             </Typography>
 
             <Box component="div" className={styles.prodRating}>

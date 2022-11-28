@@ -10,7 +10,7 @@ function Index() {
     useEffect(async () => {
         let obj = { cityId: 48357, countryId: 166, stateId: 2724 }
         let shippementLocker = await dispatch(addShipmentLockers(obj))
-        console.log(shippementLocker.payload)
+
         setShipLocker(shippementLocker.payload)
     }, [])
 

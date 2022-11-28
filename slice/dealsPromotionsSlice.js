@@ -5,7 +5,7 @@ import { url, setHeaders } from "../helper/axios/config";
 //import Cookies from 'universal-cookie';
 
 export const getDeals = createAsyncThunk("bundles/getDeals", async () => {
-  const result = await instance.get(`${url}/ecommerce/bundles`);
+  const result = await instance.get(`${url}/ecommerce/bundles/all_bundles`);
 
   return result.data.response;
 });

@@ -41,7 +41,7 @@ function CartScreen({
   checkoutHandler,
   productPrice,
 }) {
-  console.log(productCartData);
+
   let { t, i18n } = useTranslation();
   return (
     <Box className={styles.cart}>
@@ -78,8 +78,8 @@ function CartScreen({
             <CardContent sx={{ flex: "1 0 auto" }}>
               <Box
                 className={styles.topLine}
-                // display="flex"
-                // justifyContent={"space-between"}
+              // display="flex"
+              // justifyContent={"space-between"}
               >
                 <Typography className={styles.cartItemName}>
                   {item.name}
@@ -99,8 +99,8 @@ function CartScreen({
               <Divider />
               <Box
                 className={styles.bottomLine}
-                // display="flex"
-                // justifyContent={"space-between"}
+              // display="flex"
+              // justifyContent={"space-between"}
               >
                 <Typography
                   component="h5"
@@ -110,7 +110,7 @@ function CartScreen({
                   // align="center"
                   className={styles.cartItemPriceValue}
                 >
-                  Rs. {item.price}
+                  Rs. {item.product_cost}
                 </Typography>
                 <Grid
                   // item
@@ -121,12 +121,12 @@ function CartScreen({
                   className={styles.cartItemQuantity}
                 >
                   <IconButton
-                    onClick={() => handleDecreaseCart(item)}
+                    // onClick={() => handleDecreaseCart(item)}
                     aria-label="reduce item"
                     size="large"
-                    // variant="contained"
-                    // color="error"
-                    // sx={{ color:  "text.secondary" }}
+                  // variant="contained"
+                  // color="error"
+                  // sx={{ color:  "text.secondary" }}
                   >
                     <IndeterminateCheckBoxOutlinedIcon
                       onClick={() => handleDecreaseCart(item)}

@@ -35,17 +35,13 @@ const Index = () => {
   };
 
 
-  console.log(shipmentMethodData)
 
   useEffect(() => {
-    console.log(cartId)
   }, [cartId])
 
   useEffect(() => {
-    console.log(buyCartItems)
   }, [buyCartItems])
   const handleChange = async (value) => {
-
     setShippingMethodId(value)
     if (router.query.addressId) {
       let result = shippingAddressData.filter(result => {
@@ -53,7 +49,6 @@ const Index = () => {
       })[0];
 
 
-      console.log(buyCartItems)
       let obj
       if (buyCartItems) {
         obj = {

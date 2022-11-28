@@ -11,7 +11,7 @@ export const getDiscounts = createAsyncThunk(
       `${url}/ecommerce/promotions/discounts/products`
     );
 
-    console.log(result);
+
     return result.data.response;
   }
 );

@@ -22,7 +22,7 @@ export default function ShopProductSort({ data, setFilterData, setShowFilterData
         { value: 'order_asc', label: t('Filter.SortFilter.order_asc') }
 
     ];
-    console.log(data)
+
 
     const sortData = (type) => {
         setSelectedValue(type)
@@ -38,7 +38,7 @@ export default function ShopProductSort({ data, setFilterData, setShowFilterData
                             return parseFloat(b.bundleCost) - parseFloat(a.bundleCost);
                         }
                     });
-                    console.log(f_data);
+
                     setFilterData(f_data);
                 }
 
@@ -51,13 +51,13 @@ export default function ShopProductSort({ data, setFilterData, setShowFilterData
                         return parseFloat(a.bundleCost) - parseFloat(b.bundleCost);
                     }
                 });
-                console.log(f_data);
+
                 setFilterData(f_data);
             case "rating_asc":
                 f_data = data?.slice().sort(function (a, b) {
                     return parseFloat(b.averageRating) - parseFloat(a.averageRating);
                 });
-                console.log(f_data);
+
                 setFilterData(f_data);
                 break;
             case "rating_desc":

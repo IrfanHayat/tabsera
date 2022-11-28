@@ -12,7 +12,7 @@ function Index({ data, showProduct, showAllCategoryPro, showAllMerchantPro, filt
     const router = useRouter();
 
 
-    console.log(freeShippingData);
+
 
     const viewProduct = (item) => {
         router.push({

@@ -9,7 +9,7 @@ export const getCoupons = createAsyncThunk("bundles/getCoupons", async () => {
     `${url}/marketplace/promotions/coupons/products`
   );
 
-  console.log(result);
+
   return result.data.response;
 });
 

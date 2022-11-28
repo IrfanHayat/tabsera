@@ -41,10 +41,10 @@
 } */
 
 .selectimg:active {
-  border: 1px solid #f34f2f;
+  border: 1px solid #3d7cff;
 }
 .selectimg:hover {
-  border: 1px solid #f34f2f;
+  border: 1px solid #3d7cff;
 }
 
 .breadcrumbs {
@@ -71,7 +71,7 @@
 
 .prodCost {
   /* position: absolute; */
-  width: 120px;
+ width: 12vw;
   height: 34px;
   left: 961px;
   top: 444px;
@@ -85,7 +85,7 @@
 
   /* Primary/500 Main */
 
-  color: #f34f2f;
+  color: #3d7cff;
 }
 .buyNowbtn {
   display: flex;
@@ -93,9 +93,9 @@
   width: 147px;
   font-size: 16px;
   color: #fff;
-  border: 1px solid #f34f2f;
+  border: 1px solid #3d7cff;
   border-radius: 4px;
-  background-color: #f34f2f;
+  background-color: #3d7cff;
 }
 .addToCartbtn {
   display: flex;
@@ -103,16 +103,16 @@
   height: 40px;
   width: 147px;
   font-size: 16px;
-  color: #f34f2f;
-  border: 1px solid #f34f2f;
+  color: #3d7cff;
+  border: 1px solid #3d7cff;
   border-radius: 4px;
   background-color: #fff;
 }
 
 .addToCartbtn :hover {
-  color: #3d7cff;
-  border: 1px solid #3d7cff;
-  background-color: #fff;
+  color: #f34f2f;
+  border: 1px solid #f34f2f;
+  background-color: #f34f2f;
 }
 
 .merchantName {
@@ -140,20 +140,20 @@
   border-radius: 2px;
   background-color: #3d7cff;
 }
-/* .buyNowbtn :hover {
-  color: #3d7cff;
-  border: 1px solid #3d7cff;
-  background-color: #fff;
-} */
+.buyNowbtn :hover {
+  color: #f34f2f;
+  border: 1px solid #f34f2f;
+  background-color: #f34f2f;
+}
 .addToCartbtnSM {
   display: flex;
   height: 38px;
   width: 150px;
   font-size: 14px;
   color: #fff;
-  border: 1px solid #f57224;
+  border: 1px solid #3d7cff;
   border-radius: 2px;
-  background-color: #f57224;
+  background-color: #3d7cff;
 }
 
 /* .selectimg::selection {
@@ -192,5 +192,5 @@
   border-bottom: 1px solid rgb(218, 225, 231);
 }
 .tabsName {
-  color: #f34f2f;
+  color: #3d7cff;
 }

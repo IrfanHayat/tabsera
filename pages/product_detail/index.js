@@ -11,7 +11,7 @@ import {
 } from "../../slice/basketSlice";
 import MuiAlert from "@mui/material/Alert";
 import { useRouter, withRouter } from "next/router";
-import { getProductWithId, getProduct } from "../../slice/productSlice";
+import { getProductWithId, getProduct, getRelatedProduct, getReviewsProduct } from "../../slice/productSlice";
 import { getMerchantWithId } from "../../slice/merchantSlice";
 import ModalData from "../../container/Login/ModalData";
 import Cookies from "js-cookie";
@@ -31,6 +31,8 @@ function Product_detail(props) {
 
   let [productImage, setProductImage] = useState();
   let [productAttributes, setProductAttributes] = useState([]);
+  let [productNewData, setProductNewData] = useState();
+  let [productDispatch, setProductDispatch] = useState();
   let [price, setPrice] = useState();
   let [status, setStatus] = useState();
   const [showLogin, setShowLogin] = useState(false);
@@ -49,12 +51,24 @@ function Product_detail(props) {
     setOpen(false);
   };
 
-  console.log(addBuyItem);
+
   const viewStore = (categoryId, merchantId) => {
     router.push({
       pathname: "/merchant_store",
       query: { categoryId: categoryId, merchantId: merchantId },
     });
+  };
+
+  const viewProduct = async (item) => {
+    router.push({
+      pathname: "/product_detail",
+      query: { productId: item.productId },
+    });
+
+    let data = await dispatch(getProductWithId(item.productId));
+
+    setProductNewData(data.payload)
+
   };
 
   const handleCloseBar = (event, reason) => {
@@ -63,17 +77,32 @@ function Product_detail(props) {
     }
     setOpenBar(false);
   };
-  useEffect(() => {
+  useEffect(async () => {
     localStorage.setItem("productId", router?.query?.productId);
 
-    dispatch(getProductWithId(router?.query?.productId));
-  }, [router.query.productId]);
+    let data = await dispatch(getProductWithId(router?.query?.productId));
+
+    setProductNewData(data.payload)
+    let merchant = await dispatch(getMerchantWithId(data.payload.merchant_id));
+
+  }, [router?.query?.productId]);
 
   useEffect(() => {
+
+
+
+
+
+  }, [productNewData])
+
+
+  useEffect(() => {
+  }, [router.query.productId])
+
+
+
+  useEffect(async () => {
     // dispatch(getProduct());
-    if (filterProductData.merchant_id) {
-      dispatch(getMerchantWithId(filterProductData.merchant_id));
-    }
 
     if (router.query.product_name) {
       const productObj = productData.filter((result) => {
@@ -91,10 +120,10 @@ function Product_detail(props) {
       });
       setFilterData(productWithName[0]);
     }
-  }, [filterProductData.merchant_id]);
+  }, []);
 
   const skuData = (sku) => {
-    console.log(sku);
+
     sku?.map((result) => {
       setProductImage(result.sku_images);
       setProductAttributes(result.attributes);
@@ -102,6 +131,9 @@ function Product_detail(props) {
       setPrice(result.cost);
     });
   };
+
+
+
 
   useEffect(() => {
     setStatus(addCart);
@@ -159,7 +191,7 @@ function Product_detail(props) {
         }, 1000);
       }
 
-      console.log(result);
+
 
       // router.push("/cart");
     }
@@ -194,9 +226,6 @@ function Product_detail(props) {
       };
 
       let result = await dispatch(BuyNewItem(product));
-      console.log(result);
-      console.log("status", status.resultCode);
-      console.log(status);
 
       // dispatch(addToCart(item));
       if (result?.payload?.resultCode == 4000) {
@@ -214,9 +243,7 @@ function Product_detail(props) {
       //router.push("/shipping_information");
     } else {
       let result = await dispatch(BuyNewItem(item));
-      console.log(result);
-      console.log("status", status.resultCode);
-      console.log(status);
+
 
       // dispatch(addToCart(item));
       if (result?.payload?.resultCode == 4000) {
@@ -247,7 +274,7 @@ function Product_detail(props) {
   };
 
   useEffect(() => {
-    console.log(status);
+
     if (status?.resultCode == 4000) {
       setOpenBar(true);
     }
@@ -305,10 +332,14 @@ function Product_detail(props) {
           checkoutHandler={checkoutHandler}
           viewStore={viewStore}
           productIdRoute={router.query.productId}
+          getRelatedProduct={getRelatedProduct}
+          viewProduct={viewProduct}
+          getReviewsProduct={getReviewsProduct}
+          id={router.query?.productId}
         ></Details>
       ) : (
         <Details
-          productDetail={filterProductData || {}}
+          productDetail={productNewData || {}}
           merchantDetail={merchantData}
           addToCartHandler={addToCartHandler}
           BuyHandler={BuyHandler}
@@ -319,6 +350,10 @@ function Product_detail(props) {
           checkoutHandler={checkoutHandler}
           viewStore={viewStore}
           productIdRoute={router.query.productId}
+          getRelatedProduct={getRelatedProduct}
+          viewProduct={viewProduct}
+          getReviewsProduct={getReviewsProduct}
+          id={router.query?.productId}
         ></Details>
       )}
     </>

@@ -47,8 +47,6 @@ function Placeorder() {
     cart: { cartItems },
   } = useSelector((state) => state.basket);
 
-  console.log(cartItems);
-
   useEffect(() => { }, [shippingCharges]);
 
   useEffect(() => {
@@ -95,7 +93,6 @@ function Placeorder() {
     dispatch(getShipmentAddress());
   }, []);
 
-  console.log(cartItems);
 
   const placeOrderHandler = async (shippementData, userData) => {
     // let newCartItems=cartItems.map(result=>{
@@ -152,7 +149,7 @@ function Placeorder() {
     // }
 
     if (router.query.addressId) {
-      console.log(localStorage.getItem("buyCartItems"));
+
       if (localStorage.getItem("buyCartItems")) {
         let newCartItems = cartItems.map((result) => {
           let obj = {};
@@ -166,13 +163,13 @@ function Placeorder() {
         });
         let obj = {
           isBuyNow: true,
-          orderAmount: cartItems.reduce((a, c) => a + c.qty * c.price, 0),
+          orderAmount: cartItems.reduce((a, c) => a + c.qty * c.product_cost, 0),
           cartItems: newCartItems,
           coupons: [],
           orderDiscount: 0.0,
           discounts: [],
           paymentInfo: {
-            paymentAmount: cartItems.reduce((a, c) => a + c.qty * c.price, 0),
+            paymentAmount: cartItems.reduce((a, c) => a + c.qty * c.product_cost, 0),
             paymentCurreny: "PKR",
           },
           rewards: [],
@@ -198,15 +195,16 @@ function Placeorder() {
           },
           origOrderAmount: cartItems.reduce((a, c) => a + c.qty * c.price, 0),
         };
-        console.log(obj);
+
         let result = await dispatch(addOrder(obj));
 
-        if (result.payload.customerOrderNo != null) {
+        if (result.payload.response.customerOrderNo != null) {
           // setOpenBar(true);
           setTimeout(() => {
+            // router.push("/payment");
             router.push({
               pathname: "/payment",
-              query: { orderNo: result.payload.customerOrderNo },
+              query: { orderNo: result.payload.response.customerOrderNo, amount: obj.paymentInfo.paymentAmount, shippementCharges: obj.shippingInfo.shippingCharges },
             });
           }, 1000);
         }
@@ -257,19 +255,19 @@ function Placeorder() {
         };
         let result = await dispatch(addOrder(obj));
 
-        if (result.payload.customerOrderNo != null) {
+        if (result.payload.response.customerOrderNo != null) {
           // setOpenBar(true);
           setTimeout(() => {
             // router.push("/payment");
             router.push({
               pathname: "/payment",
-              query: { orderNo: result.payload.customerOrderNo },
+              query: { orderNo: result.payload.response.customerOrderNo, amount: obj.paymentInfo.paymentAmount, shippementCharges: obj.shippingInfo.shippingCharges },
             });
           }, 1000);
         }
       }
     } else {
-      console.log(shippementLockerData);
+
       let newCartItems = cartItems.map((result) => {
         let obj = {};
         obj.discount = 0;
@@ -282,13 +280,13 @@ function Placeorder() {
       });
       let obj = {
         isBuyNow: false,
-        orderAmount: cartItems.reduce((a, c) => a + c.qty * c.price, 0),
+        orderAmount: cartItems.reduce((a, c) => a + c.qty * c.product_cost, 0),
         cartItems: newCartItems,
         coupons: [],
         orderDiscount: "0.0",
         discounts: [],
         paymentInfo: {
-          paymentAmount: cartItems.reduce((a, c) => a + c.qty * c.price, 0),
+          paymentAmount: cartItems.reduce((a, c) => a + c.qty * c.product_cost, 0),
           paymentCurreny: "PKR",
         },
         rewards: [],
@@ -313,18 +311,34 @@ function Placeorder() {
           shippingDiscount: "0",
           shippingMethodId: router.query.shipId,
         },
-        origOrderAmount: cartItems.reduce((a, c) => a + c.qty * c.price, 0),
+        origOrderAmount: cartItems.reduce((a, c) => a + c.qty * c.product_cost, 0),
       };
 
-      console.log(obj);
+
 
       let result = await dispatch(addOrder(obj));
-      console.log(result);
-      if (Object.keys(result.payload).length > 0) {
+
+      if (result.payload.response.customerOrderNo != null) {
         // setOpenBar(true);
-        setTimeout(() => {
-          router.push("/payment");
-        }, 1000);
+        if (result.payload.response.message == "Your order has been  placed successfully,Error from intelParcer Team") {
+          setTimeout(() => {
+            // router.push("/payment");
+            router.push({
+              pathname: "/payment",
+              query: { orderNo: result.payload.response.orderId, amount: obj.paymentInfo.paymentAmount, intelParcelMessage: result.payload.response.intelParcelRes },
+            });
+          }, 1000);
+        } else {
+
+          setTimeout(() => {
+            // router.push("/payment");
+            router.push({
+              pathname: "/payment",
+              query: { orderNo: result.payload.response.orderId, amount: obj.paymentInfo.paymentAmount, shippementCharges: obj.shippingInfo.shippingCharges, shippingCode: result.payload.response.data.response.data.shipmentCode, shippingParcel: result.payload.response.data.response.data.parcels.map(result => result.parcelCode)[0] },
+            });
+          }, 1000);
+        }
+
       }
     }
   };

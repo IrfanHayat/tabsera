@@ -18,8 +18,9 @@ import Image from "next/image";
 import Carousel, { consts } from "react-elastic-carousel";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
-import { AppBar, Stack, Divider, ListItemIcon } from "@mui/material";
+import { AppBar, Divider, ListItemIcon } from "@mui/material";
 import { useRouter } from "next/router";
+import { useSelector, useDispatch } from "react-redux";
 import { useTheme } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
@@ -44,6 +45,16 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import SquareIcon from "@mui/icons-material/Square";
 import { useTranslation } from "react-i18next";
 import Currency from "./Currency/currency";
+import { margin } from "@mui/system";
+import ActionAreaCard from "./Card";
+import styles1 from "../styles/card.module.css";
+import ImageListItem from "@mui/material/ImageListItem";
+import ImageListItemBar from "@mui/material/ImageListItemBar";
+import { CardMedia } from "@mui/material";
+import Avatar from '@mui/material/Avatar';
+import Stack from '@mui/material/Stack';
+import RelatedProducts from "./RelatedProducts/RelatedProducts";
+import Reviews from "./Reviews/Reviews";
 const breakPoints = [
   { width: 1, itemsToShow: 1 },
   { width: 550, itemsToShow: 2 },
@@ -99,6 +110,7 @@ function a11yProps(index) {
 }
 
 function Details({
+  id,
   viewProduct,
   productDetail,
   merchantDetail,
@@ -112,7 +124,10 @@ function Details({
   handleAddToCart,
   handleDecreaseCart,
   productIdRoute,
+
+  getReviewsProduct
 }) {
+  let dispatch = useDispatch();
   let { t, i18n } = useTranslation();
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -141,12 +156,14 @@ function Details({
   // ---------------------------------------------------------/
   let [skusProduct, setSkusProduct] = useState();
   let [skusFlag, setSkusFlag] = useState(false);
-  let [variantOneProduct, setVariantOneProduct] = useState();
+
   //let [productDetailOne,setProductDetailOne]=useState();
   let [multiProductImage, setMultiProductImage] = useState();
   const [isActiveImg, setisActiveImg] = useState(false);
+
+  let [ratingProduct, setRatingProduct] = useState([]);
   const viewVariantsProduct = (result) => {
-    console.log(result);
+
     setSkusProduct(result);
     setSkusFlag(true);
   };
@@ -161,27 +178,43 @@ function Details({
   //   setValue(index);
   // };
   let router = useRouter();
-  console.log("productDetail", productDetail);
+
+
+
+  useEffect(async () => {
+
+
+    setRatingProduct(productDetail.averageRating)
+
+  }, [ratingProduct])
+
+
 
   // useEffect(() => {
   //   productDetail.skus?.map((results, index) => {
-  //     console.log(results.skus);
+
   //     // setMultiProductImage(results.media_images);
   //   });
   // }, [productDetail]);
 
   useEffect(() => {
     productDetail.skus?.map((results, index) => {
-      console.log(results.skus);
+
       //     // setMultiProductImage(results.media_images);
     });
     productDetail.product_images?.map((results, index) => {
-      console.log(results.media_images);
+
       setMultiProductImage(results.media_images);
     });
-  }, [productDetail]);
+  }, [multiProductImage]);
 
-  console.log(productImage);
+  useEffect(() => {
+
+
+
+  }, [])
+
+
 
   return (
     <>
@@ -219,42 +252,70 @@ function Details({
           </Typography>
         </Breadcrumbs>
       </Box> */}
-
-      <Grid
-        container
-        // spacing={1}
-        maxWidth="xl"
-      // sx={{ backgroundColor: "#fafafa" }}
-      // justifyContent="center"
-      >
+      {Object.keys(productDetail).length > 0 ?
         <Grid
-          item
-          md={6}
-          xs={12}
-          className={styles.produtctImagesBox}
-        // sx={{ bgcolor: "white" }}
+          container
+          // spacing={1}
+          maxWidth="xl"
+        // sx={{ backgroundColor: "#fafafa" }}
+        // justifyContent="center"
         >
-          <Carousel
-            // breakPoints={breakPoints}
-            //  disableArrowsOnEnd={false}
-            showArrows={false}
-            // pagination={true}
-            pagination={false}
-            showEmptySlots={true}
-          // itemsToShow={2}
-          // showArrows={false}
+          <Grid
+            item
+            md={6}
+            xs={12}
+            className={styles.produtctImagesBox}
+          // sx={{ bgcolor: "white" }}
           >
-            <Box className={styles.carouelImage}>
-              {Object.keys(productDetail).length > 0 && skusFlag == false
-                ? productDetail.product_images[0].media_images.map(
-                  (result, index) => (
+            <Carousel
+              // breakPoints={breakPoints}
+              //  disableArrowsOnEnd={false}
+              showArrows={false}
+              // pagination={true}
+              pagination={false}
+              showEmptySlots={true}
+            // itemsToShow={2}
+            // showArrows={false}
+            >
+              <Box className={styles.carouelImage}>
+                {Object.keys(productDetail).length > 0 && skusFlag == false
+                  ? productDetail.product_images[0].media_images.map(
+                    (result, index) => (
+                      <ReactImageMagnify
+                        {...{
+                          smallImage: {
+                            alt: "Product Image",
+                            isFluidWidth: true,
+                            // width: " 336px",
+                            // height: "330px",
+                            src: result,
+                            sizes:
+                              "(max-width: 480px) 100vw, (max-width: 1200px) 30vw, 360px",
+                            // srcSet: this.state.currentImage.fluid.srcSet,
+                          },
+                          largeImage: {
+                            src: result,
+                            // srcSet: this.state.currentImage.fluid.srcSet,
+                            width: 600,
+                            height: 800,
+                          },
+
+                          enlargedImagePosition: "over",
+
+                          isHintEnabled: true,
+                          shouldHideHintAfterFirstActivation: false,
+                        }}
+                      />
+                    )
+                  )
+                  : skusProduct &&
+                  skusProduct.sku_images.map((result) => (
+                    // <Box className={styles.carouelImage}>
                     <ReactImageMagnify
                       {...{
                         smallImage: {
                           alt: "Product Image",
                           isFluidWidth: true,
-                          // width: " 336px",
-                          // height: "330px",
                           src: result,
                           sizes:
                             "(max-width: 480px) 100vw, (max-width: 1200px) 30vw, 360px",
@@ -266,200 +327,23 @@ function Details({
                           width: 600,
                           height: 800,
                         },
-
+                        // enlargedImageStyle: {
+                        //   objectFit: "contain",
+                        // },
                         enlargedImagePosition: "over",
 
                         isHintEnabled: true,
                         shouldHideHintAfterFirstActivation: false,
                       }}
                     />
-                  )
-                )
-                : skusProduct &&
-                skusProduct.sku_images.map((result) => (
-                  // <Box className={styles.carouelImage}>
-                  <ReactImageMagnify
-                    {...{
-                      smallImage: {
-                        alt: "Product Image",
-                        isFluidWidth: true,
-                        src: result,
-                        sizes:
-                          "(max-width: 480px) 100vw, (max-width: 1200px) 30vw, 360px",
-                        // srcSet: this.state.currentImage.fluid.srcSet,
-                      },
-                      largeImage: {
-                        src: result,
-                        // srcSet: this.state.currentImage.fluid.srcSet,
-                        width: 600,
-                        height: 800,
-                      },
-                      // enlargedImageStyle: {
-                      //   objectFit: "contain",
-                      // },
-                      enlargedImagePosition: "over",
-
-                      isHintEnabled: true,
-                      shouldHideHintAfterFirstActivation: false,
-                    }}
-                  />
-                  // </Box>
-                ))}
-            </Box>
-          </Carousel>
-          {/* </ListItem> */}
-          {/* <Divider /> */}
-          {console.log(multiProductImage)}
-          <Box className={styles.produtctImages}>
-            <Carousel
-              // breakPoints={breakPoints}
-              disableArrowsOnEnd={true}
-              showArrows={false}
-              renderArrow={myArrow}
-              pagination={false}
-              showEmptySlots={true}
-              itemsToShow={6}
-            >
-              {multiProductImage &&
-                multiProductImage?.map((results, index) => (
-                  <Box
-                    // sx={{ border: }}
-                    className={styles.selectimg}
-                  // border={isActiveImg ? "1px solid blue" : " "}
-                  >
-                    <Image
-                      onClick={() => {
-                        setSkusFlag(false);
-                        setisActiveImg(true);
-                      }}
-                      objectFit="contain"
-                      // style={{borderColor:"red", border:"5px"}}
-                      key={index}
-                      src={results}
-                      alt="shirt"
-                      width={"70px"}
-                      height={"70px"}
-                    ></Image>
-                  </Box>
-                ))}
-            </Carousel>
-          </Box>
-          {/* </List> */}
-        </Grid>
-
-        <Grid item md={6} sm={12} xs={12} className={styles.prodDetailsDiv}>
-          <Box className={styles.prodDetails}>
-            <Typography className={styles.prodName}>
-              {productDetail?.product_name}
-            </Typography>
-            {/* <Typography
-              sx={{
-                fontWeight: "bold",
-                // display: "inline",
-                color: "success.main",
-              }}
-            >
-              In Stock
-            </Typography> */}
-          </Box>
-          <Box sx={{ display: "flex", my: 1 }}>
-            <Typography> Rated :</Typography>
-
-            <Rating name="size-small" defaultValue={3} size="small" readOnly />
-            {/* <Stack spacing={2} direction="row">
-              <ShareIcon />
-              <FavoriteBorderIcon color="error" />
-            </Stack> */}
-          </Box>
-          {/* <Divider fullWidth /> */}
-
-          <Box sx={{ py: 1 }}>
-            <Box className={styles.prodCost}>
-              {skusProduct ? (
-                <>
-                  <Currency amount={skusProduct.cost}></Currency>{" "}
-                </>
-              ) : (
-                <>
-                  <Currency amount={price}></Currency>
-                </>
-              )}
-            </Box>
-
-            <Box
-              color="neutral"
-              style={{ display: "block", textDecoration: "line-through" }}
-            >
-              {skusProduct ? <>PKR.{skusProduct.original_price}</> : <></>}
-            </Box>
-          </Box>
-
-          {/* <Divider /> */}
-
-          <Box sx={{ display: "flex", flexDirection: "column" }}>
-            {skusFlag && skusProduct
-              ? skusProduct.attributes.map((result, index) => (
-                <Grid container key={index}>
-                  {result.attribute_name == "Color" ? (
-                    <>
-                      <Grid item xs={2}>
-                        {result.attribute_name}:
-                      </Grid>
-                      <Grid item md={3}>
-                        <ListItemIcon>
-                          <SquareIcon
-                            sx={{
-                              // position: "relative",
-                              // top: 6,
-                              // left: 5,
-                              color: result.value,
-                            }}
-                          />
-                        </ListItemIcon>
-                      </Grid>
-                    </>
-                  ) : (
-                    <Typography style={{ fontWeight: "bold" }}>
-                      {result.attribute_name}: {result.value}{" "}
-                    </Typography>
-                  )}
-                </Grid>
-              ))
-              : productAttributes.map((result, index) => (
-                <Grid
-                  container
-                  // sx={{ display: "flex", flexDirection: "column" }}
-                  key={index}
-                >
-                  {result.attribute_name == "Color" ? (
-                    <>
-                      <Grid item xs={2}>
-                        <Typography> {result.attribute_name}: </Typography>
-                      </Grid>
-                      <Grid item md={3}>
-                        <ListItemIcon>
-                          <SquareIcon sx={{ color: result.value }} />
-                        </ListItemIcon>
-                      </Grid>
-                    </>
-                  ) : (
-                    // <Box display="flex">
-                    <Typography>
-                      {result.attribute_name}: {result.value}{" "}
-                    </Typography>
                     // </Box>
-                  )}
-                </Grid>
-              ))}
-          </Box>
-          <Grid md={12}>
+                  ))}
+              </Box>
+            </Carousel>
+            {/* </ListItem> */}
             {/* <Divider /> */}
-            <Typography variant="subtitle2">
-              {" "}
-              {t("PDP.labels.variants")} :
-            </Typography>
 
-            <Box md={6} sx={{ display: "flex", m: 1 }}>
+            <Box className={styles.produtctImages}>
               <Carousel
                 // breakPoints={breakPoints}
                 disableArrowsOnEnd={true}
@@ -469,30 +353,181 @@ function Details({
                 showEmptySlots={true}
                 itemsToShow={6}
               >
-                {productDetail &&
-                  productDetail.skus?.map((results, index) => (
-                    <Box
-                      className={styles.selectimg}
-                    // border={isActiveImg ? "1px solid blue" : " "}
-                    >
-                      <Image
-                        //  className={cx(styles.media, mediaStyles.root)}
-                        onClick={() => {
-                          viewVariantsProduct(results);
-                        }}
-                        objectFit="contain"
-                        key={index}
-                        src={results.sku_images[0]}
-                        alt="shirt"
-                        width={"70px"}
-                        height={"70px"}
-                      ></Image>
-                    </Box>
-                  ))}
+                {productDetail.product_images &&
+                  productDetail.product_images[0].media_images.map(
+                    (results, index) => (
+                      <Box
+                        // sx={{ border: }}
+                        className={styles.selectimg}
+                      // border={isActiveImg ? "1px solid blue" : " "}
+                      >
+                        <Image
+                          onClick={() => {
+                            setSkusFlag(false);
+                            setisActiveImg(true);
+                          }}
+                          objectFit="contain"
+                          // style={{borderColor:"red", border:"5px"}}
+                          key={index}
+                          src={results}
+                          alt="shirt"
+                          width={"70px"}
+                          height={"70px"}
+                        ></Image>
+                      </Box>
+                    ))}
               </Carousel>
             </Box>
+            {/* </List> */}
           </Grid>
-          {/* <Box sx={{ display: "flex", p: 1, direction: "column" }}>
+
+          <Grid item md={6} sm={12} xs={12} className={styles.prodDetailsDiv}>
+            <Box className={styles.prodDetails}>
+              <Typography className={styles.prodName}>
+                {productDetail?.product_name}
+              </Typography>
+              {/* <Typography
+              sx={{
+                fontWeight: "bold",
+                // display: "inline",
+                color: "success.main",
+              }}
+            >
+              In Stock
+            </Typography> */}
+            </Box>
+            <Box sx={{ display: "flex", my: 1 }}>
+              <Typography> Rated : </Typography>
+
+              <Rating name="size-small" value={productDetail?.averageRating} size="small" readOnly />
+              {/* <Stack spacing={2} direction="row">
+              <ShareIcon />
+              <FavoriteBorderIcon color="error" />
+            </Stack> */}
+            </Box>
+            {/* <Divider fullWidth /> */}
+
+            <Box sx={{ py: 1 }}>
+              <Box className={styles.prodCost}>
+                {skusProduct ? (
+                  <>
+                    <Currency amount={skusProduct.cost}></Currency>{" "}
+                  </>
+                ) : (
+                  <>
+                    <Currency amount={productDetail.price}></Currency>
+                  </>
+                )}
+              </Box>
+
+              <Box
+                color="neutral"
+                style={{ display: "block" }}
+              >
+                {skusProduct?.original_price ? <>PKR.{skusProduct.original_price}</> : <></>}
+              </Box>
+            </Box>
+
+            {/* <Divider /> */}
+
+            <Box sx={{ display: "flex", flexDirection: "column" }}>
+              {skusFlag && skusProduct
+                ? skusProduct.attributes.map((result, index) => (
+                  <Grid container key={index}>
+                    {result.attribute_name == "Color" ? (
+                      <>
+                        <Grid item xs={2}>
+                          {result.attribute_name}:
+                        </Grid>
+                        <Grid item md={3}>
+                          <ListItemIcon>
+                            <SquareIcon
+                              sx={{
+                                // position: "relative",
+                                // top: 6,
+                                // left: 5,
+                                color: result.value,
+                              }}
+                            />
+                          </ListItemIcon>
+                        </Grid>
+                      </>
+                    ) : (
+                      <Typography style={{ fontWeight: "bold" }}>
+                        {result.attribute_name}: {result.value}{" "}
+                      </Typography>
+                    )}
+                  </Grid>
+                ))
+                : productAttributes.map((result, index) => (
+                  <Grid
+                    container
+                    // sx={{ display: "flex", flexDirection: "column" }}
+                    key={index}
+                  >
+                    {result.attribute_name == "Color" ? (
+                      <>
+                        <Grid item xs={2}>
+                          <Typography> {result.attribute_name}: </Typography>
+                        </Grid>
+                        <Grid item md={3}>
+                          <ListItemIcon>
+                            <SquareIcon sx={{ color: result.value }} />
+                          </ListItemIcon>
+                        </Grid>
+                      </>
+                    ) : (
+                      // <Box display="flex">
+                      <Typography>
+                        {result.attribute_name}: {result.value}{" "}
+                      </Typography>
+                      // </Box>
+                    )}
+                  </Grid>
+                ))}
+            </Box>
+            <Grid md={12}>
+              <Divider />
+              <Typography variant="subtitle2">
+                {" "}
+                {t("PDP.labels.variants")} :
+              </Typography>
+
+              <Box md={6} sx={{ display: "flex", m: 1 }}>
+                <Carousel
+                  // breakPoints={breakPoints}
+                  disableArrowsOnEnd={true}
+                  showArrows={false}
+                  renderArrow={myArrow}
+                  pagination={false}
+                  showEmptySlots={true}
+                  itemsToShow={6}
+                >
+                  {productDetail &&
+                    productDetail.skus?.map((results, index) => (
+                      <Box
+                        className={styles.selectimg}
+                      // border={isActiveImg ? "1px solid blue" : " "}
+                      >
+                        <Image
+                          //  className={cx(styles.media, mediaStyles.root)}
+                          onClick={() => {
+                            viewVariantsProduct(results);
+                          }}
+                          objectFit="contain"
+                          key={index}
+                          src={results.sku_images[0]}
+                          alt="shirt"
+                          width={"70px"}
+                          height={"70px"}
+                        ></Image>
+                      </Box>
+                    ))}
+                </Carousel>
+              </Box>
+              <Divider />
+            </Grid>
+            {/* <Box sx={{ display: "flex", p: 1, direction: "column" }}>
             <Grid container>
               <Grid display="flex" alignItems="center">
                 <Typography>Quantity : </Typography>
@@ -527,76 +562,76 @@ function Details({
 
             </Grid>
           </Box> */}
-          <Box
-            // container
-            spacing={1}
-            sx={{
-              mt: 7,
-              display: {
-                xs: "none",
-                md: "flex",
-                // justifyContent: "center",
-                alignItems: "center",
-                // flexWrap: "wrap",
-                // boxShadow: 0,
-                // bgcolor: "#f6f9fc",
-                // sx={{  }}
-                // borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
-              },
-            }}
-          >
-            {/* <Grid item md={6} sm={6}> */}
-            <Button
-              // type="submit"
-              variant="contained"
-              className={styles.buyNowbtn}
-              onClick={() => {
-                skusProduct
-                  ? BuyHandler(productDetail, skusProduct)
-                  : BuyHandler(productDetail);
+            <Box
+              // container
+              spacing={1}
+              sx={{
+                mt: 2,
+                display: {
+                  xs: "none",
+                  md: "flex",
+                  // justifyContent: "center",
+                  alignItems: "center",
+                  // flexWrap: "wrap",
+                  // boxShadow: 0,
+                  // bgcolor: "#f6f9fc",
+                  // sx={{  }}
+                  // borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
+                },
               }}
             >
-              {t("PDP.buttons.buyNow")}
-            </Button>
-            {/* </Grid> */}
-            {/* <Grid item md={6} sm={6}> */}
-            <Button
-              // color="warning"
-              variant="contained"
-              className={styles.addToCartbtn}
-              onClick={() => {
-                skusProduct
-                  ? addToCartHandler(productDetail, skusProduct)
-                  : addToCartHandler(productDetail);
-              }}
-            >
-              {t("PDP.buttons.cart")}
-            </Button>
-            {/* </Grid> */}
-          </Box>
+              {/* <Grid item md={6} sm={6}> */}
+              <Button
+                // type="submit"
+                variant="contained"
+                className={styles.buyNowbtn}
+                onClick={() => {
+                  skusProduct
+                    ? BuyHandler(productDetail, skusProduct)
+                    : BuyHandler(productDetail);
+                }}
+              >
+                {t("PDP.buttons.buyNow")}
+              </Button>
+              {/* </Grid> */}
+              {/* <Grid item md={6} sm={6}> */}
+              <Button
+                // color="warning"
+                variant="plain"
+                className={styles.addToCartbtn}
+                onClick={() => {
+                  skusProduct
+                    ? addToCartHandler(productDetail, skusProduct)
+                    : addToCartHandler(productDetail);
+                }}
+              >
+                {t("PDP.buttons.cart")}
+              </Button>
+              {/* </Grid> */}
+            </Box>
 
-          {/* <Typography variant="subtitle2" display="inline-block">
+            {/* <Typography variant="subtitle2" display="inline-block">
             Sold By:
           </Typography> */}
-          <Box className={styles.merchantName}>
-            <Typography variant="subtitle2">Sold By: </Typography> {"  "}
-            <Typography variant="subtitle2" style={{ fontSize: 18, ml: 5 }}>
-              {" "}
-              {productDetail?.merchant_name}
-            </Typography>
-          </Box>
-          <Button
-            className={styles.visitStorebtn}
-            variant="text"
-            onClick={() =>
-              viewStore(productDetail?.category_id, merchantDetail?.merchant_id)
-            }
-          // onClick={viewStore}
-          >
-            {t("PDP.labels.store")}
-          </Button>
-        </Grid>
-        {/* <Grid sx={{ bgcolor: "#fafafa" }} item md={2} sm={12} xs={12}>
+            <Box className={styles.merchantName}>
+              <Typography variant="subtitle2">Sold By: </Typography> {"  "}
+              <Typography variant="subtitle2" style={{ fontSize: 18, ml: 5 }}>
+                {" "}
+                {productDetail?.merchant_name}
+              </Typography>
+            </Box>
+            <Button
+              className={styles.visitStorebtn}
+              variant="text"
+              onClick={() =>
+                viewStore(productDetail?.category_id, merchantDetail?.merchant_id)
+              }
+            // onClick={viewStore}
+            >
+              {t("PDP.labels.store")}
+            </Button>
+          </Grid>
+          {/* <Grid sx={{ bgcolor: "#fafafa" }} item md={2} sm={12} xs={12}>
           <Box
             sx={{
               pl: 1,
@@ -669,38 +704,43 @@ function Details({
           <Divider />
         </Grid> */}
 
-        <Grid container>
-          <Box className={styles.tabsMain}>
-            <Box className={styles.tabs}>
-              <Tabs
-                // textColor="warning.dark"
-                textColor="inherit"
-                // indicatorColor="inherit"
-                value={value}
-                onChange={handleChange}
-                aria-label="basic tabs example"
-              >
-                <Tab
-                  className={styles.tabsName}
-                  label={t("PDP.labels.des")}
-                  {...a11yProps(0)}
-                />
-                <Tab
-                  className={styles.tabsName}
-                  label="Review"
-                  {...a11yProps(1)}
-                />
-              </Tabs>
-            </Box>
-            <TabPanel value={value} index={0}>
-              <Typography>desc {productDetail?.product_desc}</Typography>
-            </TabPanel>
-            <TabPanel value={value} index={1}>
-              <Typography> rating and reviews</Typography>
-            </TabPanel>
-          </Box>
+          <Grid container>
+            <Box className={styles.tabsMain}>
+              <Box className={styles.tabs}>
+                <Tabs
+                  // textColor="warning.dark"
+                  textColor="inherit"
+                  // indicatorColor="inherit"
+                  value={value}
+                  onChange={handleChange}
+                  aria-label="basic tabs example"
+                >
+                  <Tab
+                    className={styles.tabsName}
+                    label={t("PDP.labels.des")}
+                    {...a11yProps(0)}
+                  />
+                  <Tab
+                    className={styles.tabsName}
+                    label="Review"
+                    {...a11yProps(1)}
+                  />
+                </Tabs>
+              </Box>
+              <TabPanel value={value} index={0}>
+                <Typography>{productDetail?.product_desc}</Typography>
+              </TabPanel>
+              <TabPanel value={value} index={1}>
 
-          {/* <Grid item md={9} xs={9}>
+
+                <Reviews productId={id}></Reviews>
+
+              </TabPanel>
+
+            </Box>
+
+
+            {/* <Grid item md={9} xs={9}>
             <Grid>
               <Typography className={styles.ratings}>
                 {t("PDP.labels.des")}
@@ -714,20 +754,21 @@ function Details({
 
            </Grid> */}
 
-          <Grid
-            item
-            md={12}
-            xs={12}
-            pl={3}
-            style={{ display: "flex", bgcolor: "red" }}
-          >
-            <Typography style={{ fontWeight: "bold", bgcolor: "red", marginLeft: "37px" }}>
-              {" "}
-              {t("PDP.labels.similar")} :
-            </Typography>
+            <Grid
+              item
+              md={12}
+              xs={12}
+              pl={3}
+              style={{ display: "flex", bgcolor: "red" }}
+            >
+              <Typography style={{ fontWeight: "bold", bgcolor: "red", marginLeft: "37px" }}>
+                {" "}
+                {t("PDP.labels.similar")} :
+              </Typography>
+              <RelatedProducts addToCartHandler={addToCartHandler} categoryId={productDetail?.category_id} viewProduct={viewProduct}></RelatedProducts>
+            </Grid>
           </Grid>
-        </Grid>
-        {/* <Grid container>
+          {/* <Grid container>
           <Grid item md={9} xs={9}>
             <Grid>
               <Typography
@@ -745,70 +786,70 @@ function Details({
      
           </Grid>
         </Grid> */}
-        <AppBar
-          position="fixed"
-          color="inherit"
-          bgcolor="#f6f9fc"
-          sx={{
-            top: "auto",
-            bottom: 0,
-            display: {
-              xs: "flex",
-              md: "none",
-              justifyContent: "center",
-              alignItems: "center",
-              flexWrap: "wrap",
-              boxShadow: 0,
-              bgcolor: "#f6f9fc",
-              // sx={{  }}
-              // borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
-            },
-          }}
-        >
-          <Toolbar>
-            <Stack direction="row" spacing={2}>
-              <Button
-                // fullWidth
-                width="300px"
-                variant="contained"
-                color="info"
-                type="submit"
-                size="large"
-                // sx={{
-                //   background:
-                //     "linear-gradient(90deg, #020024 0%, #090979 35%, #00d4ff 100%)",
-                // }}
-                // href="/shipping_information"
-                className={styles.buyNowbtnSM}
-                onClick={() => {
-                  skusProduct
-                    ? BuyHandler(productDetail, skusProduct)
-                    : BuyHandler(productDetail);
-                }}
-              >
-                Buy Now
-              </Button>
-              <Button
-                // fullWidth
-                className={styles.addToCartbtnSM}
-                variant="contained"
-                // sx={{
-                //   background: "linear-gradient(45deg, red 10%, yellow 100%)",
-                // }}
-                color="warning"
-                onClick={() => {
-                  skusProduct
-                    ? addToCartHandler(productDetail, skusProduct)
-                    : addToCartHandler(productDetail);
-                }}
-                size="large"
-              >
-                Add to cart
-              </Button>
-            </Stack>
-          </Toolbar>
-        </AppBar>
-      </Grid>
+          <AppBar
+            position="fixed"
+            color="inherit"
+            bgcolor="#f6f9fc"
+            sx={{
+              top: "auto",
+              bottom: 0,
+              display: {
+                xs: "flex",
+                md: "none",
+                justifyContent: "center",
+                alignItems: "center",
+                flexWrap: "wrap",
+                boxShadow: 0,
+                bgcolor: "#f6f9fc",
+                // sx={{  }}
+                // borderBottom: (theme) => `1px solid ${theme.palette.divider}`,
+              },
+            }}
+          >
+            <Toolbar>
+              <Stack direction="row" spacing={2}>
+                <Button
+                  // fullWidth
+                  width="300px"
+                  variant="contained"
+                  color="info"
+                  type="submit"
+                  size="large"
+                  // sx={{
+                  //   background:
+                  //     "linear-gradient(90deg, #020024 0%, #090979 35%, #00d4ff 100%)",
+                  // }}
+                  // href="/shipping_information"
+                  className={styles.buyNowbtnSM}
+                  onClick={() => {
+                    skusProduct
+                      ? BuyHandler(productDetail, skusProduct)
+                      : BuyHandler(productDetail);
+                  }}
+                >
+                  Buy Now
+                </Button>
+                <Button
+                  // fullWidth
+                  className={styles.addToCartbtnSM}
+                  variant="contained"
+                  // sx={{
+                  //   background: "linear-gradient(45deg, red 10%, yellow 100%)",
+                  // }}
+                  color="warning"
+                  onClick={() => {
+                    skusProduct
+                      ? addToCartHandler(productDetail, skusProduct)
+                      : addToCartHandler(productDetail);
+                  }}
+                  size="large"
+                >
+                  Add to cart
+                </Button>
+              </Stack>
+            </Toolbar>
+          </AppBar>
+        </Grid> : <></>}
     </>
   );
 }

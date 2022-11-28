@@ -47,7 +47,7 @@ export default function SignIn({ isLoggedIn, setIsLoggedIn }) {
   const handleClose1 = () => {
     setAnchorEl(null);
   };
-  console.log(isLoggedIn);
+
 
   const handleModalOpen = () => {
     setOpen(true);
@@ -62,7 +62,7 @@ export default function SignIn({ isLoggedIn, setIsLoggedIn }) {
     Cookies.remove("item");
     // Cookies.remove("connect.sid");
     router.push("/");
-    console.log(result);
+
   };
   const myAccount = (
     <div>

@@ -85,12 +85,18 @@ import ShopProductSort from "./Filter/ProductSort";
 import SubCategory from "../pages/sub_category";
 import { useCallback } from "react";
 import { use } from "i18next";
+import Pagination from "./Pagination/pagination";
+import Loader from "./Loader/Loader";
 export default function PersistentDrawerLeft() {
   const { data, isLoading, isFetching, isError } = useGetAllProductsQuery();
   const { categoryData } = useSelector((state) => state.category);
   const { campaignsData } = useSelector((state) => state.campaigns);
 
-  // console.log("cat DAta", categoryData);
+
+  //pagination 
+  const [currentPage, setcurrentPage] = useState(1);
+  const [perPage, setperPage] = useState(4);
+  const paginate = pageNumber => setcurrentPage(pageNumber);
   //
   // show all products
   const [showProduct, setShowProduct] = useState(false);
@@ -106,7 +112,7 @@ export default function PersistentDrawerLeft() {
   let product = data?.response;
 
   const [compaigns, setCompaigns] = useState();
-  console.log("camp DAta", compaigns);
+
 
   const [category, setCategory] = useState();
   const [value, setValue] = React.useState();
@@ -139,7 +145,7 @@ export default function PersistentDrawerLeft() {
   const [featureProductCarousel, setfeatureProductCarousel] = useState(true);
   const [btnKey, setBtnKey] = useState();
 
-  console.log(showProduct, showFreeShipping);
+
 
   let { t, i18n } = useTranslation();
 
@@ -154,7 +160,7 @@ export default function PersistentDrawerLeft() {
 
   const [sideBarCat, setSideBarCat] = useState([]);
 
-  const handleClick =
+  const handleClick = useCallback(
     (event, categoryId) => {
 
       if (anchorEl !== event.currentTarget) {
@@ -166,8 +172,16 @@ export default function PersistentDrawerLeft() {
       )[0];
 
       setSideBarCat(subCategory);
-    }
+    }, [sideBarCat])
 
+
+
+  useMemo(() => {
+
+  }, [currentPage, perPage])
+
+  const indexOfLastNumber = currentPage * perPage;
+  const indexOfFirstNumber = indexOfLastNumber - perPage;
 
 
   function handleHover() {
@@ -189,14 +203,14 @@ export default function PersistentDrawerLeft() {
 
   // ---------------------------------------------------------------
 
-  useEffect(() => { }, [showFreeShipping]);
+  useMemo(() => { }, [showFreeShipping]);
   let router = useRouter();
   let dispatch = useDispatch();
 
   /////////
   const viewCategory = useCallback(
     async (item) => {
-      console.log(item);
+
       await setCatId(null);
 
       await setCatId(item);
@@ -222,7 +236,7 @@ export default function PersistentDrawerLeft() {
 
   const addToCartHandler = useCallback(async (product) => {
     let result = await dispatch(addToCart(product));
-    console.log(result);
+
     if (result?.payload?.resultCode == 4000) {
       //setOpenBar(true);
       setStatus(result?.payload);
@@ -237,7 +251,7 @@ export default function PersistentDrawerLeft() {
     }
   }, []);
 
-  useEffect(async () => {
+  useMemo(async () => {
     if (key == 1) {
       let categoryResult = await dispatch(getCategory());
       setCategory(categoryResult.payload);
@@ -248,7 +262,7 @@ export default function PersistentDrawerLeft() {
     }
   }, [key]);
 
-  useEffect(async () => {
+  useMemo(async () => {
     let result = await dispatch(getFeatureProduct());
     setFeatureProduct(result.payload)
     // dispatch(getDiscounts());
@@ -256,7 +270,7 @@ export default function PersistentDrawerLeft() {
     // dispatch(getDeals());
   }, []);
 
-  useEffect(() => { }, [featureProduct]);
+  useMemo(() => { }, [featureProduct]);
 
   const showAllProducts = useCallback(() => {
     if (showFreeShipping) {
@@ -302,7 +316,7 @@ export default function PersistentDrawerLeft() {
   ]);
 
   const showAllCategoriesProduct = useCallback(() => {
-    console.log("ccc");
+
 
     if (showFreeShipping == true) {
       setShowAllCategoryPro(true);
@@ -346,7 +360,7 @@ export default function PersistentDrawerLeft() {
     showFreeShipping,
   ]);
   const showAllMerchantsProduct = useCallback(() => {
-    console.log(showFreeShipping);
+
     if (showFreeShipping) {
       setShowProduct(false);
       setShowAllCategoryPro(false);
@@ -388,14 +402,14 @@ export default function PersistentDrawerLeft() {
     showFreeShipping,
   ]);
   // ----------------------------------------------------------------------------------
-  const handleCat = useCallback(
+  const handleCat =
     async (subCatId) => {
       await setCatId(null);
       await setCatId(subCatId);
-    },
-    [catId]
-  );
-  console.log(discountData);
+    }
+
+    ;
+
 
   return (
     <>
@@ -408,7 +422,7 @@ export default function PersistentDrawerLeft() {
             alignItems: "center",
           }}
         >
-          <CircularProgress size={140} />
+          <Loader></Loader>
         </Grid>
       ) : (
         <>
@@ -489,7 +503,7 @@ export default function PersistentDrawerLeft() {
                   </MenuItem>
                 </TextField>
               </FormControl> */}
-              {console.log(category)}
+
               <List dense className={styles.categoryList}>
                 {key == 1 && category?.length > 0 ? (
                   <>
@@ -515,7 +529,7 @@ export default function PersistentDrawerLeft() {
                             style={{ display: "flex", flexWrap: "wrap" }}
                             onClick={(e) => viewCategory(result.category_id)}
                           >
-                            {result.category_name}
+                            {result.category_name.toLowerCase()}
                           </ListItemText>
                         </ListItem>
 
@@ -584,7 +598,7 @@ export default function PersistentDrawerLeft() {
                 )}
               </List>
             </Box>
-            {console.log(featureProduct)}
+
 
             <Box className={styles.carouselBox}>
               {featureProduct != "" ? (
@@ -714,14 +728,7 @@ export default function PersistentDrawerLeft() {
                   setFilterData={setFilterData}
                     ></SortFilter> */}
 
-                {console.log(
-                  discountData,
-                  showFreeShipping,
-                  showDiscounts,
-                  showProduct,
-                  showAllCategoryPro,
-                  showAllMerchantPro
-                )}
+
                 {showFreeShipping && catId == null ? (
                   (showFreeShipping && showProduct == false) ||
                     showAllCategoryPro == false ||
@@ -829,7 +836,7 @@ export default function PersistentDrawerLeft() {
           </Grid>
 
           <Grid>
-            {console.log(catId)}
+
             {catId ? (
               <SubCategory
                 value={value}
@@ -864,10 +871,24 @@ export default function PersistentDrawerLeft() {
                   showDeals == false &&
                   showDiscounts == false &&
                   showFreeShipping == false ? (
-                  <ViewAllProducts
-                    Item={Item}
-                    data={filterData ? filterData : data?.response}
-                  ></ViewAllProducts>
+                  <>
+                    <ViewAllProducts
+                      Item={Item}
+                      data={filterData?.length > 0 ? filterData.slice(indexOfFirstNumber, indexOfLastNumber) : data?.response.slice(indexOfFirstNumber, indexOfLastNumber)}
+                    ></ViewAllProducts>
+                    {filterData?.length > 0 ? <Pagination
+                      perPage={perPage}
+                      totalLength={filterData?.length}
+                      paginate={paginate}>
+
+                    </Pagination> : <Pagination
+                      perPage={perPage}
+                      totalLength={data?.response.length}
+                      paginate={paginate}>
+
+                    </Pagination>}
+
+                  </>
                 ) : (
                   <>
                     {showProduct &&
@@ -876,10 +897,23 @@ export default function PersistentDrawerLeft() {
                       showAllMerchantPro == false &&
                       showDeals == false &&
                       showFreeShipping == false ? (
-                      <ViewAllProducts
-                        Item={Item}
-                        data={filterData ? filterData : data?.response}
-                      ></ViewAllProducts>
+                      <>
+                        <ViewAllProducts
+                          Item={Item}
+                          data={filterData?.length > 0 ? filterData.slice(indexOfFirstNumber, indexOfLastNumber) : data?.response.slice(indexOfFirstNumber, indexOfLastNumber)}
+                        ></ViewAllProducts>
+                        {filterData?.length > 0 ? <Pagination
+                          perPage={perPage}
+                          totalLength={filterData?.length}
+                          paginate={paginate}>
+
+                        </Pagination> : <Pagination
+                          perPage={perPage}
+                          totalLength={data?.response.length}
+                          paginate={paginate}>
+
+                        </Pagination>}
+                      </>
                     ) : (
                       <>
                         {showProduct &&
@@ -889,10 +923,23 @@ export default function PersistentDrawerLeft() {
                           showDeals == false &&
                           showFreeShipping == false &&
                           sortFilter == true ? (
-                          <ViewAllProducts
-                            Item={Item}
-                            data={filterData ? filterData : data?.response}
-                          ></ViewAllProducts>
+                          <>
+                            <ViewAllProducts
+                              Item={Item}
+                              data={filterData?.length > 0 ? filterData.response.slice(indexOfFirstNumber, indexOfLastNumber) : data?.response.response.slice(indexOfFirstNumber, indexOfLastNumber)}
+                            ></ViewAllProducts>
+                            {filterData?.length > 0 ? <Pagination
+                              perPage={perPage}
+                              totalLength={filterData?.length}
+                              paginate={paginate}>
+
+                            </Pagination> : <Pagination
+                              perPage={perPage}
+                              totalLength={data?.response.length}
+                              paginate={paginate}>
+
+                            </Pagination>}
+                          </>
                         ) : (
                           <></>
                         )}
@@ -905,13 +952,26 @@ export default function PersistentDrawerLeft() {
                         showDiscounts == false &&
                         showFreeShipping == false &&
                         dealsData?.length > 0 ? (
-                        <DealsAndPromotions
-                          data={filterData?.length > 0 ? filterData : dealsData}
-                          showProduct={showProduct}
-                          showAllCategoryPro={showAllCategoryPro}
-                          showAllMerchantPro={showAllMerchantPro}
-                          filterData={filterData}
-                        ></DealsAndPromotions>
+                        <>
+                          <DealsAndPromotions
+                            data={filterData?.length > 0 ? filterData.slice(indexOfFirstNumber, indexOfLastNumber) : dealsData.slice(indexOfFirstNumber, indexOfLastNumber)}
+                            showProduct={showProduct}
+                            showAllCategoryPro={showAllCategoryPro}
+                            showAllMerchantPro={showAllMerchantPro}
+                            filterData={filterData}
+                          ></DealsAndPromotions>
+                          {filterData?.length > 0 ? <Pagination
+                            perPage={perPage}
+                            totalLength={filterData?.length}
+                            paginate={paginate}>
+
+                          </Pagination> : <Pagination
+                            perPage={perPage}
+                            totalLength={data?.response.length}
+                            paginate={paginate}>
+
+                          </Pagination>}
+                        </>
                       ) : (
                         <>
                           {" "}
@@ -949,17 +1009,30 @@ export default function PersistentDrawerLeft() {
                                     showDiscounts == false &&
                                     showFreeShipping == false &&
                                     showProduct == false ? (
-                                    <DealsAndPromotions
-                                      data={
-                                        filterData?.length > 0
-                                          ? filterData
-                                          : dealsData
-                                      }
-                                      showProduct={showProduct}
-                                      showAllCategoryPro={showAllCategoryPro}
-                                      showAllMerchantPro={showAllMerchantPro}
-                                      filterData={filterData}
-                                    ></DealsAndPromotions>
+                                    <>
+                                      <DealsAndPromotions
+                                        data={
+                                          filterData?.length > 0
+                                            ? filterData.slice(indexOfFirstNumber, indexOfLastNumber)
+                                            : dealsData.slice(indexOfFirstNumber, indexOfLastNumber)
+                                        }
+                                        showProduct={showProduct}
+                                        showAllCategoryPro={showAllCategoryPro}
+                                        showAllMerchantPro={showAllMerchantPro}
+                                        filterData={filterData}
+                                      ></DealsAndPromotions>
+                                      {filterData?.length > 0 ? <Pagination
+                                        perPage={perPage}
+                                        totalLength={filterData?.length}
+                                        paginate={paginate}>
+
+                                      </Pagination> : <Pagination
+                                        perPage={perPage}
+                                        totalLength={data?.response.length}
+                                        paginate={paginate}>
+
+                                      </Pagination>}
+                                    </>
                                   ) : (
                                     <></>
                                   )}
@@ -977,12 +1050,25 @@ export default function PersistentDrawerLeft() {
                         showDeals == false &&
                         showFreeShipping == false &&
                         discountData?.length > 0 ? (
-                        <ViewAllProducts
-                          Item={Item}
-                          data={
-                            filterData?.length > 0 ? filterData : discountData
-                          }
-                        ></ViewAllProducts>
+                        <>
+                          <ViewAllProducts
+                            Item={Item}
+                            data={
+                              filterData?.length > 0 ? filterData.slice(indexOfFirstNumber, indexOfLastNumber) : discountData.slice(indexOfFirstNumber, indexOfLastNumber)
+                            }
+                          ></ViewAllProducts>
+                          {filterData?.length > 0 ? <Pagination
+                            perPage={perPage}
+                            totalLength={filterData?.length}
+                            paginate={paginate}>
+
+                          </Pagination> : <Pagination
+                            perPage={perPage}
+                            totalLength={data?.response.length}
+                            paginate={paginate}>
+
+                          </Pagination>}
+                        </>
                       ) : (
                         <>
                           {" "}
@@ -1021,17 +1107,30 @@ export default function PersistentDrawerLeft() {
                                   {showDiscounts &&
                                     showFreeShipping == false &&
                                     showProduct == false ? (
-                                    <Discounts
-                                      data={
-                                        filterData?.length > 0
-                                          ? filterData
-                                          : discountData
-                                      }
-                                      showProduct={showProduct}
-                                      showAllCategoryPro={showAllCategoryPro}
-                                      showAllMerchantPro={showAllMerchantPro}
-                                      filterData={filterData}
-                                    ></Discounts>
+                                    <>
+                                      <Discounts
+                                        data={
+                                          filterData?.length > 0
+                                            ? filterData.slice(indexOfFirstNumber, indexOfLastNumber)
+                                            : discountData.slice(indexOfFirstNumber, indexOfLastNumber)
+                                        }
+                                        showProduct={showProduct}
+                                        showAllCategoryPro={showAllCategoryPro}
+                                        showAllMerchantPro={showAllMerchantPro}
+                                        filterData={filterData}
+                                      ></Discounts>
+                                      {filterData?.length > 0 ? <Pagination
+                                        perPage={perPage}
+                                        totalLength={filterData?.length}
+                                        paginate={paginate}>
+
+                                      </Pagination> : <Pagination
+                                        perPage={perPage}
+                                        totalLength={data?.response.length}
+                                        paginate={paginate}>
+
+                                      </Pagination>}
+                                    </>
                                   ) : (
                                     <></>
                                   )}
@@ -1049,14 +1148,27 @@ export default function PersistentDrawerLeft() {
                         showAllMerchantPro == false &&
                         showDeals == false &&
                         freeShippingData?.length > 0 ? (
-                        <ViewAllProducts
-                          Item={Item}
-                          data={
-                            filterData?.length > 0
-                              ? filterData
-                              : freeShippingData
-                          }
-                        ></ViewAllProducts>
+                        <>
+                          <ViewAllProducts
+                            Item={Item}
+                            data={
+                              filterData?.length > 0
+                                ? filterData.slice(indexOfFirstNumber, indexOfLastNumber)
+                                : freeShippingData.slice(indexOfFirstNumber, indexOfLastNumber)
+                            }
+                          ></ViewAllProducts>
+                          {filterData?.length > 0 ? <Pagination
+                            perPage={perPage}
+                            totalLength={filterData?.length}
+                            paginate={paginate}>
+
+                          </Pagination> : <Pagination
+                            perPage={perPage}
+                            totalLength={data?.response.length}
+                            paginate={paginate}>
+
+                          </Pagination>}
+                        </>
                       ) : (
                         <>
                           {" "}
@@ -1095,17 +1207,30 @@ export default function PersistentDrawerLeft() {
                                   {showFreeShipping &&
                                     showDiscounts == false &&
                                     showProduct == false ? (
-                                    <FreeShipping
-                                      data={
-                                        filterData?.length > 0
-                                          ? filterData
-                                          : freeShippingData
-                                      }
-                                      showProduct={showProduct}
-                                      showAllCategoryPro={showAllCategoryPro}
-                                      showAllMerchantPro={showAllMerchantPro}
-                                      filterData={filterData}
-                                    ></FreeShipping>
+                                    <>
+                                      <FreeShipping
+                                        data={
+                                          filterData?.length > 0
+                                            ? filterData.slice(indexOfFirstNumber, indexOfLastNumber)
+                                            : freeShippingData.slice(indexOfFirstNumber, indexOfLastNumber)
+                                        }
+                                        showProduct={showProduct}
+                                        showAllCategoryPro={showAllCategoryPro}
+                                        showAllMerchantPro={showAllMerchantPro}
+                                        filterData={filterData}
+                                      ></FreeShipping>
+                                      {filterData?.length > 0 ? <Pagination
+                                        perPage={perPage}
+                                        totalLength={filterData?.length}
+                                        paginate={paginate}>
+
+                                      </Pagination> : <Pagination
+                                        perPage={perPage}
+                                        totalLength={data?.response.length}
+                                        paginate={paginate}>
+
+                                      </Pagination>}
+                                    </>
                                   ) : (
                                     <></>
                                   )}
@@ -1132,7 +1257,7 @@ export default function PersistentDrawerLeft() {
                       <></>
                     )}
 
-                    {/* {console.log(filterData)} */}
+
 
                     {showAllMerchantPro &&
                       showDiscounts == false &&
@@ -1155,7 +1280,7 @@ export default function PersistentDrawerLeft() {
               </>
             )}
 
-            {console.log(dealsData)}
+
           </Grid>
         </>
       )}

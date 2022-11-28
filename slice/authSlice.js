@@ -24,16 +24,30 @@ const initialState = {
   logOutStatus: "",
   logOut: {},
   userLoaded: false,
+  check: "",
 };
+
+export const checkUser = createAsyncThunk(
+  "auth/check",
+  async (values, { rejectWithValue }) => {
+    try {
+      let obj = { "requestBody": `{\"mobileNumber\":\"${values}\"}` }
+
+      const result = await instance.post(`${url}/customers/check`, obj);
+      console.log(result)
+      return result.data;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
 
 export const registerUser = createAsyncThunk(
   "auth/registerUser",
   async (values, { rejectWithValue }) => {
     try {
-      const result = await instance.post(`${url}/customers/login`, values);
-      if (response.data.resultCode === 2000) {
-        logIn(true, res.data.response, "Successfully Login");
-      }
+      const result = await instance.post(`${url}/customers/register`, values);
+
       return result.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -57,7 +71,7 @@ export const loginUser = createAsyncThunk(
           channelId: 1,
           mobileNumber: values?.userName,
           //  otp: "127484",
-          password: values.pwd,
+          password: values?.pwd,
           // registrationToken: ""
         };
       } else {
@@ -119,9 +133,9 @@ export const logOutCustomer = createAsyncThunk(
   "auth/logOutCustomer",
   async () => {
     // try {
-    console.log("i ma herere");
+
     const result = await instance.get(`${url}/customers/logout`);
-    console.log(result);
+
     return result;
     // } catch (error) {
     // return rejectWithValue(error.response.data);
@@ -242,6 +256,33 @@ const authSlice = createSlice({
         ...state,
         getUserStatus: "rejected",
         getUserError: action.payload,
+      };
+    });
+
+
+    builder.addCase(checkUser.pending, (state, action) => {
+      return { ...state, loginStatus: "pending" };
+    });
+    builder.addCase(checkUser.fulfilled, (state, action) => {
+      if (action.payload) {
+        const user = action.payload;
+        localStorage.setItem("name", user.firstName);
+
+        return {
+          ...state,
+          token: action.payload,
+          name: user.firstName,
+          email: user.email,
+          _id: user.customerUserId,
+          loginStatus: "success",
+        };
+      } else return state;
+    });
+    builder.addCase(checkUser.rejected, (state, action) => {
+      return {
+        ...state,
+        loginStatus: "rejected",
+        loginError: action.payload,
       };
     });
 

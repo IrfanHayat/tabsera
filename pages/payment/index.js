@@ -60,7 +60,7 @@ function Payement() {
           //"accountNumber": "923450600666",
           "amount": cartTotalAmount.toString(),
           // "pin":'123456',
-          "orderId": placeOrderData?.orderId,
+          "orderId": placeOrderData?.response.orderId,
           "parentPaymentMethodId": selectPaymentMethod?.parent_payment_method_id,
           "paymentGatewayId": selectPaymentMethod?.payment_gateway_id,
           "paymentMethodId": selectPaymentMethod?.payment_method_id,
@@ -69,7 +69,7 @@ function Payement() {
         }
       }
       let result = await dispatch(postPayment(obj))
-      console.log(result.payload.resultCode)
+
       if (result.payload.resultCode == 5000) {
         setStatus(result.payload)
         setOpenBar(true);
@@ -84,19 +84,19 @@ function Payement() {
 
       let obj = {
         "requestBody": {
-          "accountNumber": null, //"923450600666",
+          "accountNumber": accountDetails.accountNumber, //"923450600666",
           "amount": cartTotalAmount.toString(),
-          "pin": null,//'123456',
-          "orderId": placeOrderData?.orderId,
-          "parentPaymentMethodId": 0,
-          "paymentGatewayId": 4,
-          "paymentMethodId": 3,
-          "serviceTypeId": 6,
-          "transactionTypeId": 8
+          "pin": accountDetails.pin,//'123456',
+          "orderId": placeOrderData?.response.orderId,
+          "parentPaymentMethodId": selectPaymentMethod?.parent_payment_method_id,
+          "paymentGatewayId": selectPaymentMethod?.payment_gateway_id,
+          "paymentMethodId": selectPaymentMethod?.payment_method_id,
+          serviceTypeId: 6,
+          transactionTypeId: 8
         }
       }
       let result1 = await dispatch(postPayment(obj))
-      console.log(result1)
+
       if (result1.payload.resultCode == 2000) {
 
 
@@ -107,7 +107,7 @@ function Payement() {
           // router.push('/congratulations')
           router.push({
             pathname: "/congratulations",
-            query: { orderNo: router.query?.orderNo },
+            query: { orderNo: result1.payload.response.customerOrderNo, amount: router?.query?.amount, shipcharges: router?.query?.shippementCharges, shippingCode: router?.query?.shippingCode, shippingParcel: router?.query?.shippingParcel },
           });
         }, 1000)
 
@@ -121,26 +121,44 @@ function Payement() {
 
     if (selectPaymentMethod?.payment_mode == null) {
 
-      let obj = {
-        "requestBody": {
-          //  "accountNumber": accountDetails.accountNumber, //"923450600666",
-          amount: cartTotalAmount.toString(),
-          //  "pin":accountDetails.pin,//'123456',
-          orderId: placeOrderData?.orderId,
-          parentPaymentMethodId: selectPaymentMethod?.parent_payment_method_id,
-          paymentGatewayId: selectPaymentMethod?.payment_gateway_id,
-          paymentMethodId: selectPaymentMethod?.payment_method_id,
-          serviceTypeId: 6,
-          transactionTypeId: 8,
-        },
-      };
+      let obj
+      if (placeOrderData.response?.orderId) {
+        obj = {
+          "requestBody": {
+            //  "accountNumber": accountDetails.accountNumber, //"923450600666",
+            amount: cartTotalAmount.toString(),
+            //  "pin":accountDetails.pin,//'123456',
+            orderId: placeOrderData?.response.orderId,
+            parentPaymentMethodId: selectPaymentMethod?.parent_payment_method_id,
+            paymentGatewayId: selectPaymentMethod?.payment_gateway_id,
+            paymentMethodId: selectPaymentMethod?.payment_method_id,
+            serviceTypeId: 6,
+            transactionTypeId: 8,
+          },
+        };
+      } else {
+
+        obj = {
+          "requestBody": {
+            //  "accountNumber": accountDetails.accountNumber, //"923450600666",
+            amount: cartTotalAmount.toString(),
+            //  "pin":accountDetails.pin,//'123456',
+            orderId: placeOrderData?.orderNo,
+            parentPaymentMethodId: selectPaymentMethod?.parent_payment_method_id,
+            paymentGatewayId: selectPaymentMethod?.payment_gateway_id,
+            paymentMethodId: selectPaymentMethod?.payment_method_id,
+            serviceTypeId: 6,
+            transactionTypeId: 8,
+          },
+        };
+      }
       let result = await dispatch(postPayment(obj));
       if (result.payload.resultCode == 2000) {
 
         setTimeout(() => {
           router.push({
             pathname: "/congratulations",
-            query: { orderNo: router.query?.orderNo },
+            query: { orderNo: result.payload.response.customerOrderNo, amount: router?.query?.amount, shipcharges: router?.query?.shippementCharges, shippingCode: router?.query?.shippingCode, shippingParcel: router?.query?.shippingParcel, intelParcelMessage: router?.query?.intelParcelMessage },
           });
         }, 1000)
       }
@@ -150,7 +168,7 @@ function Payement() {
   }
   const handleChange = (result) => {
     setSelectPaymentMethod(result)
-    console.log(result)
+
     if (result?.payment_mode == "API") {
       setShowModal(true)
       setOpen(true)

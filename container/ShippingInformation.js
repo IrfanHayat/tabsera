@@ -34,7 +34,7 @@ import { Controller, useForm } from "react-hook-form";
 import { TextField } from "@mui/material";
 import Chip from "@mui/material/Chip";
 import Image from "next/image";
-import LockerDetails from "./Locker/LockeDetails";
+import LockerDetails1 from "./Locker/LockerDetails1";
 //import Divider from "@mui/material";
 import styles from "../styles/shippingInfo.module.css";
 import ModeEditOutlineIcon from "@mui/icons-material/ModeEditOutline";
@@ -67,8 +67,10 @@ function ShippingInformation({
   setShow,
   userData,
   shipLocker,
+  setButtonKey,
+  buttonKey
 }) {
-  const [buttonKey, setButtonKey] = React.useState(1);
+
   const [userInfo, setUserInfo] = useState();
   let router = useRouter();
   let buttonText;
@@ -87,15 +89,17 @@ function ShippingInformation({
   //   buttonText = "Add Locker";
   // }
 
-  console.log("shippementAddress", shippementAddress);
 
+
+  const [isMapActive, setIsMapActive] = useState(false);
+  const [isTableActive, setIsTableActive] = useState(false);
   const [radioCheckLocker, setRadioCheckLocker] = useState(true);
   const [radioCheck, setRadioCheck] = useState(false);
   const [radioCheck1, setRadioCheck1] = useState(false);
   const [showMapView, setShowMapView] = useState(false);
   const [showTableView, setShowTableView] = useState(false);
   const [key, setkey] = useState(1);
-  console.log("keyI", key);
+
   // const handleChange = (event) => {
   //   setButtonKey(event.target.value);
   // };
@@ -105,11 +109,15 @@ function ShippingInformation({
   // }, [buttonKey]);
 
   function mapView() {
+    setIsMapActive(true);
     setShowMapView(true);
+    setIsTableActive(false)
     setShowTableView(false);
   }
 
   function tableView() {
+    setIsTableActive(true)
+    setIsMapActive(false);
     setShowMapView(false);
     setShowTableView(true);
   }
@@ -193,7 +201,7 @@ function ShippingInformation({
                 control={<Radio />}
                 label={t("shippingInfo.labels.ship.locker")}
               />
-              <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
+              {/* <Divider sx={{ height: 28, m: 0.5 }} orientation="vertical" />
 
               <FormControlLabel
                 onClick={() => {
@@ -203,7 +211,7 @@ function ShippingInformation({
                 value="school"
                 control={<Radio />}
                 label={t("shippingInfo.labels.ship.school")}
-              />
+              /> */}
             </RadioGroup>
           </FormControl>
         </Grid>
@@ -254,7 +262,7 @@ function ShippingInformation({
                   size="small"
                   aria-label="a dense table"
                 > */}
-            {/* {console.log(shippementAddress[0])} */}
+
             <RadioGroup
               aria-labelledby="demo-row-radio-buttons-group-label"
               name="row-radio-buttons-group"
@@ -633,6 +641,7 @@ function ShippingInformation({
                       <Typography
                         onClick={() => mapView()}
                         className={styles.mapTableViewText}
+                        sx={{ color: isMapActive ? '#3d7cff' : '' }}
                       >
                         MapView
                       </Typography>
@@ -643,6 +652,7 @@ function ShippingInformation({
                       <Typography
                         onClick={() => tableView()}
                         className={styles.mapTableViewText}
+                        sx={{ color: isTableActive ? '#3d7cff' : '' }}
                       >
                         TableView
                       </Typography>
@@ -650,36 +660,42 @@ function ShippingInformation({
 
                     {showTableView
                       ? lockersAddressData?.map((result) => (
-                        <FormControlLabel
-                          value={result.locker_id}
-                          control={<Radio />}
-                          label={
-                            <Box
-                              sx={{
-                                display: "flex",
-                                alignItems: "center",
-                              }}
-                            >
-                              <Image // className={cx(styles.media, mediaStyles.root)}
-                                src={"/locker_pic.jpg"}
-                                // onClick={(e) => viewCategory(product.category_id)}
-                                alt={"locker"}
-                                width={45}
-                                objectFit="contain"
-                                height={45}
-                              ></Image>
-                              <Typography
+                        <Box className={styles.addressBoxDiv1}>
+
+                          <FormControlLabel
+                            value={result.locker_id}
+                            control={<Radio />}
+                            label={
+                              <Box
                                 sx={{
-                                  p: 1,
+                                  display: "flex",
+                                  alignItems: "center",
                                 }}
                               >
-                                {result.locker_name}
-                              </Typography>
-                              <Typography>{result.locker_address}</Typography>
-                            </Box>
-                          }
-                          onClick={() => setRadioCheck1(true)}
-                        />
+                                <Image // className={cx(styles.media, mediaStyles.root)}
+                                  src={"/locker_pic.jpg"}
+                                  // onClick={(e) => viewCategory(product.category_id)}
+                                  alt={"locker"}
+                                  width={45}
+                                  objectFit="contain"
+                                  height={45}
+                                ></Image>
+                                <Typography
+                                  sx={{
+                                    p: 1,
+                                  }}
+                                >
+                                  {result.locker_name}
+                                </Typography>
+
+
+                              </Box>
+                            }
+                            onClick={() => setRadioCheck1(true)}
+                          />
+                          <Box sx={{ display: "flex", marginLeft: "12%" }}> <Typography>Address:</Typography><Typography sx={{ marginLeft: "2%" }}>{result.locker_address}</Typography></Box>
+                        </Box>
+
                       ))
                       : ""}
                   </>
@@ -687,7 +703,7 @@ function ShippingInformation({
               </RadioGroup>
             </Grid>
             {showMapView ? (
-              <LockerDetails lockerData={shipLocker}></LockerDetails>
+              <LockerDetails1 setRadioCheck1={setRadioCheck1} handleChangeLocker={handleChangeLocker} data={lockersAddressData}></LockerDetails1>
             ) : (
               ""
             )}

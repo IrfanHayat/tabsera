@@ -84,7 +84,7 @@ function PlaceOrder({
   //   }
   //   setOpenBar(false);
   // };
-  console.log(shippmentName);
+
   return (
     <>
       <CheckoutWizard activeStep={2}></CheckoutWizard>
@@ -212,7 +212,7 @@ function PlaceOrder({
                                   </TableCell>
                                   <TableCell align="right">
                                     <Typography>
-                                      <Currency amount={item.price}></Currency>
+                                      <Currency amount={item.product_cost}></Currency>
                                     </Typography>
                                   </TableCell>
                                 </TableRow>
@@ -250,7 +250,7 @@ function PlaceOrder({
                     <Currency
                       amount={
                         productPrice &&
-                        productPrice.reduce((a, c) => a + c.qty * c.price, 0)
+                        productPrice.reduce((a, c) => a + c.qty * c.product_cost, 0)
                       }
                     ></Currency>
                   </Typography>
@@ -295,13 +295,13 @@ function PlaceOrder({
                           amount={
                             productPrice && shippingCharges
                               ? productPrice.reduce(
-                                  (a, c) => a + c.qty * c.price,
-                                  0
-                                ) + shippingCharges
+                                (a, c) => a + c.qty * c.product_cost,
+                                0
+                              ) + shippingCharges
                               : productPrice.reduce(
-                                  (a, c) => a + c.qty * c.price,
-                                  0
-                                )
+                                (a, c) => a + c.qty * c.product_cost,
+                                0
+                              )
                           }
                         ></Currency>
                       </strong>

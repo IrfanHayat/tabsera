@@ -19,6 +19,7 @@ import styles from "../styles/merchantStore.module.css";
 import LoyaltyIcon from "@mui/icons-material/Loyalty";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import { useSelector } from "react-redux";
+import ViewAllProducts from "../pages/all_products";
 import {
   AppBar,
   CardContent,
@@ -41,6 +42,12 @@ const breakPoints = [
   { width: 768, itemsToShow: 3 },
   { width: 1200, itemsToShow: 4 },
 ];
+const Item = styled("div")(({ theme }) => ({
+  backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
+  ...theme.typography.body2,
+  padding: theme.spacing(1),
+  color: theme.palette.text.primary,
+}));
 
 function a11yProps(index) {
   return {
@@ -50,7 +57,7 @@ function a11yProps(index) {
 }
 function MerchantStore({ merchantStoreDetail }) {
   const { merchantData } = useSelector((state) => state.merchant);
-  console.log("MD-------------->", merchantStoreDetail);
+
   const MaxInput = useRef(null);
   const MinInput = useRef(null);
   const [parentCategories, setParentCategories] = useState([]);
@@ -59,7 +66,7 @@ function MerchantStore({ merchantStoreDetail }) {
   const [catId, setCatId] = useState();
   let { t, i18n } = useTranslation();
   // const [merchant, setmerchant] = useState();
-  // console.log(merchantStoreDetail);
+
   // useEffect(() => {
   //   setmerchant(merchantData);
   // }, [input]);
@@ -109,9 +116,9 @@ function MerchantStore({ merchantStoreDetail }) {
   //   let results = result?.payload.filter(
   //     (result) => result.category_id == catId
   //   );
-  //   console.log(results);
+
   //   results.map((category) => {
-  //     console.log(category)
+
   //     setBrands(category.brands);
   //   });
   // }, []);
@@ -119,8 +126,7 @@ function MerchantStore({ merchantStoreDetail }) {
   const priceFilter = () => {
     let max = MaxInput.current.value;
     let min = MinInput.current.value;
-    console.log(typeof max);
-    console.log(typeof min);
+
     let result = productDataWithCategoryId.filter(
       (result) =>
         parseInt(result.productCost) >= parseInt(min) &&
@@ -131,11 +137,11 @@ function MerchantStore({ merchantStoreDetail }) {
   };
 
   function categoryProduct(name) {
-    console.log(name);
+
     let result = productDataWithCategoryId.filter(
       (category) => category.categoryName == name
     );
-    console.log(result);
+
     setFilterProduct(result);
   }
 
@@ -182,9 +188,9 @@ function MerchantStore({ merchantStoreDetail }) {
     <>
       <Grid
         container
-        // spacing={1}
-        // sx={{ paddingTop: 2 }}
-        // justifyContent="center"
+      // spacing={1}
+      // sx={{ paddingTop: 2 }}
+      // justifyContent="center"
       >
         <Typography className={styles.topHeading}>
           {" "}
@@ -309,7 +315,7 @@ function MerchantStore({ merchantStoreDetail }) {
             <TabPanel value={value} index={1}>
               <Grid sx={{ display: "flex" }}>
                 <>
-                  <MerchantSideBarFilter
+                  {/* <MerchantSideBarFilter
                     MinInput={MinInput}
                     MaxInput={MaxInput}
                     priceFilter={priceFilter}
@@ -318,17 +324,20 @@ function MerchantStore({ merchantStoreDetail }) {
                     childrenCategory={children}
                     subCategories={subCategories}
                     brands={brands}
-                  ></MerchantSideBarFilter>
+                  ></MerchantSideBarFilter> */}
                 </>
                 <>
                   {" "}
                   {merchantStoreDetail &&
-                    merchantStoreDetail?.map((result) => (
-                      <ActionAreaCard
-                        product={result}
-                        viewProduct={viewProduct}
-                      ></ActionAreaCard>
-                    ))}
+
+                    <ViewAllProducts
+                      product={result}
+                      viewProduct={viewProduct}
+                      Item={Item}
+
+                      data={merchantStoreDetail}
+                    ></ViewAllProducts>
+                  }
                 </>
               </Grid>
             </TabPanel>

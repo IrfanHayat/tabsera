@@ -9,7 +9,7 @@ function Currency({ amount }) {
         fetch('https://extreme-ip-lookup.com/json/?key=9SApWc9vbGqdGyUvmevu')
             .then(res => res.json())
             .then(response => {
-                console.log(response)
+
                 let country = countryToCurrency[response.countryCode]
                 setCountryCurrency(country);
             })

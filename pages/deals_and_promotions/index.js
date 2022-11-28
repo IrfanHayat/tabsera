@@ -26,14 +26,13 @@ const Index = ({ data, showProduct }) => {
   const { dealsData } = useSelector((state) => state.deals);
   const [open, setOpen] = React.useState(false);
   let [status, setStatus] = useState();
-  console.log(data);
 
   let dispatch = useDispatch();
   const router = useRouter();
 
   const viewProduct = (item) => {
     router.push({
-      pathname: "/product_detail",
+      pathname: "/bundles_details",
       query: { productId: item.bundleId },
     });
   };
@@ -43,10 +42,10 @@ const Index = ({ data, showProduct }) => {
     // dispatch(couponsData());
   }, []);
   const addToCartHandler = async (product) => {
-    console.log(product)
+
     let obj = {
-      "productId": product.bundleId,
-      "productName": product.bundleName,
+      "productId": product.product_id,
+      "productName": product.product_name,
       "productImage": product.bundleImage,
 
       "productCost": product.bundleCost,
@@ -55,7 +54,7 @@ const Index = ({ data, showProduct }) => {
 
     }
     let result = await dispatch(addToCart(obj));
-    console.log(result);
+
     if (result?.payload?.resultCode == 4000) {
       //setOpenBar(true);
       setStatus(result?.payload);

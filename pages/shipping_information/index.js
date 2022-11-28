@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import ShippingInformation from "../../container/ShippingInformation";
 import { useRouter, withRouter } from "next/router";
 import { useSelector, useDispatch } from "react-redux";
+import ShippingMethods from "../../pages/shipping_methods";
+import LockerShippingMethods from "../../pages/Locker_Shipping_Methods";
 import {
   getShipmentAddress,
   getShipmentsMethods,
@@ -38,11 +40,12 @@ const Index = ({ setLockerShippingMethod, setAddressShippingMethod, setShowShipp
   let [shippingAddres, setShippingAddess] = useState();
   let [shippingLockerAddres, setShippingLockerAddess] = useState();
   let [shipLocker, setShipLocker] = useState()
-
-
+  let [boolShipAddress, setBoolShipAddress] = useState(false)
+  let [boolLockerShipAddress, setBoolLockerShipAddress] = useState(false)
+  const [buttonKey, setButtonKey] = React.useState(1);
   let dispatch = useDispatch();
 
-  console.log(lockersAddressData, "lAD");
+
 
   useEffect(() => {
     dispatch(getLockerCountry());
@@ -58,14 +61,12 @@ const Index = ({ setLockerShippingMethod, setAddressShippingMethod, setShowShipp
 
   const handleChange = (event, value) => {
 
-    console.log("Handle Change" + event.target.value)
-
-    console.log(value)
 
     let result = shippingAddressData.filter((result) =>
       result.address_id == value ? result : ""
     )[0];
-
+    setBoolShipAddress(true)
+    setBoolLockerShipAddress(false)
     setShippingAddess(result);
     let obj = {
       address: result.address,
@@ -98,39 +99,34 @@ const Index = ({ setLockerShippingMethod, setAddressShippingMethod, setShowShipp
   }, []);
 
   useEffect(() => {
-    console.log(lockerCountryData);
+
   }, [lockerCountryData]);
 
   const submitHandler = async (value) => {
-    console.log(value);
     let obj = {
       cityId: value.city.city_id,
       countryId: value.country.country_id,
       stateId: value.states.state_id,
     };
-    console.log(obj);
 
     let shippementLocker = await dispatch(addShipmentLockers(obj))
-    console.log(shippementLocker.payload)
     setShipLocker(shippementLocker.payload)
   };
 
   const getStates = (value) => {
-    console.log(value.country_id);
     dispatch(getLockerState(value.country_id));
-    console.log(lockerStatesData);
   };
 
   const getCities = (value) => {
     dispatch(getLockerCity(value.state_id));
-    console.log(lockerCityData);
+
   };
   const handleChangeLocker = (event, value) => {
-    console.log(value);
+    setBoolLockerShipAddress(true)
+    setBoolShipAddress(false)
     let result = lockersAddressData.filter((result) =>
       result.locker_id == value ? result : ""
     )[0];
-    console.log(result);
 
     setShippingLockerAddess(result);
     let obj = {
@@ -151,7 +147,6 @@ const Index = ({ setLockerShippingMethod, setAddressShippingMethod, setShowShipp
     });
   };
   const checkoutHandlerLocker = (event) => {
-    console.log(shippingLockerAddres);
     router.push({
       pathname: "/shipping_details",
       query: { lockerId: shippingLockerAddres.locker_id },
@@ -180,7 +175,11 @@ const Index = ({ setLockerShippingMethod, setAddressShippingMethod, setShowShipp
         checkoutHandlerLocker={checkoutHandlerLocker}
         handleChangeLocker={handleChangeLocker}
         shipLocker={shipLocker}
+        setButtonKey={setButtonKey}
+        buttonKey={buttonKey}
       />
+      {boolShipAddress == true && buttonKey == 1 ? <ShippingMethods /> : <></>}
+      {boolLockerShipAddress == true && buttonKey == 2 ? <LockerShippingMethods /> : <></>}
     </div>
   );
 };

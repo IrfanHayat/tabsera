@@ -109,7 +109,7 @@ export default function NavBar() {
     Cookies.remove("item");
     // Cookies.remove("connect.sid");
     router.push("/");
-    console.log(result);
+
   };
   useEffect(() => {
     changeLanguageHandler();
@@ -123,11 +123,9 @@ export default function NavBar() {
     ) {
       const hostname = window.location.hostname;
       setCurrentHost(hostname);
-      // console.log(hostname);
+
     }
     if (routers.query?.userName != "" && routers.query?.pwd != "") {
-      // console.log(routers.query?.userName);
-      // console.log(routers.query?.pwd);
       dispatch(loginUser(routers.query));
     }
   }, []);

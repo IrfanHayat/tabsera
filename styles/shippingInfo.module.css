@@ -42,7 +42,7 @@
 }
 .LocationOnIcon {
   margin-right: 5px;
-  color: #f34f2f;
+  color: #3d7cff;
 }
 .table {
   overflow-x: auto;
@@ -74,6 +74,19 @@
   box-shadow: rgb(3 0 71 / 9%) 0px 1px 3px;
 }
 
+.addressBoxDiv1 {
+  /* display: flex; */
+  /* height: 92.41000366210938px; */
+  padding: 5px;
+  margin: 16px;
+  width: 100%;
+  left: 0px;
+  top: 0px;
+  background-color: #f6f9fc;
+  border: 1px solid #d8e0e9;
+  border-radius: 8px;
+  box-shadow: rgb(3 0 71 / 9%) 0px 1px 3px;
+}
 .addressLabelDiv {
   width: 100%;
   display: flex;

@@ -1,52 +1,375 @@
 import {
-    List,
-    ListItem,
-    Typography,
-    TextField,
-    Button,
-    Link,
-  } from '@mui/material';
-  import NextLink from 'next/link';
-  import React from 'react';
+  List,
+  ListItem,
+  Typography,
+  TextField,
+  Button,
+  Link,
+  Card
+} from '@mui/material';
+import Box from '@mui/material/Box';
+import Slider from '@mui/material/Slider';
+import NextLink from 'next/link';
+import React, { useState } from 'react';
+import SwipeButton from '../container/SwipeButton'
+import { checkUser } from '../slice/authSlice'
+import { useSelector, useDispatch } from "react-redux";
+import MuiPhoneNumber from "material-ui-phone-number";
+export default function Register({ watch, getValues, register, handleSubmit, classes, control, Controller, errors, redirect }) {
 
-  
-  export default function Register({submitHandler,handleSubmit,classes,control,Controller,errors,redirect}) {
-   
-    return (
-      
-        <form onSubmit={handleSubmit(submitHandler)} className={classes.form}>
-          <Typography component="h1" variant="h1">
-            Register
-          </Typography>
+  let [mobileNumber, setMobileNumber] = useState("")
+  let [unLockVerification, setUnLockVerification] = useState(false)
+
+  let dispatch = useDispatch();
+
+  async function valueText(value) {
+    if (value == true) {
+      console.log(mobileNumber)
+      let result = await dispatch(checkUser(mobileNumber))
+      console.log(result.payload)
+      if (result.payload.resultCode == 2000) {
+        setUnLockVerification(false)
+      } else if (result.payload.resultCode == 4004) {
+        setUnLockVerification(true)
+      }
+    }
+  }
+
+  const submitHandler = ({ firstName, lastName, verification_code, email, password, confirmPassword }) => {
+    console.log("submit Handler")
+    console.log(firstName, lastName, verification_code, email, password, confirmPassword)
+    console.log("=====================")
+  };
+
+
+
+  return (
+    <>
+      <Typography component="h4" variant="h4">
+        Register
+      </Typography>
+      <form onSubmit={handleSubmit(submitHandler)}>
+        <Controller
+          name="phone"
+          control={control}
+          defaultValue=""
+          inputProps={{
+            required: true,
+          }}
+          render={({ field }) => (
+            <MuiPhoneNumber
+              defaultCountry={"us"}
+              onChange={(e) => onChange(setMobileNumber(e.target.value))}
+              fullWidth
+              sx={{ m: 1 }}
+              disableDropdown
+              variant="outlined"
+              id="phone"
+              label="Phone Number"
+              error={Boolean(errors.phone)}
+              {...field}
+            // disableAreaCodes
+            />
+            // <PhoneInput
+            //   variant="outlined"
+            //   inputStyle={{ height: "50px", width: "135%" }}
+            //   id="phone"
+            //   label="Phone"
+            //   error={Boolean(errors.phone)}
+            //   {...field}
+            // ></PhoneInput>
+          )}
+        ></Controller>
+        <SwipeButton Controller={Controller} unLockVerification={unLockVerification} control={control} errors={errors} valueText={valueText} />
+        <Controller
+
+          name="firstName"
+          control={control}
+          defaultValue=""
+          rules={{
+            required: true,
+            minLength: 2,
+
+          }}
+          render={({ field }) => (
+            <TextField
+              sx={{ width: "390px", margin: 3 }}
+              variant="outlined"
+              fullWidth
+              id="firstName"
+              label="First Name"
+              inputProps={{ type: 'name' }}
+              error={Boolean(errors.firstName)}
+              helperText={
+                errors.firstName
+                  ? errors.firstName.type === 'minLength'
+                    ? 'First Name length is more than 1'
+                    : 'First Name is required'
+                  : ''
+              }
+              {...field}
+            ></TextField>
+          )}
+        ></Controller>
+        <Controller
+
+          name="lastName"
+          control={control}
+          defaultValue=""
+          rules={{
+            required: true,
+            minLength: 2,
+
+          }}
+          render={({ field }) => (
+            <TextField
+              sx={{ width: "390px", margin: 3 }}
+              variant="outlined"
+              fullWidth
+              id="lastName"
+              label="Last Name"
+              inputProps={{ type: 'name' }}
+              error={Boolean(errors.name)}
+              helperText={
+                errors.lastName
+                  ? errors.lastName.type === 'minLength'
+                    ? 'Last Name length is more than 1'
+                    : 'Last Name is required'
+                  : ''
+              }
+              {...field}
+            ></TextField>
+          )}
+        ></Controller>
+
+        <Controller
+          name="password"
+          control={control}
+          defaultValue=""
+          rules={{
+            required: true,
+            minLength: 6,
+          }}
+
+          render={({ field: { onChange, onBlur, value, name, ref } }) => (
+            <TextField
+              variant="outlined"
+              fullWidth
+              id="password"
+              label="Password"
+              // {...register('password', {
+              //   required: "You must specify a password",
+              //   minLength: {
+              //     value: 8,
+              //     message: "Password must have at least 8 characters"
+              //   }
+              // })}
+              //onChange={(e) => onChange(setPassword(e.target.value))}
+              inputProps={{ type: 'password' }}
+              error={Boolean(errors.password)}
+              helperText={errors.password
+                ? errors.password.type === 'minLength'
+                  ? 'Password length is more than 5'
+                  : 'Password is required'
+                : ''}
+
+            ></TextField>
+          )}
+        ></Controller>
+
+        <Controller
+          name="confirmPassword"
+          control={control}
+          defaultValue=""
+          rules={{
+            required: true,
+            minLength: 6,
+          }}
+          render={({ field: { onChange, onBlur, value, name, ref } }) => (
+            <TextField
+              variant="outlined"
+              fullWidth
+              id="confirmPassword"
+              label="Confirm Password"
+              inputProps={{ type: 'password' }}
+              //onChange={(e) => onChange(setConfirmPassword(e.target.value))}
+              error={Boolean(errors.confirmPassword)}
+              // {...register("confirmPassword", { required: true })}
+
+              helperText={
+                errors.confirmPassword
+                  ? errors.confirmPassword.type === 'minLength'
+                    ? 'Confirm Password length is more than 5'
+                    : 'Confirm  Password is required'
+                  :
+                  watch("confirmPassword") !== watch("password") &&
+                    getValues("confirmPassword") ? (
+                    <p style={{ color: 'Red' }}>password not match</p>
+                  ) : null
+
+              }
+
+            ></TextField>
+          )}
+        ></Controller>
+
+
+
+        <Button
+          //   onClick={handleSubmit(submitHandler); handleClose()}
+          variant="contained"
+          type="submit"
+          sx={{ m: 1 }}
+          fullWidth
+          color="primary"
+        >
+          Login
+        </Button>
+
+        <Box sx={{ m: 1 }}>
+          Don&apos;t have an account? &nbsp;
+          <NextLink
+            href={`/register?redirect=${redirect || "/"}`}
+            passHref
+          >
+            <Link>Register</Link>
+          </NextLink>
+        </Box>
+      </form>
+
+
+      <form onSubmit={handleSubmit(submitHandler)} className={classes.form}>
+
+
+        <Card>
+
           <List>
-            <ListItem>
+            <ListItem >
               <Controller
-                name="name"
+                name="phoneNumber"
                 control={control}
                 defaultValue=""
                 rules={{
                   required: true,
                   minLength: 2,
                 }}
-                render={({ field }) => (
+
+                render={({ field: { onChange, onBlur, value, name, ref },
+                  fieldState: { invalid, isTouched, isDirty, error } },) => (
                   <TextField
+                    sx={{ width: "400px" }}
                     variant="outlined"
                     fullWidth
-                    id="name"
-                    label="Name"
-                    inputProps={{ type: 'name' }}
+
+                    id="phoneNumber"
+                    label="Phone Number"
+                    onChange={(e) => onChange(setMobileNumber(e.target.value))}
+                    inputProps={{ type: 'number' }}
                     error={Boolean(errors.name)}
                     helperText={
                       errors.name
                         ? errors.name.type === 'minLength'
-                          ? 'Name length is more than 1'
-                          : 'Name is required'
+                          ? 'Mobile Number length is more than 1'
+                          : 'Mobile Number is required'
+                        : ''
+                    }
+
+                  ></TextField>
+                )}
+              ></Controller>
+              {/* <Controller
+              render={({
+                field: { onChange, onBlur, value, name, ref },
+                fieldState: { invalid, isTouched, isDirty, error },
+              }) => (
+                <TextField
+                  value={value}
+                  onChange={(e) => onChange(console.log(e.target.value))} // send value to hook form
+                  onBlur={onBlur} // notify when input is touched
+                  inputRef={ref} // wire up the input ref
+                />
+              )}
+              name="TextField"
+              control={control}
+              rules={{ required: true }}
+            /> */}
+
+              <Controller
+
+                name="firstName"
+                control={control}
+                defaultValue=""
+                rules={{
+                  required: true,
+                  minLength: 2,
+
+                }}
+                render={({ field }) => (
+                  <TextField
+                    sx={{ width: "390px", margin: 3 }}
+                    variant="outlined"
+                    fullWidth
+                    id="firstName"
+                    label="First Name"
+                    inputProps={{ type: 'name' }}
+                    error={Boolean(errors.firstName)}
+                    helperText={
+                      errors.firstName
+                        ? errors.firstName.type === 'minLength'
+                          ? 'First Name length is more than 1'
+                          : 'First Name is required'
                         : ''
                     }
                     {...field}
                   ></TextField>
                 )}
               ></Controller>
+              <Controller
+
+                name="lastName"
+                control={control}
+                defaultValue=""
+                rules={{
+                  required: true,
+                  minLength: 2,
+
+                }}
+                render={({ field }) => (
+                  <TextField
+                    sx={{ width: "390px", margin: 3 }}
+                    variant="outlined"
+                    fullWidth
+                    id="lastName"
+                    label="Last Name"
+                    inputProps={{ type: 'name' }}
+                    error={Boolean(errors.name)}
+                    helperText={
+                      errors.lastName
+                        ? errors.lastName.type === 'minLength'
+                          ? 'Last Name length is more than 1'
+                          : 'Last Name is required'
+                        : ''
+                    }
+                    {...field}
+                  ></TextField>
+                )}
+              ></Controller>
+            </ListItem>
+            <ListItem>
+              {/* <Box sx={{ width: 250 }}>
+              <Slider
+
+                defaultValue={30}
+                getAriaValueText={valuetext}
+                valueLabelDisplay="auto"
+                sx={{ height: 10 }}
+
+                min={10}
+                max={110}
+              />
+
+            </Box> */}
+              <SwipeButton Controller={Controller} unLockVerification={unLockVerification} control={control} errors={errors} valueText={valueText} />
             </ListItem>
             <ListItem>
               <Controller
@@ -67,7 +390,7 @@ import {
                     error={Boolean(errors.email)}
                     helperText={
                       errors.email
-                        ? errors.email.type === 'pattern'
+                        ? errors.email.type === '/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i'
                           ? 'Email is not valid'
                           : 'Email is required'
                         : ''
@@ -77,64 +400,79 @@ import {
                 )}
               ></Controller>
             </ListItem>
-            <ListItem>
-              <Controller
-                name="password"
-                control={control}
-                defaultValue=""
-                rules={{
-                  required: true,
-                  minLength: 6,
-                }}
-                render={({ field }) => (
-                  <TextField
-                    variant="outlined"
-                    fullWidth
-                    id="password"
-                    label="Password"
-                    inputProps={{ type: 'password' }}
-                    error={Boolean(errors.password)}
-                    helperText={
-                      errors.password
-                        ? errors.password.type === 'minLength'
-                          ? 'Password length is more than 5'
-                          : 'Password is required'
-                        : ''
-                    }
-                    {...field}
-                  ></TextField>
-                )}
-              ></Controller>
-            </ListItem>
-            <ListItem>
-              <Controller
-                name="confirmPassword"
-                control={control}
-                defaultValue=""
-                rules={{
-                  required: true,
-                  minLength: 6,
-                }}
-                render={({ field }) => (
-                  <TextField
-                    variant="outlined"
-                    fullWidth
-                    id="confirmPassword"
-                    label="Confirm Password"
-                    inputProps={{ type: 'password' }}
-                    error={Boolean(errors.confirmPassword)}
-                    helperText={
-                      errors.confirmPassword
-                        ? errors.confirmPassword.type === 'minLength'
-                          ? 'Confirm Password length is more than 5'
-                          : 'Confirm  Password is required'
-                        : ''
-                    }
-                    {...field}
-                  ></TextField>
-                )}
-              ></Controller>
-            </ListItem>
+            {/* <ListItem>
+            <Controller
+              name="password"
+              control={control}
+              defaultValue=""
+              rules={{
+                required: true,
+                minLength: 6,
+              }}
+
+              render={({ field: { onChange, onBlur, value, name, ref } }) => (
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  id="password"
+                  label="Password"
+                  // {...register('password', {
+                  //   required: "You must specify a password",
+                  //   minLength: {
+                  //     value: 8,
+                  //     message: "Password must have at least 8 characters"
+                  //   }
+                  // })}
+                  //onChange={(e) => onChange(setPassword(e.target.value))}
+                  inputProps={{ type: 'password' }}
+                  error={Boolean(errors.password)}
+                  helperText={errors.password
+                    ? errors.password.type === 'minLength'
+                      ? 'Password length is more than 5'
+                      : 'Password is required'
+                    : ''}
+
+                ></TextField>
+              )}
+            ></Controller>
+          </ListItem>
+          <ListItem>
+            <Controller
+              name="confirmPassword"
+              control={control}
+              defaultValue=""
+              rules={{
+                required: true,
+                minLength: 6,
+              }}
+              render={({ field: { onChange, onBlur, value, name, ref } }) => (
+                <TextField
+                  variant="outlined"
+                  fullWidth
+                  id="confirmPassword"
+                  label="Confirm Password"
+                  inputProps={{ type: 'password' }}
+                  //onChange={(e) => onChange(setConfirmPassword(e.target.value))}
+                  error={Boolean(errors.confirmPassword)}
+                  // {...register("confirmPassword", { required: true })}
+
+                  helperText={
+                    errors.confirmPassword
+                      ? errors.confirmPassword.type === 'minLength'
+                        ? 'Confirm Password length is more than 5'
+                        : 'Confirm  Password is required'
+                      :
+                      watch("confirmPassword") !== watch("password") &&
+                        getValues("confirmPassword") ? (
+                        <p style={{ color: 'Red' }}>password not match</p>
+                      ) : null
+
+                  }
+
+                ></TextField>
+              )}
+            ></Controller>
+          </ListItem> */}
             <ListItem>
               <Button variant="contained" type="submit" fullWidth color="primary">
                 Register
@@ -147,8 +485,9 @@ import {
               </NextLink>
             </ListItem>
           </List>
-        </form>
-      
-    );
-  }
-  
+        </Card>
+      </form >
+    </>
+
+  );
+}

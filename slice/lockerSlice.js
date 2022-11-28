@@ -9,7 +9,7 @@ export const getLockers = createAsyncThunk(
   "customers/address/lockers",
   async () => {
     const result = await instance.get(`${url}/customers/addresses/lockers`);
-    console.log(result);
+
     return result.data.response;
   }
 );
@@ -26,7 +26,7 @@ export const addShipmentLockers = createAsyncThunk(
       `${url}/customers/addresses/lockers/find`,
       requestBody
     );
-    console.log(result.data.lockers);
+
     return result.data.lockers;
   }
 );
@@ -44,7 +44,7 @@ export const getLockerCountry = createAsyncThunk("countries", async () => {
   const result = await instance.get(
     `${url}/customers/addresses/lockers/countries`
   );
-  console.log(result.data.countries);
+
   return result.data.countries;
 });
 
@@ -60,7 +60,7 @@ export const getLockerCity = createAsyncThunk("cities", async (id) => {
   const result = await instance.get(
     `${url}/customers/addresses/lockers/cities/${id}`
   );
-  console.log(result.data);
+
   return result.data.cities;
 });
 

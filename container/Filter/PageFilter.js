@@ -34,12 +34,10 @@ function PageFilter({
     dispatch(getDeals());
   }, []);
   const handleChange = async (event) => {
-    console.log("Handle Change");
-    console.log(event.target.value);
-    console.log("---------------------------");
+
     if (event.target.value == "deals") {
       let deals = await dispatch(getDeals());
-      console.log(deals);
+
       setDealsData(deals.payload);
       setShowProduct(false);
       setShowDeals(true);
@@ -52,7 +50,7 @@ function PageFilter({
     }
     if (event.target.value == "discounts") {
       let discounts = await dispatch(getDiscounts());
-      console.log(discounts.payload);
+
       setDiscountData(discounts.payload);
       setShowProduct(false);
       setShowDiscounts(true);
@@ -66,7 +64,7 @@ function PageFilter({
 
     if (event.target.value == "freeShipping") {
       let freeShipping = await dispatch(getFreeShipping());
-      console.log(freeShipping.payload);
+
       setFreeShippingData(freeShipping.payload);
       setShowProduct(true);
       setShowDiscounts(false);
