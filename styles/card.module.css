@@ -83,7 +83,7 @@
   display: flex;
   justify-content: space-between;
   margin-left: 16px;
-  color: #3d7cff;
+  color: #0a3446;
 }
 .prodCostValue {
   font-size: 14px;
@@ -122,8 +122,8 @@
   /* margin-top: 8px; */
 }
 .btnAddCart {
-  border: 1px solid #3d7cff;
-  color: #3d7cff;
+  border: 1px solid #0a3446;
+  color: #0a3446;
   border-radius: 4px;
   height: 24px;
   width: 24px;

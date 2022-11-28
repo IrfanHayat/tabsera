@@ -38,7 +38,7 @@ const MyApp = ({ Component, pageProps }) => {
       <ThemeProvider>
         {/* <CookiesProvider> */}
         <Head>
-          <link rel="icon" href="/favicon.png" />
+          <link rel="icon" href="/tijari1.png" />
         </Head>
         <NavBar />
 

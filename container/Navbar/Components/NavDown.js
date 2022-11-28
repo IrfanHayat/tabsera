@@ -250,9 +250,9 @@ export default function NavDown(props) {
             }}
           >
             <Image
-              src="/bigLogo.png"
-              alt="/bigLogo.png"
-              height="100px"
+              src="/tijariLogo.png"
+              alt="/tijariLogo.png"
+              height="60px"
               width="220px"
 
               // onMouseOver={cu}

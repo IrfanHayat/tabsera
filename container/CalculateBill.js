@@ -1,3 +1,4 @@
+
 import React from "react";
 import { useTranslation } from "react-i18next";
 import {
@@ -25,7 +26,7 @@ import { RouteGuard } from "../RouterGuard";
 import Currency from "./Currency/currency";
 import styles from "../styles/calculateBills.module.css";
 function CalculateBill({ productPrice, checkoutHandler }) {
-
+  console.log(productPrice);
   let { t, i18n } = useTranslation();
   return (
     <Grid item md={12} xs={12}>
@@ -97,12 +98,12 @@ function CalculateBill({ productPrice, checkoutHandler }) {
                 component="h5"
                 variant="h5"
                 // m={1}
-                sx={{ color: "#3d7cff" }}
+                sx={{ color: "#f34f2f" }}
                 style={{ fontWeight: "bold" }}
               // align="center"
               >
                 <Currency amount={productPrice ? (
-                  productPrice.reduce((a, c) => a + c.qty * c.product_cost, 0)
+                  productPrice.reduce((a, c) => a + c.qty * c.price, 0)
                 ) : (
                   <></>
                 )}></Currency>

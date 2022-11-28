@@ -93,9 +93,9 @@
   width: 147px;
   font-size: 16px;
   color: #fff;
-  border: 1px solid #3d7cff;
+  border: 1px solid #f34f2f;
   border-radius: 4px;
-  background-color: #3d7cff;
+  background-color: #f34f2f;
 }
 .addToCartbtn {
   display: flex;
@@ -103,16 +103,16 @@
   height: 40px;
   width: 147px;
   font-size: 16px;
-  color: #3d7cff;
-  border: 1px solid #3d7cff;
+  color: #f34f2f;
+  border: 1px solid 1px solid #f34f2f;
   border-radius: 4px;
   background-color: #fff;
 }
 
 .addToCartbtn :hover {
-  color: #f34f2f;
-  border: 1px solid #f34f2f;
-  background-color: #f34f2f;
+  color: #3d7cff;
+  border: 1px solid #3d7cff;
+  background-color: #fff;
 }
 
 .merchantName {

@@ -1,3 +1,4 @@
+
 import { alpha } from "@mui/material/styles";
 import i18n from "../i18n";
 // ----------------------------------------------------------------------
@@ -18,7 +19,7 @@ const GREY = {
   700: "#454F5B",
   800: "#212B36",
   900: "#161C24",
-  500_8: alpha("#f34f2f", 0.08),
+  500_8: alpha("#919EAB", 0.08),
   500_12: alpha("#919EAB", 0.12),
   500_16: alpha("#919EAB", 0.16),
   500_24: alpha("#919EAB", 0.24),
@@ -31,7 +32,7 @@ const GREY = {
 const PRIMARY = {
   // lighter: "#D1E9FC",
   // light: "#76B0F1",
-  main: "#3d7cff",
+  main: "#0a3446",
   // dark: "#103996",
   // darker: "#061B64",
   // contrastText: "#fff",
@@ -40,7 +41,7 @@ const PRIMARY = {
 const SECONDARY = {
   lighter: "#D6E4FF",
   light: "#84A9FF",
-  main: "#3d7cff",
+  main: "#3366FF",
   dark: "#1939B7",
   darker: "#091A7A",
   contrastText: "#fff",

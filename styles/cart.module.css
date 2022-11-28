@@ -13,7 +13,7 @@
   background: #ffffff;
   /* Shadow/small - Card */
 
-  box-shadow: rgb(43 52 69 / 10%) 0px 4px 16px;
+  box-shadow:  rgb(43 52 69 / 10%) 0px 4px 16px;
   /* flex-direction: ; */
 }
 
@@ -58,7 +58,7 @@
 }
 
 .cartItemPriceValue {
-  color: #3d7cff;
+  color: #f34f2f;
   font-family: "Open Sans";
   font-style: normal;
   font-weight: 600;
@@ -68,7 +68,7 @@
 .quantityBtns {
   width: 32px;
   height: 32px;
-  color: #3d7cff;
+  color: #f34f2f;
   border-radius: 4px;
   /* border: 1px solid #f34f2f; */
 }
