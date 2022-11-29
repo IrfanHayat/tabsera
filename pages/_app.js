@@ -13,7 +13,7 @@ import NavBar from "../container/Navbar/NavBar";
 import Footer from "../container/Footer/Footer";
 import { Box } from "@mui/material";
 import "../i18n";
-
+import { useRouter } from 'next/router'
 import { Container } from "@mui/material";
 import AOS from "aos";
 import "aos/dist/aos.css";
@@ -23,7 +23,10 @@ import { RouteGuard } from "../RouterGuard";
 
 
 const MyApp = ({ Component, pageProps }) => {
+  const router = useRouter()
   useEffect(() => {
+    console.log(router.asPath)
+
     AOS.init({
       easing: "ease-out-cubic",
       // once: true,
