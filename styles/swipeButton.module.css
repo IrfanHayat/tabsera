@@ -1,7 +1,9 @@
 .ReactSwipeButton {
   float: left;
-  width: 100%;
+  width: 92%;
   height: 50px;
+  margin-top: 20px;
+  margin-left: 20px;
   position: relative;
 }
 .ReactSwipeButton,

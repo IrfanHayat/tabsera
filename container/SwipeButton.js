@@ -38,7 +38,7 @@ export default class CustomButton extends Component {
             document.addEventListener("mousemove", this.onDrag);
             document.addEventListener("mouseup", this.stopDrag);
         }
-        this.containerWidth = container.current.clientWidth - 50;
+        this.containerWidth = container.current?.clientWidth - 50;
     }
 
     onDrag = (e) => {
@@ -142,7 +142,7 @@ export default class CustomButton extends Component {
                     }}
                     render={({ field }) => (
                         <TextField
-                            sx={{ width: "390px" }}
+                            sx={{ width: "1000px", mt: 3, ml: 3 }}
                             variant="outlined"
                             fullWidth
                             id="verification_code"

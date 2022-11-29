@@ -12,7 +12,7 @@ import Slider from '@mui/material/Slider';
 import NextLink from 'next/link';
 import React, { useState } from 'react';
 import SwipeButton from '../container/SwipeButton'
-import { checkUser } from '../slice/authSlice'
+import { checkUser, registerUser } from '../slice/authSlice'
 import { useSelector, useDispatch } from "react-redux";
 import MuiPhoneNumber from "material-ui-phone-number";
 export default function Register({ watch, getValues, register, handleSubmit, classes, control, Controller, errors, redirect }) {
@@ -35,10 +35,12 @@ export default function Register({ watch, getValues, register, handleSubmit, cla
     }
   }
 
-  const submitHandler = ({ firstName, lastName, verification_code, email, password, confirmPassword }) => {
+  const submitHandler = async ({ email, firstName, mobileNumber, lastName, password, confirmPassword, verification_code }) => {
     console.log("submit Handler")
-    console.log(firstName, lastName, verification_code, email, password, confirmPassword)
-    console.log("=====================")
+    console.log(firstName, mobileNumber, lastName, password, confirmPassword, verification_code, email)
+    let obj = { "channelid": 1, "deviceid": "", "email": email, "firstName": firstName, "lastName": lastName, "mobile_number": mobileNumber, "password": password }
+    let result = await dispatch(registerUser(obj))
+    console.log(result)
   };
 
 
@@ -50,34 +52,33 @@ export default function Register({ watch, getValues, register, handleSubmit, cla
       </Typography>
       <form onSubmit={handleSubmit(submitHandler)}>
         <Controller
-          name="phone"
+
+          name="mobileNumber"
           control={control}
           defaultValue=""
-          inputProps={{
+          rules={{
             required: true,
+            minLength: 2,
+
           }}
           render={({ field }) => (
-            <MuiPhoneNumber
-              defaultCountry={"us"}
-              onChange={(e) => onChange(setMobileNumber(e.target.value))}
-              fullWidth
-              sx={{ m: 1 }}
-              disableDropdown
+            <TextField
+              sx={{ width: "1000px", margin: 3 }}
               variant="outlined"
-              id="phone"
+              fullWidth
+              id="mobileNumber"
               label="Phone Number"
-              error={Boolean(errors.phone)}
+              inputProps={{ type: 'number' }}
+              error={Boolean(errors.mobileNumber)}
+              helperText={
+                errors.mobileNumber
+                  ? errors.mobileNumber.type === 'minLength'
+                    ? 'First Name length is more than 1'
+                    : 'First Name is required'
+                  : ''
+              }
               {...field}
-            // disableAreaCodes
-            />
-            // <PhoneInput
-            //   variant="outlined"
-            //   inputStyle={{ height: "50px", width: "135%" }}
-            //   id="phone"
-            //   label="Phone"
-            //   error={Boolean(errors.phone)}
-            //   {...field}
-            // ></PhoneInput>
+            ></TextField>
           )}
         ></Controller>
         <SwipeButton Controller={Controller} unLockVerification={unLockVerification} control={control} errors={errors} valueText={valueText} />
@@ -93,7 +94,7 @@ export default function Register({ watch, getValues, register, handleSubmit, cla
           }}
           render={({ field }) => (
             <TextField
-              sx={{ width: "390px", margin: 3 }}
+              sx={{ width: "490px", margin: 3 }}
               variant="outlined"
               fullWidth
               id="firstName"
@@ -123,7 +124,7 @@ export default function Register({ watch, getValues, register, handleSubmit, cla
           }}
           render={({ field }) => (
             <TextField
-              sx={{ width: "390px", margin: 3 }}
+              sx={{ width: "470px", margin: 3 }}
               variant="outlined"
               fullWidth
               id="lastName"
@@ -143,6 +144,35 @@ export default function Register({ watch, getValues, register, handleSubmit, cla
         ></Controller>
 
         <Controller
+          name="email"
+          control={control}
+          defaultValue=""
+          rules={{
+            required: true,
+            pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+          }}
+          render={({ field }) => (
+            <TextField
+              variant="outlined"
+              sx={{ width: "1000px", margin: 3 }}
+
+              id="email"
+              label="Email"
+              inputProps={{ type: 'email' }}
+              error={Boolean(errors.email)}
+              helperText={
+                errors.email
+                  ? errors.email.type === '/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i'
+                    ? 'Email is not valid'
+                    : 'Email is required'
+                  : ''
+              }
+              {...field}
+            ></TextField>
+          )}
+        ></Controller>
+
+        <Controller
           name="password"
           control={control}
           defaultValue=""
@@ -154,16 +184,17 @@ export default function Register({ watch, getValues, register, handleSubmit, cla
           render={({ field: { onChange, onBlur, value, name, ref } }) => (
             <TextField
               variant="outlined"
-              fullWidth
+              sx={{ width: "1000px", margin: 3 }}
+
               id="password"
               label="Password"
-              // {...register('password', {
-              //   required: "You must specify a password",
-              //   minLength: {
-              //     value: 8,
-              //     message: "Password must have at least 8 characters"
-              //   }
-              // })}
+              {...register('password', {
+                required: "You must specify a password",
+                minLength: {
+                  value: 8,
+                  message: "Password must have at least 8 characters"
+                }
+              })}
               //onChange={(e) => onChange(setPassword(e.target.value))}
               inputProps={{ type: 'password' }}
               error={Boolean(errors.password)}
@@ -188,13 +219,14 @@ export default function Register({ watch, getValues, register, handleSubmit, cla
           render={({ field: { onChange, onBlur, value, name, ref } }) => (
             <TextField
               variant="outlined"
-              fullWidth
+              sx={{ width: "1000px", margin: 3 }}
+
               id="confirmPassword"
               label="Confirm Password"
               inputProps={{ type: 'password' }}
               //onChange={(e) => onChange(setConfirmPassword(e.target.value))}
               error={Boolean(errors.confirmPassword)}
-              // {...register("confirmPassword", { required: true })}
+              {...register("confirmPassword", { required: true })}
 
               helperText={
                 errors.confirmPassword
@@ -219,274 +251,18 @@ export default function Register({ watch, getValues, register, handleSubmit, cla
           //   onClick={handleSubmit(submitHandler); handleClose()}
           variant="contained"
           type="submit"
-          sx={{ m: 1 }}
+          sx={{ m: 3, width: "1000px" }}
           fullWidth
           color="primary"
         >
-          Login
+          Signup
         </Button>
 
-        <Box sx={{ m: 1 }}>
-          Don&apos;t have an account? &nbsp;
-          <NextLink
-            href={`/register?redirect=${redirect || "/"}`}
-            passHref
-          >
-            <Link>Register</Link>
-          </NextLink>
-        </Box>
+
       </form>
 
 
-      <form onSubmit={handleSubmit(submitHandler)} className={classes.form}>
 
-
-        <Card>
-
-          <List>
-            <ListItem >
-              <Controller
-                name="phoneNumber"
-                control={control}
-                defaultValue=""
-                rules={{
-                  required: true,
-                  minLength: 2,
-                }}
-
-                render={({ field: { onChange, onBlur, value, name, ref },
-                  fieldState: { invalid, isTouched, isDirty, error } },) => (
-                  <TextField
-                    sx={{ width: "400px" }}
-                    variant="outlined"
-                    fullWidth
-
-                    id="phoneNumber"
-                    label="Phone Number"
-                    onChange={(e) => onChange(setMobileNumber(e.target.value))}
-                    inputProps={{ type: 'number' }}
-                    error={Boolean(errors.name)}
-                    helperText={
-                      errors.name
-                        ? errors.name.type === 'minLength'
-                          ? 'Mobile Number length is more than 1'
-                          : 'Mobile Number is required'
-                        : ''
-                    }
-
-                  ></TextField>
-                )}
-              ></Controller>
-              {/* <Controller
-              render={({
-                field: { onChange, onBlur, value, name, ref },
-                fieldState: { invalid, isTouched, isDirty, error },
-              }) => (
-                <TextField
-                  value={value}
-                  onChange={(e) => onChange(console.log(e.target.value))} // send value to hook form
-                  onBlur={onBlur} // notify when input is touched
-                  inputRef={ref} // wire up the input ref
-                />
-              )}
-              name="TextField"
-              control={control}
-              rules={{ required: true }}
-            /> */}
-
-              <Controller
-
-                name="firstName"
-                control={control}
-                defaultValue=""
-                rules={{
-                  required: true,
-                  minLength: 2,
-
-                }}
-                render={({ field }) => (
-                  <TextField
-                    sx={{ width: "390px", margin: 3 }}
-                    variant="outlined"
-                    fullWidth
-                    id="firstName"
-                    label="First Name"
-                    inputProps={{ type: 'name' }}
-                    error={Boolean(errors.firstName)}
-                    helperText={
-                      errors.firstName
-                        ? errors.firstName.type === 'minLength'
-                          ? 'First Name length is more than 1'
-                          : 'First Name is required'
-                        : ''
-                    }
-                    {...field}
-                  ></TextField>
-                )}
-              ></Controller>
-              <Controller
-
-                name="lastName"
-                control={control}
-                defaultValue=""
-                rules={{
-                  required: true,
-                  minLength: 2,
-
-                }}
-                render={({ field }) => (
-                  <TextField
-                    sx={{ width: "390px", margin: 3 }}
-                    variant="outlined"
-                    fullWidth
-                    id="lastName"
-                    label="Last Name"
-                    inputProps={{ type: 'name' }}
-                    error={Boolean(errors.name)}
-                    helperText={
-                      errors.lastName
-                        ? errors.lastName.type === 'minLength'
-                          ? 'Last Name length is more than 1'
-                          : 'Last Name is required'
-                        : ''
-                    }
-                    {...field}
-                  ></TextField>
-                )}
-              ></Controller>
-            </ListItem>
-            <ListItem>
-              {/* <Box sx={{ width: 250 }}>
-              <Slider
-
-                defaultValue={30}
-                getAriaValueText={valuetext}
-                valueLabelDisplay="auto"
-                sx={{ height: 10 }}
-
-                min={10}
-                max={110}
-              />
-
-            </Box> */}
-              <SwipeButton Controller={Controller} unLockVerification={unLockVerification} control={control} errors={errors} valueText={valueText} />
-            </ListItem>
-            <ListItem>
-              <Controller
-                name="email"
-                control={control}
-                defaultValue=""
-                rules={{
-                  required: true,
-                  pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
-                }}
-                render={({ field }) => (
-                  <TextField
-                    variant="outlined"
-                    fullWidth
-                    id="email"
-                    label="Email"
-                    inputProps={{ type: 'email' }}
-                    error={Boolean(errors.email)}
-                    helperText={
-                      errors.email
-                        ? errors.email.type === '/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i'
-                          ? 'Email is not valid'
-                          : 'Email is required'
-                        : ''
-                    }
-                    {...field}
-                  ></TextField>
-                )}
-              ></Controller>
-            </ListItem>
-            {/* <ListItem>
-            <Controller
-              name="password"
-              control={control}
-              defaultValue=""
-              rules={{
-                required: true,
-                minLength: 6,
-              }}
-
-              render={({ field: { onChange, onBlur, value, name, ref } }) => (
-                <TextField
-                  variant="outlined"
-                  fullWidth
-                  id="password"
-                  label="Password"
-                  // {...register('password', {
-                  //   required: "You must specify a password",
-                  //   minLength: {
-                  //     value: 8,
-                  //     message: "Password must have at least 8 characters"
-                  //   }
-                  // })}
-                  //onChange={(e) => onChange(setPassword(e.target.value))}
-                  inputProps={{ type: 'password' }}
-                  error={Boolean(errors.password)}
-                  helperText={errors.password
-                    ? errors.password.type === 'minLength'
-                      ? 'Password length is more than 5'
-                      : 'Password is required'
-                    : ''}
-
-                ></TextField>
-              )}
-            ></Controller>
-          </ListItem>
-          <ListItem>
-            <Controller
-              name="confirmPassword"
-              control={control}
-              defaultValue=""
-              rules={{
-                required: true,
-                minLength: 6,
-              }}
-              render={({ field: { onChange, onBlur, value, name, ref } }) => (
-                <TextField
-                  variant="outlined"
-                  fullWidth
-                  id="confirmPassword"
-                  label="Confirm Password"
-                  inputProps={{ type: 'password' }}
-                  //onChange={(e) => onChange(setConfirmPassword(e.target.value))}
-                  error={Boolean(errors.confirmPassword)}
-                  // {...register("confirmPassword", { required: true })}
-
-                  helperText={
-                    errors.confirmPassword
-                      ? errors.confirmPassword.type === 'minLength'
-                        ? 'Confirm Password length is more than 5'
-                        : 'Confirm  Password is required'
-                      :
-                      watch("confirmPassword") !== watch("password") &&
-                        getValues("confirmPassword") ? (
-                        <p style={{ color: 'Red' }}>password not match</p>
-                      ) : null
-
-                  }
-
-                ></TextField>
-              )}
-            ></Controller>
-          </ListItem> */}
-            <ListItem>
-              <Button variant="contained" type="submit" fullWidth color="primary">
-                Register
-              </Button>
-            </ListItem>
-            <ListItem>
-              Already have an account? &nbsp;
-              <NextLink href={`/login?redirect=${redirect || '/'}`} passHref>
-                <Link>Login</Link>
-              </NextLink>
-            </ListItem>
-          </List>
-        </Card>
-      </form >
     </>
 
   );

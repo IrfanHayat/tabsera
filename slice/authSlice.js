@@ -25,6 +25,7 @@ const initialState = {
   logOut: {},
   userLoaded: false,
   check: "",
+  register: ''
 };
 
 export const checkUser = createAsyncThunk(
@@ -188,17 +189,8 @@ const authSlice = createSlice({
       return { ...state, registerStatus: "pending" };
     });
     builder.addCase(registerUser.fulfilled, (state, action) => {
-      if (action.payload) {
-        const user = jwtDecode(action.payload);
-        return {
-          ...state,
-          token: action.payload,
-          name: user.name,
-          email: user.email,
-          _id: user._id,
-          registerStatus: "success",
-        };
-      } else return state;
+      state.register = action.payload;
+      state.loading = false;
     });
     builder.addCase(registerUser.rejected, (state, action) => {
       return {
