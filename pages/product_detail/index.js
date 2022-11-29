@@ -11,6 +11,8 @@ import {
 } from "../../slice/basketSlice";
 import MuiAlert from "@mui/material/Alert";
 import { useRouter, withRouter } from "next/router";
+import Grid from "@mui/material/Grid";
+import Loader from "../../container/Loader";
 import { getProductWithId, getProduct, getRelatedProduct, getReviewsProduct } from "../../slice/productSlice";
 import { getMerchantWithId } from "../../slice/merchantSlice";
 import ModalData from "../../container/Login/ModalData";
@@ -42,6 +44,7 @@ function Product_detail(props) {
   let dispatch = useDispatch();
   let [filterData, setFilterData] = useState({});
   const [openBar, setOpenBar] = React.useState(false);
+  let [isLoading, setIsLoading] = useState(false);
   const { cartItems } = useSelector((state) => state.basket.cart);
 
   const [open, setOpen] = React.useState(false);
@@ -142,6 +145,7 @@ function Product_detail(props) {
   useMemo(() => skuData(filterProductData.skus), [filterProductData.skus]);
 
   const addToCartHandler = async (item, skus) => {
+    setIsLoading(true)
     if (skus) {
       let product = {
         product_id: item.product_id,
@@ -157,6 +161,7 @@ function Product_detail(props) {
       // console.log("product");
       // console.log(product);
       let result = await dispatch(addToCart(product));
+
       dispatch(getCartItems());
 
       if (result?.payload?.resultCode == 4000) {
@@ -165,6 +170,8 @@ function Product_detail(props) {
         setOpen(true);
         Cookies.set("item", JSON.stringify(product));
       } else {
+
+        setIsLoading(false)
         dispatch(getCartItems());
         dispatch(getTotalCartQuantity());
         setTimeout(() => {
@@ -184,6 +191,7 @@ function Product_detail(props) {
         setOpen(true);
         Cookies.set("item", JSON.stringify(item));
       } else {
+        setIsLoading(true)
         dispatch(getCartItems());
         dispatch(getTotalCartQuantity());
         setTimeout(() => {
@@ -212,6 +220,7 @@ function Product_detail(props) {
   }, []);
 
   const BuyHandler = async (item, skus) => {
+    setIsLoading(true)
     if (skus) {
       let product = {
         product_id: item.product_id,
@@ -235,6 +244,7 @@ function Product_detail(props) {
         setBuyStatus(true);
         Cookies.set("item", JSON.stringify(product));
       } else {
+        setIsLoading(false)
         localStorage.setItem("buyItem", true);
         router.push("/cart");
       }
@@ -253,6 +263,7 @@ function Product_detail(props) {
         setBuyStatus(true);
         Cookies.set("item", JSON.stringify(item));
       } else {
+        setIsLoading(true)
         localStorage.setItem("buyItem", true);
         router.push("/cart");
       }
@@ -319,43 +330,57 @@ function Product_detail(props) {
           </Alert>
         </Snackbar>
       )}
-      {Object.keys(filterData).length > 0 ? (
-        <Details
-          productDetail={filterData || {}}
-          merchantDetail={merchantData}
-          addToCartHandler={addToCartHandler}
-          BuyHandler={BuyHandler}
-          productImage={productImage}
-          handleAddToCart={handleAddToCart}
-          productAttributes={productAttributes}
-          price={price}
-          checkoutHandler={checkoutHandler}
-          viewStore={viewStore}
-          productIdRoute={router.query.productId}
-          getRelatedProduct={getRelatedProduct}
-          viewProduct={viewProduct}
-          getReviewsProduct={getReviewsProduct}
-          id={router.query?.productId}
-        ></Details>
+      {isLoading ? (
+        <Grid
+          sx={{
+            display: "flex",
+            minHeight: 500,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Loader></Loader>
+        </Grid>
       ) : (
-        <Details
-          productDetail={productNewData || {}}
-          merchantDetail={merchantData}
-          addToCartHandler={addToCartHandler}
-          BuyHandler={BuyHandler}
-          handleAddToCart={handleAddToCart}
-          productImage={productImage}
-          productAttributes={productAttributes}
-          price={price}
-          checkoutHandler={checkoutHandler}
-          viewStore={viewStore}
-          productIdRoute={router.query.productId}
-          getRelatedProduct={getRelatedProduct}
-          viewProduct={viewProduct}
-          getReviewsProduct={getReviewsProduct}
-          id={router.query?.productId}
-        ></Details>
+        <>{Object.keys(filterData).length > 0 ? (
+          <Details
+            productDetail={filterData || {}}
+            merchantDetail={merchantData}
+            addToCartHandler={addToCartHandler}
+            BuyHandler={BuyHandler}
+            productImage={productImage}
+            handleAddToCart={handleAddToCart}
+            productAttributes={productAttributes}
+            price={price}
+            checkoutHandler={checkoutHandler}
+            viewStore={viewStore}
+            productIdRoute={router.query.productId}
+            getRelatedProduct={getRelatedProduct}
+            viewProduct={viewProduct}
+            getReviewsProduct={getReviewsProduct}
+            id={router.query?.productId}
+          ></Details>
+        ) : (
+          <Details
+            productDetail={productNewData || {}}
+            merchantDetail={merchantData}
+            addToCartHandler={addToCartHandler}
+            BuyHandler={BuyHandler}
+            handleAddToCart={handleAddToCart}
+            productImage={productImage}
+            productAttributes={productAttributes}
+            price={price}
+            checkoutHandler={checkoutHandler}
+            viewStore={viewStore}
+            productIdRoute={router.query.productId}
+            getRelatedProduct={getRelatedProduct}
+            viewProduct={viewProduct}
+            getReviewsProduct={getReviewsProduct}
+            id={router.query?.productId}
+          ></Details>
+        )}</>
       )}
+
     </>
   );
 }
