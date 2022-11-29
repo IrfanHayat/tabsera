@@ -82,7 +82,7 @@ export const loginUser = createAsyncThunk(
           // imsi: "",
 
           channelId: 1,
-          mobileNumber: values.phone.replace(/[^\d]/g, ""),
+          mobileNumber: values.phone,
           //  otp: "127484",
           password: values.password,
           // registrationToken: ""

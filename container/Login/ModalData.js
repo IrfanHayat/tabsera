@@ -254,14 +254,14 @@ export default function ModalLoginData({
               width: "100%",
             }}
           >
-            <Button
+            {/* <Button
               variant={nameLogin ? "contained" : "outlined"}
               //   size="small"
               //   disabled={nameLogin ? "" : "disabled"}
               onClick={() => setNameLogin(true)}
             >
               Sign In with UserName
-            </Button>
+            </Button> */}
             <Button
               variant={nameLogin ? "outlined" : "contained"}
               //   size="small"
@@ -269,11 +269,11 @@ export default function ModalLoginData({
               //   disabled={nameLogin ? "disabled" : ""}
               onClick={() => setNameLogin(false)}
             >
-              Sign In with Phone
+              Sign In
             </Button>
           </Box>
           <DialogContent sx={{ width: "100" }}>
-            {nameLogin ? (
+            {/* {nameLogin ? (
               <form onSubmit={handleSubmit(submitHandler)}>
                 <Controller
                   name="userName"
@@ -379,121 +379,151 @@ export default function ModalLoginData({
                   </NextLink>
                 </Box>
               </form>
-            ) : (
-              <form onSubmit={handleSubmit(submitHandler1)}>
-                <Controller
-                  name="phone"
-                  control={control}
-                  defaultValue=""
-                  inputProps={{
-                    required: true,
-                  }}
-                  render={({ field }) => (
-                    <MuiPhoneNumber
-                      defaultCountry={"us"}
-                      fullWidth
-                      sx={{ m: 1 }}
-                      disableDropdown
-                      variant="outlined"
-                      id="phone"
-                      label="Phone Number"
-                      error={Boolean(errors.phone)}
-                      {...field}
-                    // disableAreaCodes
-                    />
-                    // <PhoneInput
-                    //   variant="outlined"
-                    //   inputStyle={{ height: "50px", width: "135%" }}
-                    //   id="phone"
-                    //   label="Phone"
-                    //   error={Boolean(errors.phone)}
-                    //   {...field}
-                    // ></PhoneInput>
-                  )}
-                ></Controller>
-                <Controller
-                  name="password"
-                  control={control}
-                  defaultValue=""
-                  rules={{
-                    required: true,
-                    minLength: 7,
-                  }}
-                  render={({ field }) => (
-                    <TextField
-                      variant="outlined"
-                      fullWidth
-                      sx={{ m: 1 }}
-                      id="password"
-                      label="Password"
-                      type={showPassword ? "text" : "password"}
-                      // inputProps={{ type: "password" }}
-                      error={Boolean(errors.password)}
-                      helperText={
-                        errors.password
-                          ? errors.password.type === "minLength"
-                            ? "Password length is more than 5"
-                            : "Password is required"
-                          : ""
-                      }
-                      {...field}
-                      InputProps={{
-                        endAdornment: (
-                          <InputAdornment
-                            position="end"
-                            onClick={handleShowPassword}
-                          >
-                            {showPassword ? (
-                              <VisibilityOffIcon />
-                            ) : (
-                              <VisibilityIcon />
-                            )}
-                          </InputAdornment>
-                        ),
-                      }}
-                    // InputProps={{
-                    //   endAdornment: (
-                    //     <InputAdornment position="end">
-                    //       <IconButton
-                    //         aria-label="Toggle password visibility"
-                    //         onClick={handleShowPassword}
-                    //         // onMouseDown={this.handleMouseDownPassword}
-                    //       >
-                    //         {showPassword ? (
-                    //           <VisibilityOffIcon />
-                    //         ) : (
-                    //           <VisibilityIcon />
-                    //         )}
-                    //       </IconButton>
-                    //     </InputAdornment>
-                    //   ),
-                    // }}
-                    ></TextField>
-                  )}
-                ></Controller>
+            ) : ( */}
+            <form onSubmit={handleSubmit(submitHandler1)}>
+              {/* <Controller
+                name="phone"
+                control={control}
+                defaultValue=""
+                inputProps={{
+                  required: true,
+                }}
+                render={({ field }) => (
+                  <MuiPhoneNumber
+                    defaultCountry={"us"}
+                    fullWidth
+                    sx={{ m: 1 }}
+                    disableDropdown
+                    variant="outlined"
+                    id="phone"
+                    label="Phone Number"
+                    error={Boolean(errors.phone)}
+                    {...field}
+                  // disableAreaCodes
+                  />
+                  // <PhoneInput
+                  //   variant="outlined"
+                  //   inputStyle={{ height: "50px", width: "135%" }}
+                  //   id="phone"
+                  //   label="Phone"
+                  //   error={Boolean(errors.phone)}
+                  //   {...field}
+                  // ></PhoneInput>
+                )}
+              ></Controller> */}
+              <Controller
 
-                <Button
-                  //   onClick={handleSubmit(submitHandler); handleClose()}
-                  variant="contained"
-                  type="submit"
-                  sx={{ m: 1 }}
-                  fullWidth
-                  color="primary"
+                name="phone"
+                control={control}
+                defaultValue=""
+                rules={{
+                  required: true,
+                  minLength: 2,
+
+                }}
+                render={({ field }) => (
+                  <TextField
+                    sx={{ margin: 1 }}
+                    variant="outlined"
+                    fullWidth
+                    id="phone"
+                    label="Phone Number / userName "
+                    inputProps={{ type: 'name' }}
+                    error={Boolean(errors.phone)}
+                    helperText={
+                      errors.phone
+                        ? errors.phone.type === 'minLength'
+                          ? 'UserName/Phone length is more than 1'
+                          : 'UserName/Phone is required'
+                        : ''
+                    }
+                    {...field}
+                  ></TextField>
+                )}
+              ></Controller>
+              <Controller
+                name="password"
+                control={control}
+                defaultValue=""
+                rules={{
+                  required: true,
+                  minLength: 7,
+                }}
+                render={({ field }) => (
+                  <TextField
+                    variant="outlined"
+                    fullWidth
+                    sx={{ m: 1 }}
+                    id="password"
+                    label="Password"
+                    type={showPassword ? "text" : "password"}
+                    // inputProps={{ type: "password" }}
+                    error={Boolean(errors.password)}
+                    helperText={
+                      errors.password
+                        ? errors.password.type === "minLength"
+                          ? "Password length is more than 5"
+                          : "Password is required"
+                        : ""
+                    }
+                    {...field}
+                    InputProps={{
+                      endAdornment: (
+                        <InputAdornment
+                          position="end"
+                          onClick={handleShowPassword}
+                        >
+                          {showPassword ? (
+                            <VisibilityOffIcon />
+                          ) : (
+                            <VisibilityIcon />
+                          )}
+                        </InputAdornment>
+                      ),
+                    }}
+                  // InputProps={{
+                  //   endAdornment: (
+                  //     <InputAdornment position="end">
+                  //       <IconButton
+                  //         aria-label="Toggle password visibility"
+                  //         onClick={handleShowPassword}
+                  //         // onMouseDown={this.handleMouseDownPassword}
+                  //       >
+                  //         {showPassword ? (
+                  //           <VisibilityOffIcon />
+                  //         ) : (
+                  //           <VisibilityIcon />
+                  //         )}
+                  //       </IconButton>
+                  //     </InputAdornment>
+                  //   ),
+                  // }}
+                  ></TextField>
+                )}
+              ></Controller>
+
+              <Button
+                //   onClick={handleSubmit(submitHandler); handleClose()}
+                variant="contained"
+                type="submit"
+                sx={{ m: 1 }}
+                fullWidth
+                color="primary"
+              >
+                Login
+              </Button>
+
+              <Box sx={{ m: 1 }}>
+                Don&apos;t have an account? &nbsp;
+                <NextLink
+                  href={`/register?redirect=${redirect || "/"}`}
+                  passHref
                 >
-                  Login
-                </Button>
-
-                <Box sx={{ m: 1 }}>
-                  Don&apos;t have an account? &nbsp;
-                  <NextLink
-                    href={`/register?redirect=${redirect || "/"}`}
-                    passHref
-                  >
-                    <Link>Register</Link>
-                  </NextLink>
-                </Box>
-              </form>
-            )}
+                  <Link>Register</Link>
+                </NextLink>
+              </Box>
+            </form>
+            {/* )} */}
           </DialogContent>
           <DialogActions>
             {/* <Button autoFocus onClick={handleClose}>

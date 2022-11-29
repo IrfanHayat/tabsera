@@ -15,10 +15,14 @@ import SwipeButton from '../container/SwipeButton'
 import { checkUser, registerUser } from '../slice/authSlice'
 import { useSelector, useDispatch } from "react-redux";
 import MuiPhoneNumber from "material-ui-phone-number";
+import { Router } from '@mui/icons-material';
+import { useRouter } from "next/router";
+
 export default function Register({ watch, getValues, register, handleSubmit, classes, control, Controller, errors, redirect }) {
 
   let [mobileNumber, setMobileNumber] = useState("")
   let [unLockVerification, setUnLockVerification] = useState(false)
+  const router = useRouter();
 
   let dispatch = useDispatch();
 
@@ -29,6 +33,8 @@ export default function Register({ watch, getValues, register, handleSubmit, cla
       console.log(result.payload)
       if (result.payload.resultCode == 2000) {
         setUnLockVerification(false)
+        router.push('/')
+
       } else if (result.payload.resultCode == 4004) {
         setUnLockVerification(true)
       }
